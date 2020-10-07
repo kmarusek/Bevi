@@ -1,24 +1,17 @@
-// import external dependencies
-import 'jquery';
+/* eslint-disable import/extensions */
+import Vue from 'vue';
 
-// Import everything from autoload
-import './autoload/**/*'
+// Plugins
 
-// import local dependencies
-import Router from './util/Router';
-import common from './routes/common';
-import home from './routes/home';
-import aboutUs from './routes/about';
+// Components
+import SiteHeader from '~/components/core/SiteHeader/SiteHeader';
 
-/** Populate Router instance with DOM routes */
-const routes = new Router({
-  // All pages
-  common,
-  // Home page
-  home,
-  // About Us page, note the change from about-us to aboutUs.
-  aboutUs,
+// Register Plugins
+
+// Register Components
+Vue.component('SiteHeader', SiteHeader);
+
+// eslint-disable-next-line no-new
+new Vue({
+  el: '#app',
 });
-
-// Load Events
-jQuery(document).ready(() => routes.loadEvents());
