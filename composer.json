@@ -30,8 +30,15 @@
       "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
     },
     {
+      "type": "composer",
+      "url": "https://pivvenit.github.io/acf-composer-bridge/composer/v3/wordpress-muplugin/"
+    },
+    {
       "type":"composer",
-      "url":"https://composer.deliciousbrains.com"
+      "url":"https://composer.deliciousbrains.com/817AEC73358B3CAA62357F0411A5E3F6",
+      "require": {
+        "deliciousbrains-plugin/wp-migrate-db-pro": "^1.9"
+      }
     }
   ],
   "require": {
