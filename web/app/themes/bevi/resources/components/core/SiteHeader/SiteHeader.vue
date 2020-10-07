@@ -10,7 +10,7 @@
 
 <style lang="scss" scoped>
 .header {
-  @apply bg-primary p-10;
+  @apply bg-primary p-10 mb-20;
 }
 
 </style>
