@@ -16,6 +16,7 @@
     "app/**/*.php",
     "config/**/*.php",
     "resources/views/**/*.php",
+    "resources/views/**/*.php",
     "resources/components/**/**/*.vue"
   ]
 }

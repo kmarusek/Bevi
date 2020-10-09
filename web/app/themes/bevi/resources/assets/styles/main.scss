@@ -31,7 +31,9 @@
  
  /** Import theme styles */
 @import "common/global";
-@import "components/buttons";
+@import "common/fonts";
+@import "common/type";
+@import "common/button";
 @import "components/forms";
 @import "layouts/header";
 @import "layouts/sidebar";

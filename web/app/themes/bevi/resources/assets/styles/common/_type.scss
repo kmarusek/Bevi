@@ -1,0 +1,14 @@
+.text-body {
+  @apply text-grey-700 text-base leading-6 font-space font-medium tracking-tight;
+
+  a {
+    @apply text-primary font-bold;
+  }
+  span {
+    @apply text-orange;
+  }
+}
+
+.h3 {
+  @apply font-body text-3xl font-semibold text-blue-600;
+}

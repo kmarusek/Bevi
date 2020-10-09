@@ -5,9 +5,27 @@ module.exports = {
   },
   purge: [],
   theme: {
+    fontFamily: {
+      body: ['Italian Plate', 'sans-serif'],
+      space: ['Space Grotesk', 'sans-serif  '],
+    },
+    opacity: {
+      '0': '0',
+      '10': '.1',
+      '20': '.2',
+      '30': '.3',
+      '40': '.4',
+      '50': '.5',
+      '60': '.6',
+      '70': '.7',
+      '80': '.8',
+      '90': '.9',
+      '100': '1',
+    },
     extend: {
       colors: {
         primary: '#246EFF',
+        secondary: '#404040',
         green: {
           100: '#DBFFA8',
           200: '#C7E4A0',
@@ -37,6 +55,7 @@ module.exports = {
           default: '#FFA24E',
           500: '#FF7800',
           600: '#00223E',
+          700: '#9B552B',
         },
         yellow: {
           100: '#FCF5CB',
@@ -54,7 +73,11 @@ module.exports = {
           700: '#666666',
           800: '#B28600',
         }
-      }
+      },
+      fontSize: {
+        base: '0.95rem',
+        '3xl': '1.75rem',
+      },
     },
   },
   variants: {},
