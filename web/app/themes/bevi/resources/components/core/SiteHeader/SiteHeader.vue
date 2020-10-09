@@ -7,16 +7,15 @@
       Lorem ipsum dolor sit amet, <a href="#">consetetur sadipscing elitr,</a> sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, <span>sed diam voluptua.</span> At vero eos et accusam et justo duo dolores et ea rebum.
     </p>
     <div>
-      <a
+      <button
         class="btn mb-2"
-        href="#"
       >
         Get a quote
-      </a>
+      </button>
     </div>
     <div>
       <button
-        class="btn pale-red"
+        class="btn purple-light"
       >
         Get a quote
       </button>
