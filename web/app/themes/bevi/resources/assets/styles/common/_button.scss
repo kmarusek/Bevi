@@ -1,0 +1,82 @@
+.btn {
+  @apply font-space bg-blue text-white rounded-full py-3 px-8 text-xs leading-none  font-semibold text-center inline-block transition-all duration-300;
+  &:active, &:focus {
+    box-shadow: 0px 0px 1px 1px theme('colors.blue-600');
+  }
+  
+  @screen lg {
+    @apply py-3 text-sm;
+  } 
+  &:disabled {
+    @apply bg-grey cursor-not-allowed;
+  }
+  &.square {
+    @apply rounded;
+  }
+  &.dark-blue {
+    @apply bg-blue-600;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.blue-600');
+    }
+  }
+  &.dark-green {
+    @apply bg-green-600;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.green-600');
+    }
+  }
+  &.green {
+    @apply bg-green-200 text-green-600;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.green-600');
+    }
+  }
+  &.purple {
+    @apply bg-purple;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.purple-200');
+    }
+  }
+  &.purple-light {
+    @apply bg-purple-200 text-purple;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.purple');
+    }
+  }
+  &.red {
+    @apply bg-red-500;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.red-500');
+    }
+  }
+  &.orange {
+    @apply bg-orange-200 text-orange-700;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.orange-700');
+    }
+  }
+  &.light-blue {
+    @apply bg-blue-200 text-blue-600;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.blue-600');
+    }
+  }
+  &.pale-blue {
+    @apply bg-blue-100 text-blue-600;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.blue-600');
+    }
+  }
+  &.pale-red {
+    @apply bg-red-200 text-red-500;
+    &:active, &:focus {
+      box-shadow: 0px 0px 1px 1px theme('colors.red-500');
+    }
+  }
+  &:hover {
+    @apply bg-opacity-80;
+  }
+  &:active, &:focus {
+    @apply bg-opacity-90 outline-none;
+  }
+}

@@ -35,7 +35,7 @@ module.exports = {
     }],
     'vue/script-indent': ['error', 2, { 'baseIndent': 1 }],
     'template-curly-spacing': ['error', 'always'],
-    'import/extensions': ['error', 'never'],
+    'import/extensions': 0,
     'vue/require-default-prop': 0,
   },
   'overrides': [
