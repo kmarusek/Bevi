@@ -1,37 +1,61 @@
 <template>
-  <section class="header page-body flex flex-col">
-    <h3 class="h3 mb-2">
-      About Bevi
-    </h3>
-    <p class="text-body max-w-xs">
-      Lorem ipsum dolor sit amet, <a href="#">consetetur sadipscing elitr,</a> sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, <span>sed diam voluptua.</span> At vero eos et accusam et justo duo dolores et ea rebum.
-    </p>
-    <div>
-      <button
-        class="btn mb-2"
+  <nav class="header">
+    <img
+      :src="require('~/assets/images/bevi.svg')"
+      alt="Bevi Logo"
+      class="w-auto"
+    >
+    <ul class="flex items-center ml-auto">
+      <li
+        v-for="(item, index) in menu"
+        :key="index"
+        :item="item"
+        class="hidden lg:block"
       >
-        Get a quote
-      </button>
-    </div>
-    <div>
-      <button
-        class="btn purple-light"
-      >
-        Get a quote
-      </button>
-    </div>
-  </section>
+        <a
+          :href="item.url"
+          class="menu-item-link"
+          :class="{ 'is-active': item.pageId === item.pageNavId }"
+        >
+          {{ item.name }}
+        </a>
+      </li>
+      <li class="ml-8 xl:ml-12">
+        <a
+          href="#"
+          class="btn large w-full"
+        >
+          Get a quote
+        </a>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
   export default {
-    
+    props: {
+      menu: {
+        required: true,
+        type: Array,
+      },
+    },
   };
 </script>
 
 <style lang="scss" scoped>
 .header {
-  @apply p-10 mb-20 relative;
+  @apply fixed w-full flex px-10 py-8;
+  
+  @screen lg {
+    @apply p-10;
+  }
 }
-
+.menu-item-link {
+  @apply font-space ml-8 font-semibold text-blue-600;
+  
+  @screen xl {
+    @apply ml-12;
+  }
+}
 </style>

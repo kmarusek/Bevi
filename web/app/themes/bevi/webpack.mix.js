@@ -8,7 +8,7 @@ mix.browserSync({
   proxy: 'bevi.test',
   open: true,
 })
-  .setResourceRoot('/app/themes/reis/dist')
+  .setResourceRoot('/app/themes/bevi/dist')
   .setPublicPath('./dist')
   .webpackConfig({
     resolve: {

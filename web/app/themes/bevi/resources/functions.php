@@ -90,3 +90,70 @@ Container::getInstance()
             'view' => require dirname(__DIR__).'/config/view.php',
         ]);
     }, true);
+
+/**
+ * Get Menu Items From Location
+ *
+ * @param $location : location slug given as key in register_nav_menus
+ */
+
+function getMenuItemsFromLocation($location)
+{
+    $theme_locations = get_nav_menu_locations();
+    $menu_obj = get_term($theme_locations[$location], 'nav_menu');
+    return is_wp_error($menu_obj) ? [] : getMenuItemsForParent($menu_obj->slug, 0);
+}
+
+
+/**
+ * Get Menu Items For Parent
+ *
+ * @param $menuSlug : menu slug for the CMS entry (not the key in register_nav_menus)
+ * @param $parentId
+ * @return array of items formatted as objects with : name / url / children (fetched recursively)
+ */
+
+function getMenuItemsForParent($menuSlug, $parentId)
+{
+    $args = [
+            'post_type' => 'nav_menu_item',
+            'meta_key' => '_menu_item_menu_item_parent',
+            'meta_value' => $parentId,
+            'tax_query' => [
+                [
+                    'taxonomy' => 'nav_menu',
+                    'field' => 'slug',
+                    'terms' => [$menuSlug]
+                ]
+            ],
+            'order' => 'ASC',
+            'orderby' => 'menu_order',
+            'posts_per_page' => -1
+        ];
+    $tmpItems = query_posts($args);
+
+    $items = [];
+
+    foreach ($tmpItems as $tmpItem) {
+        $item = new stdClass;
+        $type = get_post_meta($tmpItem->ID, '_menu_item_type', true);
+        switch ($type) :
+            case 'post_type':
+                $postId = get_post_meta($tmpItem->ID, '_menu_item_object_id', true);
+        $post = get_post($postId);
+        $item->name = $post->post_title;
+        $item->url = get_the_permalink($postId);
+        $item->pageNavId = intval($postId);
+        $item->pageId = get_the_id();
+        break;
+        case 'custom':
+                $item->name = $tmpItem->post_title;
+        $item->url = get_post_meta($tmpItem->ID, '_menu_item_url', true);
+        endswitch;
+
+        $item->children = getMenuItemsForParent($menuSlug, $tmpItem->ID);
+        $items[] = $item;
+    }
+
+    return $items;
+}
