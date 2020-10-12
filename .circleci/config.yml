@@ -1,0 +1,60 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+
+references:
+  working_directory: &working_directory
+    ~/bedrock
+ 
+  # Default container configuration
+  #
+  container_config: &container_config
+    docker:
+      - image: circleci/php:7.4-node-browsers
+    working_directory: *working_directory
+ 
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *working_directory
+
+jobs:
+  build:
+    <<: *container_config
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: composer install -n -o
+      - run:
+          name: Install js vendor files
+          command: cd ~/bedrock/web/app/themes/bevi && yarn && yarn prod
+      - persist_to_workspace:
+          root: .
+          paths:
+            - '*'
+            
+  deploy:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: Remove development dependencies
+          command: composer install --no-dev -n -o
+      - run:
+          name: Remove development dependencies in theme
+          command: composer install -d ~/bedrock/web/app/themes/bevi --no-dev -n -o
+      - run:
+          name: Install lftp
+          command: sudo apt-get update && sudo apt-get install lftp
+      - run:
+          name: Deploy to SFTP
+          command: lftp -e "set sftp:auto-confirm yes; open -u ${sftp_username},${sftp_password} sftp://${sftp_hostname}; mirror -R -v -p --exclude themes/bevi/node_modules ./web/app/ /wp-content/; quit"
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
