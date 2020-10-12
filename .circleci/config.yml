@@ -28,13 +28,13 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ checksum "~/bedrock/web/app/themes/bevi/yarn.lock" }}
       - run:
           name: Install js vendor files
           command: cd ~/bedrock/web/app/themes/bevi && yarn install --immutable && yarn prod
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "~/bedrock/web/app/themes/bevi/yarn.lock" }}
           paths:
             - ~/.cache/yarn
       - persist_to_workspace:
