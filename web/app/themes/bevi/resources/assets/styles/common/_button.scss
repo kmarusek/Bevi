@@ -1,17 +1,23 @@
 .btn {
-  @apply font-space bg-blue text-white rounded-full py-3 px-8 text-xs leading-none  font-semibold text-center inline-block transition-all duration-300;
+  @apply font-space bg-blue text-white rounded-full py-3 px-10 text-xs leading-none font-bold text-center inline-block transition-all duration-300;
   &:active, &:focus {
     box-shadow: 0px 0px 1px 1px theme('colors.blue-600');
   }
-  
   @screen lg {
-    @apply py-3 text-sm;
+    @apply py-4 text-base;
   } 
   &:disabled {
     @apply bg-grey cursor-not-allowed;
   }
   &.square {
     @apply rounded;
+  }
+  &.large {
+    @screen lg {
+      @apply text-lg;
+      padding-top: 1.075rem;
+      padding-bottom: 1.075rem;
+    } 
   }
   &.dark-blue {
     @apply bg-blue-600;
