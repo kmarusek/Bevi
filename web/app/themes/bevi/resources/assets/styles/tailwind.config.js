@@ -74,10 +74,6 @@ module.exports = {
           800: '#B28600',
         },
       },
-      fontSize: {
-        // base: '0.95rem',
-        // '3xl': '1.75rem',
-      },
     },
   },
   variants: {},
