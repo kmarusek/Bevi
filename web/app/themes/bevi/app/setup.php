@@ -44,7 +44,12 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-        'primary_navigation' => __('Primary Navigation', 'sage')
+        'primary_navigation' => __('Primary Navigation', 'sage'),
+        'primary_footer' => __('Footer - Inside Bevi', 'sage'),
+        'office_footer' => __('Footer - Office', 'sage'),
+        'support_footer' => __('Footer - Support', 'sage'),
+        'blog_footer' => __('Footer - Blog', 'sage'),
+        'terms_footer' => __('Footer - Terms', 'sage'),
     ]);
 
     /**

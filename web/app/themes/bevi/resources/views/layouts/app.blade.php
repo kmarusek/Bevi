@@ -5,21 +5,12 @@
     @php do_action('get_header') @endphp
     <div id="app">
       @include('partials.header')
-      <div class="wrap container" role="document">
-        <div class="content">
-          <main class="main">
-            @yield('content')
-          </main>
-          @if (App\display_sidebar())
-            <aside class="sidebar">
-              @include('partials.sidebar')
-            </aside>
-          @endif
-        </div>
+      <main class="main h-screen">
+        @yield('content')
+      </main>
+      @php do_action('get_footer') @endphp
+        @include('partials.footer')
       </div>
-    </div>
-    @php do_action('get_footer') @endphp
-    <!-- @include('partials.footer') -->
     @php wp_footer() @endphp
   </body>
 </html>

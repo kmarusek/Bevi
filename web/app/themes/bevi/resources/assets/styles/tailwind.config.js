@@ -54,8 +54,7 @@ module.exports = {
           200: '#FFD7B1',
           default: '#FFA24E',
           500: '#FF7800',
-          600: '#00223E',
-          700: '#9B552B',
+          600: '#9B552B',
         },
         yellow: {
           100: '#FCF5CB',
@@ -64,15 +63,25 @@ module.exports = {
           500: '#FFC002',
           600: '#B28600',
         },
-        grey: {
+        gray: {
           100: '#FAFAFA',
           200: '#F2F2F2',
           300: '#E5E5E5',
           400: '#CCCCCC',
+          500: '#F5F5F5',
           default: '#999999',
           700: '#666666',
           800: '#B28600',
         },
+      },
+    },
+    container: {
+      center: true,
+      padding: {
+        default: '1rem',
+        // sm: '2rem',
+        // lg: '4rem',
+        // xl: '5rem',
       },
     },
   },
