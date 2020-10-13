@@ -1,49 +1,35 @@
 <template>
-  <nav
+  <header
     class="header"
-    :class="{ ' bg-blue-100' : isMobileNavOpen }"
+    :class="{ 'nav-open' : isMobileNavOpen }"
   >
-    <img
-      :src="require('~/assets/images/bevi.svg')"
-      alt="Bevi Logo"
-      class="w-auto"
-    >
-    <ul class="flex items-center ml-auto">
-      <li
-        v-for="(item, index) in menu"
-        :key="index"
-        :item="item"
-        class="hidden lg:block"
+    <nav class="nav">
+      <img
+        :src="require('~/assets/images/bevi.svg')"
+        alt="Bevi Logo"
+        class="w-auto"
       >
-        <a
-          :href="item.url"
-          class="menu-item-link"
-          :class="{ 'is-active': item.pageId === item.pageNavId }"
-        >
-          <span>
-            {{ item.name }}
-          </span>
-        </a>
-      </li>
-      <li class="hidden sm:block ml-8 xl:ml-12">
-        <a
-          href="#"
-          class="btn large w-full"
-        >
-          Get a quote
-        </a>
-      </li>
-    </ul>
-    <button
-      @click="toggleMobileNav"
-      class="mobile-hamburger flex lg:hidden"
-      :class="{ active : isMobileNavOpen }"
-    >
-      <span />
-      <span />
-      <span />
-    </button>
-  </nav>
+      <SiteNavigation
+        class="flex items-center ml-auto"
+        :menu-items="menu"
+        :main-header="true"
+      />
+      <button
+        @click="toggleMobileNav"
+        class="mobile-hamburger flex lg:hidden"
+        :class="{ active : isMobileNavOpen }"
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+    </nav>
+    <SiteNavigation
+      v-if="isMobileNavOpen"
+      class="mobile-nav-item"
+      :menu-items="menu"
+    />
+  </header>
 </template>
 
 <script>
@@ -56,19 +42,10 @@
     },
     data: () => ({
       isMobileNavOpen: false,
-      windowWidth: window.innerWidth,
     }),
-    mounted() {
-      window.onresize = () => {
-        this.windowWidth = window.innerWidth;
-      };
-    },
     methods: {
       toggleMobileNav() {
         this.isMobileNavOpen = !this.isMobileNavOpen;
-      },
-      isMobile() {
-        return this.windowWidth <= 1024;
       },
     },
   };
@@ -76,34 +53,16 @@
 
 <style lang="scss" scoped>
 .header {
-  @apply fixed w-full flex items-center px-6 py-4 transition-colors duration-300 ease-in-out;
+  @apply fixed w-full px-6 py-4 transition-colors duration-300 ease-in-out;
   
   @screen lg {
-    @apply px-8 py-4;
+    @apply px-8 py-4 items-center;
   }
-  .menu-item-link {
-    @apply relative font-space ml-8 font-semibold text-blue-600 transition-all duration-300;
-    
-    @screen xl {
-      @apply ml-12;
-    }
-    span {
-      @apply z-10;
-    }
-    &:after {
-      @apply absolute w-full left-0 bg-blue transition-all duration-300;
-      content: "";
-      height: 3px;
-      top: 100%;
-      transform: scaleX(0) translateY(-2px);
-      transform-origin: left;
-      z-index: -1;
-    }
-    &:hover {
-      &:after {
-        transform: scaleX(1) translateY(-2px);
-      }
-    }
+  .nav {
+    @apply flex items-center;
+  }
+  &.nav-open {
+    @apply bg-blue-100 h-full;
   }
   .mobile-hamburger {
     @apply ml-8 relative flex flex-col justify-center items-center cursor-pointer w-8 ;
@@ -148,6 +107,10 @@
         }
       }
     }
+  }
+  .mobile-nav-item {
+    @apply absolute flex flex-col text-center justify-center content-around flex-wrap w-full inset-0;
+    z-index: -1;
   }
 }
 </style>
