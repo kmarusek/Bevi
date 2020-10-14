@@ -1,12 +1,12 @@
 <template>
-  <footer class="bg-gray-500 py-10">
-    <div class="container flex">
+  <footer class="bg-gray-500">
+    <div class="container flex pt-10 mb-10">
       <div class="footer-grid w-full md:w-3/4">
-        <div class="">
+        <div class="order-last md:order-first">
           <img
             :src="require('~/assets/images/bevi-logo.svg')"
             alt="Bevi Logo"
-            class="w-auto"
+            class="w-24"
           >
         </div>
         <SiteFooterNavigation
@@ -30,8 +30,15 @@
           class="w-auto"
         />
       </div>
-      <div class="w-full md:w-1/4 text-center border-l">
-        <h3>Still or sparkling. Whats your Bevi?</h3>
+      <div class="w-full md:w-1/4 pl-12 border-l border-gray-400 flex content-between flex-wrap">
+        <h3 class="font-medium text-3xl text-blue-600 leading-none">
+          Still or sparkling. Whats your Bevi?
+        </h3>
+        <div>
+          <h4 class="h4">
+            Join us online
+          </h4>
+        </div>
       </div>
     </div>
   </footer>

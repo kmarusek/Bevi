@@ -1,9 +1,9 @@
 <template>
   <ul class="font-space">
     <li class="mb-5">
-      <h3 class="title text-xs">
+      <h4 class="h4">
         {{ title }}
-      </h3>
+      </h4>
     </li>
     <li
       v-for="(item, index) in navigation"
@@ -36,13 +36,6 @@
   };
 </script>
 <style lang="scss" scoped>
-.title {
-  @apply  font-bold text-blue-600 uppercase tracking-widest;
-  
-  // @screen lg {
-  //   @apply py-4 items-center;
-  // }
-}
 .link {
   @apply text-gray-700 text-sm font-medium relative;
   @screen lg {

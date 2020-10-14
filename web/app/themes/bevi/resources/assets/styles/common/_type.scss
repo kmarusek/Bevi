@@ -12,3 +12,11 @@
 .h3 {
   @apply font-body text-3xl text-blue-600;
 }
+
+.h4 {
+  @apply font-extrabold text-blue-600 uppercase tracking-widest text-xs;
+  
+  // @screen lg {
+  //   @apply py-4 items-center;
+  // }
+}
