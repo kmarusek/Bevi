@@ -23,6 +23,9 @@ module.exports = {
       100: '1',
     },
     extend: {
+      fontSize: {
+        '5xl': '3.2rem',
+      },
       colors: {
         primary: '#246EFF',
         secondary: '#404040',
@@ -71,7 +74,6 @@ module.exports = {
           500: '#F5F5F5',
           default: '#999999',
           700: '#666666',
-          800: '#B28600',
         },
       },
     },

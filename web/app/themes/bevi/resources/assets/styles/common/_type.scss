@@ -1,11 +1,15 @@
 .text-body {
-  @apply text-gray-700 text-base leading-6 font-space font-medium tracking-tight;
+  @apply text-gray-700 text-base leading-7 font-space;
 
   a {
-    @apply text-primary font-bold;
+    @apply text-primary underline font-bold;
   }
-  span {
-    @apply text-orange;
+}
+
+.h2 {
+  @apply font-body text-3xl text-blue-600 font-semibold;
+  @screen md {
+    @apply text-5xl leading-tight;
   }
 }
 
@@ -15,4 +19,10 @@
 
 .h4 {
   @apply font-extrabold text-blue-600 uppercase tracking-widest text-xs;
+}
+
+.block-content {
+  p { 
+    @extend .text-body; 
+  }
 }
