@@ -3,32 +3,34 @@
     class="header"
     :class="{ 'nav-open' : isMobileNavOpen }"
   >
-    <nav class="nav">
-      <img
-        :src="require('~/assets/images/bevi.svg')"
-        alt="Bevi Logo"
-        class="w-auto"
-      >
+    <div class="container">
+      <nav class="nav">
+        <img
+          :src="require('~/assets/images/bevi.svg')"
+          alt="Bevi Logo"
+          class="w-auto"
+        >
+        <SiteNavigation
+          class="flex items-center ml-auto"
+          :menu-items="menu"
+          :main-header="true"
+        />
+        <button
+          @click="toggleMobileNav"
+          class="mobile-hamburger flex lg:hidden"
+          :class="{ active : isMobileNavOpen }"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </nav>
       <SiteNavigation
-        class="flex items-center ml-auto"
+        v-if="isMobileNavOpen"
+        class="mobile-nav-item"
         :menu-items="menu"
-        :main-header="true"
       />
-      <button
-        @click="toggleMobileNav"
-        class="mobile-hamburger flex lg:hidden"
-        :class="{ active : isMobileNavOpen }"
-      >
-        <span />
-        <span />
-        <span />
-      </button>
-    </nav>
-    <SiteNavigation
-      v-if="isMobileNavOpen"
-      class="mobile-nav-item"
-      :menu-items="menu"
-    />
+    </div>
   </header>
 </template>
 
@@ -53,10 +55,10 @@
 
 <style lang="scss" scoped>
 .header {
-  @apply fixed w-full px-6 py-4 transition-colors duration-300 ease-in-out;
+  @apply fixed w-full py-4 transition-colors duration-300 ease-in-out;
   
   @screen lg {
-    @apply px-8 py-4 items-center;
+    @apply py-4 items-center;
   }
   .nav {
     @apply flex items-center;
