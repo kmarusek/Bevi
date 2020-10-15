@@ -13,10 +13,8 @@ import SiteFooterNavigation from '~/components/core/SiteFooter/SiteFooterNavigat
 import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
 
-gsap.registerPlugin(ScrollTrigger);
-
 // Register Plugins
-Vue.use(gsap);
+gsap.registerPlugin(ScrollTrigger);
 
 // Register Components
 Vue.component('SiteHeader', SiteHeader);
