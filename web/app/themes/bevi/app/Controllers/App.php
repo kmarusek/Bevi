@@ -3,9 +3,12 @@
 namespace App\Controllers;
 
 use Sober\Controller\Controller;
+use App\Controllers\Templates\FlexibleContent;
 
 class App extends Controller
 {
+    use FlexibleContent;
+
     public function siteName()
     {
         return get_bloginfo('name');

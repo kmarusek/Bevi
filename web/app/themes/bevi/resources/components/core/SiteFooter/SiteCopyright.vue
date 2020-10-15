@@ -1,10 +1,10 @@
 <template>
   <div class="bg-purple-200 py-4 font-space text-xs font-semibold text-blue-600">
     <div class="container flex flex-col md:flex-row md:items-center">
-      <p class="md:mr-auto">
+      <p class="md:mr-auto order-last md:order-first">
         Bevi &#169; {{ new Date().getFullYear() }} All rights reserved.
       </p>
-      <ul class="font-space md:mx-auto my-6">
+      <ul class="font-space md:mx-auto md:my-6">
         <li
           v-for="(item, index) in navigation"
           :key="index"
