@@ -2,6 +2,8 @@
 import Vue from 'vue';
 
 // Plugins
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
 // Components
 import SiteHeader from '~/components/core/SiteHeader/SiteHeader';
@@ -11,7 +13,10 @@ import SiteFooterNavigation from '~/components/core/SiteFooter/SiteFooterNavigat
 import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
 
+gsap.registerPlugin(ScrollTrigger);
+
 // Register Plugins
+Vue.use(gsap);
 
 // Register Components
 Vue.component('SiteHeader', SiteHeader);
