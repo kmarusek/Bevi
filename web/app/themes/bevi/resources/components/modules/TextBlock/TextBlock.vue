@@ -6,7 +6,7 @@
       </h2>
       <div
         v-html="block.text"
-        class="mt-2 md:mt-6 block-content"
+        class="mt-2 md:mt-6 block-content md:px-8"
       />
     </div>
   </section>

@@ -24,7 +24,7 @@ module.exports = {
     },
     extend: {
       fontSize: {
-        '5xl': '3.5rem',
+        '5xl': '3.2rem',
       },
       colors: {
         primary: '#246EFF',

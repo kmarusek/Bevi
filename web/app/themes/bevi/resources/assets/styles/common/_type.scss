@@ -1,5 +1,5 @@
 .text-body {
-  @apply text-secondary text-base leading-7 font-space;
+  @apply text-gray-700 text-base leading-7 font-space;
 
   a {
     @apply text-primary underline font-bold;
@@ -7,9 +7,9 @@
 }
 
 .h2 {
-  @apply font-body text-3xl text-blue-600 font-semibold leading-tight;
+  @apply font-body text-3xl text-blue-600 font-semibold;
   @screen md {
-    @apply text-5xl leading-none;
+    @apply text-5xl leading-tight;
   }
 }
 
