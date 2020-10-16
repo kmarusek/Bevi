@@ -5,14 +5,19 @@ import Vue from 'vue';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
-// Components
+// Layout
 import SiteHeader from '~/components/core/SiteHeader/SiteHeader';
 import SiteNavigation from '~/components/core/SiteNavigation/SiteNavigation';
 import SiteFooter from '~/components/core/SiteFooter/SiteFooter';
 import SiteFooterNavigation from '~/components/core/SiteFooter/SiteFooterNavigation';
 import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
+
+// Components
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
 import FeatureBlock from '~/components/modules/FeatureBlock/FeatureBlock';
+
+// Common
+import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
 
 // Register Plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -25,6 +30,7 @@ Vue.component('SiteFooterNavigation', SiteFooterNavigation);
 Vue.component('SiteFooterCopyright', SiteFooterCopyright);
 Vue.component('TextBlock', TextBlock);
 Vue.component('FeatureBlock', FeatureBlock);
+Vue.component('ImageBlob', ImageBlob);
 
 // eslint-disable-next-line no-new
 new Vue({
