@@ -5,7 +5,7 @@
     @php do_action('get_header') @endphp
     <div id="app">
       @include('partials.header')
-      <main class="main h-screen">
+      <main>
         @yield('content')
       </main>
       @php do_action('get_footer') @endphp

@@ -22,6 +22,11 @@ module.exports = {
       90: '.9',
       100: '1',
     },
+    stroke: (theme) => ({
+      red: theme('colors.red.500'),
+      green: theme('colors.green.600'),
+      blue: theme('colors.blue'),
+    }),
     extend: {
       fontSize: {
         '5xl': '3.2rem',
@@ -30,8 +35,9 @@ module.exports = {
         primary: '#246EFF',
         secondary: '#404040',
         green: {
-          100: '#DBFFA8',
-          200: '#C7E4A0',
+          100: '#E2F1CF',
+          200: '#DBFFA8',
+          300: '#C7E4A0',
           default: '#73BC25',
           500: '#1A8C25',
           600: '#105128',

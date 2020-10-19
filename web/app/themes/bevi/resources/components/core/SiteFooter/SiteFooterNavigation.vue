@@ -1,9 +1,9 @@
 <template>
   <ul class="font-space">
     <li class="mb-5">
-      <h4 class="h4">
+      <h6 class="h6">
         {{ title }}
-      </h4>
+      </h6>
     </li>
     <li
       v-for="(item, index) in navigation"
