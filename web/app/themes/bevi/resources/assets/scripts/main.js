@@ -17,6 +17,7 @@ import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
 import FeatureBlock from '~/components/modules/FeatureBlock/FeatureBlock';
 import ImageCarousel from '~/components/modules/ImageCarousel/ImageCarousel';
+import CarouselDots from '~/components/modules/CarouselDots/CarouselDots';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -34,6 +35,7 @@ Vue.component('SiteFooterCopyright', SiteFooterCopyright);
 Vue.component('TextBlock', TextBlock);
 Vue.component('FeatureBlock', FeatureBlock);
 Vue.component('ImageCarousel', ImageCarousel);
+Vue.component('CarouselDots', CarouselDots);
 Vue.component('ImageBlob', ImageBlob);
 
 // eslint-disable-next-line no-new
