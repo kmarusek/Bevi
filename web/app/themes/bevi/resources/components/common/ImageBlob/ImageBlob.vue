@@ -21,7 +21,7 @@
     props: {
       image: {
         required: true,
-        type: Object,
+        type: String,
       },
     },
   };

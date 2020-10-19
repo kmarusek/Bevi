@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ad19c903310dbdc7c441b95b08b4f9d",
+    "content-hash": "97a88a70b6359a84407b31c973efd0bc",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -813,6 +813,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/ewww-image-optimizer/"
+        },
+        {
+            "name": "wpackagist-plugin/svg-support",
+            "version": "2.3.18",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/svg-support/",
+                "reference": "tags/2.3.18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/svg-support.2.3.18.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/svg-support/"
         }
     ],
     "packages-dev": [
@@ -822,12 +840,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "ba5d234b3a1559321b816b64aafc2ce6728799ff"
+                "reference": "327370943772f9917bc2dc2aa4263db2d572a112"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/ba5d234b3a1559321b816b64aafc2ce6728799ff",
-                "reference": "ba5d234b3a1559321b816b64aafc2ce6728799ff",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/327370943772f9917bc2dc2aa4263db2d572a112",
+                "reference": "327370943772f9917bc2dc2aa4263db2d572a112",
                 "shasum": ""
             },
             "conflict": {
@@ -927,6 +945,7 @@
                 "magento/magento1ee": ">=1,<1.14.4.3",
                 "magento/product-community-edition": ">=2,<2.2.10|>=2.3,<2.3.2-p.2",
                 "marcwillmann/turn": "<0.3.3",
+                "mediawiki/core": ">=1.31,<1.31.4|>=1.32,<1.32.4|>=1.33,<1.33.1",
                 "mittwald/typo3_forum": "<1.2.1",
                 "monolog/monolog": ">=1.8,<1.12",
                 "namshi/jose": "<2.2",
@@ -1123,7 +1142,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-08T21:02:27+00:00"
+            "time": "2020-10-19T07:02:45+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

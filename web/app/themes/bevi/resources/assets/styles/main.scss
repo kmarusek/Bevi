@@ -43,6 +43,9 @@
 @import "layouts/posts";
 @import "layouts/tinymce";
 
+// Import Plugin CSS
+@import '../../../node_modules/swiper/swiper-bundle.css';
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
