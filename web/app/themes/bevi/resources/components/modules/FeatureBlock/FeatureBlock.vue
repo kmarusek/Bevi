@@ -4,22 +4,22 @@
     :class="`color-scheme-${ block.colour_scheme }`"
   >
     <div
-      class="py-32 container xl:max-w-5xl flex flex-col items-center"
+      class="py-32 container xl:max-w-5xl flex flex-col items-center gsap-fade-section"
       :class="block.image_position !== 'Left' ? 'md:flex-row' : 'md:flex-row-reverse'"
     >
       <div
-        class="w-full md:w-1/2 mb-8 md:mb-0"
+        class="w-full md:w-1/2 mb-8 md:mb-0 gsap-fade"
         :class="block.image_position !== 'Left' ? 'md:pr-10 lg:pr-20' : 'md:pl-10 lg:pl-20'"
       >
         <h3
           v-if="block.title"
-          class="h3 gsap-text-fade"
+          class="h3"
         >
           {{ block.title }}
         </h3>
         <div
           v-html="block.text"
-          class="mt-2 md:mt-6 block-content gsap-text-fade"
+          class="mt-2 md:mt-6 block-content"
         />
       </div>
       <div
@@ -71,10 +71,10 @@
 </template>
 
 <script>
-  import GSAPTextFade from '~/mixins/GSAPTextFade.js';
+  import GSAPFade from '~/mixins/GSAPFade.js';
 
   export default {
-    mixins: [GSAPTextFade],
+    mixins: [GSAPFade],
     props: {
       block: {
         required: true,

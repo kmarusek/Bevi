@@ -1,6 +1,6 @@
 <template>
   <section
-    class="container text-center py-32 p-0"
+    class="container text-center py-32 p-0 gsap-fade-section"
     :style="{ 'background-image': 'url(' + block.background.sizes.large + ')' }"
   >
     <h3 class="font-space text-sm font-semibold uppercase text-gray-700 tracking-wide">
@@ -18,7 +18,7 @@
       >
         <img
           :src="slide.logo.sizes.thumbnail"
-          class="mx-auto"
+          class="mx-auto gsap-fade"
         >
       </swiper-slide>
     </swiper>
@@ -34,7 +34,10 @@
 </template>
 
 <script>
+  import GSAPFade from '~/mixins/GSAPFade.js';
+
   export default {
+    mixins: [GSAPFade],
     props: {
       block: {
         required: true,
