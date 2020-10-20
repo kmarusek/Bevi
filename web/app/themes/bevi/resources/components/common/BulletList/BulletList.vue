@@ -32,7 +32,6 @@
         type: Object,
       },
     },
-
   };
 </script>
 
