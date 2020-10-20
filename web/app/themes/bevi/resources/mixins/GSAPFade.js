@@ -10,7 +10,6 @@ export default {
       gsap.utils.toArray('.gsap-fade-section').forEach((section) => {
         const elems = section.querySelectorAll('.gsap-fade');
         
-        // Set things up
         gsap.set(elems, { y: 50, opacity: 0 });
         
         ScrollTrigger.create({
@@ -20,7 +19,7 @@ export default {
             y: 0,
             opacity: 1,
             duration: 1,
-            stagger: 0.2,
+            stagger: 0.3,
             delay: 0.3,
             ease: 'power3.out',
             overwrite: 'auto',
@@ -29,7 +28,7 @@ export default {
             y: 50,
             opacity: 0,
             duration: 1,
-            stagger: 0.2,
+            stagger: 0.3,
             delay: 0.3,
             ease: 'power3.out',
             overwrite: 'auto',
