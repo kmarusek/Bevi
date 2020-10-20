@@ -4,6 +4,7 @@ import Vue from 'vue';
 // Plugins
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import VueAwesomeSwiper from 'vue-awesome-swiper';
 
 // Layout
 import SiteHeader from '~/components/core/SiteHeader/SiteHeader';
@@ -15,12 +16,15 @@ import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 // Components
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
 import FeatureBlock from '~/components/modules/FeatureBlock/FeatureBlock';
+import ImageCarousel from '~/components/modules/ImageCarousel/ImageCarousel';
+import CarouselDots from '~/components/modules/CarouselDots/CarouselDots';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
 
 // Register Plugins
 gsap.registerPlugin(ScrollTrigger);
+Vue.use(VueAwesomeSwiper);
 
 // Register Components
 Vue.component('SiteHeader', SiteHeader);
@@ -30,6 +34,8 @@ Vue.component('SiteFooterNavigation', SiteFooterNavigation);
 Vue.component('SiteFooterCopyright', SiteFooterCopyright);
 Vue.component('TextBlock', TextBlock);
 Vue.component('FeatureBlock', FeatureBlock);
+Vue.component('ImageCarousel', ImageCarousel);
+Vue.component('CarouselDots', CarouselDots);
 Vue.component('ImageBlob', ImageBlob);
 
 // eslint-disable-next-line no-new
