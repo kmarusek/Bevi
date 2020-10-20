@@ -4,7 +4,12 @@
   a {
     @apply text-primary underline font-bold;
   }
+
+  &.smaller {
+    @apply text-sm leading-normal;
+  }
 }
+
 
 .h2 {
   @apply font-body text-3xl text-blue-600 font-semibold;
@@ -24,6 +29,10 @@
   @apply font-body text-3xl text-blue-600;
 }
 
+.h5 {
+  @apply font-semibold text-xl text-blue-600;
+}
+
 .h6 {
   @apply font-extrabold text-blue-600 uppercase tracking-widest text-xs;
 }
@@ -31,5 +40,10 @@
 .block-content {
   p { 
     @extend .text-body; 
+  }
+  &.smaller {
+    p { 
+      @extend .text-body.smaller;
+    }
   }
 }
