@@ -21,7 +21,7 @@
     >
       <a
         href="#"
-        class="btn large"
+        class="btn"
         :class="{ 'w-full': mainHeader }"
       >
         Get a quote
@@ -49,7 +49,7 @@
   .menu-item-link {
     @apply relative text-2xl font-space font-semibold text-blue-600 transition-all duration-300;
     @screen lg {
-      @apply ml-8 text-base;
+      @apply ml-8 text-sm;
     }
     @screen xl {
       @apply ml-12;

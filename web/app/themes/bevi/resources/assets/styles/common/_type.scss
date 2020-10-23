@@ -10,6 +10,13 @@
   }
 }
 
+.h1 {
+  @apply font-body text-4.5xl text-blue-600 font-semibold leading-none;
+  @screen md {
+    @apply text-6xl leading-none;
+  }
+}
+
 .h2 {
   @apply font-body text-3xl text-blue-600 font-semibold;
   @screen md {

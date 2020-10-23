@@ -8,7 +8,7 @@
         <img
           :src="require('~/assets/images/bevi.svg')"
           alt="Bevi Logo"
-          class="w-auto"
+          class="w-20"
         >
         <SiteNavigation
           class="flex items-center ml-auto"

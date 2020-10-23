@@ -29,7 +29,13 @@ module.exports = {
     }),
     extend: {
       fontSize: {
+        '4.5xl': '2.8rem',
         '5xl': '3.2rem',
+        '6xl': '4.5rem',
+      },
+      spacing: {
+        28: '7.75rem',
+        36: '9rem',
       },
       colors: {
         primary: '#246EFF',

@@ -21,7 +21,9 @@ import CarouselDots from '~/components/modules/CarouselDots/CarouselDots';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
+import SingleBubble from '~/components/common/SingleBubble/SingleBubble';
 import BulletList from '~/components/common/BulletList/BulletList';
+import PageHero from '~/components/common/PageHero/PageHero';
 
 // Register Plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -38,7 +40,9 @@ Vue.component('FeatureBlock', FeatureBlock);
 Vue.component('ImageCarousel', ImageCarousel);
 Vue.component('CarouselDots', CarouselDots);
 Vue.component('ImageBlob', ImageBlob);
+Vue.component('SingleBubble', SingleBubble);
 Vue.component('BulletList', BulletList);
+Vue.component('PageHero', PageHero);
 
 // eslint-disable-next-line no-new
 new Vue({
