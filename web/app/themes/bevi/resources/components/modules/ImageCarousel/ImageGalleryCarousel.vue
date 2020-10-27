@@ -58,7 +58,6 @@
           enabled: true,
         },
       },
-      activeSlide: 0,
     }),
     computed: {
       swiper() {
