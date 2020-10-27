@@ -17,6 +17,7 @@ import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
 import FeatureBlock from '~/components/modules/FeatureBlock/FeatureBlock';
 import ImageCarousel from '~/components/modules/ImageCarousel/ImageCarousel';
+import ImageGalleryCarousel from '~/components/modules/ImageCarousel/ImageGalleryCarousel';
 import CarouselDots from '~/components/modules/CarouselDots/CarouselDots';
 
 // Common
@@ -38,6 +39,7 @@ Vue.component('SiteFooterCopyright', SiteFooterCopyright);
 Vue.component('TextBlock', TextBlock);
 Vue.component('FeatureBlock', FeatureBlock);
 Vue.component('ImageCarousel', ImageCarousel);
+Vue.component('ImageGalleryCarousel', ImageGalleryCarousel);
 Vue.component('CarouselDots', CarouselDots);
 Vue.component('ImageBlob', ImageBlob);
 Vue.component('SingleBubble', SingleBubble);
