@@ -19,6 +19,7 @@ import FeatureBlock from '~/components/modules/FeatureBlock/FeatureBlock';
 import ImageCarousel from '~/components/modules/ImageCarousel/ImageCarousel';
 import ImageGalleryCarousel from '~/components/modules/ImageCarousel/ImageGalleryCarousel';
 import CarouselDots from '~/components/modules/CarouselDots/CarouselDots';
+import PressRelease from '~/components/modules/PressRelease/PressRelease';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -45,6 +46,7 @@ Vue.component('ImageBlob', ImageBlob);
 Vue.component('SingleBubble', SingleBubble);
 Vue.component('BulletList', BulletList);
 Vue.component('PageHero', PageHero);
+Vue.component('PressRelease', PressRelease);
 
 // eslint-disable-next-line no-new
 new Vue({
