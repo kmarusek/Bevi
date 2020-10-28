@@ -5,6 +5,7 @@ web/app/ewww/
 web/app/mu-plugins/*/
 web/app/upgrade
 web/app/uploads/*
+!web/app/plugins/acf-pardot-forms
 !web/app/uploads/.gitkeep
 
 # WordPress
