@@ -12,7 +12,7 @@
         >
           <span class="blob">
             <img
-              :src="require(`~/assets/images/blob_${index}.svg`)"
+              :src="require(`~/assets/images/blobs_${index}.svg`)"
               :alt="`blob_${index}`"
               :class="`blob-${index}`"
             >
