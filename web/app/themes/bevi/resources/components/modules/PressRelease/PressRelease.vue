@@ -12,22 +12,9 @@
         >
           <span class="blob">
             <img
-              v-if="index == 0"
-              :src="require('~/assets/images/blob_1.svg')"
-              alt="blob_1"
-              class="one"
-            >
-            <img
-              v-if="index == 1"
-              :src="require('~/assets/images/blob_2.svg')"
-              alt="blob_2"
-              class="two"
-            >
-            <img
-              v-if="index == 2"
-              :src="require('~/assets/images/blob_3.svg')"
-              alt="blob_3"
-              class="three"
+              :src="require(`~/assets/images/blob_${index}.svg`)"
+              :alt="`blob_${index}`"
+              :class="`blob-${index}`"
             >
           </span>
           <div class="img-wrapper">
@@ -88,15 +75,15 @@
       .blob {
         @apply absolute;
 
-        & .one {
+        &-0 {
           transform: translate3d(-20px, -100px, 0);
         }
 
-        & .two {
+        &-1 {
           transform: translate3d(-45px, -90px, 0);
         }
 
-        & .three {
+        &-2 {
           transform: translate3d(20px, -90px, 0);
         }
       }

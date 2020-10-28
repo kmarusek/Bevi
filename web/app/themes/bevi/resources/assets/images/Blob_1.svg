@@ -1,12 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="454.456" height="501.059" viewBox="0 0 454.456 501.059">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="388.763" height="475.865" viewBox="0 0 388.763 475.865">
   <defs>
     <clipPath id="clip-path">
-      <path id="Path_147097" data-name="Path 147097" d="M0,0,409.436,5.09l4.015,333.189L4.015,333.189Z" fill="none"/>
+      <path id="Path_147098" data-name="Path 147098" d="M0,0,414.458,6.572,417.9,228.717,3.438,222.144Z" fill="none"/>
     </clipPath>
   </defs>
-  <g id="Blob_1" data-name="Blob 1" transform="matrix(-0.326, 0.946, -0.946, -0.326, 454.456, 110.133)" opacity="0.5">
-    <g id="Blob_15" transform="translate(0 0)" opacity="0.15" clip-path="url(#clip-path)">
-      <path id="Path_77725" data-name="Path 77725" d="M12.764,87.082c24.274-46.839,88.08-73.46,148.678-47.778,69.374,29.442,83.746-64.583,170.537-26.382s112.732,142.2,22.12,180.451c-72.114,30.479-87.59,114.161-154.263,133.991C158.213,339.816,88.5,350.987,34.357,242.6.19,174.218-7.612,126.359,12.763,87" transform="translate(0.027 -0.019)" fill="#dc3a32"/>
+  <g id="Press_2" data-name="Press 2" transform="translate(-1034.437 -608.094)">
+    <g id="Blob_2" data-name="Blob 2" transform="translate(1034.437 983.696) rotate(-64)" opacity="0.5">
+      <g id="Group_2535" data-name="Group 2535" opacity="0.15" clip-path="url(#clip-path)">
+        <path id="Path_77728" data-name="Path 77728" d="M91.7,35.544c68.775,6.5,84.862,64.616,149.952,3.731S391.028,5.441,410.5,69.02C442.491,173.4,321.138,268.242,216.55,209.065S74.744,219.673,14.908,150.717C-11.983,119.839-3.191,26.6,92.035,35.549" transform="translate(-0.044 -0.932)" fill="#dc3a32"/>
+      </g>
     </g>
   </g>
 </svg>
