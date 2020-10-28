@@ -1,0 +1,46 @@
+.whr-group  {
+  @apply text-blue font-medium;
+
+  @screen md {
+    @apply text-lg;
+  }
+}
+.whr-items {
+  display: block !important; //needed to show the items list
+
+  @screen md {
+    @apply text-xl;
+  }
+}
+.whr-item {
+  @apply border-b border-gray-400 py-4 relative pr-16;
+  &:after {
+    @apply absolute right-0;
+
+    content: url("../images/icons/circle-arrow.svg");
+    width: 50px;
+    height: 50px;
+    top: calc(50% - 25px);
+  }
+
+  @screen md {
+    @apply ml-8;
+  }
+  
+}
+
+.whr-title {
+  @apply text-blue-600 font-medium text-2xl mb-2 leading-tight;
+  &:hover {
+    @apply underline;
+  }
+}
+
+.whr-location {
+  @apply text-blue font-semibold text-xs;
+}
+
+.whr-date,
+.whr-location span {
+  @apply hidden
+}
