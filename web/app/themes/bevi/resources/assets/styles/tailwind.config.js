@@ -3,7 +3,6 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [],
   theme: {
     fontFamily: {
       body: ['Italian Plate', 'sans-serif'],
@@ -98,4 +97,12 @@ module.exports = {
   },
   variants: {},
   plugins: [],
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    content: [
+      './resources/assets/styles/**/*.scss',
+      './resources/components/**/**/*.vue',
+      './resources/views/**/*.blade.php',
+    ],
+  },
 };
