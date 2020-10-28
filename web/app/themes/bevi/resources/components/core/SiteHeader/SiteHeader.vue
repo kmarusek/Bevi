@@ -5,11 +5,13 @@
   >
     <div class="container">
       <nav class="nav">
-        <img
-          :src="require('~/assets/images/bevi.svg')"
-          alt="Bevi Logo"
-          class="w-20"
-        >
+        <a href="/">
+          <img
+            :src="require('~/assets/images/bevi.svg')"
+            alt="Bevi Logo"
+            class="w-20"
+          >
+        </a>
         <SiteNavigation
           class="flex items-center ml-auto"
           :menu-items="menu"
