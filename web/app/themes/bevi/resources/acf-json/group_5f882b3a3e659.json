@@ -551,6 +551,15 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5f99aaaec070d": {
+                    "key": "layout_5f99aaaec070d",
+                    "name": "careers_component",
+                    "label": "Careers Component",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -584,5 +593,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1603905450
+    "modified": 1603906248
 }
