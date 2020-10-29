@@ -8,6 +8,10 @@
   &.smaller {
     @apply text-sm leading-normal;
   }
+
+  &.smallest {
+    @apply text-xs leading-normal;
+  }
 }
 
 .h1 {
@@ -50,6 +54,11 @@
   &.smaller {
     p { 
       @extend .text-body.smaller;
+    }
+  }
+  &.smallest {
+    p { 
+      @extend .text-body.smallest;
     }
   }
 }
