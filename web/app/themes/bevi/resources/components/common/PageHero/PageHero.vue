@@ -1,15 +1,8 @@
 <template>
-  <section class="relative overflow-hidden pb-28 pt-36 main-banner">
-    <svg>
-      <clipPath
-        id="wave"
-        clipPathUnits="objectBoundingBox"
-      >
-        <path
-          d="M1,0c0,0-0.3,0.1-0.5,0.1S0.3,0,0,0.1V1h1L1,0z"
-        />
-      </clipPath>
-    </svg>
+  <section
+    class="relative overflow-hidden pt-36 main-banner"
+    :class="{ wave : hasWave }"
+  >
     <div class="container xl:max-w-6xl z-10 relative text-center lg:text-left">
       <h1 class="h1">
         {{ wp.pageTitle }}
@@ -34,6 +27,7 @@
       :src="require('~/assets/images/backgrounds/page-header.jpg')"
       class="object-cover w-full h-full absolute top-0 left-0 z-0"
     >
+    <wave v-if="hasWave" />
   </section>
 </template>
 
@@ -45,15 +39,22 @@
         type: Object,
       },
     },
+    data() {
+      return {
+        hasWave: true,
+      };
+    },
   };
 </script>
 
 <style lang="scss" scoped>
 .main-banner {
-  clip-path: url(#wave);
-  svg {
-    bottom: 0;
+  min-height: 50vh;
+  @apply w-full;
+
+  &.wave {
+    clip-path: url(#wave);
+    @apply -mb-6;
   }
 }
-
 </style>
