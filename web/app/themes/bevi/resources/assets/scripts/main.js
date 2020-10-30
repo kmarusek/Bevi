@@ -21,6 +21,7 @@ import ImageGalleryCarousel from '~/components/modules/ImageCarousel/ImageGaller
 import CarouselDots from '~/components/modules/CarouselDots/CarouselDots';
 import PressRelease from '~/components/modules/PressRelease/PressRelease';
 import FormComponent from '~/components/modules/FormComponent/FormComponent';
+import Flavors from '~/components/modules/Flavors/Flavors';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -49,6 +50,7 @@ Vue.component('BulletList', BulletList);
 Vue.component('PageHero', PageHero);
 Vue.component('PressRelease', PressRelease);
 Vue.component('FormComponent', FormComponent);
+Vue.component('Flavors', Flavors);
 
 // eslint-disable-next-line no-new
 new Vue({
