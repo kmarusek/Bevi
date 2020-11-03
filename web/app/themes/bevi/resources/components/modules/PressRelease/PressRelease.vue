@@ -50,7 +50,7 @@
 <style lang="scss" scoped>
 .press-release {
   padding-bottom: 200px;
-  @apply text-center pt-16;
+  @apply text-center pt-16 overflow-x-hidden;
 
   &.color-scheme-Red {
     @apply bg-red-200;
