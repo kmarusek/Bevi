@@ -20,7 +20,7 @@
           {{ block.cta.title }}
         </a>
       </div>
-      <div class="flavor-wrapper">
+      <div class="flavor-wrapper gsap-float-section">
         <div
           v-for="(flavor, index) in block.flavor_cards"
           :key="index"
@@ -67,7 +67,6 @@
 
 <style lang="scss" scoped>
 .flavors {
-  background: pink; // TEST
   @apply flex items-center justify-center relative overflow-x-hidden py-48;
 
   @screen md {
