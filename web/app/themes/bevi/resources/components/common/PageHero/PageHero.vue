@@ -1,7 +1,7 @@
 <template>
   <section
-    class="relative overflow-hidden pt-36 main-banner"
-    :class="{ wave : hasWave }"
+    class="relative overflow-hidden flex items-center main-banner"
+    :class="{ wave : wp.hero.wave }"
   >
     <div class="container xl:max-w-6xl z-10 relative text-center lg:text-left">
       <h1 class="h1">
@@ -27,7 +27,10 @@
       :src="require('~/assets/images/backgrounds/page-header.jpg')"
       class="object-cover w-full h-full absolute top-0 left-0 z-0"
     >
-    <wave v-if="hasWave" />
+    <wave
+      v-if="wp.hero.wave"
+      :wave="wp.hero.wave"
+    />
   </section>
 </template>
 
@@ -38,11 +41,6 @@
         required: true,
         type: Object,
       },
-    },
-    data() {
-      return {
-        hasWave: true,
-      };
     },
   };
 </script>
