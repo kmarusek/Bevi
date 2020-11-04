@@ -15,7 +15,7 @@
         <a
           :href="block.cta.url"
           :target="block.cta.target ? block.cta.target : '_self'"
-          class="btn mt-4 md:mt-12"
+          class="btn mt-4 md:mt-12 gsap-fade"
         >
           {{ block.cta.title }}
         </a>
