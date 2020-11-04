@@ -25,6 +25,7 @@ module.exports = {
       red: theme('colors.red.500'),
       green: theme('colors.green.600'),
       blue: theme('colors.blue'),
+      white: theme('colors.white'),
     }),
     extend: {
       fontSize: {

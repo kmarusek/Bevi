@@ -1,12 +1,24 @@
 <template>
   <section :class="{ 'bg-blue-100' : block.show_blue_background }">
-    <div class="py-20 lg:py-32 container xl:max-w-6xl flex flex-col md:flex-row">
-      <div class="md:w-5/12 lg:pr-16">
+    <single-bubble
+      class="absolute opacity-50 bubble-one"
+      :stroke-color="block.show_blue_background ? 'white' : 'blue'"
+    />
+    <single-bubble
+      class="absolute opacity-50 bubble-two"
+      :stroke-color="block.show_blue_background ? 'white' : 'blue'"
+    />
+    <single-bubble
+      class="absolute opacity-50 bubble-three"
+      :stroke-color="block.show_blue_background ? 'white' : 'blue'"
+    />
+    <div class="py-20 lg:py-32 container xl:max-w-6xl flex flex-col lg:flex-row relative">
+      <div class="w-full lg:w-5/12 lg:pr-16">
         <h3 class="text-3xl md:text-4xl mb-4 text-blue-600 font-semibold leading-tight">
           {{ block.title }}
         </h3>
         <div v-html="block.content" />
-        <div v-if="block.bullets">
+        <div v-if="block.show_bullets === true">
           <div
             v-for="bullet in block.bullets"
             :key="bullet.id"
@@ -30,8 +42,11 @@
           </div>
         </div>
       </div>
-      <div class="md:w-7/12">
-        <div v-html="block.pardot_form" />
+      <div class="lg:w-7/12">
+        <div
+          class="pardot-form"
+          v-html="block.pardot_form"
+        />
       </div>
     </div>
   </section>
@@ -48,6 +63,27 @@
   };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.pardot-form {
+  /deep/ iframe.pardotform {
+    height: 1000px;
 
+      @screen lg {
+        height: 550px;
+      }
+  }
+}
+.bubble-one {
+  top: 15%;
+  left: 5%;
+}
+.bubble-two {
+  bottom: 35%;
+  left: 35%;
+}
+.bubble-three {
+  bottom: 5%;
+  left: 3%;
+  transform: scale(1.5);
+}
 </style>
