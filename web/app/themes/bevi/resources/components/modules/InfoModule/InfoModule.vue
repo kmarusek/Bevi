@@ -7,7 +7,7 @@
       <swiper
         ref="info"
         :options="swiperOptions"
-        class="w-full relative overflow-visible"
+        class="w-full relative py-2 md:py-0 md:overflow-visible"
       >
         <swiper-slide
           v-for="(card, index) in block.information_cards"
@@ -136,7 +136,7 @@
             <div
               v-if="card.intro_text"
               v-html="card.intro_text"
-              class="mt-2 block-content text-center max-w-sm px-4 sm:max-w-none sm:p-0"
+              class="mt-2 block-content small text-center max-w-md px-2 sm:max-w-none sm:p-0"
             />
             <a
               v-if="card.cta"
@@ -202,6 +202,12 @@
         },
       },
     }),
+    created() {
+      window.addEventListener('resize', this.updateActiveSlide);
+    },
+    destroyed() {
+      window.removeEventListener('resize', this.updateActiveSlide);
+    },
     methods: {
       carouselPrev() {
         this.swiper.slidePrev();
@@ -216,14 +222,19 @@
       carouselPaginationUpdate() {
         this.activeSlide = this.swiper.activeIndex;
       },
+      updateActiveSlide() {
+        if (window.innerWidth >= 768) {
+          this.activeSlide = -1;
+        } else {
+          this.activeSlide = 1;
+        }
+      },
     },
     mounted() {
       this.swiper.on('slideChange', () => {
         this.carouselPaginationUpdate();
       });
-      if (window.innerWidth >= 768) {
-        this.activeSlide = null;
-      }
+      this.updateActiveSlide();
     },
     computed: {
       swiper() {
@@ -249,7 +260,7 @@
     }
 
     & .bubble {
-      @apply  absolute opacity-0;
+      @apply absolute opacity-0;
       transition: opacity ease 1s;
 
       &:nth-child(2) {
