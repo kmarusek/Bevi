@@ -50,7 +50,7 @@
 <style lang="scss" scoped>
 .press-release {
   padding-bottom: 200px;
-  @apply text-center pt-16 overflow-x-hidden;
+  @apply text-center pt-16 overflow-hidden;
 
   &.color-scheme-Red {
     @apply bg-red-200;
@@ -63,6 +63,10 @@
       max-width: 450px;
       margin-bottom: 200px;
       @apply text-red-500 flex flex-col justify-start items-center w-full text-left px-16 relative mx-auto;
+
+      &:last-of-type {
+        @apply mb-0;
+      }
 
       @screen md {
         @apply px-4 mb-0;
