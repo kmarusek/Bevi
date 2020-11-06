@@ -1029,6 +1029,59 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5fa57bd6fdab2": {
+                    "key": "layout_5fa57bd6fdab2",
+                    "name": "machine_feature",
+                    "label": "Machine Feature",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5fa57c1bfdab3",
+                            "label": "Text",
+                            "name": "text",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
+                        },
+                        {
+                            "key": "field_5fa57c33fdab4",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "thumbnail",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -1052,7 +1105,7 @@
             }
         ]
     ],
-    "menu_order": 1,
+    "menu_order": 0,
     "position": "normal",
     "style": "default",
     "label_placement": "top",
@@ -1062,5 +1115,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1604500994
+    "modified": 1604684291
 }
