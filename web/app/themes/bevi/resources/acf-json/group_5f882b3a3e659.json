@@ -1029,6 +1029,24 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5fa5485046cf8": {
+                    "key": "layout_5fa5485046cf8",
+                    "name": "machine_feature",
+                    "label": "Machine Feature",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5fa58fe7d3c3b": {
+                    "key": "layout_5fa58fe7d3c3b",
+                    "name": "counters",
+                    "label": "counters",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -1050,9 +1068,16 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "counters"
+            }
         ]
     ],
-    "menu_order": 1,
+    "menu_order": 0,
     "position": "normal",
     "style": "default",
     "label_placement": "top",
@@ -1062,5 +1087,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1604500994
+    "modified": 1604686443
 }

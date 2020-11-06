@@ -24,6 +24,7 @@ import Wave from '~/components/modules/Wave/Wave';
 import FormComponent from '~/components/modules/FormComponent/FormComponent';
 import Flavors from '~/components/modules/Flavors/Flavors';
 import InfoModule from '~/components/modules/InfoModule/InfoModule';
+import Counters from '~/components/modules/Counters/Counters';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -55,6 +56,7 @@ Vue.component('Wave', Wave);
 Vue.component('FormComponent', FormComponent);
 Vue.component('Flavors', Flavors);
 Vue.component('InfoModule', InfoModule);
+Vue.component('CountersComponent', Counters);
 
 // eslint-disable-next-line no-new
 new Vue({

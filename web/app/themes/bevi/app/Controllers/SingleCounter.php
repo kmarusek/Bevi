@@ -4,14 +4,9 @@ namespace App\Controllers;
 
 use Sober\Controller\Controller;
 
-class Page extends Controller
+class SingleCounter extends Controller
 {
-    /**
-     * Return Page title and hero from ACF
-     *
-     * @return array
-     */
-    public function hero()
+    public static function counter()
     {
         return [
           'pageTitle' => get_the_title(),
