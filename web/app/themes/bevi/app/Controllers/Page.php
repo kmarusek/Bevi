@@ -15,6 +15,8 @@ class Page extends Controller
     {
         return [
           'pageTitle' => get_the_title(),
+          'featuredImage' => get_the_post_thumbnail_url(),
+          'hero' => get_field('hero'),
         ];
     }
 }
