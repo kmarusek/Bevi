@@ -22,7 +22,7 @@ class App extends Controller
         ]);
 
         $categories = array_map(function ($cat) {
-            $cat->permalink = get_category_link($cat->cat_ID);
+            $cat->link = get_category_link($cat->cat_ID);
             return $cat;
         }, $categories);
 

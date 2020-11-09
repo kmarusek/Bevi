@@ -3,6 +3,8 @@ import Vue from 'vue';
 
 // Plugins
 import gsap from 'gsap';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 
@@ -38,6 +40,7 @@ import PageHero from '~/components/common/PageHero/PageHero';
 // Register Plugins
 gsap.registerPlugin(ScrollTrigger);
 Vue.use(VueAwesomeSwiper);
+Vue.use(VueAxios, axios);
 
 // Register Components
 Vue.component('SiteHeader', SiteHeader);
