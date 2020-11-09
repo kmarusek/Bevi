@@ -26,7 +26,8 @@
   &:hover {
     opacity: 0.8;
   }
-  
+
+  // TODO: add background assets for each category
   &.culture {
     @apply bg-orange;
   }

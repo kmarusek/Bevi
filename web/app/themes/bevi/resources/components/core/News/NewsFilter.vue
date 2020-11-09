@@ -1,8 +1,5 @@
 <template>
   <section class="py-20 w-full">
-    <!-- Remove -->
-    <span class="block mt-40" />
-    <!-- Remove -->
     <ul class="flex justify-center flex-wrap">
       <li
         v-for="(category, index) in categories"
