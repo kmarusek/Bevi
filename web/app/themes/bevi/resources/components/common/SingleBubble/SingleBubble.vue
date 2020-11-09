@@ -49,9 +49,14 @@
       @apply stroke-white;
     }
   }
-    &.gray {
+  &.gray {
     path {
       @apply opacity-80;
+    }
+  }
+  &.light-gray {
+    path {
+      @apply opacity-30;
     }
   }
 }
