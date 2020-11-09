@@ -167,7 +167,7 @@ function cptui_register_my_cpts()
         $labels = [
           "name" => __( "Counters", "sage" ),
           "singular_name" => __( "Counter", "sage" ),
-          "menu_name" => __( "Counter", "sage" ),
+          "menu_name" => __( "Counters", "sage" ),
         ];
       
         $args = [

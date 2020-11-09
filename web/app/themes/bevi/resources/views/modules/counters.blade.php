@@ -1,1 +1,1 @@
-<counters-component :wp="{{ json_encode(SingleCounter::counter()) }}"></counters-component>
+<counters-component :counters="{{ json_encode($get_counters) }}"></counters-component>

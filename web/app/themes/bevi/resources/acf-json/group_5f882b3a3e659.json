@@ -1030,15 +1030,6 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_5fa5485046cf8": {
-                    "key": "layout_5fa5485046cf8",
-                    "name": "machine_feature",
-                    "label": "Machine Feature",
-                    "display": "block",
-                    "sub_fields": [],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_5fa58fe7d3c3b": {
                     "key": "layout_5fa58fe7d3c3b",
                     "name": "counters",
@@ -1087,5 +1078,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1604686443
+    "modified": 1604690701
 }
