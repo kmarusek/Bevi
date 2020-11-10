@@ -1180,6 +1180,15 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5faa975b20ee7": {
+                    "key": "layout_5faa975b20ee7",
+                    "name": "counters",
+                    "label": "Counters",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -1220,5 +1229,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1604690701
+    "modified": 1605015428
 }
