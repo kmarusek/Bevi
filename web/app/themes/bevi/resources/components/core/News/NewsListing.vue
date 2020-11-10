@@ -95,8 +95,8 @@
           this.posts = response.data;
         });
       },
-      getPostsByCategory() {
-        this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptionsCategory }).then((response) => {
+      async getPostsByCategory() {
+        await this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptionsCategory }).then((response) => {
           this.posts = response.data;
         });
       },
