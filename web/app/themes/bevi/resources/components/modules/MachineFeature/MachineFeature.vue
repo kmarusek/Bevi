@@ -1,7 +1,7 @@
 <template>
   <section class="machine-feature gsap-fade-section">
     <div
-      class="md:my-24 pb-20 container text-center"
+      class="md:my-24 pb-20 container lg:text-center"
     >
       <img
         :src="block.image_desktop.sizes.large"
