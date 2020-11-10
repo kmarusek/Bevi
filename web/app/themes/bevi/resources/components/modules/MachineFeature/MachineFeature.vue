@@ -6,7 +6,7 @@
       <img
         :src="block.image_desktop.sizes.large"
         :alt="block.image_desktop.alt"
-        class="img sm:hidden lg:block mx-auto"
+        class="img hidden lg:block mx-auto"
       >
 
       <img
@@ -19,7 +19,7 @@
         <div
           v-for="(feature, index) in block.feature_list"
           :key="index"
-          class="sm:w-1/1 md:w-1/2 mt-8 lg:invisible "
+          class="sm:w-1/1 px-2 md:w-1/2 mt-8 lg:invisible "
         >
           <h5 class="h5">
             {{ feature.title }}
@@ -32,7 +32,7 @@
 
       <div
         v-html="block.text"
-        class="mt-5 w-2/4 mx-auto"
+        class="mt-5 lg:w-2/4 mx-auto"
       />
 
       <a
