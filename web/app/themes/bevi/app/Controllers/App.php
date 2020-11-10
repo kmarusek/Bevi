@@ -33,7 +33,7 @@ class App extends Controller
         }
         return get_the_title();
     }
-    
+
     public function allCategories()
     {
         $categories = get_categories([
@@ -60,6 +60,26 @@ class App extends Controller
             $post->permalink = get_the_permalink($post->ID);
             $post->post_category = get_the_category($post->ID);
 
+            return $post;
+        }, $posts);
+
+        return $posts;
+    }
+
+    public function getCounters()
+    {
+        $posts = get_posts([
+            'numberposts'=>2,
+            'post_type'=> 'counters',
+        ]);
+
+        $posts = array_map(function ($post) {
+            $post->featured_image = get_the_post_thumbnail_url($post->ID);
+            $post->permalink = get_the_permalink($post->ID);
+            $post->post_title = get_the_title($post->ID);
+            $post->short_description = get_field('counter_data', $post->ID)['short_description'];
+            $post->counter_thumb = get_field('counter_data', $post->ID)['counter_tumb'];
+            
             return $post;
         }, $posts);
 
