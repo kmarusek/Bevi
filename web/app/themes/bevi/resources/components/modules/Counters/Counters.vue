@@ -2,7 +2,7 @@
   <section
     class="relative bg-blue-100"
   >
-    <div class="py-32 md:container flex flex-col items-center gsap-fade-section text-center">
+    <div class="py-20 lg:py-32 md:container flex flex-col items-center gsap-fade-section text-center">
       <p class="uppercase font-space text-blue-500 text-sm font-bold tracking-wider mb-1">
         Our Products
       </p>
