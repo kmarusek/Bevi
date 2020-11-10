@@ -57,11 +57,6 @@
         queryOptions: {
           per_page: 6,
           page: 1,
-          _embed: true,
-        },
-        queryOptionsCategory: {
-          per_page: 6,
-          page: 1,
           categories: this.categoryId,
           _embed: true,
         },
@@ -69,11 +64,7 @@
       };
     },
     mounted() {
-      if (this.categoryPage) {
-        this.getPosts();
-      } else {
-        this.getPostsByCategory();
-      }
+      this.getPosts();
       this.getAllPosts();
     },
     computed: {
@@ -92,11 +83,6 @@
       },
       async getPosts() {
         await this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptions }).then((response) => {
-          this.posts = response.data;
-        });
-      },
-      async getPostsByCategory() {
-        await this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptionsCategory }).then((response) => {
           this.posts = response.data;
         });
       },
@@ -215,7 +201,7 @@
     bottom: 0;
     right: 7%;
   }
-  
+
   &:nth-of-type(4) {
     top: 40%;
     left: -2%;
