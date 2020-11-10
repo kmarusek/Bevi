@@ -1,1 +1,1 @@
-<press-release :block="{{ json_encode($block) }}"></press-relea>
+<press-release :block="{{ json_encode($block) }}"></press-release>
