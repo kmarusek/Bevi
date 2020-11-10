@@ -89,6 +89,12 @@ module.exports = {
           700: '#666666',
         },
       },
+      width: {
+        30: '30%',
+      },
+      height: {
+        70: '20rem',
+      },
     },
     container: {
       center: true,
