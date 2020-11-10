@@ -1,7 +1,7 @@
 <template>
-  <section class="container relative pb-20">
+  <section class="relative pb-20 overflow-hidden">
     <NewsFilter :categories="categories" />
-    <div class="grid">
+    <div class="container grid">
       <div
         v-for="(post, index) in posts"
         :key="index"
@@ -45,6 +45,10 @@
         required: true,
         type: Array,
       },
+      categoryId: {
+        type: Number,
+        required: false,
+      },
     },
     data() {
       return {
@@ -55,11 +59,21 @@
           page: 1,
           _embed: true,
         },
+        queryOptionsCategory: {
+          per_page: 6,
+          page: 1,
+          categories: this.categoryId,
+          _embed: true,
+        },
         loading: false,
       };
     },
     mounted() {
-      this.getPosts();
+      if (this.categoryPage) {
+        this.getPosts();
+      } else {
+        this.getPostsByCategory();
+      }
       this.getAllPosts();
     },
     computed: {
@@ -71,13 +85,18 @@
       },
     },
     methods: {
-      getAllPosts() {
-        this.axios.get('/wp-json/wp/v2/posts').then((response) => {
+      async getAllPosts() {
+        await this.axios.get('/wp-json/wp/v2/posts').then((response) => {
           this.postsNumber = response.data.length;
         });
       },
-      getPosts() {
-        this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptions }).then((response) => {
+      async getPosts() {
+        await this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptions }).then((response) => {
+          this.posts = response.data;
+        });
+      },
+      getPostsByCategory() {
+        this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptionsCategory }).then((response) => {
           this.posts = response.data;
         });
       },
@@ -106,6 +125,12 @@
   row-gap: 20px;
 
   @screen md {
+    column-gap: 40px;
+    row-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @screen xl {
     column-gap: 60px;
     row-gap: 40px;
     grid-template-columns: repeat(3, 1fr);
@@ -116,6 +141,25 @@
     @apply ease-in-out transition-all duration-300;
 
     @screen md {
+      &:nth-child(4n + 1) {
+        height: 35rem;
+      }
+
+      &:nth-child(4n + 2) {
+        height: 25rem;
+      }
+
+      &:nth-child(4n + 3) {
+        height: 25rem;
+      }
+
+      &:nth-child(4n + 4) {
+        height: 35rem;
+        margin-top: -10rem;
+      }
+    }
+
+    @screen xl {
       &:nth-child(6n + 1) {
         height: 35rem;
       }
@@ -130,6 +174,7 @@
 
       &:nth-child(6n + 4) {
         height: 25rem;
+        margin-top: 0;
       }
 
       &:nth-child(6n + 5) {
@@ -157,23 +202,23 @@
   @apply absolute;
 
   &:nth-of-type(1) {
-    top: 20%;
-    right: -30px;
+    top: 12%;
+    right: 3%;
   }
 
   &:nth-of-type(2) {
     top: 50%;
-    right: -80px;
+    right: -1%;
   }
 
   &:nth-of-type(3) {
     bottom: 0;
-    right: 50px;
+    right: 7%;
   }
   
   &:nth-of-type(4) {
     top: 40%;
-    left: -80px;
+    left: -2%;
   }
 }
 </style>
