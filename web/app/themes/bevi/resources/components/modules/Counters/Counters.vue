@@ -41,9 +41,10 @@
           <h3 class="h3 text-blue-600 font-semibold mt-2">
             {{ counter.post_title }}
           </h3>
-          <p class="mt-2 px-4 text-sm md:px-12">
-            {{ counter.short_description }}
-          </p>
+          <div
+            class="mt-2 px-4 md:px-12 text-body smaller"
+            v-html="counter.short_description"
+          />
           <a
             :href="counter.permalink"
             class="btn mt-3"
