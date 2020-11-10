@@ -21,9 +21,9 @@
           :key="index"
           class="sm:w-1/1 px-2 md:w-1/2 mt-8 lg:invisible "
         >
-          <h5 class="h5">
+          <h3 class="h3">
             {{ feature.title }}
-          </h5>
+          </h3>
           <div
             v-html="feature.text"
           />
