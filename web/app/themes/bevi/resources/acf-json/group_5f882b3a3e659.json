@@ -1037,25 +1037,6 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_5fa57c1bfdab3",
-                            "label": "Text",
-                            "name": "text",
-                            "type": "wysiwyg",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "tabs": "all",
-                            "toolbar": "full",
-                            "media_upload": 1,
-                            "delay": 0
-                        },
-                        {
                             "key": "field_5fa57c33fdab4",
                             "label": "Image - Desktop",
                             "name": "image_desktop",
@@ -1102,6 +1083,25 @@
                             "max_height": "",
                             "max_size": "",
                             "mime_types": ""
+                        },
+                        {
+                            "key": "field_5fa57c1bfdab3",
+                            "label": "Text",
+                            "name": "text",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
                         },
                         {
                             "key": "field_5fa907fabc00e",
@@ -1213,5 +1213,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1604926444
+    "modified": 1605006914
 }
