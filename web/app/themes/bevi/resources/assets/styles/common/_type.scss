@@ -24,6 +24,9 @@
 .h2 {
   @apply font-body text-3xl text-blue-600 font-semibold;
   @screen md {
+    @apply text-4xl leading-tight;
+  }
+  @screen lg {
     @apply text-5xl leading-tight;
   }
 }

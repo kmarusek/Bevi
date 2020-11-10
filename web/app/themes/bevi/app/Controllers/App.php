@@ -79,6 +79,9 @@ class App extends Controller
             $post->post_title = get_the_title($post->ID);
             $post->short_description = get_field('counter_data', $post->ID)['short_description'];
             $post->counter_thumb = get_field('counter_data', $post->ID)['counter_tumb'];
+            $post->counter_image = get_field('counter_data', $post->ID)['counter_image'];
+            $post->counter_details = get_field('counter_data', $post->ID)['counter_details'];
+            $post->counter_link = get_field('counter_data', $post->ID)['counter_link'];
             
             return $post;
         }, $posts);
