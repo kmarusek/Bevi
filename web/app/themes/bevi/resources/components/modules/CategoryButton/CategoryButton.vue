@@ -21,7 +21,7 @@
 
 <style lang="scss" scoped>
 .category {
-  @apply font-space bg-green-100 text-blue-600 rounded-full py-3 px-6 text-sm leading-none font-medium text-center inline-flex transition-all duration-300 no-underline;
+  @apply font-space bg-green-100 text-blue-600 rounded-full py-3 px-6 text-sm leading-none font-medium text-center inline-flex flex-no-wrap transition-all duration-300 no-underline;
 
   &:hover {
     opacity: 0.8;

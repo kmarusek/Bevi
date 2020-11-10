@@ -57,7 +57,7 @@
 
 <style lang="scss" scoped>
 .header {
-  @apply fixed w-full py-4 transition-colors duration-300 ease-in-out z-10;
+  @apply fixed w-full py-4 transition-colors duration-300 ease-in-out z-50;
   
   @screen lg {
     @apply py-4 items-center;

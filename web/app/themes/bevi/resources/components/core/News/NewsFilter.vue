@@ -1,10 +1,10 @@
 <template>
-  <section class="py-20 w-full">
-    <ul class="flex justify-center flex-wrap">
+  <section class="py-10 md:py-20 w-full">
+    <ul class="pl-4 md:pl-0 flex whitespace-no-wrap justify-start md:justify-center overflow-x-scroll md:overflow-x-visible md:flex-wrap">
       <li
         v-for="(category, index) in categories"
         :key="index"
-        class="mx-4 mb-4"
+        class="mr-4 md:mx-4 md:mb-4"
       >
         <CategoryButton :category="category" />
       </li>
