@@ -76,13 +76,13 @@
       },
     },
     methods: {
-      async getAllPosts() {
-        await this.axios.get('/wp-json/wp/v2/posts').then((response) => {
+      getAllPosts() {
+        this.axios.get('/wp-json/wp/v2/posts').then((response) => {
           this.postsNumber = response.data.length;
         });
       },
-      async getPosts() {
-        await this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptions }).then((response) => {
+      getPosts() {
+        this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptions }).then((response) => {
           this.posts = response.data;
         });
       },
