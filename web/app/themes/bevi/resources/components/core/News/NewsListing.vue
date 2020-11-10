@@ -77,7 +77,7 @@
     },
     methods: {
       getAllPosts() {
-        this.axios.get('/wp-json/wp/v2/posts').then((response) => {
+        this.axios.get('/wp-json/wp/v2/posts', { params: {categories: this.categoryId} }).then((response) => {
           this.postsNumber = response.data.length;
         });
       },
