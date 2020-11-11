@@ -1189,6 +1189,15 @@
                     "sub_fields": [],
                     "min": "",
                     "max": ""
+                },
+                "layout_5faa9d701f152": {
+                    "key": "layout_5faa9d701f152",
+                    "name": "machine_comparison",
+                    "label": "Machine Comparison",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -1229,5 +1238,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1605015428
+    "modified": 1605016965
 }
