@@ -1,0 +1,74 @@
+<template>
+  <section class="relative bg-blue-100">
+    <div class="py-20 lg:py-32 md:container flex flex-col items-center gsap-fade-section text-center">
+      <h2 class="h2 mb-4 lg:mb-10 text-blue-600 font-semibold">
+        Choose your dispenser
+      </h2>
+      <div class="w-full flex flex-col sm:flex-row justify-around flex-wrap">
+        <div
+          class="dispenser-item w-full sm:w-1/2 lg:px-16 xl:px-32 flex flex-col sm:border-b border-r border-blue-200 pb-8"
+          v-for="(counter, index) in counters"
+          :key="counter.id"
+        >
+          <div class="relative mt-auto">
+            <img
+              v-if="counter.counter_image"
+              class="mx-auto relative z-10"
+              :src="counter.counter_image.sizes.large"
+            >
+            <img
+              :src="require(`~/assets/images/blob_${index}.svg`)"
+              :alt="`blob_${index}`"
+              :class="`blob-${index}`"
+              class="blob"
+            >
+          </div>
+          <h4 class="hidden sm:block text-2xl text-blue-600 font-semibold mt-6">
+            {{ counter.post_title }}
+          </h4>
+          <machine-details
+            class="sm:hidden"
+            :counters="counter"
+            :details="counter.counter_details"
+          />
+        </div>
+        <div
+          class="dispenser-item w-full sm:w-1/2 lg:px-16 xl:px-32 sm:border-r border-blue-200 pt-8"
+          v-for="counter in counters"
+          :key="counter.id"
+        >
+          <machine-details
+            class="hidden sm:block"
+            :counters="counter"
+            :details="counter.counter_details"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+  export default {
+    props: {
+      counters: {
+        required: true,
+        type: Array,
+      },
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+.blob {
+  @apply absolute z-0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.dispenser-item {
+  &:nth-of-type(even) {
+    border-right: 0;
+  }
+}
+
+</style>
