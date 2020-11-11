@@ -6,7 +6,7 @@
         class="absolute top-0 left-0 m-4"
       />
       <div
-        class="post-card-image bg-blue-100"
+        class="post-card-image"
         :style="{ 'background-image' : `url(${ backgroundImage })` }"
       />
       <div class="details">
@@ -34,7 +34,10 @@
     },
     computed: {
       backgroundImage() {
-        return this.post._embedded['wp:featuredmedia'] ? this.post._embedded['wp:featuredmedia'][0].source_url : '';
+        return this.post._embedded['wp:featuredmedia']
+          ? this.post._embedded['wp:featuredmedia'][0].source_url
+          // eslint-disable-next-line
+          : `${ require('../../../assets/images/placeholder.jpg') }`;
       },
     },
   };
