@@ -14,6 +14,13 @@
   }
 }
 
+.heading-one {
+  @apply font-body text-4.5xl text-blue-600 font-semibold leading-none;
+  @screen md {
+    @apply text-7xl leading-none;
+  }
+}
+
 .h1 {
   @apply font-body text-4.5xl text-blue-600 font-semibold leading-none;
   @screen md {
