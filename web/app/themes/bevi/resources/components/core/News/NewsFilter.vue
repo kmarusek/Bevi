@@ -5,6 +5,7 @@
         v-for="(category, index) in categories"
         :key="index"
         class="mr-4 md:mx-4 md:mb-4"
+        :class="{ 'order-1' : category.slug === 'uncategorized' }"
       >
         <CategoryButton :category="category" />
       </li>
