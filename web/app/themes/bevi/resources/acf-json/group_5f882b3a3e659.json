@@ -1181,9 +1181,15 @@
                     "min": "",
                     "max": ""
                 },
-                "key": "layout_5faa975b20ee7",
-                "name": "counters",
-                "label": "Counters",
+                "layout_5faa975b20ee7": {
+                    "key": "layout_5faa975b20ee7",
+                    "name": "counters",
+                    "label": "Counters",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_5faaa40981fc4": {
                     "key": "layout_5faaa40981fc4",
                     "name": "image_gallery",
