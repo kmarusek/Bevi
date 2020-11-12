@@ -29,7 +29,6 @@ module.exports = {
     }),
     extend: {
       fontSize: {
-        xxs: '0.65rem',
         '4.5xl': '2.8rem',
         '5xl': '3.2rem',
         '5.5xl': '3.8rem',
