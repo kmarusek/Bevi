@@ -1263,6 +1263,15 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5faa9d701f152": {
+                    "key": "layout_5faa9d701f152",
+                    "name": "machine_comparison",
+                    "label": "Machine Comparison",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
