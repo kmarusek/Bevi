@@ -15,12 +15,24 @@
 }
 
 .heading-one {
-  @apply font-body text-4.5xl text-blue-600 font-semibold leading-none;
-  @screen md {
-    @apply text-7xl leading-none;
+  @apply font-body text-5.5xl text-blue-600 font-bold leading-none;
+  @screen sm {
+    @apply text-6xl font-semibold;
+  }
+  @screen xl {
+    @apply text-7xl;
   }
 }
 
+.heading-two {
+  @apply font-body text-4xl text-blue-600 font-semibold leading-none;
+
+  @screen xl {
+    @apply text-5xl leading-normal;
+  }
+}
+
+.post-content /deep/ h1,
 .h1 {
   @apply font-body text-4.5xl text-blue-600 font-semibold leading-none;
   @screen md {
@@ -28,31 +40,35 @@
   }
 }
 
+.post-content /deep/ h2,
 .h2 {
   @apply font-body text-3xl text-blue-600 font-semibold;
   @screen md {
     @apply text-4xl leading-tight;
   }
   @screen lg {
-    @apply text-5xl leading-tight;
+    @apply text-5xl;
   }
 }
 
+.post-content /deep/ h3,
 .h3 {
   @apply font-body text-3xl font-semibold leading-tight;
   @screen md {
     @apply text-3xl font-medium;
   }
 }
-
+.post-content /deep/ h4,
 .h4 {
   @apply font-body text-3xl text-blue-600;
 }
 
+.post-content /deep/ h5,
 .h5 {
   @apply font-semibold text-xl text-blue-600;
 }
 
+.post-content /deep/ h6,
 .h6 {
   @apply font-extrabold text-blue-600 uppercase tracking-widest text-xs;
 }
