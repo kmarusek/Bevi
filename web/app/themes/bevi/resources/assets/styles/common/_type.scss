@@ -15,7 +15,7 @@
 }
 
 .heading-one {
-  @apply font-body text-5.5xl text-blue-600 font-bold leading-none;
+  @apply font-body text-5.5xl font-bold leading-none;
   @screen sm {
     @apply text-6xl font-semibold;
   }
@@ -25,7 +25,7 @@
 }
 
 .heading-two {
-  @apply font-body text-4xl text-blue-600 font-semibold leading-none;
+  @apply font-body text-4xl font-semibold leading-none;
 
   @screen xl {
     @apply text-5xl leading-normal;

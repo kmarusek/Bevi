@@ -22,17 +22,17 @@
       >
         <div
           class="w-full"
-          :class="{'md:pl-20' : block.text_position === 'Left' && block.feature_image, 'md:pr-20' : block.text_position === 'Right' && block.feature_image}"
+          :class="[{'md:pl-20' : block.text_position === 'Left' && block.feature_image, 'md:pr-20' : block.text_position === 'Right' && block.feature_image}, block.text_color.value ]"
         >
           <h6
             v-if="block.small_title"
-            class="font-space font-medium md:text-lg text-blue-600"
+            class="font-space font-medium md:text-lg"
           >
             {{ block.small_title }}
           </h6>
           <h1
             v-if="block.large_title"
-            :class="block.text_position === 'Center' ? 'heading-one text-blue-600' : 'text-blue-600 my-2 heading-two'"
+            :class="block.text_position === 'Center' ? 'heading-one' : 'my-2 heading-two'"
           >
             {{ block.large_title }}
           </h1>
@@ -40,7 +40,7 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="post-content text-blue-600"
+            class="post-content"
           />
 
           <a
