@@ -3,8 +3,21 @@
     class="lg:min-h-screen bg-cover bg-no-repeat flex relative"
     :style="{ 'background-image': 'url(' + block.background_image.sizes.large + ')' }"
   >
+    <video
+      v-if="block.add_background_video"
+      :poster="block.background_image.sizes.large"
+      autoplay
+      muted
+      loop
+      class="absolute w-full h-full top-0 left-0 z-1 object-fill"
+    >
+      <source
+        :src="block.video.url"
+        type="video/mp4"
+      >
+    </video>
     <div
-      class="container flex"
+      class="container flex relative"
       :class="{
         'text-center md:text-left flex-col md:flex-row' : block.text_position === 'Right',
         'text-center md:text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
@@ -22,17 +35,23 @@
       >
         <div
           class="w-full"
-          :class="{'md:pl-20' : block.text_position === 'Left' && block.feature_image, 'md:pr-20' : block.text_position === 'Right' && block.feature_image}"
+          :class="[
+            {
+              'md:pl-20' : block.text_position === 'Left' && block.feature_image,
+              'md:pr-20' : block.text_position === 'Right' && block.feature_image
+            },
+            block.text_color.value
+          ]"
         >
           <h6
             v-if="block.small_title"
-            class="font-space font-medium md:text-lg text-blue-600"
+            class="font-space font-medium md:text-lg"
           >
             {{ block.small_title }}
           </h6>
           <h1
             v-if="block.large_title"
-            :class="block.text_position === 'Center' ? 'heading-one text-blue-600' : 'text-blue-600 my-2 heading-two'"
+            :class="block.text_position === 'Center' ? 'heading-one' : 'my-2 heading-two'"
           >
             {{ block.large_title }}
           </h1>
@@ -40,7 +59,7 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="post-content text-blue-600"
+            class="post-content"
           />
 
           <a
