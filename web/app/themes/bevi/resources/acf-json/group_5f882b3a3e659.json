@@ -239,7 +239,7 @@
                             "key": "field_5fae7b2667f98",
                             "label": "Video",
                             "name": "video",
-                            "type": "oembed",
+                            "type": "file",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": [
@@ -256,8 +256,11 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "width": "",
-                            "height": ""
+                            "return_format": "array",
+                            "library": "all",
+                            "min_size": "",
+                            "max_size": "",
+                            "mime_types": ""
                         }
                     ],
                     "min": "",
@@ -1485,5 +1488,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1605273945
+    "modified": 1605277194
 }

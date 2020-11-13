@@ -3,8 +3,21 @@
     class="lg:min-h-screen bg-cover bg-no-repeat flex relative"
     :style="{ 'background-image': 'url(' + block.background_image.sizes.large + ')' }"
   >
+    <video
+      v-if="block.add_background_video"
+      :poster="block.background_image.sizes.large"
+      autoplay
+      muted
+      loop
+      class="absolute w-full h-full top-0 left-0 z-1 object-fill"
+    >
+      <source
+        :src="block.video.url"
+        type="video/mp4"
+      >
+    </video>
     <div
-      class="container flex"
+      class="container flex relative"
       :class="{
         'text-center md:text-left flex-col md:flex-row' : block.text_position === 'Right',
         'text-center md:text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
