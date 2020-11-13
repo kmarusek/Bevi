@@ -5,15 +5,24 @@
   >
     <div
       class="container flex"
-      :class="[block.image_position === 'Center' ? 'flex-col text-center' : 'text-center md:text-left flex-col md:flex-row', block.image_position === 'Left' ? 'md:flex-row-reverse' : '']"
+      :class="{
+        'text-center md:text-left flex-col md:flex-row' : block.text_position === 'Right',
+        'text-center md:text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
+        'flex-col text-center' : block.text_position === 'Center'
+      }"
     >
       <div
-        :class="block.image_position === 'Center' ? 'pt-20 md:pt-32' : 'md:flex-1 pt-20 md:py-20 lg:py-32'"
+        :class="{
+          'pt-20 xs:py-32 lg:w-2/4' : block.text_position === 'Left' && block.feature_image || block.text_position === 'Right' && block.feature_image,
+          'py-32 lg:w-2/4' : block.text_position === 'Left' && !block.feature_image || 'Right' && !block.feature_image,
+          'md:flex-1 py-32 lg:w-full' : block.text_position === 'Center' && !block.feature_image,
+          'md:flex-1 pt-20 lg:pt-32 lg:w-full' : block.text_position === 'Center' && block.feature_image,
+        }"
         class="flex items-center"
       >
         <div
           class="w-full"
-          :class="{'md:pl-20' : block.image_position === 'Left', 'md:pr-20' : block.image_position === 'Right'}"
+          :class="{'md:pl-20' : block.text_position === 'Left' && block.feature_image, 'md:pr-20' : block.text_position === 'Right' && block.feature_image}"
         >
           <h6
             v-if="block.small_title"
@@ -23,13 +32,13 @@
           </h6>
           <h1
             v-if="block.large_title"
-            :class="block.image_position === 'Center' ? 'heading-one text-blue-600' : 'text-blue-600 my-2 heading-two'"
+            :class="block.text_position === 'Center' ? 'heading-one text-blue-600' : 'text-blue-600 my-2 heading-two'"
           >
             {{ block.large_title }}
           </h1>
 
           <div
-            v-if="block.main_text && block.image_position != 'Center'"
+            v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
             class="post-content text-blue-600"
           />
@@ -39,21 +48,23 @@
             :href="block.link.url"
             :target="block.link.target"
             class="btn mt-4"
-            :class="{'center-bottom' : block.image_position === 'Center'}"
+            :class="{'center-bottom' : block.text_position === 'Center'}"
           >
             {{ block.link.title }}
           </a>
         </div>
       </div>
       <div
+        v-if="block.feature_image"
         class="flex-1 flex"
-        :class="block.image_position === 'Center' ? '' : ' mt-10 md:mt-20 lg:mt-auto'"
+        :class="block.text_position === 'Center' ? '' : ' mt-10 md:mt-20 lg:mt-auto'"
       >
         <img
+          v-if="block.feature_image"
           :src="block.feature_image.sizes.large"
           :alt="block.feature_image.alt"
           class="h-auto mx-auto mt-auto"
-          :class="block.image_position === 'Center' ? 'hero-image-small' : ' hero-image'"
+          :class="block.text_position === 'Center' ? 'hero-image-small' : ' hero-image'"
         >
       </div>
     </div>
