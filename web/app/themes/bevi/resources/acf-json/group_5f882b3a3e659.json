@@ -63,6 +63,7 @@
                             },
                             "choices": {
                                 "text-blue-600": "Dark Blue",
+                                "text-white": "White",
                                 "text-blue": "Blue",
                                 "text-green": "Green",
                                 "text-purple": "Purple",
@@ -1484,5 +1485,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1605270581
+    "modified": 1605273945
 }
