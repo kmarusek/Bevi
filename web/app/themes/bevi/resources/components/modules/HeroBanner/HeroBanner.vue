@@ -19,8 +19,8 @@
     <div
       class="container flex relative"
       :class="{
-        'text-center md:text-left flex-col md:flex-row' : block.text_position === 'Right',
-        'text-center md:text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
+        'text-left flex-col md:flex-row' : block.text_position === 'Right',
+        'text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
         'flex-col text-center' : block.text_position === 'Center'
       }"
     >
