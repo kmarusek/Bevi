@@ -1,7 +1,8 @@
 <template>
   <section
-    class="min-h-screen bg-cover bg-no-repeat flex relative"
+    class="bg-cover bg-no-repeat flex relative overflow-hidden"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
+    :class="block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen '"
   >
     <video
       v-if="block.add_background_video"
@@ -16,6 +17,58 @@
         type="video/mp4"
       >
     </video>
+    <div class="bubbles">
+      <span class="bubble1 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble1.svg')"
+        >
+      </span>
+      <span class="bubble2 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble2.svg')"
+        >
+      </span>
+      <span class="bubble3 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble3.svg')"
+        >
+      </span>
+      <span class="bubble4 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble4.svg')"
+        >
+      </span>
+      <span class="bubble5 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble5.svg')"
+        >
+      </span>
+      <span class="bubble6 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble6.svg')"
+        >
+      </span>
+      <span class="bubble7 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble7.svg')"
+        >
+      </span>
+      <span class="bubble8 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble8.svg')"
+        >
+      </span>
+      <span class="bubble9 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble9.svg')"
+        >
+      </span>
+      <span class="bubble10 bubble">
+        <img
+          :src="require('~/assets/images/bubbles/bubble10.svg')"
+        >
+      </span>
+    </div>
     <div
       class="container flex relative"
       :class="{
@@ -141,6 +194,118 @@
 
   @screen lg {
     max-height: 80vh;
+  }
+}
+
+.bubbles {
+  @apply z-0 h-full absolute;
+  width: 90%;
+  left: 5%;
+
+  @screen md {
+    width: 50%;
+    left: 25%;
+  }
+  
+  .bubble {
+    @apply absolute inline-block;
+    top: 110%;
+    will-change: transform;
+  }
+  .bubble1 {
+    left: 31%;
+    animation: bubbles 4.5s linear infinite 0.75s;
+
+    img {
+      animation: sideWays 6s ease-in-out infinite alternate;
+    }
+  }
+  .bubble2 {
+    left: 22%;
+    animation: bubbles 6s linear infinite 0.25s;
+
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble3 {
+    left: 86%;
+    animation: bubbles 12s linear infinite 1.5s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble4 {
+    left: 70%;
+    animation: bubbles 6s linear infinite 2.5s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble5 {
+    left: 90%;
+    animation: bubbles 8s linear infinite 0.5s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble6 {
+    left: 43%;
+    animation: bubbles 7s linear infinite 1s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble7 {
+    left: 65%;
+    animation: bubbles 9s linear infinite 2s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble8 {
+    left: 10%;
+    animation: bubbles 9s linear infinite 1s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble9 {
+    left: 13%;
+    animation: bubbles 9s linear infinite 1s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble10 {
+    left: 26%;
+    animation: bubbles 8s linear infinite 2s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+}
+
+@keyframes bubbles {
+  0% {
+    opacity: 0;
+    transform: translateY(15%);
+   }
+   20% {
+    opacity: 1;
+    transform: translateY(-20%);
+   }
+   100% {
+      opacity: 0;
+      transform: translateY(-1000%);
+   }
+}
+@keyframes sideWays {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+     transform: translateX(50px);
   }
 }
 </style>
