@@ -1,34 +1,38 @@
 <template>
   <section class="container py-6 px-12 mx-auto">
-    <div class="flex flex-wrap -m-4">
+    <div class="flex flex-wrap">
       <div class="lg:w-1/4 lg:sticky top-0 self-start">
-        <nav class="list-none">
-          <li
-            v-for="(item, idx) in block.sidenav"
-            :key="idx"
-            class="mb-3link text-gray-600 hover:text-gray-800 lg:cursor-pointer"
-            :class="{'font-bold': (item.title == activeEntry)}"
-            @click="goToSection(item.title)"
-          >
-            {{ item.title }}
-          </li>
+        <!-- <nav class="list-none flex flex-wrap lg:flex-none mb-12 lg:mb-0"> -->
+        <nav class="mb-6 lg:mb-0">
+          <ul class="list-none flex flex-wrap lg:flex-col">
+            <li
+              v-for="(item, idx) in block.sidenav"
+              :key="idx"
+              class="md:mb-3 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-2 lg:mr-0 text-lg lg:text-base"
+              :class="{'font-bold': (item.title == activeEntry)}"
+              @click="goToSection(item.title)"
+            >
+              {{ item.title }}
+            </li>
+          </ul>
         </nav>
       </div>
 
-      <div class="lg:w-3/4 /4">
+      <div class="lg:w-3/4">
         <div
           v-for="(item, idx) in block.sidenav"
-          class="mb-10"
+          class="mb-16"
           :name="item.title"
           :key="idx"
           ref="section"
         >
           <h2
-            class="h2 title-font font-medium text-black mb-3"
+            class="h2 mb-2"
           >
             {{ item.title }}
           </h2>
           <div
+            class="block-content smaller list-disc"
             v-html="item.main_content"
           />
         </div>
