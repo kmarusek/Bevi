@@ -1,6 +1,6 @@
 <template>
   <section
-    class="lg:min-h-screen bg-cover bg-no-repeat flex relative"
+    class="min-h-screen bg-cover bg-no-repeat flex relative"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
   >
     <video
@@ -27,7 +27,7 @@
       <div
         :class="{
           'pt-20 xs:py-32 lg:w-2/4' : block.text_position === 'Left' && block.feature_image || block.text_position === 'Right' && block.feature_image,
-          'py-32 lg:w-2/4' : block.text_position === 'Left' && !block.feature_image || 'Right' && !block.feature_image,
+          'py-20 xs:py-32 lg:w-2/4' : block.text_position === 'Left' && !block.feature_image || 'Right' && !block.feature_image,
           'md:flex-1 py-32 lg:w-full' : block.text_position === 'Center' && !block.feature_image,
           'md:flex-1 pt-20 lg:pt-32 lg:w-full' : block.text_position === 'Center' && block.feature_image,
         }"
