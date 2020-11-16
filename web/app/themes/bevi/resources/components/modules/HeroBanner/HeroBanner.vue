@@ -1,7 +1,7 @@
 <template>
   <section
     class="lg:min-h-screen bg-cover bg-no-repeat flex relative"
-    :style="{ 'background-image': 'url(' + block.background_image.sizes.large + ')' }"
+    :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
   >
     <video
       v-if="block.add_background_video"
@@ -98,7 +98,22 @@
         type: Object,
       },
     },
-
+    data: () => ({
+      windowWidth: window.innerWidth,
+    }),
+    mounted() {
+      window.onresize = () => {
+        this.windowWidth = window.innerWidth;
+      };
+    },
+    methods: {
+      backgroundImage() {
+        if (this.block.mobile_background_image && this.windowWidth <= 767) {
+          return this.block.mobile_background_image.sizes.medium_large;
+        }
+        return this.block.background_image.sizes.large;
+      },
+    },
   };
 </script>
 
