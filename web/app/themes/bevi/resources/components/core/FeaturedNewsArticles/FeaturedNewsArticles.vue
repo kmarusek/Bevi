@@ -9,24 +9,38 @@
         :key="index"
         class="fixed-height-container"
       >
-
-      <div class="flex flex-wrap -mx-2 overflow-hidden">
-
-        <div class="my-2 px-2 w-1/2 overflow-hidden">
-          <img
+        <div
+          class="flex flex-wrap -mx-2 items-center overflow-hidden"
+        >
+          <div
+            class="my-2 px-6 w-2/4 overflow-hidden"
+          >
+            <img
               :src="slide.featured_image"
-              class="gsap-fade rounded-md hidden md:block"
+              class="gsap-fade hidden md:block rounded object-cover h-70 w-full"
             >
+          </div>
+          <div
+            class="my-2 px-2 w-2/4 overflow-hidden"
+          >
+            <span>Posted on: 3 days ago</span>
+            <h3
+              class="h3 mb-4"
+            >
+              {{ slide.post_title }}
+            </h3>
+            <div
+              v-html="slide.post_content"
+              class="block-content smaller"
+            />
+            <a
+              href="#"
+              class="hover:underline text-gray-800 font-semibold inline-block"
+            >
+              Read more
+            </a>
+          </div>
         </div>
-
-        <div class="my-2 px-2 w-1/2 overflow-hidden">
-          <span>Posted on: 3 days ago</span>
-          <h3 class="h3">{{ slide.post_title }}</h3>
-          <div v-html="slide.post_content" />
-        </div>
-
-      </div>
-
       </swiper-slide>
       <div
         v-if="block.length >= 2"
@@ -52,7 +66,7 @@
     props: {
       block: {
         required: true,
-        type: Object,
+        type: Array,
       },
     },
     data: () => ({
@@ -88,8 +102,8 @@
       }
     },
     created() {
-      console.log(this);
-    },
+      // console.log(this.block)
+    }
   };
 </script>
 
