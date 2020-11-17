@@ -36,6 +36,7 @@ import MachineDetails from '~/components/modules/MachineComparison/MachineDetail
 import CategoryButton from '~/components/modules/CategoryButton/CategoryButton';
 import PostCard from '~/components/modules/PostCard/PostCard';
 import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
+import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -78,6 +79,7 @@ Vue.component('NewsFilter', NewsFilter);
 Vue.component('CategoryButton', CategoryButton);
 Vue.component('PostCard', PostCard);
 Vue.component('ImageGallery', ImageGallery);
+Vue.component('AuthorBlock', AuthorBlock);
 
 // eslint-disable-next-line no-new
 new Vue({
