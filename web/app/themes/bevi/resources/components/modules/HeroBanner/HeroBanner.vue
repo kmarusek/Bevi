@@ -1,7 +1,7 @@
 <template>
   <section
-    class="lg:min-h-screen bg-cover bg-no-repeat flex relative"
-    :style="{ 'background-image': 'url(' + block.background_image.sizes.large + ')' }"
+    class="min-h-screen bg-cover bg-no-repeat flex relative"
+    :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
   >
     <video
       v-if="block.add_background_video"
@@ -19,15 +19,15 @@
     <div
       class="container flex relative"
       :class="{
-        'text-center md:text-left flex-col md:flex-row' : block.text_position === 'Right',
-        'text-center md:text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
+        'text-left flex-col md:flex-row' : block.text_position === 'Right',
+        'text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
         'flex-col text-center' : block.text_position === 'Center'
       }"
     >
       <div
         :class="{
           'pt-20 xs:py-32 lg:w-2/4' : block.text_position === 'Left' && block.feature_image || block.text_position === 'Right' && block.feature_image,
-          'py-32 lg:w-2/4' : block.text_position === 'Left' && !block.feature_image || 'Right' && !block.feature_image,
+          'py-20 xs:py-32 lg:w-2/4' : block.text_position === 'Left' && !block.feature_image || 'Right' && !block.feature_image,
           'md:flex-1 py-32 lg:w-full' : block.text_position === 'Center' && !block.feature_image,
           'md:flex-1 pt-20 lg:pt-32 lg:w-full' : block.text_position === 'Center' && block.feature_image,
         }"
@@ -98,7 +98,22 @@
         type: Object,
       },
     },
-
+    data: () => ({
+      windowWidth: window.innerWidth,
+    }),
+    mounted() {
+      window.onresize = () => {
+        this.windowWidth = window.innerWidth;
+      };
+    },
+    methods: {
+      backgroundImage() {
+        if (this.block.mobile_background_image && this.windowWidth <= 767) {
+          return this.block.mobile_background_image.sizes.medium_large;
+        }
+        return this.block.background_image.sizes.large;
+      },
+    },
   };
 </script>
 
