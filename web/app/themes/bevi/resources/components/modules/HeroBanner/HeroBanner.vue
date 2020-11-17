@@ -34,7 +34,7 @@
       </span>
     </div>
     <div
-      class="container flex relative"
+      class="container flex relative gsap-fade-sections"
       :class="{
         'text-left flex-col md:flex-row' : block.text_position === 'Right',
         'text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
@@ -51,7 +51,7 @@
         class="flex items-center"
       >
         <div
-          class="w-full gsap-fade-section"
+          class="w-full"
           :class="[
             {
               'md:pl-20' : block.text_position === 'Left' && block.feature_image,
@@ -62,14 +62,14 @@
         >
           <h6
             v-if="block.small_title"
-            class="font-space font-medium md:text-lg gsap-fade"
+            class="font-space font-medium md:text-lg gsap-fades"
           >
             {{ block.small_title }}
           </h6>
           <h1
             v-if="block.large_title"
             :class="block.text_position === 'Center' ? 'heading-one' : 'my-2 heading-two'"
-            class="gsap-fade"
+            class="gsap-fades"
           >
             {{ block.large_title }}
           </h1>
@@ -77,14 +77,14 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="post-content gsap-fade"
+            class="post-content gsap-fades"
           />
 
           <a
             v-if="block.link"
             :href="block.link.url"
             :target="block.link.target"
-            class="btn mt-4 gsap-fade"
+            class="btn mt-4 gsap-fades"
             :class="{'center-bottom' : block.text_position === 'Center'}"
           >
             {{ block.link.title }}
@@ -100,7 +100,7 @@
           v-if="block.feature_image"
           :src="block.feature_image.sizes.large"
           :alt="block.feature_image.alt"
-          class="h-auto mx-auto mt-auto gsap-fade"
+          class="h-auto mx-auto mt-auto gsap-fades"
           :class="block.text_position === 'Center' ? 'hero-image-small' : ' hero-image'"
         >
       </div>
@@ -110,10 +110,10 @@
 
 <script>
 
-  import GSAPFade from '~/mixins/GSAPFade.js';
+  import { gsap } from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
 
   export default {
-    mixins: [GSAPFade],
     props: {
       block: {
         required: true,
@@ -127,6 +127,7 @@
       window.onresize = () => {
         this.windowWidth = window.innerWidth;
       };
+      this.startAnimation();
     },
     methods: {
       backgroundImage() {
@@ -134,6 +135,28 @@
           return this.block.mobile_background_image.sizes.medium_large;
         }
         return this.block.background_image.sizes.large;
+      },
+      startAnimation() {
+        gsap.utils.toArray('.gsap-fade-sections').forEach((section) => {
+          const elems = section.querySelectorAll('.gsap-fades');
+        
+          gsap.set(elems, { y: 10, opacity: 0 });
+        
+          ScrollTrigger.create({
+            trigger: section,
+            start: 'top 80%',
+            scrub: true,
+            onEnter: () => gsap.to(elems, {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.8,
+              delay: 0.8,
+              ease: 'power3.out',
+              overwrite: 'auto',
+            }),
+          });
+        });
       },
     },
   };
