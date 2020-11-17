@@ -82,10 +82,24 @@ class App extends Controller
             $post->counter_image = get_field('counter_data', $post->ID)['counter_image'];
             $post->counter_details = get_field('counter_data', $post->ID)['counter_details'];
             $post->counter_link = get_field('counter_data', $post->ID)['counter_link'];
-            
+
             return $post;
         }, $posts);
 
         return $posts;
+    }
+
+    public function featuredArticles()
+    {
+        $posts = get_field('featured_articles');
+        if ($posts) {
+            $posts = array_map(function ($post) {
+                $post->featured_image = get_the_post_thumbnail_url($post->ID);
+                $post->permalink = get_the_permalink($post->ID);
+                $post->author = get_the_author_meta($post->ID);
+                return $post;
+            }, $posts);
+            return $posts;
+        }
     }
 }

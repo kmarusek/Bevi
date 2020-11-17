@@ -16,6 +16,7 @@ import SiteFooterNavigation from '~/components/core/SiteFooter/SiteFooterNavigat
 import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import NewsListing from '~/components/core/News/NewsListing';
 import NewsFilter from '~/components/core/News/NewsFilter';
+import FeaturedNewsArticles from '~/components/core/FeaturedNewsArticles/FeaturedNewsArticles';
 
 // Components
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
@@ -78,6 +79,7 @@ Vue.component('NewsFilter', NewsFilter);
 Vue.component('CategoryButton', CategoryButton);
 Vue.component('PostCard', PostCard);
 Vue.component('ImageGallery', ImageGallery);
+Vue.component('FeaturedNewsArticles', FeaturedNewsArticles);
 
 // eslint-disable-next-line no-new
 new Vue({
