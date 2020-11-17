@@ -17,7 +17,10 @@
         type="video/mp4"
       >
     </video>
-    <div class="bubbles">
+    <div
+      class="bubbles"
+      v-if="block.show_bubbles"
+    >
       <span
         v-for="(n, index) in 12"
         :key="index"
