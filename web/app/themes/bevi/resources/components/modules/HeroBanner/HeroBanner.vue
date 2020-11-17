@@ -18,54 +18,15 @@
       >
     </video>
     <div class="bubbles">
-      <span class="bubble1 bubble">
+      <span
+        v-for="(n, index) in 12"
+        :key="index"
+        class="bubble"
+        :class="`bubble${index}`"
+      >
         <img
-          :src="require('~/assets/images/bubbles/bubble1.svg')"
-        >
-      </span>
-      <span class="bubble2 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble2.svg')"
-        >
-      </span>
-      <span class="bubble3 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble3.svg')"
-        >
-      </span>
-      <span class="bubble4 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble4.svg')"
-        >
-      </span>
-      <span class="bubble5 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble5.svg')"
-        >
-      </span>
-      <span class="bubble6 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble6.svg')"
-        >
-      </span>
-      <span class="bubble7 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble7.svg')"
-        >
-      </span>
-      <span class="bubble8 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble8.svg')"
-        >
-      </span>
-      <span class="bubble9 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble9.svg')"
-        >
-      </span>
-      <span class="bubble10 bubble">
-        <img
-          :src="require('~/assets/images/bubbles/bubble10.svg')"
+          :src="require(`~/assets/images/bubbles/bubble${index}.svg`)"
+          alt="bubble icon"
         >
       </span>
     </div>
@@ -203,97 +164,128 @@
   left: 5%;
 
   @screen md {
-    width: 50%;
-    left: 25%;
+    width: 60%;
+    left: 20%;
   }
   
   .bubble {
     @apply absolute inline-block;
     top: 110%;
     will-change: transform;
+
+    &:nth-of-type(even) {
+      @apply hidden;
+      
+      @screen md {
+        @apply inline-block;
+      }
+    }
+  }
+  .bubble0 {
+    left: 6%;
+    animation: bubbles 6.5s linear infinite 0.75s;
+
+    img {
+      animation: sideWays 8s ease-in-out infinite alternate;
+    }
   }
   .bubble1 {
-    left: 31%;
-    animation: bubbles 4.5s linear infinite 0.75s;
+    left: 22%;
+    animation: bubbles 9s linear infinite 0.25s;
 
     img {
       animation: sideWays 6s ease-in-out infinite alternate;
     }
   }
   .bubble2 {
-    left: 22%;
-    animation: bubbles 6s linear infinite 0.25s;
-
+    left: 14%;
+    animation: bubbles 14s linear infinite 1.5s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble3 {
-    left: 86%;
-    animation: bubbles 12s linear infinite 1.5s;
+    left: 70%;
+    animation: bubbles 7.5s linear infinite 2.5s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble4 {
-    left: 70%;
-    animation: bubbles 6s linear infinite 2.5s;
+    left: 80%;
+    animation: bubbles 11s linear infinite 0.5s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble5 {
-    left: 90%;
-    animation: bubbles 8s linear infinite 0.5s;
+    left: 43%;
+    animation: bubbles 9.5s linear infinite 1s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble6 {
-    left: 43%;
-    animation: bubbles 7s linear infinite 1s;
+    left: 65%;
+    animation: bubbles 11.8s linear infinite 14s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble7 {
-    left: 65%;
-    animation: bubbles 9s linear infinite 2s;
+    left: 10%;
+    animation: bubbles 9s linear infinite 1.2s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble8 {
-    left: 10%;
-    animation: bubbles 9s linear infinite 1s;
+    left: 13%;
+    animation: bubbles 12.6s linear infinite 0.3s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble9 {
-    left: 13%;
-    animation: bubbles 9s linear infinite 1s;
+    left: 26%;
+    animation: bubbles 6.3s linear infinite 8s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble10 {
-    left: 26%;
-    animation: bubbles 8s linear infinite 2s;
+    left: 69%;
+    animation: bubbles 9.8s linear infinite 1.8s;
     img {
-      animation: sideWays 4s ease-in-out infinite alternate;
+      animation: sideWays 2s ease-in-out infinite alternate;
+    }
+  }
+  .bubble11 {
+    left: 85%;
+    animation: bubbles 12s linear infinite 3s;
+    img {
+      animation: sideWays 4.6s ease-in-out infinite alternate;
+    }
+  }
+  .bubble12 {
+    left: 70%;
+    animation: bubbles 7.5s linear infinite 6.5s;
+    img {
+      animation: sideWays 8s ease-in-out infinite alternate;
     }
   }
 }
 
 @keyframes bubbles {
   0% {
-    opacity: 0;
     transform: translateY(15%);
+     opacity: 1;
    }
    20% {
-    opacity: 1;
     transform: translateY(-20%);
+   }
+   70% {
+    opacity: 1;
    }
    100% {
       opacity: 0;
