@@ -51,7 +51,7 @@
         class="flex items-center"
       >
         <div
-          class="w-full"
+          class="w-full gsap-fade-section"
           :class="[
             {
               'md:pl-20' : block.text_position === 'Left' && block.feature_image,
@@ -62,13 +62,14 @@
         >
           <h6
             v-if="block.small_title"
-            class="font-space font-medium md:text-lg"
+            class="font-space font-medium md:text-lg gsap-fade"
           >
             {{ block.small_title }}
           </h6>
           <h1
             v-if="block.large_title"
             :class="block.text_position === 'Center' ? 'heading-one' : 'my-2 heading-two'"
+            class="gsap-fade"
           >
             {{ block.large_title }}
           </h1>
@@ -76,14 +77,14 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="post-content"
+            class="post-content gsap-fade"
           />
 
           <a
             v-if="block.link"
             :href="block.link.url"
             :target="block.link.target"
-            class="btn mt-4"
+            class="btn mt-4 gsap-fade"
             :class="{'center-bottom' : block.text_position === 'Center'}"
           >
             {{ block.link.title }}
@@ -99,7 +100,7 @@
           v-if="block.feature_image"
           :src="block.feature_image.sizes.large"
           :alt="block.feature_image.alt"
-          class="h-auto mx-auto mt-auto"
+          class="h-auto mx-auto mt-auto gsap-fade"
           :class="block.text_position === 'Center' ? 'hero-image-small' : ' hero-image'"
         >
       </div>
@@ -108,7 +109,11 @@
 </template>
 
 <script>
+
+  import GSAPFade from '~/mixins/GSAPFade.js';
+
   export default {
+    mixins: [GSAPFade],
     props: {
       block: {
         required: true,
