@@ -66,6 +66,32 @@ class App extends Controller
         return $posts;
     }
 
+    public static function getPostData()
+    {
+        // Get Post Data
+        $postData['post_title'] = get_the_title();
+        $postData['post_permalink'] = get_the_permalink();
+        $postData['post_date'] = get_the_date('F j, Y');
+        $postData['post_author'] = get_the_author();
+        $postData['post_author_avatar'] = get_avatar_url(get_the_author_meta('ID'));
+        $authorId = get_the_author_meta('ID');
+        $postData['post_author_role'] = get_the_author_meta('user_description', $authorId);
+        $postData['post_content'] = get_the_content();
+        $postData['featured_image'] = get_the_post_thumbnail_url();
+
+        // Get categories, map permalink to each cat
+        $categories = get_the_category();
+        $categories = array_map(function ($cat) {
+            $cat->permalink = get_category_link($cat->cat_ID);
+            return $cat;
+        }, $categories);
+
+        // Add to post array
+        $postData['post_category'] = $categories;
+
+        return $postData;
+    }
+
     public function getCounters()
     {
         $posts = get_posts([
