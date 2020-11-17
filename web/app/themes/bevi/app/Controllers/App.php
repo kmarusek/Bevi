@@ -71,7 +71,7 @@ class App extends Controller
         // Get Post Data
         $postData['post_title'] = get_the_title();
         $postData['post_permalink'] = get_the_permalink();
-        $postData['post_date'] = get_the_date('F j, Y');
+        $postData['post_date'] = get_the_date('Y-m-d');
         $postData['post_author'] = get_the_author();
         $postData['post_author_avatar'] = get_avatar_url(get_the_author_meta('ID'));
         $authorId = get_the_author_meta('ID');
