@@ -67,7 +67,7 @@
       block: {
         required: true,
         type: Array,
-      },
+      }
     },
     data: () => ({
       swiperOptions: {
@@ -102,7 +102,7 @@
       }
     },
     created() {
-      // console.log(this.block)
+      console.log(this);
     }
   };
 </script>
