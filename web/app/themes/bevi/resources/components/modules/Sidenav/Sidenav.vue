@@ -2,7 +2,6 @@
   <section class="container py-6 px-12 mx-auto">
     <div class="flex flex-wrap">
       <div class="lg:w-1/4 lg:sticky top-0 self-start">
-        <!-- <nav class="list-none flex flex-wrap lg:flex-none mb-12 lg:mb-0"> -->
         <nav class="mb-6 lg:mb-0">
           <ul class="list-none flex flex-wrap lg:flex-col">
             <li
