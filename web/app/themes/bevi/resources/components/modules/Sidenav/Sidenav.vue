@@ -7,7 +7,7 @@
             <li
               v-for="(item, idx) in block.sidenav"
               :key="idx"
-              class="md:mb-3 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-2 lg:mr-0 text-lg lg:text-base"
+              class="sm:font-bold lg:font-normal md:mb-3 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-2 lg:mr-0 text-lg lg:text-base"
               :class="{'font-bold': (item.title == activeEntry)}"
               @click="goToSection(item.title)"
             >
