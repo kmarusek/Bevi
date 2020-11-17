@@ -1,7 +1,8 @@
 <template>
   <section
-    class="min-h-screen bg-cover bg-no-repeat flex relative"
+    class="bg-cover bg-no-repeat flex relative overflow-hidden"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
+    :class="block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen '"
   >
     <video
       v-if="block.add_background_video"
@@ -17,7 +18,23 @@
       >
     </video>
     <div
-      class="container flex relative"
+      class="bubbles"
+      v-if="block.show_bubbles"
+    >
+      <span
+        v-for="(n, index) in 12"
+        :key="index"
+        class="bubble"
+        :class="`bubble${index}`"
+      >
+        <img
+          :src="require(`~/assets/images/bubbles/bubble${index}.svg`)"
+          alt="bubble icon"
+        >
+      </span>
+    </div>
+    <div
+      class="container flex relative gsap-fade-sections"
       :class="{
         'text-left flex-col md:flex-row' : block.text_position === 'Right',
         'text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
@@ -45,13 +62,14 @@
         >
           <h6
             v-if="block.small_title"
-            class="font-space font-medium md:text-lg"
+            class="font-space font-medium md:text-lg gsap-fades"
           >
             {{ block.small_title }}
           </h6>
           <h1
             v-if="block.large_title"
             :class="block.text_position === 'Center' ? 'heading-one' : 'my-2 heading-two'"
+            class="gsap-fades"
           >
             {{ block.large_title }}
           </h1>
@@ -59,14 +77,14 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="post-content"
+            class="post-content gsap-fades"
           />
 
           <a
             v-if="block.link"
             :href="block.link.url"
             :target="block.link.target"
-            class="btn mt-4"
+            class="btn mt-4 gsap-fades"
             :class="{'center-bottom' : block.text_position === 'Center'}"
           >
             {{ block.link.title }}
@@ -82,7 +100,7 @@
           v-if="block.feature_image"
           :src="block.feature_image.sizes.large"
           :alt="block.feature_image.alt"
-          class="h-auto mx-auto mt-auto"
+          class="h-auto mx-auto mt-auto gsap-fades"
           :class="block.text_position === 'Center' ? 'hero-image-small' : ' hero-image'"
         >
       </div>
@@ -91,6 +109,10 @@
 </template>
 
 <script>
+
+  import { gsap } from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+
   export default {
     props: {
       block: {
@@ -105,6 +127,7 @@
       window.onresize = () => {
         this.windowWidth = window.innerWidth;
       };
+      this.startAnimation();
     },
     methods: {
       backgroundImage() {
@@ -112,6 +135,28 @@
           return this.block.mobile_background_image.sizes.medium_large;
         }
         return this.block.background_image.sizes.large;
+      },
+      startAnimation() {
+        gsap.utils.toArray('.gsap-fade-sections').forEach((section) => {
+          const elems = section.querySelectorAll('.gsap-fades');
+        
+          gsap.set(elems, { y: 10, opacity: 0 });
+        
+          ScrollTrigger.create({
+            trigger: section,
+            start: 'top 80%',
+            scrub: true,
+            onEnter: () => gsap.to(elems, {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.8,
+              delay: 0.8,
+              ease: 'power3.out',
+              overwrite: 'auto',
+            }),
+          });
+        });
       },
     },
   };
@@ -141,6 +186,149 @@
 
   @screen lg {
     max-height: 80vh;
+  }
+}
+
+.bubbles {
+  @apply z-0 h-full absolute;
+  width: 90%;
+  left: 5%;
+
+  @screen md {
+    width: 60%;
+    left: 20%;
+  }
+  
+  .bubble {
+    @apply absolute inline-block;
+    top: 110%;
+    will-change: transform;
+
+    &:nth-of-type(even) {
+      @apply hidden;
+      
+      @screen md {
+        @apply inline-block;
+      }
+    }
+  }
+  .bubble0 {
+    left: 6%;
+    animation: bubbles 6.5s linear infinite 0.75s;
+
+    img {
+      animation: sideWays 8s ease-in-out infinite alternate;
+    }
+  }
+  .bubble1 {
+    left: 22%;
+    animation: bubbles 9s linear infinite 0.25s;
+
+    img {
+      animation: sideWays 6s ease-in-out infinite alternate;
+    }
+  }
+  .bubble2 {
+    left: 14%;
+    animation: bubbles 14s linear infinite 1.5s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble3 {
+    left: 70%;
+    animation: bubbles 7.5s linear infinite 2.5s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble4 {
+    left: 80%;
+    animation: bubbles 11s linear infinite 0.5s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble5 {
+    left: 43%;
+    animation: bubbles 9.5s linear infinite 1s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble6 {
+    left: 65%;
+    animation: bubbles 11.8s linear infinite 14s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble7 {
+    left: 10%;
+    animation: bubbles 9s linear infinite 1.2s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble8 {
+    left: 13%;
+    animation: bubbles 12.6s linear infinite 0.3s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble9 {
+    left: 26%;
+    animation: bubbles 6.3s linear infinite 8s;
+    img {
+      animation: sideWays 4s ease-in-out infinite alternate;
+    }
+  }
+  .bubble10 {
+    left: 69%;
+    animation: bubbles 9.8s linear infinite 1.8s;
+    img {
+      animation: sideWays 2s ease-in-out infinite alternate;
+    }
+  }
+  .bubble11 {
+    left: 85%;
+    animation: bubbles 12s linear infinite 3s;
+    img {
+      animation: sideWays 4.6s ease-in-out infinite alternate;
+    }
+  }
+  .bubble12 {
+    left: 70%;
+    animation: bubbles 7.5s linear infinite 6.5s;
+    img {
+      animation: sideWays 8s ease-in-out infinite alternate;
+    }
+  }
+}
+
+@keyframes bubbles {
+  0% {
+    transform: translateY(15%);
+     opacity: 1;
+   }
+   20% {
+    transform: translateY(-20%);
+   }
+   70% {
+    opacity: 1;
+   }
+   100% {
+      opacity: 0;
+      transform: translateY(-1000%);
+   }
+}
+@keyframes sideWays {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+     transform: translateX(50px);
   }
 }
 </style>
