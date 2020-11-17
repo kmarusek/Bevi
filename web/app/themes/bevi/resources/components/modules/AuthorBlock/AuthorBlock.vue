@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex items-center pt-40 relative">
+  <div class="container flex items-center relative">
     <div
       @click="scrollToTop()"
       class="scroll-top hidden md:flex"
@@ -36,7 +36,7 @@
         </div>
         <div
           v-if="postData.post_author_role"
-          class="text-xs"
+          class="text-xs text-gray-700"
         >
           {{ postData.post_author_role }}
         </div>
