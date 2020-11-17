@@ -1,1 +1,1 @@
-<feature-block :block="{{ json_encode($block) }}"></feature-block>
+<feature-block :block="{{ json_encode($featuredArticles) }}"></feature-block>

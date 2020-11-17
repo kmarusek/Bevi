@@ -67,7 +67,7 @@
       block: {
         required: true,
         type: Array,
-      }
+      },
     },
     data: () => ({
       swiperOptions: {
@@ -101,9 +101,6 @@
         this.swiper.destroy();
       }
     },
-    created() {
-      console.log(this);
-    }
   };
 </script>
 

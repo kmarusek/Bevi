@@ -91,7 +91,7 @@ class App extends Controller
 
     public function featuredArticles()
     {
-        $posts = get_field('featured_articles');
+        $posts = get_field('featured_articles', 'option');
         if ($posts) {
             $posts = array_map(function ($post) {
                 $post->featured_image = get_the_post_thumbnail_url($post->ID);

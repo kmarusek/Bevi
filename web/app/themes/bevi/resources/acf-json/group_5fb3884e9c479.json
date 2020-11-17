@@ -1,12 +1,12 @@
 {
     "key": "group_5fb3884e9c479",
-    "title": "Post > Featured Articles",
+    "title": "Featured Articles",
     "fields": [
         {
             "key": "field_5fb3887500e3f",
             "label": "Featured Articles",
             "name": "featured_articles",
-            "type": "true_false",
+            "type": "relationship",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,19 +15,29 @@
                 "class": "",
                 "id": ""
             },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "post_type": [
+                "post"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "min": "",
+            "max": 10,
+            "return_format": "object"
         }
     ],
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "options_page",
                 "operator": "==",
-                "value": "post"
+                "value": "bevi-general-settings"
             }
         ]
     ],
@@ -36,8 +46,10 @@
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
-    "hide_on_screen": "",
+    "hide_on_screen": [
+        "page_attributes"
+    ],
     "active": true,
     "description": "",
-    "modified": 1605601964
+    "modified": 1605643782
 }
