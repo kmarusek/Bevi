@@ -52,7 +52,7 @@
 <style lang="scss" scoped>
 .hero-image {
   height: 50vh;
-  @apply w-full bg-center bg-no-repeat;
+  @apply w-full bg-center bg-no-repeat bg-cover;
 }
 
 .avatar {
