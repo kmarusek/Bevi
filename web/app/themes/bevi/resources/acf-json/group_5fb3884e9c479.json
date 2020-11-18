@@ -15,20 +15,16 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": [
-                "post"
-            ],
+            "post_type": "",
             "taxonomy": "",
             "filters": [
                 "search",
                 "post_type",
                 "taxonomy"
             ],
-            "elements": [
-                "featured_image"
-            ],
+            "elements": "",
             "min": "",
-            "max": 10,
+            "max": "",
             "return_format": "object"
         }
     ],
@@ -51,5 +47,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1605643782
+    "modified": 1605696000
 }

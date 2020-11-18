@@ -97,6 +97,7 @@ class App extends Controller
                 $post->featured_image = get_the_post_thumbnail_url($post->ID);
                 $post->permalink = get_the_permalink($post->ID);
                 $post->author = get_the_author_meta($post->ID);
+                $post->post_category = get_the_category($post->ID);
                 return $post;
             }, $posts);
             return $posts;

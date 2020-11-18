@@ -1,5 +1,5 @@
 <template>
-  <section class="container pt-64 ">
+  <section class="container pt-24 lg:pt-36 ">
     <swiper
       ref="carousel"
       :options="swiperOptions"
@@ -7,23 +7,27 @@
       <swiper-slide
         v-for="(slide, index) in block"
         :key="index"
-        class="fixed-height-container"
+        class="lg:px-24"
       >
         <div
           class="flex flex-wrap -mx-2 items-center overflow-hidden"
         >
           <div
-            class="my-2 px-6 w-2/4 overflow-hidden"
+            class="relative lg:pr-6 lg:w-2/4 overflow-hidden"
           >
             <img
               :src="slide.featured_image"
-              class="gsap-fade hidden md:block rounded object-cover h-70 w-full"
+              class="gsap-fade rounded object-cover h-70 w-full mb-4 lg:mb-0"
             >
+            <CategoryButton
+              :category="slide.post_category[0]"
+              class="absolute top-0 left-0 m-4"
+            />
           </div>
           <div
-            class="my-2 px-2 w-2/4 overflow-hidden"
+            class="my-2 px-2 lg:w-2/4 overflow-hidden"
           >
-            <span>Posted on: 3 days ago</span>
+            <span class="mb-2 block">Posted on: {{ converDateTime(slide.post_date) }}</span>
             <h3
               class="h3 mb-4"
             >
@@ -34,8 +38,8 @@
               class="block-content smaller"
             />
             <a
-              href="#"
-              class="hover:underline text-gray-800 font-semibold inline-block"
+              :href="slide.permalink"
+              class="mt-6 hover:underline text-gray-800 font-semibold inline-block read-more"
             >
               Read more
             </a>
@@ -44,13 +48,13 @@
       </swiper-slide>
       <div
         v-if="block.length >= 2"
-        class="gsap-fade swiper-button-prev custom-button-prev"
+        class="gsap-fade swiper-button-prev custom-button-prev relative lg:absolute mt-4 lg:mt-0"
         slot="button-prev"
         @click="carouselPrev"
       />
       <div
         v-if="block.length >= 2"
-        class="gsap-fade swiper-button-next custom-button-next"
+        class="gsap-fade swiper-button-next custom-button-next right-0"
         slot="button-next"
         @click="carouselNext"
       />
@@ -59,10 +63,9 @@
 </template>
 
 <script>
-  import GSAPFade from '~/mixins/GSAPFade.js';
+  import moment from 'moment';
 
   export default {
-    mixins: [GSAPFade],
     props: {
       block: {
         required: true,
@@ -95,6 +98,9 @@
       carouselNext() {
         this.swiper.slideNext();
       },
+      converDateTime(timestamp) {
+        return moment(timestamp).fromNow();
+      },
     },
     mounted() {
       if (this.block.length <= 1) {
@@ -107,6 +113,14 @@
 <style lang="scss" scoped>
   /deep/ .swiper-wrapper {
   @apply items-center;
+}
+
+/deep/ .category.uncategorized {
+  @apply order-1;
+}
+
+.read-more {
+  color: theme("colors.blue.default");
 }
 
 .fixed-height-container {
