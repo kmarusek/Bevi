@@ -7,6 +7,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
+import VueMoment from 'vue-moment';
 
 // Layout
 import SiteHeader from '~/components/core/SiteHeader/SiteHeader';
@@ -17,6 +18,7 @@ import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import NewsListing from '~/components/core/News/NewsListing';
 import NewsFilter from '~/components/core/News/NewsFilter';
 import FeaturedNewsArticles from '~/components/core/FeaturedNewsArticles/FeaturedNewsArticles';
+import NewsHero from '~/components/core/News/NewsHero';
 
 // Components
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
@@ -37,6 +39,8 @@ import MachineDetails from '~/components/modules/MachineComparison/MachineDetail
 import CategoryButton from '~/components/modules/CategoryButton/CategoryButton';
 import PostCard from '~/components/modules/PostCard/PostCard';
 import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
+import Sidenav from '~/components/modules/Sidenav/Sidenav';
+import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -48,6 +52,7 @@ import PageHero from '~/components/common/PageHero/PageHero';
 gsap.registerPlugin(ScrollTrigger);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VueAxios, axios);
+Vue.use(VueMoment);
 
 // Register Components
 Vue.component('SiteHeader', SiteHeader);
@@ -80,6 +85,9 @@ Vue.component('CategoryButton', CategoryButton);
 Vue.component('PostCard', PostCard);
 Vue.component('ImageGallery', ImageGallery);
 Vue.component('FeaturedNewsArticles', FeaturedNewsArticles);
+Vue.component('Sidenav', Sidenav);
+Vue.component('AuthorBlock', AuthorBlock);
+Vue.component('NewsHero', NewsHero);
 
 // eslint-disable-next-line no-new
 new Vue({
