@@ -1,6 +1,6 @@
 <template>
   <section
-    class="bg-cover bg-no-repeat flex relative overflow-hidden"
+    class="bg-cover bg-no-repeat flex relative overflow-hidden main-banner wave"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
     :class="block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen '"
   >
@@ -105,6 +105,9 @@
         >
       </div>
     </div>
+    <wave
+      wave="1"
+    />
   </section>
 </template>
 
@@ -163,6 +166,12 @@
 </script>
 
 <style lang="scss" scoped>
+.main-banner {
+  &.wave:not(:last-of-type) {
+    clip-path: url(#wave);
+    @apply -mb-6;
+  }
+}
 .center-bottom {
   @apply absolute;
   bottom: 5%;
@@ -186,149 +195,6 @@
 
   @screen lg {
     max-height: 80vh;
-  }
-}
-
-.bubbles {
-  @apply z-0 h-full absolute;
-  width: 90%;
-  left: 5%;
-
-  @screen md {
-    width: 60%;
-    left: 20%;
-  }
-  
-  .bubble {
-    @apply absolute inline-block;
-    top: 110%;
-    will-change: transform;
-
-    &:nth-of-type(even) {
-      @apply hidden;
-      
-      @screen md {
-        @apply inline-block;
-      }
-    }
-  }
-  .bubble0 {
-    left: 6%;
-    animation: bubbles 6.5s linear infinite 0.75s;
-
-    img {
-      animation: sideWays 8s ease-in-out infinite alternate;
-    }
-  }
-  .bubble1 {
-    left: 22%;
-    animation: bubbles 9s linear infinite 0.25s;
-
-    img {
-      animation: sideWays 6s ease-in-out infinite alternate;
-    }
-  }
-  .bubble2 {
-    left: 14%;
-    animation: bubbles 14s linear infinite 1.5s;
-    img {
-      animation: sideWays 4s ease-in-out infinite alternate;
-    }
-  }
-  .bubble3 {
-    left: 70%;
-    animation: bubbles 7.5s linear infinite 2.5s;
-    img {
-      animation: sideWays 4s ease-in-out infinite alternate;
-    }
-  }
-  .bubble4 {
-    left: 80%;
-    animation: bubbles 11s linear infinite 0.5s;
-    img {
-      animation: sideWays 4s ease-in-out infinite alternate;
-    }
-  }
-  .bubble5 {
-    left: 43%;
-    animation: bubbles 9.5s linear infinite 1s;
-    img {
-      animation: sideWays 4s ease-in-out infinite alternate;
-    }
-  }
-  .bubble6 {
-    left: 65%;
-    animation: bubbles 11.8s linear infinite 14s;
-    img {
-      animation: sideWays 4s ease-in-out infinite alternate;
-    }
-  }
-  .bubble7 {
-    left: 10%;
-    animation: bubbles 9s linear infinite 1.2s;
-    img {
-      animation: sideWays 4s ease-in-out infinite alternate;
-    }
-  }
-  .bubble8 {
-    left: 13%;
-    animation: bubbles 12.6s linear infinite 0.3s;
-    img {
-      animation: sideWays 4s ease-in-out infinite alternate;
-    }
-  }
-  .bubble9 {
-    left: 26%;
-    animation: bubbles 6.3s linear infinite 8s;
-    img {
-      animation: sideWays 4s ease-in-out infinite alternate;
-    }
-  }
-  .bubble10 {
-    left: 69%;
-    animation: bubbles 9.8s linear infinite 1.8s;
-    img {
-      animation: sideWays 2s ease-in-out infinite alternate;
-    }
-  }
-  .bubble11 {
-    left: 85%;
-    animation: bubbles 12s linear infinite 3s;
-    img {
-      animation: sideWays 4.6s ease-in-out infinite alternate;
-    }
-  }
-  .bubble12 {
-    left: 70%;
-    animation: bubbles 7.5s linear infinite 6.5s;
-    img {
-      animation: sideWays 8s ease-in-out infinite alternate;
-    }
-  }
-}
-
-@keyframes bubbles {
-  0% {
-    transform: translateY(15%);
-     opacity: 1;
-   }
-   20% {
-    transform: translateY(-20%);
-   }
-   70% {
-    opacity: 1;
-   }
-   100% {
-      opacity: 0;
-      transform: translateY(-1000%);
-   }
-}
-@keyframes sideWays {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-     transform: translateX(50px);
   }
 }
 </style>
