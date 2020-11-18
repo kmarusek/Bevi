@@ -18,6 +18,7 @@ import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import NewsListing from '~/components/core/News/NewsListing';
 import NewsFilter from '~/components/core/News/NewsFilter';
 import NewsHero from '~/components/core/News/NewsHero';
+import NewsContent from '~/components/core/News/NewsContent';
 
 // Components
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
@@ -86,6 +87,7 @@ Vue.component('ImageGallery', ImageGallery);
 Vue.component('Sidenav', Sidenav);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
+Vue.component('NewsContent', NewsContent);
 
 // eslint-disable-next-line no-new
 new Vue({
