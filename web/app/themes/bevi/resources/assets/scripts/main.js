@@ -38,6 +38,7 @@ import MachineDetails from '~/components/modules/MachineComparison/MachineDetail
 import CategoryButton from '~/components/modules/CategoryButton/CategoryButton';
 import PostCard from '~/components/modules/PostCard/PostCard';
 import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
+import Sidenav from '~/components/modules/Sidenav/Sidenav';
 import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
 
 // Common
@@ -82,6 +83,7 @@ Vue.component('NewsFilter', NewsFilter);
 Vue.component('CategoryButton', CategoryButton);
 Vue.component('PostCard', PostCard);
 Vue.component('ImageGallery', ImageGallery);
+Vue.component('Sidenav', Sidenav);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
 
