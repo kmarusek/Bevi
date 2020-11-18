@@ -1,23 +1,21 @@
 <template>
   <section class="container py-6 px-12 mx-auto">
     <div class="flex flex-wrap">
-      <div class="lg:w-1/4 sticky top-0 self-start bg-white pt-12 border-gray-300 border-b-2 lg:border-0">
-        <nav class="mb-3 lg:mb-0">
-          <ul class="list-none flex flex-wrap lg:flex-col justify-center">
-            <li
-              v-for="(item, idx) in block.sidenav"
-              :key="idx"
-              class="md:mb-3 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-2 lg:mr-0 text-lg lg:text-base"
-              :class="{'font-bold': (item.title == activeEntry)}"
-              @click="goToSection(item.title)"
-            >
-              {{ item.title }}
-            </li>
-          </ul>
-        </nav>
+      <div class="lg:w-1/4 sticky top-0 self-start bg-white border-gray-300 border-b-2 lg:border-0 overflow-hidden">
+        <ul class="list-none flex overflow-x-scroll lg:flex-col pt-16 lg:pt-0 mb-3 lg:mb-0">
+          <li
+            v-for="(item, idx) in block.sidenav"
+            :key="idx"
+            class="flex-shrink-0 md:mb-2 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-5 lg:mr-0 text-lg lg:text-base"
+            :class="{'font-bold': (item.title == activeEntry)}"
+            @click="goToSection(item.title)"
+          >
+            {{ item.title }}
+          </li>
+        </ul>
       </div>
 
-      <div class="lg:w-3/4">
+      <div class="mt-8 lg:w-3/4 lg:mt-0">
         <div
           v-for="(item, idx) in block.sidenav"
           class="mb-16"
