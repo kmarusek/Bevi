@@ -1573,220 +1573,21 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_5faaa40981fc4": {
-                    "key": "layout_5faaa40981fc4",
-                    "name": "image_gallery",
-                    "label": "Image Gallery",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5faaa44781fc5",
-                            "label": "Title",
-                            "name": "title",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
-                            "key": "field_5fabb82181fc6",
-                            "label": "Gallery",
-                            "name": "gallery",
-                            "type": "repeater",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "collapsed": "",
-                            "min": 1,
-                            "max": 10,
-                            "layout": "table",
-                            "button_label": "",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5fabb84c81fc7",
-                                    "label": "Image",
-                                    "name": "image",
-                                    "type": "image",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "return_format": "array",
-                                    "preview_size": "medium",
-                                    "library": "all",
-                                    "min_width": "",
-                                    "min_height": "",
-                                    "min_size": "",
-                                    "max_width": "",
-                                    "max_height": "",
-                                    "max_size": "",
-                                    "mime_types": ""
-                                }
-                            ]
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_5faa975b20ee7": {
                     "key": "layout_5faa975b20ee7",
                     "name": "counters",
                     "label": "Counters",
                     "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5faaa44781fc5",
-                            "label": "Title",
-                            "name": "title",
-                            "type": "text",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
-                        },
-                        {
-                            "key": "field_5fabb82181fc6",
-                            "label": "Gallery",
-                            "name": "gallery",
-                            "type": "repeater",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "collapsed": "",
-                            "min": 1,
-                            "max": 10,
-                            "layout": "table",
-                            "button_label": "",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5fabb84c81fc7",
-                                    "label": "Image",
-                                    "name": "image",
-                                    "type": "image",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "return_format": "array",
-                                    "preview_size": "medium",
-                                    "library": "all",
-                                    "min_width": "",
-                                    "min_height": "",
-                                    "min_size": "",
-                                    "max_width": "",
-                                    "max_height": "",
-                                    "max_size": "",
-                                    "mime_types": ""
-                                }
-                            ]
-                        }
-                    ],
+                    "sub_fields": [],
                     "min": "",
                     "max": ""
                 },
-                "layout_5fadd69c50919": {
-                    "key": "layout_5fadd69c50919",
-                    "name": "sidenav",
-                    "label": "Sidenav",
+                "layout_5faa9d701f152": {
+                    "key": "layout_5faa9d701f152",
+                    "name": "machine_comparison",
+                    "label": "Machine Comparison",
                     "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5fadd6c85091a",
-                            "label": "Sidenav",
-                            "name": "sidenav",
-                            "type": "repeater",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "collapsed": "",
-                            "min": 0,
-                            "max": 0,
-                            "layout": "table",
-                            "button_label": "",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5fadd7e65091c",
-                                    "label": "Title",
-                                    "name": "title",
-                                    "type": "text",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "default_value": "",
-                                    "placeholder": "",
-                                    "prepend": "",
-                                    "append": "",
-                                    "maxlength": 30
-                                },
-                                {
-                                    "key": "field_5faeb1b34973d",
-                                    "label": "Main Content",
-                                    "name": "main_content",
-                                    "type": "wysiwyg",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "default_value": "",
-                                    "tabs": "all",
-                                    "toolbar": "basic",
-                                    "media_upload": 1,
-                                    "delay": 0
-                                }
-                            ]
-                        }
-                    ],
+                    "sub_fields": [],
                     "min": "",
                     "max": ""
                 }
@@ -1829,5 +1630,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1605739055
+    "modified": 1605797265
 }

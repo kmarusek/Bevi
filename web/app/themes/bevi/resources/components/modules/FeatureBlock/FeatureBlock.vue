@@ -78,7 +78,7 @@
     props: {
       block: {
         required: true,
-        type: Object,
+        type: [Object, Array],
       },
     },
   };

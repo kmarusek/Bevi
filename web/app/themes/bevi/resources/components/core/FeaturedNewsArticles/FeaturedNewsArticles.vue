@@ -97,9 +97,6 @@
       carouselNext() {
         this.swiper.slideNext();
       },
-      converDateTime(timestamp) {
-        return moment(timestamp).fromNow();
-      },
     },
     mounted() {
       if (this.block.length <= 1) {
