@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative overflow-hidden flex items-center main-banner"
+    class="relative overflow-hidden flex items-center main-banner gsap-fade-section"
     :class="{ wave : block.hero.wave }"
   >
     <div
@@ -20,7 +20,7 @@
       </span>
     </div>
     <div class="container xl:max-w-6xl z-10 relative text-center lg:text-left">
-      <h1 class="h1">
+      <h1 class="h1 gsap-fade">
         {{ block.hero.title }}
       </h1>
     </div>
@@ -36,7 +36,10 @@
 </template>
 
 <script>
+  import GSAPFade from '~/mixins/GSAPFade.js';
+
   export default {
+    mixins: [GSAPFade],
     props: {
       block: {
         required: true,
