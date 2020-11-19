@@ -1,7 +1,7 @@
 <template>
-  <section class="text-block text-center py-32 gsap-fade-section">
-    <div class="container max-w-2xl">
-      <h2 class="h2 gsap-fade">
+  <section class="text-block text-center py-32 lg:py-48 gsap-fade-section">
+    <div class="container max-w-3xl">
+      <h2 class="h1 gsap-fade">
         {{ block.title }}
       </h2>
       <div

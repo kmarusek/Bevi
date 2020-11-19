@@ -7,6 +7,7 @@
 }
 .whr-items {
   display: block !important; //needed to show the items list
+  @apply mb-6;
 
   @screen md {
     @apply text-xl;
