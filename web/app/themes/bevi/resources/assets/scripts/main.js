@@ -19,6 +19,7 @@ import NewsListing from '~/components/core/News/NewsListing';
 import NewsFilter from '~/components/core/News/NewsFilter';
 import FeaturedNewsArticles from '~/components/core/FeaturedNewsArticles/FeaturedNewsArticles';
 import NewsHero from '~/components/core/News/NewsHero';
+import NewsContent from '~/components/core/News/NewsContent';
 
 // Components
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
@@ -88,6 +89,7 @@ Vue.component('FeaturedNewsArticles', FeaturedNewsArticles);
 Vue.component('Sidenav', Sidenav);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
+Vue.component('NewsContent', NewsContent);
 
 // eslint-disable-next-line no-new
 new Vue({
