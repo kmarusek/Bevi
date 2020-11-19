@@ -122,6 +122,7 @@ class App extends Controller
             $posts = array_map(function ($post) {
                 $post->featured_image = get_the_post_thumbnail_url($post->ID);
                 $post->permalink = get_the_permalink($post->ID);
+                $post->post_content = wp_trim_words(get_the_content(null, false, $post->ID), 30, '...');
                 $post->author = get_the_author_meta($post->ID);
                 $post->post_category = get_the_category($post->ID);
                 return $post;

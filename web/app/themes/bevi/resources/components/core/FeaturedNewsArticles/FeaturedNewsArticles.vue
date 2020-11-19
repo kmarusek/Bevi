@@ -27,7 +27,7 @@
           <div
             class="my-2 px-2 lg:w-2/4 overflow-hidden"
           >
-            <span class="mb-2 block">Posted on: {{ converDateTime(slide.post_date) }}</span>
+            <span class="mb-2 block">Posted on: {{ slide.post_date | moment("from", "now") }}</span>
             <h3
               class="h3 mb-4"
             >
@@ -63,7 +63,6 @@
 </template>
 
 <script>
-  import moment from 'moment';
 
   export default {
     props: {
