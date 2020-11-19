@@ -1,9 +1,6 @@
 <template>
   <section class="container">
-    <div class="flex relative pt-24 md:pt-40">
-      <div class="w-full lg:w-2/12 md:mb-6 md:py-8 gsap-fade">
-        Share
-      </div>
+    <div class="flex relative pt-8 md:pt-20">
       <div
         class="post-content w-full lg:w-8/12 mt-2 md:mt-6 md:px-8 gsap-fade mx-auto "
         v-html="postData.post_content"
@@ -19,9 +16,6 @@
         type: Object,
         required: true,
       },
-    },
-    created() {
-      console.log(this);
     },
   };
 </script>
@@ -65,5 +59,23 @@
   .post-content /deep/ figcaption,
   .figcaption {
     @apply text-center text-sm mb-12;
+  }
+
+  .post-content /deep/ .wp-block-quote {
+    background-image: url('../../../assets/images/icons/quote.svg');
+    @apply font-semibold not-italic w-full leading-tight text-sm bg-contain bg-no-repeat px-8 py-4 my-4;
+
+    @screen md {
+      @apply px-16 py-16 my-12 text-xl;
+    }
+
+    p {
+      @apply mb-3;
+    }
+
+    cite {
+      @apply mt-4 not-italic text-xs uppercase tracking-wide;
+      color: theme("colors.blue.default");
+    }
   }
 </style>
