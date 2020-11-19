@@ -17,6 +17,7 @@ import SiteFooterNavigation from '~/components/core/SiteFooter/SiteFooterNavigat
 import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import NewsListing from '~/components/core/News/NewsListing';
 import NewsFilter from '~/components/core/News/NewsFilter';
+import FeaturedNewsArticles from '~/components/core/FeaturedNewsArticles/FeaturedNewsArticles';
 import NewsHero from '~/components/core/News/NewsHero';
 
 // Components
@@ -83,6 +84,7 @@ Vue.component('NewsFilter', NewsFilter);
 Vue.component('CategoryButton', CategoryButton);
 Vue.component('PostCard', PostCard);
 Vue.component('ImageGallery', ImageGallery);
+Vue.component('FeaturedNewsArticles', FeaturedNewsArticles);
 Vue.component('Sidenav', Sidenav);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
