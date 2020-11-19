@@ -1719,6 +1719,13 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "counters"
+            }
         ]
     ],
     "menu_order": 0,
