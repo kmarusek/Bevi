@@ -114,4 +114,41 @@ class App extends Controller
 
         return $posts;
     }
+
+    public function getFlavors()
+    {
+        $posts = get_posts([
+            'numberposts'=>-1,
+            'post_type'=> 'flavors',
+        ]);
+
+        $posts = array_map(function ($post) {
+            $post->featured_image = get_the_post_thumbnail_url($post->ID);
+            $post->permalink = get_the_permalink($post->ID);
+            $post->flavor_title = get_the_title($post->ID);
+            $post->flavor_tags = get_the_tags($post->ID);
+            $post->flavor_badge = get_field('flavor_data', $post->ID)['badge'];
+            $post->flavor_ingredients = get_field('flavor_data', $post->ID)['ingredients'];
+            $post->flavor_icons = get_field('flavor_data', $post->ID)['icons'];
+            $post->flavor_calorie_table = get_field('flavor_data', $post->ID)['calorie_table'];
+            $post->flavor_accent_color = get_field('flavor_data', $post->ID)['accent_color'];
+            
+
+            return $post;
+        }, $posts);
+
+        return $posts;
+    }
+
+    public function getFlavorsTags()
+    {
+        $args = array(
+            'type' => get_post_type(),
+            'orderby' => 'name',
+            'order' => 'ASC'
+        );
+        $tags = get_tags($args);
+
+        return $tags;
+    }
 }

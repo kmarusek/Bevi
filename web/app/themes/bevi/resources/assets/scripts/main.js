@@ -39,6 +39,10 @@ import CategoryButton from '~/components/modules/CategoryButton/CategoryButton';
 import PostCard from '~/components/modules/PostCard/PostCard';
 import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
 import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
+import AllFlavors from '~/components/modules/AllFlavors/AllFlavors';
+import FlavorsFilter from '~/components/modules/AllFlavors/FlavorsFilter';
+import FlavorCard from '~/components/modules/AllFlavors/FlavorCard';
+import FlavorTray from '~/components/modules/AllFlavors/FlavorTray';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -84,6 +88,10 @@ Vue.component('PostCard', PostCard);
 Vue.component('ImageGallery', ImageGallery);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
+Vue.component('AllFlavors', AllFlavors);
+Vue.component('FlavorsFilter', FlavorsFilter);
+Vue.component('FlavorCard', FlavorCard);
+Vue.component('FlavorTray', FlavorTray);
 
 // eslint-disable-next-line no-new
 new Vue({

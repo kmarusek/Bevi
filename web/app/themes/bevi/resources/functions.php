@@ -194,6 +194,52 @@ function cptui_register_my_cpts()
         ];
       
         register_post_type( "counters", $args );
+
+        /**
+         * Post Type: Flavors.
+         */
+      
+        $labels = [
+          "name" => __( "Flavors", "sage" ),
+          "singular_name" => __( "flavor", "sage" ),
+          "menu_name" => __( "Flavors", "sage" ),
+        ];
+      
+        $args = [
+          "label" => __( "Flavors", "sage" ),
+          "labels" => $labels,
+          "description" => "",
+          "public" => true,
+          "publicly_queryable" => true,
+          "show_ui" => true,
+          "show_in_rest" => true,
+          "rest_base" => "",
+          "rest_controller_class" => "WP_REST_Posts_Controller",
+          "has_archive" => true,
+          "show_in_menu" => true,
+          "show_in_nav_menus" => true,
+          "delete_with_user" => false,
+          "exclude_from_search" => false,
+          "capability_type" => "post",
+          "map_meta_cap" => true,
+          "hierarchical" => false,
+          "rewrite" => [ "slug" => "flavors", "with_front" => true ],
+          "query_var" => true,
+          "supports" => [ "title", "editor", "thumbnail" ],
+        ];
+      
+        register_post_type( "flavors", $args );
     }
     
     add_action( 'init', 'cptui_register_my_cpts' );
+
+function reg_tag()
+    {
+        /**
+         * Add tags to Flavors post type.
+         */
+
+        register_taxonomy_for_object_type('post_tag', 'flavors');
+    }
+
+    add_action('init', 'reg_tag');
