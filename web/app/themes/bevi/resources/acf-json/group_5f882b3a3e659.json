@@ -1262,6 +1262,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5fba7972da00b",
+                            "label": "FAQ Title",
+                            "name": "faq_title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5fb6a16c935bf",
                             "label": "Selected FAQ",
                             "name": "selected_faq",
@@ -1282,6 +1301,46 @@
                             "multiple": 1,
                             "return_format": "object",
                             "ui": 1
+                        },
+                        {
+                            "key": "field_5fba4723a12e6",
+                            "label": "CTA",
+                            "name": "cta",
+                            "type": "page_link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "allow_archives": 1,
+                            "multiple": 0
+                        },
+                        {
+                            "key": "field_5fba478292737",
+                            "label": "Description",
+                            "name": "text",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
                         }
                     ],
                     "min": "",
@@ -1319,5 +1378,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1605806313
+    "modified": 1606056424
 }
