@@ -1,7 +1,8 @@
 <template>
   <section
-    class="min-h-screen bg-cover bg-no-repeat flex relative"
+    class="bg-cover bg-no-repeat flex relative overflow-hidden main-banner wave"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
+    :class="block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen '"
   >
     <video
       v-if="block.add_background_video"
@@ -17,7 +18,23 @@
       >
     </video>
     <div
-      class="container flex relative"
+      class="bubbles"
+      v-if="block.show_bubbles"
+    >
+      <span
+        v-for="(n, index) in 12"
+        :key="index"
+        class="bubble"
+        :class="`bubble${index}`"
+      >
+        <img
+          :src="require(`~/assets/images/bubbles/bubble${index}.svg`)"
+          alt="bubble icon"
+        >
+      </span>
+    </div>
+    <div
+      class="container flex relative gsap-fade-sections"
       :class="{
         'text-left flex-col md:flex-row' : block.text_position === 'Right',
         'text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
@@ -45,13 +62,14 @@
         >
           <h6
             v-if="block.small_title"
-            class="font-space font-medium md:text-lg"
+            class="font-space font-medium md:text-lg gsap-fades"
           >
             {{ block.small_title }}
           </h6>
           <h1
             v-if="block.large_title"
             :class="block.text_position === 'Center' ? 'heading-one' : 'my-2 heading-two'"
+            class="gsap-fades"
           >
             {{ block.large_title }}
           </h1>
@@ -59,14 +77,14 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="post-content"
+            class="post-content gsap-fades"
           />
 
           <a
             v-if="block.link"
             :href="block.link.url"
             :target="block.link.target"
-            class="btn mt-4"
+            class="btn mt-4 gsap-fades"
             :class="{'center-bottom' : block.text_position === 'Center'}"
           >
             {{ block.link.title }}
@@ -82,15 +100,22 @@
           v-if="block.feature_image"
           :src="block.feature_image.sizes.large"
           :alt="block.feature_image.alt"
-          class="h-auto mx-auto mt-auto"
+          class="h-auto mx-auto mt-auto gsap-fades"
           :class="block.text_position === 'Center' ? 'hero-image-small' : ' hero-image'"
         >
       </div>
     </div>
+    <wave
+      wave="1"
+    />
   </section>
 </template>
 
 <script>
+
+  import { gsap } from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+
   export default {
     props: {
       block: {
@@ -105,6 +130,7 @@
       window.onresize = () => {
         this.windowWidth = window.innerWidth;
       };
+      this.startAnimation();
     },
     methods: {
       backgroundImage() {
@@ -113,11 +139,39 @@
         }
         return this.block.background_image.sizes.large;
       },
+      startAnimation() {
+        gsap.utils.toArray('.gsap-fade-sections').forEach((section) => {
+          const elems = section.querySelectorAll('.gsap-fades');
+        
+          gsap.set(elems, { y: 10, opacity: 0 });
+        
+          ScrollTrigger.create({
+            trigger: section,
+            start: 'top 80%',
+            scrub: true,
+            onEnter: () => gsap.to(elems, {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              stagger: 0.8,
+              delay: 0.8,
+              ease: 'power3.out',
+              overwrite: 'auto',
+            }),
+          });
+        });
+      },
     },
   };
 </script>
 
 <style lang="scss" scoped>
+.main-banner {
+  &.wave:not(:last-of-type) {
+    clip-path: url(#wave);
+    @apply -mb-6;
+  }
+}
 .center-bottom {
   @apply absolute;
   bottom: 5%;

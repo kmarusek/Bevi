@@ -17,7 +17,9 @@ import SiteFooterNavigation from '~/components/core/SiteFooter/SiteFooterNavigat
 import SiteFooterCopyright from '~/components/core/SiteFooter/SiteCopyright';
 import NewsListing from '~/components/core/News/NewsListing';
 import NewsFilter from '~/components/core/News/NewsFilter';
+import FeaturedNewsArticles from '~/components/core/FeaturedNewsArticles/FeaturedNewsArticles';
 import NewsHero from '~/components/core/News/NewsHero';
+import NewsContent from '~/components/core/News/NewsContent';
 
 // Components
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
@@ -38,6 +40,7 @@ import MachineDetails from '~/components/modules/MachineComparison/MachineDetail
 import CategoryButton from '~/components/modules/CategoryButton/CategoryButton';
 import PostCard from '~/components/modules/PostCard/PostCard';
 import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
+import Sidenav from '~/components/modules/Sidenav/Sidenav';
 import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
 import AllFlavors from '~/components/modules/AllFlavors/AllFlavors';
 import FlavorsFilter from '~/components/modules/AllFlavors/FlavorsFilter';
@@ -86,12 +89,15 @@ Vue.component('NewsFilter', NewsFilter);
 Vue.component('CategoryButton', CategoryButton);
 Vue.component('PostCard', PostCard);
 Vue.component('ImageGallery', ImageGallery);
+Vue.component('FeaturedNewsArticles', FeaturedNewsArticles);
+Vue.component('Sidenav', Sidenav);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
 Vue.component('AllFlavors', AllFlavors);
 Vue.component('FlavorsFilter', FlavorsFilter);
 Vue.component('FlavorCard', FlavorCard);
 Vue.component('FlavorTray', FlavorTray);
+Vue.component('NewsContent', NewsContent);
 
 // eslint-disable-next-line no-new
 new Vue({

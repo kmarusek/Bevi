@@ -1,0 +1,51 @@
+{
+    "key": "group_5fb3884e9c479",
+    "title": "Featured Articles",
+    "fields": [
+        {
+            "key": "field_5fb3887500e3f",
+            "label": "Featured Articles",
+            "name": "featured_articles",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": "",
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "object"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "bevi-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "page_attributes"
+    ],
+    "active": true,
+    "description": "",
+    "modified": 1605696000
+}

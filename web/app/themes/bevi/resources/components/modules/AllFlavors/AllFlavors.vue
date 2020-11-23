@@ -62,8 +62,12 @@
       };
     },
     // computed: {
-    //   filteredList() {
-    //     },
+    //   listOrder() {
+    //     const el = document.getElementsByClassName('flavor');
+    //     if (index <= 5) {
+    //       return el.classList.add('order-1');
+    //     }
+    //   }
     // },
     methods: {
       closeTray() {

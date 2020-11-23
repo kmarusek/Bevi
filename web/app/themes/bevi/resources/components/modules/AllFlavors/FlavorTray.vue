@@ -1,6 +1,9 @@
 <template>
   <div class="flavor-tray">
-    <button class="close" @click="$emit('close')">
+    <button
+      class="close"
+      @click="$emit('close')"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 96.316 92.164"

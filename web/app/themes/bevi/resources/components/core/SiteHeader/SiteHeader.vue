@@ -3,7 +3,7 @@
     class="header"
     :class="{ 'nav-open' : isMobileNavOpen }"
   >
-    <div class="container">
+    <div class="px-4 md:px-10">
       <nav class="nav">
         <a href="/">
           <img

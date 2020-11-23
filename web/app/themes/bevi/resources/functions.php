@@ -233,7 +233,7 @@ function cptui_register_my_cpts()
     
     add_action( 'init', 'cptui_register_my_cpts' );
 
-function reg_tag()
+    function reg_tag()
     {
         /**
          * Add tags to Flavors post type.
@@ -243,3 +243,14 @@ function reg_tag()
     }
 
     add_action('init', 'reg_tag');
+
+    // ACF Options Page
+    if (function_exists('acf_add_options_page')) {
+    acf_add_options_page(array(
+        'page_title' => 'Bevi Settings',
+        'menu_title' => 'Bevi Settings',
+        'menu_slug' => 'bevi-general-settings',
+        'capability' => 'edit_posts',
+        'redirect' => false
+    ));
+    }
