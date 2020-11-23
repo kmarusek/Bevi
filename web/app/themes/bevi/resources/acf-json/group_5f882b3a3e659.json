@@ -554,6 +554,30 @@
                             "mime_types": ""
                         },
                         {
+                            "key": "field_5fbb93efe6f06",
+                            "label": "Video Placeholder Image",
+                            "name": "poster",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "thumbnail",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        },
+                        {
                             "key": "field_5fb781227e318",
                             "label": "Second Title",
                             "name": "second_title",
@@ -571,25 +595,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5fb7812d7e319",
-                            "label": "Second Text",
-                            "name": "second_text",
-                            "type": "wysiwyg",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "default_value": "",
-                            "tabs": "all",
-                            "toolbar": "full",
-                            "media_upload": 1,
-                            "delay": 0
                         },
                         {
                             "key": "field_5fb7813c7e31a",
@@ -1916,5 +1921,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1605861726
+    "modified": 1606128661
 }
