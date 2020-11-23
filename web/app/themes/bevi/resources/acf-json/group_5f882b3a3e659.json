@@ -1786,30 +1786,7 @@
                     "name": "machine_comparison",
                     "label": "Machine Comparison",
                     "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5fad308893ef1",
-                            "label": "Featured News Articles",
-                            "name": "featured_news_articles",
-                            "type": "post_object",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "post_type": [
-                                "post"
-                            ],
-                            "taxonomy": "",
-                            "allow_null": 0,
-                            "multiple": 1,
-                            "return_format": "object",
-                            "ui": 1
-                        }
-                    ],
+                    "sub_fields": [],
                     "min": "",
                     "max": ""
                 },
@@ -1921,5 +1898,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606128661
+    "modified": 1606153234
 }
