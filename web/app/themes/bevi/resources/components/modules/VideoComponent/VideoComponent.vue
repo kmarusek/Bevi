@@ -7,6 +7,7 @@
         :poster="block.poster.sizes.large"
         muted
         loop
+        preload="auto"
         class="min-h-screen w-full z-1 object-cover"
       >
         <source
