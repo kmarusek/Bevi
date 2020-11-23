@@ -34,7 +34,7 @@
       </span>
     </div>
     <div
-      class="container flex relative gsap-fade-sections"
+      class="container flex relative gsap-fade-sections z-10"
       :class="{
         'text-left flex-col md:flex-row' : block.text_position === 'Right',
         'text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
