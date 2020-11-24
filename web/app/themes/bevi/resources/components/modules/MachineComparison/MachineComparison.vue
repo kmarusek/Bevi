@@ -1,6 +1,6 @@
 <template>
   <section class="relative bg-blue-100">
-    <div class="py-20 lg:py-32 md:container flex flex-col items-center gsap-fade-section text-center">
+    <div class="py-20 lg:py-32 md:container flex flex-col items-center text-center">
       <h2 class="h2 mb-4 lg:mb-10 text-blue-600 font-semibold">
         Choose your dispenser
       </h2>

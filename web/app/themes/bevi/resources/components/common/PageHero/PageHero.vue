@@ -1,11 +1,11 @@
 <template>
   <section
     class="relative overflow-hidden flex items-center main-banner gsap-fade-section"
-    :class="{ wave : block.hero.wave }"
+    :class="{ wave : block.wave || block.hero.wave }"
   >
     <div
       class="bubbles"
-      v-if="block.hero.show_bubbles"
+      v-if="block.show_bubbles || block.hero.show_bubbles"
     >
       <span
         v-for="(n, index) in 6"
@@ -21,7 +21,7 @@
     </div>
     <div class="container xl:max-w-6xl z-10 relative text-center lg:text-left">
       <h1 class="h1 gsap-fade">
-        {{ block.hero.title }}
+        {{ block.title || block.hero.title }}
       </h1>
     </div>
     <img
@@ -29,8 +29,8 @@
       class="object-cover w-full h-full absolute top-0 left-0 z-0"
     >
     <wave
-      v-if="block.hero.wave"
-      :wave="block.hero.wave"
+      v-if="block.wave || block.hero.wave"
+      :wave="block.wave || block.hero.wave"
     />
   </section>
 </template>

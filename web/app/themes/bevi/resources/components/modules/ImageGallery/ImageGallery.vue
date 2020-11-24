@@ -37,8 +37,10 @@
 </template>
 
 <script>
+  import GSAPFade from '~/mixins/GSAPFade.js';
+
   export default {
-    // mixins: [GSAPFade],
+    mixins: [GSAPFade],
     props: {
       block: {
         required: true,
