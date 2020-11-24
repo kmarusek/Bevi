@@ -34,7 +34,7 @@
       </span>
     </div>
     <div
-      class="container flex relative gsap-fade-sections"
+      class="container flex relative gsap-fade-sections z-10"
       :class="{
         'text-left flex-col md:flex-row' : block.text_position === 'Right',
         'text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
@@ -181,6 +181,7 @@
 
 .hero-image-small {
   max-height: 350px;
+  z-index: -1;
   
   @screen md {
     max-height: 65vh;
@@ -188,6 +189,7 @@
 }
 .hero-image {
   max-height: 350px;
+  z-index: -1;
   
   @screen md {
     max-height: 65vh;
