@@ -181,6 +181,7 @@
 
 .hero-image-small {
   max-height: 350px;
+  z-index: -1;
   
   @screen md {
     max-height: 65vh;
@@ -188,6 +189,7 @@
 }
 .hero-image {
   max-height: 350px;
+  z-index: -1;
   
   @screen md {
     max-height: 65vh;
