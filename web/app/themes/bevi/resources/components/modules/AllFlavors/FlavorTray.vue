@@ -23,53 +23,87 @@
       </svg>
       <img :src="require('~/assets/images/icons/close.svg')">
     </button>
-    <div class="flex flex-col md:w-1/2 md:px-10 xl:px-20">
-      <img
-        :src="flavor.featured_image"
-        :alt="flavor.post_title"
-        class="flavor-image"
-      >
-      <button class="btn md:w-8/12 md:m-auto rounded-md">
-        View calorie table
-      </button>
-    </div>
-    <div class="flex flex-col justify-center md:w-1/2 md:px-10 xl:px-20 mt-8 md:mt-0">
-      <h2
-        class="h2 title"
-        v-html="flavor.post_title"
-      />
-      <p
-        class="mb-8"
-        v-html="flavor.post_content"
-      />
-      <p
-        class="mb-8 text-sm text-gray"
-        v-html="flavor.flavor_ingredients"
-      />
-      <ul
-        class="flex"
-        v-if="flavor.flavor_icons"
-      >
-        <li
-          v-for="(icon, i) in flavor.flavor_icons"
-          :key="i"
-          class="flavor-tray-icon"
-        >
-          <img
-            :src="icon.image.sizes.thumbnail"
-            :alt="icon.image.alt"
-          >
-          <span
-            v-if="icon.callout"
-            class="callout"
+    <div
+      class="tray-wrapper"
+      :class="trayLoading ? 'opacity-0' : 'opacity-100'"
+    >
+      <div class="flex flex-col md:w-1/2 md:px-10 xl:px-20 h-full">
+        <div class="flex items-center justify-center h-full">
+          <transition
+            name="fade"
+            mode="out-in"
           >
             <img
-              :src="icon.callout.sizes.large"
-              :alt="icon.callout.alt"
+              v-if="swapImage"
+              key="1"
+              :src="flavor.flavor_calorie_table.sizes.large"
+              :alt="flavor.post_title"
+              class="flavor-image"
             >
+            <img
+              v-else
+              key="2"
+              :src="flavor.featured_image"
+              :alt="flavor.post_title"
+              class="flavor-image"
+            >
+          </transition>
+        </div>
+        <button
+          v-if="flavor.flavor_calorie_table"
+          class="btn md:w-8/12 md:m-auto rounded-md"
+          @click="toggleImage"
+        >
+          <span v-if="swapImage">
+            Hide calorie table
           </span>
-        </li>
-      </ul>
+          <span v-else>
+            View calorie table
+          </span>
+        </button>
+      </div>
+      <div class="tray-content-wrapper">
+        <h2
+          class="h2 title"
+          v-html="flavor.post_title"
+        />
+        <span
+          class="accent"
+          :class="flavor.flavor_accent_color ? `bg-${ flavor.flavor_accent_color }` : 'bg-blue'"
+        />
+        <p
+          class="mb-8"
+          v-html="flavor.post_content"
+        />
+        <p
+          class="mb-8 text-sm text-gray"
+          v-html="flavor.flavor_ingredients"
+        />
+        <ul
+          class="flex"
+          v-if="flavor.flavor_icons"
+        >
+          <li
+            v-for="(icon, i) in flavor.flavor_icons"
+            :key="i"
+            class="flavor-tray-icon"
+          >
+            <img
+              :src="icon.image.sizes.thumbnail"
+              :alt="icon.image.alt"
+            >
+            <span
+              v-if="icon.callout"
+              class="callout"
+            >
+              <img
+                :src="icon.callout.sizes.large"
+                :alt="icon.callout.alt"
+              >
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -81,10 +115,19 @@
         required: true,
         type: Object,
       },
+      trayLoading: {
+        required: true,
+        type: Boolean,
+      },
     },
-    computed: {
-      accentColor() {
-        return { '--accent-color': `theme('colors.${ this.flavor.flavor_accent_color }.default')` };
+    data() {
+      return {
+        swapImage: false,
+      };
+    },
+    methods: {
+      toggleImage() {
+        this.swapImage = !this.swapImage;
       },
     },
   };
@@ -92,11 +135,7 @@
 
 <style lang="scss" scoped>
 .flavor-tray {
-  @apply block flex flex-col bg-white w-full p-10 relative border-2 border-gray-200 rounded-lg;
-
-  @screen md {
-    @apply flex-row;
-  }
+  @apply bg-white w-full p-10 relative border-2 border-gray-200 rounded-lg h-full;
 
   .flavor-image {
     max-width: 230px;
@@ -107,16 +146,32 @@
     }
   }
 
-  .title {
-    @apply mb-6;
+  .tray-wrapper {
+    transition: opacity ease-in-out 0.5s;
+    @apply block flex flex-col h-full;
 
-    &:after {
-      content: "";
-      width: 45px;
-      height: 5px;
-      background: var(--accent-color);
-      @apply block bg-purple;
+    @screen md {
+      @apply flex-row;
     }
+  }
+
+  .tray-content-wrapper {
+    transition: opacity ease-in-out 0.5s;
+    @apply flex flex-col justify-center mt-8;
+
+    @screen md {
+      @apply w-1/2 px-10 mt-0;
+    }
+
+    @screen xl {
+      @apply px-20;
+    }
+  }
+
+  .accent {
+    width: 45px;
+    height: 5px;
+    @apply block mb-6;
   }
 
   &-icon {
@@ -158,5 +213,13 @@
       @apply ease-in-out transition-all duration-300;
     }
   }
+}
+
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

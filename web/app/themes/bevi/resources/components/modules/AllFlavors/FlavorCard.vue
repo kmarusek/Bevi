@@ -38,39 +38,56 @@
         required: true,
         type: Object,
       },
+      showTray: {
+        required: true,
+        type: Boolean,
+      },
     },
   };
 </script>
 
 <style lang="scss" scoped>
 .flavor {
-  min-width: 160px;
-  @apply block flex flex-col justify-center items-center w-1/5 px-4 mb-16 mx-2 cursor-pointer;
+  @apply block flex flex-col justify-center items-center w-1/2 px-4 my-12 cursor-pointer;
 
   @screen md {
-    min-width: 220px;
-    @apply mb-40 mx-0 px-10;
+    padding: 1%;
+    @apply w-1/3;
+  }
+
+  @screen xl {
+    padding: 2%;
+    @apply mx-0 w-1/5;
   }
 
   .image-wrapper {
-    width: 160px;
-    height: 160px;
+    max-width: 160px;
+    max-height: 160px;
     @apply relative;
 
     @screen md {
-      width: 220px;
-      height: 220px;
+      max-width: 220px;
+      max-height: 220px;
     }
 
     .badge {
-      width: 50px;
-      height: 50px;
-      @apply absolute top-0 right-0 m-4;
+      width: 40px;
+      height: 40px;
+      @apply absolute top-0 right-0 m-2;
+
+      @screen md {
+        width: 50px;
+        height: 50px;
+      }
     }
 
     .callout {
       transform: translate3d(55px, -55px, 0) rotate(5deg);
-      @apply absolute top-0 right-0;
+      @apply absolute top-0 right-0 hidden;
+
+      @screen md {
+        @apply block;
+      }
 
       &:before {
         content: "";
@@ -85,7 +102,7 @@
 
   .label {
     line-height: 40px;
-    @apply text-gray-550 font-semibold leading-tight mt-2;
+    @apply text-gray-550 font-semibold leading-tight mt-2 text-center;
   }
 }
 </style>

@@ -1,5 +1,10 @@
 <template>
   <section class="all-flavors gsap-fade-section">
+    <span
+      v-if="showTray"
+      class="overlay"
+      @click="closeTray"
+    />
     <div class="container text-center">
       <div class="relative mb-4 md:mb-10">
         <div class="title-wrapper gsap-fade">
@@ -13,22 +18,30 @@
           </p>
         </div>
       </div>
-      <FlavorsFilter
-        @filter-list="filterList"
-        :tags="tags"
-      />
     </div>
-    <div class="container flex flex-wrap justify-center">
+    <FlavorsFilter
+      @filter-list="filterList"
+      :tags="tags"
+      class="md:container"
+    />
+    <div
+      class="flavors-wrapper container"
+      :class="loading ? 'opacity-0' : 'opacity-100'"
+    >
+      <div class="overflow-hidden tray-wrapper order-2">
+        <FlavorTray
+          v-if="showTray"
+          :flavor="flavors[selectedIndex]"
+          :tray-loading="trayLoading"
+          @close="closeTray"
+        />
+      </div>
       <FlavorCard
-        v-for="(flavor, index) in flavors"
+        v-for="(flavor, index) in filteredList"
         :key="index"
         :flavor="flavor"
+        :show-tray="showTray"
         @click.native="openTray(flavor.post_name, index)"
-      />
-      <FlavorTray
-        v-if="showTray"
-        :flavor="flavors[selectedIndex]"
-        @close="closeTray"
       />
     </div>
   </section>
@@ -57,35 +70,112 @@
       return {
         selectedTag: '',
         filteredList: [],
-        showTray: true,
+        showTray: false,
         selectedIndex: 0,
+        loading: false,
+        trayLoading: false,
+        windowWidth: window.innerWidth,
       };
     },
-    // computed: {
-    //   listOrder() {
-    //     const el = document.getElementsByClassName('flavor');
-    //     if (index <= 5) {
-    //       return el.classList.add('order-1');
-    //     }
-    //   }
-    // },
+    beforeMount() {
+      this.filteredList = this.flavors;
+    },
+    mounted() {
+      this.setFlavorsIndex();
+
+      window.addEventListener('resize', () => {
+        this.windowWidth = window.innerWidth;
+        this.setFlavorsIndex();
+      });
+    },
+    computed: {
+      getTrayOrder() {
+        return Math.ceil((((this.selectedIndex + 1) / 5) + 1));
+      },
+      rowItemIndex() {
+        if (this.windowWidth <= 768) {
+          return 2;
+        }
+        if (this.windowWidth > 768 && this.windowWidth <= 1280) {
+          return 3;
+        }
+        return 5;
+      },
+    },
     methods: {
+      setFlavorsIndex() {
+        const flavorItems = document.querySelectorAll('.flavor');
+        const idx = this.rowItemIndex;
+
+        for (let i = 0; i < flavorItems.length; i += 1) {
+          flavorItems[i].classList.forEach((flavorClass) => {
+            if (flavorClass.startsWith('order')) {
+              flavorItems[i].classList.remove(flavorClass);
+            }
+          });
+
+          if (i <= (idx - 1)) {
+            flavorItems[i].classList.add('order-1');
+          } else if (i > (idx - 1) && i < (idx * 2)) {
+            flavorItems[i].classList.add('order-2');
+          } else if (i > ((idx * 2) - 1) && i < (idx * 3)) {
+            flavorItems[i].classList.add('order-3');
+          } else if (i > ((idx * 3) - 1) && i < (idx * 4)) {
+            flavorItems[i].classList.add('order-4');
+          } else if (i > ((idx * 4) - 1) && i < (idx * 5)) {
+            flavorItems[i].classList.add('order-5');
+          } else if (i > ((idx * 5) - 1) && i < (idx * 6)) {
+            flavorItems[i].classList.add('order-6');
+          } else if (i > ((idx * 6) - 1) && i < (idx * 7)) {
+            flavorItems[i].classList.add('order-7');
+          } else if (i > ((idx * 7) - 1) && i < (idx * 8)) {
+            flavorItems[i].classList.add('order-7');
+          } else if (i > ((idx * 8) - 1) && i < (idx * 9)) {
+            flavorItems[i].classList.add('order-7');
+          } else if (i > ((idx * 9) - 1) && i < (idx * 10)) {
+            flavorItems[i].classList.add('order-7');
+          }
+        }
+      },
       closeTray() {
         this.showTray = false;
       },
       openTray(item, index) {
-        this.showTray = true;
+        this.trayLoading = true;
+        setTimeout(() => {
+          this.trayLoading = false;
+        }, 500);
         this.selectedIndex = index;
-        console.log(item, index);
+
+        const flavorTray = document.querySelector('.tray-wrapper');
+
+        flavorTray.classList.forEach((trayClass) => {
+          if (trayClass.startsWith('order')) {
+            flavorTray.classList.remove(trayClass);
+          }
+        });
+
+        flavorTray.classList.add(`order-${ this.getTrayOrder }`);
+
+        this.showTray = true;
       },
       filterList(item) {
         this.selectedTag = item;
-        // return this.flavors.filter((tag) => tag.post_tags.slug.includes(this.selectedTag));
-        // this.filteredList = this.flavors.flatMap((flavor) => flavor.post_tags.map(() => ({
-        //   // result: postTag.name.replace(new RegExp(this.selectedTag, 'gi'), (match) => match),
-        //   tag: flavor.post_tags.name,
-        // })));
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+        }, 500);
+
+        if (item === 'all flavors') {
+          this.filteredList = this.flavors;
+        } else {
+          this.filteredList = this.flavors.filter((flavor) => flavor.flavor_tags.some((tag) => tag.name.toLowerCase() === item.toLowerCase()));
+        }
+        this.setFlavorsIndex();
       },
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize');
     },
   };
 </script>
@@ -97,5 +187,29 @@
   @screen md {
     @apply py-48;
   }
+
+  .tray-wrapper {
+    transition: all ease 0.5s;
+    @apply w-full;
+  }
+
+  .overlay {
+    z-index: -1;
+    @apply absolute inset-0;
+  }
+
+  .flavors-wrapper {
+    transition: opacity 0.5s ease-in-out;
+    @apply flex flex-wrap justify-center;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
