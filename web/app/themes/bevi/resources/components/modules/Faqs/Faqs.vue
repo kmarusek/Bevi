@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="block-content lg:w-1/3 mx-auto my-6 md:my-8 text-center">
+    <div class="block-content lg:w-1/2 mx-auto my-6 md:my-8 text-center">
       <p
         v-html="block.text"
       />
@@ -63,11 +63,11 @@
       };
     },
     methods: {
-      handleClick(currentIndex) {
-        this.faqList[currentIndex].active = !this.faqList[currentIndex].active;
+      handleClick(curIndex) {
+        this.faqList[curIndex].active = !this.faqList[curIndex].active;
 
         for (let idx = 0; idx < this.faqList.length; idx += 1) {
-          if (this.faqList[idx].id !== currentIndex) this.faqList[idx].active = false;
+          if (this.faqList[idx].id !== curIndex) this.faqList[idx].active = false;
         }
       },
       setFaqs() {
@@ -86,6 +86,10 @@
 </script>
 
 <style lang="scss" scoped>
+
+  .block-content p {
+    margin-bottom: 1rem;
+  }
 
   .faq-content {
     @apply overflow-y-hidden;
