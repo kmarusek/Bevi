@@ -12,5 +12,6 @@
         @include('partials.footer')
       </div>
     @php wp_footer() @endphp
+    <script id="CookieDeclaration" src="https://consent.cookiebot.com/87b4ec8d-7070-4d14-a5f7-e12be46378df/cd.js" type="text/javascript" async></script>
   </body>
 </html>

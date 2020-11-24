@@ -10,4 +10,5 @@
   whr_embed(250461, {detail: 'titles', base: 'departments', zoom: 'city', });
   });
   </script>
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" type="text/javascript" async></script>
 </head>
