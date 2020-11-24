@@ -11,9 +11,9 @@
           <li
             v-for="faq in faqs"
             :key="faq.ID"
-            class="flex-shrink-0 md:mb-2 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-5 lg:mr-0 text-lg lg:text-base"
-            :class="{'font-bold': (faq.post_title === activeEntry)}"
-            @click="goToSection(faq.post_title)"
+            class="flex-shrink-0 md:mb-2 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-5 lg:mr-0 text-lg lg:text-base px-2"
+            :class="{'font-bold': (faq.ID === activeEntry)}"
+            @click="goToSection(faq.ID)"
           >
             {{ faq.post_title }}
           </li>
@@ -24,9 +24,9 @@
         <div
           v-for="faq in faqs"
           class="mb-16"
-          :name="faq.post_title"
           :key="faq.ID"
-          ref="section"
+          :id="faq.ID"
+          :ref="faq.ID"
         >
           <h2
             class=" font-semibold text-2xl mb-2 leading-tight"
@@ -53,45 +53,18 @@
     },
     data() {
       return {
-        observer: null,
-        activeEntry: '',
+        activeEntry: null,
       };
     },
     methods: {
-       goToSection(sectionName) {
-        window.scrollTo({
-          top: this.$refs.section.filter((e) => e.attributes.name.value === sectionName)[0].offsetTop,
-          behavior: 'smooth',
-        });
-      },
-      observeSections() {
-        this.$refs.section.forEach((section) => {
-          this.observe(section);
-        });
-      },
-      observe(entry) {
-        this.observer.observe(entry);
-      },
-      initObserver() {
-        const options = {
-          threshold: [0.3],
-        };
-        this.observer = new IntersectionObserver((entries) => {
-          const active = entries.filter((e) => e.isIntersecting);
-          if (active.length) {
-            this.activeEntry = active[0].target.attributes.name.value;
-          }
-        }, options);
-      },
+      goToSection(refName) {
+        const element = this.$refs[refName][0];
+        this.activeEntry = +this.$refs[refName][0].id;
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     },
     mounted() {
-      this.initObserver();
-      this.observeSections();
-    },
-    computed: {
-      getSectionsRefs() {
-        return this.$refs;
-      },
+      this.activeEntry = this.faqs[0].ID;
     },
   };
 </script>
