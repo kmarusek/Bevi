@@ -54,7 +54,7 @@
   min-height: 50vh;
   @apply w-full;
 
-  &.wave:not(:last-of-type) {
+  &.wave {
     clip-path: url(#wave);
     @apply -mb-6;
   }
