@@ -26,7 +26,7 @@
       />
       <div
         v-if="block.slides.length >= 2"
-        class="wiper-button-next custom-button-next"
+        class="swiper-button-next custom-button-next"
         slot="button-next"
         @click="carouselNext"
       />
