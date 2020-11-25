@@ -7,8 +7,8 @@
             v-for="(item, idx) in block.sidenav"
             :key="idx"
             class="flex-shrink-0 md:mb-2 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-5 lg:mr-0 text-lg lg:text-base"
-            :class="{'font-bold': (item.title == activeEntry)}"
-            @click="goToSection(item.title)"
+            :class="{'font-bold': (idx === activeEntry)}"
+            @click="goToSection(idx)"
           >
             {{ item.title }}
           </li>
@@ -19,9 +19,9 @@
         <div
           v-for="(item, idx) in block.sidenav"
           class="mb-16"
-          :name="item.title"
           :key="idx"
-          ref="section"
+          :id="idx"
+          :ref="idx"
         >
           <h2
             class="h2 mb-2"
@@ -48,49 +48,15 @@
     },
     data() {
       return {
-        currentSection: null,
-        observer: null,
-        activeEntry: '',
+        activeEntry: 0,
       };
     },
     methods: {
-      goToSection(sectionName) {
-        window.scrollTo({
-          top: this.$refs.section.filter((e) => e.attributes.name.value === sectionName)[0].offsetTop,
-          behavior: 'smooth',
-        });
-      },
-      observeSections() {
-        this.$refs.section.forEach((section) => {
-          this.observe(section);
-        });
-      },
-      observe(entry) {
-        this.observer.observe(entry);
-      },
-      setActiveSection(section) {
-        this.currentSection = section;
-      },
-      initObserver() {
-        const options = {
-          threshold: [0.5],
-        };
-        this.observer = new IntersectionObserver((entries) => {
-          const active = entries.filter((e) => e.isIntersecting);
-          if (active.length) {
-            this.activeEntry = active[0].target.attributes.name.value;
-          }
-        }, options);
-      },
-    },
-    mounted() {
-      this.initObserver();
-      this.observeSections();
-    },
-    computed: {
-      getSectionsRefs() {
-        return this.$refs;
-      },
+      goToSection(refName) {
+        const element = this.$refs[refName][0];
+        this.activeEntry = +this.$refs[refName][0].id;
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     },
   };
 </script>

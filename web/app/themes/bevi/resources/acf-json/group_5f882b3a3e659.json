@@ -713,97 +713,6 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_5fb52ca35fa9f": {
-                    "key": "layout_5fb52ca35fa9f",
-                    "name": "page_hero",
-                    "label": "Page Hero",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_5fb5480cdbbde",
-                            "label": "Hero",
-                            "name": "hero",
-                            "type": "group",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "layout": "block",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5fb54e263dc73",
-                                    "label": "Title",
-                                    "name": "title",
-                                    "type": "text",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "default_value": "",
-                                    "placeholder": "",
-                                    "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
-                                },
-                                {
-                                    "key": "field_5fb5462469732",
-                                    "label": "Wave",
-                                    "name": "wave",
-                                    "type": "select",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "50",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "choices": {
-                                        "1": "One",
-                                        "2": "Two",
-                                        "3": "Three"
-                                    },
-                                    "default_value": false,
-                                    "allow_null": 1,
-                                    "multiple": 0,
-                                    "ui": 1,
-                                    "ajax": 0,
-                                    "return_format": "value",
-                                    "placeholder": ""
-                                },
-                                {
-                                    "key": "field_5fb5a1b4147e1",
-                                    "label": "Show Bubbles",
-                                    "name": "show_bubbles",
-                                    "type": "true_false",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "50",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "message": "",
-                                    "default_value": 0,
-                                    "ui": 1,
-                                    "ui_on_text": "",
-                                    "ui_off_text": ""
-                                }
-                            ]
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_5f8ed75b16718": {
                     "key": "layout_5f8ed75b16718",
                     "name": "bullet_list",
@@ -1705,6 +1614,80 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5fbe6a3e046eb",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5fbe6904b6a90",
+                            "label": "Gallery",
+                            "name": "gallery",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "table",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5fbe6928b6a92",
+                                    "label": "Image",
+                                    "name": "image",
+                                    "type": "image",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array",
+                                    "preview_size": "thumbnail",
+                                    "library": "all",
+                                    "min_width": "",
+                                    "min_height": "",
+                                    "min_size": "",
+                                    "max_width": "",
+                                    "max_height": "",
+                                    "max_size": "",
+                                    "mime_types": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5faa975b20ee7": {
+                    "key": "layout_5faa975b20ee7",
+                    "name": "counters",
+                    "label": "Counters",
+                    "display": "block",
+                    "sub_fields": [
+                        {
                             "key": "field_5faaa44781fc5",
                             "label": "Title",
                             "name": "title",
@@ -1772,21 +1755,94 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_5faa975b20ee7": {
-                    "key": "layout_5faa975b20ee7",
-                    "name": "counters",
-                    "label": "Counters",
+                "layout_5fb6a156935be": {
+                    "key": "layout_5fb6a156935be",
+                    "name": "faqs",
+                    "label": "FAQs",
                     "display": "block",
-                    "sub_fields": [],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_5faa9d701f152": {
-                    "key": "layout_5faa9d701f152",
-                    "name": "machine_comparison",
-                    "label": "Machine Comparison",
-                    "display": "block",
-                    "sub_fields": [],
+                    "sub_fields": [
+                        {
+                            "key": "field_5fba7972da00b",
+                            "label": "FAQ Title",
+                            "name": "faq_title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5fb6a16c935bf",
+                            "label": "Selected FAQ",
+                            "name": "selected_faq",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "faqs"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "multiple": 1,
+                            "return_format": "object",
+                            "ui": 1
+                        },
+                        {
+                            "key": "field_5fba4723a12e6",
+                            "label": "CTA",
+                            "name": "cta",
+                            "type": "page_link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "page"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "allow_archives": 1,
+                            "multiple": 0
+                        },
+                        {
+                            "key": "field_5fba478292737",
+                            "label": "Description",
+                            "name": "text",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        }
+                    ],
                     "min": "",
                     "max": ""
                 },
@@ -1978,9 +2034,9 @@
         ],
         [
             {
-                "param": "page",
-                "operator": "!=",
-                "value": "228"
+                "param": "post_type",
+                "operator": "==",
+                "value": "faqs"
             }
         ]
     ],
@@ -1994,5 +2050,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606325707
+    "modified": 1606315321
 }
