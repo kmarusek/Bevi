@@ -26,7 +26,6 @@
     />
     <div
       class="flavors-wrapper container"
-      :class="loading ? 'opacity-0' : 'opacity-100'"
     >
       <div class="overflow-hidden tray-wrapper order-2">
         <FlavorTray
@@ -42,6 +41,7 @@
         :flavor="flavor"
         :show-tray="showTray"
         @click.native="openTray(flavor.post_name, index)"
+        :class="{ 'selected-flavour' : selectedIndex === index }"
       />
     </div>
   </section>
@@ -71,7 +71,7 @@
         selectedTag: '',
         filteredList: [],
         showTray: false,
-        selectedIndex: 0,
+        selectedIndex: null,
         loading: false,
         trayLoading: false,
         windowWidth: window.innerWidth,
@@ -144,7 +144,7 @@
         this.trayLoading = true;
         setTimeout(() => {
           this.trayLoading = false;
-        }, 500);
+        }, 200);
         this.selectedIndex = index;
 
         const flavorTray = document.querySelector('.tray-wrapper');
