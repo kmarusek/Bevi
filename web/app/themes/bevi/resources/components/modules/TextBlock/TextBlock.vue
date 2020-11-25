@@ -15,6 +15,7 @@
     <wave
       v-if="block.wave"
       :wave="block.wave"
+      wave-id="text-wave"
     />
   </section>
 </template>
@@ -34,8 +35,8 @@
 </script>
 
 <style lang="scss" scoped>
-.wave {
-  clip-path: url(#wave);
-  @apply -mb-6;
-}
+  .wave {
+    clip-path: url(#text-wave);
+    @apply -mb-6 relative bg-white;
+  }
 </style>

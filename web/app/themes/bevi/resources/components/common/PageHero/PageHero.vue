@@ -31,6 +31,7 @@
     <wave
       v-if="block.hero.wave"
       :wave="block.hero.wave"
+      wave-id="hero-wave"
     />
   </section>
 </template>
@@ -55,7 +56,7 @@
   @apply w-full;
 
   &.wave {
-    clip-path: url(#wave);
+    clip-path: url(#hero-wave);
     @apply -mb-6;
   }
 }

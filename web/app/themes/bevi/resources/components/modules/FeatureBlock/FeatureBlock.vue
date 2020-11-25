@@ -70,6 +70,7 @@
     <wave
       v-if="block.wave"
       :wave="block.wave"
+      wave-id="feature-wave"
     />
   </section>
 </template>
@@ -148,7 +149,7 @@
 }
 
 .wave {
-  clip-path: url(#wave);
-  @apply -mb-6;
+  clip-path: url(#feature-wave);
+  @apply -mb-6 relative;
 }
 </style>
