@@ -1,7 +1,7 @@
 <template>
   <section
     class="feature-block"
-    :class="`color-scheme-${ block.colour_scheme }`"
+    :class="this.sectionClasses"
   >
     <div
       class="py-32 container xl:max-w-5xl flex flex-col items-center gsap-fade-section"
@@ -67,6 +67,10 @@
         <ImageBlob :image="block.image.sizes.large" />
       </div>
     </div>
+    <wave
+      v-if="block.wave"
+      :wave="block.wave"
+    />
   </section>
 </template>
 
@@ -79,6 +83,18 @@
       block: {
         required: true,
         type: [Object, Array],
+      },
+    },
+    computed: {
+      sectionClasses() {
+        const classes = [];
+        if (this.block.colour_scheme) {
+          classes.push(`color-scheme-${ this.block.colour_scheme }`);
+        }
+        if (this.block.wave) {
+          classes.push('wave');
+        }
+        return classes;
       },
     },
   };
@@ -117,7 +133,7 @@
     .h3 {
       @apply text-blue-600;
     }
-        svg path {
+    svg path {
       @apply stroke-red;
     }
   }
@@ -129,5 +145,10 @@
     @apply absolute bottom-0 right-0 w-12;
     right: 10%;
   }
+}
+
+.wave {
+  clip-path: url(#wave);
+  @apply -mb-6;
 }
 </style>
