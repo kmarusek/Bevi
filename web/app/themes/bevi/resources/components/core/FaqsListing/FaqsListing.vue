@@ -1,6 +1,6 @@
 <template>
   <section class="container py-6 px-12 mx-auto">
-     <h2
+    <h2
       class="mb-6 md:mb-8 font-semibold text-xl md:text-3xl leading-tight text-center capitalize"
     >
       Frequently Asked Questions
@@ -61,7 +61,7 @@
         const element = this.$refs[refName][0];
         this.activeEntry = +this.$refs[refName][0].id;
         element.scrollIntoView({ behavior: 'smooth' });
-      }
+      },
     },
     mounted() {
       this.activeEntry = this.faqs[0].ID;

@@ -22,13 +22,13 @@
       </swiper-slide>
       <div
         v-if="block.gallery.length"
-        class="gsap-fade swiper-button-prev custom-button-prev"
+        class="swiper-button-prev custom-button-prev"
         slot="button-prev"
         @click="carouselPrev"
       />
       <div
         v-if="block.gallery.length"
-        class="gsap-fade swiper-button-next custom-button-next"
+        class="swiper-button-next custom-button-next"
         slot="button-next"
         @click="carouselNext"
       />
@@ -37,8 +37,10 @@
 </template>
 
 <script>
+  import GSAPFade from '~/mixins/GSAPFade.js';
+
   export default {
-    // mixins: [GSAPFade],
+    mixins: [GSAPFade],
     props: {
       block: {
         required: true,
