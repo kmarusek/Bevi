@@ -1,5 +1,8 @@
 <template>
-  <section class="press-release gsap-fade-section color-scheme-Red">
+  <section
+    class="press-release gsap-fade-section color-scheme-Red"
+    :class="{ wave : block.wave }"
+  >
     <div class="container">
       <h2 class="h2 mb-20 md:mb-40 gsap-fade">
         {{ block.title }}
@@ -30,6 +33,11 @@
         </div>
       </div>
     </div>
+    <wave
+      v-if="block.wave"
+      :wave="block.wave"
+      wave-id="press-wave"
+    />
   </section>
 </template>
 
@@ -102,5 +110,10 @@
       }
     }
   }
+}
+
+.wave {
+  clip-path: url(#press-wave);
+  @apply -mb-6 relative bg-white;
 }
 </style>
