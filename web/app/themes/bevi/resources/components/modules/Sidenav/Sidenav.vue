@@ -56,7 +56,7 @@
         const element = this.$refs[refName][0];
         this.activeEntry = +this.$refs[refName][0].id;
         element.scrollIntoView({ behavior: 'smooth' });
-      }
+      },
     },
   };
 </script>
