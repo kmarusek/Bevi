@@ -20,13 +20,13 @@
       </swiper-slide>
       <div
         v-if="block.slides.length >= 2"
-        class="gsap-fade swiper-button-prev custom-button-prev"
+        class="swiper-button-prev custom-button-prev"
         slot="button-prev"
         @click="carouselPrev"
       />
       <div
         v-if="block.slides.length >= 2"
-        class="gsap-fade swiper-button-next custom-button-next"
+        class="wiper-button-next custom-button-next"
         slot="button-next"
         @click="carouselNext"
       />
