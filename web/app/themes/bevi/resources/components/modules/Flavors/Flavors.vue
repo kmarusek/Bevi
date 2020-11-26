@@ -1,5 +1,8 @@
 <template>
-  <section class="flavors gsap-fade-section">
+  <section
+    class="flavors gsap-fade-section"
+    :class="{ wave : block.wave }"
+  >
     <div class="container text-center max-w-2xl">
       <div class="relative z-10 py-20 md:py-0">
         <div class="title-wrapper gsap-fade">
@@ -13,6 +16,7 @@
           </p>
         </div>
         <a
+          v-if="block.cta"
           :href="block.cta.url"
           :target="block.cta.target ? block.cta.target : '_self'"
           class="btn mt-4 md:mt-12 gsap-fade"
@@ -47,6 +51,11 @@
         </div>
       </div>
     </div>
+    <wave
+      v-if="block.wave"
+      :wave="block.wave"
+      wave-id="flavors-wave"
+    />
   </section>
 </template>
 
@@ -220,5 +229,10 @@
       }
     }
   }
+}
+
+.wave {
+  clip-path: url(#flavors-wave);
+  @apply -mb-6 relative bg-white;
 }
 </style>
