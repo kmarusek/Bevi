@@ -1902,6 +1902,32 @@
                                     "delay": 0
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5fbf9964d2569",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -2250,5 +2276,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606390297
+    "modified": 1606392187
 }

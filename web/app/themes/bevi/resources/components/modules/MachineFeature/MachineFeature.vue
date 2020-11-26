@@ -1,8 +1,6 @@
 <template>
   <section class="machine-feature gsap-fade-section">
-    <div
-      class="md:my-24 pb-20 container lg:text-center"
-    >
+    <div class="pb-20 md:py-24 container lg:text-center">
       <img
         :src="block.image_desktop.sizes.large"
         :alt="block.image_desktop.alt"
@@ -24,9 +22,7 @@
           <h3 class="h3">
             {{ feature.title }}
           </h3>
-          <div
-            v-html="feature.text"
-          />
+          <div v-html="feature.text" />
         </div>
       </div>
 
@@ -36,12 +32,22 @@
       />
 
       <a
+        v-if="block.cta"
         :href="block.cta.url"
         :target="block.cta.target ? block.cta.target : '_self'"
         class="btn mt-4 md:mt-12 gsap-fade"
       >
         {{ block.cta.title }}
       </a>
+    </div>
+    <div
+      v-if="block.wave"
+      class="wave-wrapper"
+    >
+      <wave
+        :wave="block.wave"
+        wave-id="machine-wave"
+      />
     </div>
   </section>
 </template>
@@ -57,6 +63,15 @@
   };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.wave-wrapper {
+  z-index: -1;
+  max-height: 300px;
+  @apply bg-white absolute bottom-0 w-full h-full -mb-6;
+  clip-path: url(#machine-wave);
 
+  @screen md {
+    max-height: 500px;
+  }
+}
 </style>
