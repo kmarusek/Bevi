@@ -2290,6 +2290,13 @@
                 "operator": "==",
                 "value": "counters"
             }
+        ],
+        [
+            {
+                "param": "page",
+                "operator": "!=",
+                "value": "228"
+            }
         ]
     ],
     "menu_order": 0,

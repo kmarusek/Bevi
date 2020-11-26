@@ -77,7 +77,7 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="post-content gsap-fades"
+            class="gsap-fades"
           />
 
           <a

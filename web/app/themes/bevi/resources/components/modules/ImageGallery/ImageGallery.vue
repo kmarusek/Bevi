@@ -13,12 +13,7 @@
           v-for="slide in block.gallery"
           :key="slide.image.ID"
           class="w-full"
-        >
-          <img
-            :src="slide.image.sizes.large"
-            class="w-full h-full rounded-md object-center object-cover hidden md:block"
-          >
-        </swiper-slide>
+        />
         <div
           v-if="block.gallery.length"
           class="swiper-button-prev custom-button-prev"
@@ -32,15 +27,6 @@
           @click="carouselNext"
         />
       </swiper>
-    </div>
-    <div
-      class="wave-wrapper"
-      v-if="block.wave"
-    >
-      <wave
-        :wave="block.wave"
-        wave-id="gallery-wave"
-      />
     </div>
   </section>
 </template>
