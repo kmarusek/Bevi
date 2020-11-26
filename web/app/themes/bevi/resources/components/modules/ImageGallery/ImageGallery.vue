@@ -1,44 +1,52 @@
 <template>
-  <section
-    class="container py-12 p-0 gsap-fade-section"
-  >
-    <h2 class="h2 text-center mb-20 md:mb-40">
-      {{ block.title }}
-    </h2>
-    <swiper
-      ref="gallery"
-      :options="swiperOptions"
-      class="fixed-height-container"
-    >
-      <swiper-slide
-        v-for="slide in block.gallery"
-        :key="slide.image.ID"
-        class="w-full"
+  <section class="py-12 md:py-28 px-0">
+    <div class="container">
+      <h2 class="h2 text-center mb-20 md:mb-40">
+        {{ block.title }}
+      </h2>
+      <swiper
+        ref="gallery"
+        :options="swiperOptions"
+        class="fixed-height-container"
       >
-        <img
-          :src="slide.image.sizes.large"
-          class="gsap-fade w-full h-full rounded-md object-center object-cover hidden md:block"
+        <swiper-slide
+          v-for="slide in block.gallery"
+          :key="slide.image.ID"
+          class="w-full"
         >
-      </swiper-slide>
-      <div
-        v-if="block.gallery.length"
-        class="gsap-fade swiper-button-prev custom-button-prev"
-        slot="button-prev"
-        @click="carouselPrev"
+          <img
+            :src="slide.image.sizes.large"
+            class="w-full h-full rounded-md object-center object-cover hidden md:block"
+          >
+        </swiper-slide>
+        <div
+          v-if="block.gallery.length"
+          class="swiper-button-prev custom-button-prev"
+          slot="button-prev"
+          @click="carouselPrev"
+        />
+        <div
+          v-if="block.gallery.length"
+          class="swiper-button-next custom-button-next"
+          slot="button-next"
+          @click="carouselNext"
+        />
+      </swiper>
+    </div>
+    <div
+      class="wave-wrapper"
+      v-if="block.wave"
+    >
+      <wave
+        :wave="block.wave"
+        wave-id="comparison-wave"
       />
-      <div
-        v-if="block.gallery.length"
-        class="gsap-fade swiper-button-next custom-button-next"
-        slot="button-next"
-        @click="carouselNext"
-      />
-    </swiper>
+    </div>
   </section>
 </template>
 
 <script>
   export default {
-    // mixins: [GSAPFade],
     props: {
       block: {
         required: true,
@@ -107,7 +115,8 @@
   }
 }
 
-.custom-button-prev, .custom-button-next {
+.custom-button-prev,
+.custom-button-next {
   top: calc(100% - 30px);
   width: 50px;
   height: 50px;
@@ -117,7 +126,7 @@
   }
 
   &:after {
-    content: url('../../../assets/images/icons/circle-arrow.svg');
+    content: url("../../../assets/images/icons/circle-arrow.svg");
     width: 50px;
     height: 50px;
   }
@@ -130,5 +139,16 @@
 
 .custom-button-next {
   right: 15px;
+}
+
+.wave-wrapper {
+  z-index: -1;
+  max-height: 300px;
+  @apply bg-white absolute bottom-0 w-full h-full -mb-6;
+  clip-path: url(#machine-wave);
+
+  @screen md {
+    max-height: 500px;
+  }
 }
 </style>

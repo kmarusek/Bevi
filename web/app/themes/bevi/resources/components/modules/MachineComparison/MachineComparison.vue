@@ -47,10 +47,9 @@
     </div>
     <div
       class="wave-wrapper"
-      :class="{ wave : block.wave }"
+      v-if="block.wave"
     >
       <wave
-        v-if="block.wave"
         :wave="block.wave"
         wave-id="comparison-wave"
       />
@@ -85,13 +84,13 @@
   }
 }
 .wave-wrapper {
-  height: 40%;
   z-index: -1;
-  @apply bg-blue-100 absolute bottom-0 w-full;
+  max-height: 300px;
+  @apply bg-blue-100 absolute bottom-0 w-full h-full -mb-6;
+  clip-path: url(#machine-wave);
 
-  &.wave {
-    clip-path: url(#comparison-wave);
-    @apply -mb-6;
+  @screen md {
+    max-height: 500px;
   }
 }
 </style>
