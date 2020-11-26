@@ -39,7 +39,7 @@
     >
       <wave
         :wave="block.wave"
-        wave-id="comparison-wave"
+        wave-id="gallery-wave"
       />
     </div>
   </section>
@@ -145,7 +145,7 @@
   z-index: -1;
   max-height: 300px;
   @apply bg-white absolute bottom-0 w-full h-full -mb-6;
-  clip-path: url(#machine-wave);
+  clip-path: url(#gallery-wave);
 
   @screen md {
     max-height: 500px;

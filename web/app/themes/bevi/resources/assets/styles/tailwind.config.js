@@ -28,6 +28,9 @@ module.exports = {
       white: theme('colors.white'),
     }),
     extend: {
+      screens: {
+        '2xl': '1536px',
+      },
       fontSize: {
         '4.5xl': '2.8rem',
         '5xl': '3.2rem',
