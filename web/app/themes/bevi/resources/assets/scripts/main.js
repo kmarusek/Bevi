@@ -43,6 +43,7 @@ import PostCard from '~/components/modules/PostCard/PostCard';
 import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
 import Sidenav from '~/components/modules/Sidenav/Sidenav';
 import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
+import Careers from '~/components/modules/Careers/Careers';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -92,6 +93,7 @@ Vue.component('Sidenav', Sidenav);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
 Vue.component('NewsContent', NewsContent);
+Vue.component('Careers', Careers);
 
 // eslint-disable-next-line no-new
 new Vue({

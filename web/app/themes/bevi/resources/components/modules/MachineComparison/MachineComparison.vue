@@ -1,5 +1,8 @@
 <template>
-  <section class="relative bg-blue-100">
+  <section
+    class="relative bg-blue-100"
+    :class="{ wave : block.wave }"
+  >
     <div class="py-20 lg:py-32 md:container flex flex-col items-center gsap-fade-section text-center">
       <h2 class="h2 mb-4 lg:mb-10 text-blue-600 font-semibold">
         Choose your dispenser
@@ -45,6 +48,11 @@
         </div>
       </div>
     </div>
+    <wave
+      v-if="block.wave"
+      :wave="block.wave"
+      wave-id="comparison-wave"
+    />
   </section>
 </template>
 
@@ -54,6 +62,10 @@
       counters: {
         required: true,
         type: Array,
+      },
+      block: {
+        required: true,
+        type: Object,
       },
     },
   };
@@ -71,4 +83,8 @@
   }
 }
 
+.wave {
+  clip-path: url(#comparison-wave);
+  @apply -mb-6 relative bg-white;
+}
 </style>

@@ -1204,7 +1204,34 @@
                     "name": "careers_component",
                     "label": "Careers Component",
                     "display": "block",
-                    "sub_fields": [],
+                    "sub_fields": [
+                        {
+                            "key": "field_5fbf859925f43",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        }
+                    ],
                     "min": "",
                     "max": ""
                 },
@@ -1968,7 +1995,34 @@
                     "name": "machine_comparison",
                     "label": "Machine Comparison",
                     "display": "block",
-                    "sub_fields": [],
+                    "sub_fields": [
+                        {
+                            "key": "field_5fbf858725f42",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        }
+                    ],
                     "min": "",
                     "max": ""
                 },
@@ -2169,5 +2223,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606386219
+    "modified": 1606387110
 }
