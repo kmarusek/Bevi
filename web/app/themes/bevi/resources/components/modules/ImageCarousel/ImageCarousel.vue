@@ -1,34 +1,42 @@
 <template>
   <section
-    class="container text-center py-32 p-0 gsap-fade-section"
-    :style="{ 'background-image': 'url(' + block.background.sizes.large + ')' }"
+    class="gsap-fade-section"
+    :class="{ wave : block.wave }"
+    :style="{ 'background-image': `url('${block.background.sizes.large}')` }"
   >
-    <h3 class="font-space text-sm font-semibold uppercase text-gray-700 tracking-wide">
-      {{ block.title }}
-    </h3>
-    <swiper
-      ref="content"
-      :options="swiperOptions"
-      class="mt-10"
-    >
-      <swiper-slide
-        v-for="slide in block.carousel"
-        :key="slide.id"
-        class="w-full"
+    <div class="container text-center py-32">
+      <h3 class="font-space text-sm font-semibold uppercase text-gray-700 tracking-wide">
+        {{ block.title }}
+      </h3>
+      <swiper
+        ref="content"
+        :options="swiperOptions"
+        class="mt-10"
       >
-        <img
-          :src="slide.logo.sizes.thumbnail"
-          class="mx-auto gsap-fade"
+        <swiper-slide
+          v-for="slide in block.carousel"
+          :key="slide.id"
+          class="w-full"
         >
-      </swiper-slide>
-    </swiper>
-    <carousel-dots
-      @carousel-item-active="carouselUpdateSlide"
-      @carousel-prev="carouselPrev"
-      @carousel-next="carouselNext"
-      :item-count="block.carousel.length"
-      :active-slide="activeSlide"
-      class=" md:hidden pt-10"
+          <img
+            :src="slide.logo.sizes.thumbnail"
+            class="mx-auto gsap-fade"
+          >
+        </swiper-slide>
+      </swiper>
+      <carousel-dots
+        @carousel-item-active="carouselUpdateSlide"
+        @carousel-prev="carouselPrev"
+        @carousel-next="carouselNext"
+        :item-count="block.carousel.length"
+        :active-slide="activeSlide"
+        class=" md:hidden pt-10"
+      />
+    </div>
+    <wave
+      v-if="block.wave"
+      :wave="block.wave"
+      wave-id="carousel-wave"
     />
   </section>
 </template>
@@ -89,5 +97,10 @@
 <style lang="scss" scoped>
 /deep/ .swiper-wrapper {
   @apply items-center;
+}
+
+.wave {
+  clip-path: url(#carousel-wave);
+  @apply -mb-6 relative bg-white;
 }
 </style>

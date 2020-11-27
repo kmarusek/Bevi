@@ -360,6 +360,32 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_5fbe7338e6168",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -480,6 +506,32 @@
                             },
                             "default_value": "Default",
                             "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5fbe78c9ba58a",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
                             "multiple": 0,
                             "ui": 1,
                             "ajax": 0,
@@ -708,6 +760,32 @@
                             "max_height": "",
                             "max_size": "",
                             "mime_types": ""
+                        },
+                        {
+                            "key": "field_5fbe904c42ff9",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -892,6 +970,32 @@
                                     "delay": 0
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5fbe95c0fff8f",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1064,6 +1168,32 @@
                                     "new_lines": ""
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5fbe9a3ceef04",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1074,7 +1204,34 @@
                     "name": "careers_component",
                     "label": "Careers Component",
                     "display": "block",
-                    "sub_fields": [],
+                    "sub_fields": [
+                        {
+                            "key": "field_5fbf859925f43",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        }
+                    ],
                     "min": "",
                     "max": ""
                 },
@@ -1415,6 +1572,32 @@
                                     "mime_types": ""
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5fbf82145cb9a",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1542,6 +1725,32 @@
                                     "return_format": "array"
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5fbf80c27c46f",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1693,6 +1902,32 @@
                                     "delay": 0
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5fbf9964d2569",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1743,7 +1978,7 @@
                             "button_label": "",
                             "sub_fields": [
                                 {
-                                    "key": "field_5fabb84c81fc7",
+                                    "key": "field_5fbfd26f5f538",
                                     "label": "Image",
                                     "name": "image",
                                     "type": "image",
@@ -1767,6 +2002,32 @@
                                     "mime_types": ""
                                 }
                             ]
+                        },
+                        {
+                            "key": "field_5fbfd032c6140",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "22",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1777,7 +2038,34 @@
                     "name": "counters",
                     "label": "Counters",
                     "display": "block",
-                    "sub_fields": [],
+                    "sub_fields": [
+                        {
+                            "key": "field_5fbf920cb44e4",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        }
+                    ],
                     "min": "",
                     "max": ""
                 },
@@ -1786,7 +2074,34 @@
                     "name": "machine_comparison",
                     "label": "Machine Comparison",
                     "display": "block",
-                    "sub_fields": [],
+                    "sub_fields": [
+                        {
+                            "key": "field_5fbf858725f42",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        }
+                    ],
                     "min": "",
                     "max": ""
                 },
@@ -1994,5 +2309,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606329331
+    "modified": 1606406959
 }

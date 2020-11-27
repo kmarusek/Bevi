@@ -107,6 +107,7 @@
     </div>
     <wave
       wave="1"
+      wave-id="banner-wave"
     />
   </section>
 </template>
@@ -167,8 +168,8 @@
 
 <style lang="scss" scoped>
 .main-banner {
-  &.wave:not(:last-of-type) {
-    clip-path: url(#wave);
+  &.wave {
+    clip-path: url(#banner-wave);
     @apply -mb-6;
   }
 }

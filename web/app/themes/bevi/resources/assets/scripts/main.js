@@ -44,6 +44,7 @@ import PostCard from '~/components/modules/PostCard/PostCard';
 import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
 import Sidenav from '~/components/modules/Sidenav/Sidenav';
 import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
+import Careers from '~/components/modules/Careers/Careers';
 import Faqs from '~/components/modules/Faqs/Faqs';
 
 // Common
@@ -94,6 +95,7 @@ Vue.component('Sidenav', Sidenav);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
 Vue.component('NewsContent', NewsContent);
+Vue.component('Careers', Careers);
 Vue.component('Faqs', Faqs);
 Vue.component('FaqsListing', FaqsListing);
 

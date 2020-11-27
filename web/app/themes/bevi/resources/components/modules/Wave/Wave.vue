@@ -2,7 +2,7 @@
   <div class="absolute bottom-0 w-full">
     <svg>
       <clipPath
-        id="wave"
+        :id="waveId"
         clipPathUnits="objectBoundingBox"
       >
         <path
@@ -29,6 +29,10 @@
   export default {
     props: {
       wave: {
+        required: true,
+        type: String,
+      },
+      waveId: {
         required: true,
         type: String,
       },

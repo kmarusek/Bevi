@@ -13,6 +13,7 @@
           </p>
         </div>
         <a
+          v-if="block.cta"
           :href="block.cta.url"
           :target="block.cta.target ? block.cta.target : '_self'"
           class="btn mt-4 md:mt-12 gsap-fade"
@@ -20,32 +21,41 @@
           {{ block.cta.title }}
         </a>
       </div>
-      <div class="flavor-wrapper gsap-float-section">
-        <div
-          v-for="(flavor, index) in block.flavor_cards"
-          :key="index"
-          class="flavor gsap-float"
+    </div>
+    <div class="flavor-wrapper gsap-float-section">
+      <div
+        v-for="(flavor, index) in block.flavor_cards"
+        :key="index"
+        class="flavor gsap-float"
+      >
+        <img
+          :src="flavor.image.sizes.large"
+          :alt="flavor.image.alt"
+          class="img"
+        >
+        <p
+          class="label"
+          v-html="flavor.label"
+        />
+        <span
+          v-if="flavor.callout"
+          class="callout"
         >
           <img
-            :src="flavor.image.sizes.large"
-            :alt="flavor.image.alt"
-            class="img"
+            :src="flavor.callout.sizes.large"
+            :alt="flavor.callout.alt"
           >
-          <p
-            class="label"
-            v-html="flavor.label"
-          />
-          <span
-            v-if="flavor.callout"
-            class="callout"
-          >
-            <img
-              :src="flavor.callout.sizes.large"
-              :alt="flavor.callout.alt"
-            >
-          </span>
-        </div>
+        </span>
       </div>
+    </div>
+    <div
+      v-if="block.wave"
+      class="wave-wrapper"
+    >
+      <wave
+        :wave="block.wave"
+        wave-id="flavors-wave"
+      />
     </div>
   </section>
 </template>
@@ -67,7 +77,7 @@
 
 <style lang="scss" scoped>
 .flavors {
-  @apply flex items-center justify-center relative overflow-x-hidden py-48;
+  @apply flex items-center justify-center relative py-48;
 
   @screen md {
     @apply h-screen py-10;
@@ -110,6 +120,10 @@
     }
   }
 
+  .flavor-wrapper {
+    @apply absolute inset-0 w-full h-full overflow-x-hidden;
+  }
+
   .flavor {
     @apply absolute block flex flex-col justify-center items-center;
 
@@ -125,6 +139,11 @@
 
       @screen md {
         width: 10vw;
+      }
+     
+      @screen 2xl {
+        width: 15vw;
+        max-width: 200px;
       }
     }
 
@@ -205,7 +224,7 @@
       @apply hidden;
 
       @screen md {
-        @apply block;
+        @apply flex;
       }
     }
 
@@ -216,9 +235,20 @@
       @apply hidden;
 
       @screen md {
-        @apply block;
+        @apply flex;
       }
     }
+  }
+}
+
+.wave-wrapper {
+  z-index: -1;
+  max-height: 300px;
+  @apply bg-white absolute bottom-0 w-full h-full -mb-6;
+  clip-path: url(#flavors-wave);
+
+  @screen md {
+    max-height: 500px;
   }
 }
 </style>

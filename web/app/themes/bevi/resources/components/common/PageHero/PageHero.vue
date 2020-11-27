@@ -31,6 +31,7 @@
     <wave
       v-if="block.wave || block.hero.wave"
       :wave="block.wave || block.hero.wave"
+      wave-id="hero-wave"
     />
   </section>
 </template>
@@ -54,8 +55,8 @@
   min-height: 50vh;
   @apply w-full;
 
-  &.wave:not(:last-of-type) {
-    clip-path: url(#wave);
+  &.wave {
+    clip-path: url(#hero-wave);
     @apply -mb-6;
   }
 }

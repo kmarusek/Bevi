@@ -45,6 +45,15 @@
         </div>
       </div>
     </div>
+    <div
+      class="wave-wrapper"
+      v-if="block.wave"
+    >
+      <wave
+        :wave="block.wave"
+        wave-id="comparison-wave"
+      />
+    </div>
   </section>
 </template>
 
@@ -54,6 +63,10 @@
       counters: {
         required: true,
         type: Array,
+      },
+      block: {
+        required: true,
+        type: Object,
       },
     },
   };
@@ -70,5 +83,14 @@
     border-right: 0;
   }
 }
+.wave-wrapper {
+  z-index: -1;
+  max-height: 300px;
+  @apply bg-blue-100 absolute bottom-0 w-full h-full -mb-6;
+  clip-path: url(#machine-wave);
 
+  @screen md {
+    max-height: 500px;
+  }
+}
 </style>
