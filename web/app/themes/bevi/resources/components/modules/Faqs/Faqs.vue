@@ -78,7 +78,7 @@
           id: index,
         }));
 
-        this.faqList = this.faqList.filter((item) => item.title !== '' && item.content !== '');
+        this.faqList = this.faqList.filter((item) => item.title && item.content);
       },
     },
     created() {
