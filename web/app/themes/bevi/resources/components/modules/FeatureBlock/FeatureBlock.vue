@@ -1,7 +1,7 @@
 <template>
   <section
     class="feature-block"
-    :class="this.sectionClasses"
+    :class="sectionClasses"
   >
     <div
       class="py-32 container xl:max-w-5xl flex flex-col items-center gsap-fade-section"
@@ -92,9 +92,11 @@
         if (this.block.colour_scheme) {
           classes.push(`color-scheme-${ this.block.colour_scheme }`);
         }
+
         if (this.block.wave) {
           classes.push('wave');
         }
+        
         return classes;
       },
     },

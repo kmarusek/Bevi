@@ -112,7 +112,7 @@
   }
 
   &:after {
-    content: url("../../../assets/images/icons/circle-arrow.svg");
+    content: url('../../../assets/images/icons/circle-arrow.svg');
     width: 50px;
     height: 50px;
   }
