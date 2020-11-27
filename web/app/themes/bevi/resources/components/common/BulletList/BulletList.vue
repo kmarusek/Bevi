@@ -10,6 +10,7 @@
     >
       <div class="w-1/4 sm:w-1/5">
         <img
+          v-if="bullet.icon"
           :src="bullet.icon.sizes.thumbnail"
           class="mb-2 mt-8 sm:my-0"
         >
