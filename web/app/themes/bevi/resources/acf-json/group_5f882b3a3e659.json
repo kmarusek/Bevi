@@ -913,7 +913,7 @@
                                     "name": "icon",
                                     "type": "image",
                                     "instructions": "",
-                                    "required": 0,
+                                    "required": 1,
                                     "conditional_logic": 0,
                                     "wrapper": {
                                         "width": "",
@@ -937,7 +937,7 @@
                                     "name": "title",
                                     "type": "text",
                                     "instructions": "",
-                                    "required": 0,
+                                    "required": 1,
                                     "conditional_logic": 0,
                                     "wrapper": {
                                         "width": "",
@@ -956,7 +956,7 @@
                                     "name": "content",
                                     "type": "wysiwyg",
                                     "instructions": "",
-                                    "required": 0,
+                                    "required": 1,
                                     "conditional_logic": 0,
                                     "wrapper": {
                                         "width": "",
@@ -2302,5 +2302,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606479218
+    "modified": 1606479279
 }
