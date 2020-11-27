@@ -2290,13 +2290,6 @@
                 "operator": "==",
                 "value": "counters"
             }
-        ],
-        [
-            {
-                "param": "page",
-                "operator": "!=",
-                "value": "228"
-            }
         ]
     ],
     "menu_order": 0,
@@ -2309,5 +2302,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606406959
+    "modified": 1606478445
 }
