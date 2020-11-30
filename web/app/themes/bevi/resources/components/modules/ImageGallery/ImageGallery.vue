@@ -1,33 +1,38 @@
 <template>
-  <section class="py-12 md:py-28 px-0">
-    <div class="container">
-      <h2 class="h2 text-center mb-20 md:mb-40">
+  <section class="py-20 md:py-28">
+    <div class="gallery-container">
+      <h2 class="h2 text-left mb-8 md:mb-20">
         {{ block.title }}
       </h2>
-      <swiper
-        ref="gallery"
-        :options="swiperOptions"
-        class="fixed-height-container"
-      >
-        <swiper-slide
-          v-for="slide in block.gallery"
-          :key="slide.image.ID"
-          class="w-full"
-        />
-        <div
-          v-if="block.gallery.length"
-          class="swiper-button-prev custom-button-prev"
-          slot="button-prev"
-          @click="carouselPrev"
-        />
-        <div
-          v-if="block.gallery.length"
-          class="swiper-button-next custom-button-next"
-          slot="button-next"
-          @click="carouselNext"
-        />
-      </swiper>
     </div>
+    <swiper
+      ref="gallery"
+      :options="swiperOptions"
+      class="px-20 gallery-container"
+    >
+      <swiper-slide
+        v-for="slide in block.gallery"
+        :key="slide.ID"
+        class="w-full"
+      >
+        <img
+          :src="slide.sizes.large"
+          class="gsap-fade w-full rounded-md"
+        >
+      </swiper-slide>
+      <div
+        v-if="block.gallery.length"
+        class="swiper-button-prev custom-button-prev"
+        slot="button-prev"
+        @click="carouselPrev"
+      />
+      <div
+        v-if="block.gallery.length"
+        class="swiper-button-next custom-button-next"
+        slot="button-next"
+        @click="carouselNext"
+      />
+    </swiper>
   </section>
 </template>
 
@@ -41,19 +46,23 @@
     },
     data: () => ({
       swiperOptions: {
-        slidesPerView: 1,
+        slidesPerView: 1.2,
         spaceBetween: 20,
         speed: 600,
         loop: false,
-        centeredSlides: true,
+        centeredSlides: false,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
         breakpoints: {
           768: {
-            slidesPerView: 3,
-            centeredSlides: false,
+            spaceBetween: 40,
+            slidesPerView: 3.2,
+          },
+          1024: {
+            spaceBetween: 60,
+            slidesPerView: 3.4,
           },
         },
         keyboard: {
@@ -84,35 +93,35 @@
 
 <style lang="scss" scoped>
 /deep/ .swiper-wrapper {
-  @apply items-center;
+  @apply items-start;
 }
 
-.fixed-height-container {
-  height: 50vh;
-  @apply w-full pb-20;
+.gallery-container {
+  @apply px-10;
 
   @screen md {
-    @apply px-20 pb-0;
-  }
-
-  @screen xl {
-    height: 60vh;
-    @apply px-28;
+    padding-left: 13%;
   }
 }
 
 .custom-button-prev,
 .custom-button-next {
-  top: calc(100% - 30px);
+  top: 50%;
   width: 50px;
   height: 50px;
+  transition: opacity ease 0.5s;
+  @apply hidden opacity-70;
+
+  &:hover {
+    @apply opacity-100;
+  }
 
   @screen md {
-    top: 50%;
+    @apply block;
   }
 
   &:after {
-    content: url('../../../assets/images/icons/circle-arrow.svg');
+    content: url("../../../assets/images/icons/circle-arrow-2.svg");
     width: 50px;
     height: 50px;
   }
@@ -120,11 +129,11 @@
 
 .custom-button-prev {
   transform: rotate(180deg);
-  left: 15px;
+  left: 8%;
 }
 
 .custom-button-next {
-  right: 15px;
+  right: 8%;
 }
 
 .wave-wrapper {
