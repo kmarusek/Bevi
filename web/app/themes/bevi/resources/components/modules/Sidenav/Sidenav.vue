@@ -91,7 +91,7 @@
 .block-content /deep/ ol,
 .block-content /deep/ ul,
  {
-  @apply pl-4 text-gray-700 ;
+  @apply pl-4 text-gray-700 text-base leading-7 font-space;
 
   ::marker {
     @apply font-bold text-blue-600;
