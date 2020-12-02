@@ -1,5 +1,8 @@
 <template>
-  <div class="flavor-tray">
+  <div
+    id="tray"
+    class="flavor-tray"
+  >
     <button
       class="close"
       @click="$emit('close')"

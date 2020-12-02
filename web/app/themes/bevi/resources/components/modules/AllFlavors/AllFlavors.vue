@@ -40,8 +40,9 @@
         :key="index"
         :flavor="flavor"
         :show-tray="showTray"
+        :selected-index="selectedIndex"
+        :index="index"
         @click.native="openTray(flavor.post_name, index)"
-        :class="{ 'selected-flavour' : selectedIndex === index }"
       />
     </div>
   </section>
@@ -139,13 +140,12 @@
       },
       closeTray() {
         this.showTray = false;
+        this.selectedIndex = null;
       },
       openTray(item, index) {
         this.trayLoading = true;
-        setTimeout(() => {
-          this.trayLoading = false;
-        }, 200);
         this.selectedIndex = index;
+        const tray = document.querySelector('#tray');
 
         const flavorTray = document.querySelector('.tray-wrapper');
 
@@ -153,11 +153,15 @@
           if (trayClass.startsWith('order')) {
             flavorTray.classList.remove(trayClass);
           }
+
+          setTimeout(() => {
+            this.trayLoading = false;
+            this.showTray = true;
+            tray.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 200);
         });
 
         flavorTray.classList.add(`order-${ this.getTrayOrder }`);
-
-        this.showTray = true;
       },
       filterList(item) {
         this.selectedTag = item;
@@ -171,6 +175,7 @@
         } else {
           this.filteredList = this.flavors.filter((flavor) => flavor.flavor_tags.some((tag) => tag.name.toLowerCase() === item.toLowerCase()));
         }
+
         this.setFlavorsIndex();
       },
     },
@@ -202,14 +207,5 @@
     transition: opacity 0.5s ease-in-out;
     @apply flex flex-wrap justify-center;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
