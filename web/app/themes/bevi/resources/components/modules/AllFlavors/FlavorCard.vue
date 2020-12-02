@@ -1,5 +1,8 @@
 <template>
-  <div class="flavor">
+  <div
+    class="flavor"
+    :class="{ showTray : 'tray-open' }"
+  >
     <div class="image-wrapper">
       <img
         :src="flavor.featured_image"
@@ -103,6 +106,19 @@
   .label {
     line-height: 40px;
     @apply text-gray-550 font-semibold leading-tight mt-2 text-center;
+  }
+
+  &.selected-flavour {
+    @apply relative;
+
+    &:after {
+      content:'';
+      width: 30px;
+      height: 30px;
+      bottom: -65px;
+      transform: rotate(-45deg);
+      @apply border-2 border-b-0 border-l-0 border-gray-200 bg-white absolute;
+    }
   }
 }
 </style>
