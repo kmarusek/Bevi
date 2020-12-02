@@ -24,9 +24,7 @@
       :tags="tags"
       class="md:container"
     />
-    <div
-      class="flavors-wrapper container"
-    >
+    <div class="flavors-wrapper container">
       <div class="overflow-hidden tray-wrapper order-2">
         <FlavorTray
           v-if="showTray"
@@ -43,6 +41,15 @@
         :selected-index="selectedIndex"
         :index="index"
         @click.native="openTray(flavor.post_name, index)"
+      />
+    </div>
+    <div
+      v-if="block.wave"
+      class="wave-wrapper"
+    >
+      <wave
+        :wave="block.wave"
+        wave-id="all-flavors-wave"
       />
     </div>
   </section>
@@ -187,7 +194,7 @@
 
 <style lang="scss" scoped>
 .all-flavors {
-  @apply relative overflow-x-hidden py-20 bg-gray-100;
+  @apply relative py-20 bg-gray-100;
 
   @screen md {
     @apply py-48;
@@ -206,6 +213,17 @@
   .flavors-wrapper {
     transition: opacity 0.5s ease-in-out;
     @apply flex flex-wrap justify-center;
+  }
+}
+
+.wave-wrapper {
+  z-index: -1;
+  max-height: 300px;
+  @apply bg-gray-100 absolute bottom-0 w-full h-full -mb-6;
+  clip-path: url(#all-flavors-wave);
+
+  @screen md {
+    max-height: 500px;
   }
 }
 </style>
