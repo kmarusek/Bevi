@@ -21,44 +21,67 @@
 </script>
 
 <style lang="scss" scoped>
-  .post-content /deep/ h1,
-  .h1 {
-    @apply mb-8 leading-none;
-  }
+  .post-content /deep/ {
+    h1 {
+      @apply font-body text-4.5xl text-blue-600 font-semibold leading-none mb-6;
+      @screen md {
+        @apply text-5.75xl;
+      }
+    }
 
-  .post-content /deep/ h2,
-  .h2 {
-    @apply mb-8 leading-none;
-  }
+    h2 {
+      @apply font-body text-3xl text-blue-600 font-semibold  mb-6;
+      @screen md {
+        @apply text-4xl leading-tight;
+      }
+      @screen lg {
+        @apply text-5xl font-bold;
+      }
+    }
 
-  .post-content /deep/ h3,
-  .h3 {
-    @apply mb-8 leading-none;
-  }
+    h3 {
+      @apply font-body text-3xl font-semibold leading-tight mb-6;
+      @screen md {
+        @apply text-3xl font-medium;
+      }
+    }
 
-  .post-content /deep/ h4,
-  .h34{
-    @apply mb-8 leading-none;
-  }
+    h4 {
+      @apply font-body text-3xl text-blue-600 mb-6;
+    }
 
-  .post-content /deep/ h5,
-  .h5 {
-    @apply mb-8 leading-none;
-  }
+    h5 {
+      @apply font-semibold text-xl text-blue-600 mb-6;
+    }
 
-  .post-content /deep/ p,
-  .p {
-    @apply mb-6;
+    h6 {
+      @apply font-extrabold text-blue-600 uppercase tracking-widest text-xs mb-6;
+    }
+    p {
+      @apply text-gray-700 text-base leading-7 font-space mb-6;
+
+      a {
+        @apply text-primary underline font-bold;
+      }
+
+      &.smaller {
+        @apply text-sm leading-normal;
+      }
+
+      &.smallest {
+        @apply text-xs leading-normal;
+      }
+    }
   }
 
   .post-content /deep/ img,
   .img {
-    @apply rounded-md;
+    @apply rounded-md mx-auto;
   }
 
   .post-content /deep/ figcaption,
   .figcaption {
-    @apply text-center text-sm mb-12;
+    @apply text-center text-sm mb-12 mx-auto;
   }
 
   .post-content /deep/ .wp-block-quote {
