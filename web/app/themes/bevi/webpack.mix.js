@@ -12,6 +12,7 @@ mix.browserSync({
   open: true,
 });
 
+// this is set to resolve the way WP Engine organises the file structure
 if (env !== 'production') {
   mix.setResourceRoot('/app/themes/bevi/dist');
 } else {
