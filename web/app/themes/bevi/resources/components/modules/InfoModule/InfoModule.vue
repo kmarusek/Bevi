@@ -1,5 +1,8 @@
 <template>
-  <section class="information-module bg-green-100">
+  <section
+    class="information-module bg-green-100"
+    :class="{ wave : block.wave }"
+  >
     <div class="py-32 md:container flex flex-col items-center gsap-fade-section">
       <h3 class="h3 mb-12">
         {{ block.title }}
@@ -158,6 +161,11 @@
         class=" md:hidden pt-10"
       />
     </div>
+    <wave
+      v-if="block.wave"
+      :wave="block.wave"
+      wave-id="info-wave"
+    />
   </section>
 </template>
 
@@ -324,5 +332,10 @@
     fill: theme("colors.green.600");
     @apply opacity-100;
   }
+}
+
+.wave {
+  clip-path: url(#info-wave);
+  @apply -mb-6 relative;
 }
 </style>

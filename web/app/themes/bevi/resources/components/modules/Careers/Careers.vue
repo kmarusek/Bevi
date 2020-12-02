@@ -1,21 +1,21 @@
 <template>
   <section
-    class="text-block text-center py-32 lg:py-48 gsap-fade-section"
+    class="bg-gray-200 gsap-fade-section"
     :class="{ wave : block.wave }"
   >
-    <div class="container max-w-3xl">
-      <h2 class="h1 gsap-fade">
-        {{ block.title }}
-      </h2>
+    <div class="py-20 lg:py-32 container">
+      <h3 class="text-4xl mb-10 text-blue-600 font-medium gsap-fade">
+        Open Positions
+      </h3>
       <div
-        v-html="block.text"
-        class="mt-2 md:mt-6 block-content md:px-8 gsap-fade"
+        id="whr_embed_hook"
+        class="opprtunities-embed gsap-fade"
       />
     </div>
     <wave
       v-if="block.wave"
       :wave="block.wave"
-      wave-id="text-wave"
+      wave-id="careers-wave"
     />
   </section>
 </template>
@@ -35,8 +35,8 @@
 </script>
 
 <style lang="scss" scoped>
-  .wave {
-    clip-path: url(#text-wave);
-    @apply -mb-6 relative bg-white;
-  }
+.wave {
+  clip-path: url(#careers-wave);
+  @apply -mb-6 relative;
+}
 </style>

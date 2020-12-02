@@ -77,7 +77,7 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="post-content gsap-fades"
+            class="gsap-fades"
           />
 
           <a
@@ -107,6 +107,7 @@
     </div>
     <wave
       wave="1"
+      wave-id="banner-wave"
     />
   </section>
 </template>
@@ -167,8 +168,8 @@
 
 <style lang="scss" scoped>
 .main-banner {
-  &.wave:not(:last-of-type) {
-    clip-path: url(#wave);
+  &.wave {
+    clip-path: url(#banner-wave);
     @apply -mb-6;
   }
 }

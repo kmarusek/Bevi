@@ -1,34 +1,48 @@
 <template>
-  <section class="press-release gsap-fade-section color-scheme-Red">
-    <div class="container">
-      <h2 class="h2 mb-20 md:mb-40 gsap-fade">
-        {{ block.title }}
-      </h2>
-      <div class="flex flex-col md:flex-row justify-between md:-mx-4 lg:-mx-16">
-        <div
-          v-for="(card, index) in block.cards"
-          :key="card.id"
-          class="card"
-        >
-          <span class="blob">
-            <img
-              :src="require(`~/assets/images/blobs_${index}.svg`)"
-              :alt="`blob_${index}`"
-              :class="`blob-${index}`"
-            >
-          </span>
-          <div class="img-wrapper">
-            <img
-              :src="card.logo.sizes.large"
-              :alt="card.logo.alt"
-              class="gsap-fade"
-            >
+  <section
+    class="press-release gsap-fade-section color-scheme-Red"
+    :class="{ wave : block.wave }"
+  >
+    <div class="overflow-wrapper">
+      <div class="container">
+        <h2 class="h2 mb-20 md:mb-40 gsap-fade">
+          {{ block.title }}
+        </h2>
+        <div class="flex flex-col md:flex-row justify-between md:-mx-4 lg:-mx-16">
+          <div
+            v-for="(card, index) in block.cards"
+            :key="card.id"
+            class="card"
+          >
+            <span class="blob">
+              <img
+                :src="require(`~/assets/images/blobs_${index}.svg`)"
+                :alt="`blob_${index}`"
+                :class="`blob-${index}`"
+              >
+            </span>
+            <div class="img-wrapper">
+              <img
+                :src="card.logo.sizes.large"
+                :alt="card.logo.alt"
+                class="gsap-fade"
+              >
+            </div>
+            <p class="gsap-fade">
+              {{ card.text }}
+            </p>
           </div>
-          <p class="gsap-fade">
-            {{ card.text }}
-          </p>
         </div>
       </div>
+    </div>
+    <div
+      class="wave-wrapper"
+      v-if="block.wave"
+    >
+      <wave
+        :wave="block.wave"
+        wave-id="press-wave"
+      />
     </div>
   </section>
 </template>
@@ -50,7 +64,12 @@
 <style lang="scss" scoped>
 .press-release {
   padding-bottom: 200px;
-  @apply text-center pt-16 overflow-hidden;
+  @apply text-center pt-16 relative;
+
+  .overflow-wrapper {
+    min-height: 600px;
+    @apply overflow-hidden h-full;
+  }
 
   &.color-scheme-Red {
     @apply bg-red-200;
@@ -62,7 +81,7 @@
     .card {
       max-width: 450px;
       margin-bottom: 200px;
-      @apply text-red-500 flex flex-col justify-start items-center w-full text-left px-16 relative mx-auto;
+      @apply text-red-500 flex flex-col justify-start items-center w-full text-left relative mx-auto;
 
       &:last-of-type {
         @apply mb-0;
@@ -101,6 +120,17 @@
         @apply flex justify-center items-center mb-4;
       }
     }
+  }
+}
+
+.wave-wrapper {
+  z-index: -1;
+  max-height: 300px;
+  @apply bg-red-200 absolute bottom-0 w-full h-full -mb-6;
+  clip-path: url(#press-wave);
+
+  @screen md {
+    max-height: 500px;
   }
 }
 </style>

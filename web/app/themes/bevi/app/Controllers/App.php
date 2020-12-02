@@ -167,4 +167,19 @@ class App extends Controller
             return $posts;
         }
     }
+    
+    public function getFaqs()
+    {
+        $posts = get_posts([
+            'numberposts'=>-1,
+            'post_type'=> 'faqs',
+        ]);
+    
+        $posts = array_map(function ($post) {
+            $post->post_title = get_the_title($post->ID);
+            $postData['post_content'] = get_the_content();
+            return $post;
+        }, $posts);
+        return $posts;
+    }
 }

@@ -163,13 +163,13 @@ function cptui_register_my_cpts()
         /**
          * Post Type: Counters.
          */
-      
+
         $labels = [
           "name" => __( "Counters", "sage" ),
           "singular_name" => __( "Counter", "sage" ),
           "menu_name" => __( "Counters", "sage" ),
         ];
-      
+
         $args = [
           "label" => __( "Counters", "sage" ),
           "labels" => $labels,
@@ -192,7 +192,7 @@ function cptui_register_my_cpts()
           "query_var" => true,
           "supports" => [ "title", "editor", "thumbnail" ],
         ];
-      
+
         register_post_type( "counters", $args );
 
         /**
@@ -230,7 +230,7 @@ function cptui_register_my_cpts()
       
         register_post_type( "flavors", $args );
     }
-    
+
     add_action( 'init', 'cptui_register_my_cpts' );
 
     function reg_tag()
@@ -243,6 +243,46 @@ function cptui_register_my_cpts()
     }
 
     add_action('init', 'reg_tag');
+
+function cptui_register_my_cpts_faqs() {
+
+    /**
+     * Post Type: FAQs.
+     */
+
+    $labels = [
+        "name" => __( "FAQs", "sage" ),
+        "singular_name" => __( "FAQ", "sage" ),
+    ];
+
+    $args = [
+        "label" => __( "FAQs", "sage" ),
+        "labels" => $labels,
+        "description" => "",
+        "public" => true,
+        "publicly_queryable" => true,
+        "show_ui" => true,
+        "show_in_rest" => true,
+        "rest_base" => "",
+        "rest_controller_class" => "WP_REST_Posts_Controller",
+        "has_archive" => false,
+        "show_in_menu" => true,
+        "show_in_nav_menus" => true,
+        "delete_with_user" => false,
+        "exclude_from_search" => false,
+        "capability_type" => "post",
+        "map_meta_cap" => true,
+        "hierarchical" => false,
+        "rewrite" => [ "slug" => "faqs", "with_front" => true ],
+        "query_var" => true,
+        "supports" => [ "title", "editor", "thumbnail" ],
+    ];
+
+    register_post_type( "faqs", $args );
+}
+
+add_action( 'init', 'cptui_register_my_cpts_faqs' );
+
 
     // ACF Options Page
     if (function_exists('acf_add_options_page')) {
