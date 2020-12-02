@@ -2244,6 +2244,61 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_5fc77a8810084": {
+                    "key": "layout_5fc77a8810084",
+                    "name": "all_flavors",
+                    "label": "All Flavors",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5fc77a9010085",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5fc77a9a10086",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -2284,5 +2339,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606906372
+    "modified": 1606908593
 }
