@@ -91,7 +91,7 @@
     },
     computed: {
       getTrayOrder() {
-        return Math.ceil((((this.selectedIndex + 1) / 5) + 1));
+        return Math.ceil((((this.selectedIndex + 1) / this.rowItemIndex) + 1));
       },
       rowItemIndex() {
         if (this.windowWidth <= 768) {
