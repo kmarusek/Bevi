@@ -501,8 +501,7 @@
                                 "Default": "Default",
                                 "Green": "Green",
                                 "Blue": "Blue",
-                                "Red": "Red",
-                                "Yellow": "Yellow"
+                                "Red": "Red"
                             },
                             "default_value": "Default",
                             "allow_null": 0,
@@ -743,7 +742,7 @@
                             "name": "background",
                             "type": "image",
                             "instructions": "",
-                            "required": 1,
+                            "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
@@ -1845,65 +1844,6 @@
                             "return_format": "array"
                         },
                         {
-                            "key": "field_5fa9349edad43",
-                            "label": "Feature list",
-                            "name": "feature_list",
-                            "type": "repeater",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "collapsed": "",
-                            "min": 0,
-                            "max": 0,
-                            "layout": "table",
-                            "button_label": "",
-                            "sub_fields": [
-                                {
-                                    "key": "field_5fa934ccdad44",
-                                    "label": "Title",
-                                    "name": "title",
-                                    "type": "text",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "default_value": "",
-                                    "placeholder": "",
-                                    "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
-                                },
-                                {
-                                    "key": "field_5fa934dcdad45",
-                                    "label": "Text",
-                                    "name": "text",
-                                    "type": "wysiwyg",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "default_value": "",
-                                    "tabs": "all",
-                                    "toolbar": "full",
-                                    "media_upload": 1,
-                                    "delay": 0
-                                }
-                            ]
-                        },
-                        {
                             "key": "field_5fbf9964d2569",
                             "label": "Wave",
                             "name": "wave",
@@ -2339,5 +2279,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1606908980
+    "modified": 1607014309
 }
