@@ -5,7 +5,7 @@ require('mix-tailwindcss');
 require('laravel-mix-eslint');
 require('dotenv').config();
 
-const env = process.env.APP_ENV;
+const env = process.env.NODE_ENV;
 
 mix.browserSync({
   proxy: 'bevi.test',
