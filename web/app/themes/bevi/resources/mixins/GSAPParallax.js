@@ -3,16 +3,21 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 export default {
   mounted() {
-    this.startTextFade();
+    this.startParallaxFade();
   },
   methods: {
-    startTextFade() {
-      gsap.to('.parallax', {
-        scrollTrigger: {
-          scrub: true,
-        },
-        y: (i, target) => -ScrollTrigger.maxScroll(window) * target.dataset.speed,
-        ease: 'none',
+    startParallaxFade() {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      gsap.utils.toArray('.parallax').forEach((section) => {
+        gsap.to(section, {
+          y: -section.dataset.speed * 100,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            scrub: true,
+          },
+        });
       });
     },
   },

@@ -18,19 +18,23 @@
         >
           <div class="relative">
             <single-bubble
-              class="bubble"
+              class="bubble parallax"
+              data-speed="1"
               stroke-color="light-blue"
             />
             <single-bubble
-              class="bubble"
+              class="bubble parallax"
+              data-speed="2.4"
               stroke-color="light-blue"
             />
             <single-bubble
-              class="bubble"
+              class="bubble parallax"
+              data-speed="1.2"
               stroke-color="light-blue"
             />
             <single-bubble
-              class="bubble"
+              class="bubble parallax"
+              data-speed="1.4"
               stroke-color="light-blue"
             />
             <img
@@ -64,7 +68,10 @@
 </template>
 
 <script>
+  import GSAPParallax from '~/mixins/GSAPParallax.js';
+
   export default {
+    mixins: GSAPParallax,
     props: {
       counters: {
         required: true,
@@ -83,7 +90,7 @@
   @apply absolute;
 
   &:nth-of-type(1) {
-    top: 4%;
+    top: 30%;
     left: 10%;
     transform: scale(0.4);
 
@@ -93,7 +100,7 @@
   }
 
   &:nth-of-type(2) {
-    top: 15%;
+    top: 45%;
     right: 15%;
     transform: scale(0.6);
 
@@ -103,7 +110,7 @@
   }
 
   &:nth-of-type(3) {
-    bottom: 15%;
+    bottom: -15%;
     right: 15%;
 
     @screen md {
@@ -112,7 +119,7 @@
   }
 
   &:nth-of-type(4) {
-    bottom: 10%;
+    bottom: -10%;
     left: 10%;
     transform: scale(0.5);
 
