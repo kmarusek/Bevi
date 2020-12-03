@@ -21,7 +21,7 @@
     </div>
     <div class="container xl:max-w-6xl z-10 relative text-center lg:text-left">
       <h1 class="h1 gsap-fade">
-        {{ block.title || block.hero.title }}
+        {{ category || block.title || block.hero.title }}
       </h1>
     </div>
     <img
@@ -45,6 +45,10 @@
       block: {
         required: true,
         type: Object,
+      },
+      category: {
+        required: false,
+        type: String,
       },
     },
   };
