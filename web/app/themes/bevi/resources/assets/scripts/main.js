@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import VueMoment from 'vue-moment';
+import VueScrollTo from 'vue-scrollto';
 
 // Layout
 import SiteHeader from '~/components/core/SiteHeader/SiteHeader';
@@ -62,6 +63,11 @@ gsap.registerPlugin(ScrollTrigger);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VueAxios, axios);
 Vue.use(VueMoment);
+Vue.use(VueScrollTo, {
+  offset: -110,
+  duration: 500,
+  easing: 'ease',
+});
 
 // Register Components
 Vue.component('SiteHeader', SiteHeader);

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-  @include('partials.page-header')
-
-  @if (!have_posts())
-    <div class="alert alert-warning">
-      {{ __('Sorry, but the page you were trying to view does not exist.', 'sage') }}
+<section class="relative overflow-hidden flex items-center main-banner bg-blue-100">
+    <div class="container xl:max-w-6xl z-10 relative text-center lg:text-left">
+        <h1 class="h1">
+          Error 404
+        </h1>
+        <p>Sorry, but the page you were trying to view does not exist</p>
     </div>
-    {!! get_search_form(false) !!}
-  @endif
+</section>
 @endsection

@@ -51,13 +51,4 @@
 </script>
 
 <style lang="scss" scoped>
-.main-banner {
-  min-height: 50vh;
-  @apply w-full;
-
-  &.wave {
-    clip-path: url(#hero-wave);
-    @apply -mb-6;
-  }
-}
 </style>

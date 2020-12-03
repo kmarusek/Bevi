@@ -48,6 +48,15 @@
         />
       </div>
     </transition>
+    <div
+      v-if="block.wave"
+      class="wave-wrapper"
+    >
+      <wave
+        :wave="block.wave"
+        wave-id="all-flavors-wave"
+      />
+    </div>
   </section>
 </template>
 
@@ -197,7 +206,7 @@
 
 <style lang="scss" scoped>
 .all-flavors {
-  @apply relative overflow-x-hidden py-20 bg-gray-100;
+  @apply relative py-20 bg-gray-100;
 
   @screen md {
     @apply py-48;
@@ -222,8 +231,20 @@
 .fade-enter-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.wave-wrapper {
+  z-index: -1;
+  max-height: 300px;
+  @apply bg-gray-100 absolute bottom-0 w-full h-full -mb-6;
+  clip-path: url(#all-flavors-wave);
+
+  @screen md {
+    max-height: 500px;
+  }
 }
 </style>
