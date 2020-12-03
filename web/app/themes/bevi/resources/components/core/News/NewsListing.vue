@@ -46,7 +46,7 @@
         type: Array,
       },
       categoryId: {
-        type: Number,
+        type: String,
         required: false,
       },
     },

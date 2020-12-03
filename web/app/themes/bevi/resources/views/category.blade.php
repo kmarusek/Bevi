@@ -5,6 +5,7 @@
 <?php
   $category = get_the_category(); 
   ?>
-<news-listing category-id="{{ json_encode($category[0]->cat_ID) }}" :categories="{{ json_encode($all_categories) }}" />
+  <page-hero :block="{{ json_encode(get_field('hero', get_option('page_for_posts'))) }}" :category="{{ json_encode($category[0]->name) }}"></page-hero>
+  <news-listing category-id="{{ json_encode($category[0]->cat_ID) }}" :categories="{{ json_encode($all_categories) }}" />
 @endwhile
 @endsection
