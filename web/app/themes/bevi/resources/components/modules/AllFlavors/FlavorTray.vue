@@ -31,7 +31,7 @@
       :class="trayLoading ? 'opacity-0' : 'opacity-100'"
     >
       <div class="flex flex-col md:w-1/2 md:px-10 xl:px-20 h-full">
-        <div class="flex items-center justify-center h-full">
+        <div class="image-wrapper">
           <transition
             name="fade"
             mode="out-in"
@@ -138,20 +138,29 @@
 
 <style lang="scss" scoped>
 .flavor-tray {
-  @apply bg-white w-full p-10 relative border-2 border-gray-200 rounded-lg h-full;
+  @apply bg-white w-full p-10 relative border-2 border-gray-200 rounded-lg h-auto;
+
+  .image-wrapper {
+    height: 300px;
+    @apply flex items-center justify-center;
+
+    @screen xl {
+      height: 500px;
+    }
+  }
 
   .flavor-image {
-    max-width: 230px;
-    @apply w-full py-6 m-auto;
+    width: 230px;
+    @apply h-auto py-6 m-auto;
 
-    @screen md {
-      @apply max-w-none;
+    @screen xl {
+      width: 400px;
     }
   }
 
   .tray-wrapper {
     transition: opacity ease-in-out 0.5s;
-    @apply block flex flex-col h-full;
+    @apply flex flex-col h-full;
 
     @screen md {
       @apply flex-row;

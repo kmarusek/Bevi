@@ -24,25 +24,30 @@
       :tags="tags"
       class="md:container"
     />
-    <div class="flavors-wrapper container">
-      <div class="overflow-hidden tray-wrapper order-2">
-        <FlavorTray
-          v-if="showTray"
-          :flavor="flavors[selectedIndex]"
-          :tray-loading="trayLoading"
-          @close="closeTray"
+    <transition name="fade">
+      <div
+        class="flavors-wrapper container"
+        v-if="!loading"
+      >
+        <div class="overflow-hidden tray-wrapper order-2">
+          <FlavorTray
+            v-if="showTray"
+            :flavor="filteredList[selectedIndex]"
+            :tray-loading="trayLoading"
+            @close="closeTray"
+          />
+        </div>
+        <FlavorCard
+          v-for="(flavor, index) in filteredList"
+          :key="index"
+          :flavor="flavor"
+          :show-tray="showTray"
+          :selected-index="selectedIndex"
+          :index="index"
+          @click.native="openTray(flavor.post_name, index)"
         />
       </div>
-      <FlavorCard
-        v-for="(flavor, index) in filteredList"
-        :key="index"
-        :flavor="flavor"
-        :show-tray="showTray"
-        :selected-index="selectedIndex"
-        :index="index"
-        @click.native="openTray(flavor.post_name, index)"
-      />
-    </div>
+    </transition>
     <div
       v-if="block.wave"
       class="wave-wrapper"
@@ -164,26 +169,33 @@
           setTimeout(() => {
             this.trayLoading = false;
             this.showTray = true;
-            tray.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (tray) {
+              tray.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
           }, 200);
         });
 
         flavorTray.classList.add(`order-${ this.getTrayOrder }`);
       },
       filterList(item) {
+        this.showTray = false;
+        this.selectedIndex = null;
         this.selectedTag = item;
         this.loading = true;
+
         setTimeout(() => {
           this.loading = false;
+        }, 200);
+
+        setTimeout(() => {
+          this.setFlavorsIndex();
         }, 500);
 
         if (item === 'all flavors') {
           this.filteredList = this.flavors;
         } else {
-          this.filteredList = this.flavors.filter((flavor) => flavor.flavor_tags.some((tag) => tag.name.toLowerCase() === item.toLowerCase()));
+          this.filteredList = this.flavors.filter((flavor) => flavor.flavor_tags && flavor.flavor_tags.some((tag) => tag.name.toLowerCase() === item.toLowerCase()));
         }
-
-        this.setFlavorsIndex();
       },
     },
     beforeDestroy() {
@@ -214,6 +226,15 @@
     transition: opacity 0.5s ease-in-out;
     @apply flex flex-wrap justify-center;
   }
+}
+
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 .wave-wrapper {
