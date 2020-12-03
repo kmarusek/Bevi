@@ -53,28 +53,21 @@
     },
     methods: {
       goToSection(refName) {
-        const element = this.$refs[refName][0];
         this.activeEntry = +this.$refs[refName][0].id;
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.$scrollTo(
+          this.$refs[refName][0],
+        );
       },
     },
   };
 </script>
 
 <style lang="scss" scoped>
-
-.scroll-margin {
-  scroll-margin-top: 120px;
-
-  @screen lg {
-    scroll-margin-top: 80px;
-  }
-}
 .sidebar {
   top: 0;
 
   @screen lg {
-    top: 80px;
+    top: 120px;
   }
 }
 
