@@ -8,18 +8,18 @@
       :class="block.image_position !== 'Left' ? 'md:flex-row' : 'md:flex-row-reverse'"
     >
       <div
-        class="w-full md:w-1/2 mb-8 md:mb-0"
+        class="w-full md:w-1/2 mb-8 md:mb-0 gsap-fade"
         :class="block.image_position !== 'Left' ? 'md:pr-10 lg:pr-20' : 'md:pl-10 lg:pl-20'"
       >
         <h3
           v-if="block.title"
-          class="h3 c"
+          class="h3"
         >
           {{ block.title }}
         </h3>
         <div
           v-html="block.text"
-          class="mt-2 md:mt-6 block-content gsap-fade-section"
+          class="mt-2 md:mt-6 block-content"
         />
       </div>
       <div
