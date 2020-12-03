@@ -501,8 +501,7 @@
                                 "Default": "Default",
                                 "Green": "Green",
                                 "Blue": "Blue",
-                                "Red": "Red",
-                                "Yellow": "Yellow"
+                                "Red": "Red"
                             },
                             "default_value": "Default",
                             "allow_null": 0,
@@ -2280,5 +2279,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1607014012
+    "modified": 1607014309
 }
