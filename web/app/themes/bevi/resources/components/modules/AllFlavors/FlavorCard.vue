@@ -74,7 +74,7 @@
   }
 
   .flavor-wrapper {
-    @apply relative flex flex-col justify-center items-center;
+    @apply relative flex flex-col justify-center items-center w-full;
 
     &.selected-flavor {
       @apply relative;
@@ -93,12 +93,12 @@
 
   .image-wrapper {
     max-width: 160px;
-    max-height: 160px;
-    @apply relative;
+    height: 160px;
+    @apply relative flex items-center justify-center;
 
     @screen md {
       max-width: 220px;
-      max-height: 220px;
+      height: 220px;
     }
 
     .badge {
