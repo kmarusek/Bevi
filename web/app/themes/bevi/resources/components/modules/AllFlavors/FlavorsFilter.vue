@@ -1,5 +1,5 @@
 <template>
-  <section class="py-10 md:pt-10 border-t-2 border-gray-200 w-full">
+  <section class="pt-8 pb-4 md:py-10 md:pt-10 border-t-2 border-gray-200 w-full">
     <ul class="pl-4 md:pl-0 flex whitespace-no-wrap justify-start md:justify-center overflow-x-scroll md:overflow-x-visible md:flex-wrap">
       <li class="mr-4 md:mx-4 md:mb-4">
         <button

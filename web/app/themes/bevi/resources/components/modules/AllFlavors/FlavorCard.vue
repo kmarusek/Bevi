@@ -61,11 +61,11 @@
 
 <style lang="scss" scoped>
 .flavor {
-  @apply flex justify-center w-1/2 px-4 my-12 cursor-pointer;
+  @apply flex justify-center w-1/2 px-4 mt-4 mb-8 cursor-pointer;
 
   @screen md {
     padding: 0 1%;
-    @apply w-1/3;
+    @apply w-1/3 my-12;
   }
 
   @screen xl {
@@ -85,8 +85,12 @@
         height: 30px;
         bottom: 0;
         transform: rotate(-45deg);
-        margin-bottom: calc(-3rem - 15px);
+        margin-bottom: calc(-2rem - 15px);
         @apply border-2 border-b-0 border-l-0 border-gray-200 bg-white absolute;
+
+        @screen md {
+          margin-bottom: calc(-3rem - 15px);
+        }
       }
     }
   }
@@ -94,7 +98,7 @@
   .image-wrapper {
     max-width: 160px;
     height: 160px;
-    @apply relative flex items-center justify-center;
+    @apply relative flex items-center justify-center w-full;
 
     @screen md {
       max-width: 220px;
