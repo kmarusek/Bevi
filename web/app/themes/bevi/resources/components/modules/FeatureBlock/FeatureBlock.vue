@@ -147,7 +147,10 @@
   .bubble-small {
     @apply absolute w-10;
     left: 10%;
-    top: 40%;
+
+    @screen md {
+      top: 40%;
+    }
   }
   .bubble-large {
     @apply absolute right-0 w-12;

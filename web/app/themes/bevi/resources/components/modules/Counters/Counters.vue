@@ -90,40 +90,44 @@
   @apply absolute;
 
   &:nth-of-type(1) {
-    top: 30%;
+    top: 4%;
     left: 10%;
     transform: scale(0.4);
 
     @screen md {
+      top: 30%;
       left: 5%;
     }
   }
 
   &:nth-of-type(2) {
-    top: 45%;
+    top: 15%;
     right: 15%;
     transform: scale(0.6);
 
     @screen md {
+      top: 45%;
       right: 5%;
     }
   }
 
   &:nth-of-type(3) {
-    bottom: -15%;
+    bottom: 15%;
     right: 15%;
 
     @screen md {
+      bottom: -15%;
       right: 0;
     }
   }
 
   &:nth-of-type(4) {
-    bottom: -10%;
+    bottom: 10%;
     left: 10%;
     transform: scale(0.5);
 
     @screen md {
+      bottom: -10%;
       left: 5%;
     }
   }
