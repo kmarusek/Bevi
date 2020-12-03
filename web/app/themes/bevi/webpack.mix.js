@@ -5,19 +5,19 @@ require('mix-tailwindcss');
 require('laravel-mix-eslint');
 require('dotenv').config();
 
-const env = process.env.APP_ENV;
+const env = process.env.NODE_ENV;
 
 mix.browserSync({
   proxy: 'bevi.test',
   open: true,
 });
 
-// this is set to resolve the way WP Engine organises the file structure
 if (env !== 'production') {
   mix.setResourceRoot('/app/themes/bevi/dist');
 } else {
   mix.setResourceRoot('/wp-content/themes/bevi/dist');
 }
+
 mix.setPublicPath('./dist')
   .webpackConfig({
     resolve: {
