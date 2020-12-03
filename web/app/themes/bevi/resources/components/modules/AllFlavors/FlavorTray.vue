@@ -138,7 +138,7 @@
 
 <style lang="scss" scoped>
 .flavor-tray {
-  @apply bg-white w-full p-10 relative border-2 border-gray-200 rounded-lg h-full;
+  @apply bg-white w-full p-10 relative border-2 border-gray-200 rounded-lg h-auto;
 
   .image-wrapper {
     height: 300px;
@@ -160,7 +160,7 @@
 
   .tray-wrapper {
     transition: opacity ease-in-out 0.5s;
-    @apply block flex flex-col h-full;
+    @apply flex flex-col h-full;
 
     @screen md {
       @apply flex-row;
