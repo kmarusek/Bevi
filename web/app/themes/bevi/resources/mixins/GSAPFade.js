@@ -14,7 +14,7 @@ export default {
         
         ScrollTrigger.create({
           trigger: section,
-          start: 'top 60%',
+          start: 'top 80%',
           onEnter: () => gsap.to(elems, {
             y: 0,
             opacity: 1,
