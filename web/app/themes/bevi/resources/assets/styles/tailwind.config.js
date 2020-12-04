@@ -3,12 +3,6 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: {
-    content: [ '**/*.vue' ],
-    options: {
-      safelist: [ /red$/, /yellow$/, /orange$/, /green$/, /blue$/, /purple$/ ],
-    }
-  },
   theme: {
     fontFamily: {
       body: ['Italian Plate', 'sans-serif'],
