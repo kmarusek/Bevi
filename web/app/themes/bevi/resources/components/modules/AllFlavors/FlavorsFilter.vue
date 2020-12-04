@@ -57,6 +57,10 @@
 .tag {
   @apply font-space bg-cover bg-center bg-gray-400 bg-no-repeat text-blue-600 rounded-full py-3 px-6 text-sm leading-none font-medium text-center inline-flex flex-no-wrap transition-all duration-300 no-underline outline-none capitalize mb-4;
 
+  @screen md {
+    @apply mb-0;
+  }
+
   &.selected {
     @apply text-white bg-blue-500;
   }

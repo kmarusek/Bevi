@@ -129,7 +129,8 @@
 
     .label {
       line-height: 40px;
-      @apply text-gray-550 font-semibold leading-tight;
+      max-width: 200px;
+      @apply text-gray-550 font-semibold leading-tight mb-2 text-center;
     }
 
     .img {
