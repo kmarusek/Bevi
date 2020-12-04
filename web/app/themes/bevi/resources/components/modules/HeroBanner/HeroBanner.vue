@@ -58,7 +58,7 @@
               'md:pr-20' : block.text_position === 'Right' && block.feature_image
             },
             block.text_color.value
-          ],"
+          ]"
         >
           <h6
             v-if="block.small_title"
