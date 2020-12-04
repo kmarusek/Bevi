@@ -68,7 +68,7 @@
           </h6>
           <h1
             v-if="block.large_title"
-            :class="block.text_position === 'Center' ? 'heading-one' : 'my-2 heading-two'"
+            :class="block.text_position === 'Center' ? 'heading-one' : 'my-4 heading-two'"
             class="gsap-fades"
           >
             {{ block.large_title }}
