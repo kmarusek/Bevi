@@ -1,5 +1,8 @@
 <template>
-  <section :class="{ 'bg-blue-100' : block.show_blue_background }">
+  <section
+    :class="{ 'bg-blue-100' : block.show_blue_background }"
+    class="parallax-section"
+  >
     <single-bubble
       class="absolute opacity-50 bubble-one parallax"
       data-speed="2"

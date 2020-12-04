@@ -24,7 +24,7 @@
             />
             <single-bubble
               class="bubble parallax"
-              data-speed="2.4"
+              data-speed="1.6"
               stroke-color="light-blue"
             />
             <single-bubble
