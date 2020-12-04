@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container py-py-20 lg:py-32">
     <h2
       class="mb-6 md:mb-8 font-semibold text-xl md:text-3xl leading-tight text-center capitalize"
     >
