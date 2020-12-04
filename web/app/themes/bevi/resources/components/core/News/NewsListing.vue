@@ -20,33 +20,40 @@
       <span v-else>View more</span>
     </button>
     <single-bubble
-      class="bubble"
+      class="bubble parallax"
+      data-speed="1"
       stroke-color="light-gray"
     />
     <single-bubble
-      class="bubble"
+      class="bubble parallax"
+      data-speed="1.4"
       stroke-color="light-gray"
     />
     <single-bubble
-      class="bubble"
+      class="bubble parallax"
+      data-speed="1.2"
       stroke-color="light-gray"
     />
     <single-bubble
-      class="bubble"
+      class="bubble parallax"
+      data-speed="1.4"
       stroke-color="light-gray"
     />
   </section>
 </template>
 
 <script>
+  import GSAPParallax from '~/mixins/GSAPParallax.js';
+
   export default {
+    mixins: GSAPParallax,
     props: {
       categories: {
         required: true,
         type: Array,
       },
       categoryId: {
-        type: Number,
+        type: String,
         required: false,
       },
     },

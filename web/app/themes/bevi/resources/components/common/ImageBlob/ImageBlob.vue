@@ -3,6 +3,7 @@
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 1164 1164"
+    class="image-blob"
   >
     <clipPath id="shape">
       <!-- eslint-disable -->
@@ -27,6 +28,10 @@
   };
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.image-blob {
+  @screen md {
+    min-height: 400px
+  }
+}
 </style>

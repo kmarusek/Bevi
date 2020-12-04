@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import VueMoment from 'vue-moment';
+import VueScrollTo from 'vue-scrollto';
 
 // Layout
 import SiteHeader from '~/components/core/SiteHeader/SiteHeader';
@@ -44,6 +45,10 @@ import PostCard from '~/components/modules/PostCard/PostCard';
 import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
 import Sidenav from '~/components/modules/Sidenav/Sidenav';
 import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
+import AllFlavors from '~/components/modules/AllFlavors/AllFlavors';
+import FlavorsFilter from '~/components/modules/AllFlavors/FlavorsFilter';
+import FlavorCard from '~/components/modules/AllFlavors/FlavorCard';
+import FlavorTray from '~/components/modules/AllFlavors/FlavorTray';
 import Careers from '~/components/modules/Careers/Careers';
 import Faqs from '~/components/modules/Faqs/Faqs';
 
@@ -58,6 +63,11 @@ gsap.registerPlugin(ScrollTrigger);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VueAxios, axios);
 Vue.use(VueMoment);
+Vue.use(VueScrollTo, {
+  offset: -110,
+  duration: 500,
+  easing: 'ease',
+});
 
 // Register Components
 Vue.component('SiteHeader', SiteHeader);
@@ -94,6 +104,10 @@ Vue.component('FeaturedNewsArticles', FeaturedNewsArticles);
 Vue.component('Sidenav', Sidenav);
 Vue.component('AuthorBlock', AuthorBlock);
 Vue.component('NewsHero', NewsHero);
+Vue.component('AllFlavors', AllFlavors);
+Vue.component('FlavorsFilter', FlavorsFilter);
+Vue.component('FlavorCard', FlavorCard);
+Vue.component('FlavorTray', FlavorTray);
 Vue.component('NewsContent', NewsContent);
 Vue.component('Careers', Careers);
 Vue.component('Faqs', Faqs);

@@ -8,18 +8,18 @@
       :class="block.image_position !== 'Left' ? 'md:flex-row' : 'md:flex-row-reverse'"
     >
       <div
-        class="w-full md:w-1/2 mb-8 md:mb-0 gsap-fade"
+        class="w-full md:w-1/2 mb-8 md:mb-0"
         :class="block.image_position !== 'Left' ? 'md:pr-10 lg:pr-20' : 'md:pl-10 lg:pl-20'"
       >
         <h3
           v-if="block.title"
-          class="h3"
+          class="h3 gsap-fade"
         >
           {{ block.title }}
         </h3>
         <div
           v-html="block.text"
-          class="mt-2 md:mt-6 block-content"
+          class="mt-2 md:mt-6 block-content gsap-fade"
         />
       </div>
       <div
@@ -31,7 +31,8 @@
           width="66.877"
           height="67.268"
           viewBox="0 0 66.877 67.268"
-          class="bubble-small"
+          class="bubble-small parallax"
+          data-speed="1"
         >
           <path
             id="Path_148630"
@@ -50,7 +51,8 @@
           width="96.316"
           height="92.164"
           viewBox="0 0 96.316 92.164"
-          class="bubble-large"
+          class="bubble-large parallax"
+          data-speed="2.6"
         >
           <path
             id="Path_148631"
@@ -77,9 +79,10 @@
 
 <script>
   import GSAPFade from '~/mixins/GSAPFade.js';
+  import GSAPParallax from '~/mixins/GSAPParallax.js';
 
   export default {
-    mixins: [GSAPFade],
+    mixins: [GSAPFade, GSAPParallax],
     props: {
       block: {
         required: true,
@@ -105,6 +108,7 @@
 
 <style lang="scss" scoped>
 .feature-block {
+  
   &.color-scheme-Default {
     .h3 {
       @apply text-blue-600;
@@ -143,10 +147,15 @@
   .bubble-small {
     @apply absolute w-10;
     left: 10%;
+
+    @screen md {
+      top: 40%;
+    }
   }
   .bubble-large {
-    @apply absolute bottom-0 right-0 w-12;
-    right: 10%;
+    @apply absolute right-0 w-12;
+    right: -5%;
+    bottom: 0%;
   }
 }
 

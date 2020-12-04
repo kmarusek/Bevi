@@ -13,19 +13,6 @@
         class="img sm:visible lg:hidden mx-auto"
       >
 
-      <div class="feature-list flex flex-wrap lg:h-0">
-        <div
-          v-for="(feature, index) in block.feature_list"
-          :key="index"
-          class="sm:w-1/1 px-2 md:w-1/2 mt-8 lg:invisible "
-        >
-          <h3 class="h3">
-            {{ feature.title }}
-          </h3>
-          <div v-html="feature.text" />
-        </div>
-      </div>
-
       <div
         v-html="block.text"
         class="mt-5 lg:w-2/4 mx-auto"
