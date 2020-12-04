@@ -172,6 +172,33 @@
     clip-path: url(#banner-wave);
     @apply -mb-6;
   }
+  .text-blue-600 {
+    @apply text-blue-600;
+  }
+  .text-white {
+    @apply text-white;
+  }
+  .text-blue {
+    @apply text-blue;
+  }
+  .text-green  {
+    @apply text-green;
+  }
+  .text-purple {
+    @apply text-purple;
+  }
+  .text-red {
+    @apply text-red;
+  }
+  .text-orange {
+    @apply text-orange;
+  }
+  .text-yellow {
+    @apply text-yellow;
+  }
+  .text-gray {
+    @apply text-gray;
+  }
 }
 .center-bottom {
   @apply absolute;
