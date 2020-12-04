@@ -1,15 +1,21 @@
 <template>
-  <section :class="{ 'bg-blue-100' : block.show_blue_background }">
+  <section
+    :class="{ 'bg-blue-100' : block.show_blue_background }"
+    class="parallax-section"
+  >
     <single-bubble
-      class="absolute opacity-50 bubble-one"
+      class="absolute opacity-50 bubble-one parallax"
+      data-speed="2"
       :stroke-color="block.show_blue_background ? 'white' : 'blue'"
     />
     <single-bubble
-      class="absolute opacity-50 bubble-two"
+      class="absolute opacity-50 bubble-two parallax"
+      data-speed="2"
       :stroke-color="block.show_blue_background ? 'white' : 'blue'"
     />
     <single-bubble
-      class="absolute opacity-50 bubble-three"
+      class="absolute opacity-50 bubble-three parallax"
+      data-speed="2"
       :stroke-color="block.show_blue_background ? 'white' : 'blue'"
     />
     <div class="py-20 lg:py-32 container xl:max-w-6xl flex flex-col lg:flex-row relative">
@@ -53,7 +59,10 @@
 </template>
 
 <script>
+  import GSAPParallax from '~/mixins/GSAPParallax.js';
+
   export default {
+    mixins: GSAPParallax,
     props: {
       block: {
         required: true,
@@ -74,7 +83,7 @@
   }
 }
 .bubble-one {
-  top: 15%;
+  top: 25%;
   left: 5%;
 }
 .bubble-two {
