@@ -230,22 +230,27 @@
 // Adding background colors removed by purge css
 .bg {
   &-blue {
-    background-color: theme('colors.blue.default');
+    background-color: theme("colors.blue.default");
   }
+
   &-red {
-    background-color: theme('colors.red.default');
+    background-color: theme("colors.red.default");
   }
+
   &-yellow {
-    background-color: theme('colors.yellow.default');
+    background-color: theme("colors.yellow.default");
   }
+
   &-orange {
-    background-color: theme('colors.orange.default');
+    background-color: theme("colors.orange.default");
   }
+
   &-green {
-    background-color: theme('colors.green.default');
+    background-color: theme("colors.green.default");
   }
+
   &-purple {
-    background-color: theme('colors.purple.default');
+    background-color: theme("colors.purple.default");
   }
 }
 
