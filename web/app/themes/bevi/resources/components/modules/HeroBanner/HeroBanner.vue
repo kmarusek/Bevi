@@ -1,8 +1,8 @@
 <template>
   <section
-    class="bg-cover bg-no-repeat flex relative overflow-hidden main-banner wave"
+    class="bg-cover bg-no-repeat flex relative overflow-hidden main-banner"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
-    :class="block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen '"
+    :class="[block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen ', { wave : block.wave }]"
   >
     <video
       v-if="block.add_background_video"
@@ -106,7 +106,8 @@
       </div>
     </div>
     <wave
-      wave="1"
+      v-if="block.wave"
+      :wave="block.wave"
       wave-id="banner-wave"
     />
   </section>
@@ -168,10 +169,6 @@
 
 <style lang="scss" scoped>
 .main-banner {
-  &.wave {
-    clip-path: url(#banner-wave);
-    @apply -mb-6;
-  }
   .text-blue-600 {
     @apply text-blue-600;
   }
@@ -181,7 +178,7 @@
   .text-blue {
     @apply text-blue;
   }
-  .text-green  {
+  .text-green {
     @apply text-green;
   }
   .text-purple {
@@ -200,6 +197,7 @@
     @apply text-gray;
   }
 }
+
 .center-bottom {
   @apply absolute;
   bottom: 5%;
@@ -210,7 +208,7 @@
 .hero-image-small {
   max-height: 350px;
   z-index: -1;
-  
+
   @screen md {
     max-height: 65vh;
   }
@@ -218,7 +216,7 @@
 .hero-image {
   max-height: 350px;
   z-index: -1;
-  
+
   @screen md {
     max-height: 65vh;
   }
@@ -226,5 +224,10 @@
   @screen lg {
     max-height: 80vh;
   }
+}
+
+.wave {
+  clip-path: url(#banner-wave);
+  @apply -mb-6 relative;
 }
 </style>
