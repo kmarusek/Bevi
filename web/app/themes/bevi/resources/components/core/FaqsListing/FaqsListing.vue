@@ -1,7 +1,7 @@
 <template>
   <section class="container pt-24 lg:pt-32 px-4 lg:px-12 mx-auto">
     <div class="flex flex-wrap">
-      <div class="hidden lg:block lg:w-1/4 sticky top-0 self-start bg-white border-gray-300 border-b-2 lg:border-0 overflow-hidden">
+      <aside class="sidebar hidden lg:block lg:w-1/4 sticky top-0 self-start bg-white border-gray-300 border-b-2 lg:border-0 overflow-hidden">
         <ul class="list-none flex overflow-x-scroll lg:flex-col pt-16 lg:pt-0 mb-3 lg:mb-0 lg:pr-4">
           <li
             v-for="faq in faqs"
@@ -12,7 +12,7 @@
             v-html="faq.post_title"
           />
         </ul>
-      </div>
+      </aside>
 
       <div class="mt-8 lg:w-3/4 lg:mt-0">
         <div
@@ -63,6 +63,13 @@
 </script>
 
 <style lang="scss" scoped>
+  .sidebar {
+    top: 0;
+
+    @screen lg {
+      top: 120px;
+    }
+  }
 
   .block-content /deep/ p {
     margin-bottom: 1rem;
