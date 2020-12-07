@@ -41,7 +41,7 @@
       />
     </swiper>
     <div
-      v-if="block.show_bullets === true"
+      v-if="block.show_bullets"
       class="flex flex-col lg:flex-row"
     >
       <div
