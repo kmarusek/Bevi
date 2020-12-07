@@ -287,6 +287,33 @@
                             "mime_types": ""
                         },
                         {
+                            "key": "field_5fce22dadd88b",
+                            "label": "Align Feature Image Bottom?",
+                            "name": "align_feature_image_bottom",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5fae7b0767f97",
+                                        "operator": "!=",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 1,
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
+                        },
+                        {
                             "key": "field_5fae7b2667f98",
                             "label": "Video",
                             "name": "video",
@@ -312,6 +339,32 @@
                             "min_size": "",
                             "max_size": "",
                             "mime_types": ""
+                        },
+                        {
+                            "key": "field_5fca39d19392d",
+                            "label": "Wave",
+                            "name": "wave",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "20",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "1": "One",
+                                "2": "Two",
+                                "3": "Three"
+                            },
+                            "default_value": false,
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -2239,15 +2292,6 @@
                     ],
                     "min": "",
                     "max": ""
-                },
-                "layout_5fca4c56b16a0": {
-                    "key": "layout_5fca4c56b16a0",
-                    "name": "all_faqs",
-                    "label": "All FAQs",
-                    "display": "block",
-                    "sub_fields": [],
-                    "min": "",
-                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -2281,5 +2325,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1607093348
+    "modified": 1607345132
 }
