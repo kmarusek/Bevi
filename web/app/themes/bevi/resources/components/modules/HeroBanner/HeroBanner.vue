@@ -36,8 +36,8 @@
     <div
       class="container flex relative gsap-fade-sections z-10"
       :class="{
-        'text-left flex-col md:flex-row' : block.text_position === 'Right',
-        'text-left flex-col md:flex-row-reverse' : block.text_position === 'Left',
+        'text-left flex-col lg:flex-row' : block.text_position === 'Right',
+        'text-left flex-col lg:flex-row-reverse' : block.text_position === 'Left',
         'flex-col text-center' : block.text_position === 'Center'
       }"
     >
@@ -47,6 +47,7 @@
           'py-20 xs:py-32 lg:w-2/4' : block.text_position === 'Left' && !block.feature_image || 'Right' && !block.feature_image,
           'md:flex-1 py-32 lg:w-full' : block.text_position === 'Center' && !block.feature_image,
           'md:flex-1 pt-20 lg:pt-32 lg:w-full' : block.text_position === 'Center' && block.feature_image,
+          'lg:pt-0' : !block.align_feature_image_bottom,
         }"
         class="flex items-center"
       >
@@ -93,14 +94,14 @@
       </div>
       <div
         v-if="block.feature_image"
-        class="flex-1 flex"
-        :class="block.text_position === 'Center' ? '' : ' mt-10 md:mt-20 lg:mt-auto'"
+        class="flex-1 flex mt-10 lg:mt-0 "
+        :class="block.align_feature_image_bottom ? 'items-end' : 'items-center'"
       >
         <img
           v-if="block.feature_image"
           :src="block.feature_image.sizes.large"
           :alt="block.feature_image.alt"
-          class="h-auto mx-auto mt-auto gsap-fades"
+          class="h-auto mx-auto gsap-fades"
           :class="block.text_position === 'Center' ? 'hero-image-small' : ' hero-image'"
         >
       </div>
