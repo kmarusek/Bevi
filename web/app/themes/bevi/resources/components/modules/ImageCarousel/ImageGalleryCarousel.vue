@@ -1,5 +1,14 @@
 <template>
-  <section class="container text-center py-12 p-0 gsap-fade-section">
+  <section class="container py-12 lg:py-32 gsap-fade-section">
+    <div>
+      <h2
+        v-if="block.title"
+        class="heading-two max-w-3xl mx-auto text-blue-600 mb-10 gsap-fade text-center "
+      >
+        {{ block.title }}
+      </h2>
+    </div>
+
     <swiper
       ref="carousel"
       :options="swiperOptions"
@@ -31,6 +40,32 @@
         @click="carouselNext"
       />
     </swiper>
+    <div
+      v-if="block.show_bullets === true"
+      class="flex flex-col lg:flex-row"
+    >
+      <div
+        v-for="bullet in block.bullets"
+        :key="bullet.id"
+        class="flex items-center lg:items-start w-full my-4 sm:my-10"
+      >
+        <div class="w-1/5 pr-2 md:pr-0">
+          <img
+            :src="bullet.thumbnail.sizes.thumbnail"
+            alt=""
+          >
+        </div>
+        <div class="w-4/5 sm:px-6">
+          <h5 class="font-semibold text-lg tracking-wide text-blue-600">
+            {{ bullet.title }}
+          </h5>
+          <div
+            v-html="bullet.content"
+            class="block-content smallest"
+          />
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
