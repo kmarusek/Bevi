@@ -1,24 +1,18 @@
 <template>
-  <section class="container py-6 px-12 mx-auto">
-    <h2
-      class="mb-6 md:mb-8 font-semibold text-xl md:text-3xl leading-tight text-center capitalize"
-    >
-      Frequently Asked Questions
-    </h2>
+  <section class="container pt-24 lg:pt-32 px-4 lg:px-12 mx-auto">
     <div class="flex flex-wrap">
-      <div class="lg:w-1/4 sticky top-0 self-start bg-white border-gray-300 border-b-2 lg:border-0 overflow-hidden">
-        <ul class="list-none flex overflow-x-scroll lg:flex-col pt-16 lg:pt-0 mb-3 lg:mb-0">
+      <aside class="sidebar hidden lg:block lg:w-1/4 sticky top-0 self-start bg-white border-gray-300 border-b-2 lg:border-0 overflow-hidden">
+        <ul class="list-none flex overflow-x-scroll lg:flex-col pt-16 lg:pt-0 mb-3 lg:mb-0 lg:pr-4">
           <li
             v-for="faq in faqs"
             :key="faq.ID"
             class="flex-shrink-0 md:mb-2 lg:mb-5 link text-gray-600 lg:cursor-pointer mr-5 lg:mr-0 text-lg lg:text-base px-2"
-            :class="{'font-bold': (faq.ID === activeEntry)}"
+            :class="{'font-bold text-blue-600': (faq.ID === activeEntry)}"
             @click="goToSection(faq.ID)"
-          >
-            {{ faq.post_title }}
-          </li>
+            v-html="faq.post_title"
+          />
         </ul>
-      </div>
+      </aside>
 
       <div class="mt-8 lg:w-3/4 lg:mt-0">
         <div
@@ -29,10 +23,9 @@
           :ref="faq.ID"
         >
           <h2
-            class=" font-semibold text-2xl mb-2 leading-tight"
-          >
-            {{ faq.post_title }}
-          </h2>
+            class=" font-semibold text-2xl mb-2 leading-tight text-blue-600"
+            v-html="faq.post_title"
+          />
           <div
             class="block-content smaller"
             v-html="faq.post_content"
@@ -70,6 +63,13 @@
 </script>
 
 <style lang="scss" scoped>
+  .sidebar {
+    top: 0;
+
+    @screen lg {
+      top: 120px;
+    }
+  }
 
   .block-content /deep/ p {
     margin-bottom: 1rem;
