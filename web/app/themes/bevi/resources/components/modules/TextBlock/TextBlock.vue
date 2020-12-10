@@ -39,4 +39,14 @@
     clip-path: url(#text-wave);
     @apply -mb-6 relative bg-white;
   }
+
+  .block-content /deep/ ul {
+    @apply list-disc;
+    list-style-position: inside;
+  }
+
+  .block-content /deep/ ol {
+    @apply list-decimal;
+    list-style-position: inside;
+  }
 </style>
