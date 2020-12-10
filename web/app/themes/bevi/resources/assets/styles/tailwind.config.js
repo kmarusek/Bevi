@@ -103,6 +103,7 @@ module.exports = {
       },
       height: {
         70: '20rem',
+        80: '30rem',
       },
     },
     container: {
