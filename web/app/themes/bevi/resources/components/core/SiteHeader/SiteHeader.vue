@@ -37,6 +37,9 @@
 </template>
 
 <script>
+  import { gsap } from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+
   export default {
     props: {
       menu: {
@@ -47,9 +50,24 @@
     data: () => ({
       isMobileNavOpen: false,
     }),
+    mounted() {
+      this.startAnimation();
+    },
     methods: {
       toggleMobileNav() {
         this.isMobileNavOpen = !this.isMobileNavOpen;
+      },
+      startAnimation() {
+        gsap.registerPlugin(ScrollTrigger);
+
+        ScrollTrigger.create({
+          start: 'top -10',
+          end: 99999,
+          toggleClass: {
+            className: 'bg-white',
+            targets: '.header',
+          },
+        });
       },
     },
   };
