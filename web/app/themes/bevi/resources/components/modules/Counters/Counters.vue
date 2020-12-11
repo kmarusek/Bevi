@@ -12,7 +12,7 @@
       </h3>
       <div class="w-full flex flex-col sm:flex-row justify-around">
         <div
-          class="mb-6 w-full sm:w-1/2 md:w-2/5 lg:w-30"
+          class="mb-6 w-full sm:w-1/2 md:w-2/5 lg:w-30 flex flex-col"
           v-for="counter in counters"
           :key="counter.id"
         >
@@ -39,23 +39,25 @@
             />
             <img
               v-if="counter.counter_thumb"
-              class="h-70 sm:h-auto w-auto sm:w-full mx-auto relative"
+              class="h-70 lg:h-80 mx-auto relative"
               :src="counter.counter_thumb.sizes.large"
             >
           </div>
-          <h3 class="h3 text-blue-600 font-semibold mt-2">
-            {{ counter.post_title }}
-          </h3>
-          <div
-            class="mt-2 px-4 md:px-12 text-body smaller"
-            v-html="counter.short_description"
-          />
-          <a
-            :href="counter.permalink"
-            class="btn mt-3"
-          >
-            View dispenser
-          </a>
+          <div class="mt-10">
+            <h3 class="h3 text-blue-600 font-semibold mt-2">
+              {{ counter.post_title }}
+            </h3>
+            <div
+              class="mt-2 px-4 md:px-12 text-body smaller"
+              v-html="counter.short_description"
+            />
+            <a
+              :href="counter.permalink"
+              class="btn mt-3"
+            >
+              View dispenser
+            </a>
+          </div>
         </div>
       </div>
     </div>
