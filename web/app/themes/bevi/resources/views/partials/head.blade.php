@@ -11,4 +11,19 @@
   });
   </script>
   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" type="text/javascript" async></script>
+  
+  <script type="text/javascript" src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NQTDRQW');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- BEGIN PRIVY WIDGET CODE -->
+  <script type='text/javascript'> var _d_site = _d_site || '2C028D55AB1EBFD7B0AA3671'; </script>
+  <script src='https://widget.privy.com/assets/widget.js'></script>
+  <!-- END PRIVY WIDGET CODE -->
 </head>
