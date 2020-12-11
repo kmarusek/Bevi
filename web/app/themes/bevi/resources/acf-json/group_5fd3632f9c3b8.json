@@ -16,6 +16,83 @@
                 "id": ""
             },
             "return_format": "array"
+        },
+        {
+            "key": "field_5fd3915f0dc39",
+            "label": "Footer Headings",
+            "name": "footer_headings",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_5fd3916b0dc3a",
+                    "label": "Column One",
+                    "name": "column_one",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_5fd3924b05a2e",
+                    "label": "Column Two",
+                    "name": "column_two",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_5fd392645efe3",
+                    "label": "Column Three",
+                    "name": "column_three",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_5fd392655efe4",
+                    "label": "Column Four",
+                    "name": "column_four",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                }
+            ]
         }
     ],
     "location": [
@@ -35,5 +112,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1607690549
+    "modified": 1607701860
 }
