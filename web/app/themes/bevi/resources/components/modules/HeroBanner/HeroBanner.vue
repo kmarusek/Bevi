@@ -10,7 +10,7 @@
       autoplay
       muted
       loop
-      class="absolute w-full h-full top-0 left-0 z-1 object-fill"
+      class="absolute w-full h-full top-0 left-0 z-1 object-fill hidden lg:block"
     >
       <source
         :src="block.video.url"
@@ -48,6 +48,7 @@
           'md:flex-1 py-32 lg:w-full' : block.text_position === 'Center' && !block.feature_image,
           'md:flex-1 pt-20 lg:pt-32 lg:w-full' : block.text_position === 'Center' && block.feature_image,
           'lg:pt-0' : !block.align_feature_image_bottom,
+          'narrower': block.narrower_content,
         }"
         class="flex items-center"
       >
@@ -67,18 +68,18 @@
           >
             {{ block.small_title }}
           </h6>
-          <h1
+          <p
             v-if="block.large_title"
             :class="block.text_position === 'Center' ? 'heading-one' : 'my-4 heading-two'"
             class="gsap-fades"
           >
             {{ block.large_title }}
-          </h1>
+          </p>
 
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="gsap-fades"
+            class="gsap-fades block-content"
           />
 
           <a
@@ -230,5 +231,43 @@
 .wave {
   clip-path: url(#banner-wave);
   @apply -mb-6 relative;
+}
+
+.narrower {
+  @screen xl {
+    max-width: 40%;
+  }
+}
+
+.block-content /deep/ {
+  h2 {
+    @apply font-body text-3xl font-semibold mb-2;
+    @screen md {
+      @apply text-4xl leading-tight;
+    }
+    @screen lg {
+      @apply text-5xl font-bold;
+    }
+  }
+
+  h3 {
+    @apply font-body text-3xl font-semibold leading-tight mb-2;
+    @screen md {
+      @apply text-3xl font-medium;
+    }
+  }
+
+  h4 {
+    @apply font-body text-3xl mb-2;
+  }
+
+  h5 {
+    @apply font-semibold text-xl mb-2;
+  }
+
+  h6 {
+    @apply font-extrabold uppercase tracking-widest text-xs mb-2;
+  }
+
 }
 </style>

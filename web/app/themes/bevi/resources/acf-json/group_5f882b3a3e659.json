@@ -135,7 +135,7 @@
                                 ]
                             ],
                             "wrapper": {
-                                "width": "75",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -144,6 +144,33 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_5fd3c06192dc7",
+                            "label": "Narrower Content?",
+                            "name": "narrower_content",
+                            "type": "true_false",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5fac04d9d51ab",
+                                        "operator": "!=",
+                                        "value": "Center"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "",
+                            "ui_off_text": ""
                         },
                         {
                             "key": "field_5fac1ddee2a2b",
@@ -2478,5 +2505,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1607699856
+    "modified": 1607712993
 }

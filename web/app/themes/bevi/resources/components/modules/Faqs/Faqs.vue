@@ -44,7 +44,7 @@
         v-if="block.cta.url"
         class="btn mt-6"
         :href="block.cta.url"
-        :target="block.link.target"
+        :target="block.cta.target"
       >
         {{ block.cta.title }}
       </a>
