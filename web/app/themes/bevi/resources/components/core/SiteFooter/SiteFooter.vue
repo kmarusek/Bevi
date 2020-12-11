@@ -11,22 +11,22 @@
         </div>
         <SiteFooterNavigation
           :navigation="insideBevi"
-          :heading="headings.column_one"
+          :heading="headings ? headings.column_one : null"
           class="w-auto"
         />
         <SiteFooterNavigation
           :navigation="office"
-          :heading="headings.column_two"
+          :heading="headings ? headings.column_two : null"
           class="w-auto"
         />
         <SiteFooterNavigation
           :navigation="support"
-          :heading="headings.column_three"
+          :heading="headings ? headings.column_three : null"
           class="w-auto"
         />
         <SiteFooterNavigation
           :navigation="blog"
-          :heading="headings.column_four"
+          :heading="headings ? headings.column_four : null"
           class="w-auto"
         />
       </div>
