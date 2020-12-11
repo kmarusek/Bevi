@@ -1,6 +1,6 @@
 <template>
   <section
-    class="bg-cover bg-no-repeat flex relative overflow-hidden main-banner"
+    class="bg-cover bg-no-repeat bg-center flex relative overflow-hidden main-banner"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
     :class="[block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen ', { wave : block.wave }]"
   >
