@@ -1,0 +1,39 @@
+{
+    "key": "group_5fd3632f9c3b8",
+    "title": "Options > Global",
+    "fields": [
+        {
+            "key": "field_5fd3634bd5cba",
+            "label": "Navigation CTA",
+            "name": "navigation_cta",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "bevi-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "modified": 1607690549
+}
