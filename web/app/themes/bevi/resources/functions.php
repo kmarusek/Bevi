@@ -142,6 +142,7 @@ function getMenuItemsForParent($menuSlug, $parentId)
                 $postId = get_post_meta($tmpItem->ID, '_menu_item_object_id', true);
         $post = get_post($postId);
         $item->name = $post->post_title;
+        $item->label = $tmpItem->post_title;
         $item->url = get_the_permalink($postId);
         $item->pageNavId = intval($postId);
         $item->pageId = get_the_id();

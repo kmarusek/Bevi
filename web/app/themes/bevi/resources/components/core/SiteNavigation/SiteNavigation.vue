@@ -10,9 +10,7 @@
         class="menu-item-link"
         :class="{ 'is-active': item.pageId === item.pageNavId }"
       >
-        <span>
-          {{ item.name }}
-        </span>
+        <span v-html="item.label ? item.label : item.name" />
       </a>
     </li>
     <li
