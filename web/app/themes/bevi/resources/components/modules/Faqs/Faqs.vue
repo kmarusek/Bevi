@@ -1,5 +1,5 @@
 <template>
-  <section class="container py-py-20 lg:py-32">
+  <section class="container max-w-6xl py-py-20 lg:py-32">
     <h2
       class="mb-6 md:mb-8 font-semibold text-xl md:text-3xl leading-tight text-center capitalize"
     >
@@ -35,15 +35,18 @@
       </div>
     </div>
 
-    <div class="block-content lg:w-1/2 mx-auto my-6 md:my-8 text-center">
+    <div class="block-content lg:w-1/2 lg:px-6 mx-auto my-6 md:my-8 text-center max-w-md">
       <p
-        v-html="block.text"
+        v-if="block.description"
+        v-html="block.description"
       />
       <a
-        class="btn mt-8"
-        :href="block.cta"
+        v-if="block.cta.url"
+        class="btn mt-6"
+        :href="block.cta.url"
+        :target="block.link.target"
       >
-        Contact Us
+        {{ block.cta.title }}
       </a>
     </div>
   </section>
