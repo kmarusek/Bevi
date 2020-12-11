@@ -1,9 +1,12 @@
 <template>
   <ul class="font-space">
     <li class="mb-5">
-      <h6 class="h6">
-        {{ title }}
-      </h6>
+      <a
+        class="h6"
+        :href="heading.url"
+      >
+        {{ heading.title }}
+      </a>
     </li>
     <li
       v-for="(item, index) in navigation"
@@ -14,9 +17,7 @@
         :href="item.url"
         class="link"
       >
-        <span>
-          {{ item.name }}
-        </span>
+        <span v-html="item.label ? item.label : item.name" />
       </a>
     </li>
   </ul>
@@ -28,9 +29,9 @@
         required: true,
         type: Array,
       },
-      title: {
+      heading: {
         required: false,
-        type: String,
+        type: Array,
       },
     },
   };
@@ -45,7 +46,7 @@
   span {
     @apply z-10;
   }
-  
+
   &:after {
     @apply absolute w-full left-0 bg-blue transition-all duration-300;
     content: "";

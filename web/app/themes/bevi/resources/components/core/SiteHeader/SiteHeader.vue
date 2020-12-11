@@ -16,6 +16,7 @@
           class="flex items-center ml-auto"
           :menu-items="menu"
           :main-header="true"
+          :cta="cta"
         />
         <button
           @click="toggleMobileNav"
@@ -31,6 +32,7 @@
         v-if="isMobileNavOpen"
         class="mobile-nav-item"
         :menu-items="menu"
+        :cta="cta"
       />
     </div>
   </header>
@@ -45,6 +47,10 @@
       menu: {
         required: true,
         type: Array,
+      },
+      cta: {
+        required: false,
+        type: Object,
       },
     },
     data: () => ({

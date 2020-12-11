@@ -10,21 +10,21 @@
         class="menu-item-link"
         :class="{ 'is-active': item.pageId === item.pageNavId }"
       >
-        <span>
-          {{ item.name }}
-        </span>
+        <span v-html="item.label ? item.label : item.name" />
       </a>
     </li>
     <li
+      v-if="cta"
       class="lg:ml-8 xl:ml-12"
       :class="{ 'hidden sm:block': mainHeader }"
     >
       <a
-        href="#"
+        :href="cta.url"
         class="btn"
         :class="{ 'w-full': mainHeader }"
+        :target="cta.target ? cta.target : '_self'"
       >
-        Get a quote
+        {{ cta.title }}
       </a>
     </li>
   </ul>
@@ -40,6 +40,10 @@
       mainHeader: {
         required: false,
         type: Boolean,
+      },
+      cta: {
+        required: false,
+        type: Object,
       },
     },
   };

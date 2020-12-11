@@ -11,22 +11,22 @@
         </div>
         <SiteFooterNavigation
           :navigation="insideBevi"
-          title="Inside Bevi"
+          :heading="headings.column_one"
           class="w-auto"
         />
         <SiteFooterNavigation
           :navigation="office"
-          title="Office"
+          :heading="headings.column_two"
           class="w-auto"
         />
         <SiteFooterNavigation
           :navigation="support"
-          title="Support"
+          :heading="headings.column_three"
           class="w-auto"
         />
         <SiteFooterNavigation
           :navigation="blog"
-          title="Blog"
+          :heading="headings.column_four"
           class="w-auto"
         />
       </div>
@@ -98,6 +98,10 @@
       terms: {
         required: true,
         type: Array,
+      },
+      headings: {
+        required: false,
+        type: Object,
       },
     },
   };
