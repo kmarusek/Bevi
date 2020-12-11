@@ -54,8 +54,8 @@
                         "2": "Two",
                         "3": "Three"
                     },
-                    "default_value": false,
-                    "allow_null": 1,
+                    "default_value": 1,
+                    "allow_null": 0,
                     "multiple": 0,
                     "ui": 1,
                     "ajax": 0,
@@ -189,5 +189,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1606479208
+    "modified": 1607707538
 }
