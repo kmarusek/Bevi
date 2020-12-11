@@ -5,12 +5,12 @@
     :class="[block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen ', { wave : block.wave }]"
   >
     <video
-      v-if="block.add_background_video"
+      v-if="block.add_background_video && windowWidth >= 768"
       :poster="block.background_image.sizes.large"
       autoplay
       muted
       loop
-      class="absolute w-full h-full top-0 left-0 z-1 object-fill hidden lg:block"
+      class="absolute w-full h-full top-0 left-0 z-1 object-cover"
     >
       <source
         :src="block.video.url"
