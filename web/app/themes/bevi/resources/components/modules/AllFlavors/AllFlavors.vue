@@ -8,11 +8,17 @@
     <div class="container text-center">
       <div class="relative mb-4 md:mb-10">
         <div class="title-wrapper gsap-fade">
-          <h2 class="h2">
+          <h2
+            v-if="block.title"
+            class="h2"
+          >
             {{ block.title }}
           </h2>
         </div>
-        <div class="mt-2 md:mt-6 block-content smaller md:px-8 gsap-fade">
+        <div
+          v-if="block.intro_text"
+          class="mt-2 md:mt-6 block-content smaller md:px-8 gsap-fade"
+        >
           <p>
             {{ block.intro_text }}
           </p>

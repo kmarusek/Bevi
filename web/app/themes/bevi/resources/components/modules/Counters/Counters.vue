@@ -52,10 +52,11 @@
               v-html="counter.short_description"
             />
             <a
-              :href="counter.permalink"
+              :href="counter.counter_link.url"
+              :target="counter.counter_link.target"
               class="btn mt-3"
             >
-              View dispenser
+              {{ counter.counter_link.title }}
             </a>
           </div>
         </div>
