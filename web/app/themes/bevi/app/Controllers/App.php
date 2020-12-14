@@ -126,7 +126,7 @@ class App extends Controller
             $post->featured_image = get_the_post_thumbnail_url($post->ID);
             $post->permalink = get_the_permalink($post->ID);
             $post->flavor_title = get_the_title($post->ID);
-            $post->flavor_tags = get_the_tags($post->ID);
+            $post->flavor_tags = wp_get_post_terms($post->ID, 'flavor-tags');
             $post->flavor_badge = get_field('flavor_data', $post->ID)['badge'];
             $post->flavor_ingredients = get_field('flavor_data', $post->ID)['ingredients'];
             $post->flavor_icons = get_field('flavor_data', $post->ID)['icons'];
@@ -142,12 +142,12 @@ class App extends Controller
 
     public function getFlavorsTags()
     {
-        $args = array(
-            'type' => get_post_type(),
+        $tags = get_terms(array(
+            'taxonomy' => 'flavor-tags',
+            'hide_empty' => true,
             'orderby' => 'name',
-            'order' => 'ASC'
-        );
-        $tags = get_tags($args);
+            'order' => 'ASC',
+        ));
 
         return $tags;
     }
