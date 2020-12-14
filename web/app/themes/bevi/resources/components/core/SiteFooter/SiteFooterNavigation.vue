@@ -3,9 +3,9 @@
     <li class="mb-5">
       <a
         class="h6"
-        :href="heading.url"
+        :href="heading ? heading.url : ''"
       >
-        {{ heading.title }}
+        {{ heading ? heading.title : '' }}
       </a>
     </li>
     <li
@@ -31,7 +31,7 @@
       },
       heading: {
         required: false,
-        type: Array,
+        type: [Object, String],
       },
     },
   };

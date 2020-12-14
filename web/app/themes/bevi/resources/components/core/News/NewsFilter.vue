@@ -18,7 +18,7 @@
     props: {
       categories: {
         required: true,
-        type: Array,
+        type: Object,
       },
     },
   };
