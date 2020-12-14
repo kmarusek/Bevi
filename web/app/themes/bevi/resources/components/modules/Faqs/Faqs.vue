@@ -1,7 +1,7 @@
 <template>
-  <section class="container max-w-6xl py-py-20 lg:py-32">
+  <section class="container max-w-5xl py-py-20 lg:py-32">
     <h2
-      class="mb-6 md:mb-8 font-semibold text-xl md:text-3xl leading-tight text-center capitalize"
+      class="mb-6 md:mb-8 font-semibold h3 text-center text-blue-600"
     >
       {{ block.faq_title }}
     </h2>
@@ -17,7 +17,7 @@
             class="h-12 flex pr-12 items-center relative cursor-pointer"
           >
             <span
-              class="font-semibold text-sm md:text-x1 leading-tight w-full"
+              class="font-semibold text-sm md:text-lg leading-tight w-full text-blue-600"
             >
               {{ faq.title }}
             </span>

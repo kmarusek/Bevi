@@ -32,6 +32,7 @@ module.exports = {
         '2xl': '1536px',
       },
       fontSize: {
+        '2.5xl': '1.75rem',
         '4.5xl': '2.8rem',
         '5xl': '3.2rem',
         '5.5xl': '3.8rem',
@@ -59,6 +60,7 @@ module.exports = {
         },
         blue: {
           100: '#D4E4F8',
+          150: '#d4e1f0',
           200: '#A8C3E4',
           default: '#246EFF',
           500: '#174CBB',
@@ -69,6 +71,7 @@ module.exports = {
           default: '#4B273A',
         },
         red: {
+          100: '#f9e3e2',
           200: '#F7DBDA',
           default: '#DC3A32',
           500: '#AB2328',
@@ -100,9 +103,12 @@ module.exports = {
       },
       width: {
         30: '30%',
+        40: '40%',
+        60: '60%',
       },
       height: {
         70: '20rem',
+        75: '25rem',
         80: '30rem',
       },
     },

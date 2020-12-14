@@ -7,7 +7,7 @@
       <p class="uppercase font-space text-blue-500 text-sm font-bold tracking-wider mb-1">
         Our Products
       </p>
-      <h3 class="h3 mb-4 text-blue-600 font-semibold">
+      <h3 class="h3 font-semibold mb-4 text-blue-600">
         Our office water dispensers
       </h3>
       <div class="w-full flex flex-col sm:flex-row justify-around">
@@ -44,7 +44,7 @@
             >
           </div>
           <div class="mt-10">
-            <h3 class="h3 text-blue-600 font-semibold mt-2">
+            <h3 class="h3 text-blue-600 font-semibold leading-none mt-2">
               {{ counter.post_title }}
             </h3>
             <div
@@ -54,7 +54,7 @@
             <a
               :href="counter.counter_link.url"
               :target="counter.counter_link.target"
-              class="btn mt-3"
+              class="btn mt-4"
             >
               {{ counter.counter_link.title }}
             </a>
