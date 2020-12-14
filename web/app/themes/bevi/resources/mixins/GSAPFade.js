@@ -24,15 +24,6 @@ export default {
             ease: 'power3.out',
             overwrite: 'auto',
           }),
-          onLeaveBack: () => gsap.to(elems, {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.3,
-            delay: 0.3,
-            ease: 'power3.out',
-            overwrite: 'auto',
-          }),
         });
       });
     },
