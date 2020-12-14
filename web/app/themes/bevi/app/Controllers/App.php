@@ -43,6 +43,7 @@ class App extends Controller
 
         $categories = array_map(function ($cat) {
             $cat->link = get_category_link($cat->cat_ID);
+            $cat->color = get_field('background_color', $cat);
             return $cat;
         }, $categories);
 

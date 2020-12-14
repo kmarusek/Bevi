@@ -1,7 +1,7 @@
 <template>
   <a
     class="category order-0"
-    :class="category.slug"
+    :class="category.color"
     :href="category.link"
   >
     {{ category.name }}
@@ -28,23 +28,23 @@
     opacity: 0.8;
   }
 
-  &.culture {
+  &.orange {
     background-image: url("../../../assets/images/backgrounds/orange.jpg");
   }
 
-  &.office-hacks {
+  &.purple {
     background-image: url("../../../assets/images/backgrounds/purple.jpg");
   }
 
-  &.sustainability {
+  &.yellow {
     background-image: url("../../../assets/images/backgrounds/yellow.jpg");
   }
 
-  &.water {
+  &.red {
     background-image: url("../../../assets/images/backgrounds/red.jpg");
   }
 
-  &.wellness {
+  &.green {
     background-image: url("../../../assets/images/backgrounds/green.jpg");
   }
 }
