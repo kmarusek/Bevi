@@ -18,14 +18,14 @@
       <div class="h-full bg-white flex items-center w-full text-area z-10 absolute top-0">
         <div class="container max-w-3xl">
           <h2
-            class="h1 step"
+            class="h1 scroll-animate"
             v-if="block.title"
           >
             {{ block.title }}
           </h2>
           <div
             v-html="block.text"
-            class="mt-2 md:mt-6 block-content md:px-8 step"
+            class="mt-2 md:mt-6 block-content md:px-8 scroll-animate"
           />
         </div>
       </div>
@@ -72,11 +72,11 @@
       startAnimation() {
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.set('.step', { opacity: 0, y: 50 });
+        gsap.set('.scroll-animate', { opacity: 0, y: 50 });
         gsap.set('.second-title', { opacity: 0, y: 50 });
         gsap.set('.second-button', { opacity: 0, y: 50 });
 
-        gsap.utils.toArray('.step').forEach((el) => {
+        gsap.utils.toArray('.scroll-animate').forEach((el) => {
           gsap.to(el, {
             scrollTrigger: {
               trigger: el,
