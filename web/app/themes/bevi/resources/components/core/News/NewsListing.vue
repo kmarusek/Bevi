@@ -7,7 +7,10 @@
         :key="index"
         class="grid-item"
       >
-        <PostCard :post="post" />
+        <PostCard
+          :post="post"
+          :categories="categories"
+        />
       </div>
     </div>
     <button

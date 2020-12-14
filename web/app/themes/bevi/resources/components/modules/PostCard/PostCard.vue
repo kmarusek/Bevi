@@ -2,7 +2,7 @@
   <a :href="post.link">
     <div class="post-card">
       <CategoryButton
-        :category="post._embedded['wp:term'][0][0]"
+        :category="cardCategory[0]"
         class="absolute top-0 left-0 m-4"
       />
       <div
@@ -31,6 +31,18 @@
         required: true,
         type: Object,
       },
+      categories: {
+        required: true,
+        type: Object,
+      },
+    },
+    data() {
+      return {
+        cardCategory: null,
+      };
+    },
+    mounted() {
+      this.getCategory();
     },
     computed: {
       backgroundImage() {
@@ -39,6 +51,12 @@
           // eslint-disable-next-line
           : `${ require('../../../assets/images/placeholder.jpg') }`;
       },
+    },
+    methods: {
+      getCategory() {
+        const categoryList = Object.values(this.categories);
+        this.cardCategory = categoryList.filter((category) => category.cat_ID === this.post._embedded['wp:term'][0][0].id);
+      }
     },
   };
 </script>
