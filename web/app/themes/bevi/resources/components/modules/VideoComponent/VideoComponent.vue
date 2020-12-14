@@ -1,6 +1,6 @@
 <template>
   <section class="text-center">
-    <div class="parallax-container">
+    <div class="parallax-container max-h-screen overflow-hidden">
       <video
         v-if="block.video.url"
         id="videos"
@@ -8,7 +8,7 @@
         muted
         loop
         preload="auto"
-        class="min-h-screen w-full z-1 object-cover"
+        class="z-1 object-cover"
       >
         <source
           :src="block.video.url"
@@ -18,14 +18,14 @@
       <div class="h-full bg-white flex items-center w-full text-area z-10 absolute top-0">
         <div class="container max-w-3xl">
           <h2
-            class="h1 first-title"
+            class="h1 scroll-animate"
             v-if="block.title"
           >
             {{ block.title }}
           </h2>
           <div
             v-html="block.text"
-            class="mt-2 md:mt-6 block-content md:px-8 first-text"
+            class="mt-2 md:mt-6 block-content md:px-8 scroll-animate"
           />
         </div>
       </div>
@@ -72,10 +72,21 @@
       startAnimation() {
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.set('.first-title', { opacity: 0, y: 50 });
-        gsap.set('.first-text', { opacity: 0, y: 50 });
+        gsap.set('.scroll-animate', { opacity: 0, y: 50 });
         gsap.set('.second-title', { opacity: 0, y: 50 });
         gsap.set('.second-button', { opacity: 0, y: 50 });
+
+        gsap.utils.toArray('.scroll-animate').forEach((el) => {
+          gsap.to(el, {
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 80%',
+              end: 'top 60%',
+            },
+            opacity: 1,
+            y: 0,
+          });
+        });
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -84,23 +95,11 @@
             scrub: true,
           },
         });
-        tl.to('.first-title', {
+        tl.to('.text-area', {
           ease: 'power1.out',
-          opacity: 1,
-          y: 0,
-          duration: 0.3,
-        })
-          .to('.first-text', {
-            ease: 'power1.out',
-            opacity: 1,
-            y: 0,
-            duration: 0.3,
-          })
-          .to('.text-area', {
-            ease: 'power1.out',
-            opacity: 0,
-            duration: 1,
-          }, '+=0.3')
+          opacity: 0,
+          duration: 1,
+        }, '+=0.3')
           .call(this.playVideo)
           .to('.second-title', {
             ease: 'power1.out',
