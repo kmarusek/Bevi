@@ -1,18 +1,18 @@
 <template>
   <section
-    class="relative bg-blue-100"
+    class="relative bg-blue-100 gsap-fade-section"
     :class="{ wave : block.wave }"
   >
     <div class="py-20 lg:py-32 md:container flex flex-col items-center text-center">
-      <p class="uppercase font-space text-blue-500 text-sm font-bold tracking-wider mb-1">
+      <p class="uppercase font-space text-blue-500 text-sm font-bold tracking-wider mb-1 gsap-fade">
         Our Products
       </p>
-      <h3 class="h3 mb-4 text-blue-600 font-semibold">
+      <h3 class="h3 mb-4 text-blue-600 font-semibold gsap-fade">
         Our office water dispensers
       </h3>
       <div class="w-full flex flex-col sm:flex-row justify-around">
         <div
-          class="mb-6 w-full sm:w-1/2 md:w-2/5 lg:w-30 flex flex-col"
+          class="mb-6 w-full sm:w-1/2 md:w-2/5 lg:w-30 flex flex-col gsap-fade"
           v-for="counter in counters"
           :key="counter.id"
         >
@@ -72,9 +72,10 @@
 
 <script>
   import GSAPParallax from '~/mixins/GSAPParallax.js';
+  import GSAPFade from '~/mixins/GSAPFade.js';
 
   export default {
-    mixins: GSAPParallax,
+    mixins: [GSAPParallax, GSAPFade],
     props: {
       counters: {
         required: true,
