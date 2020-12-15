@@ -1,5 +1,8 @@
 <template>
-  <section class="flavors gsap-fade-section">
+  <section
+    class="flavors gsap-fade-section"
+    :class="block.padding"
+  >
     <div class="container text-center max-w-2xl">
       <div class="relative z-10 py-20 md:py-0">
         <div class="title-wrapper gsap-fade">

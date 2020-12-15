@@ -1806,6 +1806,36 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_5fd8838b0b883",
+                            "label": "Padding",
+                            "name": "padding",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "none: None": "none: None",
+                                "sm": "Small",
+                                "smw": "Small - Wave",
+                                "md": "Medium",
+                                "mdw": "Medium - Wave",
+                                "lg": "Big",
+                                "lgw": "Big - Wave"
+                            },
+                            "default_value": "mdw",
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -2505,5 +2535,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1607712993
+    "modified": 1608033435
 }
