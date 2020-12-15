@@ -1,6 +1,6 @@
 <template>
   <section
-    class="gsap-fade-section"
+    class="gsap-fade-section flex"
     :class="{ wave : block.wave }"
     :style="{ 'background-image': `url('${block.background.sizes.large}')` }"
   >
