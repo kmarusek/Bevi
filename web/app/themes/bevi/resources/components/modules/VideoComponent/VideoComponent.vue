@@ -1,6 +1,6 @@
 <template>
   <section class="text-center">
-    <div class="parallax-container max-h-screen overflow-hidden">
+    <div class="parallax-container h-screen overflow-hidden">
       <video
         v-if="block.video.url"
         id="videos"
@@ -8,7 +8,7 @@
         muted
         loop
         preload="auto"
-        class="z-1 object-cover"
+        class="z-1 h-full w-full object-cover"
       >
         <source
           :src="block.video.url"
