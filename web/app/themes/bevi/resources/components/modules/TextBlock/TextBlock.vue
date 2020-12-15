@@ -1,7 +1,7 @@
 <template>
   <section
-    class="text-block text-center py-32 lg:py-48 gsap-fade-section"
-    :class="{ wave : block.wave }"
+    class="text-block text-center gsap-fade-section"
+    :class="[{ wave : block.wave }, block.padding]"
   >
     <div class="container max-w-3xl">
       <h2 class="h1 gsap-fade">

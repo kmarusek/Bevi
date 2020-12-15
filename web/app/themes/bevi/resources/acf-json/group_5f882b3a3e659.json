@@ -466,6 +466,27 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_5fd8e93d77433",
+                            "label": "Padding",
+                            "name": "padding",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_5fd8e6c619d10"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         }
                     ],
                     "min": "",
@@ -611,6 +632,36 @@
                             },
                             "default_value": false,
                             "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 1,
+                            "ajax": 0,
+                            "return_format": "value",
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5fd8e6c619d10",
+                            "label": "Padding",
+                            "name": "padding",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "padding-none": "None",
+                                "padding-sm": "Small",
+                                "padding-smw": "Small - Wave",
+                                "padding-md": "Medium",
+                                "padding-mdw": "Medium - Wave",
+                                "padding-lg": "Big",
+                                "padding-lgw": "Big - Wave"
+                            },
+                            "default_value": "padding-mdw",
+                            "allow_null": 0,
                             "multiple": 0,
                             "ui": 1,
                             "ajax": 0,
@@ -865,6 +916,27 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_5fd8f501ca25e",
+                            "label": "Padding",
+                            "name": "padding",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_5fd8e6c619d10"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         }
                     ],
                     "min": "",
@@ -1075,6 +1147,27 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_5fd8ee132df12",
+                            "label": "Padding",
+                            "name": "padding",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_5fd8e6c619d10"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         }
                     ],
                     "min": "",
@@ -1404,7 +1497,7 @@
                             "placeholder": ""
                         },
                         {
-                            "key": "field_5fd8ac83102bb",
+                            "key": "field_5fd8e8de77432",
                             "label": "Padding",
                             "name": "padding",
                             "type": "clone",
@@ -1417,7 +1510,7 @@
                                 "id": ""
                             },
                             "clone": [
-                                "field_5fd8838b0b883"
+                                "field_5fd8e6c619d10"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -1827,36 +1920,6 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
-                        },
-                        {
-                            "key": "field_5fd8838b0b883",
-                            "label": "Padding",
-                            "name": "padding",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "none: None": "none: None",
-                                "padding-sm": "Small",
-                                "padding-smw": "Small - Wave",
-                                "padding-md": "Medium",
-                                "padding-mdw": "Medium - Wave",
-                                "padding-lg": "Big",
-                                "padding-lgw": "Big - Wave"
-                            },
-                            "default_value": "padding-mdw",
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -2010,6 +2073,27 @@
                             "ajax": 0,
                             "return_format": "value",
                             "placeholder": ""
+                        },
+                        {
+                            "key": "field_5fd8f2f7d013e",
+                            "label": "Padding",
+                            "name": "padding",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "field_5fd8e6c619d10"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
                         }
                     ],
                     "min": "",
@@ -2556,5 +2640,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1608035497
+    "modified": 1608054045
 }
