@@ -1,7 +1,7 @@
 <template>
-  <section class="container max-w-5xl py-py-20 lg:py-32">
+  <section class="container max-w-5xl py-py-20 lg:py-32 gsap-fade-section">
     <h2
-      class="mb-6 md:mb-8 font-semibold h3 text-center text-blue-600"
+      class="mb-6 md:mb-8 font-semibold h3 text-center text-blue-600 gsap-fade"
     >
       {{ block.faq_title }}
     </h2>
@@ -11,7 +11,7 @@
         v-for="faq in faqList"
         :key="faq.id"
       >
-        <div class="rounded-md border border-gray-400 p-4 m-3">
+        <div class="rounded-md border border-gray-400 p-4 m-3 gsap-fade">
           <div
             @click="handleClick(faq.id)"
             class="h-12 flex pr-12 items-center relative cursor-pointer"
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="block-content lg:w-1/2 lg:px-6 mx-auto my-6 md:my-8 text-center max-w-md">
+    <div class="block-content lg:w-1/2 lg:px-6 mx-auto my-6 md:my-8 text-center max-w-md gsap-fade">
       <p
         v-if="block.description"
         v-html="block.description"
@@ -53,7 +53,10 @@
 </template>
 
 <script>
+  import GSAPFade from '~/mixins/GSAPFade.js';
+
   export default {
+    mixins: [GSAPFade],
     props: {
       block: {
         type: Object,
