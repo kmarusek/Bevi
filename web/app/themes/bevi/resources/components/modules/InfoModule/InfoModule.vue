@@ -4,7 +4,7 @@
     :class="{ wave : block.wave }"
   >
     <div class="py-32 md:container flex flex-col items-center gsap-fade-section">
-      <h3 class="h3 mb-12">
+      <h3 class="h3 font-bold mb-4">
         {{ block.title }}
       </h3>
       <swiper
@@ -133,19 +133,19 @@
                 />
               </svg>
             </div>
-            <h4 class="h5 text-green-600">
+            <h4 class="font-body text-3xl font-semibold antialiased text-green-600">
               {{ card.title }}
             </h4>
             <div
               v-if="card.intro_text"
               v-html="card.intro_text"
-              class="mt-2 block-content small text-center max-w-md px-2 sm:max-w-none sm:p-0"
+              class="mt-2 block-content smaller text-center max-w-md px-2 sm:max-w-none sm:p-0"
             />
             <a
               v-if="card.cta"
               :href="card.cta.url"
               :target="card.cta.target ? card.cta.target : '_self'"
-              class="btn mt-4 md:mt-12 bg-green-600"
+              class="btn mt-4 md:mt-6 bg-green-600"
             >
               {{ card.cta.title }}
             </a>

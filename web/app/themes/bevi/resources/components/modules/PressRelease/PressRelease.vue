@@ -5,7 +5,7 @@
   >
     <div class="overflow-wrapper">
       <div class="container">
-        <h2 class="h2 mb-20 md:mb-40">
+        <h2 class="h3 mb-20 md:mb-32">
           {{ block.title }}
         </h2>
         <div class="flex flex-col md:flex-row justify-between md:-mx-4 lg:-mx-16">
@@ -63,7 +63,6 @@
 
 <style lang="scss" scoped>
 .press-release {
-  padding-bottom: 200px;
   @apply text-center pt-16 relative;
 
   .overflow-wrapper {
@@ -72,9 +71,9 @@
   }
 
   &.color-scheme-Red {
-    @apply bg-red-200;
+    @apply bg-red-100;
 
-    .h2 {
+    .h3 {
       @apply text-red-500;
     }
 
@@ -126,7 +125,7 @@
 .wave-wrapper {
   z-index: -1;
   max-height: 300px;
-  @apply bg-red-200 absolute bottom-0 w-full h-full -mb-6;
+  @apply bg-red-100 absolute bottom-0 w-full h-full -mb-6;
   clip-path: url(#press-wave);
 
   @screen md {

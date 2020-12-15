@@ -10,14 +10,14 @@
         class="lg:px-24"
       >
         <div
-          class="flex flex-wrap -mx-2 items-center overflow-hidden"
+          class="flex flex-wrap lg:-mx-2 items-center overflow-hidden"
         >
           <div
-            class="relative lg:pr-6 lg:w-2/4 overflow-hidden"
+            class="relative lg:pr-6 lg:w-60 overflow-hidden"
           >
             <img
               :src="slide.featured_image"
-              class="gsap-fade rounded object-cover h-70 w-full mb-4 lg:mb-0"
+              class="gsap-fade rounded object-cover h-75 w-full mb-4 lg:mb-0"
             >
             <CategoryButton
               :category="slide.post_category[0]"
@@ -25,11 +25,11 @@
             />
           </div>
           <div
-            class="my-2 px-2 lg:w-2/4 overflow-hidden"
+            class="my-2 px-2 lg:w-40 lg:pl-10 overflow-hidden"
           >
-            <span class="mb-2 block">Posted on: {{ slide.post_date | moment("from", "now") }}</span>
+            <span class="mb-2 block text-xs font-semibold">Posted on: {{ slide.post_date | moment("from", "now") }}</span>
             <h3
-              class="h3 mb-4"
+              class="h4 font-semibold leading-tight mb-4 text-blue-600"
             >
               {{ slide.post_title }}
             </h3>

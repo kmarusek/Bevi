@@ -56,7 +56,7 @@
       getCategory() {
         const categoryList = Object.values(this.categories);
         this.cardCategory = categoryList.filter((category) => category.cat_ID === this.post._embedded['wp:term'][0][0].id);
-      }
+      },
     },
   };
 </script>

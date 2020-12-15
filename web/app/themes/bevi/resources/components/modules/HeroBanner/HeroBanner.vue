@@ -234,25 +234,29 @@
 
 .narrower {
   @screen xl {
-    max-width: 40%;
+    max-width: 33%;
   }
 }
 
 .block-content /deep/ {
+  p {
+    @apply text-gray-550;
+  }
+
   h2 {
-    @apply font-body text-3xl font-semibold mb-2;
+    @apply font-body text-3xl text-blue-600 font-semibold;
     @screen md {
       @apply text-4xl leading-tight;
     }
     @screen lg {
-      @apply text-5xl font-bold;
+      @apply text-4.5xl;
     }
   }
 
   h3 {
-    @apply font-body text-3xl font-semibold leading-tight mb-2;
+    @apply font-body text-3xl font-semibold leading-tight;
     @screen md {
-      @apply text-3xl font-medium;
+      @apply text-4xl;
     }
   }
 
@@ -266,6 +270,16 @@
 
   h6 {
     @apply font-extrabold uppercase tracking-widest text-xs mb-2;
+  }
+
+  ul {
+    @apply list-disc pl-10;
+    list-style-position: outside;
+  }
+
+  ol {
+    @apply list-decimal pl-10;
+    list-style-position: outside;
   }
 
 }
