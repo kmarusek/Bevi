@@ -37,7 +37,7 @@
     height: 250px;
 }
 .image-blob {
-  height: 230px;
+  height: 290px;
 
   @screen md {
     height: 340px;

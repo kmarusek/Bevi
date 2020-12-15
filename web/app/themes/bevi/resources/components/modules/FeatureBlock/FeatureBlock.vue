@@ -143,13 +143,20 @@
   }
   .bubble-small {
     @apply absolute w-10;
-    left: 10%;
     top: 40%;
+    left: -5%;
+    @screen md {
+      left: 10%;
+    }
   }
   .bubble-large {
     @apply absolute w-12;
-    right: 15%;
+    right: 0%;
     bottom: 0%;
+
+    @screen md {
+      right: 15%;
+    }
   }
 }
 
