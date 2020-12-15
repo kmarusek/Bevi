@@ -1,12 +1,12 @@
 <template>
-  <section class="relative bg-blue-150">
+  <section class="relative bg-blue-150 gsap-fade-section">
     <div class="py-20 lg:py-32 md:container flex flex-col items-center text-center">
-      <h2 class="h2 mb-4 lg:mb-10 text-blue-600 font-semibold">
+      <h2 class="h2 mb-4 lg:mb-10 text-blue-600 font-semibold gsap-fade">
         Choose your dispenser
       </h2>
       <div class="w-full flex flex-col sm:flex-row justify-around flex-wrap">
         <div
-          class="dispenser-item w-full sm:w-1/2 lg:px-16 xl:px-32 flex flex-col sm:border-b border-r border-blue-200 pb-8"
+          class="dispenser-item w-full sm:w-1/2 lg:px-16 xl:px-32 flex flex-col sm:border-b border-r border-blue-200 pb-8 gsap-fade"
           v-for="(counter, index) in counters"
           :key="counter.id"
         >
@@ -58,7 +58,10 @@
 </template>
 
 <script>
+  import GSAPFade from '~/mixins/GSAPFade.js';
+
   export default {
+    mixins: [GSAPFade],
     props: {
       counters: {
         required: true,
