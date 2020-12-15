@@ -1,5 +1,5 @@
 <template>
-  <section class="py-10 md:py-20 w-full">
+  <section class="pb-10 md:pb-20 w-full">
     <ul class="pl-4 md:pl-0 flex whitespace-no-wrap justify-start md:justify-center overflow-x-scroll md:overflow-x-visible md:flex-wrap">
       <li
         v-for="(category, index) in categories"

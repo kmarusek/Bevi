@@ -31,7 +31,7 @@
 <style lang="scss" scoped>
 .image-blob {
   @screen md {
-    min-height: 400px
+    min-height: 340px
   }
 }
 </style>

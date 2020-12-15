@@ -74,7 +74,7 @@
 .block-content /deep/ div,
 .block-content /deep/ p,
  {
-  @apply text-gray-700 text-base leading-7 font-space mb-6;
+  @apply text-gray-700 text-base leading-7 font-space mb-2;
 }
 
 .block-content /deep/ a {

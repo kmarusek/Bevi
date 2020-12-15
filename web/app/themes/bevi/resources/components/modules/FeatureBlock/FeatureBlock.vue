@@ -19,7 +19,7 @@
         </h3>
         <div
           v-html="block.text"
-          class="mt-2 md:mt-6 block-content gsap-fade"
+          class="mt-2 md:mt-4 block-content gsap-fade"
         />
       </div>
       <div

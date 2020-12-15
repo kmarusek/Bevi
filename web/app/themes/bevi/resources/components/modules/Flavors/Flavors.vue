@@ -3,11 +3,11 @@
     <div class="container text-center max-w-2xl">
       <div class="relative z-10 py-20 md:py-0">
         <div class="title-wrapper gsap-fade">
-          <h2 class="h2">
+          <h2 class="h3 text-blue-600">
             {{ block.title }}
           </h2>
         </div>
-        <div class="mt-2 md:mt-6 block-content smaller md:px-8 gsap-fade">
+        <div class="mt-2 block-content smaller md:px-24 gsap-fade leading-lose">
           <p>
             {{ block.intro_text }}
           </p>
@@ -16,7 +16,7 @@
           v-if="block.cta"
           :href="block.cta.url"
           :target="block.cta.target ? block.cta.target : '_self'"
-          class="btn mt-4 md:mt-12 gsap-fade"
+          class="btn mt-4 md:mt-6 gsap-fade"
         >
           {{ block.cta.title }}
         </a>
@@ -97,7 +97,8 @@
       transform: translateX(-20px);
       width: 10%;
       background-size: 100% 100%;
-      @apply absolute left-0 bg-no-repeat h-full;
+      left: 5%;
+      @apply absolute bg-no-repeat h-full;
 
       @screen md {
         transform: translateX(-50px);
@@ -111,7 +112,8 @@
       transform: translateX(20px);
       width: 10%;
       background-size: 100% 100%;
-      @apply absolute right-0 bg-no-repeat h-full;
+      right: 5%;
+      @apply absolute bg-no-repeat h-full;
 
       @screen md {
         transform: translateX(50px);

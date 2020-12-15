@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute bottom-0 w-full">
+  <div class="absolute bottom-0 w-full -z-10">
     <svg>
       <clipPath
         :id="waveId"

@@ -234,13 +234,51 @@ function cptui_register_my_cpts()
 
     add_action( 'init', 'cptui_register_my_cpts' );
 
+    /**
+     * Register Flavor Tags Taxonomy.
+     */
+    function flavor_tags_taxononmy()
+    {
+
+        $labels = array(
+            'name'                       => 'Flavor Tag',
+            'singular_name'              => 'Flavor Tag',
+            'menu_name'                  => 'Flavor Tags',
+            'all_items'                  => 'All Flavor Tags',
+            'parent_item'                => 'Parent Flavor Tag',
+            'parent_item_colon'          => 'Parent Flavor Tag:',
+            'new_item_name'              => 'New Flavor Tag',
+            'add_new_item'               => 'Add New Flavor Tag',
+            'edit_item'                  => 'Edit Flavor Tag',
+            'update_item'                => 'Update Flavor Tag',
+            'separate_items_with_commas' => 'Separate Flavor Tags with commas',
+            'search_items'               => 'Search Flavor Tags',
+            'add_or_remove_items'        => 'Add or remove Flavor Tags',
+            'choose_from_most_used'      => 'Choose from the most used Flavor Tags',
+            'not_found'                  => 'Not Found',
+        );
+        $args = array(
+            'labels'                     => $labels,
+            'hierarchical'               => false,
+            'public'                     => true,
+            'show_ui'                    => true,
+            'show_admin_column'          => true,
+            'show_in_nav_menus'          => true,
+            'show_tagcloud'              => false,
+            'show_in_rest'               => true,
+        );
+        register_taxonomy('flavor-tags', array('flavor'), $args);
+    }
+
+    add_action('init', 'flavor_tags_taxononmy', 0);
+
     function reg_tag()
     {
         /**
          * Add tags to Flavors post type.
          */
 
-        register_taxonomy_for_object_type('post_tag', 'flavors');
+        register_taxonomy_for_object_type('flavor-tags', 'flavors');
     }
 
     add_action('init', 'reg_tag');
