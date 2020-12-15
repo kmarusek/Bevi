@@ -19,7 +19,7 @@ export default {
             y: 0,
             opacity: 1,
             duration: 1,
-            stagger: 0.3,
+            stagger: 0.2,
             delay: 0.3,
             ease: 'power3.out',
             overwrite: 'auto',

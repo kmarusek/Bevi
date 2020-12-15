@@ -49,7 +49,7 @@
   import GSAPParallax from '~/mixins/GSAPParallax.js';
 
   export default {
-    mixins: GSAPParallax,
+    mixins: [GSAPParallax],
     props: {
       categories: {
         required: true,

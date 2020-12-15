@@ -53,7 +53,7 @@
         class="flex items-center"
       >
         <div
-          class="w-full gsap-fades"
+          class="w-full"
           :class="[
             {
               'md:pl-20' : block.text_position === 'Left' && block.feature_image,
@@ -64,13 +64,14 @@
         >
           <h6
             v-if="block.small_title"
-            class="font-space font-medium md:text-lg"
+            class="font-space font-medium md:text-lg gsap-fades"
           >
             {{ block.small_title }}
           </h6>
           <p
             v-if="block.large_title"
             :class="block.text_position === 'Center' ? 'heading-one' : 'my-4 heading-two'"
+            class="gsap-fades"
           >
             {{ block.large_title }}
           </p>
@@ -78,14 +79,14 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="block-content"
+            class="gsap-fades block-content"
           />
 
           <a
             v-if="block.link"
             :href="block.link.url"
             :target="block.link.target"
-            class="btn mt-4"
+            class="btn mt-4 gsap-fades"
             :class="{'center-bottom' : block.text_position === 'Center'}"
           >
             {{ block.link.title }}
@@ -155,9 +156,9 @@
             onEnter: () => gsap.to(elems, {
               y: 0,
               opacity: 1,
-              duration: 1.2,
-              stagger: 0.8,
-              delay: 0.8,
+              duration: 1,
+              stagger: 0.2,
+              delay: 0.5,
               ease: 'power3.out',
               overwrite: 'auto',
             }),

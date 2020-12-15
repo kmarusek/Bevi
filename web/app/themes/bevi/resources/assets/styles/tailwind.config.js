@@ -31,6 +31,9 @@ module.exports = {
       screens: {
         '2xl': '1536px',
       },
+      zIndex: {
+        '-10': '-10',
+      },
       fontSize: {
         '2.5xl': '1.75rem',
         '4.5xl': '2.8rem',

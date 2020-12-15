@@ -4,7 +4,7 @@
     :class="{ wave : block.wave }"
   >
     <div class="py-32 md:container flex flex-col items-center gsap-fade-section">
-      <h3 class="h3 font-bold mb-4">
+      <h3 class="h3 font-bold mb-4 gsap-fade">
         {{ block.title }}
       </h3>
       <swiper
