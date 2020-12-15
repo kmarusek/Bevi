@@ -1,7 +1,7 @@
 <template>
   <section
     class="press-release gsap-fade-section color-scheme-Red"
-    :class="{ wave : block.wave }"
+    :class="[{ wave : block.wave }, block.padding]"
   >
     <div class="overflow-wrapper">
       <div class="container">
@@ -63,11 +63,15 @@
 
 <style lang="scss" scoped>
 .press-release {
-  @apply text-center pt-16 relative;
+  @apply text-center relative;
 
   .overflow-wrapper {
-    min-height: 600px;
-    @apply overflow-hidden h-full;
+    
+    @apply min-h-full;
+    @screen lg {
+      @apply overflow-hidden;
+      min-height: 540px;
+    }
   }
 
   &.color-scheme-Red {

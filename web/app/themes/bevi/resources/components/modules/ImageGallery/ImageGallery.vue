@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 md:py-28">
+  <section :class="block.padding">
     <div class="gallery-container">
       <h2 class="h2 text-left mb-8 md:mb-20">
         {{ block.title }}

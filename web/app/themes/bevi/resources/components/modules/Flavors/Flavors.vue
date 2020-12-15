@@ -80,7 +80,7 @@
   @apply flex items-center justify-center relative py-48;
 
   @screen md {
-    @apply h-screen py-10;
+    @apply h-screen mt-24;
   }
 
   .title-wrapper {
