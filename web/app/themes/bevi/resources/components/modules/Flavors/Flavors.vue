@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="flavors gsap-fade-section"
-    :class="block.padding"
-  >
+  <section class="flavors gsap-fade-section">
     <div class="container text-center max-w-2xl">
       <div class="relative z-10 py-20 md:py-0">
         <div class="title-wrapper gsap-fade">
@@ -83,7 +80,7 @@
   @apply flex items-center justify-center relative py-48;
 
   @screen md {
-    @apply h-screen py-10;
+    @apply h-screen mt-24;
   }
 
   .title-wrapper {
