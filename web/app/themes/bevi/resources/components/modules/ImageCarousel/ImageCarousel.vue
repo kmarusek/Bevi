@@ -20,7 +20,7 @@
         >
           <img
             :src="slide.logo.sizes.thumbnail"
-            class="mx-auto gsap-fade"
+            class="mx-auto gsap-fade carousel-image"
           >
         </swiper-slide>
       </swiper>
@@ -102,5 +102,10 @@
 .wave {
   clip-path: url(#carousel-wave);
   @apply -mb-6 relative bg-white;
+}
+
+.carousel-image {
+  height: 4rem;
+  max-width: 120px;
 }
 </style>

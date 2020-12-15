@@ -22,10 +22,7 @@
           class="mt-2 md:mt-4 block-content gsap-fade"
         />
       </div>
-      <div
-        class="w-full md:w-1/2 flex justify-center relative"
-        :class="block.image_position !== 'Left' ? 'md:pl-10 lg:pl-20' : 'md:pr-10 lg:pr-20'"
-      >
+      <div class="mx-auto md:mx-0 md:w-1/2 flex justify-center relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="66.877"
@@ -146,15 +143,12 @@
   }
   .bubble-small {
     @apply absolute w-10;
-    left: 0%;
-
-    @screen md {
-      top: 40%;
-    }
+    left: 10%;
+    top: 40%;
   }
   .bubble-large {
-    @apply absolute right-0 w-12;
-    right: 10%;
+    @apply absolute w-12;
+    right: 15%;
     bottom: 0%;
   }
 }
