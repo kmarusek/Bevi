@@ -4,7 +4,7 @@
       <div class="relative z-10 py-20 md:py-0">
         <div class="title-wrapper gsap-fade">
           <h2 class="h3 text-blue-600">
-            Bursting with natural flavor
+            {{ block.title }}
           </h2>
         </div>
         <div class="mt-2 block-content smaller md:px-24 gsap-fade leading-lose">
