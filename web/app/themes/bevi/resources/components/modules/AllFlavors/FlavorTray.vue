@@ -138,7 +138,7 @@
 
 <style lang="scss" scoped>
 .flavor-tray {
-  @apply bg-white w-full p-10 relative border-2 border-gray-200 rounded-lg h-auto;
+  @apply bg-white w-full p-10 relative border-2 border-gray-200 rounded-lg flex h-auto;
 
   .image-wrapper {
     height: 300px;
@@ -163,7 +163,7 @@
     @apply flex flex-col h-full;
 
     @screen md {
-      @apply flex-row;
+      @apply flex flex-row;
     }
   }
 

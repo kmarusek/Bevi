@@ -116,6 +116,10 @@
 </script>
 
 <style lang="scss" scoped>
+/deep/ .swiper-container {
+  @apply flex;
+}
+
 /deep/ .swiper-wrapper {
   @apply items-center;
 }

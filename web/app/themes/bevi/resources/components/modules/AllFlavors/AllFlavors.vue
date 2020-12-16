@@ -35,7 +35,7 @@
         class="flavors-wrapper container"
         v-if="!loading"
       >
-        <div class="overflow-hidden tray-wrapper order-2">
+        <div class="tray-container order-2">
           <FlavorTray
             v-if="showTray"
             :flavor="filteredList[selectedIndex]"
@@ -165,7 +165,7 @@
         this.selectedIndex = index;
         const tray = document.querySelector('#tray');
 
-        const flavorTray = document.querySelector('.tray-wrapper');
+        const flavorTray = document.querySelector('.tray-container');
 
         flavorTray.classList.forEach((trayClass) => {
           if (trayClass.startsWith('order')) {
@@ -218,7 +218,7 @@
     @apply py-48;
   }
 
-  .tray-wrapper {
+  .tray-container {
     transition: all ease 0.5s;
     @apply w-full;
   }
