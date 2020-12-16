@@ -124,6 +124,10 @@
 
   .flavor-wrapper {
     @apply absolute inset-0 w-full h-full overflow-x-hidden;
+    
+    @screen md {
+      top: 5%;
+    }
   }
 
   .flavor {
@@ -132,7 +136,7 @@
     .label {
       line-height: 40px;
       max-width: 200px;
-      @apply text-gray-550 font-semibold leading-tight mb-2 text-center;
+      @apply text-gray-550 font-semibold leading-tight mt-2 text-center text-lg;
     }
 
     .img {
@@ -165,7 +169,6 @@
       }
     }
 
-    // Lemon
     &:nth-of-type(1) {
       top: 8%;
       left: 25%;
@@ -176,7 +179,6 @@
       }
     }
 
-    // Raspberry
     &:nth-of-type(2) {
       bottom: 16%;
       right: -8%;
@@ -187,7 +189,6 @@
       }
     }
 
-    // Pomegranate
     &:nth-of-type(3) {
       bottom: 5%;
       left: -17%;
@@ -198,7 +199,6 @@
       }
     }
 
-    // Peach
     &:nth-of-type(4) {
       top: 14%;
       right: -13%;
@@ -209,7 +209,6 @@
       }
     }
 
-    // Lime
     &:nth-of-type(5) {
       top: 15%;
       left: -19%;
@@ -220,18 +219,15 @@
       }
     }
 
-    // Coconut
     &:nth-of-type(6) {
-      bottom: 25%;
-      right: -4%;
-      @apply hidden;
+      bottom: 30%;
+      @apply hidden right-0;
 
       @screen md {
         @apply flex;
       }
     }
 
-    // Peach Mango
     &:nth-of-type(7) {
       bottom: 34%;
       left: 2%;
