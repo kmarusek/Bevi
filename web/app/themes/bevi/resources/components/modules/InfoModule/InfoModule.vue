@@ -29,6 +29,7 @@
               <ImageBlob
                 class="image"
                 :image="card.image.sizes.large"
+                small="true"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
