@@ -58,10 +58,10 @@
           @click="toggleImage"
         >
           <span v-if="swapImage">
-            Hide calorie table
+            Hide nutrition facts
           </span>
           <span v-else>
-            View calorie table
+            View nutrition facts
           </span>
         </button>
       </div>
