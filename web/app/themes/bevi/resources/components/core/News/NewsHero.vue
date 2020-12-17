@@ -3,7 +3,7 @@
     <div class="flex flex-col container relative pt-24 md:pt-40">
       <div class="flex items-center flex-wrap">
         <CategoryButton
-          :category="postData.post_category[0]"
+          :category="cardCategory[0]"
           class="mr-4 md:mr-6"
         />
         <span class="text-black mt-2">Posted: {{ postData.post_date | moment("from", "now") }}</span>
@@ -44,6 +44,24 @@
       postData: {
         type: Object,
         required: true,
+      },
+      categories: {
+        required: true,
+        type: Object,
+      },
+    },
+    data() {
+      return {
+        cardCategory: null,
+      };
+    },
+    mounted() {
+      this.getCategory();
+    },
+    methods: {
+      getCategory() {
+        const categoryList = Object.values(this.categories);
+        this.cardCategory = categoryList.filter((category) => category.cat_ID === this.postData.post_category[0].cat_ID);
       },
     },
   };
