@@ -162,7 +162,16 @@ class App extends Controller
                 $post->permalink = get_the_permalink($post->ID);
                 $post->post_content = wp_trim_words(get_the_content(null, false, $post->ID), 30, '...');
                 $post->author = get_the_author_meta($post->ID);
-                $post->post_category = get_the_category($post->ID);
+                
+                $categories = get_the_category($post->ID);
+                $categories = array_map(function ($cat) {
+                    $cat->link = get_category_link($cat->cat_ID);
+                    $cat->color = get_field('background_color', $cat);
+                    return $cat;
+                }, $categories);
+                
+                $post->post_category = $categories;
+
                 return $post;
             }, $posts);
             return $posts;
