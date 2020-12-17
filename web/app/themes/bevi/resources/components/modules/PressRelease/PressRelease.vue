@@ -5,7 +5,7 @@
   >
     <div class="overflow-wrapper">
       <div class="container">
-        <h2 class="h3 mb-20 md:mb-32 gsap-fade">
+        <h2 class="h3 font-semibold mb-20 md:mb-32 gsap-fade">
           {{ block.title }}
         </h2>
         <div class="flex flex-col md:flex-row justify-between md:-mx-4 lg:-mx-16">

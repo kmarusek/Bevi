@@ -3,11 +3,11 @@
     <div class="container text-center max-w-2xl">
       <div class="relative z-10 py-20 md:py-0">
         <div class="title-wrapper gsap-fade">
-          <h2 class="h3 text-blue-600">
+          <h2 class="h3 font-semibold text-blue-600">
             {{ block.title }}
           </h2>
         </div>
-        <div class="mt-2 block-content smaller md:px-24 gsap-fade leading-lose">
+        <div class="mt-2 block-content md:px-24 gsap-fade leading-lose">
           <p>
             {{ block.intro_text }}
           </p>
