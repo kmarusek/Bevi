@@ -10,7 +10,7 @@
         <div class="title-wrapper gsap-fade">
           <h2
             v-if="block.title"
-            class="h2"
+            class="h3 font-semibold"
           >
             {{ block.title }}
           </h2>
