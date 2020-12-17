@@ -35,3 +35,45 @@ body {
 main {
   @include descending-z-index;
 }
+
+
+//padding for the components. Some have extra padding top as to deal with the negative margine that the waves produce
+
+.padding-none {
+  @apply py-0;
+}
+.padding-sm {
+  @apply py-16;
+}
+
+.padding-smw {
+  @apply pt-20 pb-16;
+}
+
+.padding-md {
+  @apply py-20;
+  @screen lg {
+    @apply py-32;
+  }
+}
+
+.padding-mdw {
+  @apply pt-24 pb-20;
+  @screen lg {
+    @apply pt-40 pb-32;
+  }
+}
+
+.padding-lg {
+  @apply py-32;
+  @screen lg {
+    @apply py-48;
+  }
+}
+
+.padding-lgw {
+  @apply pt-24 pb-20;
+  @screen lg {
+    @apply pt-64 pb-40;
+  }
+}

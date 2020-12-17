@@ -234,7 +234,7 @@
 }
 
 .narrower {
-  @screen xl {
+  @screen lg {
     max-width: 33%;
   }
 }

@@ -1,10 +1,10 @@
 <template>
   <section
-    class="gsap-fade-section"
-    :class="{ wave : block.wave }"
+    class="gsap-fade-section flex"
+    :class="[{ wave : block.wave }, block.padding]"
     :style="{ 'background-image': `url('${block.background.sizes.large}')` }"
   >
-    <div class="container text-center py-32">
+    <div class="container text-center">
       <h3 class="font-space text-sm font-semibold uppercase text-gray-700 tracking-wide">
         {{ block.title }}
       </h3>
@@ -20,7 +20,7 @@
         >
           <img
             :src="slide.logo.sizes.thumbnail"
-            class="mx-auto gsap-fade"
+            class="mx-auto gsap-fade carousel-image"
           >
         </swiper-slide>
       </swiper>
@@ -102,5 +102,10 @@
 .wave {
   clip-path: url(#carousel-wave);
   @apply -mb-6 relative bg-white;
+}
+
+.carousel-image {
+  height: 4rem;
+  max-width: 120px;
 }
 </style>

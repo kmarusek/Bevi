@@ -80,6 +80,12 @@
 </script>
 
 <style lang="scss" scoped>
+body.landing-page {
+  .nav ul {
+    @apply hidden;
+  }
+}
+
 .header {
   @apply fixed w-full py-4 transition-colors duration-300 ease-in-out z-50;
   

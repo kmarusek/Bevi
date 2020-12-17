@@ -1,10 +1,10 @@
 <template>
   <section
     class="feature-block"
-    :class="sectionClasses"
+    :class="[sectionClasses, block.padding]"
   >
     <div
-      class="py-32 container xl:max-w-5xl flex flex-col items-center gsap-fade-section"
+      class="container xl:max-w-5xl flex flex-col items-center gsap-fade-section"
       :class="block.image_position !== 'Left' ? 'md:flex-row' : 'md:flex-row-reverse'"
     >
       <div
@@ -22,10 +22,7 @@
           class="mt-2 md:mt-4 block-content gsap-fade"
         />
       </div>
-      <div
-        class="w-full md:w-1/2 flex justify-center relative"
-        :class="block.image_position !== 'Left' ? 'md:pl-10 lg:pl-20' : 'md:pr-10 lg:pr-20'"
-      >
+      <div class="mx-auto md:mx-0 md:w-1/2 flex justify-center relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="66.877"
@@ -146,16 +143,20 @@
   }
   .bubble-small {
     @apply absolute w-10;
-    left: 0%;
-
+    top: 40%;
+    left: -5%;
     @screen md {
-      top: 40%;
+      left: 10%;
     }
   }
   .bubble-large {
-    @apply absolute right-0 w-12;
-    right: 10%;
+    @apply absolute w-12;
+    right: 0%;
     bottom: 0%;
+
+    @screen md {
+      right: 15%;
+    }
   }
 }
 

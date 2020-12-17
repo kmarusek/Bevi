@@ -1,28 +1,30 @@
 <template>
   <section
-    class="py-32 flex flex-wrap flex-col sm:flex-row container justify-center gsap-fade-section"
-    :class="{ wave : block.wave }"
+    class="gsap-fade-section"
+    :class="[{ wave : block.wave }, block.padding]"
   >
-    <div
-      v-for="bullet in block.bullets"
-      :key="bullet.id"
-      class="sm:flex w-full sm:w-1/2 lg:w-1/3 sm:my-8 gsap-fade"
-    >
-      <div class="w-1/4 sm:w-1/5">
-        <img
-          v-if="bullet.icon"
-          :src="bullet.icon.sizes.thumbnail"
-          class="mb-2 mt-8 sm:my-0"
-        >
-      </div>
-      <div class="sm:w-4/5 sm:px-6">
-        <h5 class="h5">
-          {{ bullet.title }}
-        </h5>
-        <div
-          v-html="bullet.content"
-          class="block-content smaller"
-        />
+    <div class="flex flex-wrap flex-col sm:flex-row container justify-center">
+      <div
+        v-for="bullet in block.bullets"
+        :key="bullet.id"
+        class="sm:flex w-full sm:w-1/2 lg:w-1/3 sm:my-8 gsap-fade"
+      >
+        <div class="w-1/4 sm:w-1/5">
+          <img
+            v-if="bullet.icon"
+            :src="bullet.icon.sizes.thumbnail"
+            class="mb-2 mt-8 sm:my-0"
+          >
+        </div>
+        <div class="sm:w-4/5 sm:px-6">
+          <h5 class="h5">
+            {{ bullet.title }}
+          </h5>
+          <div
+            v-html="bullet.content"
+            class="block-content smaller"
+          />
+        </div>
       </div>
     </div>
     <wave

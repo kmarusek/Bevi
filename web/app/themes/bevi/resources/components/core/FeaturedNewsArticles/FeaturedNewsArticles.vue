@@ -1,5 +1,5 @@
 <template>
-  <section class="container pt-24 lg:pt-36 ">
+  <section class="container pt-24 lg:pt-36 flex">
     <swiper
       ref="carousel"
       :options="swiperOptions"

@@ -1,9 +1,9 @@
 <template>
   <section
     class="information-module bg-green-100"
-    :class="{ wave : block.wave }"
+    :class="[{ wave : block.wave }, block.padding]"
   >
-    <div class="py-32 md:container flex flex-col items-center gsap-fade-section">
+    <div class="md:container flex flex-col items-center gsap-fade-section">
       <h3 class="h3 font-bold mb-4 gsap-fade">
         {{ block.title }}
       </h3>
@@ -29,6 +29,7 @@
               <ImageBlob
                 class="image"
                 :image="card.image.sizes.large"
+                small="true"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"

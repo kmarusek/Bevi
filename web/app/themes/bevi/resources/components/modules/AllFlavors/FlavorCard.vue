@@ -4,6 +4,9 @@
       class="flavor-wrapper"
       :class="{'selected-flavor' : selectedIndex === index }"
     >
+      <button class="flavor-btn btn">
+        Find out more
+      </button>
       <div class="image-wrapper">
         <img
           :src="flavor.featured_image"
@@ -93,9 +96,28 @@
         }
       }
     }
+
+    &:hover {
+      & .image-wrapper,
+      & .label {
+        opacity: 0.7;
+      }
+
+      & .flavor-btn {
+        transform: translateY(0);
+        @apply opacity-100;
+      }
+    }
+  }
+
+  .flavor-btn {
+    transform: translateY(5px);
+    transition: all ease 0.5s;
+    @apply opacity-0 absolute z-10;
   }
 
   .image-wrapper {
+     transition: opacity ease 0.5s;
     max-width: 160px;
     height: 160px;
     @apply relative flex items-center justify-center w-full;
@@ -136,6 +158,7 @@
   }
 
   .label {
+     transition: opacity ease 0.5s;
     line-height: 40px;
     @apply text-gray-550 font-semibold leading-tight mt-2 text-center;
   }
