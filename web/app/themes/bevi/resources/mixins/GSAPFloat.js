@@ -11,11 +11,11 @@ export default {
         return (direction = 1) => (min + delta * Math.random()) * direction;
       }
       
-      const randomX = random(0, 10);
-      const randomY = random(0, 10);
+      const randomX = random(2, 12);
+      const randomY = random(2, 12);
       const randomTime = random(3, 5);
       const randomTime2 = random(5, 10);
-      const randomAngle = random(-3, 3);
+      const randomAngle = random(-4, 4);
       const float = document.querySelectorAll('.gsap-float');
 
       function rotate(target, direction) {
