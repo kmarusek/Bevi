@@ -41,12 +41,12 @@
   }
 
   .block-content /deep/ ul {
-    @apply list-disc;
+    @apply list-disc text-gray-700;
     list-style-position: inside;
   }
 
   .block-content /deep/ ol {
-    @apply list-decimal;
+    @apply list-decimal text-gray-700;
     list-style-position: inside;
   }
 </style>

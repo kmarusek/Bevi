@@ -1,5 +1,5 @@
 <template>
-  <section class="container max-w-5xl py-py-20 lg:py-32 gsap-fade-section">
+  <section class="container max-w-5xl py-20 lg:py-32 gsap-fade-section">
     <h2
       class="mb-6 md:mb-8 font-semibold h3 text-center text-blue-600 gsap-fade"
     >
