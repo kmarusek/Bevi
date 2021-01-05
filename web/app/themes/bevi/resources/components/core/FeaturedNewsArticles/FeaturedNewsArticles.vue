@@ -9,12 +9,8 @@
         :key="index"
         class="lg:px-24"
       >
-        <div
-          class="flex flex-wrap lg:-mx-2 items-center overflow-hidden"
-        >
-          <div
-            class="relative lg:pr-6 lg:w-60 overflow-hidden"
-          >
+        <div class="flex flex-wrap lg:-mx-2 items-center overflow-hidden">
+          <div class="relative lg:pr-6 lg:w-60 overflow-hidden">
             <img
               :src="slide.featured_image"
               class="gsap-fade rounded object-cover h-75 w-full mb-4 lg:mb-0"
@@ -24,13 +20,9 @@
               class="absolute top-0 left-0 m-4"
             />
           </div>
-          <div
-            class="my-2 px-2 lg:w-40 lg:pl-10 overflow-hidden"
-          >
+          <div class="my-2 px-2 lg:w-40 lg:pl-10 overflow-hidden">
             <span class="mb-2 block text-xs font-semibold">Posted: {{ slide.post_date | moment("from", "now") }}</span>
-            <h3
-              class="h4 font-semibold leading-tight mb-4 text-blue-600"
-            >
+            <h3 class="h4 font-semibold leading-tight mb-4 text-blue-600">
               {{ slide.post_title }}
             </h3>
             <div
@@ -78,6 +70,7 @@
         slidesPerView: 1,
         speed: 600,
         loop: true,
+        spaceBetween: 20,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
@@ -109,8 +102,20 @@
 </script>
 
 <style lang="scss" scoped>
-  /deep/ .swiper-wrapper {
+/deep/ .swiper-container {
+  @apply pb-12;
+
+  @screen md {
+    @apply pb-0;
+  }
+}
+
+/deep/ .swiper-wrapper {
   @apply items-center;
+}
+
+/deep/ .swiper-slide {
+  @apply h-auto;
 }
 
 /deep/ .category.uncategorized {
@@ -135,7 +140,8 @@
   }
 }
 
-.custom-button-prev, .custom-button-next {
+.custom-button-prev,
+.custom-button-next {
   top: calc(100% - 30px);
   width: 50px;
   height: 50px;
@@ -145,7 +151,7 @@
   }
 
   &:after {
-    content: url('../../../assets/images/icons/circle-arrow.svg');
+    content: url("../../../assets/images/icons/circle-arrow.svg");
     width: 50px;
     height: 50px;
   }
