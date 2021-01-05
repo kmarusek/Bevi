@@ -163,7 +163,6 @@
       openTray(item, index) {
         this.trayLoading = true;
         this.selectedIndex = index;
-        const tray = document.querySelector('#tray');
 
         const flavorTray = document.querySelector('.tray-container');
 
@@ -173,6 +172,7 @@
           }
 
           setTimeout(() => {
+            const tray = document.querySelector('#tray');
             this.trayLoading = false;
             this.showTray = true;
             if (tray) {
