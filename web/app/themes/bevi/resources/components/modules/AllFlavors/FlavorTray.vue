@@ -30,7 +30,7 @@
       class="tray-wrapper"
       :class="trayLoading ? 'opacity-0' : 'opacity-100'"
     >
-      <div class="flex flex-col md:w-1/2 md:px-10 xl:px-20 h-full">
+      <div class="flex flex-col md:w-1/2 md:px-10 xl:px-20 h-auto">
         <div class="image-wrapper">
           <transition
             name="fade"
@@ -160,7 +160,7 @@
 
   .tray-wrapper {
     transition: opacity ease-in-out 0.5s;
-    @apply flex flex-col h-full;
+    @apply flex flex-col h-auto;
 
     @screen md {
       @apply flex flex-row;
