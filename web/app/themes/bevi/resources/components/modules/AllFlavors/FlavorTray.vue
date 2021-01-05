@@ -30,7 +30,7 @@
       class="tray-wrapper"
       :class="trayLoading ? 'opacity-0' : 'opacity-100'"
     >
-      <div class="flex flex-col md:w-1/2 md:px-10 xl:px-20 h-full">
+      <div class="flex flex-col md:w-1/2 md:px-10 xl:px-20 lg:h-full">
         <div class="image-wrapper">
           <transition
             name="fade"
