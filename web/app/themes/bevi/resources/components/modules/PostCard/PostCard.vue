@@ -2,6 +2,7 @@
   <a :href="post.link">
     <div class="post-card">
       <CategoryButton
+        v-if="cardCategory[0]"
         :category="cardCategory[0]"
         class="absolute top-0 left-0 m-4"
       />
@@ -33,12 +34,12 @@
       },
       categories: {
         required: true,
-        type: Object,
+        type: [Object, Array],
       },
     },
     data() {
       return {
-        cardCategory: null,
+        cardCategory: 0,
       };
     },
     mounted() {
