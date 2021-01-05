@@ -39,7 +39,7 @@
             />
             <img
               v-if="counter.counter_thumb"
-              class="h-70 lg:h-80 mx-auto relative"
+              class="h-70 xl:h-80 mx-auto relative"
               :src="counter.counter_thumb.sizes.large"
             >
           </div>
