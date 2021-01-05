@@ -81,7 +81,7 @@
 
 <style lang="scss" scoped>
 body.landing-page {
-  .nav ul {
+  .header {
     @apply hidden;
   }
 }
