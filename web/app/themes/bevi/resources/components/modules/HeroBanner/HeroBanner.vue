@@ -2,7 +2,7 @@
   <section
     class="bg-cover bg-no-repeat bg-center flex relative overflow-hidden main-banner large-banner"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
-    :class="[block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen ', { wave : block.wave }]"
+    :class="{wave : block.wave}"
   >
     <video
       v-if="block.add_background_video && windowWidth >= 768"
@@ -53,7 +53,7 @@
         class="flex items-center"
       >
         <div
-          class="w-full"
+          class="w-full gsap-fades z-10"
           :class="[
             {
               'md:pl-20' : block.text_position === 'Left' && block.feature_image,
@@ -64,14 +64,13 @@
         >
           <h6
             v-if="block.small_title"
-            class="font-space font-medium md:text-lg gsap-fades"
+            class="font-space font-medium md:text-lg"
           >
             {{ block.small_title }}
           </h6>
           <p
             v-if="block.large_title"
             :class="block.text_position === 'Center' ? 'heading-one' : 'my-4 heading-two'"
-            class="gsap-fades"
           >
             {{ block.large_title }}
           </p>
@@ -79,14 +78,14 @@
           <div
             v-if="block.main_text && block.text_position != 'Center'"
             v-html="block.main_text"
-            class="gsap-fades block-content"
+            class="block-content"
           />
 
           <a
             v-if="block.link"
             :href="block.link.url"
             :target="block.link.target"
-            class="btn mt-4 gsap-fades"
+            class="btn mt-4"
             :class="{'center-bottom' : block.text_position === 'Center'}"
           >
             {{ block.link.title }}
@@ -95,8 +94,8 @@
       </div>
       <div
         v-if="block.feature_image"
-        class="flex-1 flex mt-10 lg:mt-0 "
-        :class="block.align_feature_image_bottom ? 'items-end' : 'items-center'"
+        class="flex-1 block lg:flex mt-10 lg:mt-0 "
+        :class="[block.align_feature_image_bottom ? 'items-end' : 'items-center', {'absolute bottom-0 w-full' : block.text_position === 'Center'}]"
       >
         <img
           v-if="block.feature_image"

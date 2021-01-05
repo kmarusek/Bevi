@@ -3,12 +3,17 @@
 
   &.small-banner {
     min-height: 30vh;
+
     @screen md {
       min-height: 50vh;
     }
   }
   &.large-banner {
     min-height: 75vh;
+    
+    @screen md {
+      @apply min-h-screen;
+    }
   }
 
   &.wave {
