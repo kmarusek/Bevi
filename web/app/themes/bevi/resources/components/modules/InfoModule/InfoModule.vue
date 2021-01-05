@@ -7,15 +7,14 @@
       <h3 class="h3 font-semibold mb-4 gsap-fade">
         {{ block.title }}
       </h3>
-      <swiper
+      <div
         ref="info"
-        :options="swiperOptions"
-        class="w-full relative py-2 md:py-0 md:overflow-visible"
+        class="w-full relative py-2 md:py-0 md:overflow-visible flex flex-col md:flex-row"
       >
-        <swiper-slide
+        <div
           v-for="(card, index) in block.information_cards"
           :key="index"
-          class="gsap-fade"
+          class="gsap-fade w-full md:w-1/3 py-10 md:py-0 px-4 xl:px-0"
         >
           <div
             class="flex flex-col items-center text-center"
@@ -24,7 +23,7 @@
           >
             <div
               class="image-wrapper"
-              :class="{hovering: isHovered === index || activeSlide === index }"
+              :class="{hovering: isHovered === index }"
             >
               <ImageBlob
                 class="image"
@@ -151,16 +150,8 @@
               {{ card.cta.title }}
             </a>
           </div>
-        </swiper-slide>
-      </swiper>
-      <carousel-dots
-        @carousel-item-active="carouselUpdateSlide"
-        @carousel-prev="carouselPrev"
-        @carousel-next="carouselNext"
-        :item-count="block.information_cards.length"
-        :active-slide="activeSlide"
-        class=" md:hidden pt-10"
-      />
+        </div>
+      </div>
     </div>
     <wave
       v-if="block.wave"
@@ -184,72 +175,7 @@
     },
     data: () => ({
       isHovered: null,
-      activeSlide: 1,
-      swiperOptions: {
-        initialSlide: 1,
-        slidesPerView: 1.2,
-        centeredSlides: true,
-        spaceBetween: 20,
-        speed: 600,
-        loop: false,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-          375: {
-            spaceBetween: 30,
-            slidesPerView: 2,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 50,
-            centeredSlides: false,
-            allowSlidePrev: false,
-            allowSlideNext: false,
-          },
-        },
-      },
     }),
-    created() {
-      window.addEventListener('resize', this.updateActiveSlide);
-    },
-    destroyed() {
-      window.removeEventListener('resize', this.updateActiveSlide);
-    },
-    methods: {
-      carouselPrev() {
-        this.swiper.slidePrev();
-      },
-      carouselNext() {
-        this.swiper.slideNext();
-      },
-      carouselUpdateSlide(index) {
-        this.swiper.slideTo(index);
-        this.activeSlide = index;
-      },
-      carouselPaginationUpdate() {
-        this.activeSlide = this.swiper.activeIndex;
-      },
-      updateActiveSlide() {
-        if (window.innerWidth >= 768) {
-          this.activeSlide = -1;
-        } else {
-          this.activeSlide = 1;
-        }
-      },
-    },
-    mounted() {
-      this.swiper.on('slideChange', () => {
-        this.carouselPaginationUpdate();
-      });
-      this.updateActiveSlide();
-    },
-    computed: {
-      swiper() {
-        return this.$refs.info.$swiper;
-      },
-    },
   };
 </script>
 

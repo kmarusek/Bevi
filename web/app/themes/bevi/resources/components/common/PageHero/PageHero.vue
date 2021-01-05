@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative overflow-hidden flex items-center main-banner gsap-fade-section"
+    class="relative overflow-hidden flex items-center main-banner small-banner gsap-fade-section"
     :class="{ wave : block.wave || block.hero.wave }"
   >
     <div

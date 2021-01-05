@@ -1,8 +1,8 @@
 <template>
   <section
-    class="bg-cover bg-no-repeat bg-center flex relative overflow-hidden main-banner"
+    class="bg-cover bg-no-repeat bg-center flex relative overflow-hidden main-banner large-banner"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
-    :class="[block.text_position === 'Center' ? 'lg:min-h-screen ' : 'min-h-screen ', { wave : block.wave }]"
+    :class="[block.text_position === 'Center' ? 'min-h-auto lg:min-h-screen ' : 'min-h-screen ', { wave : block.wave }]"
   >
     <video
       v-if="block.add_background_video && windowWidth >= 768"
@@ -95,7 +95,7 @@
       </div>
       <div
         v-if="block.feature_image"
-        class="flex-1 flex mt-10 lg:mt-0 "
+        class="flex-1 block lg:flex mt-10 lg:mt-0 -z-10"
         :class="block.align_feature_image_bottom ? 'items-end' : 'items-center'"
       >
         <img
@@ -156,9 +156,9 @@
             onEnter: () => gsap.to(elems, {
               y: 0,
               opacity: 1,
-              duration: 1,
-              stagger: 0.2,
-              delay: 0.5,
+              duration: 0.3,
+              stagger: 0.3,
+              delay: 0.15,
               ease: 'power3.out',
               overwrite: 'auto',
             }),
