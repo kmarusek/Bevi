@@ -53,7 +53,7 @@
     props: {
       categories: {
         required: true,
-        type: Object,
+        type: [Object, Array],
       },
       categoryId: {
         type: String,
@@ -87,7 +87,7 @@
     },
     methods: {
       getAllPosts() {
-        this.axios.get('/wp-json/wp/v2/posts', { params: { categories: this.categoryId } }).then((response) => {
+        this.axios.get('/wp-json/wp/v2/posts', { params: { categories: this.categoryId, per_page: 100 } }).then((response) => {
           this.postsNumber = response.data.length;
         });
       },
@@ -162,6 +162,7 @@
 
       &:nth-child(6n + 2) {
         height: 25rem;
+        margin-top: 0;
       }
 
       &:nth-child(6n + 3) {
