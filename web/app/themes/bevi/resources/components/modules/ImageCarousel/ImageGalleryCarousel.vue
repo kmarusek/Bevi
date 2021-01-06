@@ -121,7 +121,7 @@
 }
 
 /deep/ .swiper-wrapper {
-  @apply items-center;
+  @apply items-center h-auto;
 }
 
 .fixed-height-container {
