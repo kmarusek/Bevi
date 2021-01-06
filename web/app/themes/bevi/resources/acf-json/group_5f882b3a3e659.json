@@ -736,30 +736,6 @@
                             "mime_types": ""
                         },
                         {
-                            "key": "field_5fbb93efe6f06",
-                            "label": "Video Placeholder Image",
-                            "name": "poster",
-                            "type": "image",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "preview_size": "thumbnail",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
-                        },
-                        {
                             "key": "field_5fb781227e318",
                             "label": "Second Title",
                             "name": "second_title",
@@ -768,7 +744,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -777,6 +753,37 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5ff5f45101571",
+                            "label": "Text Color",
+                            "name": "text_color",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "text-blue-600": "Dark Blue",
+                                "text-white": "White",
+                                "text-blue": "Blue",
+                                "text-green": "Green",
+                                "text-purple": "Purple",
+                                "text-red": "Red",
+                                "text-orange": "Orange",
+                                "text-yellow": "Yellow"
+                            },
+                            "default_value": "Dark Blue",
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "array",
+                            "ajax": 0,
+                            "placeholder": ""
                         },
                         {
                             "key": "field_5fb7813c7e31a",
@@ -2741,5 +2748,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1609942680
+    "modified": 1609954873
 }
