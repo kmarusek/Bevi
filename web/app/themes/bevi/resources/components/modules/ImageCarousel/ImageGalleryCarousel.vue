@@ -12,6 +12,7 @@
     <swiper
       ref="carousel"
       :options="swiperOptions"
+      class="swiper-carousel"
     >
       <swiper-slide
         v-for="(slide, index) in block.slides"
@@ -121,7 +122,7 @@
 }
 
 /deep/ .swiper-wrapper {
-  @apply items-center;
+  @apply items-center h-auto;
 }
 
 .fixed-height-container {
