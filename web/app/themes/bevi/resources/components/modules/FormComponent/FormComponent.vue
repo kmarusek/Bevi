@@ -65,8 +65,13 @@
 
 <style lang="scss" scoped>
 .pardot-form {
-  /deep/ iframe {
+  /deep/ iframe.pardotform {
+    min-height: 1000px;
     @apply h-full;
+
+    @screen lg {
+      min-height: 550px;
+    }
   }
 }
 .bubble-one {
