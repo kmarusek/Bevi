@@ -1,23 +1,5 @@
 <template>
-  <section
-    :class="{ 'bg-blue-100' : block.show_blue_background }"
-    class="parallax-section"
-  >
-    <single-bubble
-      class="absolute opacity-50 bubble-one parallax"
-      data-speed="2"
-      :stroke-color="block.show_blue_background ? 'white' : 'blue'"
-    />
-    <single-bubble
-      class="absolute opacity-50 bubble-two parallax"
-      data-speed="2"
-      :stroke-color="block.show_blue_background ? 'white' : 'blue'"
-    />
-    <single-bubble
-      class="absolute opacity-50 bubble-three parallax"
-      data-speed="2"
-      :stroke-color="block.show_blue_background ? 'white' : 'blue'"
-    />
+  <section :class="{ 'bg-blue-100' : block.show_blue_background }">
     <div class="py-20 lg:py-32 container xl:max-w-6xl flex flex-col lg:flex-row relative">
       <div class="w-full lg:w-5/12 lg:pr-16">
         <h3 class="text-3xl md:text-4xl mb-4 text-blue-600 font-semibold leading-tight">
@@ -52,6 +34,7 @@
         <div
           class="pardot-form"
           v-html="block.pardot_form"
+          :style="[ isMobile ? { 'height' : `${block.form_height.mobile}px` } : { 'height' : `${block.form_height.desktop}px` } ]"
         />
       </div>
     </div>
@@ -69,17 +52,21 @@
         type: [Object, Array],
       },
     },
+    computed: {
+      isMobile() {
+        if (window.innerWidth <= 768) {
+          return true;
+        }
+        return false;
+      },
+    },
   };
 </script>
 
 <style lang="scss" scoped>
 .pardot-form {
-  /deep/ iframe.pardotform {
-    height: 1000px;
-
-      @screen lg {
-        height: 550px;
-      }
+  /deep/ iframe {
+    @apply h-full;
   }
 }
 .bubble-one {
