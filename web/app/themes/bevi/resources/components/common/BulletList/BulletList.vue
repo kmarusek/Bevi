@@ -22,7 +22,7 @@
           </h5>
           <div
             v-html="bullet.content"
-            class="block-content smaller"
+            class="block-content"
           />
         </div>
       </div>

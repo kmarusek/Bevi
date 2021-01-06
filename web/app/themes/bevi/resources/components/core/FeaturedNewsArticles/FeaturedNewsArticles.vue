@@ -27,7 +27,7 @@
             </h3>
             <div
               v-html="slide.post_content"
-              class="block-content smaller"
+              class="block-content"
             />
             <a
               :href="slide.permalink"

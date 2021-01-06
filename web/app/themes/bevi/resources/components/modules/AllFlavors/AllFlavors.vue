@@ -17,7 +17,7 @@
         </div>
         <div
           v-if="block.intro_text"
-          class="mt-2 md:mt-6 block-content smaller md:px-8 gsap-fade"
+          class="mt-2 md:mt-6 block-content md:px-8 gsap-fade"
         >
           <p>
             {{ block.intro_text }}

@@ -48,7 +48,7 @@
               {{ counter.post_title }}
             </h3>
             <div
-              class="mt-2 px-4 md:px-12 text-body smaller"
+              class="mt-2 px-4 md:px-12 text-body"
               v-html="counter.short_description"
             />
             <a
