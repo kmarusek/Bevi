@@ -63,14 +63,6 @@
         type: Object,
       },
     },
-    computed: {
-      isMobile() {
-        if (window.innerWidth <= 768) {
-          return true;
-        }
-        return false;
-      },
-    },
     mounted() {
       this.startAnimation();
     },
