@@ -54,10 +54,7 @@
     },
     computed: {
       isMobile() {
-        if (window.innerWidth <= 768) {
-          return true;
-        }
-        return false;
+        return window.innerWidth <= 768;
       },
     },
   };
