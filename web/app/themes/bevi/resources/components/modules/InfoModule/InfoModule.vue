@@ -139,7 +139,7 @@
             <div
               v-if="card.intro_text"
               v-html="card.intro_text"
-              class="mt-2 block-content smaller text-center max-w-md px-2 sm:max-w-none sm:p-0"
+              class="mt-2 block-content text-center max-w-md px-2 sm:max-w-none sm:p-0"
             />
             <a
               v-if="card.cta"
