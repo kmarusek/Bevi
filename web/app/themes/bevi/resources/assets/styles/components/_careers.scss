@@ -16,7 +16,7 @@
 .whr-item {
   @apply border-b border-gray-400 py-4 relative pr-16;
   &:after {
-    @apply absolute right-0;
+    @apply absolute right-0 pointer-events-none;
 
     content: url("../images/icons/circle-arrow.svg");
     width: 50px;
@@ -31,9 +31,16 @@
 }
 
 .whr-title {
-  @apply text-blue-600 font-medium text-2xl mb-2 leading-tight;
+  @apply text-blue-600 font-medium text-2xl;
+  margin: 2rem 0;
+  line-height: 2.25;
+  
   &:hover {
     @apply underline;
+  }
+
+  a {
+    @apply w-full h-full top-0 absolute;
   }
 }
 
