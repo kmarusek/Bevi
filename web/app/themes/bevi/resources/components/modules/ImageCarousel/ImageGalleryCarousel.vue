@@ -12,7 +12,6 @@
     <swiper
       ref="carousel"
       :options="swiperOptions"
-      class="swiper-carousel"
     >
       <swiper-slide
         v-for="(slide, index) in block.slides"
