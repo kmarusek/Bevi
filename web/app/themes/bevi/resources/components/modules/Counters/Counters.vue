@@ -20,7 +20,7 @@
         >
           <div
             class="bubble-wrap relative"
-            :class="{ hovering: isHovered === index }"
+            :class="{ hovering: isHovered === index || isMobile }"
           >
             <single-bubble
               class="bubble gsap-float"
@@ -91,6 +91,11 @@
     data: () => ({
       isHovered: null,
     }),
+    computed: {
+      isMobile() {
+        return window.innerWidth <= 768;
+      },
+    },
   };
 </script>
 
