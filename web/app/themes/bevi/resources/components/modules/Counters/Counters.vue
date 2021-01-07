@@ -13,28 +13,29 @@
       <div class="w-full flex flex-col sm:flex-row justify-around">
         <div
           class="mb-6 w-full sm:w-1/2 md:w-2/5 lg:w-30 flex flex-col gsap-fade"
-          v-for="counter in counters"
+          v-for="(counter, index) in counters"
           :key="counter.id"
+          @mouseover="isHovered = index"
+          @mouseout="isHovered = null"
         >
-          <div class="relative">
+          <div
+            class="bubble-wrap relative"
+            :class="{ hovering: isHovered === index }"
+          >
             <single-bubble
-              class="bubble parallax"
-              data-speed="1"
+              class="bubble gsap-float"
               stroke-color="light-blue"
             />
             <single-bubble
-              class="bubble parallax"
-              data-speed="1.6"
+              class="bubble gsap-float"
               stroke-color="light-blue"
             />
             <single-bubble
-              class="bubble parallax"
-              data-speed="1.2"
+              class="bubble gsap-float"
               stroke-color="light-blue"
             />
             <single-bubble
-              class="bubble parallax"
-              data-speed="1.4"
+              class="bubble gsap-float"
               stroke-color="light-blue"
             />
             <img
@@ -73,9 +74,10 @@
 <script>
   import GSAPParallax from '~/mixins/GSAPParallax.js';
   import GSAPFade from '~/mixins/GSAPFade.js';
+  import GSAPFloat from '~/mixins/GSAPFloat.js';
 
   export default {
-    mixins: [GSAPParallax, GSAPFade],
+    mixins: [GSAPParallax, GSAPFade, GSAPFloat],
     props: {
       counters: {
         required: true,
@@ -86,31 +88,45 @@
         type: Object,
       },
     },
+    data: () => ({
+      isHovered: null,
+    }),
   };
 </script>
 
 <style lang="scss" scoped>
+.bubble-wrap {
+  @apply relative;
+
+  &.hovering {
+    & .bubble {
+      @apply opacity-100;
+    }
+  }
+}
+
 .bubble {
-  @apply absolute;
+  transition: opacity ease 0.5s;
+  @apply absolute opacity-0;
 
   &:nth-of-type(1) {
     top: 4%;
     left: 10%;
-    transform: scale(0.4);
+    width: 20px;
 
     @screen md {
-      top: 30%;
-      left: 5%;
+      top: -10%;
+      left: 8%;
     }
   }
 
   &:nth-of-type(2) {
     top: 15%;
     right: 15%;
-    transform: scale(0.6);
+    width: 30px;
 
     @screen md {
-      top: 45%;
+      top: 3%;
       right: 5%;
     }
   }
@@ -120,15 +136,15 @@
     right: 15%;
 
     @screen md {
-      bottom: -15%;
-      right: 0;
+      bottom: 10%;
+      right: -5%;
     }
   }
 
   &:nth-of-type(4) {
     bottom: 10%;
     left: 10%;
-    transform: scale(0.5);
+    width: 25px;
 
     @screen md {
       bottom: -10%;

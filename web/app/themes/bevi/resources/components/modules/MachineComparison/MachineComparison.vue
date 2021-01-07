@@ -7,7 +7,7 @@
       <div class="w-full flex flex-col sm:flex-row justify-around flex-wrap">
         <div
           class="dispenser-item w-full sm:w-1/2 lg:px-16 xl:px-32 flex flex-col sm:border-b border-r border-blue-200 pb-8 gsap-fade"
-          v-for="(counter, index) in counters"
+          v-for="counter in counters"
           :key="counter.id"
         >
           <div class="relative mt-auto">
@@ -15,12 +15,6 @@
               v-if="counter.counter_image"
               class="mx-auto relative z-10"
               :src="counter.counter_image.sizes.large"
-            >
-            <img
-              :src="require(`~/assets/images/blob_${index}.svg`)"
-              :alt="`blob_${index}`"
-              :class="`blob-${index}`"
-              class="blob"
             >
           </div>
           <h4 class="hidden sm:block text-2.5xl text-blue-600 font-semibold mt-6">
@@ -76,11 +70,6 @@
 </script>
 
 <style lang="scss" scoped>
-.blob {
-  @apply absolute z-0;
-  top: 50%;
-  transform: translateY(-50%);
-}
 .dispenser-item {
   &:nth-of-type(even) {
     border-right: 0;
