@@ -66,10 +66,9 @@
   @apply text-center relative;
 
   .overflow-wrapper {
-    
-    @apply min-h-full;
+    @apply min-h-full overflow-hidden;
+
     @screen lg {
-      @apply overflow-hidden;
       min-height: 540px;
     }
   }

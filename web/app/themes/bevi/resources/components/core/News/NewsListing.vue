@@ -19,7 +19,10 @@
       :disabled="loading"
       v-if="showLoadMore"
     >
-      <span v-if="loading">Loading...</span>
+      <span
+        class="loading"
+        v-if="loading"
+      >Loading...</span>
       <span v-else>View more</span>
     </button>
     <single-bubble
@@ -94,6 +97,7 @@
       getPosts() {
         this.axios.get('/wp-json/wp/v2/posts', { params: this.queryOptions }).then((response) => {
           this.posts = response.data;
+          this.loading = false;
         });
       },
       loadMore() {
@@ -102,12 +106,9 @@
         } else {
           this.queryOptions.per_page += 6;
         }
-        this.loading = true;
 
-        setTimeout(() => {
-          this.getPosts();
-          this.loading = false;
-        }, 500);
+        this.loading = true;
+        this.getPosts();
       },
     },
   };
@@ -216,6 +217,19 @@
   &:nth-of-type(4) {
     top: 40%;
     left: -2%;
+  }
+}
+
+.loading {
+  animation: loading 1s infinite alternate;
+}
+
+@keyframes loading {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>

@@ -3,7 +3,7 @@
     class="relative bg-blue-100 gsap-fade-section"
     :class="{ wave : block.wave }"
   >
-    <div class="py-20 lg:py-32 md:container flex flex-col items-center text-center">
+    <div class="py-20 lg:py-32 container flex flex-col items-center text-center">
       <p class="uppercase font-space text-blue-500 text-sm font-bold tracking-wider mb-1 gsap-fade">
         Our Products
       </p>
@@ -20,7 +20,7 @@
         >
           <div
             class="bubble-wrap relative"
-            :class="{ hovering: isHovered === index }"
+            :class="{ hovering: isHovered === index || isMobile }"
           >
             <single-bubble
               class="bubble gsap-float"
@@ -91,6 +91,11 @@
     data: () => ({
       isHovered: null,
     }),
+    computed: {
+      isMobile() {
+        return window.innerWidth <= 768;
+      },
+    },
   };
 </script>
 

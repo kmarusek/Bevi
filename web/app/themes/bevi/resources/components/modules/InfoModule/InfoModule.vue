@@ -14,7 +14,7 @@
         <div
           v-for="(card, index) in block.information_cards"
           :key="index"
-          class="gsap-fade w-full md:w-1/3 py-10 md:py-0 px-4 xl:px-0"
+          class="gsap-fade w-full md:w-1/3 py-10 md:py-0 px-4"
         >
           <div
             class="flex flex-col items-center text-center"
