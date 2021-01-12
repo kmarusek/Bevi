@@ -81,7 +81,7 @@
           gsap.to(el, {
             scrollTrigger: {
               trigger: el,
-              start: 'top 80%',
+              start: 'top 85%',
               end: 'top 60%',
             },
             opacity: 1,
@@ -100,20 +100,20 @@
         tl.to('.text-area', {
           ease: 'power1.out',
           opacity: 0,
-          duration: 0.2,
+          duration: 0.1,
         }, '+=0.6')
           .call(this.playVideo)
           .to('.second-title', {
             ease: 'power1.out',
             opacity: 1,
             y: 0,
-            duration: 0.3,
+            duration: 0.2,
           })
           .to('.second-button', {
             ease: 'power1.out',
             opacity: 1,
             y: 0,
-            duration: 0.3,
+            duration: 0.2,
           }, '-=0.2');
       },
     },
