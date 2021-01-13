@@ -1,9 +1,12 @@
 <template>
   <section
     class="information-module bg-green-100"
-    :class="[{ wave : block.wave }, block.padding]"
+    :class="{wave : block.wave}"
   >
-    <div class="md:container flex flex-col items-center gsap-fade-section">
+    <div
+      class="md:container flex flex-col items-center gsap-fade-section"
+      :class="lock.padding"
+    >
       <h3 class="h3 font-semibold mb-4 gsap-fade">
         {{ block.title }}
       </h3>
