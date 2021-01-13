@@ -7,16 +7,16 @@
       <div
         v-for="bullet in block.bullets"
         :key="bullet.id"
-        class="sm:flex w-full sm:w-1/2 lg:w-1/3 sm:my-8 gsap-fade"
+        class="flex w-full sm:w-1/2 lg:w-1/3 my-4 sm:my-8 gsap-fade"
       >
-        <div class="w-1/4 sm:w-1/5">
+        <div class="w-1/5 pr-2 md:pr-0">
           <img
             v-if="bullet.icon"
             :src="bullet.icon.sizes.thumbnail"
             class="mb-2 mt-8 sm:my-0"
           >
         </div>
-        <div class="sm:w-4/5 sm:px-6">
+        <div class="w-4/5 sm:px-6">
           <h5 class="h5">
             {{ bullet.title }}
           </h5>

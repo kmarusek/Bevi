@@ -14,13 +14,13 @@ export default {
         
         ScrollTrigger.create({
           trigger: section,
-          start: 'top 80%',
+          start: 'top 85%',
           onEnter: () => gsap.to(elems, {
             y: 0,
             opacity: 1,
             duration: 1,
-            stagger: 0.2,
-            delay: 0.3,
+            stagger: 0.1,
+            delay: 0.1,
             ease: 'power3.out',
             overwrite: 'auto',
           }),
