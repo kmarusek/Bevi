@@ -5,7 +5,7 @@
   >
     <div
       class="md:container flex flex-col items-center gsap-fade-section"
-      :class="lock.padding"
+      :class="block.padding"
     >
       <h3 class="h3 font-semibold mb-4 gsap-fade">
         {{ block.title }}
