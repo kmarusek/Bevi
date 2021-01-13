@@ -16,7 +16,7 @@
         <swiper-slide
           v-for="slide in block.carousel"
           :key="slide.id"
-          class="w-full"
+          class="h-auto"
         >
           <img
             :src="slide.logo.sizes.thumbnail"
@@ -96,7 +96,7 @@
 
 <style lang="scss" scoped>
 /deep/ .swiper-wrapper {
-  @apply items-center;
+  @apply items-center h-auto;
 }
 
 .wave {
