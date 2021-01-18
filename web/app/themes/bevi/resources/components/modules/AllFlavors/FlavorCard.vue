@@ -4,9 +4,6 @@
       class="flavor-wrapper"
       :class="{'selected-flavor' : selectedIndex === index }"
     >
-      <button class="flavor-btn btn">
-        Find out more
-      </button>
       <div class="image-wrapper">
         <img
           :src="flavor.featured_image"
@@ -98,28 +95,20 @@
     }
 
     &:hover {
-      & .image-wrapper,
       & .label {
         opacity: 0.7;
       }
-
-      & .flavor-btn {
-        transform: translateY(0);
-        @apply opacity-100;
+      & .image-wrapper {
+        transform: scale(1.1);
       }
     }
   }
 
-  .flavor-btn {
-    transform: translateY(5px);
-    transition: all ease 0.5s;
-    @apply opacity-0 absolute z-10;
-  }
-
   .image-wrapper {
-     transition: opacity ease 0.5s;
+    transition: all ease 0.5s;
     max-width: 160px;
     height: 160px;
+    transform: scale(1);
     @apply relative flex items-center justify-center w-full;
 
     @screen md {

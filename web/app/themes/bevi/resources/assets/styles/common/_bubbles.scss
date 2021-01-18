@@ -11,7 +11,7 @@
   
   .bubble {
     @apply absolute inline-block;
-    top: 110%;
+    top: 100%;
     will-change: transform;
 
     &:nth-of-type(even) {
@@ -32,7 +32,7 @@
   }
   .bubble1 {
     left: 22%;
-    animation: bubbles 9s linear infinite 0.25s;
+    animation: bubbles 9s linear infinite 0s;
 
     img {
       animation: sideWays 6s ease-in-out infinite alternate;
@@ -40,28 +40,28 @@
   }
   .bubble2 {
     left: 14%;
-    animation: bubbles 14s linear infinite 1.5s;
+    animation: bubbles 14s linear infinite 0.9s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble3 {
     left: 70%;
-    animation: bubbles 7.5s linear infinite 2.5s;
+    animation: bubbles 7.5s linear infinite 1.4s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble4 {
     left: 80%;
-    animation: bubbles 11s linear infinite 0.5s;
+    animation: bubbles 11s linear infinite 0.3s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble5 {
     left: 43%;
-    animation: bubbles 9.5s linear infinite 1s;
+    animation: bubbles 9.5s linear infinite 0.5s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
@@ -75,14 +75,14 @@
   }
   .bubble7 {
     left: 10%;
-    animation: bubbles 9s linear infinite 1.2s;
+    animation: bubbles 9s linear infinite 0.8s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
   }
   .bubble8 {
     left: 13%;
-    animation: bubbles 12.6s linear infinite 0.3s;
+    animation: bubbles 12.6s linear infinite 0.1s;
     img {
       animation: sideWays 4s ease-in-out infinite alternate;
     }
@@ -96,14 +96,14 @@
   }
   .bubble10 {
     left: 69%;
-    animation: bubbles 9.8s linear infinite 1.8s;
+    animation: bubbles 9.8s linear infinite 1s;
     img {
       animation: sideWays 2s ease-in-out infinite alternate;
     }
   }
   .bubble11 {
     left: 85%;
-    animation: bubbles 12s linear infinite 3s;
+    animation: bubbles 12s linear infinite 1.8s;
     img {
       animation: sideWays 4.6s ease-in-out infinite alternate;
     }
