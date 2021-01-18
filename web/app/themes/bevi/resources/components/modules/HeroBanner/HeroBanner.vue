@@ -147,18 +147,17 @@
         gsap.utils.toArray('.gsap-fade-sections').forEach((section) => {
           const elems = section.querySelectorAll('.gsap-fades');
         
-          gsap.set(elems, { y: 10, opacity: 0 });
+          gsap.set(elems, { opacity: 0 });
         
           ScrollTrigger.create({
             trigger: section,
             start: 'top 85%',
             scrub: true,
             onEnter: () => gsap.to(elems, {
-              y: 0,
               opacity: 1,
-              duration: 0.2,
-              stagger: 0.2,
-              delay: 0.15,
+              duration: 0.1,
+              stagger: 0.05,
+              delay: 0.05,
               ease: 'power3.out',
               overwrite: 'auto',
             }),
@@ -240,7 +239,7 @@
 }
 
 .block-content /deep/ {
-  p {
+  p, ul {
     @apply text-gray-550;
   }
 
