@@ -141,7 +141,7 @@
         if (this.block.mobile_background_image && this.windowWidth <= 767) {
           return this.block.mobile_background_image.sizes.medium_large;
         }
-        return this.block.background_image.sizes.large;
+        return this.block.background_image.url;
       },
       startAnimation() {
         gsap.utils.toArray('.gsap-fade-sections').forEach((section) => {
