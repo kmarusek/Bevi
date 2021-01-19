@@ -181,7 +181,7 @@
 
     &:nth-of-type(2) {
       bottom: 16%;
-      right: -8%;
+      right: 2%;
 
       @screen md {
         bottom: 11%;
@@ -191,7 +191,7 @@
 
     &:nth-of-type(3) {
       bottom: 5%;
-      left: -17%;
+      left: 4%;
 
       @screen md {
         bottom: 10%;
