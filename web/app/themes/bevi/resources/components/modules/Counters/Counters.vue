@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative bg-blue-100 gsap-fade-section"
+    class="relative bg-blue-100 gsap-fade-section gsap-float-section"
     :class="{ wave : block.wave }"
   >
     <div class="py-20 lg:py-32 container flex flex-col items-center text-center">
