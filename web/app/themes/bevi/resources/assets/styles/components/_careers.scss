@@ -33,7 +33,11 @@
 .whr-title {
   @apply text-blue-600 font-medium text-2xl;
   margin: 2rem 0;
-  line-height: 2.25;
+  line-height: 1;
+
+  @screen md {
+    line-height: 2.25;
+  }
   
   &:hover {
     @apply underline;
