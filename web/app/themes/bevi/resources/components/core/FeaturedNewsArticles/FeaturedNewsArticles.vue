@@ -114,10 +114,6 @@
   @apply items-center;
 }
 
-/deep/ .swiper-slide {
-  @apply h-auto;
-}
-
 /deep/ .category.uncategorized {
   @apply order-1;
 }
