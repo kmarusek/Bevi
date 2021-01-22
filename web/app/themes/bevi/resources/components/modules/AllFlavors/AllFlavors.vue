@@ -157,7 +157,9 @@
         }
       },
       closeTray() {
+        const selected = document.querySelector('.selected-flavor');
         this.showTray = false;
+        selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
         this.selectedIndex = null;
       },
       openTray(item, index) {
