@@ -1,8 +1,11 @@
 <template>
   <section class="text-center">
-    <div class="parallax-container h-screen overflow-hidden">
+    <div
+      class="parallax-container h-screen overflow-hidden bg-cover bg-no-repeat bg-center"
+      :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
+    >
       <video
-        v-if="block.video.url"
+        v-if="block.video.url && windowWidth >= 768"
         id="videos"
         muted
         loop
@@ -63,10 +66,23 @@
         type: Object,
       },
     },
+    data: () => ({
+      windowWidth: window.innerWidth,
+    }),
     mounted() {
+      window.onresize = () => {
+        this.windowWidth = window.innerWidth;
+      };
+
       this.startAnimation();
     },
     methods: {
+      backgroundImage() {
+        if (this.block.mobile_background_image && this.windowWidth <= 767) {
+          return this.block.mobile_background_image.sizes.medium_large;
+        }
+        return null;
+      },
       playVideo() {
         document.getElementById('videos').play();
       },
