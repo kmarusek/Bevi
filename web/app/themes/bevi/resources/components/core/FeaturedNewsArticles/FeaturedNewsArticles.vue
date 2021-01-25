@@ -39,13 +39,11 @@
         </div>
       </swiper-slide>
       <div
-        v-if="block.length >= 2"
-        class="gsap-fade swiper-button-prev custom-button-prev relative lg:absolute mt-4 lg:mt-0"
+        class="gsap-fade swiper-button-prev custom-button-prev left-0"
         slot="button-prev"
         @click="carouselPrev"
       />
       <div
-        v-if="block.length >= 2"
         class="gsap-fade swiper-button-next custom-button-next right-0"
         slot="button-next"
         @click="carouselNext"
@@ -70,6 +68,7 @@
         slidesPerView: 1,
         speed: 600,
         loop: true,
+        autoHeight: true,
         spaceBetween: 20,
         navigation: {
           nextEl: '.swiper-button-next',
@@ -103,7 +102,7 @@
 
 <style lang="scss" scoped>
 /deep/ .swiper-container {
-  @apply pb-12;
+  @apply pb-16;
 
   @screen md {
     @apply pb-0;
