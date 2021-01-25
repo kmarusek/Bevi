@@ -11,7 +11,7 @@ export default {
         const target = section.querySelectorAll('.gsap-float');
 
         const float = gsap.timeline({ repeat: -1, yoyo: true, repeatRefresh: true });
-        const randomDuration = gsap.utils.random(5, 7, 10);
+        const randomDuration = gsap.utils.random(5, 7, 6);
 
         float.from(target, {
           rotate: 0,
@@ -21,8 +21,8 @@ export default {
 
         float.to(target, {
           rotation: 'random(-8, 8)',
-          x: 'random(-20, 20)',
-          y: 'random(-20, 20)',
+          x: 'random(-60, 60)',
+          y: 'random(-60, 60)',
           duration: randomDuration,
           stagger: 0.1,
           ease: Sine.easeInOut,

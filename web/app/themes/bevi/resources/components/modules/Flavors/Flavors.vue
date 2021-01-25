@@ -204,8 +204,8 @@
       right: -13%;
 
       @screen md {
-        top: 19%;
-        right: 7%;
+        top: 14%;
+        right: 12%;
       }
     }
 
