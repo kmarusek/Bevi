@@ -84,7 +84,10 @@
         return null;
       },
       playVideo() {
-        document.getElementById('videos').play();
+        if (this.windowWidth >= 767) {
+          return document.getElementById('videos').play();
+        }
+        return null;
       },
       startAnimation() {
         gsap.registerPlugin(ScrollTrigger);
