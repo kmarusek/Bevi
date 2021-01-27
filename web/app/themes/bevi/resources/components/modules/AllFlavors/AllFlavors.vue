@@ -159,8 +159,11 @@
       closeTray() {
         const selected = document.querySelector('.selected-flavor');
         this.showTray = false;
-        selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
         this.selectedIndex = null;
+
+        if (this.windowWidth > 768) {
+          selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       },
       openTray(item, index) {
         this.trayLoading = true;
@@ -177,7 +180,7 @@
             const tray = document.querySelector('#tray');
             this.trayLoading = false;
             this.showTray = true;
-            if (tray) {
+            if (tray && this.windowWidth > 768) {
               tray.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
           }, 200);
