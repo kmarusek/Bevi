@@ -168,6 +168,65 @@
                     "ui": 0,
                     "ui_on_text": "",
                     "ui_off_text": ""
+                },
+                {
+                    "key": "field_60103c4e7ad7c",
+                    "label": "Form Height",
+                    "name": "form_height",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_60103c6f7ad7d",
+                            "label": "Mobile",
+                            "name": "mobile",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": "",
+                            "max": "",
+                            "step": ""
+                        },
+                        {
+                            "key": "field_60103c7a7ad7e",
+                            "label": "Desktop",
+                            "name": "desktop",
+                            "type": "number",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "min": "",
+                            "max": "",
+                            "step": ""
+                        }
+                    ]
                 }
             ]
         }
@@ -189,5 +248,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1607707538
+    "modified": 1611676811
 }

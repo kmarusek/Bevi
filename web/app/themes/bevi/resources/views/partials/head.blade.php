@@ -10,7 +10,8 @@
   whr_embed(250461, {detail: 'titles', base: 'departments', zoom: 'city', });
   });
   </script>
-  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" type="text/javascript" async></script>
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" data-blockingmode="auto" type="text/javascript"></script>
+  <script id="CookieDeclaration" src="https://consent.cookiebot.com/87b4ec8d-7070-4d14-a5f7-e12be46378df/cd.js" type="text/javascript" async></script>
   
   <script type="text/javascript" src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
 
