@@ -258,4 +258,8 @@
     max-height: 500px;
   }
 }
+
+.order-8 {
+  order: 8;
+}
 </style>
