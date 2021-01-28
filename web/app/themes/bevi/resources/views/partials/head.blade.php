@@ -3,8 +3,8 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   @php wp_head() @endphp
-  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" data-blockingmode="auto" type="text/javascript"></script>
-  <script src="https://www.workable.com/assets/embed.js" type="text/javascript"></script>
+
+  <script src="https://www.workable.com/assets/embed.js" type="text/javascript" async></script>
   <script type="text/javascript" charset="utf-8">
   whr(document).ready(function(){
   // whr_embed(250461, {detail: 'titles', base: 'jobs', zoom: 'country', grouping: 'none'});
@@ -12,7 +12,7 @@
   });
   </script>
   <script type="text/javascript" src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
-
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" data-blockingmode="auto" type="text/javascript"></script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
