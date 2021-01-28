@@ -64,7 +64,6 @@
 .pardot-form {
   /deep/ iframe.pardotform {
     min-height: 1000px;
-    @apply h-full;
 
     @screen lg {
       min-height: 550px;
