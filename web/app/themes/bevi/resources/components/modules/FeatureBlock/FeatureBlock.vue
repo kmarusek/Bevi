@@ -1,11 +1,11 @@
 <template>
   <section
     class="feature-block"
-    :class="[sectionClasses, block.padding]"
+    :class="[sectionClasses]"
   >
     <div
       class="container xl:max-w-5xl flex flex-col items-center gsap-fade-section"
-      :class="block.image_position !== 'Left' ? 'md:flex-row' : 'md:flex-row-reverse'"
+      :class="[block.image_position !== 'Left' ? 'md:flex-row' : 'md:flex-row-reverse', block.padding]"
     >
       <div
         class="w-full md:w-1/2 mb-8 md:mb-0"
