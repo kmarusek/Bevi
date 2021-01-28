@@ -24,6 +24,4 @@
   <script type='text/javascript'> var _d_site = _d_site || '2C028D55AB1EBFD7B0AA3671'; </script>
   <script src='https://widget.privy.com/assets/widget.js'></script>
   <!-- END PRIVY WIDGET CODE -->
-  
-  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" data-blockingmode="auto" type="text/javascript"></script>
 </head>
