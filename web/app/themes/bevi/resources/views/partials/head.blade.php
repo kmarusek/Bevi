@@ -20,9 +20,4 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-NQTDRQW');</script>
   <!-- End Google Tag Manager -->
-
-  <!-- BEGIN PRIVY WIDGET CODE -->
-  <script type='text/javascript'> var _d_site = _d_site || '2C028D55AB1EBFD7B0AA3671'; </script>
-  <script src='https://widget.privy.com/assets/widget.js'></script>
-  <!-- END PRIVY WIDGET CODE -->
 </head>
