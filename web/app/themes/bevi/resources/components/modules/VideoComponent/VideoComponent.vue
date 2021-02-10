@@ -81,7 +81,7 @@
         if (this.block.mobile_background_image && this.windowWidth <= 767) {
           return this.block.mobile_background_image.sizes.medium_large;
         }
-        return null;
+        return '';
       },
       playVideo() {
         if (this.windowWidth >= 767) {
