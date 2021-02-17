@@ -1,0 +1,1 @@
+{!! $block['custom_html'] !!}
