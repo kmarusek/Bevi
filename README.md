@@ -4,6 +4,7 @@ Bevi is a WordPress project which uses blade php templates to pass the data to V
 
 ## Requirements
 
+
 - PHP >= 7.3
 - Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 - Node 8/ Node >= 10 (suggest using NVM to switch)
