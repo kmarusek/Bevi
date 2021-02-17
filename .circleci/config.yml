@@ -67,7 +67,7 @@ workflows:
           filters:
             branches:
               only:
-                - release/v0.1
+                - release/v1.1
       - deploy:
           requires:
             - build
