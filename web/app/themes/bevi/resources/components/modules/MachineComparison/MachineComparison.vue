@@ -2,7 +2,7 @@
   <section class="relative bg-blue-150 gsap-fade-section">
     <div class="py-20 lg:py-32 md:container flex flex-col items-center text-center">
       <h2 class="h2 mb-4 lg:mb-10 text-blue-600 font-semibold gsap-fade">
-        Choose your dispenser
+        {{ block.title }}
       </h2>
       <div class="w-full flex flex-col sm:flex-row justify-around flex-wrap">
         <div
