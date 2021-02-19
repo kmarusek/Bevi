@@ -96,7 +96,7 @@
         if (this.block.wave) {
           classes.push('wave');
         }
-        
+
         return classes;
       },
     },
@@ -105,8 +105,9 @@
 
 <style lang="scss" scoped>
 .feature-block {
-  
+
   &.color-scheme-Default {
+    @apply bg-white;
     .h3 {
       @apply text-blue-600;
     }
