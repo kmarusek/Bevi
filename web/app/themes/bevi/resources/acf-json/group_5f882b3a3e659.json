@@ -2474,6 +2474,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_602e608e6bc7f",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5fbf858725f42",
                             "label": "Wave",
                             "name": "wave",
@@ -2739,6 +2758,35 @@
                     "sub_fields": [],
                     "min": "",
                     "max": ""
+                },
+                "layout_602cde4edc976": {
+                    "key": "layout_602cde4edc976",
+                    "name": "custom_html",
+                    "label": "Custom HTML",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_602cde58dc977",
+                            "label": "Custom HTML",
+                            "name": "custom_html",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -2772,5 +2820,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1611581758
+    "modified": 1613652122
 }
