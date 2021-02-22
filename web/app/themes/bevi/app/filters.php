@@ -47,7 +47,7 @@ collect([
  * Render page using Blade
  */
 add_filter('template_include', function ($template) {
-    collect(['get_header', 'wp_head'])->each(function ($tag) {
+    collect(['get_header'])->each(function ($tag) {
         ob_start();
         do_action($tag);
         $output = ob_get_clean();
