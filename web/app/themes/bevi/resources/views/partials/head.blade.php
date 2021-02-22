@@ -6,6 +6,7 @@
   @if (is_page('careers'))
     <script src="https://www.workable.com/assets/embed.js" type="text/javascript"></script>
   @endif
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" data-blockingmode="auto" type="text/javascript"></script>
   <script type="text/javascript" charset="utf-8">
   whr(document).ready(function(){
   // whr_embed(250461, {detail: 'titles', base: 'jobs', zoom: 'country', grouping: 'none'});
@@ -21,9 +22,4 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-NQTDRQW');</script>
   <!-- End Google Tag Manager -->
-
-  <!-- BEGIN PRIVY WIDGET CODE -->
-  <script type='text/javascript'> var _d_site = _d_site || '2C028D55AB1EBFD7B0AA3671'; </script>
-  <script src='https://widget.privy.com/assets/widget.js'></script>
-  <!-- END PRIVY WIDGET CODE -->
 </head>

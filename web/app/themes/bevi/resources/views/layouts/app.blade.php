@@ -13,8 +13,8 @@
         @yield('content')
       </main>
       @php do_action('get_footer') @endphp
-        @include('partials.footer')
-      </div>
+      @include('partials.footer')
+    </div>
     @php wp_footer() @endphp
   </body>
 </html>
