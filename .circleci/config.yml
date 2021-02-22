@@ -67,7 +67,7 @@ workflows:
           filters:
             branches:
               only:
-                - candidate/20210218-feb-sprint-2
+                - release/v1.1
       - deploy:
           requires:
             - build
