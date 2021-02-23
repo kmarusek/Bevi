@@ -2,7 +2,6 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="87b4ec8d-7070-4d14-a5f7-e12be46378df" type="text/javascript". data-blockingmode="auto"></script>
   @php wp_head() @endphp
   @if (is_page('careers'))
     <script src="https://www.workable.com/assets/embed.js" type="text/javascript"></script>
