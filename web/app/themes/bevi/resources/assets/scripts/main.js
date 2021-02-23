@@ -51,6 +51,7 @@ import FlavorCard from '~/components/modules/AllFlavors/FlavorCard';
 import FlavorTray from '~/components/modules/AllFlavors/FlavorTray';
 import Careers from '~/components/modules/Careers/Careers';
 import Faqs from '~/components/modules/Faqs/Faqs';
+import CookieDeclaration from '~/components/modules/CookieDeclaration/CookieDeclaration';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -112,6 +113,7 @@ Vue.component('NewsContent', NewsContent);
 Vue.component('Careers', Careers);
 Vue.component('Faqs', Faqs);
 Vue.component('FaqsListing', FaqsListing);
+Vue.component('CookieDeclaration', CookieDeclaration);
 
 // eslint-disable-next-line no-new
 new Vue({
