@@ -8,7 +8,7 @@
     width: 60%;
     left: 20%;
   }
-  
+
   .bubble {
     @apply absolute inline-block;
     top: 100%;
@@ -16,7 +16,7 @@
 
     &:nth-of-type(even) {
       @apply hidden;
-      
+
       @screen md {
         @apply inline-block;
       }
@@ -123,7 +123,7 @@
      opacity: 1;
    }
    10% {
-    transform: translateY(-20%);
+    transform: translateY(-250%);
    }
    70% {
     opacity: 1;
