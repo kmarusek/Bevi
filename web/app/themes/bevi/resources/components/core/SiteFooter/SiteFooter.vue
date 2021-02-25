@@ -32,7 +32,7 @@
       </div>
       <div class="w-full lg:w-1/4 lg:pl-12 pt-12 mt-12 lg:mt-0 lg:pt-0 border-t border-l-0 lg:border-t-0 lg:border-l border-gray-400 flex flex-col sm:flex-row content-between flex-wrap">
         <h4 class="font-medium text-3xl text-black leading-tight">
-          Still or sparkling.<br> Whats your Bevi?
+          Still or sparkling.<br> What's your Bevi?
         </h4>
         <div class="sm:ml-auto lg:ml-0">
           <h6 class="h6 mt-6 md:mt-0 mb-3 text-blue-600">
