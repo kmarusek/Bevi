@@ -123,14 +123,14 @@
      opacity: 1;
    }
    10% {
-    transform: translateY(-100%);
+    transform: translateY(-200%);
    }
    70% {
     opacity: 1;
    }
    100% {
       opacity: 0;
-      transform: translateY(-1000%);
+      transform: translateY(-1750%);
    }
 }
 @keyframes sideWays {
