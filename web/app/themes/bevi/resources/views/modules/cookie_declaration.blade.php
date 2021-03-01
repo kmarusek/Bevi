@@ -1,0 +1,1 @@
+<cookie-declaration></cookie-declaration>
