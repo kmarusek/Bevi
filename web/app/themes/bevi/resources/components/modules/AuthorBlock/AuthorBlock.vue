@@ -23,7 +23,7 @@
       </svg>
       <img :src="require('~/assets/images/icons/arrow.svg')">
     </div>
-    <div class="w-full border-t-2 border-b-2 md:border-b-0 border-gray-200 py-10 flex items-center flex-wrap max-w-article mx-auto">
+    <div class="w-full lg:w-10/12 border-t-2 border-b-2 md:border-b-0 border-gray-200 py-10 flex items-center flex-wrap mx-auto">
       <img
         v-if="postData.post_author_avatar"
         :src="postData.post_author_avatar"
