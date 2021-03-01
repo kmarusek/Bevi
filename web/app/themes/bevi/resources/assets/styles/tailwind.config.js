@@ -123,7 +123,9 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
   purge: {
     enabled: process.env.NODE_ENV === 'production',
     content: [
