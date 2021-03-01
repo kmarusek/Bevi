@@ -2,7 +2,7 @@
   <section class="container">
     <div class="flex relative pt-8 md:pt-20">
       <div
-        class="post-content w-full lg:w-10/12 mt-2 md:mt-6 md:px-8 mx-auto "
+        class="post-content w-full lg:w-10/12 mt-2 md:mt-6 mx-auto"
         v-html="postData.post_content"
       />
     </div>

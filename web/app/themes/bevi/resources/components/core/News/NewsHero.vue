@@ -1,7 +1,7 @@
 <template>
   <section class="relative">
     <div class="flex flex-col container relative pt-24 md:pt-40">
-      <div class="w-full lg:w-10/12 mx-auto md:px-8">
+      <div class="w-full lg:w-10/12 mx-auto">
         <div class="flex items-center flex-wrap">
           <CategoryButton
             :category="cardCategory[0]"
