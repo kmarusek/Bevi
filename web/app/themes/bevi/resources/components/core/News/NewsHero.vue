@@ -6,7 +6,6 @@
           :category="cardCategory[0]"
           class="mr-4 md:mr-6"
         />
-        <span class="text-black mt-2">Posted: {{ postData.post_date | moment("from", "now") }}</span>
       </div>
       <h2 class="h2 mt-6 md:mt-10 mb-8 md:w-2/3">
         {{ postData.post_title }}
