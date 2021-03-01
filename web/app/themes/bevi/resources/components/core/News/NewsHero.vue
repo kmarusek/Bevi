@@ -30,12 +30,17 @@
             </div>
           </div>
         </div>
+        <div class="aspect-w-4 aspect-h-3">
+          <img
+            :src="postData.featured_image.src"
+            :alt="postData.featured_image.alt"
+            :width="postData.featured_image.width"
+            :height="postData.featured_image.height"
+            class="object-cover"
+          >
+        </div>
       </div>
     </div>
-    <div
-      class="hero-image"
-      :style="{ 'background-image' : `url(${ postData.featured_image })` }"
-    />
   </section>
 </template>
 
@@ -69,11 +74,6 @@
 </script>
 
 <style lang="scss" scoped>
-.hero-image {
-  height: 50vh;
-  @apply w-full bg-center bg-no-repeat bg-cover;
-}
-
 .avatar {
   width: 60px;
   height: 60px;
