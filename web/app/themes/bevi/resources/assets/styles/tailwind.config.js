@@ -43,9 +43,6 @@ module.exports = {
         '6xl': '4.5rem',
         '7xl': '7rem',
       },
-      maxWidth: {
-        'article': '880px',
-      },
       spacing: {
         28: '7.75rem',
         36: '9rem',
