@@ -8,9 +8,9 @@
         />
         <span class="text-black mt-2">Posted: {{ postData.post_date | moment("from", "now") }}</span>
       </div>
-      <h2 class="h2 mt-6 md:mt-10 mb-8 md:w-2/3">
+      <h1 class="h2 mt-6 md:mt-10 mb-8 md:w-2/3">
         {{ postData.post_title }}
-      </h2>
+      </h1>
       <div class="flex mb-8 md:mb-24">
         <img
           v-if="postData.post_author_avatar"
