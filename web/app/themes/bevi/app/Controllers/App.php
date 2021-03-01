@@ -77,7 +77,14 @@ class App extends Controller
         $authorId = get_the_author_meta('ID');
         $postData['post_author_role'] = get_the_author_meta('user_description', $authorId);
         $postData['post_content'] = get_the_content();
-        $postData['featured_image'] = get_the_post_thumbnail_url();
+        $postData['featured_image'] = array_map(function ($image) {
+            return [
+                'src' => $image[0],
+                'width' => $image[1],
+                'height' => $image[2],
+                'alt' => get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true),
+            ];
+        }, [wp_get_attachment_image_src(get_post_thumbnail_id(), 'full')])[0];
 
         // Get categories, map permalink to each cat
         $categories = get_the_category();
