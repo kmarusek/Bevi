@@ -2474,6 +2474,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_602e608e6bc7f",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5fbf858725f42",
                             "label": "Wave",
                             "name": "wave",
@@ -2768,6 +2787,15 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_6034e8d488d97": {
+                    "key": "layout_6034e8d488d97",
+                    "name": "cookie_declaration",
+                    "label": "Cookie Declaration",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
                 }
             },
             "button_label": "Add Row",
@@ -2801,5 +2829,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1613553255
+    "modified": 1614080222
 }
