@@ -67,7 +67,7 @@ workflows:
           filters:
             branches:
               only:
-                - candidate/20210218-feb-sprint-2
+                - master
       - deploy:
           requires:
             - build
