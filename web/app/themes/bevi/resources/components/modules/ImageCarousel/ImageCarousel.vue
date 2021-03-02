@@ -1,0 +1,111 @@
+<template>
+  <section
+    class="gsap-fade-section flex"
+    :class="[{ wave : block.wave }, block.padding]"
+    :style="{ 'background-image': `url('${block.background.sizes.large}')` }"
+  >
+    <div class="container text-center">
+      <h3 class="font-space text-sm font-semibold uppercase text-gray-700 tracking-wide">
+        {{ block.title }}
+      </h3>
+      <swiper
+        ref="content"
+        :options="swiperOptions"
+        class="mt-10"
+      >
+        <swiper-slide
+          v-for="slide in block.carousel"
+          :key="slide.id"
+          class="h-auto"
+        >
+          <img
+            :src="slide.logo.sizes.thumbnail"
+            class="mx-auto gsap-fade carousel-image"
+          >
+        </swiper-slide>
+      </swiper>
+      <carousel-dots
+        @carousel-item-active="carouselUpdateSlide"
+        @carousel-prev="carouselPrev"
+        @carousel-next="carouselNext"
+        :item-count="block.carousel.length"
+        :active-slide="activeSlide"
+        class=" md:hidden pt-10"
+      />
+    </div>
+    <wave
+      v-if="block.wave"
+      :wave="block.wave"
+      wave-id="carousel-wave"
+    />
+  </section>
+</template>
+
+<script>
+  import GSAPFade from '~/mixins/GSAPFade.js';
+
+  export default {
+    mixins: [GSAPFade],
+    props: {
+      block: {
+        required: true,
+        type: Object,
+      },
+    },
+    data: () => ({
+      swiperOptions: {
+        slidesPerView: 2,
+        centeredSlides: true,
+        loop: false,
+        breakpoints: {
+          768: {
+            slidesPerView: 5,
+            centeredSlides: false,
+          },
+        },
+      },
+      activeSlide: 0,
+    }),
+    computed: {
+      swiper() {
+        return this.$refs.content.$swiper;
+      },
+    },
+    methods: {
+      carouselPrev() {
+        this.swiper.slidePrev();
+      },
+      carouselNext() {
+        this.swiper.slideNext();
+      },
+      carouselUpdateSlide(index) {
+        this.swiper.slideTo(index);
+        this.activeSlide = index;
+      },
+      carouselPaginationUpdate() {
+        this.activeSlide = this.swiper.activeIndex;
+      },
+    },
+    mounted() {
+      this.swiper.on('slideChange', () => {
+        this.carouselPaginationUpdate();
+      });
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+/deep/ .swiper-wrapper {
+  @apply items-center h-auto;
+}
+
+.wave {
+  clip-path: url(#carousel-wave);
+  @apply -mb-6 relative bg-white;
+}
+
+.carousel-image {
+  height: 4rem;
+  max-width: 120px;
+}
+</style>

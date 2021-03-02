@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-  @include('partials.page-header')
+  <page-hero :block="{{ json_encode(get_field('hero', get_option('page_for_posts'))) }}"></page-hero>
+  <featured-news-articles :block="{{ json_encode($featured_articles) }}"></featured-news-articles>
 
-  @if (!have_posts())
-    <div class="alert alert-warning">
-      {{ __('Sorry, no results were found.', 'sage') }}
-    </div>
-    {!! get_search_form(false) !!}
-  @endif
-
-  @while (have_posts()) @php the_post() @endphp
-    @include('partials.content-'.get_post_type())
-  @endwhile
-
-  {!! get_the_posts_navigation() !!}
+  <div class="container py-20 hidden lg:block"> 
+    <hr />
+  </div>
+  
+  <news-listing :categories="{{ json_encode($all_categories) }}"></news-listing>
+  <form-component :block="{{ json_encode(get_field('blog_form', get_option('page_for_posts'))) }}"></form-component>
 @endsection

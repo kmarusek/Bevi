@@ -90,3 +90,246 @@ Container::getInstance()
             'view' => require dirname(__DIR__).'/config/view.php',
         ]);
     }, true);
+
+/**
+ * Get Menu Items From Location
+ *
+ * @param $location : location slug given as key in register_nav_menus
+ */
+
+function getMenuItemsFromLocation($location)
+{
+    $theme_locations = get_nav_menu_locations();
+    $menu_obj = get_term($theme_locations[$location], 'nav_menu');
+    return is_wp_error($menu_obj) ? [] : getMenuItemsForParent($menu_obj->slug, 0);
+}
+
+
+/**
+ * Get Menu Items For Parent
+ *
+ * @param $menuSlug : menu slug for the CMS entry (not the key in register_nav_menus)
+ * @param $parentId
+ * @return array of items formatted as objects with : name / url / children (fetched recursively)
+ */
+
+function getMenuItemsForParent($menuSlug, $parentId)
+{
+    $args = [
+            'post_type' => 'nav_menu_item',
+            'meta_key' => '_menu_item_menu_item_parent',
+            'meta_value' => $parentId,
+            'tax_query' => [
+                [
+                    'taxonomy' => 'nav_menu',
+                    'field' => 'slug',
+                    'terms' => [$menuSlug]
+                ]
+            ],
+            'order' => 'ASC',
+            'orderby' => 'menu_order',
+            'posts_per_page' => -1
+        ];
+    $tmpItems = query_posts($args);
+
+    $items = [];
+
+    foreach ($tmpItems as $tmpItem) {
+        $item = new stdClass;
+        $type = get_post_meta($tmpItem->ID, '_menu_item_type', true);
+        switch ($type) :
+            case 'post_type':
+                $postId = get_post_meta($tmpItem->ID, '_menu_item_object_id', true);
+        $post = get_post($postId);
+        $item->name = $post->post_title;
+        $item->label = $tmpItem->post_title;
+        $item->url = get_the_permalink($postId);
+        $item->pageNavId = intval($postId);
+        $item->pageId = get_the_id();
+        break;
+        case 'custom':
+                $item->name = $tmpItem->post_title;
+        $item->url = get_post_meta($tmpItem->ID, '_menu_item_url', true);
+        endswitch;
+
+        $item->children = getMenuItemsForParent($menuSlug, $tmpItem->ID);
+        $items[] = $item;
+    }
+
+    return $items;
+}
+
+function cptui_register_my_cpts()
+    {
+        /**
+         * Post Type: Counters.
+         */
+
+        $labels = [
+          "name" => __( "Counters", "sage" ),
+          "singular_name" => __( "Counter", "sage" ),
+          "menu_name" => __( "Counters", "sage" ),
+        ];
+
+        $args = [
+          "label" => __( "Counters", "sage" ),
+          "labels" => $labels,
+          "description" => "",
+          "public" => true,
+          "publicly_queryable" => true,
+          "show_ui" => true,
+          "show_in_rest" => true,
+          "rest_base" => "",
+          "rest_controller_class" => "WP_REST_Posts_Controller",
+          "has_archive" => true,
+          "show_in_menu" => true,
+          "show_in_nav_menus" => true,
+          "delete_with_user" => false,
+          "exclude_from_search" => false,
+          "capability_type" => "post",
+          "map_meta_cap" => true,
+          "hierarchical" => false,
+          "rewrite" => [ "slug" => "counters", "with_front" => true ],
+          "query_var" => true,
+          "supports" => [ "title", "editor", "thumbnail" ],
+        ];
+
+        register_post_type( "counters", $args );
+
+        /**
+         * Post Type: Flavors.
+         */
+      
+        $labels = [
+          "name" => __( "Flavors", "sage" ),
+          "singular_name" => __( "flavor", "sage" ),
+          "menu_name" => __( "Flavors", "sage" ),
+        ];
+      
+        $args = [
+          "label" => __( "Flavors", "sage" ),
+          "labels" => $labels,
+          "description" => "",
+          "public" => true,
+          "publicly_queryable" => true,
+          "show_ui" => true,
+          "show_in_rest" => true,
+          "rest_base" => "",
+          "rest_controller_class" => "WP_REST_Posts_Controller",
+          "has_archive" => true,
+          "show_in_menu" => true,
+          "show_in_nav_menus" => true,
+          "delete_with_user" => false,
+          "exclude_from_search" => false,
+          "capability_type" => "post",
+          "map_meta_cap" => true,
+          "hierarchical" => false,
+          "rewrite" => [ "slug" => "flavors", "with_front" => true ],
+          "query_var" => true,
+          "supports" => [ "title", "editor", "thumbnail" ],
+        ];
+      
+        register_post_type( "flavors", $args );
+    }
+
+    add_action( 'init', 'cptui_register_my_cpts' );
+
+    /**
+     * Register Flavor Tags Taxonomy.
+     */
+    function flavor_tags_taxononmy()
+    {
+
+        $labels = array(
+            'name'                       => 'Flavor Tag',
+            'singular_name'              => 'Flavor Tag',
+            'menu_name'                  => 'Flavor Tags',
+            'all_items'                  => 'All Flavor Tags',
+            'parent_item'                => 'Parent Flavor Tag',
+            'parent_item_colon'          => 'Parent Flavor Tag:',
+            'new_item_name'              => 'New Flavor Tag',
+            'add_new_item'               => 'Add New Flavor Tag',
+            'edit_item'                  => 'Edit Flavor Tag',
+            'update_item'                => 'Update Flavor Tag',
+            'separate_items_with_commas' => 'Separate Flavor Tags with commas',
+            'search_items'               => 'Search Flavor Tags',
+            'add_or_remove_items'        => 'Add or remove Flavor Tags',
+            'choose_from_most_used'      => 'Choose from the most used Flavor Tags',
+            'not_found'                  => 'Not Found',
+        );
+        $args = array(
+            'labels'                     => $labels,
+            'hierarchical'               => false,
+            'public'                     => true,
+            'show_ui'                    => true,
+            'show_admin_column'          => true,
+            'show_in_nav_menus'          => true,
+            'show_tagcloud'              => false,
+            'show_in_rest'               => true,
+        );
+        register_taxonomy('flavor-tags', array('flavor'), $args);
+    }
+
+    add_action('init', 'flavor_tags_taxononmy', 0);
+
+    function reg_tag()
+    {
+        /**
+         * Add tags to Flavors post type.
+         */
+
+        register_taxonomy_for_object_type('flavor-tags', 'flavors');
+    }
+
+    add_action('init', 'reg_tag');
+
+function cptui_register_my_cpts_faqs() {
+
+    /**
+     * Post Type: FAQs.
+     */
+
+    $labels = [
+        "name" => __( "FAQs", "sage" ),
+        "singular_name" => __( "FAQ", "sage" ),
+    ];
+
+    $args = [
+        "label" => __( "FAQs", "sage" ),
+        "labels" => $labels,
+        "description" => "",
+        "public" => true,
+        "publicly_queryable" => true,
+        "show_ui" => true,
+        "show_in_rest" => true,
+        "rest_base" => "",
+        "rest_controller_class" => "WP_REST_Posts_Controller",
+        "has_archive" => false,
+        "show_in_menu" => true,
+        "show_in_nav_menus" => true,
+        "delete_with_user" => false,
+        "exclude_from_search" => false,
+        "capability_type" => "post",
+        "map_meta_cap" => true,
+        "hierarchical" => false,
+        "rewrite" => [ "slug" => "faqs", "with_front" => true ],
+        "query_var" => true,
+        "supports" => [ "title", "editor", "thumbnail" ],
+    ];
+
+    register_post_type( "faqs", $args );
+}
+
+add_action( 'init', 'cptui_register_my_cpts_faqs' );
+
+
+    // ACF Options Page
+    if (function_exists('acf_add_options_page')) {
+    acf_add_options_page(array(
+        'page_title' => 'Bevi Settings',
+        'menu_title' => 'Bevi Settings',
+        'menu_slug' => 'bevi-general-settings',
+        'capability' => 'edit_posts',
+        'redirect' => false
+    ));
+    }

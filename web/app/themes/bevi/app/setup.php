@@ -12,7 +12,7 @@ use Roots\Sage\Template\BladeProvider;
  */
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
-    wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), ['jquery'], null, true);
+    wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), '', null, true);
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
@@ -44,7 +44,12 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-        'primary_navigation' => __('Primary Navigation', 'sage')
+        'primary_navigation' => __('Primary Navigation', 'sage'),
+        'primary_footer' => __('Footer - Inside Bevi', 'sage'),
+        'office_footer' => __('Footer - Office', 'sage'),
+        'support_footer' => __('Footer - Support', 'sage'),
+        'blog_footer' => __('Footer - Blog', 'sage'),
+        'terms_footer' => __('Footer - Terms', 'sage'),
     ]);
 
     /**

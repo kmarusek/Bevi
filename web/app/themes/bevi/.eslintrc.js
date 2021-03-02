@@ -1,48 +1,49 @@
 module.exports = {
-  'root': true,
-  'extends': 'eslint:recommended',
-  'globals': {
-    'wp': true,
+  root: true,
+  env: {
+    browser: true,
+    node: true
   },
-  'env': {
-    'node': true,
-    'es6': true,
-    'amd': true,
-    'browser': true,
-    'jquery': true,
+  parserOptions: {
+    parser: 'babel-eslint'
   },
-  'parserOptions': {
-    'ecmaFeatures': {
-      'globalReturn': true,
-      'generators': false,
-      'objectLiteralDuplicateProperties': false,
-      'experimentalObjectRestSpread': true,
-    },
-    'ecmaVersion': 2017,
-    'sourceType': 'module',
-  },
-  'plugins': [
-    'import',
+  extends: [
+    'airbnb-base',
+    'plugin:vue/strongly-recommended',
   ],
-  'settings': {
-    'import/core-modules': [],
-    'import/ignore': [
-      'node_modules',
-      '\\.(coffee|scss|css|less|hbs|svg|json)$',
-    ],
+  settings: {
+    'import/core-modules': ['vue', 'vuex', 'axios'],
   },
-  'rules': {
-    'no-console': 0,
-    'quotes': ['error', 'single'],
-    'comma-dangle': [
-      'error',
-      {
-        'arrays': 'always-multiline',
-        'objects': 'always-multiline',
-        'imports': 'always-multiline',
-        'exports': 'always-multiline',
-        'functions': 'ignore',
-      },
-    ],
+  rules: {
+    'nuxt/no-cjs-in-config': 'off',
+    quotes: ['error', 'single'],
+    'max-len': ['error', { code: 300, ignoreStrings: true, ignoreUrls: true }],
+    'import/no-unresolved': 0,
+    'linebreak-style': 0,
+    'comma-dangle': 1,
+    'import/prefer-default-export': 0,
+    'no-unused-expressions': ['error', { allowTernary: true }],
+    'no-underscore-dangle': 0,
+    'no-param-reassign': 0,
+    'object-curly-newline': ['error', { ObjectPattern: 'never' }],
+    'vue/html-closing-bracket-newline': ['error', {
+      singleline: 'never',
+      multiline: 'always'
+    }],
+    'no-trailing-spaces': ['error', {
+      skipBlankLines: true
+    }],
+    'vue/script-indent': ['error', 2, { 'baseIndent': 1 }],
+    'template-curly-spacing': ['error', 'always'],
+    'import/extensions': 0,
+    'vue/require-default-prop': 0,
   },
+  'overrides': [
+    {
+      'files': ['*.vue'],
+      'rules': {
+        'indent': 'off'
+      }
+    }
+  ]
 };

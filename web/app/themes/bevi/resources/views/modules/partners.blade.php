@@ -1,0 +1,1 @@
+<image-carousel :block="{{ json_encode($block) }}"></image-carousel>

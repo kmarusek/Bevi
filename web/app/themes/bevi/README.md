@@ -6,7 +6,7 @@
 Sage is a WordPress starter theme with a modern development workflow.
 
 ## Features
-
+ 
 * Sass for stylesheets
 * Modern JavaScript
 * [Webpack](https://webpack.github.io/) for compiling assets, optimizing images, and concatenating and minifying files

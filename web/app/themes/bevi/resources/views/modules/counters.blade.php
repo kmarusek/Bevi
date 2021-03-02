@@ -1,0 +1,1 @@
+<counters-component :counters="{{ json_encode($get_counters) }}" :block="{{ json_encode($block) }}"></counters-component>

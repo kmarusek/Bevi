@@ -1,0 +1,1 @@
+<faqs :block="{{ json_encode($block) }}"></faqs>

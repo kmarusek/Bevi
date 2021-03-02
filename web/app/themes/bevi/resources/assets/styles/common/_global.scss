@@ -1,0 +1,79 @@
+body {
+  @apply text-base font-body text-secondary;
+}
+
+.carousel-dots {
+  @apply flex flex-row justify-center items-center;
+
+  .carousel-dot {
+    @apply w-2 h-2 block bg-gray-700 opacity-20 rounded-full;
+
+    &:not(:last-of-type) {
+      @apply mr-3;
+    }
+
+    &.is-active {
+      @apply opacity-100;
+    }
+  }
+}
+
+//this adds a descending z-index so the wave cut outs work
+@mixin descending-z-index($count: 30){
+  section {
+    position: relative;
+    $target: 0;
+    $index: $count;
+    @while $index > 0 {
+      &:nth-child(#{$target}){ z-index: #{$index}; }
+      $target: $target + 1;
+      $index: $index - 1;
+    }
+  }
+}
+
+main {
+  @include descending-z-index;
+}
+
+
+//padding for the components. Some have extra padding top as to deal with the negative margine that the waves produce
+
+.padding-none {
+  @apply py-0;
+}
+.padding-sm {
+  @apply py-16;
+}
+
+.padding-smw {
+  @apply pt-20 pb-16;
+}
+
+.padding-md {
+  @apply py-20;
+  @screen lg {
+    @apply py-32;
+  }
+}
+
+.padding-mdw {
+  @apply pt-24 pb-20;
+  @screen lg {
+    @apply pt-40 pb-32;
+  }
+}
+
+.padding-lg {
+  @apply py-32;
+  @screen lg {
+    @apply py-48;
+  }
+}
+
+.padding-lgw {
+  @apply pt-24 pb-20;
+  @screen lg {
+    @apply pt-64 pb-40;
+  }
+}

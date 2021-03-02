@@ -1,0 +1,1 @@
+<machine-comparison :counters="{{ json_encode($get_counters) }}" :block="{{ json_encode($block) }}"></machine-comparison>
