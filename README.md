@@ -9,6 +9,8 @@ Bevi is a WordPress project which uses blade php templates to pass the data to V
 - Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 - Node 8/ Node >= 10 (suggest using NVM to switch)
 
+## Deployment
+
 ## Installation
 
 1. Copy `.env.example` to `.env`.
@@ -58,3 +60,4 @@ yarn prod
 ```
 ```
 8. Access WordPress admin at `https://example.com/wp/wp-admin/`
+
