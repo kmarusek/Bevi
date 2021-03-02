@@ -1,40 +1,46 @@
 <template>
   <section class="relative">
     <div class="flex flex-col container relative pt-24 md:pt-40">
-      <div class="flex items-center flex-wrap">
-        <CategoryButton
-          :category="cardCategory[0]"
-          class="mr-4 md:mr-6"
-        />
-        <span class="text-black mt-2">Posted: {{ postData.post_date | moment("from", "now") }}</span>
-      </div>
-      <h1 class="h2 mt-6 md:mt-10 mb-8 md:w-2/3">
-        {{ postData.post_title }}
-      </h1>
-      <div class="flex mb-8 md:mb-24">
-        <img
-          v-if="postData.post_author_avatar"
-          :src="postData.post_author_avatar"
-          alt="avatar"
-          class="avatar "
-        >
-        <div class="flex flex-col justify-center">
-          <div class="capitalize h5">
-            {{ postData.post_author }}
-          </div>
-          <div
-            v-if="postData.post_author_role"
-            class="text-xs text-gray-700"
+      <div class="w-full lg:w-10/12 mx-auto">
+        <div class="flex items-center flex-wrap">
+          <CategoryButton
+            :category="cardCategory[0]"
+            class="mr-4 md:mr-6"
+          />
+        </div>
+        <h1 class="h2 mt-6 md:mt-10 mb-8 md:w-2/3">
+          {{ postData.post_title }}
+        </h1>
+        <div class="flex mb-8 md:mb-24">
+          <img
+            v-if="postData.post_author_avatar"
+            :src="postData.post_author_avatar"
+            alt="avatar"
+            class="avatar "
           >
-            {{ postData.post_author_role }}
+          <div class="flex flex-col justify-center">
+            <div class="capitalize h5">
+              {{ postData.post_author }}
+            </div>
+            <div
+              v-if="postData.post_author_role"
+              class="text-xs text-gray-700"
+            >
+              {{ postData.post_author_role }}
+            </div>
           </div>
+        </div>
+        <div class="aspect-w-4 aspect-h-3">
+          <img
+            :src="postData.featured_image.src"
+            :alt="postData.featured_image.alt"
+            :width="postData.featured_image.width"
+            :height="postData.featured_image.height"
+            class="object-cover"
+          >
         </div>
       </div>
     </div>
-    <div
-      class="hero-image"
-      :style="{ 'background-image' : `url(${ postData.featured_image })` }"
-    />
   </section>
 </template>
 
@@ -68,11 +74,6 @@
 </script>
 
 <style lang="scss" scoped>
-.hero-image {
-  height: 50vh;
-  @apply w-full bg-center bg-no-repeat bg-cover;
-}
-
 .avatar {
   width: 60px;
   height: 60px;
