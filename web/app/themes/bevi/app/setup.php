@@ -11,8 +11,8 @@ use Roots\Sage\Template\BladeProvider;
  * Theme assets
  */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, null);
-    wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), '', null, true);
+    wp_enqueue_style('sage/main.css', asset_path('styles/main.css'), false, filemtime(get_theme_root() . '/bevi/dist/styles/main.css'));
+    wp_enqueue_script('sage/main.js', asset_path('scripts/main.js'), '', filemtime(get_theme_root() . '/bevi/dist/scripts/main.js'), true);
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
