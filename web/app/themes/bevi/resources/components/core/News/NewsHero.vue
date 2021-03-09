@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        <div class="aspect-w-4 aspect-h-3">
+        <div class="aspect-w-3 aspect-h-2">
           <img
             :src="postData.featured_image.src"
             :alt="postData.featured_image.alt"
