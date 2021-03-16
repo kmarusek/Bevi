@@ -29,7 +29,7 @@
           v-if="postData.post_author_avatar"
           :src="postData.post_author_avatar"
           alt="avatar"
-          class="avatar "
+          class="avatar"
         >
         <div class="flex flex-col">
           <div class="capitalize h5">
