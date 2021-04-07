@@ -14,6 +14,7 @@
       </main>
       @php do_action('get_footer') @endphp
       @include('partials.footer')
+      <portal-target name="modal"></portal-target>
     </div>
     @php wp_footer() @endphp
   </body>
