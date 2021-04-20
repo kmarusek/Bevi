@@ -9,7 +9,6 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import VueMoment from 'vue-moment';
 import VueScrollTo from 'vue-scrollto';
-import PortalVue from 'portal-vue';
 
 // Layout
 import SiteHeader from '~/components/core/SiteHeader/SiteHeader';
@@ -71,7 +70,6 @@ Vue.use(VueScrollTo, {
   duration: 500,
   easing: 'ease',
 });
-Vue.use(PortalVue);
 
 // Register Components
 Vue.component('SiteHeader', SiteHeader);
