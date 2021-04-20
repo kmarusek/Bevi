@@ -37,57 +37,11 @@
           >
         </div>
         <div class="col-span-2 pb-20">
-          <form
-            @submit.prevent="onSubmit"
-            class="space-y-4"
-          >
-            <div>
-              <Label for="first_name">
-                First name
-              </Label>
-              <Input
-                v-model="form.first_name"
-                id="first_name"
-              />
-            </div>
-            <div>
-              <Label for="last_name">
-                Last name
-              </Label>
-              <Input
-                v-model="form.last_name"
-                id="last_name"
-              />
-            </div>
-            <div>
-              <Label for="email">
-                Email
-              </Label>
-              <Input
-                v-model="form.email"
-                id="email"
-                type="email"
-              />
-            </div>
-            <div>
-              <Label for="phone">
-                Phone number
-              </Label>
-              <Input
-                v-model="form.phone"
-                id="phone"
-                type="phone"
-              />
-            </div>
-            <div class="text-center">
-              <button
-                class="btn"
-                type="button"
-              >
-                Get a quote
-              </button>
-            </div>
-          </form>
+          <div
+            class="pardot-form"
+            v-html="block.pardot_form"
+            :style="[ isMobile ? { 'height' : `${block.form_height.mobile}px` } : { 'height' : `${block.form_height.desktop}px` } ]"
+          />
         </div>
       </div>
     </div>
@@ -100,48 +54,11 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  import Label from '../../common/Label/Label.vue';
-  import Input from '../../common/Input/Input.vue';
-
   export default {
-    components: {
-      Label,
-      Input,
-    },
     props: {
       block: {
         required: true,
         type: Object,
-      },
-    },
-    data() {
-      return {
-        form: {
-          first_name: '',
-          last_name: '',
-          email: '',
-          phone_number: '',
-          zip_code: '',
-          country: '',
-          location: '',
-          daily_users: '',
-        },
-      };
-    },
-    methods: {
-      onSubmit() {
-        axios.post('http://go.pardot.com/l/891143/2020-09-23/y4', {
-          '891143_573pi_891143_573': this.form.first_name,
-          '891143_575pi_891143_575': this.form.last_name,
-          '891143_577pi_891143_577': this.form.email,
-          '891143_1693pi_891143_1693': this.form.phone_number,
-          '891143_581pi_891143_581': this.form.company,
-          '891143_585pi_891143_585': this.form.zip_code,
-          '891143_925pi_891143_925': this.form.country,
-          '891143_1695pi_891143_1695': this.form.location,
-          '891143_583pi_891143_583': this.form.daily_users,
-        });
       },
     },
   };
