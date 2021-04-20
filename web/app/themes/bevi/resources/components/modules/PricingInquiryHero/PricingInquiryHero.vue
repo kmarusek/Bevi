@@ -36,7 +36,7 @@
             :alt="block.image.alt"
           >
         </div>
-        <div class="lg:col-span-2 pb-20">
+        <div class="lg:col-span-2">
           <div
             class="pardot-form"
             v-html="block.pardot_form"
