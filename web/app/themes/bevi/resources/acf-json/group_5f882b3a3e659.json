@@ -799,30 +799,6 @@
                                 "id": ""
                             },
                             "return_format": "array"
-                        },
-                        {
-                            "key": "field_600ec91b85ab7",
-                            "label": "Mobile Background",
-                            "name": "mobile_background_image",
-                            "type": "image",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "return_format": "array",
-                            "preview_size": "medium",
-                            "library": "all",
-                            "min_width": "",
-                            "min_height": "",
-                            "min_size": "",
-                            "max_width": "",
-                            "max_height": "",
-                            "max_size": "",
-                            "mime_types": ""
                         }
                     ],
                     "min": "",
@@ -2800,7 +2776,7 @@
                 "layout_606c6955f032f": {
                     "key": "layout_606c6955f032f",
                     "name": "pricing_inquiry_hero",
-                    "label": "Pricing Inquiry Hero",
+                    "label": "Page Hero with Form",
                     "display": "block",
                     "sub_fields": [
                         {
@@ -3043,5 +3019,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1618918063
+    "modified": 1619709746
 }
