@@ -2800,7 +2800,7 @@
                 "layout_606c6955f032f": {
                     "key": "layout_606c6955f032f",
                     "name": "pricing_inquiry_hero",
-                    "label": "Pricing Inquiry Hero",
+                    "label": "Page Hero with Form",
                     "display": "block",
                     "sub_fields": [
                         {
@@ -3043,5 +3043,5 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1618918063
+    "modified": 1619709746
 }
