@@ -28,7 +28,7 @@
             v-html="block.content"
           />
         </div>
-        <div class="lg:col-span-4 order-last lg:order-2">
+        <div class="lg:col-span-4 order-last lg:order-none">
           <img
             :src="block.image.sizes.large"
             :width="block.image.sizes['large-width']"
