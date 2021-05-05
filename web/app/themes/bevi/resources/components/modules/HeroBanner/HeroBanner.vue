@@ -95,7 +95,7 @@
       </div>
       <div
         v-if="block.feature_image"
-        class="flex-1 block lg:flex mt-10 lg:mt-0 -z-10"
+        class="flex-1 block flex mt-10 lg:mt-0 -z-10"
         :class="block.align_feature_image_bottom ? 'items-end' : 'items-center'"
       >
         <img
@@ -146,9 +146,9 @@
       startAnimation() {
         gsap.utils.toArray('.gsap-fade-sections').forEach((section) => {
           const elems = section.querySelectorAll('.gsap-fades');
-        
+
           gsap.set(elems, { opacity: 0 });
-        
+
           ScrollTrigger.create({
             trigger: section,
             start: 'top 85%',
