@@ -1,6 +1,6 @@
 <template>
   <div class="py-20 lg:py-32 container xl:max-w-6xl relative">
-    <div id="declaration"></div>
+    <div id="declaration" />
   </div>
 </template>
 
