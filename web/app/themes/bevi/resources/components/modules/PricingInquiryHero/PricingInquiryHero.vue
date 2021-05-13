@@ -9,8 +9,8 @@
     ]"
   >
     <div class="container flex flex-col lg:flex-row">
-      <div class="grid grid-cols-1 lg:grid-cols-8 items-end pt-20 xs:py-32 w-full md:gap-20">
-        <div class="lg:col-span-2 space-y-4 pb-20">
+      <div class="grid grid-cols-1 xl:grid-cols-8 items-end justify-between pt-20 xs:py-32 w-full lg:gap-20">
+        <div class="xl:col-span-2 space-y-4 pb-20">
           <h3
             v-if="block.subtitle"
             class="font-space font-medium md:text-lg"
@@ -28,7 +28,7 @@
             v-html="block.content"
           />
         </div>
-        <div class="lg:col-span-4 order-last lg:order-2">
+        <div class="xl:col-span-4 order-last md:order-2">
           <img
             :src="block.image.sizes.large"
             :width="block.image.sizes['large-width']"
@@ -36,7 +36,7 @@
             :alt="block.image.alt"
           >
         </div>
-        <div class="lg:col-span-2">
+        <div class="xl:col-span-2">
           <div
             class="pardot-form"
             v-html="block.pardot_form"
