@@ -21,7 +21,7 @@
     </video>
     <div class="container flex flex-col lg:flex-row">
       <div class="grid grid-cols-2 xl:grid-cols-8 items-end justify-between pt-20 xs:py-32 w-full lg:gap-20">
-        <div class="xl:col-span-3 space-y-4 pb-20">
+        <div class="sm:col-span-1 xl:col-span-3 space-y-4 pb-20">
           <h3
             v-if="block.subtitle"
             class="font-space font-medium md:text-lg"
@@ -40,7 +40,7 @@
           />
         </div>
         <div class="xl:col-span-2" />
-        <div class="xl:col-span-3">
+        <div class="sm:col-span-1 xl:col-span-3">
           <div
             class="pardot-form"
             v-html="block.pardot_form"
