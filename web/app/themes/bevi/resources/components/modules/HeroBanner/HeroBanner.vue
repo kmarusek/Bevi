@@ -57,7 +57,8 @@
           :class="[
             {
               'md:pl-20' : block.text_position === 'Left' && block.feature_image,
-              'md:pr-20' : block.text_position === 'Right' && block.feature_image
+              'md:pr-20' : block.text_position === 'Right' && block.feature_image,
+              'p-8 bg-white bg-opacity-50 rounded-3xl': block.add_background_video && windowWidth >= 768,
             },
             block.text_color.value
           ]"
