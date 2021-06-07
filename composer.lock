@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85bd96eb717201c28b7a215fb7a5c5be",
+    "content-hash": "685643d50ebb0a3886cbe8bc4a1f9160",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -949,15 +949,15 @@
         },
         {
             "name": "wpackagist-plugin/ewww-image-optimizer",
-            "version": "5.7.1",
+            "version": "6.1.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/ewww-image-optimizer/",
-                "reference": "tags/5.7.1"
+                "reference": "tags/6.1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/ewww-image-optimizer.5.7.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/ewww-image-optimizer.6.1.5.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
