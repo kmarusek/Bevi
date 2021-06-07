@@ -258,11 +258,6 @@
             "keywords": [
                 "env"
             ],
-            "support": {
-                "email": "oom@oscarotero.com",
-                "issues": "https://github.com/oscarotero/env/issues",
-                "source": "https://github.com/oscarotero/env/tree/v2.1.0"
-            },
             "time": "2020-06-11T10:59:27+00:00"
         },
         {
@@ -318,10 +313,6 @@
                 "php",
                 "type"
             ],
-            "support": {
-                "issues": "https://github.com/schmittjoh/php-option/issues",
-                "source": "https://github.com/schmittjoh/php-option/tree/1.7.5"
-            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -396,10 +387,6 @@
                 "wordpress",
                 "wp"
             ],
-            "support": {
-                "issues": "https://github.com/pivvenit/acf-pro-installer/issues",
-                "source": "https://github.com/pivvenit/acf-pro-installer/tree/3.0.0"
-            },
             "time": "2020-11-21T14:21:09+00:00"
         },
         {
@@ -459,11 +446,6 @@
                 "plugin",
                 "wordpress"
             ],
-            "support": {
-                "forum": "https://discourse.roots.io/",
-                "issues": "https://github.com/roots/bedrock-autoloader/issues",
-                "source": "https://github.com/roots/bedrock-autoloader/tree/1.0.4"
-            },
             "funding": [
                 {
                     "url": "https://github.com/roots",
@@ -511,15 +493,6 @@
                 "cms",
                 "wordpress"
             ],
-            "support": {
-                "docs": "https://developer.wordpress.org/",
-                "forum": "https://wordpress.org/support/",
-                "irc": "irc://irc.freenode.net/wordpress",
-                "issues": "https://core.trac.wordpress.org/",
-                "rss": "https://wordpress.org/news/feed/",
-                "source": "https://core.trac.wordpress.org/browser",
-                "wiki": "https://codex.wordpress.org/"
-            },
             "funding": [
                 {
                     "url": "https://github.com/roots",
@@ -587,10 +560,6 @@
             "keywords": [
                 "wordpress"
             ],
-            "support": {
-                "issues": "https://github.com/roots/wordpress-core-installer/issues",
-                "source": "https://github.com/roots/wordpress-core-installer/tree/master"
-            },
             "funding": [
                 {
                     "url": "https://github.com/roots",
@@ -643,10 +612,6 @@
                 }
             ],
             "description": "Collect configuration values and safely define() them",
-            "support": {
-                "issues": "https://github.com/roots/wp-config/issues",
-                "source": "https://github.com/roots/wp-config/tree/master"
-            },
             "time": "2018-08-10T14:18:38+00:00"
         },
         {
@@ -704,11 +669,6 @@
             "keywords": [
                 "wordpress wp bcrypt password"
             ],
-            "support": {
-                "forum": "https://discourse.roots.io/",
-                "issues": "https://github.com/roots/wp-password-bcrypt/issues",
-                "source": "https://github.com/roots/wp-password-bcrypt/tree/master"
-            },
             "time": "2016-03-01T16:27:06+00:00"
         },
         {
@@ -849,10 +809,6 @@
                 "env",
                 "environment"
             ],
-            "support": {
-                "issues": "https://github.com/vlucas/phpdotenv/issues",
-                "source": "https://github.com/vlucas/phpdotenv/tree/v4.2.0"
-            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -875,7 +831,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/better-search-replace.zip?timestamp=1607361595"
+                "url": "https://downloads.wordpress.org/plugin/better-search-replace.zip?timestamp=1618418349"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -1011,15 +967,15 @@
         },
         {
             "name": "wpackagist-plugin/page-title-splitter",
-            "version": "2.05",
+            "version": "2.5.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/page-title-splitter/",
-                "reference": "tags/2.05"
+                "reference": "trunk"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/page-title-splitter.2.05.zip"
+                "url": "https://downloads.wordpress.org/plugin/page-title-splitter.zip?timestamp=1616454266"
             },
             "require": {
                 "composer/installers": "~1.0"
