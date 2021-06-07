@@ -53,6 +53,7 @@ import Careers from '~/components/modules/Careers/Careers';
 import Faqs from '~/components/modules/Faqs/Faqs';
 import CookieDeclaration from '~/components/modules/CookieDeclaration/CookieDeclaration';
 import PricingInquiryHero from '~/components/modules/PricingInquiryHero/PricingInquiryHero';
+import PageHeroWithFormAndVideo from '~/components/modules/PageHeroWithFormAndVideo/PageHeroWithFormAndVideo';
 
 // Common
 import ImageBlob from '~/components/common/ImageBlob/ImageBlob';
@@ -116,6 +117,7 @@ Vue.component('Faqs', Faqs);
 Vue.component('FaqsListing', FaqsListing);
 Vue.component('CookieDeclaration', CookieDeclaration);
 Vue.component('PricingInquiryHero', PricingInquiryHero);
+Vue.component('PageHeroWithFormAndVideo', PageHeroWithFormAndVideo);
 
 // eslint-disable-next-line no-new
 new Vue({

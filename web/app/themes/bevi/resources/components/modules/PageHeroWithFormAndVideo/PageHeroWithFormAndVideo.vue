@@ -1,16 +1,27 @@
 <template>
   <section
-    :style="{ 'background-image': 'url(' + block.background_image.url + ')' }"
     :class="[
-      'bg-cover bg-no-repeat bg-center flex',
+      'flex relative',
       {
         wave: block.wave,
       }
     ]"
   >
+    <video
+      v-if="!isMobile"
+      autoplay
+      muted
+      loop
+      class="absolute w-full h-full top-0 left-0 -z-10 object-cover"
+    >
+      <source
+        :src="block.background_video.url"
+        type="video/mp4"
+      >
+    </video>
     <div class="container flex flex-col lg:flex-row">
-      <div class="grid grid-cols-1 xl:grid-cols-8 items-end justify-between pt-20 xs:py-32 w-full lg:gap-20">
-        <div class="xl:col-span-2 space-y-4 pb-20">
+      <div class="grid grid-cols-2 xl:grid-cols-8 items-end justify-between pt-20 xs:py-32 w-full lg:gap-20">
+        <div class="sm:col-span-1 xl:col-span-3 space-y-4 pb-20">
           <h3
             v-if="block.subtitle"
             class="font-space font-medium md:text-lg"
@@ -28,15 +39,8 @@
             v-html="block.content"
           />
         </div>
-        <div class="xl:col-span-4 order-last xl:order-none">
-          <img
-            :src="block.image.sizes.large"
-            :width="block.image.sizes['large-width']"
-            :height="block.image.sizes['large-height']"
-            :alt="block.image.alt"
-          >
-        </div>
-        <div class="xl:col-span-2">
+        <div class="xl:col-span-2" />
+        <div class="sm:col-span-1 xl:col-span-3">
           <div
             class="pardot-form"
             v-html="block.pardot_form"
