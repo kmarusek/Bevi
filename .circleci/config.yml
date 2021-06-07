@@ -47,8 +47,8 @@ jobs:
     steps:
       - *attach_workspace
       - run:
-          name: Output composer to confirm plugin versions
-          command: cat composer.json
+          name: Remove development dependencies
+          command: composer install --no-dev -n -o
       - run:
           name: Remove development dependencies in theme
           command: composer install -d ~/bedrock/web/app/themes/bevi --no-dev -n -o
