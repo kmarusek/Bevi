@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "501716b26ed3c1dc06e2b803594aa978",
+    "content-hash": "fa1e758af3f2b2fb230786f4da74650b",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -1029,7 +1029,7 @@
         },
         {
             "name": "wpackagist-plugin/pardot",
-            "version": "1.5.0",
+            "version": "1.5.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/pardot/",
@@ -1037,7 +1037,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/pardot.zip?timestamp=1610479216"
+                "url": "https://downloads.wordpress.org/plugin/pardot.zip?timestamp=1617117246"
             },
             "require": {
                 "composer/installers": "~1.0"
