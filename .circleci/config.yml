@@ -67,7 +67,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - bugfix/BEVSUP-31
       - deploy:
           requires:
             - build
