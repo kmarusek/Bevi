@@ -57,7 +57,7 @@ jobs:
           command: sudo apt-get update && sudo apt-get install lftp
       - run:
           name: Deploy to SFTP
-          command: lftp -e "set sftp:auto-confirm yes; open -u ${sftp_username},${sftp_password} sftp://${sftp_hostname}; mirror -R -n -v -p --exclude themes/bevi/node_modules ./web/app/ /wp-content/; quit"
+          command: lftp -e "set sftp:auto-confirm yes; open -u ${sftp_username},${sftp_password} sftp://${sftp_hostname}; mirror -R --transfer-all -v -p --exclude themes/bevi/node_modules ./web/app/ /wp-content/; quit"
 
 workflows:
   version: 2
