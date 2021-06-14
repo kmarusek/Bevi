@@ -25,6 +25,9 @@ jobs:
       - run:
           name: Install dependencies
           command: composer install -n -o
+      - run: 
+          name: View dependencies
+          command: composer show -i
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
@@ -49,9 +52,15 @@ jobs:
       - run:
           name: Remove development dependencies
           command: composer install --no-dev -n -o
+      - run: 
+          name: View dependencies
+          command: composer show -i
       - run:
           name: Remove development dependencies in theme
           command: composer install -d ~/bedrock/web/app/themes/bevi --no-dev -n -o
+      - run: 
+          name: View theme dependencies
+          command: composer show -d ~/bedrock/web/app/themes/bevi -i
       - run:
           name: Install lftp
           command: sudo apt-get update && sudo apt-get install lftp
