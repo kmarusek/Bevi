@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Install dependencies
           command: composer install -n -o
-      - run: 
+      - run:
           name: View dependencies
           command: composer show -i
       - restore_cache:
@@ -52,22 +52,18 @@ jobs:
       - run:
           name: Remove development dependencies
           command: composer install --no-dev -n -o
-      - run: 
+      - run:
           name: View dependencies
           command: composer show -i
       - run:
           name: Remove development dependencies in theme
           command: composer install -d ~/bedrock/web/app/themes/bevi --no-dev -n -o
-      - run: 
+      - run:
           name: View theme dependencies
           command: composer show -d ~/bedrock/web/app/themes/bevi -i
       - run:
           name: Install lftp
           command: sudo apt-get update && sudo apt-get install lftp
-      - run:
-          name: Deploy to SFTP
-          command: lftp -e "set sftp:auto-confirm yes; open -u ${sftp_username},${sftp_password} sftp://${sftp_hostname}; mirror -R -n -v -p --exclude themes/bevi/node_modules ./web/app/ /wp-content/; quit"
-
 workflows:
   version: 2
   build_test_deploy:
