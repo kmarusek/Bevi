@@ -2,6 +2,8 @@ pipelines:
  branches:
    master:
      - step:
+         clone:
+           depth: full
          script:
            - git push git@git.wpengine.com:production/bevidev.git master
            - echo "Pushed to bevidev.wpengine.com"
