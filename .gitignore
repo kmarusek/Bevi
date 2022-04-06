@@ -27,3 +27,15 @@ web/.htaccess
 wp-cli.local.yml
 
 .DS_Store
+
+# WPEngine Wordpress
+wp-config.php
+web/wp-content/mu-plugins
+wp-content/uploads
+wp-content/mu-plugins
+wp-content/webp-express
+wp-content/mysql.sql
+.htaccess
+advanced-cache.php
+*.exe
+wp-content/plugins/official-facebook-pixel/vendor/facebook/php-business-sdk/test/misc/video.mp4
