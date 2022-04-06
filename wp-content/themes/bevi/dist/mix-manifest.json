@@ -1,18 +1,14 @@
 {
-    "/scripts/main.js": "/scripts/main.js?id=27c9e628e7ab44716e8a",
-    "/scripts/manifest.js": "/scripts/manifest.js?id=7428df81bb3fda6e4613",
-    "/styles/main.css": "/styles/main.css?id=cf8dd5d282896a0cf598",
-    "/scripts/vendor.js": "/scripts/vendor.js?id=de1d6091518827a58b5f",
-    "/fonts/.gitkeep": "/fonts/.gitkeep?id=d41d8cd98f00b204e980",
-    "/images/.gitkeep": "/images/.gitkeep?id=d41d8cd98f00b204e980",
+    "/scripts/main.js": "/scripts/main.js?id=95f98e99a6596b20b4a0",
+    "/styles/main.css": "/styles/main.css?id=a9cdca62cdf7d95e1e3a",
     "/images/arrow.svg": "/images/arrow.svg?id=a2b027e4ceb826193040",
     "/images/bevi-logo.svg": "/images/bevi-logo.svg?id=6a460add16b3cd96a7ce",
     "/images/bevi.svg": "/images/bevi.svg?id=96abf64a3157ebd3642e",
     "/images/blob.svg": "/images/blob.svg?id=c411db06d016725b7f68",
-    "/images/blob_0.svg": "/images/blob_0.svg?id=e5c488ee3ade96008a44",
-    "/images/blob_1.svg": "/images/blob_1.svg?id=d6b713b387cacc221472",
     "/images/blobs_0.svg": "/images/blobs_0.svg?id=cf5f7264dbc61217e0db",
     "/images/blobs_1.svg": "/images/blobs_1.svg?id=c670f578f72ed0d4522c",
     "/images/blobs_2.svg": "/images/blobs_2.svg?id=bec817e226fc633150b1",
+    "/images/blob_0.svg": "/images/blob_0.svg?id=e5c488ee3ade96008a44",
+    "/images/blob_1.svg": "/images/blob_1.svg?id=d6b713b387cacc221472",
     "/images/placeholder.jpg": "/images/placeholder.jpg?id=631d7f154caaa1f30179"
 }

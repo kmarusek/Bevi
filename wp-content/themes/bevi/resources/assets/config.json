@@ -8,8 +8,8 @@
       "./scripts/customizer.js"
     ]
   },
-  "publicPath": "/app/themes/bevi",
-  "devUrl": "http://bevi.test",
+  "publicPath": "/wp-content/themes/bevi",
+  "devUrl": "http://bevi.localserver",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",
   "watch": [
