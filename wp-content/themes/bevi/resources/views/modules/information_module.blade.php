@@ -1,0 +1,1 @@
+<info-module :block="{{ json_encode($block) }}"></info-module>

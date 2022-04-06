@@ -1,0 +1,1 @@
+<careers :block="{{ json_encode($block) }}"></careers>

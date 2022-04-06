@@ -1,0 +1,1 @@
+<faqs-listing :faqs="{{ json_encode($get_faqs) }}"></faqs-listing>

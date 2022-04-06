@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70.366 71.078">
+  <g id="Icon_Carousel_Arrow_Circle" data-name="Icon / Carousel Arrow Circle" transform="translate(1.23 1.225)">
+    <path id="Path_145906" data-name="Path 145906" d="M56.225,27.907C56.05,43.4,42.589,55.241,28.1,55.241S-1.942,43.772.2,27.525C2.224,12.159,13.617,0,28.1,0S56.432,9.557,56.225,27.907Z" transform="matrix(0.259, -0.966, 0.966, 0.259, 0, 54.311)" fill="none" stroke="#00263e" stroke-miterlimit="10" stroke-width="2" fill-rule="evenodd"/>
+    <path id="arrow-left" d="M15.823,4.424v1.9H3.636L6.716,9.4,5.373,10.748,0,5.374,5.373,0,6.716,1.343,3.636,4.424Z" transform="translate(41.701 39.302) rotate(180)" fill="#00263e"/>
+  </g>
+</svg>
