@@ -5,7 +5,7 @@ Tags: user registration, user profile, registration form, membership, login form
 Requires at least: 4.7
 Requires PHP: 7.1.0
 Tested up to: 5.9
-Stable tag: 3.2.9
+Stable tag: 3.2.10
 License: GPLv2 or later
 
 Modern membership plugin for user registration, login form, user profile, member directories & content restriction.
@@ -117,6 +117,10 @@ No. You can create and manage your forms, user profiles and member directories w
 10. Admin Bar and Dashboard Access
 
 == Changelog ==
+
+= 3.2.10 =
+* Added noncache to temporary redirects.
+* Fixed fatal error caused by user avatar functions.
 
 = 3.2.9 =
 * Fixed bug where reset password enforcement not working.

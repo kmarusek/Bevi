@@ -300,6 +300,7 @@ class PasswordReset
                 return [self::do_password_reset_status_messages('changed')];
             }
 
+            nocache_headers();
             wp_safe_redirect(ppress_password_reset_redirect());
             exit;
         }

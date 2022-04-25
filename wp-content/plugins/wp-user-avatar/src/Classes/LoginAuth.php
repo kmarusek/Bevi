@@ -94,6 +94,8 @@ class LoginAuth
         // if ajax, return the url to redirect to
         if (self::is_ajax()) return $login_redirection;
 
+        nocache_headers();
+
         wp_safe_redirect($login_redirection);
         exit;
     }
@@ -156,6 +158,8 @@ class LoginAuth
         if (self::is_ajax()) {
             wp_send_json(['success' => true, 'redirect' => $login_redirection]);
         }
+
+        nocache_headers();
 
         wp_safe_redirect($login_redirection);
         exit;

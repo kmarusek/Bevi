@@ -7,18 +7,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mailoptin/composer-cleanup-plugin.git",
-                "reference": "540fddf14a4fd96626278963b10e14169a989f2e"
+                "reference": "74d878666436c99f5b671b90312e85479afeedb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mailoptin/composer-cleanup-plugin/zipball/540fddf14a4fd96626278963b10e14169a989f2e",
-                "reference": "540fddf14a4fd96626278963b10e14169a989f2e",
+                "url": "https://api.github.com/repos/mailoptin/composer-cleanup-plugin/zipball/74d878666436c99f5b671b90312e85479afeedb0",
+                "reference": "74d878666436c99f5b671b90312e85479afeedb0",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^2.0"
             },
-            "time": "2022-03-09T06:20:49+00:00",
+            "time": "2022-03-15T13:35:33+00:00",
             "default-branch": true,
             "type": "composer-plugin",
             "extra": {

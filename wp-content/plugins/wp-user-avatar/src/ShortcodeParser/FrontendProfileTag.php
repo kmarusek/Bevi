@@ -44,6 +44,7 @@ class FrontendProfileTag
             } else {
 
                 if (strpos($_SERVER['REQUEST_URI'], '/' . ppress_get_profile_slug() . '/') !== false) {
+                    nocache_headers();
                     wp_safe_redirect(home_url());
                     exit;
                 }
@@ -60,6 +61,7 @@ class FrontendProfileTag
             $user = get_user_by('login', $username_or_nicename);
 
             if ( ! $user) {
+                nocache_headers();
                 wp_safe_redirect(home_url());
                 exit;
             }

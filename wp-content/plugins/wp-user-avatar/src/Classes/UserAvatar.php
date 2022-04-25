@@ -29,7 +29,17 @@ class UserAvatar
                     $args['url'] = $wpua_functions->wpua_get_default_avatar_url($size);
                 } else {
 
-                    $has_valid_url = $wpua_functions->wpua_has_gravatar($id_or_email);
+                    $has_valid_url = false;
+
+                    if (method_exists($wpua_functions, 'wpua_has_gravatar')) {
+                        $has_valid_url = $wpua_functions->wpua_has_gravatar($id_or_email);
+                    } elseif (class_exists('\WP_User_Avatar_Functions')) {
+
+                        $obj = new \WP_User_Avatar_Functions();
+                        if (method_exists($obj, 'wpua_has_gravatar')) {
+                            $has_valid_url = $obj->wpua_has_gravatar($id_or_email);
+                        }
+                    }
 
                     if ( ! $has_valid_url) {
                         $wpua_size   = ! empty($size) ? $size : 96;

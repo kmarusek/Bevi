@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the ProfilePress package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ProfilePress 3.2.9\n"
+"Project-Id-Version: ProfilePress 3.2.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-user-avatar\n"
-"POT-Creation-Date: 2022-03-09 06:22:46+00:00\n"
+"POT-Creation-Date: 2022-04-05 10:37:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -348,7 +348,7 @@ msgstr ""
 #: deprecated/wp-user-avatar/includes/wpua-functions.php:78
 #: deprecated/wp-user-avatar/includes/wpua-functions.php:131
 #: src/Classes/ImageUploader.php:49
-#: src/ShortcodeParser/MyAccount/MyAccountTag.php:528
+#: src/ShortcodeParser/MyAccount/MyAccountTag.php:529
 msgid "Profile Picture"
 msgstr ""
 
@@ -2630,7 +2630,7 @@ msgid "Enter a Name"
 msgstr ""
 
 #: src/Classes/AjaxHandler.php:217 src/Classes/AjaxHandler.php:240
-#: src/Classes/PasswordReset.php:359
+#: src/Classes/PasswordReset.php:360
 msgid "Unexpected error. Please try again."
 msgstr ""
 
@@ -2926,61 +2926,61 @@ msgstr ""
 msgid "Check your email for further instruction."
 msgstr ""
 
-#: src/Classes/PasswordReset.php:337
+#: src/Classes/PasswordReset.php:338
 msgid "Sorry, that key appears to be invalid."
 msgstr ""
 
-#: src/Classes/PasswordReset.php:340 src/ShortcodeParser/FormProcessor.php:75
+#: src/Classes/PasswordReset.php:341 src/ShortcodeParser/FormProcessor.php:75
 msgid "Passwords do not match."
 msgstr ""
 
-#: src/Classes/PasswordReset.php:343
+#: src/Classes/PasswordReset.php:344
 msgid "Please enter your password."
 msgstr ""
 
-#: src/Classes/PasswordReset.php:346
+#: src/Classes/PasswordReset.php:347
 msgid "Sorry, that key does not appear to be valid."
 msgstr ""
 
-#: src/Classes/PasswordReset.php:349
+#: src/Classes/PasswordReset.php:350
 msgid "Password is not strong enough."
 msgstr ""
 
-#: src/Classes/PasswordReset.php:352
+#: src/Classes/PasswordReset.php:353
 msgid "You have successfully changed your password"
 msgstr ""
 
-#: src/Classes/PasswordReset.php:355
+#: src/Classes/PasswordReset.php:356
 msgid "Log in"
 msgstr ""
 
-#: src/Classes/RegistrationAuth.php:220
+#: src/Classes/RegistrationAuth.php:222
 msgid "%s field is required"
 msgstr ""
 
-#: src/Classes/RegistrationAuth.php:229
+#: src/Classes/RegistrationAuth.php:231
 msgid ""
 "<strong>ERROR</strong>: This username is invalid because it uses illegal "
 "characters. Please enter a valid username."
 msgstr ""
 
-#: src/Classes/RegistrationAuth.php:233
+#: src/Classes/RegistrationAuth.php:235
 msgid "Email address is not valid"
 msgstr ""
 
-#: src/Classes/RegistrationAuth.php:237
+#: src/Classes/RegistrationAuth.php:239
 msgid "Passwords do not match"
 msgstr ""
 
-#: src/Classes/RegistrationAuth.php:241
+#: src/Classes/RegistrationAuth.php:243
 msgid "Email addresses do not match"
 msgstr ""
 
-#: src/Classes/RegistrationAuth.php:245
+#: src/Classes/RegistrationAuth.php:247
 msgid "Password is not strong"
 msgstr ""
 
-#: src/Classes/RegistrationAuth.php:411
+#: src/Classes/RegistrationAuth.php:413
 #: src/Themes/DragDrop/AbstractTheme.php:110
 msgid "Registration successful."
 msgstr ""
@@ -4594,27 +4594,27 @@ msgstr ""
 msgid "The password you entered is incorrect."
 msgstr ""
 
-#: src/ShortcodeParser/FormProcessor.php:190
+#: src/ShortcodeParser/FormProcessor.php:191
 msgid "Authentication failed. Please try again"
 msgstr ""
 
-#: src/ShortcodeParser/FrontendProfileTag.php:86
+#: src/ShortcodeParser/FrontendProfileTag.php:88
 msgid ""
 "This content is available to members only. Please <a href=\"%1$s\">login</a> "
 "or <a href=\"%2$s\">register</a> to view this area."
 msgstr ""
 
-#: src/ShortcodeParser/FrontendProfileTag.php:93
+#: src/ShortcodeParser/FrontendProfileTag.php:95
 msgid "You are not authorized to access this area."
 msgstr ""
 
-#: src/ShortcodeParser/FrontendProfileTag.php:131
+#: src/ShortcodeParser/FrontendProfileTag.php:133
 msgid ""
 "Form class not found. Please check if this user profile actually exist in "
 "ProfilePress."
 msgstr ""
 
-#: src/ShortcodeParser/FrontendProfileTag.php:196
+#: src/ShortcodeParser/FrontendProfileTag.php:198
 #: src/Themes/DragDrop/UserProfile/Dixon.php:121
 msgid "Profile"
 msgstr ""
@@ -4633,35 +4633,35 @@ msgid ""
 "ProfilePress."
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/MyAccountTag.php:51
+#: src/ShortcodeParser/MyAccount/MyAccountTag.php:52
 msgid "Dashboard"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/MyAccountTag.php:56
+#: src/ShortcodeParser/MyAccount/MyAccountTag.php:57
 msgid "Account Details"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/MyAccountTag.php:63
+#: src/ShortcodeParser/MyAccount/MyAccountTag.php:64
 #: src/ShortcodeParser/MyAccount/change-password.tmpl.php:25
 msgid "Change Password"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/MyAccountTag.php:70
+#: src/ShortcodeParser/MyAccount/MyAccountTag.php:71
 msgid "Logout"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/MyAccountTag.php:79
+#: src/ShortcodeParser/MyAccount/MyAccountTag.php:80
 #: src/ShortcodeParser/MyAccount/email-notifications.tmpl.php:14
 msgid "Email Notifications"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/MyAccountTag.php:90
+#: src/ShortcodeParser/MyAccount/MyAccountTag.php:91
 #: src/ShortcodeParser/MyAccount/account-settings.tmpl.php:17
 #: src/ShortcodeParser/MyAccount/edit-profile.tmpl.php:32
 msgid "Account Settings"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/MyAccountTag.php:527
+#: src/ShortcodeParser/MyAccount/MyAccountTag.php:528
 msgid "Cover Photo (min. width: 1000px)"
 msgstr ""
 
@@ -5538,9 +5538,9 @@ msgstr ""
 msgid "ProfilePress"
 msgstr ""
 
-#. #-#-#-#-#  wp-user-avatar.pot (ProfilePress 3.2.9)  #-#-#-#-#
+#. #-#-#-#-#  wp-user-avatar.pot (ProfilePress 3.2.10)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  wp-user-avatar.pot (ProfilePress 3.2.9)  #-#-#-#-#
+#. #-#-#-#-#  wp-user-avatar.pot (ProfilePress 3.2.10)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "https://profilepress.net"
 msgstr ""

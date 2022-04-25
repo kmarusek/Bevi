@@ -75,6 +75,7 @@ class GlobalSiteAccess
         if ( ! empty($excluded_pages) && is_page($excluded_pages)) return;
 
         if ( ! is_user_logged_in()) {
+            nocache_headers();
             wp_safe_redirect($redirect_url);
             exit;
         }

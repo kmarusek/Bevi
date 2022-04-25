@@ -7,7 +7,7 @@ class CleanupRules
     public static function getRules()
     {
         // Default patterns for common files
-        $docs = 'README* CHANGELOG* CHANGES* FAQ* CONTRIBUTING* CODE_OF_CONDUCT* HISTORY* UPGRADING* UPGRADE* package* demo example examples doc docs readme* changelog* composer*';
+        $docs = 'README* CHANGELOG* CHANGES* FAQ* CONTRIBUTING* CODE_OF_CONDUCT* HISTORY* UPGRADING* UPGRADE* package* demo example examples doc docs readme* changelog* composer* .gitignore';
         $tests = '.travis.yml .php_cs gulpfile.js package.json styleci.yml puli.json .scrutinizer.yml phpunit.xml* phpcs.php phpunit.php test tests Tests travis patchwork.json';
 
         return array(
@@ -78,6 +78,8 @@ class CleanupRules
             'symfony/class-loader' => array($docs, $tests),
             'symfony/console' => array($docs, $tests),
             'symfony/css-selector' => array($docs, $tests),
+            'symfony/polyfill-mbstring' => array($docs, $tests),
+            'symfony/polyfill-php80' => array($docs, $tests),
             'symfony/debug' => array($docs, $tests),
             'symfony/dom-crawler' => array($docs, $tests),
             'symfony/event-dispatcher' => array($docs, $tests),
@@ -105,6 +107,15 @@ class CleanupRules
             'jacobbennett/sendyphp' => array($docs, $tests),
             'league/csv' => array($docs, $tests),
             'mailerlite/mailerlite-api-v2-php-sdk' => array($docs, $tests),
+            'deliciousbrains/wp-background-processing' => array($docs, $tests),
+            'drewm/drip' => array($docs, $tests),
+            'kylekatarnls/update-helper' => array($docs, $tests),
+            'nesbot/carbon' => array($docs, $tests),
+            'kylekatarnls/update-helper' => array($docs, $tests),
+            'mailoptin/mailchimp-api-php' => array($docs, $tests),
+            'mailoptin/libsodium' => array($docs, $tests),
+            'mailoptin/connections' => array($docs, $tests),
+            'mailoptin/authifly' => array($docs, $tests),
             'mailoptin/advanceanalytics' => array($docs, $tests),
             'mailoptin/core' => array($docs, $tests),
             'pelago/emogrifier' => array($docs, $tests),
@@ -115,6 +126,12 @@ class CleanupRules
             'php-http/message-factory' => array($docs, $tests),
             'php-http/promise' => array($docs, $tests),
             'thinkshout/mailchimp-api-php' => array($docs, $tests),
+            'barryvdh/composer-cleanup-plugin' => array($docs, $tests),
+            'composer/installers' => array($docs, $tests),
+            'profilepress/libsodium' => array($docs, $tests),
+            'hybridauth/hybridauth' => array($docs, $tests),
+            'robthree/twofactorauth' => array($docs, $tests),
+            'bacon/bacon-qr-code' => array($docs, $tests),
         );
     }
 }

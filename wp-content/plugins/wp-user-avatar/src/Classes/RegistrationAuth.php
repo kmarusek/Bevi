@@ -77,6 +77,8 @@ class RegistrationAuth
             return [$no_login_redirect];
         }
 
+        nocache_headers();
+
         wp_safe_redirect($no_login_redirect);
         exit;
     }

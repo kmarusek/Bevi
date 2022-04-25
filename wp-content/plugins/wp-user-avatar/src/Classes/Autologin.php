@@ -69,6 +69,8 @@ class Autologin
             return [$login_redirection];
         }
 
+        nocache_headers();
+
         wp_safe_redirect($login_redirection);
         exit;
     }

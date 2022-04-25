@@ -34,6 +34,7 @@ class MyAccountTag extends FormProcessor
         // check if the page being viewed contains the "profilepress-my-account" shortcode. if true, redirect to login page
         if (isset($post->post_content) && has_shortcode($post->post_content, 'profilepress-my-account')) {
             if ( ! is_user_logged_in()) {
+                nocache_headers();
                 wp_safe_redirect(ppress_login_url());
                 exit;
             }

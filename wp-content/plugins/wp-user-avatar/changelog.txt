@@ -1,5 +1,9 @@
 ﻿== Changelog ==
 
+= 3.2.10 =
+* Added noncache to temporary redirects.
+* Fixed fatal error caused by user avatar functions.
+
 = 3.2.9 =
 * Fixed bug where reset password enforcement not working.
 * Made sure select2 is only loaded where needed in admin screens.

@@ -175,6 +175,7 @@ class Init
         $dashboard_redirect_url = ppress_var($this->db_options(), 'dashboard_redirect_url', home_url(), true);
 
         if (is_admin()) {
+            nocache_headers();
             wp_safe_redirect(esc_url_raw($dashboard_redirect_url));
             exit;
         }

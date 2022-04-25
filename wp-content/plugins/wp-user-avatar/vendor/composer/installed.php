@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6283077c705e2efa9a21ad4af3869108aeb5ae42',
+        'reference' => 'c4ee7edb8a343efcce84b582fa6ea027d4100cfe',
         'name' => '__root__',
         'dev' => false,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6283077c705e2efa9a21ad4af3869108aeb5ae42',
+            'reference' => 'c4ee7edb8a343efcce84b582fa6ea027d4100cfe',
             'dev_requirement' => false,
         ),
         'barryvdh/composer-cleanup-plugin' => array(
@@ -27,7 +27,7 @@
             'aliases' => array(
                 0 => '0.1.x-dev',
             ),
-            'reference' => '540fddf14a4fd96626278963b10e14169a989f2e',
+            'reference' => '74d878666436c99f5b671b90312e85479afeedb0',
             'dev_requirement' => false,
         ),
         'collizo4sky/persist-admin-notices-dismissal' => array(
