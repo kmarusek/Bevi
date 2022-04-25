@@ -3,7 +3,7 @@
 Plugin Name: Easy Social Icons
 Plugin URI: http://www.cybernetikz.com
 Description: You can upload your own social icon, set your social URL, choose weather you want to display vertical or horizontal. You can use the shortcode <strong>[cn-social-icon]</strong> in page/post, template tag for php file <strong>&lt;?php if ( function_exists('cn_social_icon') ) echo cn_social_icon(); ?&gt;</strong> also you can use the widget <strong>"Easy Social Icons"</strong> for sidebar.
-Version: 3.2.2
+Version: 3.2.4
 Author: cybernetikz
 Author URI: http://www.cybernetikz.com
 License: GPL2
@@ -35,12 +35,16 @@ function cnss_delete_icon()
 {
 	global $wpdb,$err,$msg,$cnssBaseDir;
 	if (isset($_GET['cnss-delete'])) {
+		if (! is_numeric($_GET['id'])) {
+			wp_die('Sequrity Issue.');
+		}
+
 		if ($_GET['id'] != '' && wp_verify_nonce($_GET['_wpnonce'], 'cnss_delete_icon'))
 		{
 			$table_name = $wpdb->prefix . "cn_social_icon";
 			$image_file_path = $cnssBaseDir;
-			$wpdb->delete( $table_name, array( 'id' => $_GET['id'] ), array( '%d' ) );
-			$msg = "Delete Successful !"."<br />";
+			$wpdb->delete( $table_name, array( 'id' => sanitize_text_field($_GET['id']) ), array( '%d' ) );
+			$msg = "Delete Successful !";
 		}
 	}
 }
@@ -231,43 +235,9 @@ function cnss_original_icon_color_fn($value) {
 	return $value==''?'0':$value;
 }
 
-function jsEscape($str) {
-  $output = '';
-  $str = str_split($str);
-  for($i=0;$i<count($str);$i++) {
-  $chrNum = ord($str[$i]);
-  $chr = $str[$i];
-  if($chrNum === 226) {
-    if(isset($str[$i+1]) && ord($str[$i+1]) === 128) {
-      if(isset($str[$i+2]) && ord($str[$i+2]) === 168) {
-        $output .= '\u2028';
-        $i += 2;
-        continue;
-      }
-      if(isset($str[$i+2]) && ord($str[$i+2]) === 169) {
-        $output .= '\u2029';
-        $i += 2;
-        continue;
-      }
-    }
-  }
-  switch($chr) {
-    case "'":
-    case '"':
-    case "\n";
-    case "\r";
-    case "&";
-    case "\\";
-    case "<":
-    case ">":
-      $output .= sprintf("\\u%04x", $chrNum);
-    break;
-    default:
-      $output .= $str[$i];
-    break;
-    }
-  }
-  return $output;
+function cnss_sanitize_array(array $arr)
+{
+	return array_map('sanitize_text_field', $arr);
 }
 
 function cnss_social_icon_option_fn() {
@@ -459,8 +429,8 @@ function cnss_social_icon_option_fn() {
             }
             if( isset($_POST['_selected_icons']) ) {
                 if(is_array($_POST['_selected_icons'])) {
-                    $ids = implode(',', $_POST['_selected_icons']);
-                    $shortcode .= ' selected_icons=&quot;'.sanitize_text_field($ids) .'&quot;';
+                    $ids = implode(',', cnss_sanitize_array($_POST['_selected_icons']));
+                    $shortcode .= ' selected_icons=&quot;'.$ids.'&quot;';
                 }
             }
         }
@@ -520,7 +490,7 @@ function cnss_social_icon_option_fn() {
               </tr>
             </table>
             <p></p>
-            <?php echo cnss_social_icon_sc( isset($_POST['_selected_icons']) ? $_POST['_selected_icons'] : array() ); ?>
+            <?php echo cnss_social_icon_sc( isset($_POST['_selected_icons']) ? cnss_sanitize_array($_POST['_selected_icons']) : array() ); ?>
             <p><label><?php _e( 'Select Social Icons:' ); ?></label> <em>(If select none all icons will be displayed)</em></p>
             <p>
                 <input type="submit" class="button-primary" value="<?php _e('Generate Shortcode') ?>" />
@@ -642,9 +612,9 @@ function cnss_process_post() {
 				);
 
 				if (!$results)
-					$err .= "Fail to update database" . "<br />";
+					$err .= "Fail to update database";
 				else
-					$msg .= "Update successful !" . "<br />";
+					$msg .= "Update successful !";
 			}
 			/*
 			$allSocialMediaIcons = array('500px','amazon','android','angellist','apple','bandcamp','behance','behance-square','bitbucket','bluetooth','cc-amex','cc-mastercard','cc-paypal','cc-stripe','cc-visa','codepen','css3','delicious','deviantart','digg','dribbble ','dropbox','drupal','edge ','etsy','expeditedssl','facebook','facebook-f','facebook-official','facebook-square','firefox','flickr','forumbee ','foursquare','free-code-camp','get-pocket','git ','git-square ','github ','github-square ','gitlab','google ','google-plus','google-plus-circle','google-plus-official','google-plus-square','google-wallet','gratipay','hacker-news','houzz','html5','imdb','instagram','internet-explorer','joomla','lastfm','linkedin','linkedin-square','linux','maxcdn ','medium ','meetup','odnoklassniki','opera','paypal','pinterest ','pinterest-p ','pinterest-square ','product-hunt','quora ','reddit ','rss ','scribd','skype','slack','slideshare ','snapchat','soundcloud','spotify','stack-exchange','stack-overflow','steam','stumbleupon','telegram','trello','tripadvisor','tumblr','tumblr-square','twitch','twitter','twitter-square','viadeo','vimeo ','vimeo-square ','vine ','wechat','whatsapp ','wikipedia-w','windows','wordpress ','xing','xing-square','yahoo','yelp','youtube','youtube-square');
@@ -711,11 +681,11 @@ function cnss_process_post() {
 				);
 
 				if (false === $result3){
-					$err .= "Update fails !". "<br />";
+					$err .= "Update fails !";
 				}
 				else
 				{
-					$msg = "Update successful !". "<br />";
+					$msg = "Update successful !";
 				}
 			}
 
@@ -798,17 +768,22 @@ function cnss_social_icon_sort_fn() {
 function cnss_save_ajax_order() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . "cn_social_icon";
-	parse_str($_POST['order'], $data);
-	if (is_array($data)) {
-		foreach($data as $key => $values )
-		{
-			if ( $key == 'item' )
-			{
-				foreach( $values as $position => $id )
-				{
-					$wpdb->update( $table_name, array('sortorder' => $position), array('id' => $id) );
-				}
-			}
+	parse_str(sanitize_text_field($_POST['order']), $data);
+	if (! is_array($data)) {
+		return;
+	}
+	foreach($data as $key => $values ) {
+		if ( $key != 'item' ) {
+			continue;
+		}
+		foreach( $values as $position => $id ) {
+			$wpdb->update(
+				$table_name,
+				array('sortorder' => $position),
+				array('id' => $id),
+				array('%d'),
+				array('%d')
+			);
 		}
 	}
 }
@@ -960,10 +935,10 @@ function cnss_social_icon_add_fn() {
 <div class="wrap">
 <?php echo cnss_esi_review_text(); ?>
 <?php
-if($msg!='') echo '<div id="message" class="updated fade">'.$msg.'</div>';
-if($err!='') echo '<div id="message" class="error fade">'.$err.'</div>';
+if($msg!='') echo '<div id="message" class="updated fade">'.esc_html($msg).'</div>';
+if($err!='') echo '<div id="message" class="error fade">'.esc_html($err).'</div>';
 ?>
-<h2><?php echo $page_title;?></h2>
+<h2><?php echo esc_attr($page_title);?></h2>
 <div class="content_wrapper">
 <div class="left">
 
@@ -1019,7 +994,7 @@ if($err!='') echo '<div id="message" class="error fade">'.$err.'</div>';
 			<td><input list="url-autofill" type="text" name="url" id="url" class="regular-text" value="<?php echo $url?>" />
 			<datalist style="display: none;" id="url-autofill">
 			<?php foreach ($social_sites as $key => $value) { ?>
-			  <option value="<?php echo $key; ?>">
+			  <option value="<?php echo esc_attr($key); ?>">
 			<?php } ?>
 			</datalist><br /><i>Type few char for suggestions &ndash; don't forget the <strong><code>http(s)://</code></strong></i></td>
         </tr>
@@ -1027,7 +1002,7 @@ if($err!='') echo '<div id="message" class="error fade">'.$err.'</div>';
         <tr valign="top">
 			<th scope="row">Sort Order</th>
 			<td>
-				<input type="number" name="sortorder" id="sortorder" class="small-text" value="<?php echo $sortorder?>" />
+				<input type="number" name="sortorder" id="sortorder" class="small-text" value="<?php echo esc_attr($sortorder); ?>">
 			</td>
         </tr>
 
@@ -1041,13 +1016,13 @@ if($err!='') echo '<div id="message" class="error fade">'.$err.'</div>';
     </table>
 
 	<?php if (isset($_GET['mode']) ) { ?>
-	<input type="hidden" name="action" value="edit" />
-	<input type="hidden" name="id" id="id" value="<?php echo $id;?>" />
-	<?php } else {?>
-	<input type="hidden" name="action" value="update" />
+	<input type="hidden" name="action" value="edit">
+	<input type="hidden" name="id" id="id" value="<?php echo esc_attr($id); ?>">
+	<?php } else { ?>
+	<input type="hidden" name="action" value="update">
 	<?php } ?>
 
-    <p class="submit" style="text-align:center"><input id="submit_button" name="submit_button" type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" /><?php echo cnss_back_to_link() ?></p>
+    <p class="submit" style="text-align:center"><input id="submit_button" name="submit_button" type="submit" class="button-primary" value="<?php _e('Save Changes') ?>"><?php echo cnss_back_to_link() ?></p>
 </form>
 </div>
 <div class="right">
@@ -1141,13 +1116,13 @@ function cnss_social_icon_page_fn() {
 					?>
 						<tr valign="top">
 							<td>
-								<?php echo $icon->id; ?>
+								<?php echo esc_attr($icon->id); ?>
 							</td>
 							<td>
-								<?php echo $icon->title;?>
+								<?php echo esc_attr($icon->title); ?>
 							</td>
 							<td>
-								<a target="_blank" href="<?php echo $icon->url;?>"><?php echo $icon->url;?></a>
+								<a target="_blank" href="<?php echo esc_url($icon->url); ?>"><?php echo esc_url($icon->url); ?></a>
 							</td>
 							<td>
 								<?php echo $icon->target==1?'New Window':'Same Window' ?>
@@ -1326,7 +1301,6 @@ function cn_social_icon($attr = array(), $call_from_widget = NULL) {
 }
 
 function cnss_social_icon_sc( $selected_icons_array = array() ) {
-
 		global $wpdb,$cnssBaseURL;
 
 		$cnss_width = esc_attr(get_option('cnss-width'));
@@ -1485,7 +1459,7 @@ class Cnss_Widget extends WP_Widget {
 				$icon->id = esc_attr($icon->id);
 				?><li style="display:inline-block; padding:2px 8px; border:1px dashed #ccc;">
 	            <div style="text-align: center; width: <?php echo $cnss_width ?>px;">
-	            	<label for="<?php echo $this->get_field_id( 'selected_icons'.$icon->id ); ?>"><?php echo cnss_get_icon_html($icon->image_url, $icon->title); ?>
+	            	<label for="<?php echo $this->get_field_id( 'selected_icons'.esc_attr($icon->id) ); ?>"><?php echo cnss_get_icon_html($icon->image_url, $icon->title); ?>
 	            	</label>
 	            </div>
 	            <div style="text-align: center;"><input <?php if( in_array($icon->id, $selected_icons_array ) ) echo 'checked="checked"'; ?> style="margin:0;" type="checkbox" name="<?php echo $this->get_field_name( 'selected_icons' ); ?>[]" id="<?php echo $this->get_field_id( 'selected_icons'.$icon->id ); ?>" value="<?php echo $icon->id; ?>" /></div>
