@@ -51,6 +51,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "eslint-webpack-plugin": "^3.0.1",
     "gsap": "^3.5.1",
+    "iframe-resizer": "^4.3.2",
     "laravel-mix": "^6.0.4",
     "laravel-mix-eslint": "^0.2.0",
     "mix-tailwindcss": "^1.2.0",

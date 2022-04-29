@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 import { registerScrollSpy } from 'vue3-scroll-spy';
 
 // Plugins
+import iframeResizer from 'iframe-resizer';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import axios from 'axios';

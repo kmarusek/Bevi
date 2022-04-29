@@ -28,7 +28,7 @@
             v-html="block.content"
           />
         </div>
-        <div class="xl:col-span-4 order-last xl:order-none">
+        <div class="xl:col-span-3 order-last xl:order-none">
           <img
             :src="block.image.sizes.large"
             :width="block.image.sizes['large-width']"
@@ -36,8 +36,9 @@
             :alt="block.image.alt"
           >
         </div>
-        <div class="xl:col-span-2">
+        <div class="xl:col-span-3">
           <div
+            ref="pardot"
             class="pardot-form"
             v-html="block.pardot_form"
             :style="[ isMobile ? { 'height' : `${block.form_height.mobile}px` } : { 'height' : `${block.form_height.desktop}px` } ]"
@@ -54,6 +55,8 @@
 </template>
 
 <script>
+  import iframeResize from 'iframe-resizer/js/iframeResizer';
+
   export default {
     props: {
       block: {
@@ -66,6 +69,10 @@
         return window.innerWidth <= 768;
       },
     },
+    mounted() {
+      const iframe = this.$refs.pardot.querySelector('iframe');
+      iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'lowestElement'}, iframe);
+    }
   };
 </script>
 

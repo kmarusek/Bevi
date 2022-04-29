@@ -35,6 +35,7 @@
       </div>
       <div class="lg:w-7/12">
         <div
+          ref="pardot"
           class="pardot-form"
           v-html="block.pardot_form"
           :style="[ isMobile ? { 'height' : `${block.form_height.mobile}px` } : { 'height' : `${block.form_height.desktop}px` } ]"
@@ -46,6 +47,7 @@
 
 <script>
   import GSAPParallax from '~/mixins/GSAPParallax.js';
+  import iframeResize from 'iframe-resizer/js/iframeResizer';
 
   export default {
     mixins: [GSAPParallax],
@@ -60,6 +62,10 @@
         return window.innerWidth <= 768;
       },
     },
+    mounted() {
+      const iframe = this.$refs.pardot.querySelector('iframe');
+      iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'lowestElement'}, iframe);
+    }
   };
 </script>
 
