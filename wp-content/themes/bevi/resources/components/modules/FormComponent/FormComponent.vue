@@ -64,21 +64,22 @@
     },
     mounted() {
       const iframe = this.$refs.pardot.querySelector('iframe');
-      iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'lowestElement'}, iframe);
+      iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'taggedElement'}, iframe);
     }
   };
 </script>
 
 <style lang="scss" scoped>
-.pardot-form {
-  :deep(iframe.pardotform) {
-    min-height: 1000px;
+// min-heights replaced with automatic resizing from iframe-resizer
+// .pardot-form {
+//   :deep(iframe.pardotform) {
+//     min-height: 1000px;
 
-    @screen lg {
-      min-height: 550px;
-    }
-  }
-}
+//     @screen lg {
+//       min-height: 550px;
+//     }
+//   }
+// }
 .bubble-one {
   top: 25%;
   left: 5%;

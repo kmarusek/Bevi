@@ -71,7 +71,7 @@
     },
     mounted() {
       const iframe = this.$refs.pardot.querySelector('iframe');
-      iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'lowestElement'}, iframe);
+      iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'taggedElement'}, iframe);
     }
   };
 </script>
