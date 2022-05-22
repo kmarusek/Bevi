@@ -1,5 +1,5 @@
 <template>
-  <section class="all-flavors gsap-fade-section">
+  <section id="all-flavors" class="all-flavors gsap-fade-section">
     <span
       v-if="showTray"
       class="overlay"
