@@ -1,5 +1,5 @@
 <template>
-  <section class="container py-0 lg:px-12 mx-auto">
+  <section class="container mx-auto">
     <div class="relative flex min-h-screen flex-col overflow-hidden">
       <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:rounded-lg sm:px-10">
 
