@@ -9,7 +9,7 @@
     ]
   },
   "publicPath": "/wp-content/themes/bevi",
-  "devUrl": "http://bevi.localserver",
+  "devUrl": "http://bevi.local",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",
   "watch": [
