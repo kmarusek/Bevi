@@ -3672,7 +3672,7 @@
                 },
                 "layout_6297582bb1413": {
                     "key": "layout_6297582bb1413",
-                    "name": "h_events",
+                    "name": "events",
                     "label": "Events",
                     "display": "block",
                     "sub_fields": [
@@ -3828,5 +3828,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1654087957
+    "modified": 1654089995
 }
