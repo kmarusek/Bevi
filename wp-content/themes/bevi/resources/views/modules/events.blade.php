@@ -1,0 +1,1 @@
+<events :block="{{ json_encode($block) }}"></events>
