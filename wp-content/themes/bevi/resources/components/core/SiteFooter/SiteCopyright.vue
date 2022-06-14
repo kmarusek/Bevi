@@ -28,7 +28,7 @@
         <div class="icon ml-auto md:ml-6">
           <img
             :src="require('~/assets/images/icons/arrow.svg').default"
-            alt=""
+            alt="Back to top"
           >
         </div>
       </button>
