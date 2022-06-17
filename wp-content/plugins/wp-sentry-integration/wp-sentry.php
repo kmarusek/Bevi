@@ -4,7 +4,7 @@
  * Plugin Name: WordPress Sentry
  * Plugin URI: https://github.com/stayallive/wp-sentry
  * Description: A (unofficial) WordPress plugin to report PHP and JavaScript errors to Sentry.
- * Version: 4.16.0
+ * Version: 5.0.0
  * Author: Alex Bouma
  * Author URI: https://alex.bouma.dev
  * License: MIT
@@ -74,11 +74,6 @@ if ( ! class_exists( WP_Sentry_Version::class ) ) {
 		: __DIR__ . '/vendor/autoload.php';
 
 	define( 'WP_SENTRY_SCOPED_AUTOLOADER', $scopedAutoloaderExists );
-}
-
-// Define the default version
-if ( ! defined( 'WP_SENTRY_VERSION' ) && function_exists( 'wp_get_theme' ) ) {
-	define( 'WP_SENTRY_VERSION', wp_get_theme()->get( 'Version' ) ?: 'unknown' );
 }
 
 // Load the PHP tracker if we have a PHP DSN

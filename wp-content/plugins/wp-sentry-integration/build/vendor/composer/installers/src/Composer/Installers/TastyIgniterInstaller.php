@@ -15,7 +15,7 @@ class TastyIgniterInstaller extends \WPSentry\ScopedVendor\Composer\Installers\B
      */
     public function inflectPackageVars(array $vars) : array
     {
-        $extra = $this->composer->getPackage()->getExtra();
+        $extra = $this->package->getExtra();
         if ($vars['type'] === 'tastyigniter-module') {
             return $this->inflectModuleVars($vars);
         }

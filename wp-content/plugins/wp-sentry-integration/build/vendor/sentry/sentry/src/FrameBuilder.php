@@ -67,7 +67,7 @@ final class FrameBuilder
                 $functionName = \Sentry\Frame::ANONYMOUS_CLASS_PREFIX . $this->stripPrefixFromFilePath(\substr($backtraceFrame['class'], \strlen(\Sentry\Frame::ANONYMOUS_CLASS_PREFIX)));
             }
             $rawFunctionName = \sprintf('%s::%s', $backtraceFrame['class'], $backtraceFrame['function']);
-            $functionName = \sprintf('%s::%s', \preg_replace('/0x[a-fA-F0-9]+$/', '', $functionName), $backtraceFrame['function']);
+            $functionName = \sprintf('%s::%s', \preg_replace('/(?::\\d+\\$|0x)[a-fA-F0-9]+$/', '', $functionName), $backtraceFrame['function']);
         } elseif (isset($backtraceFrame['function'])) {
             $functionName = $backtraceFrame['function'];
         }

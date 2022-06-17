@@ -30,15 +30,6 @@ use WPSentry\ScopedVendor\Symfony\Component\HttpClient\HttplugClient as SymfonyH
 final class HttpClientFactory implements \Sentry\HttpClient\HttpClientFactoryInterface
 {
     /**
-     * @var int The timeout of the request in seconds
-     */
-    private const DEFAULT_HTTP_TIMEOUT = 5;
-    /**
-     * @var int The default number of seconds to wait while trying to connect
-     *          to a server
-     */
-    private const DEFAULT_HTTP_CONNECT_TIMEOUT = 2;
-    /**
      * @var StreamFactoryInterface The PSR-17 stream factory
      */
     private $streamFactory;
@@ -83,7 +74,7 @@ final class HttpClientFactory implements \Sentry\HttpClient\HttpClientFactoryInt
             throw new \RuntimeException('The "http_proxy" option does not work together with a custom HTTP client.');
         }
         $httpClient = $this->httpClient ?? $this->resolveClient($options);
-        $httpClientPlugins = [new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\HeaderSetPlugin(['User-Agent' => $this->sdkIdentifier . '/' . $this->sdkVersion]), new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\AuthenticationPlugin(new \Sentry\HttpClient\Authentication\SentryAuthentication($options, $this->sdkIdentifier, $this->sdkVersion)), new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\RetryPlugin(['retries' => $options->getSendAttempts()]), new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\ErrorPlugin(['only_server_exception' => \true])];
+        $httpClientPlugins = [new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\HeaderSetPlugin(['User-Agent' => $this->sdkIdentifier . '/' . $this->sdkVersion]), new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\AuthenticationPlugin(new \Sentry\HttpClient\Authentication\SentryAuthentication($options, $this->sdkIdentifier, $this->sdkVersion)), new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\RetryPlugin(['retries' => $options->getSendAttempts(\false)]), new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\ErrorPlugin(['only_server_exception' => \true])];
         if ($options->isCompressionEnabled()) {
             $httpClientPlugins[] = new \Sentry\HttpClient\Plugin\GzipEncoderPlugin($this->streamFactory);
             $httpClientPlugins[] = new \WPSentry\ScopedVendor\Http\Client\Common\Plugin\DecoderPlugin();
@@ -96,21 +87,21 @@ final class HttpClientFactory implements \Sentry\HttpClient\HttpClientFactoryInt
     private function resolveClient(\Sentry\Options $options)
     {
         if (\class_exists(\WPSentry\ScopedVendor\Symfony\Component\HttpClient\HttplugClient::class)) {
-            $symfonyConfig = ['max_duration' => self::DEFAULT_HTTP_TIMEOUT];
+            $symfonyConfig = ['timeout' => $options->getHttpConnectTimeout(), 'max_duration' => $options->getHttpTimeout()];
             if (null !== $options->getHttpProxy()) {
                 $symfonyConfig['proxy'] = $options->getHttpProxy();
             }
             return new \WPSentry\ScopedVendor\Symfony\Component\HttpClient\HttplugClient(\WPSentry\ScopedVendor\Symfony\Component\HttpClient\HttpClient::create($symfonyConfig));
         }
         if (\class_exists(\WPSentry\ScopedVendor\Http\Adapter\Guzzle6\Client::class)) {
-            $guzzleConfig = [\WPSentry\ScopedVendor\GuzzleHttp\RequestOptions::TIMEOUT => self::DEFAULT_HTTP_TIMEOUT, \WPSentry\ScopedVendor\GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => self::DEFAULT_HTTP_CONNECT_TIMEOUT];
+            $guzzleConfig = [\WPSentry\ScopedVendor\GuzzleHttp\RequestOptions::TIMEOUT => $options->getHttpTimeout(), \WPSentry\ScopedVendor\GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => $options->getHttpConnectTimeout()];
             if (null !== $options->getHttpProxy()) {
                 $guzzleConfig[\WPSentry\ScopedVendor\GuzzleHttp\RequestOptions::PROXY] = $options->getHttpProxy();
             }
             return \WPSentry\ScopedVendor\Http\Adapter\Guzzle6\Client::createWithConfig($guzzleConfig);
         }
         if (\class_exists(\WPSentry\ScopedVendor\Http\Client\Curl\Client::class)) {
-            $curlConfig = [\CURLOPT_TIMEOUT => self::DEFAULT_HTTP_TIMEOUT, \CURLOPT_CONNECTTIMEOUT => self::DEFAULT_HTTP_CONNECT_TIMEOUT];
+            $curlConfig = [\CURLOPT_TIMEOUT => $options->getHttpTimeout(), \CURLOPT_CONNECTTIMEOUT => $options->getHttpConnectTimeout()];
             if (null !== $options->getHttpProxy()) {
                 $curlConfig[\CURLOPT_PROXY] = $options->getHttpProxy();
             }

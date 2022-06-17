@@ -10,7 +10,7 @@ use WPSentry\ScopedVendor\Http\Discovery\Exception;
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
  */
-/*final */
+/* final */
 class NotFoundException extends \RuntimeException implements \WPSentry\ScopedVendor\Http\Discovery\Exception
 {
 }
