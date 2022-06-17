@@ -22,12 +22,16 @@ class MemberDirectoryTag
             $url = ppress_get_current_url_raw();
 
             if ( ! empty($_GET['ppmd-search']) &&
-                 ( ! empty($_GET['search-' . $directory_id]) || ! empty(array_filter($_GET['filters'])))
+                 (
+                     ! empty($_GET['search-' . $directory_id]) || (is_array($_GET['filters']) && ! empty(array_filter($_GET['filters'])))
+                 )
             ) {
 
                 $url = add_query_arg([
                     sprintf('filter%s', absint($_GET['ppmd-search'])) => base64_encode(wp_json_encode($_GET))
                 ], ppress_get_current_url_raw());
+
+                $url .= '#pp-member-directory-' . $directory_id;
             }
 
             wp_safe_redirect($url);

@@ -435,11 +435,13 @@ abstract class AbstractTheme implements ThemeInterface
     {
         static $instance = [];
 
-        if ( ! isset($instance[$form_id])) {
-            $class              = get_called_class();
-            $instance[$form_id] = new $class($form_id, $form_type);
+        $cache_key = $form_id . '_' . $form_type;
+
+        if ( ! isset($instance[$cache_key])) {
+            $class                = get_called_class();
+            $instance[$cache_key] = new $class($form_id, $form_type);
         }
 
-        return $instance[$form_id];
+        return $instance[$cache_key];
     }
 }

@@ -1,5 +1,26 @@
 ﻿== Changelog ==
 
+= 3.2.14 =
+* Improve PHP 8 compatibility.
+
+= 3.2.13 =
+* Fixed bug where custom html texts where scribbled.
+
+= 3.2.12 =
+* Fixed user roles not recognized during member directory search.
+* Fixed fatal error caused by empty member directory search field.
+* Fixed bug with shortcodes not working in custom html.
+* Fixed conflict where media uploader was not working for other plugins.
+* Fixed Buddypress signup page override not working.
+* Fixed My Account page visitor redirect bug.
+* Improvement: scroll to member directory section after search.
+* Improved ajax login process.
+* Added Slim SEO compatibility.
+
+= 3.2.11 =
+* Fixed PHP Fatal error:  Uncaught Error: Call to a member function wpua_get_default_avatar_url() on null
+* Upgrade jbox and flatpickr libs.
+
 = 3.2.10 =
 * Added noncache to temporary redirects.
 * Fixed fatal error caused by user avatar functions.

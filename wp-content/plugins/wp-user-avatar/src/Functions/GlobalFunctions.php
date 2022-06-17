@@ -369,12 +369,12 @@ function ppress_login_url($redirect = '')
  */
 function ppress_registration_url()
 {
-    $reg_url = wp_registration_url();
-
     $page_id = ppress_get_setting('set_registration_url');
 
     if ( ! empty($page_id) && get_post_status($page_id)) {
         $reg_url = get_permalink($page_id);
+    } else {
+        $reg_url = wp_registration_url();
     }
 
     return apply_filters('ppress_registration_url', $reg_url);
@@ -1454,4 +1454,24 @@ function ppress_clean($var)
     } else {
         return is_scalar($var) ? sanitize_textarea_field($var) : $var;
     }
+}
+
+/**
+ * @param $s
+ * @see https://stackoverflow.com/a/23810738/2648410
+ * @return bool
+ */
+function ppress_is_base64($s)
+{
+    // Check if there are valid base64 characters
+    if ( ! preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $s)) return false;
+
+    // Decode the string in strict mode and check the results
+    $decoded = base64_decode($s, true);
+    if (false === $decoded) return false;
+
+    // Encode the string again
+    if (base64_encode($decoded) != $s) return false;
+
+    return true;
 }

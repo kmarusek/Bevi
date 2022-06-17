@@ -152,7 +152,13 @@ class GlobalShortcodes
     {
         $atts = shortcode_atts(['custom_html' => ''], $atts);
 
-        return do_shortcode(stripslashes(wp_kses_post($atts['custom_html'])));
+        $val = $atts['custom_html'];
+
+        if (ppress_is_base64($val)) {
+            $val = base64_decode($atts['custom_html']);
+        }
+
+        return do_shortcode(stripslashes(wp_kses_post($val)));
     }
 
     /**

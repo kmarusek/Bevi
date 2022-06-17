@@ -94,9 +94,10 @@ class WP_User_Avatar
     {
         global $post, $wpua_is_profile;
         // Get post ID so not to interfere with media uploads
-        $post_id = is_object($post) ? $post->ID : 0;
         // Don't use post ID on front pages if there's a WPUA uploader
-        $settings['post']['id'] = ( ! is_admin() && $wpua_is_profile == 1) ? 0 : $post_id;
+        if ( ! is_admin() && $wpua_is_profile == 1) {
+            $settings['post']['id'] = 0;
+        }
 
         return $settings;
     }

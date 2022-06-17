@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c4ee7edb8a343efcce84b582fa6ea027d4100cfe',
+        'reference' => '62074ba2a7d716da9ae147b82fc14f9da802e8d8',
         'name' => '__root__',
         'dev' => false,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c4ee7edb8a343efcce84b582fa6ea027d4100cfe',
+            'reference' => '62074ba2a7d716da9ae147b82fc14f9da802e8d8',
             'dev_requirement' => false,
         ),
         'barryvdh/composer-cleanup-plugin' => array(

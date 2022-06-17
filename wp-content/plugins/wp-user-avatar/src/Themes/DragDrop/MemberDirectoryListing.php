@@ -83,7 +83,7 @@ class MemberDirectoryListing
 
                 if ( ! empty($field_setting['custom_html'])) {
 
-                    $field_type = $field_type . ' custom_html="' . $field_setting['custom_html'] . '"';
+                    $field_type = $field_type . ' custom_html="' . base64_encode($field_setting['custom_html']) . '"';
                 }
             }
 

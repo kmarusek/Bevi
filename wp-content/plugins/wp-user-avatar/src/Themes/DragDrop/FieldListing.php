@@ -229,7 +229,7 @@ class FieldListing
                 $val = esc_attr($value);
                 //do not escape custom HTML
                 if ($key == 'custom_html') {
-                    $val = addslashes($value);
+                    $val = base64_encode($value);
                 }
 
                 $attributes .= $key . "='" . $val . "' ";

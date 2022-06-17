@@ -42,8 +42,11 @@ class UserAvatar
                     }
 
                     if ( ! $has_valid_url) {
-                        $wpua_size   = ! empty($size) ? $size : 96;
-                        $args['url'] = $wpua_functions->wpua_get_default_avatar_url($wpua_size);
+                        $wpua_size = ! empty($size) ? $size : 96;
+
+                        if (method_exists($wpua_functions, 'wpua_get_default_avatar_url')) {
+                            $args['url'] = $wpua_functions->wpua_get_default_avatar_url($wpua_size);
+                        }
                     }
                 }
                 /** WP User Avatar Adapter ENDS */

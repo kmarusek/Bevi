@@ -144,20 +144,16 @@ abstract class AbstractSettingsPage
 
     public function active_menu_tab()
     {
-        static $cache = null;
-
-        if (is_null($cache) && strpos(ppressGET_var('page'), 'pp') !== false) {
-            $cache = isset($_GET['view']) ? sanitize_text_field($_GET['view']) : $this->default_header_menu();
+        if (strpos(ppressGET_var('page'), 'pp') !== false) {
+            return isset($_GET['view']) ? sanitize_text_field($_GET['view']) : $this->default_header_menu();
         }
 
-        return $cache;
+        return false;
     }
 
     public function active_submenu_tab()
     {
-        static $cache = null;
-
-        if (is_null($cache) && strpos(ppressGET_var('page'), 'pp') !== false) {
+        if (strpos(ppressGET_var('page'), 'pp') !== false) {
 
             $active_menu = $this->active_menu_tab();
 
@@ -167,10 +163,10 @@ abstract class AbstractSettingsPage
                 $first_submenu_tab = array_values($submenu_tabs)[0]['id'];
             }
 
-            $cache = isset($_GET['section']) && ppressGET_var('view', 'general', true) == $active_menu ? sanitize_text_field($_GET['section']) : $first_submenu_tab;
+            return isset($_GET['section']) && ppressGET_var('view', 'general', true) == $active_menu ? sanitize_text_field($_GET['section']) : $first_submenu_tab;
         }
 
-        return $cache;
+        return false;
     }
 
     public function admin_page_callback()

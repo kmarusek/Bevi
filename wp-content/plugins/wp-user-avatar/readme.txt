@@ -1,22 +1,22 @@
-﻿=== Membership, User Registration, Login Form & User Profile – ProfilePress (Formerly WP User Avatar) ===
+=== WordPress Membership, User Registration, Login Form, User Profile & Restrict Content – ProfilePress ===
 Contributors: properfraction, collizo4sky
 Donate link: https://profilepress.net/pricing/
-Tags: user registration, user profile, registration form, membership, login form, 2fa, two-factor authenticator, login, registration, password reset, members, users, profile, front-end profile, edit profile, avatar, profile picture
+Tags: membership, user registration, user profile, registration form, login form, 2fa, two-factor authenticator, login, registration, password reset, members, users, profile, front-end profile, edit profile, avatar, profile picture
 Requires at least: 4.7
 Requires PHP: 7.1.0
-Tested up to: 5.9
-Stable tag: 3.2.10
+Tested up to: 6.0
+Stable tag: 3.2.14
 License: GPLv2 or later
 
 Modern membership plugin for user registration, login form, user profile, member directories & content restriction.
 
 == Description ==
 
-= The Modern WordPress Membership & User Profile Plugin =
+= Modern Membership, User Registration, Profile & Login Form Plugin =
 
-[ProfilePress](https://profilepress.net/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) (formerly WP User Avatar) is a lightweight membership plugin that lets you create beautiful user profiles, member directories and frontend user registration form, login form, password reset and editing profile information. It also allows you to protect sensitive content and control user access.
+[ProfilePress](https://profilepress.net/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) (formerly WP User Avatar) is a lightweight membership plugin that lets you create beautiful user profiles, member directories and frontend user registration form, login form, password reset and editing profile information. It also allows you to restrict content and control user access.
 
-Our Drag-and-Drop form builder makes building forms easy. It is the perfect solution for creating online communities and membership sites where users can easily register or signup to become members.
+Our Drag-and-Drop form builder makes building forms easy. It is the perfect solution for creating online communities and membership sites where users can register or signup to become members.
 
 [Website](https://profilepress.net/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) | [Addons](https://profilepress.net/addons/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) | [Documentation](https://profilepress.net/docs/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) | [Support](https://profilepress.net/support/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion)
 
@@ -117,6 +117,27 @@ No. You can create and manage your forms, user profiles and member directories w
 10. Admin Bar and Dashboard Access
 
 == Changelog ==
+
+= 3.2.14 =
+* Improve PHP 8 compatibility.
+
+= 3.2.13 =
+* Fixed bug where custom html texts where scribbled.
+
+= 3.2.12 =
+* Fixed user roles not recognized during member directory search.
+* Fixed fatal error caused by empty member directory search field.
+* Fixed bug with shortcodes not working in custom html.
+* Fixed conflict where media uploader was not working for other plugins.
+* Fixed Buddypress signup page override not working.
+* Fixed My Account page visitor redirect bug.
+* Improvement: scroll to member directory section after search.
+* Improved ajax login process.
+* Added Slim SEO compatibility.
+
+= 3.2.11 =
+* Fixed PHP Fatal error:  Uncaught Error: Call to a member function wpua_get_default_avatar_url() on null
+* Upgrade jbox and flatpickr libs.
 
 = 3.2.10 =
 * Added noncache to temporary redirects.
