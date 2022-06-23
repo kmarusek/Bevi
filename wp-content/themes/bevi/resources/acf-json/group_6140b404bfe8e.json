@@ -1,27 +1,7 @@
 {
     "key": "group_6140b404bfe8e",
     "title": "Menu Items",
-    "fields": [
-        {
-            "key": "field_6140b4252f614",
-            "label": "Description",
-            "name": "description",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        }
-    ],
+    "fields": [],
     "location": [
         [
             {
@@ -39,5 +19,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1631630405
+    "show_in_rest": 0,
+    "modified": 1656008558
 }
