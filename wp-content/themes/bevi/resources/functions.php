@@ -142,7 +142,6 @@ function getMenuItemsForParent($menuSlug, $parentId)
                 $postId = get_post_meta($tmpItem->ID, '_menu_item_object_id', true);
         $post = get_post($postId);
         $item->name = $post->post_title;
-        $item->description = get_post_meta($tmpItem->ID, 'description', true);
         $item->label = $tmpItem->post_title;
         $item->url = get_the_permalink($postId);
         $item->pageNavId = intval($postId);
@@ -175,7 +174,6 @@ function cptui_register_my_cpts()
         $args = [
           "label" => __( "Counters", "sage" ),
           "labels" => $labels,
-          "description" => "",
           "public" => true,
           "publicly_queryable" => true,
           "show_ui" => true,
@@ -210,7 +208,6 @@ function cptui_register_my_cpts()
         $args = [
           "label" => __( "Flavors", "sage" ),
           "labels" => $labels,
-          "description" => "",
           "public" => true,
           "publicly_queryable" => true,
           "show_ui" => true,
@@ -298,7 +295,6 @@ function cptui_register_my_cpts_faqs() {
     $args = [
         "label" => __( "FAQs", "sage" ),
         "labels" => $labels,
-        "description" => "",
         "public" => true,
         "publicly_queryable" => true,
         "show_ui" => true,
@@ -334,3 +330,21 @@ add_action( 'init', 'cptui_register_my_cpts_faqs' );
         'redirect' => false
     ));
     }
+
+// for customizer error, delete all post meta with description name
+add_action( 'admin_bar_menu', 'bevi_admin_bar_menu', 999 );
+function bevi_admin_bar_menu( $wp_admin_bar ) {
+    global $wp_the_query;
+
+    if ( @$wp_the_query->post->ID ) {
+
+        $enabled = get_page_template_slug( $wp_the_query->post->ID ) == 'views/space-station-page.blade.php' ? true : false;
+        $dot     = ' <span class="fl-builder-admin-bar-status-dot" style="color:' . ( $enabled ? '#6bc373' : '#d9d9d9' ) . '; font-size:18px; line-height:1;">&bull;</span>';
+
+        $wp_admin_bar->add_node( array(
+            'id'    => 'fl-builder-frontend-edit-link',
+            'title' => '<span class="ab-icon"></span>' . FLBuilderModel::get_branding() . $dot,
+            'href'  => FLBuilderModel::get_edit_url( $wp_the_query->post->ID ),
+        ));
+    }
+}
