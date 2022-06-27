@@ -3677,6 +3677,59 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_62b8d5454fee7",
+                            "label": "Title",
+                            "name": "events_title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_62b8d54c4fee8",
+                            "label": "Description",
+                            "name": "events_description",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_62b8d5e44fee9",
+                            "label": "Contact button",
+                            "name": "events_contact_button",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        },
+                        {
                             "key": "field_62975843b1414",
                             "label": "Event",
                             "name": "r_event",
@@ -3715,21 +3768,6 @@
                                     "maxlength": ""
                                 },
                                 {
-                                    "key": "field_6297588cb1416",
-                                    "label": "Event location",
-                                    "name": "event_location",
-                                    "type": "link",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "return_format": "url"
-                                },
-                                {
                                     "key": "field_62975894b1417",
                                     "label": "Event date",
                                     "name": "event_date",
@@ -3745,6 +3783,40 @@
                                     "display_format": "F j, Y",
                                     "return_format": "F j, Y",
                                     "first_day": 1
+                                },
+                                {
+                                    "key": "field_62b8d6474feea",
+                                    "label": "Time",
+                                    "name": "event_time",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "12AM - 8PM EST",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_6297588cb1416",
+                                    "label": "Event location",
+                                    "name": "event_location",
+                                    "type": "link",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "url"
                                 },
                                 {
                                     "key": "field_629758f5b1419",
@@ -3788,6 +3860,21 @@
                                     "max_height": "",
                                     "max_size": "",
                                     "mime_types": ""
+                                },
+                                {
+                                    "key": "field_62b8d6b83c2a0",
+                                    "label": "Go to page",
+                                    "name": "event_gotopage",
+                                    "type": "link",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "array"
                                 }
                             ]
                         }
@@ -3828,5 +3915,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1654095314
+    "modified": 1656281271
 }

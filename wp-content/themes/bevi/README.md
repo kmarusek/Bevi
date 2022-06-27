@@ -90,9 +90,9 @@ Edit `app/setup.php` to enable or disable theme features, setup navigation menus
 
 ### Build commands
 
-* `yarn start` — Compile assets when file changes are made, start Browsersync session
+* `yarn watch` — Compile assets when file changes are made, start Browsersync session
 * `yarn build` — Compile and optimize the files in your assets directory
-* `yarn build:production` — Compile assets for production
+* `yarn prod`  — Compile assets for production
 
 ## Documentation
 

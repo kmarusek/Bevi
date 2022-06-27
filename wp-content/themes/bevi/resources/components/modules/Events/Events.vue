@@ -1,24 +1,34 @@
 <template>
-  <section class="container mx-auto">
+  <section class="container mx-auto bg-gray-100">
     <div class="relative flex min-h-screen flex-col overflow-hidden">
-      <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:rounded-lg sm:px-10">
 
-        <div
-            v-for="(item, idx) in block.r_event"
-            class="grid grid-cols-5 gap-4"
-            :key="idx"
-            :id="`item-${idx}`">
+      <div class="block-content py-16 px-36" data-v-c5a16a1c="">
+        <h1 class="gsap-fades my-4 heading-two">{{ block.events_title }}</h1>
+        <p>{{ block.events_description }}</p>
+        <hr class="mt-16" />
+      </div>
 
-          <div class="col-span-1 py-8 text-base leading-7 text-gray-600">
-            <img v-bind:src="item.event_image" class="w-48" />
+      <div class="eventbuttons px-36">
+        <button class="future btn mr-16">Future events</button>
+        <button class="past btn bg-gray-300">Past events</button>
+      </div>
+
+      <div
+          v-for="(item, idx) in block.r_event"
+          :key="idx"
+          :id="`item-${idx}`"
+          class="eventcard mx-36 my-16 ring-1 ring-gray-900/5 sm:mx-auto sm:rounded-lg sm:px-10 bg-white border border-white hover:border-blue-200">
+
+        <div class="grid grid-cols-5 gap-4">
+          <div v-bind:style="{ 'background-image': 'url(' + item.event_image + ')' }" class="col-span-1 my-8 mr-8 text-base leading-7 text-gray-600 rounded-full w-48 h-48 bg-cover">
           </div>
           <div class="col-span-4 space-y-3 py-8 text-base leading-7 text-gray-600">
-            <p class="font-bold">{{ item.event_date }}</p>
-            <p class="font-bold">{{ item.event_title }}</p>
-            <p>{{ item.event_description }}</p>
-            <p><a v-bind:src="item.event_location">{{ item.event_location }}</a></p>
+            <p class="eventdate font-bold">{{ item.event_date }}</p>
+            <h3 class="text-3xl md:text-4xl mb-4 text-blue-600 font-semibold leading-tight eventcard-hover:text-blue">{{ item.event_title }}</h3>
+            <p>{{ item.event_time }}</p>
+            <p><a v-bind:href="item.event_location">{{ item.event_location }}</a></p>
+            <p class="text-body">{{ item.event_description }}</p>
           </div>
-
         </div>
 
       </div>
@@ -34,5 +44,14 @@
         type: Object,
       },
     },
+    mounted() {
+      // this.getCategory();
+    },
   };
 </script>
+
+<style>
+.eventcard:hover .eventcard-hover\:text-blue {
+  color: #246eff;
+}
+</style>
