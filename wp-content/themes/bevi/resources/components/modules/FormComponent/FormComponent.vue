@@ -3,7 +3,7 @@
     :id="block.id"
     :class="{ 'bg-blue-100' : block.show_blue_background }"
   >
-    <div class="py-20 lg:py-32 container xl:max-w-6xl flex flex-col lg:flex-row relative">
+    <div class="py-20 lg:py-32 lg:pb-0 container xl:max-w-6xl flex flex-col lg:flex-row relative">
       <div class="w-full lg:w-5/12 lg:pr-16">
         <h3 class="text-3xl md:text-4xl mb-4 text-blue-600 font-semibold leading-tight">
           {{ block.title }}
