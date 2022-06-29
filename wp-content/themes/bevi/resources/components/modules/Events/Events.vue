@@ -45,7 +45,28 @@
       },
     },
     mounted() {
-      // this.getCategory();
+      jQuery('.eventdate').each(function() {
+        let date = jQuery(this).html();
+        let dateclass = 'future';
+        if(new Date() > new Date(date))
+        {
+          dateclass = 'past';
+        }
+        jQuery(this).closest('.eventcard').addClass(dateclass);
+      });
+      jQuery( ".eventcard.past" ).hide();
+      jQuery( ".eventbuttons .btn.future" ).click(function() {
+        jQuery( ".eventbuttons .btn.past" ).addClass('bg-gray-300');
+        jQuery( ".eventbuttons .btn.future" ).removeClass('bg-gray-300');
+        jQuery( ".eventcard.future" ).show();
+        jQuery( ".eventcard.past" ).hide();
+      });
+      jQuery( ".eventbuttons .btn.past" ).click(function() {
+        jQuery( ".eventbuttons .btn.future" ).addClass('bg-gray-300');
+        jQuery( ".eventbuttons .btn.past" ).removeClass('bg-gray-300');
+        jQuery( ".eventcard.past" ).show();
+        jQuery( ".eventcard.future" ).hide();
+      });
     },
   };
 </script>
