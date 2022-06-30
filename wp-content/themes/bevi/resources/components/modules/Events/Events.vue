@@ -2,13 +2,13 @@
   <section class="container mx-auto bg-gray-100">
     <div class="relative flex min-h-screen flex-col overflow-hidden">
 
-      <div class="block-content py-16 px-8 md:px-36" data-v-c5a16a1c="">
+      <div class="block-content py-16 pb-4 px-8 md:px-36" data-v-c5a16a1c="">
         <h1 class="gsap-fades my-4 heading-two">{{ block.events_title }}</h1>
         <p>{{ block.events_description }}</p>
-        <hr class="mt-16" />
+        <hr class="mt-6" />
       </div>
 
-      <div class="eventbuttons px-8 md:px-36">
+      <div class="eventbuttons py-4 px-8 md:px-36">
         <button class="future btn mr-4 md:mr-16">Future events</button>
         <button class="past btn bg-gray-300">Past events</button>
       </div>
