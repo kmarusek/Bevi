@@ -3816,7 +3816,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "return_format": "url"
+                                    "return_format": "array"
                                 },
                                 {
                                     "key": "field_629758f5b1419",
@@ -3915,5 +3915,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1656281271
+    "modified": 1656281272
 }
