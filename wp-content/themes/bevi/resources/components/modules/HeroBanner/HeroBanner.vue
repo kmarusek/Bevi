@@ -10,7 +10,7 @@
       autoplay
       muted
       loop
-      class="absolute w-full h-full top-0 left-0 z-1 object-cover"
+      class="absolute w-full h-full top-20 left-0 z-1 object-cover"
     >
       <source
         :src="block.video.url"
