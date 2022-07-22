@@ -49,6 +49,7 @@ return array(
     'Sentry\\Integration\\RequestFetcherInterface' => $vendorDir . '/sentry/sentry/src/Integration/RequestFetcherInterface.php',
     'Sentry\\Integration\\RequestIntegration' => $vendorDir . '/sentry/sentry/src/Integration/RequestIntegration.php',
     'Sentry\\Integration\\TransactionIntegration' => $vendorDir . '/sentry/sentry/src/Integration/TransactionIntegration.php',
+    'Sentry\\Monolog\\CompatibilityProcessingHandlerTrait' => $vendorDir . '/sentry/sentry/src/Monolog/CompatibilityProcessingHandlerTrait.php',
     'Sentry\\Monolog\\Handler' => $vendorDir . '/sentry/sentry/src/Monolog/Handler.php',
     'Sentry\\Options' => $vendorDir . '/sentry/sentry/src/Options.php',
     'Sentry\\Response' => $vendorDir . '/sentry/sentry/src/Response.php',

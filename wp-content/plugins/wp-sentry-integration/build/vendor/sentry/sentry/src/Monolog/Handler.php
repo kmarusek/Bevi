@@ -5,9 +5,9 @@ namespace Sentry\Monolog;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
+use Monolog\LogRecord;
 use Sentry\Event;
 use Sentry\EventHint;
-use Sentry\Severity;
 use Sentry\State\HubInterface;
 use Sentry\State\Scope;
 /**
@@ -18,6 +18,7 @@ use Sentry\State\Scope;
  */
 final class Handler extends \Monolog\Handler\AbstractProcessingHandler
 {
+    use CompatibilityProcessingHandlerTrait;
     private const CONTEXT_EXCEPTION_KEY = 'exception';
     /**
      * @var HubInterface
@@ -39,9 +40,9 @@ final class Handler extends \Monolog\Handler\AbstractProcessingHandler
         $this->fillExtraContext = $fillExtraContext;
     }
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed>|LogRecord $record
      */
-    protected function write(array $record) : void
+    protected function doWrite($record) : void
     {
         $event = \Sentry\Event::createEvent();
         $event->setLevel(self::getSeverityFromLevel($record['level']));
@@ -60,30 +61,6 @@ final class Handler extends \Monolog\Handler\AbstractProcessingHandler
             }
             $this->hub->captureEvent($event, $hint);
         });
-    }
-    /**
-     * Translates the Monolog level into the Sentry severity.
-     *
-     * @param int $level The Monolog log level
-     */
-    private static function getSeverityFromLevel(int $level) : \Sentry\Severity
-    {
-        switch ($level) {
-            case \Monolog\Logger::DEBUG:
-                return \Sentry\Severity::debug();
-            case \Monolog\Logger::WARNING:
-                return \Sentry\Severity::warning();
-            case \Monolog\Logger::ERROR:
-                return \Sentry\Severity::error();
-            case \Monolog\Logger::CRITICAL:
-            case \Monolog\Logger::ALERT:
-            case \Monolog\Logger::EMERGENCY:
-                return \Sentry\Severity::fatal();
-            case \Monolog\Logger::INFO:
-            case \Monolog\Logger::NOTICE:
-            default:
-                return \Sentry\Severity::info();
-        }
     }
     /**
      * @param mixed[] $context

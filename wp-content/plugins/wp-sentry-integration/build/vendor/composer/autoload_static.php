@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita5ad84bb52102342c55060288d21eb6f
+class ComposerStaticInite6959121e58d048ae46f77b4be44fac4
 {
     public static $files = array (
         'wp-sentry-7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -175,6 +175,7 @@ class ComposerStaticInita5ad84bb52102342c55060288d21eb6f
         'Sentry\\Integration\\RequestFetcherInterface' => __DIR__ . '/..' . '/sentry/sentry/src/Integration/RequestFetcherInterface.php',
         'Sentry\\Integration\\RequestIntegration' => __DIR__ . '/..' . '/sentry/sentry/src/Integration/RequestIntegration.php',
         'Sentry\\Integration\\TransactionIntegration' => __DIR__ . '/..' . '/sentry/sentry/src/Integration/TransactionIntegration.php',
+        'Sentry\\Monolog\\CompatibilityProcessingHandlerTrait' => __DIR__ . '/..' . '/sentry/sentry/src/Monolog/CompatibilityProcessingHandlerTrait.php',
         'Sentry\\Monolog\\Handler' => __DIR__ . '/..' . '/sentry/sentry/src/Monolog/Handler.php',
         'Sentry\\Options' => __DIR__ . '/..' . '/sentry/sentry/src/Options.php',
         'Sentry\\Response' => __DIR__ . '/..' . '/sentry/sentry/src/Response.php',
@@ -573,9 +574,9 @@ class ComposerStaticInita5ad84bb52102342c55060288d21eb6f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita5ad84bb52102342c55060288d21eb6f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita5ad84bb52102342c55060288d21eb6f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInita5ad84bb52102342c55060288d21eb6f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite6959121e58d048ae46f77b4be44fac4::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite6959121e58d048ae46f77b4be44fac4::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite6959121e58d048ae46f77b4be44fac4::$classMap;
 
         }, null, ClassLoader::class);
     }
