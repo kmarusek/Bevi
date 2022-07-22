@@ -47,7 +47,7 @@ class EditProfileTag extends FormProcessor
 
         $response = apply_filters('ppress_edit_profile_status', $response, $id);
 
-        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This form was created and powered by ProfilePress WordPress plugin - https://profilepress.net -->' . "\r\n");
+        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This form was created and powered by ProfilePress WordPress plugin - https://profilepress.com -->' . "\r\n");
         $attribution_end   = apply_filters('ppress_hide_attribution', "\r\n" . '<!-- / ProfilePress WordPress plugin. -->' . "\r\n");
         $css               = self::get_edit_profile_css($id);
 

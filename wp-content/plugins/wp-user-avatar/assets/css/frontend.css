@@ -315,7 +315,8 @@
 }
 
 .pp-form-wrapper .ppress-pf-social-icon.dpf-instagram svg,
-.pp-form-wrapper .ppress-pf-social-icon.dpf-github svg {
+.pp-form-wrapper .ppress-pf-social-icon.dpf-github svg, 
+.pp-form-wrapper .ppress-pf-social-icon.dpf-pinterest svg {
     padding: 3px;
 }
 

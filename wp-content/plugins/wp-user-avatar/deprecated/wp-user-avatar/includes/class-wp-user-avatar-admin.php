@@ -103,7 +103,7 @@ class WP_User_Avatar_Admin
         $content .= '</p>';
 
         $content .= '<p>';
-        $content .= '<strong><a href="https://profilepress.net/article/avatar-shortcode/?utm_source=wp_dashboard&utm_medium=ppress-settings-page&utm_campaign=profile-cover-photo" target="_blank">' . esc_html__('Learn more', 'wp-user-avatar') . '</a></strong>';
+        $content .= '<strong><a href="https://profilepress.com/article/avatar-shortcode/?utm_source=wp_dashboard&utm_medium=ppress-settings-page&utm_campaign=profile-cover-photo" target="_blank">' . esc_html__('Learn more', 'wp-user-avatar') . '</a></strong>';
         $content .= '</p>';
 
         return $content;

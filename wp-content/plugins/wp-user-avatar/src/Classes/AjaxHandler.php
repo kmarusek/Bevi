@@ -126,7 +126,7 @@ class AjaxHandler
         $theme_class = esc_attr($theme['theme_class']);
         $theme_type  = esc_attr($theme['theme_type']);
 
-        $upgrade_url = 'https://profilepress.net/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=premium_template';
+        $upgrade_url = 'https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=premium_template';
 
         /** @todo add preview support of templates */
 

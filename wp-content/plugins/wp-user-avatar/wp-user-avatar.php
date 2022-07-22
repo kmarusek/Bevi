@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: ProfilePress
- * Plugin URI: https://profilepress.net
+ * Plugin URI: https://profilepress.com
  * Description: The modern WordPress membership and user profile plugin.
- * Version: 3.2.14
+ * Version: 3.2.16
  * Author: ProfilePress Team
- * Author URI: https://profilepress.net
+ * Author URI: https://profilepress.com
  * Text Domain: wp-user-avatar
  * Domain Path: /languages
  *
@@ -14,7 +14,7 @@
 defined('ABSPATH') or die("No script kiddies please!");
 
 define('PROFILEPRESS_SYSTEM_FILE_PATH', __FILE__);
-define('PPRESS_VERSION_NUMBER', '3.2.14');
+define('PPRESS_VERSION_NUMBER', '3.2.16');
 
 require __DIR__ . '/vendor/autoload.php';
 

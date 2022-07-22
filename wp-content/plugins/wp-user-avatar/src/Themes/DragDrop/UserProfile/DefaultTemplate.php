@@ -123,7 +123,7 @@ class DefaultTemplate extends AbstractTheme
             ];
         } else {
 
-            $upgrade_url = 'https://profilepress.net/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=default_profile_social_link';
+            $upgrade_url = 'https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=default_profile_social_link';
             $settings[]  = [
                 'id'      => 'ppress_dpf_profile_social_link_upsell',
                 'label'   => '',
@@ -220,7 +220,7 @@ class DefaultTemplate extends AbstractTheme
     {
         if ($this->get_meta('ppress_dpf_profile_show_social_links') !== 'true') return;
 
-        $this->social_profile_icons();
+        echo $this->social_profile_icons();
     }
 
     public function profile_tabs()

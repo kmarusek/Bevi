@@ -280,7 +280,7 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
         }
 
         if ( ! EM::is_enabled(EM::CUSTOM_FIELDS)) {
-            $upgrade_url                        = 'https://profilepress.net/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=md_custom_field_upsell';
+            $upgrade_url                        = 'https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=md_custom_field_upsell';
             $new_settings['ppress_md_search'][] = [
                 'id'      => 'ppress_md_search_filter_upsell',
                 'label'   => '',
@@ -424,7 +424,7 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
 
             $total_users_found = $wp_user_query->get_total();
 
-            if ( ! empty($query_params['ppmd-search']) && is_array($users) && ! empty($users)) {
+            if ( ! empty($roles) && ! empty($query_params['ppmd-search']) && is_array($users) && ! empty($users)) {
 
                 /**
                  * @var int $key
@@ -439,6 +439,9 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
 
                 $total_users_found = count($users);
 
+                // only necessary because if filtering by role, LIMIT is removed from query.
+                // limit is removed in pre_user_query action callback.
+                $users = array_slice($users, $offset, $users_per_page);
             }
 
             $cache[$this->form_id] = [
@@ -452,7 +455,6 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
 
     protected function search_filter_query_params()
     {
-
         static $cache = [];
 
         if ( ! isset($cache[$this->form_id])) {
@@ -472,12 +474,11 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
     public function md_standard_sort_fields()
     {
         return [
-            'newest'       => esc_html__('Newest Users First', 'wp-user-avatar'),
-            'oldest'       => esc_html__('Oldest Users First', 'wp-user-avatar'),
-            'display-name' => esc_html__('Display Name', 'wp-user-avatar'),
-            'first-name'   => esc_html__('First Name', 'wp-user-avatar'),
-            'last-name'    => esc_html__('Last Name', 'wp-user-avatar'),
-            'username'     => esc_html__('Username', 'wp-user-avatar')
+            'newest'     => esc_html__('Newest Users First', 'wp-user-avatar'),
+            'oldest'     => esc_html__('Oldest Users First', 'wp-user-avatar'),
+            'first-name' => esc_html__('First Name', 'wp-user-avatar'),
+            'last-name'  => esc_html__('Last Name', 'wp-user-avatar'),
+            'username'   => esc_html__('Username', 'wp-user-avatar')
         ];
     }
 
@@ -512,12 +513,13 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
         ]));
 
         $args = [
-            'number'   => $parsed_args['number'],
-            'paged'    => $parsed_args['paged'],
-            'offset'   => $parsed_args['offset'],
-            'role__in' => $parsed_args['roles'],
-            'include'  => $parsed_args['include_user_ids'],
-            'exclude'  => $parsed_args['exclude_user_ids']
+            'number'  => $parsed_args['number'],
+            'paged'   => $parsed_args['paged'],
+            'offset'  => $parsed_args['offset'],
+            // excluded cos we are doing this filtering in PHP self::wp_user_query()
+            //'role__in' => $parsed_args['roles'],
+            'include' => $parsed_args['include_user_ids'],
+            'exclude' => $parsed_args['exclude_user_ids']
         ];
 
         // no check for username because it's the default orderby
@@ -554,9 +556,9 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
 
             $search_columns = $parsed_args['search_columns'];
 
-            $filter_meta_fields = $parsed_args['filter_meta_fields'];
-
             $roles = $parsed_args['roles'];
+
+            $filter_meta_fields = $parsed_args['filter_meta_fields'];
 
             $args['search'] = '*' . $search_term . '*';
 
@@ -564,7 +566,7 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
             // to supplied search columns. We want to also check usermeta too.
             add_filter('user_search_columns', '__return_empty_array', 999999999);
 
-            add_action('pre_user_query', function ($query) {
+            add_action('pre_user_query', function ($query) use ($roles) {
                 // removes "AND ()" from query which causes the sql to be invalid.
                 // SELECT DISTINCT wp_users.* FROM wp_users INNER JOIN wp_usermeta ON
                 // ( wp_users.ID = wp_usermeta.user_id ) WHERE 1=1 AND ( wp_users.user_nicename LIKE '%little%' OR
@@ -572,13 +574,18 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
                 // OR ( wp_usermeta.meta_key = 'last_name' AND wp_usermeta.meta_value LIKE '%little%' ) OR ( wp_usermeta.meta_key = 'twitter'
                 // AND wp_usermeta.meta_value LIKE '%little%' ) ) ) AND () ORDER BY user_registered DESC
                 $query->query_where = str_replace('AND ()', '', $query->query_where);
+
+                if ( ! empty($roles)) {
+                    // remove query LIMIT so we can get actual total number of result
+                    unset($query->query_limit);
+                }
             });
 
             /**
              * Modifies the query so we can tactically include searching of $search_columns in wp_users table
              * @see https://wordpress.stackexchange.com/a/248674/59917
              */
-            add_filter('get_meta_sql', function ($sql) use ($search_term, $search_columns, $filter_meta_fields, $roles) {
+            add_filter('get_meta_sql', function ($sql) use ($search_term, $search_columns, $filter_meta_fields) {
 
                 global $wpdb;
 
@@ -730,9 +737,9 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
     {
         $filter_enabled = $this->get_meta('ppress_md_enable_filters') == 'true';
 
-        $filter_fields = array_filter($this->get_meta('ppress_md_filter_fields'), function ($item) {
+        $filter_fields = apply_filters('ppress_member_directory_filter_fields', array_filter($this->get_meta('ppress_md_filter_fields'), function ($item) {
             return ! empty($item);
-        });
+        }), $this->form_id, $this);
 
         if ( ! $filter_enabled || empty($filter_fields)) return;
 
@@ -844,7 +851,7 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
         <div class="ppressmd-member-directory-header-row ppressmd-member-directory-search-row">
             <div class="ppressmd-member-directory-search-line">
                 <label>
-                    <input name="search-<?= $this->form_id ?>" type="search" class="ppressmd-search-line" placeholder="<?= $search_string ?>" value="<?= $entered_search_term ?>">
+                    <input name="search-<?= $this->form_id ?>" type="search" class="ppressmd-search-line" placeholder="<?= $search_string ?>" value="<?= esc_attr($entered_search_term) ?>">
                 </label>
                 <input type="submit" class="ppressmd-do-search ppressmd-button" value="<?= $search_string ?>">
             </div>

@@ -3,7 +3,7 @@
         <?php
         printf(
             esc_html__('To restrict contents in a post or page, we provide the below shortcode. %sLearn more%s', 'wp-user-avatar'),
-            '<a target="_blank" href="https://profilepress.net/article/wordpress-content-restriction-shortcodes/">', '</a>'
+            '<a target="_blank" href="https://profilepress.com/article/wordpress-content-restriction-shortcodes/">', '</a>'
         ); ?>
     </p>
     <div style="padding:5px;margin: 0 1px;background: #f0f0f1;background: rgba(0,0,0,.07);">

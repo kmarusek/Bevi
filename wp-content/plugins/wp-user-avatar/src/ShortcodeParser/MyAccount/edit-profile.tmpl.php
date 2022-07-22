@@ -80,111 +80,113 @@ $sub_menus = apply_filters('ppress_my_account_settings_sub_menus', ['general' =>
 
             <div class="profilepress-myaccount-form-wrap">
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field pp-cover-image">
                     <div class="ppmyac-custom-file">
-                        <?= do_shortcode('[edit-profile-cover-image id="pp-cover-image" class="ppmyac-custom-file-input"]', true) ?>
+                        <?= '[edit-profile-cover-image id="pp-cover-image" class="ppmyac-custom-file-input"]' ?>
                         <label for="pp-cover-image" class="ppmyac-custom-file-label" data-browse="<?= esc_html__('Browse', 'wp-user-avatar'); ?>">
                             <?= esc_html__('Cover photo (min. width: 1000px)', 'wp-user-avatar') ?>
                         </label>
                     </div>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field pp-user-cover-image">
                     <div class="profilepress-myaccount-delete-cover-image-wrap">
                         <div class="profilepress-myaccount-cover-image">
                             <div class="profilepress-myaccount-has-cover-image" style="<?= ! $cover_image_url ? 'display:none' : '' ?>">
-                                <?= do_shortcode('[pp-user-cover-image]', true); ?>
+                                <?= '[pp-user-cover-image]'; ?>
                             </div>
-                            <?= do_shortcode(sprintf('[pp-remove-cover-image-button label="%s" class="ppmyac-remove-avatar"]', __('Remove', 'wp-user-avatar')), true); ?>
+                            <?= sprintf('[pp-remove-cover-image-button label="%s" class="ppmyac-remove-avatar"]', __('Remove', 'wp-user-avatar')); ?>
                             <div class="profilepress-myaccount-cover-image-empty" style="<?= $cover_image_url ? 'display:none' : '' ?>"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field edit-profile-avatar">
                     <div class="ppmyac-custom-file">
-                        <?= do_shortcode('[edit-profile-avatar id="pp-avatar" class="ppmyac-custom-file-input"]', true) ?>
+                        <?= '[edit-profile-avatar id="pp-avatar" class="ppmyac-custom-file-input"]' ?>
                         <label for="pp-avatar" class="ppmyac-custom-file-label" data-browse="<?= esc_html__('Browse', 'wp-user-avatar'); ?>">
                             <?= esc_html__('Profile picture', 'wp-user-avatar') ?>
                         </label>
                     </div>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field delete-avatar">
                     <div class="profilepress-myaccount-delete-avatar-wrap">
                         <div class="profilepress-myaccount-delete-avatar">
                             <?= UserAvatar::get_avatar_img($current_user_id); ?>
-                            <?= do_shortcode(sprintf('[pp-remove-avatar-button label="%s" class="ppmyac-remove-avatar"]', __('Remove', 'wp-user-avatar')), true); ?>
+                            <?= sprintf('[pp-remove-avatar-button label="%s" class="ppmyac-remove-avatar"]', __('Remove', 'wp-user-avatar')); ?>
                         </div>
                     </div>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field edit-profile-email">
                     <label for="edit-profile-email"><?= esc_html__('Email address', 'wp-user-avatar') ?></label>
-                    <?= do_shortcode('[edit-profile-email id="edit-profile-email" class="profilepress-myaccount-form-control"]', true); ?>
+                    <?= '[edit-profile-email id="edit-profile-email" class="profilepress-myaccount-form-control"]'; ?>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field edit-profile-first-name">
                     <label for="edit-profile-first-name"><?= esc_html__('First name', 'wp-user-avatar') ?></label>
-                    <?= do_shortcode('[edit-profile-first-name id="edit-profile-first-name" class="profilepress-myaccount-form-control"]', true); ?>
+                    <?= '[edit-profile-first-name id="edit-profile-first-name" class="profilepress-myaccount-form-control"]'; ?>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field edit-profile-last-name">
                     <label for="edit-profile-last-name"><?= esc_html__('Last name', 'wp-user-avatar') ?></label>
-                    <?= do_shortcode('[edit-profile-last-name id="edit-profile-last-name" class="profilepress-myaccount-form-control"]', true); ?>
+                    <?= '[edit-profile-last-name id="edit-profile-last-name" class="profilepress-myaccount-form-control"]'; ?>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field edit-profile-nickname">
                     <label for="edit-profile-nickname"><?= esc_html__('Nickname', 'wp-user-avatar') ?></label>
-                    <?= do_shortcode('[edit-profile-nickname id="edit-profile-nickname" class="profilepress-myaccount-form-control"]', true); ?>
+                    <?= '[edit-profile-nickname id="edit-profile-nickname" class="profilepress-myaccount-form-control"]'; ?>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field eup_display_name">
                     <label for="eup_display_name"><?= esc_html__('Display name publicly as', 'wp-user-avatar') ?></label>
                     <?php $this->display_name_select_dropdown(); ?>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field edit-profile-website">
                     <label for="edit-profile-website"><?= esc_html__('Website', 'wp-user-avatar') ?></label>
-                    <?= do_shortcode('[edit-profile-website id="edit-profile-website" class="profilepress-myaccount-form-control"]', true); ?>
+                    <?= '[edit-profile-website id="edit-profile-website" class="profilepress-myaccount-form-control"]'; ?>
                 </div>
 
-                <div class="profilepress-myaccount-form-field">
+                <div class="profilepress-myaccount-form-field edit-profile-bio">
                     <label for="edit-profile-bio"><?= esc_html__('About yourself', 'wp-user-avatar') ?></label>
-                    <?= do_shortcode('[edit-profile-bio id="edit-profile-bio" class="profilepress-myaccount-form-control"]', true); ?>
+                    <?= '[edit-profile-bio id="edit-profile-bio" class="profilepress-myaccount-form-control"]'; ?>
                 </div>
 
                 <?php if (is_array($contact_infos) && ! empty($contact_infos)) : ?>
 
                     <?php foreach ($contact_infos as $field_key => $label) : ?>
-                        <div class="profilepress-myaccount-form-field">
+
+                        <div class="profilepress-myaccount-form-field <?= $field_key ?>">
                             <label for="<?= $field_key ?>"><?= $label ?></label>
-                            <?= do_shortcode(sprintf('[edit-profile-cpf key="%1$s" id="%1$s" type="%2$s" class="profilepress-myaccount-form-control"]', $field_key, 'text'), true) ?>
+                            <?= sprintf('[edit-profile-cpf key="%1$s" id="%1$s" type="%2$s" class="profilepress-myaccount-form-control"]', $field_key, 'text'); ?>
                         </div>
                     <?php endforeach; ?>
 
-                <?php endif; ?>
+                <?php endif;
 
-                <?php if (is_array($custom_fields) && ! empty($custom_fields)) : ?>
+                if (is_array($custom_fields) && ! empty($custom_fields)) : ?>
 
-                    <?php foreach ($custom_fields as $custom_field) : ?>
-                        <?php
+                    <?php foreach ($custom_fields as $custom_field) :
+
                         $field_key = $custom_field['field_key'];
+
                         // skip woocommerce core billing / shipping fields added to wordpress profile admin page.
                         if (in_array($field_key, ppress_woocommerce_billing_shipping_fields())) continue;
                         ?>
-                        <div class="profilepress-myaccount-form-field">
+                        <div class="profilepress-myaccount-form-field <?= $field_key ?>">
                             <?php if ($custom_field['type'] !== 'agreeable') : ?>
                                 <label for="<?= $field_key ?>"><?= $custom_field['label_name'] ?></label>
                             <?php endif; ?>
-                            <?= do_shortcode(sprintf('[edit-profile-cpf id="%1$s" key="%1$s" type="%2$s" class="profilepress-myaccount-form-control"]', $field_key, $custom_field['type'])) ?>
+                            <?= sprintf('[edit-profile-cpf id="%1$s" key="%1$s" type="%2$s" class="profilepress-myaccount-form-control"]', $field_key, $custom_field['type']) ?>
                         </div>
                     <?php endforeach; ?>
 
                 <?php endif; ?>
 
-                <div class="profilepress-myaccount-form-field">
-                    <?= do_shortcode('[edit-profile-submit]', true); ?>
+                <div class="profilepress-myaccount-form-field edit-profile-submit">
+                    <?= '[edit-profile-submit]'; ?>
                 </div>
             </div>
 

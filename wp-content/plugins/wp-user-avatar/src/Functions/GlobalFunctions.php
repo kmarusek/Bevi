@@ -1350,6 +1350,7 @@ function ppress_social_network_fields()
         Base::cif_youtube   => 'YouTube',
         Base::cif_instagram => 'Instagram',
         Base::cif_github    => 'GitHub',
+        Base::cif_pinterest => 'Pinterest',
     ]);
 }
 
@@ -1458,8 +1459,9 @@ function ppress_clean($var)
 
 /**
  * @param $s
- * @see https://stackoverflow.com/a/23810738/2648410
+ *
  * @return bool
+ * @see https://stackoverflow.com/a/23810738/2648410
  */
 function ppress_is_base64($s)
 {

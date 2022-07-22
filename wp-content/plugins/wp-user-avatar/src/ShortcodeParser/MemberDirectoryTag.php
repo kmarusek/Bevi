@@ -51,7 +51,7 @@ class MemberDirectoryTag
 
         $id = absint($atts['id']);
 
-        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This WordPress member directory is built and powered by ProfilePress WordPress plugin - https://profilepress.net -->' . "\r\n");
+        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This WordPress member directory is built and powered by ProfilePress WordPress plugin - https://profilepress.com -->' . "\r\n");
         $attribution_end   = apply_filters('ppress_hide_attribution', "\r\n" . '<!-- / ProfilePress WordPress plugin. -->' . "\r\n");
         $css               = self::directory_css($id);
 

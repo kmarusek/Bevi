@@ -30,7 +30,7 @@ class RegistrationFormTag extends FormProcessor
 
         $registration_status = apply_filters('ppress_registration_status', $registration_status, $id, $redirect);
 
-        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This form was created and powered by ProfilePress WordPress plugin - https://profilepress.net -->' . "\r\n");
+        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This form was created and powered by ProfilePress WordPress plugin - https://profilepress.com -->' . "\r\n");
         $attribution_end   = apply_filters('ppress_hide_attribution', "\r\n" . '<!-- / ProfilePress WordPress plugin. -->' . "\r\n");
 
         $css = self::get_registration_css($id);

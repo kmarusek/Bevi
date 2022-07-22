@@ -61,7 +61,7 @@ class MelangeTag extends FormProcessor
         // pp_login_error_output is used by modules eg email confirmation to output custom login notices.
         if (empty($response)) $response = apply_filters('ppress_login_error_output', '');
 
-        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This (Melange) form was created and powered by ProfilePress WordPress plugin - https://profilepress.net -->' . "\r\n");
+        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This (Melange) form was created and powered by ProfilePress WordPress plugin - https://profilepress.com -->' . "\r\n");
         $attribution_end   = apply_filters('ppress_hide_attribution', "\r\n" . '<!-- / ProfilePress WordPress plugin. -->' . "\r\n");
 
         $css = self::get_melange_css($id);

@@ -1,5 +1,16 @@
 ﻿== Changelog ==
 
+= 3.2.16 =
+* Added unique classes to my account page - account details section.
+* Fixed bug with member directory search not working in some cases.
+* Fixed bug where upload field with data is still required.
+* Fixed XSS on member directory search field.
+
+= 3.2.15 =
+* Fixed bug where social icons where showing when disabled.
+* Removed display name from sorted field options.
+* Added filter to member directory filter fields.
+
 = 3.2.14 =
 * Improve PHP 8 compatibility.
 
@@ -34,8 +45,8 @@
 * Fixed bug with item dragging in the form builder.
 * Added: Clear form after registration.
 * Added action hook to email template.
-* [Pro](https://profilepress.net/addons/passwordless-login/) Added enabling/disabling of passwordless login per form.
-* [Pro](https://profilepress.net/addons/woocommerce/) support for replacing the registration form in WooCommerce my account page
+* [Pro](https://profilepress.com/addons/passwordless-login/) Added enabling/disabling of passwordless login per form.
+* [Pro](https://profilepress.com/addons/woocommerce/) support for replacing the registration form in WooCommerce my account page
 
 = 3.2.7 =
 * Fixed bug where redirect after login settings not getting cleared.
@@ -43,11 +54,11 @@
 * Fixed bug where content restriction didn't work in some cases.
 
 = 3.2.6 =
-* [New content restriction shortcode](https://profilepress.net/article/wordpress-content-restriction-shortcodes/?utm_source=wporg_listing&utm_medium=readme&utm_campaign=changelog).
+* [New content restriction shortcode](https://profilepress.com/article/wordpress-content-restriction-shortcodes/?utm_source=wporg_listing&utm_medium=readme&utm_campaign=changelog).
 * Added content restriction to specific users.
 
 = 3.2.5 =
-* [Pro] [Two-Factor Authentication addon](https://profilepress.net/addons/2fa/?utm_source=wporg_listing&utm_medium=readme&utm_campaign=changelog).
+* [Pro] [Two-Factor Authentication addon](https://profilepress.com/addons/2fa/?utm_source=wporg_listing&utm_medium=readme&utm_campaign=changelog).
 * Fixed bug where member directory custom sort wasn't working.
 * Fixed conflict with LearnDash Propanel.
 * Fixed bug where value attribute of password-reset-submit wasn't working.

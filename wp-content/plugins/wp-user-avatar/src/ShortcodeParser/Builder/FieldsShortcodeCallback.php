@@ -835,6 +835,8 @@ class FieldsShortcodeCallback
             return esc_html__('No checkbox choice found.', 'wp-user-avatar');
         }
 
+        $atts['required'] = 'false';
+
         $attributes = $this->field_attributes('ignore_value', $this->valid_field_atts(ppress_normalize_attributes($atts)));
 
         $checkbox_tag_key = "{$key}[]";
@@ -996,8 +998,9 @@ class FieldsShortcodeCallback
                 $user_upload_data = get_user_meta($this->current_user->ID, 'pp_uploaded_files', true);
                 // if the user uploads isn't empty and there exist a file with the custom field key.
                 if ( ! empty($user_upload_data) && ($filename = @$user_upload_data[$key])) {
-                    $link = PPRESS_FILE_UPLOAD_URL . $filename;
-                    $html .= "<div class='ppress-user-upload'><a href='$link'>$filename</a></div>";
+                    $link       = PPRESS_FILE_UPLOAD_URL . $filename;
+                    $html       .= "<div class='ppress-user-upload'><a href='$link'>$filename</a></div>";
+                    $attributes = str_replace('required="required"', '', $attributes);
                 }
 
                 $html = apply_filters('ppress_edit_profile_hide_file', $html);

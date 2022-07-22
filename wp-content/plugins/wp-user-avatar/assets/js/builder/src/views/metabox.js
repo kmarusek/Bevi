@@ -12,6 +12,7 @@ export default Backbone.View.extend({
 
         $('.pp-color-field', this.$el).wpColorPicker();
         $('.ppselect2', this.$el).select2();
+
         this.tabify();
 
         new jBox('Tooltip', {

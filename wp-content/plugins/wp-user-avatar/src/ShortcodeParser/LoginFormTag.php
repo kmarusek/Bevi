@@ -33,7 +33,7 @@ class LoginFormTag extends FormProcessor
         $login_error = ! empty($login_error) ? $login_error : apply_filters('ppress_login_error_output', '');
         $login_error = apply_filters('ppress_login_error', $login_error, $id);
 
-        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This form was created and powered by ProfilePress WordPress plugin - https://profilepress.net -->' . "\r\n");
+        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This form was created and powered by ProfilePress WordPress plugin - https://profilepress.com -->' . "\r\n");
         $attribution_end   = apply_filters('ppress_hide_attribution', "\r\n" . '<!-- / ProfilePress WordPress plugin. -->' . "\r\n");
 
         $css = $this->get_login_css($id);

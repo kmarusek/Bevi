@@ -67,15 +67,15 @@ abstract class AbstractSettingsPage
                     <span class="dashicons dashicons-star-filled"></span> <?= __('Review', 'wp-user-avatar'); ?>
                 </a></span>
                     <?php if (ExtensionManager::is_premium()) : ?>
-                        <span><a rel="noopener" href="https://profilepress.net/submit-ticket/" target="_blank">
+                        <span><a rel="noopener" href="https://profilepress.com/submit-ticket/" target="_blank">
                         <span class="dashicons dashicons-admin-users"></span> <?= __('Support', 'wp-user-avatar'); ?>
                     </a></span>
                     <?php else : ?>
-                        <span><a class="ppress-active" rel="noopener" href="https://profilepress.net/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=ppress_header_topright_menu" target="_blank">
+                        <span><a class="ppress-active" rel="noopener" href="https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=ppress_header_topright_menu" target="_blank">
                         <span class="dashicons dashicons-info"></span> <?= __('Pro Upgrade', 'wp-user-avatar'); ?>
                     </a></span>
                     <?php endif; ?>
-                    <span><a rel="noopener" href="https://profilepress.net/docs/" target="_blank">
+                    <span><a rel="noopener" href="https://profilepress.com/docs/" target="_blank">
                     <span class="dashicons dashicons-book"></span> <?= __('Docs', 'wp-user-avatar'); ?>
                 </a></span>
                 </div>
@@ -225,7 +225,7 @@ abstract class AbstractSettingsPage
         $support_url = 'https://wordpress.org/support/plugin/wp-user-avatar/';
 
         if (ExtensionManager::is_premium()) {
-            $support_url = 'https://profilepress.net/submit-ticket/';
+            $support_url = 'https://profilepress.com/submit-ticket/';
         }
 
         $content .= sprintf(
@@ -238,7 +238,7 @@ abstract class AbstractSettingsPage
         $content .= '<p>';
         $content .= sprintf(
             esc_html__('Detailed documentation is also available on the plugin website. %sView Knowledge Base%s', 'wp-user-avatar'),
-            '<a class="ppress-link" href="https://profilepress.net/docs/" target="_blank">', $link_icon . '</a>'
+            '<a class="ppress-link" href="https://profilepress.com/docs/" target="_blank">', $link_icon . '</a>'
         );
 
         $content .= '</p>';

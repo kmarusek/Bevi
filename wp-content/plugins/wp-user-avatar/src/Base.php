@@ -92,6 +92,7 @@ class Base
     const cif_vk = 'vk';
     const cif_instagram = 'instagram';
     const cif_github = 'github';
+    const cif_pinterest = 'pinterest';
 
     public function __construct()
     {

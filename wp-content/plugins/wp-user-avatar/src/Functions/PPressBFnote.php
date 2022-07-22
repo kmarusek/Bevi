@@ -57,7 +57,7 @@ if ( ! class_exists('\PPressBFnote')) {
             );
             $this->notice_css();
 
-            $bf_url = 'https://profilepress.net/pricing/?utm_source=wp-admin&utm_medium=admin-notice&utm_id=bf2021'
+            $bf_url = 'https://profilepress.com/pricing/?utm_source=wp-admin&utm_medium=admin-notice&utm_id=bf2021'
 
             ?>
             <div class="ppressbfnote-admin-notice notice notice-success">

@@ -25,7 +25,7 @@ class AdminFooter
     {
         if (ppress_is_admin_page()) {
             $rate_text = sprintf(__('Thank you for using <a href="%1$s" target="_blank">ProfilePress</a>! Please <a href="%2$s" target="_blank">rate us ★★★★★</a> on <a href="%2$s" target="_blank">WordPress.org</a> to help us spread the word.', 'wp-user-avatar'),
-                'https://profilepress.net',
+                'https://profilepress.com',
                 'https://wordpress.org/support/view/plugin-reviews/wp-user-avatar?filter=5#postform'
             );
 

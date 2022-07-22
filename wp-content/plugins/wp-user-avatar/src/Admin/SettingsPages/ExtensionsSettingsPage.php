@@ -102,7 +102,7 @@ class ExtensionsSettingsPage extends AbstractSettingsPage
                                 ) ?>
                             </span>
                         <div class="ppress-extensions-upsell-button">
-                            <a target="_blank" href="https://profilepress.net/pricing/?discount=10PPOFF&utm_source=liteplugin&utm_medium=extension-page&utm_campaign=notice&utm_content=upsell" class="button-primary">
+                            <a target="_blank" href="https://profilepress.com/pricing/?discount=10PPOFF&utm_source=liteplugin&utm_medium=extension-page&utm_campaign=notice&utm_content=upsell" class="button-primary">
                                 <?= esc_html__('Upgrade Now', 'wp-user-avatar') ?>
                             </a>
                         </div>
@@ -114,7 +114,7 @@ class ExtensionsSettingsPage extends AbstractSettingsPage
                 <?php foreach (EM::available_extensions() as $id => $extension) :
                     $name = sprintf('%s[%s]', EM::DB_OPTION_NAME, $id);
                     $extension_class = ppress_var(EM::class_map(), $id);
-                    $upgrade_url = "https://profilepress.net/pricing/?utm_source=WordPress&utm_campaign=liteplugin&utm_medium=extension-upgrade&utm_content=$id";
+                    $upgrade_url = "https://profilepress.com/pricing/?utm_source=WordPress&utm_campaign=liteplugin&utm_medium=extension-upgrade&utm_content=$id";
                     if ( ! EM::is_premium()) {
                         $upgrade_url = add_query_arg('discount', '10PPOFF', $upgrade_url);
                     }

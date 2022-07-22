@@ -38,7 +38,7 @@ class PasswordResetTag extends FormProcessor
 
         $password_reset_status = apply_filters('ppress_password_reset_notice', $password_reset_status, $id);
 
-        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This form was created and powered by ProfilePress WordPress plugin - https://profilepress.net -->' . "\r\n");
+        $attribution_start = apply_filters('ppress_hide_attribution', '<!-- This form was created and powered by ProfilePress WordPress plugin - https://profilepress.com -->' . "\r\n");
         $attribution_end   = apply_filters('ppress_hide_attribution', "\r\n" . '<!-- / ProfilePress WordPress plugin. -->' . "\r\n");
 
         $password_reset_css = self::get_password_reset_css($id);

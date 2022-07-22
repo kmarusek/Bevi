@@ -63,7 +63,7 @@ class DefaultTemplate extends AbstractMemberDirectoryTheme
                 'priority' => 30
             ];
         } else {
-            $upgrade_url = 'https://profilepress.net/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=md_social_connect_icons';
+            $upgrade_url = 'https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=md_social_connect_icons';
             $settings[]  = [
                 'id'      => 'ppress_md_default_social_icons_upsell',
                 'label'   => '',
@@ -184,11 +184,11 @@ class DefaultTemplate extends AbstractMemberDirectoryTheme
                     <div class="ppmd-member-card">
                         <?php echo $this->directory_listing($user->ID)->forge()->output(); ?>
 
-                        <?php if ($social_icons_enabled && $social_profile_icons !== false) : ?>
+                        <?php if ($social_icons_enabled === true && $social_profile_icons !== false) : ?>
                             <div class="ppress-md-member-meta-main">
                                 <div class="ppress-md-member-meta">
                                     <div class="ppress-md-member-connect">
-                                        <?php $this->social_profile_icons() ?>
+                                        <?php echo $social_profile_icons ?>
                                     </div>
                                 </div>
                             </div>
