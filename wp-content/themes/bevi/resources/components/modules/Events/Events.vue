@@ -13,7 +13,7 @@
                 v-if="block.events_contact_button"
                 v-bind:href="block.events_contact_button.url"
                 class="px-3 md:px-10 text-blue bg-white border border-2 border-blue hover:text-white hover:bg-blue w-full rounded-full py-3 inline-block text-center">
-                Go to event
+              {{ block.events_contact_button.title }}
             </a>
           </div>
         </div>
@@ -40,7 +40,7 @@
             <p class="eventdate text-2xl">{{ item.event_date }}</p>
             <h3 class="text-3xl md:text-4xl mb-4 text-blue-600 font-semibold leading-tight eventcard-hover:text-blue">{{ item.event_title }}</h3>
             <p class="text-xl">{{ item.event_time }}</p>
-            <p><a v-if="item.event_location" v-bind:href="item.event_location.url">{{ item.event_location.title }}</a></p>
+            <p v-if="item.event_location">{{ item.event_location }}</p>
             <p class="text-body">{{ item.event_description }}</p>
           </div>
         </div>

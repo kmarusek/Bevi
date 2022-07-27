@@ -3807,21 +3807,6 @@
                                     "key": "field_6297588cb1416",
                                     "label": "Event location",
                                     "name": "event_location",
-                                    "type": "link",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "return_format": "array"
-                                },
-                                {
-                                    "key": "field_629758f5b1419",
-                                    "label": "Event description",
-                                    "name": "event_description",
                                     "type": "text",
                                     "instructions": "",
                                     "required": 0,
@@ -3836,6 +3821,25 @@
                                     "prepend": "",
                                     "append": "",
                                     "maxlength": ""
+                                },
+                                {
+                                    "key": "field_629758f5b1419",
+                                    "label": "Event description",
+                                    "name": "event_description",
+                                    "type": "textarea",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "maxlength": "",
+                                    "rows": 12,
+                                    "new_lines": "br"
                                 },
                                 {
                                     "key": "field_62975fd26b4c9",
@@ -3915,5 +3919,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1656281272
+    "modified": 1658953154
 }
