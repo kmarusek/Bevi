@@ -12,7 +12,7 @@
             <a
                 v-if="block.events_contact_button"
                 v-bind:href="block.events_contact_button.url"
-                class="px-3 md:px-10 text-blue bg-white border border-2 border-blue hover:text-white hover:bg-blue w-full rounded-full py-3 inline-block text-center">
+                class="px-3 md:px-10 text-blue bg-white border border-2 border-blue hover:text-white hover:bg-blue w-full rounded-full py-3 inline-block text-center transform transition duration-500">
               {{ block.events_contact_button.title }}
             </a>
           </div>
