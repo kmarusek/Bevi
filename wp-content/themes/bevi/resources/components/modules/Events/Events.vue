@@ -45,7 +45,7 @@
             <p class="py-5"><a
                 v-if="item.event_gotopage"
                 v-bind:href="item.event_gotopage.url"
-                class="px-5 md:px-10 mt-5 text-black bg-white border border-2 border-black hover:text-white hover:bg-blue w-full rounded-full py-4 text-center transform transition duration-500">
+                class="px-5 md:px-10 mt-5 text-black bg-white border border-2 border-black hover:text-white hover:bg-blue hover:border-blue w-full rounded-full py-4 text-center transform transition duration-500">
               {{ item.event_gotopage.title }}
             </a></p>
           </div>
