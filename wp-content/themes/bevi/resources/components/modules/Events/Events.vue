@@ -32,7 +32,7 @@
           class="eventcard mx-0 lg:mx-48 my-8 ring-1 ring-gray-900/5 rounded-3xl sm:px-10 bg-white border border-white hover:border-blue-200">
 
         <div class="grid grid-cols-5 gap-4">
-          <div v-bind:style="{ 'background-image': 'url(' + item.event_image + ')' }" class="col-span-5 md:col-span-2 xl:col-span-1 my-8 mx-auto text-base leading-7 text-gray-600 rounded-full w-48 h-48 bg-cover relative clip-polygon">
+          <div v-bind:style="{ 'background-image': 'url(' + item.event_image + ')' }" class="col-span-5 md:col-span-2 xl:col-span-1 my-8 mx-auto text-base leading-7 text-gray-600 rounded-full w-48 xl:w-36 xxl:w-48 h-48 xl:h-36 xxl:h-48 bg-cover relative clip-polygon">
             <!-- ImageBlob :image="item.event_image" /-->
 
           </div>
@@ -42,6 +42,12 @@
             <p class="text-xl">{{ item.event_time }}</p>
             <p v-if="item.event_location">{{ item.event_location }}</p>
             <p class="text-body">{{ item.event_description }}</p>
+            <p class="py-5"><a
+                v-if="item.event_gotopage"
+                v-bind:href="item.event_gotopage.url"
+                class="px-5 md:px-10 mt-5 text-black bg-white border border-2 border-black hover:text-white hover:bg-blue w-full rounded-full py-4 text-center transform transition duration-500">
+              {{ item.event_gotopage.title }}
+            </a></p>
           </div>
         </div>
 
