@@ -7,7 +7,7 @@
     </h2>
     <div class="flex flex-wrap -m-2">
       <dl
-        class="p4-4 md:w-1/2"
+        class="p4-4 w-full md:w-1/2"
         v-for="(faq, index) in faqList"
         :key="faq.id"
       >
