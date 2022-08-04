@@ -3771,7 +3771,7 @@
                                     "key": "field_62975894b1417",
                                     "label": "Event date",
                                     "name": "event_date",
-                                    "type": "date_picker",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -3780,9 +3780,11 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "display_format": "F j, Y",
-                                    "return_format": "F j, Y",
-                                    "first_day": 1
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
                                 },
                                 {
                                     "key": "field_62b8d6474feea",
@@ -3919,5 +3921,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1658953154
+    "modified": 1659617955
 }
