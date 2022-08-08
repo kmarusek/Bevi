@@ -37,7 +37,7 @@
 
           </div>
           <div class="col-start-1 md:col-start-3 xl:col-start-2 col-end-6 space-y-3 py-8 px-8 md:px-0 text-base leading-7 text-gray-600">
-            <p class="text-2xl"><span class="eventdate">{{ item.event_date }}</span><span v-if="item.event_date_end">{{ item.event_date_end }}</span></p>
+            <p class="text-2xl"><span class="eventdate">{{ item.event_date }}</span><span v-if="item.event_date_end"> - {{ item.event_date_end }}</span></p>
             <h3 class="text-3xl md:text-4xl mb-4 text-blue-600 font-semibold leading-tight eventcard-hover:text-blue">{{ item.event_title }}</h3>
             <p class="text-xl">{{ item.event_time }}</p>
             <p v-if="item.event_location">{{ item.event_location }}</p>
