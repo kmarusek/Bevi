@@ -3771,7 +3771,7 @@
                                     "key": "field_62975894b1417",
                                     "label": "Event date",
                                     "name": "event_date",
-                                    "type": "text",
+                                    "type": "date_picker",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -3780,11 +3780,26 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "default_value": "",
-                                    "placeholder": "",
-                                    "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
+                                    "display_format": "F j, Y",
+                                    "return_format": "F j, Y",
+                                    "first_day": 0
+                                },
+                                {
+                                    "key": "field_62f0f99447eb0",
+                                    "label": "Event date (end)",
+                                    "name": "event_date_end",
+                                    "type": "date_picker",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "display_format": "F j, Y",
+                                    "return_format": "F j, Y",
+                                    "first_day": 0
                                 },
                                 {
                                     "key": "field_62b8d6474feea",
@@ -3921,5 +3936,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1659617955
+    "modified": 1659959786
 }
