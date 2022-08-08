@@ -170,8 +170,13 @@
     }
 
     &:nth-of-type(1) {
-      top: 8%;
-      left: 25%;
+      top: 5%;
+      left: 35%;
+
+      @screen sm {
+        top: 8%;
+        left: 25%;
+      }
 
       @screen md {
         top: 12%;
@@ -201,7 +206,12 @@
 
     &:nth-of-type(4) {
       top: 14%;
-      right: -13%;
+      right: -2%;
+
+      @screen sm {
+        top: 14%;
+        right: -13%;
+      }
 
       @screen md {
         top: 14%;
@@ -211,7 +221,12 @@
 
     &:nth-of-type(5) {
       top: 15%;
-      left: -19%;
+      left: 0%;
+
+      @screen sm {
+        top: 15%;
+        left: -19%;
+      }
 
       @screen md {
         top: 4%;
