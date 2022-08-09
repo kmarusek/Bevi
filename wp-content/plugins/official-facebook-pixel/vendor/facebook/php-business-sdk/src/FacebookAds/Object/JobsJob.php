@@ -28,8 +28,8 @@ use FacebookAds\ApiRequest;
 use FacebookAds\Cursor;
 use FacebookAds\Http\RequestInterface;
 use FacebookAds\TypeChecker;
-use FacebookAds\Object\Fields\CPASParentCatalogSettingsFields;
-use FacebookAds\Object\Values\CPASParentCatalogSettingsAttributionWindowsValues;
+use FacebookAds\Object\Fields\JobsJobFields;
+use FacebookAds\Object\Values\JobsJobImageFetchStatusValues;
 
 /**
  * This class is auto-generated.
@@ -40,21 +40,90 @@ use FacebookAds\Object\Values\CPASParentCatalogSettingsAttributionWindowsValues;
  *
  */
 
-class CPASParentCatalogSettings extends AbstractCrudObject {
+class JobsJob extends AbstractCrudObject {
 
   /**
-   * @return CPASParentCatalogSettingsFields
+   * @return JobsJobFields
    */
   public static function getFieldsEnum() {
-    return CPASParentCatalogSettingsFields::getInstance();
+    return JobsJobFields::getInstance();
   }
 
   protected static function getReferencedEnums() {
     $ref_enums = array();
-    $ref_enums['AttributionWindows'] = CPASParentCatalogSettingsAttributionWindowsValues::getInstance()->getValues();
+    $ref_enums['ImageFetchStatus'] = JobsJobImageFetchStatusValues::getInstance()->getValues();
     return $ref_enums;
   }
 
+
+  public function getAugmentedRealitiesMetadata(array $fields = array(), array $params = array(), $pending = false) {
+    $this->assureId();
+
+    $param_types = array(
+    );
+    $enums = array(
+    );
+
+    $request = new ApiRequest(
+      $this->api,
+      $this->data['id'],
+      RequestInterface::METHOD_GET,
+      '/augmented_realities_metadata',
+      new AbstractCrudObject(),
+      'EDGE',
+      array(),
+      new TypeChecker($param_types, $enums)
+    );
+    $request->addParams($params);
+    $request->addFields($fields);
+    return $pending ? $request : $request->execute();
+  }
+
+  public function getChannelsToIntegrityStatus(array $fields = array(), array $params = array(), $pending = false) {
+    $this->assureId();
+
+    $param_types = array(
+    );
+    $enums = array(
+    );
+
+    $request = new ApiRequest(
+      $this->api,
+      $this->data['id'],
+      RequestInterface::METHOD_GET,
+      '/channels_to_integrity_status',
+      new CatalogItemChannelsToIntegrityStatus(),
+      'EDGE',
+      CatalogItemChannelsToIntegrityStatus::getFieldsEnum()->getValues(),
+      new TypeChecker($param_types, $enums)
+    );
+    $request->addParams($params);
+    $request->addFields($fields);
+    return $pending ? $request : $request->execute();
+  }
+
+  public function getVideosMetadata(array $fields = array(), array $params = array(), $pending = false) {
+    $this->assureId();
+
+    $param_types = array(
+    );
+    $enums = array(
+    );
+
+    $request = new ApiRequest(
+      $this->api,
+      $this->data['id'],
+      RequestInterface::METHOD_GET,
+      '/videos_metadata',
+      new AbstractCrudObject(),
+      'EDGE',
+      array(),
+      new TypeChecker($param_types, $enums)
+    );
+    $request->addParams($params);
+    $request->addFields($fields);
+    return $pending ? $request : $request->execute();
+  }
 
   public function getSelf(array $fields = array(), array $params = array(), $pending = false) {
     $this->assureId();
@@ -69,34 +138,9 @@ class CPASParentCatalogSettings extends AbstractCrudObject {
       $this->data['id'],
       RequestInterface::METHOD_GET,
       '/',
-      new CPASParentCatalogSettings(),
+      new JobsJob(),
       'NODE',
-      CPASParentCatalogSettings::getFieldsEnum()->getValues(),
-      new TypeChecker($param_types, $enums)
-    );
-    $request->addParams($params);
-    $request->addFields($fields);
-    return $pending ? $request : $request->execute();
-  }
-
-  public function updateSelf(array $fields = array(), array $params = array(), $pending = false) {
-    $this->assureId();
-
-    $param_types = array(
-      'attribution_windows' => 'list<attribution_windows_enum>',
-    );
-    $enums = array(
-      'attribution_windows_enum' => CPASParentCatalogSettingsAttributionWindowsValues::getInstance()->getValues(),
-    );
-
-    $request = new ApiRequest(
-      $this->api,
-      $this->data['id'],
-      RequestInterface::METHOD_POST,
-      '/',
-      new CPASParentCatalogSettings(),
-      'NODE',
-      CPASParentCatalogSettings::getFieldsEnum()->getValues(),
+      JobsJob::getFieldsEnum()->getValues(),
       new TypeChecker($param_types, $enums)
     );
     $request->addParams($params);

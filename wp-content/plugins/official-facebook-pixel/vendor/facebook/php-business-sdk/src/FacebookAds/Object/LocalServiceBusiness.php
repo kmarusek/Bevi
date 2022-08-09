@@ -28,7 +28,8 @@ use FacebookAds\ApiRequest;
 use FacebookAds\Cursor;
 use FacebookAds\Http\RequestInterface;
 use FacebookAds\TypeChecker;
-use FacebookAds\Object\Fields\ReferralFields;
+use FacebookAds\Object\Fields\LocalServiceBusinessFields;
+use FacebookAds\Object\Values\LocalServiceBusinessImageFetchStatusValues;
 
 /**
  * This class is auto-generated.
@@ -39,22 +40,23 @@ use FacebookAds\Object\Fields\ReferralFields;
  *
  */
 
-class Referral extends AbstractCrudObject {
+class LocalServiceBusiness extends AbstractCrudObject {
 
   /**
-   * @return ReferralFields
+   * @return LocalServiceBusinessFields
    */
   public static function getFieldsEnum() {
-    return ReferralFields::getInstance();
+    return LocalServiceBusinessFields::getInstance();
   }
 
   protected static function getReferencedEnums() {
     $ref_enums = array();
+    $ref_enums['ImageFetchStatus'] = LocalServiceBusinessImageFetchStatusValues::getInstance()->getValues();
     return $ref_enums;
   }
 
 
-  public function deleteSelf(array $fields = array(), array $params = array(), $pending = false) {
+  public function getChannelsToIntegrityStatus(array $fields = array(), array $params = array(), $pending = false) {
     $this->assureId();
 
     $param_types = array(
@@ -65,11 +67,11 @@ class Referral extends AbstractCrudObject {
     $request = new ApiRequest(
       $this->api,
       $this->data['id'],
-      RequestInterface::METHOD_DELETE,
-      '/',
-      new AbstractCrudObject(),
-      'NODE',
-      array(),
+      RequestInterface::METHOD_GET,
+      '/channels_to_integrity_status',
+      new CatalogItemChannelsToIntegrityStatus(),
+      'EDGE',
+      CatalogItemChannelsToIntegrityStatus::getFieldsEnum()->getValues(),
       new TypeChecker($param_types, $enums)
     );
     $request->addParams($params);
@@ -90,44 +92,9 @@ class Referral extends AbstractCrudObject {
       $this->data['id'],
       RequestInterface::METHOD_GET,
       '/',
-      new Referral(),
+      new LocalServiceBusiness(),
       'NODE',
-      Referral::getFieldsEnum()->getValues(),
-      new TypeChecker($param_types, $enums)
-    );
-    $request->addParams($params);
-    $request->addFields($fields);
-    return $pending ? $request : $request->execute();
-  }
-
-  public function updateSelf(array $fields = array(), array $params = array(), $pending = false) {
-    $this->assureId();
-
-    $param_types = array(
-      'invite_limit' => 'unsigned int',
-      'messenger_cta' => 'string',
-      'messenger_promotion_text' => 'string',
-      'namespace' => 'unsigned int',
-      'need_promo_code' => 'bool',
-      'offer_origin' => 'string',
-      'privacy_policy_link' => 'string',
-      'promotion_text' => 'string',
-      'receiver_benefits_text' => 'string',
-      'referral_link_uri' => 'string',
-      'sender_benefits_text' => 'string',
-      'terms_and_condition_link' => 'string',
-    );
-    $enums = array(
-    );
-
-    $request = new ApiRequest(
-      $this->api,
-      $this->data['id'],
-      RequestInterface::METHOD_POST,
-      '/',
-      new Referral(),
-      'NODE',
-      Referral::getFieldsEnum()->getValues(),
+      LocalServiceBusiness::getFieldsEnum()->getValues(),
       new TypeChecker($param_types, $enums)
     );
     $request->addParams($params);

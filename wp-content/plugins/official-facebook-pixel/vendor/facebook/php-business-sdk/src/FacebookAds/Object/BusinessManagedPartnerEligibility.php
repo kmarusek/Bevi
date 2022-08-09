@@ -22,9 +22,13 @@
  *
  */
 
-namespace FacebookAds\Object\Values;
+namespace FacebookAds\Object;
 
-use FacebookAds\Enum\AbstractEnum;
+use FacebookAds\ApiRequest;
+use FacebookAds\Cursor;
+use FacebookAds\Http\RequestInterface;
+use FacebookAds\TypeChecker;
+use FacebookAds\Object\Fields\BusinessManagedPartnerEligibilityFields;
 
 /**
  * This class is auto-generated.
@@ -33,11 +37,21 @@ use FacebookAds\Enum\AbstractEnum;
  * on github and we'll fix in our codegen framework. We'll not be able to accept
  * pull request for this class.
  *
- * @method static AdAsyncRequestSetNotificationStatusValues getInstance()
  */
-class AdAsyncRequestSetNotificationStatusValues extends AbstractEnum {
 
-  const NOT_SENT = 'NOT_SENT';
-  const SENDING = 'SENDING';
-  const SENT = 'SENT';
+class BusinessManagedPartnerEligibility extends AbstractObject {
+
+  /**
+   * @return BusinessManagedPartnerEligibilityFields
+   */
+  public static function getFieldsEnum() {
+    return BusinessManagedPartnerEligibilityFields::getInstance();
+  }
+
+  protected static function getReferencedEnums() {
+    $ref_enums = array();
+    return $ref_enums;
+  }
+
+
 }

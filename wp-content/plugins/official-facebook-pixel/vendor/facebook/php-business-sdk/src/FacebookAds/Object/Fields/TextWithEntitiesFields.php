@@ -22,7 +22,7 @@
  *
  */
 
-namespace FacebookAds\Object\Values;
+namespace FacebookAds\Object\Fields;
 
 use FacebookAds\Enum\AbstractEnum;
 
@@ -33,16 +33,15 @@ use FacebookAds\Enum\AbstractEnum;
  * on github and we'll fix in our codegen framework. We'll not be able to accept
  * pull request for this class.
  *
- * @method static CPASParentCatalogSettingsAttributionWindowsValues getInstance()
  */
-class CPASParentCatalogSettingsAttributionWindowsValues extends AbstractEnum {
 
-  const DDA = 'DDA';
-  const VALUE_DEFAULT = 'DEFAULT';
-  const X1D_CLICK = 'X1D_CLICK';
-  const X1D_VIEW = 'X1D_VIEW';
-  const X28D_CLICK = 'X28D_CLICK';
-  const X28D_VIEW = 'X28D_VIEW';
-  const X7D_CLICK = 'X7D_CLICK';
-  const X7D_VIEW = 'X7D_VIEW';
+class TextWithEntitiesFields extends AbstractEnum {
+
+  const TEXT = 'text';
+
+  public function getFieldTypes() {
+    return array(
+      'text' => 'string',
+    );
+  }
 }

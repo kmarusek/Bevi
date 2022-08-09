@@ -22,9 +22,13 @@
  *
  */
 
-namespace FacebookAds\Object\Fields;
+namespace FacebookAds\Object;
 
-use FacebookAds\Enum\AbstractEnum;
+use FacebookAds\ApiRequest;
+use FacebookAds\Cursor;
+use FacebookAds\Http\RequestInterface;
+use FacebookAds\TypeChecker;
+use FacebookAds\Object\Fields\AdStudyObjectiveOffsiteDatasetsFields;
 
 /**
  * This class is auto-generated.
@@ -35,15 +39,19 @@ use FacebookAds\Enum\AbstractEnum;
  *
  */
 
-class ProductFeedUploadDiagnosticsReportFields extends AbstractEnum {
+class AdStudyObjectiveOffsiteDatasets extends AbstractCrudObject {
 
-  const LAST_UPDATED_TIME = 'last_updated_time';
-  const REPORT_URL = 'report_url';
-
-  public function getFieldTypes() {
-    return array(
-      'last_updated_time' => 'string',
-      'report_url' => 'string',
-    );
+  /**
+   * @return AdStudyObjectiveOffsiteDatasetsFields
+   */
+  public static function getFieldsEnum() {
+    return AdStudyObjectiveOffsiteDatasetsFields::getInstance();
   }
+
+  protected static function getReferencedEnums() {
+    $ref_enums = array();
+    return $ref_enums;
+  }
+
+
 }

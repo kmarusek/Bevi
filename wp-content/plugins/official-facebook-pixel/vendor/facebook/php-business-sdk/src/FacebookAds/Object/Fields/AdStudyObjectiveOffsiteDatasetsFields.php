@@ -35,16 +35,14 @@ use FacebookAds\Enum\AbstractEnum;
  *
  */
 
-class CPASParentCatalogSettingsFields extends AbstractEnum {
+class AdStudyObjectiveOffsiteDatasetsFields extends AbstractEnum {
 
-  const ATTRIBUTION_WINDOWS = 'attribution_windows';
-  const DEFAULT_CURRENCY = 'default_currency';
+  const EVENT_NAMES = 'event_names';
   const ID = 'id';
 
   public function getFieldTypes() {
     return array(
-      'attribution_windows' => 'list<string>',
-      'default_currency' => 'string',
+      'event_names' => 'list<string>',
       'id' => 'string',
     );
   }

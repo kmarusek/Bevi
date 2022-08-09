@@ -22,9 +22,13 @@
  *
  */
 
-namespace FacebookAds\Object\Values;
+namespace FacebookAds\Object;
 
-use FacebookAds\Enum\AbstractEnum;
+use FacebookAds\ApiRequest;
+use FacebookAds\Cursor;
+use FacebookAds\Http\RequestInterface;
+use FacebookAds\TypeChecker;
+use FacebookAds\Object\Fields\AREffectsBatchStatusFields;
 
 /**
  * This class is auto-generated.
@@ -33,12 +37,21 @@ use FacebookAds\Enum\AbstractEnum;
  * on github and we'll fix in our codegen framework. We'll not be able to accept
  * pull request for this class.
  *
- * @method static MeasurementUploadEventLookbackWindowValues getInstance()
  */
-class MeasurementUploadEventLookbackWindowValues extends AbstractEnum {
 
-  const DAYS30 = 'DAYS30';
-  const DAYS45 = 'DAYS45';
-  const DAYS60 = 'DAYS60';
-  const DAYS90 = 'DAYS90';
+class AREffectsBatchStatus extends AbstractObject {
+
+  /**
+   * @return AREffectsBatchStatusFields
+   */
+  public static function getFieldsEnum() {
+    return AREffectsBatchStatusFields::getInstance();
+  }
+
+  protected static function getReferencedEnums() {
+    $ref_enums = array();
+    return $ref_enums;
+  }
+
+
 }

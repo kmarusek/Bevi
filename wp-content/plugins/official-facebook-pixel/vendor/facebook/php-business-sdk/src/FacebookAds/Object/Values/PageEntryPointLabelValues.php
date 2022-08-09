@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -22,8 +22,23 @@
  *
  */
 
-namespace FacebookAds\Object\Fields;
+namespace FacebookAds\Object\Values;
 
-class Agency extends AbstractObject {
+use FacebookAds\Enum\AbstractEnum;
 
+/**
+ * This class is auto-generated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ * @method static PageEntryPointLabelValues getInstance()
+ */
+class PageEntryPointLabelValues extends AbstractEnum {
+
+  const ASK_US = 'ASK_US';
+  const CHAT = 'CHAT';
+  const HELP = 'HELP';
+  const NONE = 'NONE';
 }

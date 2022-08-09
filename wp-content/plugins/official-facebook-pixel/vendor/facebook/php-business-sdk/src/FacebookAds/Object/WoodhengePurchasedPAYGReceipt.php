@@ -22,9 +22,13 @@
  *
  */
 
-namespace FacebookAds\Object\Fields;
+namespace FacebookAds\Object;
 
-use FacebookAds\Enum\AbstractEnum;
+use FacebookAds\ApiRequest;
+use FacebookAds\Cursor;
+use FacebookAds\Http\RequestInterface;
+use FacebookAds\TypeChecker;
+use FacebookAds\Object\Fields\WoodhengePurchasedPAYGReceiptFields;
 
 /**
  * This class is auto-generated.
@@ -35,31 +39,42 @@ use FacebookAds\Enum\AbstractEnum;
  *
  */
 
-class MeasurementUploadEventFields extends AbstractEnum {
+class WoodhengePurchasedPAYGReceipt extends AbstractCrudObject {
 
-  const AGGREGATION_LEVEL = 'aggregation_level';
-  const CONVERSION_END_DATE = 'conversion_end_date';
-  const CONVERSION_START_DATE = 'conversion_start_date';
-  const EVENT_STATUS = 'event_status';
-  const ID = 'id';
-  const LOOKBACK_WINDOW = 'lookback_window';
-  const MATCH_UNIVERSE = 'match_universe';
-  const PARTNER = 'partner';
-  const TIMEZONE = 'timezone';
-  const UPLOAD_TAG = 'upload_tag';
-
-  public function getFieldTypes() {
-    return array(
-      'aggregation_level' => 'string',
-      'conversion_end_date' => 'string',
-      'conversion_start_date' => 'string',
-      'event_status' => 'string',
-      'id' => 'string',
-      'lookback_window' => 'string',
-      'match_universe' => 'string',
-      'partner' => 'Business',
-      'timezone' => 'string',
-      'upload_tag' => 'string',
-    );
+  /**
+   * @return WoodhengePurchasedPAYGReceiptFields
+   */
+  public static function getFieldsEnum() {
+    return WoodhengePurchasedPAYGReceiptFields::getInstance();
   }
+
+  protected static function getReferencedEnums() {
+    $ref_enums = array();
+    return $ref_enums;
+  }
+
+
+  public function getSelf(array $fields = array(), array $params = array(), $pending = false) {
+    $this->assureId();
+
+    $param_types = array(
+    );
+    $enums = array(
+    );
+
+    $request = new ApiRequest(
+      $this->api,
+      $this->data['id'],
+      RequestInterface::METHOD_GET,
+      '/',
+      new WoodhengePurchasedPAYGReceipt(),
+      'NODE',
+      WoodhengePurchasedPAYGReceipt::getFieldsEnum()->getValues(),
+      new TypeChecker($param_types, $enums)
+    );
+    $request->addParams($params);
+    $request->addFields($fields);
+    return $pending ? $request : $request->execute();
+  }
+
 }

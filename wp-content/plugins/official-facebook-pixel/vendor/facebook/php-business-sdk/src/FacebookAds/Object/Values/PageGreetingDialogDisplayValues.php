@@ -22,13 +22,9 @@
  *
  */
 
-namespace FacebookAds\Object;
+namespace FacebookAds\Object\Values;
 
-use FacebookAds\ApiRequest;
-use FacebookAds\Cursor;
-use FacebookAds\Http\RequestInterface;
-use FacebookAds\TypeChecker;
-use FacebookAds\Object\Fields\AdAccountContentFilterLevelsInheritanceFields;
+use FacebookAds\Enum\AbstractEnum;
 
 /**
  * This class is auto-generated.
@@ -37,21 +33,11 @@ use FacebookAds\Object\Fields\AdAccountContentFilterLevelsInheritanceFields;
  * on github and we'll fix in our codegen framework. We'll not be able to accept
  * pull request for this class.
  *
+ * @method static PageGreetingDialogDisplayValues getInstance()
  */
+class PageGreetingDialogDisplayValues extends AbstractEnum {
 
-class AdAccountContentFilterLevelsInheritance extends AbstractObject {
-
-  /**
-   * @return AdAccountContentFilterLevelsInheritanceFields
-   */
-  public static function getFieldsEnum() {
-    return AdAccountContentFilterLevelsInheritanceFields::getInstance();
-  }
-
-  protected static function getReferencedEnums() {
-    $ref_enums = array();
-    return $ref_enums;
-  }
-
-
+  const HIDE = 'HIDE';
+  const SHOW = 'SHOW';
+  const WELCOME_MESSAGE = 'WELCOME_MESSAGE';
 }
