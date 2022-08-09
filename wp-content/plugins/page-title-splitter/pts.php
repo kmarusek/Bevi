@@ -4,7 +4,7 @@
 	Plugin URI: http://plugins.15kmtoexit.com/page-title-splitter/
 	Description: Add breakpoints to post, page and custom post titles.
 	Author: Chris Steman
-	Version: 2.5.5
+	Version: 2.5.6
 	Author URI: http://15kmtoexit.com
 	*/
 	

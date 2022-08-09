@@ -3,8 +3,8 @@ Contributors: 15km
 Donate link: http://plugins.15kmtoexit.com/donate/
 Tags: breakpoint, title, layout, markers, title manipulation
 Requires at least: 3.0.1
-Tested up to: 5.8.1
-Stable tag: 2.5.5
+Tested up to: 6.0.1
+Stable tag: 2.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,8 @@ Thank you to neotechnomad for letting me know about the issue
 = 2.5.5 =
 * Fixed undefined index: cssbox_widget
 Thank you strarsis for reminding me of this issue 
+= 2.5.6 =
+* Checked and updated the WordPress tested up to tag 
 
 == Upgrade Notice ==
 
