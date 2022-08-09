@@ -6,6 +6,7 @@ use ProfilePress\Core\Classes\ExtensionManager as EM;
 use ProfilePress\Core\Classes\FormRepository;
 use ProfilePress\Core\Classes\PROFILEPRESS_sql;
 use ProfilePress\Core\Classes\UserAvatar;
+use ProfilePress\Core\Membership\CheckoutFields;
 
 class FieldsShortcodeCallback
 {
@@ -18,15 +19,29 @@ class FieldsShortcodeCallback
     /** @var \WP_User */
     private $current_user;
 
-    public function __construct($form_type)
+    public function __construct($form_type, $form_name = '', $tag_name = '')
     {
         $this->form_type = $form_type;
 
         $this->form_name = $form_type == FormRepository::REGISTRATION_TYPE ? 'registration' : 'edit_profile';
+        if ( ! empty($form_name)) {
+            $this->form_name = $form_name;
+        }
 
         $this->tag_name = $form_type == FormRepository::REGISTRATION_TYPE ? 'reg' : 'eup';
+        if ( ! empty($tag_name)) {
+            $this->tag_name = $tag_name;
+        }
 
-        add_action('init', [$this, 'get_current_user']);
+        $flag = false;
+        if (function_exists('wp_get_current_user')) {
+            $this->get_current_user();
+            if (method_exists($this->current_user, 'exists') && $this->current_user->exists()) $flag = true;
+        }
+
+        if ( ! $flag) {
+            add_action('init', [$this, 'get_current_user']);
+        }
     }
 
     public function get_current_user()
@@ -53,7 +68,7 @@ class FieldsShortcodeCallback
     {
         $atts = ppress_normalize_attributes($atts);
 
-        return isset($atts['required']) && ($atts['required'] === true || $atts['required'] == 'true' || $atts['required'] == '1');
+        return isset($atts['required']) && in_array($atts['required'], [true, 'true', '1'], true);
     }
 
     /**
@@ -65,6 +80,12 @@ class FieldsShortcodeCallback
      */
     public function human_readable_field_key($key)
     {
+        $field = PROFILEPRESS_sql::get_profile_custom_field_by_key($key);
+
+        if ($field && ! empty($field['label_name'])) {
+            return sanitize_text_field($field['label_name']);
+        }
+
         return ucfirst(str_replace('_', ' ', $key));
     }
 
@@ -72,7 +93,7 @@ class FieldsShortcodeCallback
     {
         if ( ! is_array($atts)) return $atts;
 
-        $invalid_atts = array('enforce', 'key', 'field_key', 'limit', 'options', 'checkbox_text', 'date_format', 'field_width', 'icon', 'checked_state');
+        $invalid_atts = array('enforce', 'key', 'type', 'field_key', 'limit', 'options', 'key_value_options', 'checkbox_text', 'date_format', 'field_width', 'icon', 'checked_state', 'billing_country');
 
         $valid_atts = array();
 
@@ -254,7 +275,7 @@ class FieldsShortcodeCallback
 
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
             // default username saved in DB
-            $atts['value'] = esc_attr($this->current_user->user_url);
+            $atts['value'] = $this->current_user->user_url ?? '';
         }
 
         $field_name = $this->tag_name . '_website';
@@ -351,7 +372,7 @@ class FieldsShortcodeCallback
 
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
             // default username saved in DB
-            $atts['value'] = esc_attr($this->current_user->first_name);
+            $atts['value'] = isset($this->current_user->first_name) ? esc_attr($this->current_user->first_name) : '';
         }
 
         $field_name = $this->tag_name . '_first_name';
@@ -384,7 +405,7 @@ class FieldsShortcodeCallback
 
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
             // default username saved in DB
-            $atts['value'] = esc_attr($this->current_user->last_name);
+            $atts['value'] = isset($this->current_user->last_name) ? esc_attr($this->current_user->last_name) : '';
         }
 
         $field_name = $this->tag_name . '_last_name';
@@ -414,7 +435,7 @@ class FieldsShortcodeCallback
 
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
             // default username saved in DB
-            $atts['value'] = $this->current_user->description;
+            $atts['value'] = $this->current_user->description ?? '';
         }
 
         $field_name = $this->tag_name . '_bio';
@@ -495,7 +516,7 @@ class FieldsShortcodeCallback
         $type = sanitize_text_field($atts['type']);
 
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
-            $db_data       = ! empty($atts['value']) ? sanitize_text_field($atts['value']) : $this->current_user->$key;
+            $db_data       = isset($atts['value']) ? sanitize_text_field($atts['value']) : ($this->current_user->$key ?? '');
             $atts['value'] = isset($_POST[$key]) ? esc_attr($_POST[$key]) : $db_data;
         }
 
@@ -552,7 +573,7 @@ class FieldsShortcodeCallback
         $value = isset($_POST[$key]) ? sanitize_text_field($_POST[$key]) : @sanitize_text_field($atts['value']);
 
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
-            $db_data = ! empty($atts['value']) ? sanitize_text_field($atts['value']) : $this->current_user->$key;
+            $db_data = isset($atts['value']) ? sanitize_text_field($atts['value']) : ($this->current_user->$key ?? '');
             $value   = isset($_POST[$key]) ? sanitize_text_field($_POST[$key]) : $db_data;
         }
 
@@ -616,6 +637,7 @@ class FieldsShortcodeCallback
         }
 
         return apply_filters('ppress_frontend_flatpickr_date_config', [
+            'allowInput'    => true,
             'dateFormat'    => $dateFormat,
             'enableTime'    => $hasTime,
             'noCalendar'    => ! self::hasDate($dateFormat),
@@ -640,8 +662,10 @@ class FieldsShortcodeCallback
 
         $atts['class'] = "pp_datepicker $key " . @$atts['class'];
 
+
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
-            $atts['value'] = isset($_POST[$key]) ? esc_attr($_POST[$key]) : $this->current_user->$key;
+            $db_data       = isset($atts['value']) ? sanitize_text_field($atts['value']) : ($this->current_user->$key ?? '');
+            $atts['value'] = isset($_POST[$key]) ? esc_attr($_POST[$key]) : $db_data;
         }
 
         $attributes = $this->field_attributes($key, $this->valid_field_atts($atts));
@@ -685,7 +709,8 @@ class FieldsShortcodeCallback
         $value = isset($_POST[$key]) ? esc_textarea($_POST[$key]) : @esc_textarea($atts['value']);
 
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
-            $value = isset($_POST[$key]) ? esc_textarea($_POST[$key]) : $this->current_user->$key;
+            $db_data = isset($atts['value']) ? esc_textarea($atts['value']) : ($this->current_user->$key ?? '');
+            $value   = isset($_POST[$key]) ? esc_textarea($_POST[$key]) : $db_data;
         }
 
         $attributes = $this->field_attributes($key, $this->valid_field_atts(ppress_normalize_attributes($atts)));
@@ -708,7 +733,7 @@ class FieldsShortcodeCallback
 
         $key = ppress_sanitize_key($atts['key']);
 
-        if ( ! isset($atts['options']) || empty($atts['options'])) return esc_html__('No dropdown option found.', 'wp-user-avatar');
+        if (empty($atts['options']) && empty($atts['key_value_options'])) return esc_html__('No dropdown option found.', 'wp-user-avatar');
 
         $is_multiple           = isset($atts['is_multiple']) && $atts['is_multiple'] == '1' ? 'multiple' : '';
         $select2_class_name    = $is_multiple == 'multiple' ? 'ppress-select2 ' : '';
@@ -725,29 +750,40 @@ class FieldsShortcodeCallback
         $option_values = is_array($atts['options']) ? implode(',', $atts['options']) : $atts['options'];
 
         if ( ! empty($option_values)) {
+            $option_values = explode(',', $option_values);
+            $option_values = array_combine($option_values, $option_values);
+        }
+
+        if ( ! empty($atts['key_value_options'])) {
+            $option_values = is_string($atts['key_value_options']) ? unserialize(base64_decode($atts['key_value_options'])) : $atts['key_value_options'];
+        }
+
+        if ( ! empty($option_values)) {
 
             $_POST = $this->GET_POST();
 
-            $option_values = explode(',', $option_values);
+            foreach ($option_values as $option_value => $value) {
 
-            foreach ($option_values as $value) {
-                $value = trim($value);
+                $option_value = is_string($option_value) ? trim($option_value) : '';
+                $value        = is_string($value) ? trim($value) : '';
 
-                $selected = is_array(@$_POST[$key]) && in_array($value, @$_POST[$key]) ? 'selected="selected"' : @selected(@$_POST[$key], $value, false);
+                $selected = is_array(@$_POST[$key]) && in_array($option_value, @$_POST[$key]) ? 'selected="selected"' : @selected(@$_POST[$key], $option_value, false);
+
+                $db_data = isset($atts['value']) ? $atts['value'] : (isset($this->current_user->$key) ? $this->current_user->$key : '');
 
                 if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
                     $selected = '';
-                    if (is_array(@$_POST[$key]) && in_array($value, @$_POST[$key])) $selected = 'selected="selected"';
+                    if (is_array(@$_POST[$key]) && in_array($option_value, @$_POST[$key])) $selected = 'selected="selected"';
                     // !isset($_POST[ $key ] is called to not run the succeeding code if the form is submitted.
                     // to enable the select dropdown retain the submitted options when an error occur/ prevent the form from saving.
-                    elseif ( ! isset($_POST[$key]) && is_array($this->current_user->$key) && in_array($value, $this->current_user->$key)) {
+                    elseif ( ! isset($_POST[$key]) && isset($db_data) && is_array($db_data) && in_array($option_value, $db_data)) {
                         $selected = 'selected="selected"';
-                    } elseif ( ! isset($_POST[$key]) && ! is_array($this->current_user->$key) && $value == $this->current_user->$key) {
+                    } elseif ( ! isset($_POST[$key]) && isset($db_data) && ! is_array($db_data) && $option_value == $db_data) {
                         $selected = 'selected="selected"';
                     }
                 }
 
-                $html .= "<option value=\"$value\" $selected>$value</option>";
+                $html .= "<option value=\"$option_value\" $selected>$value</option>";
             }
         }
 
@@ -794,7 +830,7 @@ class FieldsShortcodeCallback
             $checked = @checked($_POST[$key], $value, false);
 
             if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
-                $db_data = ! empty($atts['value']) ? sanitize_text_field($atts['value']) : $this->current_user->$key;
+                $db_data = isset($atts['value']) ? sanitize_text_field($atts['value']) : ($this->current_user->$key ?? '');
                 $checked = @checked(
                     isset($_POST[$key]) && ! empty($_POST[$key]) ? $_POST[$key] : $db_data,
                     $value,
@@ -857,9 +893,9 @@ class FieldsShortcodeCallback
                 $checked = '';
                 if (isset($_POST[$key]) && is_array(@$_POST[$key]) && in_array($value, @$_POST[$key])) {
                     $checked = 'checked="checked"';
-                } elseif ( ! isset($_POST[$key]) && is_array($this->current_user->$key) && in_array($value, $this->current_user->$key)) {
+                } elseif ( ! isset($_POST[$key]) && isset($this->current_user->$key) && is_array($this->current_user->$key) && in_array($value, $this->current_user->$key)) {
                     $checked = 'checked="checked"';
-                } elseif ( ! isset($_POST[$key]) && ! is_array($this->current_user->$key) && $value == $this->current_user->$key) {
+                } elseif ( ! isset($_POST[$key]) && isset($this->current_user->$key) && ! is_array($this->current_user->$key) && $value == $this->current_user->$key) {
                     $checked = 'checked="checked"';
                 }
             }
@@ -899,7 +935,7 @@ class FieldsShortcodeCallback
         $checked = checked(ppressPOST_var($key, ppress_var($atts, 'checked_state')), 'true', false);
 
         if ($this->form_type == FormRepository::EDIT_PROFILE_TYPE) {
-            $db_data = ! empty($atts['value']) ? sanitize_text_field($atts['value']) : $this->current_user->$key;
+            $db_data = isset($atts['value']) ? sanitize_text_field($atts['value']) : ($this->current_user->$key ?? '');
             $db_data = ('1' == $db_data) ? 'true' : $db_data;
 
             $checked = @checked(
@@ -929,8 +965,6 @@ class FieldsShortcodeCallback
      */
     public function custom_profile_field($atts)
     {
-        if ( ! EM::is_enabled(EM::CUSTOM_FIELDS)) return '';
-
         if (empty($atts)) $atts = [];
 
         $_POST = $this->GET_POST();
@@ -941,7 +975,28 @@ class FieldsShortcodeCallback
 
         if (empty($key)) return esc_html__('Field key is missing', 'wp-user-avatar');
 
-        $type = ! empty($atts['type']) ? $atts['type'] : PROFILEPRESS_sql::get_field_type($key);
+        $type = PROFILEPRESS_sql::get_field_type($key);
+
+        $standard_billing_fields = CheckoutFields::standard_billing_fields();
+
+        if (in_array($key, array_keys($standard_billing_fields))) {
+
+            $type = $standard_billing_fields[$key]['field_type'];
+
+            if ($key == CheckoutFields::BILLING_STATE) {
+                $country = get_user_meta($this->current_user->ID, CheckoutFields::BILLING_COUNTRY, true);
+                if ( ! empty($atts['billing_country'])) {
+                    $country = sanitize_text_field($atts['billing_country']);
+                }
+
+                if ( ! empty($country) && ! empty($states = ppress_array_of_world_states($country))) {
+                    $type                      = 'select';
+                    $atts['key_value_options'] = ['' => '&mdash;&mdash;&mdash;'] + $states;
+                }
+            }
+        }
+
+        $type = ! empty($atts['type']) ? $atts['type'] : $type;
 
         if (empty($type) || ! $type) {
             $type = 'text';
@@ -950,7 +1005,7 @@ class FieldsShortcodeCallback
         $html = esc_html__('custom field not defined', 'wp-user-avatar');
 
         if ($type == 'select') {
-            $atts['options']     = PROFILEPRESS_sql::get_field_option_values($key);
+            $atts['options']     = isset($atts['options']) ? $atts['options'] : PROFILEPRESS_sql::get_field_option_values($key);
             $atts['is_multiple'] = ppress_is_select_field_multi_selectable($key) ? '1' : '';
             $html                = $this->select_dropdown_field($atts);
         }
@@ -1041,7 +1096,6 @@ class FieldsShortcodeCallback
 
         $atts          = apply_filters('ppress_' . $this->form_name . '_submit_field_atts', $this->valid_field_atts(ppress_normalize_attributes($atts)));
         $atts['value'] = isset($atts['value']) ? esc_attr($atts['value']) : $value;
-
 
         $form_type = $this->form_type;
         $form_id   = isset($GLOBALS['pp_registration_form_id']) ? $GLOBALS['pp_registration_form_id'] : 0;

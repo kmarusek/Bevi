@@ -27,6 +27,7 @@
 namespace ProfilePress;
 
 ob_start();
+
 class Custom_Settings_Page_Api
 {
     /** @var mixed|void database saved data. */
@@ -34,6 +35,8 @@ class Custom_Settings_Page_Api
 
     /** @var string option name for database saving. */
     private $option_name = '';
+
+    private $form_method = 'post';
 
     /** @var array config of settings page tabs */
     private $tabs_config = [];
@@ -52,9 +55,11 @@ class Custom_Settings_Page_Api
 
     private $view_classes = '';
 
-    private $wrap_classes = '';
+    private $wrap_classes = 'ppview';
 
     private $exclude_top_tav_nav = false;
+
+    private $remove_nonce_field = false;
 
     protected function __construct($main_content_config = [], $option_name = '', $page_header = '')
     {
@@ -84,6 +89,11 @@ class Custom_Settings_Page_Api
         $this->option_name = $val;
     }
 
+    public function form_method($val)
+    {
+        $this->form_method = $val;
+    }
+
     public function tab($val)
     {
         $this->tabs_config = $val;
@@ -102,6 +112,11 @@ class Custom_Settings_Page_Api
     public function add_wrap_classes($classes)
     {
         $this->wrap_classes = $classes;
+    }
+
+    public function remove_nonce_field()
+    {
+        $this->remove_nonce_field = true;
     }
 
     public function remove_white_design()
@@ -177,13 +192,13 @@ class Custom_Settings_Page_Api
 
         if ( ! empty($custom_sidebar)) {
             echo $custom_sidebar;
-
             return;
         }
+
+        if ( ! empty($this->sidebar_config)):
         ?>
-        <div id="postbox-container-1" class="postbox-container">
+            <div id="postbox-container-1" class="postbox-container">
             <div class="meta-box-sortables">
-                <?php if ( ! empty($this->sidebar_config)): ?>
                     <?php foreach ($this->sidebar_config as $arg) : ?>
                         <div class="postbox">
                             <div class="postbox-header">
@@ -197,10 +212,9 @@ class Custom_Settings_Page_Api
                             </div>
                         </div>
                     <?php endforeach; ?>
-                <?php endif; ?>
             </div>
         </div>
-        <?php
+        <?php endif;
     }
 
     /**
@@ -378,8 +392,8 @@ class Custom_Settings_Page_Api
         }
 
         .remove_white_styling #post-body-content tr .description {
-            max-width: 630px;
             width: 100%;
+            font-style: italic;
         }
         </style>
     <?php
@@ -396,6 +410,7 @@ class Custom_Settings_Page_Api
 
     public function nonce_field()
     {
+        if($this->remove_nonce_field) return;
         printf('<input id="wp_csa_nonce" type="hidden" name="wp_csa_nonce" value="%s">', wp_create_nonce('wp-csa-nonce'));
     }
 
@@ -504,6 +519,7 @@ class Custom_Settings_Page_Api
         $id       = ! empty($id) ? $id : '';
         $data_key = ! empty($data_key) ? "data-index='$data_key'" : null;
         $value    = ! empty($value) ? $value : null;
+
         ?>
         <input type="text" placeholder="<?=$placeholder; ?>" id="<?=$id; ?>" name="<?=$name; ?>" class="<?=$class; ?>" value="<?=$value; ?>" <?=$data_key; ?>/>
         <?php
@@ -545,6 +561,7 @@ class Custom_Settings_Page_Api
         $option_name = $this->option_name;
         $name_attr   = $option_name . '[' . $key . ']';
         $value       = ! empty($db_options[$key]) ? $db_options[$key] : $defvalue;
+        $class    = 'regular-text '. esc_attr(ppress_var($args, 'class', ''));
 
         if (isset($args['obfuscate_val']) && in_array($args['obfuscate_val'], [true, 'true'])) {
             $value = $this->obfuscate_string($value);
@@ -555,7 +572,7 @@ class Custom_Settings_Page_Api
             <th scope="row"><label for="<?=$key; ?>"><?=$label; ?></label></th>
             <td>
                 <?php do_action('wp_cspa_before_text_field', $db_options, $option_name, $key, $args); ?>
-                <?php $this->_text_field($key, $name_attr, $value); ?>
+                <?php $this->_text_field($key, $name_attr, $value, $class); ?>
                 <?php do_action('wp_cspa_after_text_field', $db_options, $option_name, $key, $args); ?>
                 <p class="description"><?=$description; ?></p>
             </td>
@@ -1015,9 +1032,9 @@ class Custom_Settings_Page_Api
             <th scope="row"><label for="<?=$key; ?>"><?=$label; ?></label></th>
             <td>
                 <?php do_action('wp_cspa_before_checkbox_field', $db_options, $option_name, $key, $args); ?>
-                <strong><label for="<?=$key; ?>"><?=$checkbox_label; ?></label></strong>
                 <input type="hidden" name="<?=$option_name, '[', $key, ']'; ?>" value="false">
                 <input type="checkbox" id="<?=$key; ?>" name="<?=$option_name, '[', $key, ']'; ?>" value="<?=$value; ?>" <?php checked($default_value, $value); ?> />
+                <strong><label for="<?=$key; ?>"><?=$checkbox_label; ?></label></strong>
                 <?php do_action('wp_cspa_after_checkbox_field', $db_options, $option_name, $key, $args); ?>
 
                 <p class="description"><?=$description; ?></p>
@@ -1037,12 +1054,13 @@ class Custom_Settings_Page_Api
      */
 public function _header($args)
 {
-    $section_title = $args['section_title'];
     ob_start();
     ?>
     <div class="postbox">
         <?php do_action('wp_cspa_header', $args, $this->option_name); ?>
-        <div class="postbox-header"><h3 class="hndle is-non-sortable"><span><?=$section_title; ?></span></h3></div>
+        <?php if(!empty($args['section_title'])) : ?>
+        <div class="postbox-header"><h3 class="hndle is-non-sortable"><span><?=$args['section_title']; ?></span></h3></div>
+        <?php endif; ?>
         <div class="inside">
             <table class="form-table">
                 <?php
@@ -1134,11 +1152,11 @@ public function _header($args)
                     <div id="post-body-content">
                         <?php do_action('wp_cspa_before_post_body_content', $this->option_name, $this->db_options); ?>
                         <div class="meta-box-sortables ui-sortable">
-                            <form method="post" <?php do_action('wp_cspa_form_tag', $this->option_name); ?>>
-                                <?php $this->nonce_field(); ?>
+                            <form method="<?= $this->form_method ?>" <?php do_action('wp_cspa_form_tag', $this->option_name); ?>>
                                 <?php ob_start(); ?>
                                 <?php $this->_settings_page_main_content_area(); ?>
                                 <?=apply_filters('wp_cspa_main_content_area', ob_get_clean(), $this->option_name); ?>
+                                <?php $this->nonce_field(); ?>
                             </form>
                         </div>
                     </div>
@@ -1204,7 +1222,7 @@ public function _header($args)
             echo '<div class="pp-settings-wrap" data-option-name="' . $option_name . '">';
             echo '<h2 class="nav-tab-wrapper">' . $nav_tabs . '</h2>';
             echo '<div class="metabox-holder pp-tab-settings">';
-            echo '<form method="post">';
+            echo '<form method="'.$this->form_method.'">';
             ob_start();
             $this->nonce_field();
             echo $tab_content_area;

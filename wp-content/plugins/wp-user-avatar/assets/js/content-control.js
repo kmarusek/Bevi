@@ -56,6 +56,8 @@
             })
         });
 
+        $('#pp-cc-access-membership-plans').select2();
+
         $('#pp-cc-access-wp-users').select2({
             ajax: {
                 url: ajaxurl,

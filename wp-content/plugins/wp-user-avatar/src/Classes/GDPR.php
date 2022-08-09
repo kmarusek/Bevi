@@ -27,6 +27,7 @@ class GDPR
     {
         $user          = get_user_by('email', $email_address);
         $user_id       = $user->ID;
+        /** @todo loop through billing details too. maybe use ppress_custom_fields_key_value_pair() */
         $custom_fields = PROFILEPRESS_sql::get_profile_custom_fields();
 
         $items_removed  = false;
@@ -66,6 +67,7 @@ class GDPR
 
                 $data_to_export = [];
 
+                /** @todo loop through biiling details too  */
                 $custom_fields    = PROFILEPRESS_sql::get_profile_custom_fields();
                 $db_contact_infos = PROFILEPRESS_sql::get_contact_info_fields();
 

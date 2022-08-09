@@ -54,8 +54,8 @@ class ExtensionsSettingsPage extends AbstractSettingsPage
     public function register_settings_page()
     {
         add_submenu_page(
-            PPRESS_SETTINGS_SLUG,
-            $this->admin_page_title() . ' - ProfilePress',
+            PPRESS_DASHBOARD_SETTINGS_SLUG,
+            'ProfilePress ' . $this->admin_page_title(),
             '<span style="color:#f18500">' . $this->admin_page_title() . '</span>',
             'manage_options',
             PPRESS_EXTENSIONS_SETTINGS_SLUG,

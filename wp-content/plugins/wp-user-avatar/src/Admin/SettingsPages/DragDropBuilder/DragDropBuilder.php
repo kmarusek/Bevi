@@ -7,6 +7,7 @@ use ProfilePress\Core\Classes\ExtensionManager;
 use ProfilePress\Core\Classes\ExtensionManager as EM;
 use ProfilePress\Core\Classes\FormRepository as FR;
 use ProfilePress\Core\Classes\PROFILEPRESS_sql;
+use ProfilePress\Core\Membership\CheckoutFields;
 use ProfilePress\Core\Themes\DragDrop\AbstractTheme;
 
 class DragDropBuilder
@@ -65,11 +66,33 @@ class DragDropBuilder
             return [];
         }
 
-        $custom_fields = PROFILEPRESS_sql::get_profile_custom_fields();
-
-        $contact_infos = PROFILEPRESS_sql::get_contact_info_fields();
+        $billing_address_fields = CheckoutFields::standard_billing_fields();
+        $custom_fields          = PROFILEPRESS_sql::get_profile_custom_fields();
+        $contact_infos          = PROFILEPRESS_sql::get_contact_info_fields();
 
         $fields = [];
+
+        foreach ($billing_address_fields as $billing_field_id => $billing_address) {
+
+            // field key and type are being added to make the key unique for each defined fields array.
+            $tag_name         = $this->form_type == FR::REGISTRATION_TYPE ? 'reg' : 'edit-profile';
+            $key              = $tag_name . '-cpf-' . $billing_field_id . $billing_field_id['field_type'];
+            $definedFieldType = 'input';
+
+            $field_key = $billing_field_id;
+
+            $title = $billing_address['label'];
+
+            $fields[$key] = [
+                'definedFieldKey'  => $field_key,
+                'definedFieldType' => esc_attr($definedFieldType),
+                'fieldTitle'       => sanitize_text_field($title),
+                'fieldBarTitle'    => sanitize_text_field($title),
+                'label'            => esc_attr($title),
+                'placeholder'      => esc_attr($title),
+                'fieldIcon'        => '<span class="dashicons dashicons-portfolio"></span>',
+            ];
+        }
 
         if ($woocommerce_field === false) {
             foreach ($contact_infos as $field_key => $label) {

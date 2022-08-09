@@ -2,6 +2,8 @@
 
 namespace ProfilePress\Core\Classes;
 
+use ProfilePressVendor\Pelago\Emogrifier;
+
 class SendEmail
 {
     protected $sender_name;
@@ -91,7 +93,7 @@ class SendEmail
 
             if (class_exists('DOMDocument') && ! is_customize_preview()) {
                 /** @see https://github.com/MyIntervals/emogrifier/tree/v2.2.0 */
-                $emogrifier = new \Pelago\Emogrifier();
+                $emogrifier = new Emogrifier();
                 $emogrifier->setHtml($message);
                 $message = $emogrifier->emogrify();
             }

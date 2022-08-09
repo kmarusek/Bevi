@@ -68,8 +68,8 @@ class Forms extends AbstractSettingsPage
     public function register_menu_page()
     {
         $hook = add_submenu_page(
-            PPRESS_SETTINGS_SLUG,
-            $this->admin_page_title() . ' - ProfilePress',
+            PPRESS_DASHBOARD_SETTINGS_SLUG,
+            'ProfilePress ' . $this->admin_page_title(),
             esc_html__('Forms & Profiles', 'wp-user-avatar'),
             'manage_options',
             PPRESS_FORMS_SETTINGS_SLUG,
@@ -281,7 +281,7 @@ class Forms extends AbstractSettingsPage
         }
 
         add_action('wp_cspa_main_content_area', array($this, 'wp_list_table'), 10, 2);
-        add_action('wp_cspa_before_post_body_content', array($this, 'form_sub_header'), 10, 2);
+        add_action('wp_cspa_before_post_body_content', array($this, 'form_sub_header'));
         add_action('wp_cspa_before_closing_header', [$this, 'add_new_form_button']);
 
         $instance = Custom_Settings_Page_Api::instance();

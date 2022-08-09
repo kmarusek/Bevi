@@ -43,8 +43,8 @@ class Backend
     public function register_customize_nav_menu_item_types($item_types)
     {
         $item_types[] = array(
-            'title'      => __('ProfilePress Links', 'woocommerce'),
-            'type_label' => __('ProfilePress Link', 'woocommerce'),
+            'title'      => __('ProfilePress Links', 'wp-user-avatar'),
+            'type_label' => __('ProfilePress Link', 'wp-user-avatar'),
             'type'       => 'ppnavmenu',
             'object'     => 'ppnavmenu_links',
         );
@@ -75,7 +75,7 @@ class Backend
             $items[] = array(
                 'id'         => str_replace('#', '', $id),
                 'title'      => $title,
-                'type_label' => __('ProfilePress Link', 'woocommerce'),
+                'type_label' => __('ProfilePress Link', 'wp-user-avatar'),
                 'url'        => $id,
             );
         }

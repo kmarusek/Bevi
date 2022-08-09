@@ -165,7 +165,7 @@ class FrontendProfileTag
 
         // if currently viewed page is the page with the front-end profile, rewrite the title accordingly.
         if ((isset($post->ID) && !empty(ppress_get_setting('set_user_profile_shortcode')) && $post->ID == ppress_get_setting('set_user_profile_shortcode'))
-            || has_shortcode('profilepress-user-profile', @$post->post_content)
+            || ppress_post_content_has_shortcode('profilepress-user-profile')
         ) {
 
             $user_object = $ppress_frontend_profile_user_obj;

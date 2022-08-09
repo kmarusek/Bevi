@@ -23,6 +23,8 @@ class GeneralSettings extends AbstractSettingsPage
 
         add_action('ppress_admin_settings_submenu_page_general_general', [$this, 'settings_admin_page_callback']);
 
+        add_action('admin_footer', [$this, 'js_script']);
+
         // flush rewrite rule on save/persistence
         add_action('wp_cspa_persist_settings', function () {
             flush_rewrite_rules();
@@ -34,8 +36,8 @@ class GeneralSettings extends AbstractSettingsPage
     public function register_menu_page()
     {
         $hook = add_submenu_page(
-            PPRESS_SETTINGS_SLUG,
-            apply_filters('ppress_general_settings_admin_page_title', esc_html__('Settings', 'wp-user-avatar')) . ' - ProfilePress',
+            PPRESS_DASHBOARD_SETTINGS_SLUG,
+            'ProfilePress ' . apply_filters('ppress_general_settings_admin_page_title', esc_html__('Settings', 'wp-user-avatar')),
             esc_html__('Settings', 'wp-user-avatar'),
             'manage_options',
             PPRESS_SETTINGS_SLUG,
@@ -122,22 +124,78 @@ class GeneralSettings extends AbstractSettingsPage
                 'tab_title' => esc_html__('Global', 'wp-user-avatar'),
                 'dashicon'  => 'dashicons-admin-site-alt',
                 [
-                    'section_title'         => esc_html__('Global Settings', 'wp-user-avatar'),
-                    'set_lost_password_url' => [
-                        'type'        => 'custom_field_block',
-                        'label'       => esc_html__('Password-reset Page', 'wp-user-avatar'),
-                        'data'        => $this->page_dropdown('set_lost_password_url'),
-                        'description' => sprintf(
-                            esc_html__('Select the page you wish to make WordPress default "Lost Password page". %3$s This should be the page that contains a %1$spassword reset form shortcode%2$s.', 'wp-user-avatar'),
-                            '<a href="' . add_query_arg('form-type', 'password-reset', PPRESS_FORMS_SETTINGS_PAGE) . '"><strong>', '</strong></a>', '<br/>'),
+                    'section_title'      => esc_html__('Global Settings', 'wp-user-avatar'),
+                    'disable_ajax_mode'  => [
+                        'type'           => 'checkbox',
+                        'label'          => esc_html__('Disable Ajax Mode', 'wp-user-avatar'),
+                        'value'          => 'yes',
+                        'checkbox_label' => esc_html__('Disable', 'wp-user-avatar'),
+                        'description'    => esc_html__('Check this box to disable ajax behaviour(whereby forms do not require page reload when submitted) in forms.', 'wp-user-avatar'),
                     ],
+                    'remove_plugin_data' => [
+                        'type'           => 'checkbox',
+                        'value'          => 'yes',
+                        'label'          => esc_html__('Remove Data on Uninstall', 'wp-user-avatar'),
+                        'checkbox_label' => esc_html__('Delete', 'wp-user-avatar'),
+                        'description'    => esc_html__('Check this box if you would like ProfilePress to completely remove all of its data when the plugin is deleted.', 'wp-user-avatar'),
+                    ]
+                ],
+            ]), /** Set default values on register activation */
+            'business_info'             => apply_filters('ppress_business_info_settings_page', [
+                'tab_title' => esc_html__('Business Info', 'wp-user-avatar'),
+                'dashicon'  => 'dashicons-info',
+                [
+                    'section_title'        => esc_html__('Business Information', 'wp-user-avatar'),
+                    'business_name'        => [
+                        'type'        => 'text',
+                        'label'       => esc_html__('Business Name', 'wp-user-avatar'),
+                        'description' => esc_html__('The official (legal) name of your store. Defaults to Site Title if empty.', 'wp-user-avatar'),
+                    ],
+                    'business_address'     => [
+                        'type'        => 'text',
+                        'label'       => esc_html__('Address', 'wp-user-avatar'),
+                        'description' => esc_html__('The street address where your business is registered and located.', 'wp-user-avatar'),
+                    ],
+                    'business_city'        => [
+                        'type'        => 'text',
+                        'label'       => esc_html__('City', 'wp-user-avatar'),
+                        'description' => esc_html__('The city in which your business is registered and located.', 'wp-user-avatar'),
+                    ],
+                    'business_country'     => [
+                        'type'        => 'select',
+                        'label'       => esc_html__('Country', 'wp-user-avatar'),
+                        'description' => esc_html__('The country in which your business is registered and located.', 'wp-user-avatar'),
+                        'options'     => ['' => '&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;'] + ppress_array_of_world_countries()
+                    ],
+                    'business_state'       => [
+                        'type'        => 'text',
+                        'label'       => esc_html__('State / Province / Region', 'wp-user-avatar'),
+                        'description' => esc_html__('The state your business is located.', 'wp-user-avatar'),
+                    ],
+                    'business_postal_code' => [
+                        'type'        => 'text',
+                        'label'       => esc_html__('ZIP / Postal Code', 'wp-user-avatar'),
+                        'description' => esc_html__('The country in which your business is located.', 'wp-user-avatar'),
+                    ],
+                    'business_tin'         => [
+                        'type'        => 'text',
+                        'label'       => esc_html__('Tax Identification Number', 'wp-user-avatar'),
+                        'description' => esc_html__('This can be your VAT number, GST/HST or ABN.', 'wp-user-avatar'),
+                    ],
+                ],
+            ]),
+            'global_pages'              => apply_filters('ppress_global_pages_settings_page', [
+                'tab_title' => esc_html__('Pages', 'wp-user-avatar'),
+                'dashicon'  => 'dashicons-admin-page',
+                [
+                    'section_title'         => esc_html__('Global Pages', 'wp-user-avatar'),
                     'set_login_url'         => [
                         'type'        => 'custom_field_block',
                         'label'       => esc_html__('Login Page', 'wp-user-avatar'),
                         'data'        => $this->page_dropdown('set_login_url'),
                         'description' => sprintf(
                             esc_html__('Select the page you wish to make WordPress default Login page. %3$s This should be the page that contains a %1$slogin form shortcode%2$s.', 'wp-user-avatar'),
-                            '<a href="' . add_query_arg('form-type', 'login', PPRESS_FORMS_SETTINGS_PAGE) . '"><strong>', '</strong></a>', '<br/>'),
+                            '<a href="' . add_query_arg('form-type', 'login', PPRESS_FORMS_SETTINGS_PAGE) . '">', '</a>', '<br/>'),
                     ],
                     'set_registration_url'  => [
                         'type'        => 'custom_field_block',
@@ -145,7 +203,15 @@ class GeneralSettings extends AbstractSettingsPage
                         'data'        => $this->page_dropdown('set_registration_url'),
                         'description' => sprintf(
                             esc_html__('Select the page you wish to make WordPress default Registration page. %3$s This should be the page that contains a %1$sregistration form shortcode%2$s.', 'wp-user-avatar'),
-                            '<a href="' . add_query_arg('form-type', 'registration', PPRESS_FORMS_SETTINGS_PAGE) . '"><strong>', '</strong></a>', '<br/>'),
+                            '<a href="' . add_query_arg('form-type', 'registration', PPRESS_FORMS_SETTINGS_PAGE) . '">', '</a>', '<br/>'),
+                    ],
+                    'set_lost_password_url' => [
+                        'type'        => 'custom_field_block',
+                        'label'       => esc_html__('Password Reset Page', 'wp-user-avatar'),
+                        'data'        => $this->page_dropdown('set_lost_password_url'),
+                        'description' => sprintf(
+                            esc_html__('Select the page you wish to make WordPress default "Lost Password page". %3$s This should be the page that contains a %1$spassword reset form shortcode%2$s.', 'wp-user-avatar'),
+                            '<a href="' . add_query_arg('form-type', 'password-reset', PPRESS_FORMS_SETTINGS_PAGE) . '">', '</a>', '<br/>'),
                     ],
                     'edit_user_profile_url' => [
                         'type'        => 'custom_field_block',
@@ -153,22 +219,41 @@ class GeneralSettings extends AbstractSettingsPage
                         'data'        => $this->page_dropdown('edit_user_profile_url'),
                         'description' => sprintf(
                             esc_html__('Select a page that contains %3$s shortcode. You can also use an %1$sedit profile shortcode%2$s on the My Account page in case you want something custom.', 'wp-user-avatar'),
-                            '<a href="' . add_query_arg('form-type', 'edit-profile', PPRESS_FORMS_SETTINGS_PAGE) . '"><strong>', '</strong></a>', '<code>[profilepress-my-account]</code>'),
+                            '<a href="' . add_query_arg('form-type', 'edit-profile', PPRESS_FORMS_SETTINGS_PAGE) . '">', '</a>', '<code>[profilepress-my-account]</code>'),
                     ],
-                    'disable_ajax_mode'     => [
-                        'type'           => 'checkbox',
-                        'label'          => esc_html__('Disable Ajax Mode', 'wp-user-avatar'),
-                        'value'          => 'yes',
-                        'checkbox_label' => esc_html__('Disable', 'wp-user-avatar'),
-                        'description'    => esc_html__('Check this box to disable ajax behaviour(whereby forms do not require page reload when submitted) in forms.', 'wp-user-avatar'),
+                ],
+                [
+                    'section_title'           => esc_html__('Payment Pages', 'wp-user-avatar'),
+                    'checkout_page_id'        => [
+                        'type'        => 'custom_field_block',
+                        'label'       => esc_html__('Checkout Page', 'wp-user-avatar'),
+                        'data'        => $this->page_dropdown('checkout_page_id'),
+                        'description' => sprintf(
+                            esc_html__('The checkout page where members will complete their payments. %2$sThe shortcode %1$s must be on this page.', 'wp-user-avatar'),
+                            '<code>[profilepress-checkout]</code>', '<br>'
+                        ),
                     ],
-                    'remove_plugin_data'    => [
-                        'type'           => 'checkbox',
-                        'value'          => 'yes',
-                        'label'          => esc_html__('Remove Data on Uninstall', 'wp-user-avatar'),
-                        'checkbox_label' => esc_html__('Delete', 'wp-user-avatar'),
-                        'description'    => esc_html__('Check this box if you would like ProfilePress to completely remove all of its data when the plugin is deleted.', 'wp-user-avatar'),
-                    ]
+                    'payment_success_page_id' => [
+                        'type'        => 'custom_field_block',
+                        'label'       => esc_html__('Order Success Page', 'wp-user-avatar'),
+                        'data'        => $this->page_dropdown('payment_success_page_id'),
+                        'description' => sprintf(
+                            esc_html__('The page customers are sent to after completing their orders.%2$sThe shortcode %1$s must be on this page.', 'wp-user-avatar'),
+                            '<code>[profilepress-receipt]</code>', '<br>'
+                        )
+                    ],
+                    'payment_failure_page_id' => [
+                        'type'        => 'custom_field_block',
+                        'label'       => esc_html__('Order Failure Page', 'wp-user-avatar'),
+                        'data'        => $this->page_dropdown('payment_failure_page_id'),
+                        'description' => esc_html__('The page customers are sent to after a failed order.', 'wp-user-avatar')
+                    ],
+                    'terms_page_id'         => [
+                        'label'       => esc_html__('Terms & Conditions Page', 'wp-user-avatar'),
+                        'description' => esc_html__('If you select a "Terms" page, customers will be asked if they accept them when checking out.', 'wp-user-avatar'),
+                        'type'        => 'custom_field_block',
+                        'data'        => $this->page_dropdown('terms_page_id'),
+                    ],
                 ]
             ]),
             'registration_settings'     => apply_filters('ppress_registration_settings_page', [
@@ -380,6 +465,13 @@ class GeneralSettings extends AbstractSettingsPage
             ])
         ];
 
+        $business_country = ppress_business_country();
+
+        if ( ! empty($business_country) && ! empty(ppress_array_of_world_states($business_country))) {
+            $args['business_info'][0]['business_state']['type']    = 'select';
+            $args['business_info'][0]['business_state']['options'] = ['' => '&mdash;&mdash;&mdash;'] + ppress_array_of_world_states($business_country);
+        }
+
         if (class_exists('\BuddyPress')) {
             $args['buddypress_settings'] = apply_filters('ppress_buddypress_settings_page', [
                     'tab_title'                     => esc_html__('BuddyPress', 'wp-user-avatar'),
@@ -462,6 +554,19 @@ class GeneralSettings extends AbstractSettingsPage
                 return $return;
             }, 10, 3);
         }
+    }
+
+    public function js_script()
+    {
+        ?>
+        <script type="text/javascript">
+            (function ($) {
+                $('#business_country').on('change', function () {
+                    $('#business_info').find('.button-primary').click();
+                })
+            })(jQuery)
+        </script>
+        <?php
     }
 
     public static function get_instance()

@@ -59,12 +59,13 @@ class Redirect
 
                 $who_can_access = ppress_var($access_condition, 'who_can_access', 'everyone');
 
-                $access_roles    = ppress_var($access_condition, 'access_roles', []);
-                $access_wp_users = ppress_var($access_condition, 'access_wp_users', []);
+                $access_roles            = ppress_var($access_condition, 'access_roles', []);
+                $access_wp_users         = ppress_var($access_condition, 'access_wp_users', []);
+                $access_membership_plans = ppress_var($access_condition, 'access_membership_plans', []);
 
                 if (Checker::content_match($meta['content'], true)) {
 
-                    if (Checker::is_blocked($who_can_access, $access_roles, $access_wp_users)) {
+                    if (Checker::is_blocked($who_can_access, $access_roles, $access_wp_users, $access_membership_plans)) {
                         nocache_headers();
                         wp_safe_redirect(esc_url_raw($redirect_url));
                         exit;

@@ -209,12 +209,18 @@ class ModifyRedirectDefaultLinks
      */
     public function logout_url_func($logout_url, $redirect)
     {
+        if (apply_filters('ppress_logout_url_enable_redirect_get_query', false) && ! empty($redirect)) {
+            return $logout_url;
+        }
+
         $set_redirect = false;
 
         $custom_logout_page_url = ppress_get_setting('custom_url_log_out');
         $logout_page_id         = ppress_get_setting('set_log_out_url');
 
-        if ( ! empty($custom_logout_page_url)) {
+        if (apply_filters('ppress_logout_url_enable_redirect_get_query', false) && ! empty($redirect)) {
+            $set_redirect = $redirect;
+        } elseif ( ! empty($custom_logout_page_url)) {
             $set_redirect = $custom_logout_page_url;
         } elseif ( ! empty($logout_page_id)) {
 
@@ -231,7 +237,7 @@ class ModifyRedirectDefaultLinks
             }
         }
 
-        if ($set_redirect) {
+        if ( ! empty($set_redirect)) {
             $set_redirect = apply_filters('ppress_logout_redirect', $set_redirect);
             $logout_url   = esc_url_raw(add_query_arg('redirect_to', rawurlencode($set_redirect), $logout_url));
         }

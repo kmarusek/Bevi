@@ -60,7 +60,6 @@ class Init
         $instance->build();
     }
 
-
     public static function save_options()
     {
         if (isset($_GET['section']) && $_GET['section'] == 'admin-bar-dashboard' && isset($_POST['settings_submit'])) {

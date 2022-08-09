@@ -55,8 +55,8 @@ class SettingsPage extends AbstractSettingsPage
     public function register_cpf_settings_page()
     {
         $hook = add_submenu_page(
-            PPRESS_SETTINGS_SLUG,
-            $this->admin_page_title() . ' - ProfilePress',
+            PPRESS_DASHBOARD_SETTINGS_SLUG,
+            'ProfilePress '. $this->admin_page_title(),
             esc_html__('Content Protection', 'wp-user-avatar'),
             'manage_options',
             PPRESS_CONTENT_PROTECTION_SETTINGS_SLUG,

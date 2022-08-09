@@ -2,10 +2,10 @@
 
 namespace ProfilePress\Core\Classes;
 
-use WP_Session;
+use WP_PPress_Session;
 
 /**
- * This is a wrapper class for WP_Session / PHP $_SESSION
+ * This is a wrapper class for WP_PPress_Session / PHP $_SESSION
  *
  * @copyright   Copyright (c) 2015, Pippin Williamson
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -23,7 +23,7 @@ class PPRESS_Session
     /**
      * Get things started
      *
-     * Defines our WP_Session constants, includes the necessary libraries and
+     * Defines our WP_PPress_Session constants, includes the necessary libraries and
      * retrieves the WP Session instance
      */
     public function __construct()
@@ -32,17 +32,20 @@ class PPRESS_Session
             return;
         }
 
-        // Use WP_Session (default)
-
-        if ( ! defined('WP_SESSION_COOKIE')) {
-            define('WP_SESSION_COOKIE', 'ppwp_wp_session');
+        if ( ! defined('WP_PPRESS_SESSION_COOKIE')) {
+            define('WP_PPRESS_SESSION_COOKIE', 'ppwp_wp_session');
         }
 
-        if ( ! class_exists('Recursive_ArrayAccess')) {
+        if ( ! class_exists('PPRESS_Recursive_ArrayAccess')) {
             require_once PROFILEPRESS_SRC . 'lib/wp_session/class-recursive-arrayaccess.php';
         }
 
-        if ( ! class_exists('WP_Session')) {
+        // Include utilities class
+        if ( ! class_exists('WP_PPress_Session_Utils')) {
+            require_once PROFILEPRESS_SRC . 'lib/wp_session/class-wp-session-utils.php';
+        }
+
+        if ( ! class_exists('WP_PPress_Session')) {
             require_once PROFILEPRESS_SRC . 'lib/wp_session/class-wp-session.php';
             require_once PROFILEPRESS_SRC . 'lib/wp_session/wp-session.php';
         }
@@ -53,13 +56,13 @@ class PPRESS_Session
     }
 
     /**
-     * Setup the WP_Session instance
+     * Setup the WP_PPress_Session instance
      *
      * @return mixed
      */
     public function init()
     {
-        $this->session = WP_Session::get_instance();
+        $this->session = WP_PPress_Session::get_instance();
 
         return $this->session;
     }
@@ -163,6 +166,10 @@ class PPRESS_Session
                 // Starting sessions while saving the file editor can break the save process, so don't start
                 $start_session = false;
             }
+        }
+
+        if (defined('DOING_CRON') && DOING_CRON) {
+            $start_session = false;
         }
 
         return apply_filters('ppress_should_start_session', $start_session);

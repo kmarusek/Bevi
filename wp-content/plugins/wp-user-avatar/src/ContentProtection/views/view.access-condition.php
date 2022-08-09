@@ -1,15 +1,24 @@
 <?php
 
+use ProfilePress\Core\Membership\Repositories\PlanRepository;
+
 $postedData = ppress_var(@$_POST['ppress_cc_data'], 'access_condition', []);
 
 $who_can_access                      = ppressPOST_var('who_can_access', ppress_var($accessConditionData, 'who_can_access'), false, $postedData);
 $access_roles                        = ppressPOST_var('access_roles', ppress_var($accessConditionData, 'access_roles', []), [], $postedData);
+$access_membership_plans                     = ppressPOST_var('access_membership_plans', ppress_var($accessConditionData, 'access_membership_plans', []), [], $postedData);
 $access_wp_users                     = ppressPOST_var('access_wp_users', ppress_var($accessConditionData, 'access_wp_users', []), [], $postedData);
 $noaccess_action                     = ppressPOST_var('noaccess_action', ppress_var($accessConditionData, 'noaccess_action'), false, $postedData);
 $noaccess_action_message_type        = ppressPOST_var('noaccess_action_message_type', ppress_var($accessConditionData, 'noaccess_action_message_type'), false, $postedData);
 $noaccess_action_message_custom      = ppressPOST_var('noaccess_action_message_custom', ppress_var($accessConditionData, 'noaccess_action_message_custom'), false, $postedData);
 $noaccess_action_redirect_url        = ppressPOST_var('noaccess_action_redirect_url', ppress_var($accessConditionData, 'noaccess_action_redirect_url'), false, $postedData);
 $noaccess_action_redirect_custom_url = ppressPOST_var('noaccess_action_redirect_custom_url', ppress_var($accessConditionData, 'noaccess_action_redirect_custom_url'), false, $postedData);
+
+$membership_plans = [];
+foreach (PlanRepository::init()->retrieveAll() as $plan) {
+    $membership_plans[$plan->id] = $plan->name;
+}
+
 ?>
 
 <div class="pp-content-protection-access-box">
@@ -24,6 +33,18 @@ $noaccess_action_redirect_custom_url = ppressPOST_var('noaccess_action_redirect_
                     <option value="everyone" <?php selected($who_can_access, 'everyone'); ?>><?= esc_html__('Everyone', 'wp-user-avatar') ?></option>
                     <option value="login" <?php selected($who_can_access, 'login'); ?>><?= esc_html__('Logged in users', 'wp-user-avatar') ?></option>
                     <option value="logout" <?php selected($who_can_access, 'logout'); ?>><?= esc_html__('Logged out users', 'wp-user-avatar') ?></option>
+                </select>
+            </td>
+        </tr>
+        <tr id="pp-cc-access-membership-plans-row">
+            <th>
+                <label for="pp-cc-access-membership-plans"><?= esc_html__('Select Membership Plans that can access content', 'wp-user-avatar') ?></label>
+            </th>
+            <td>
+                <select id="pp-cc-access-membership-plans" name="ppress_cc_data[access_condition][access_membership_plans][]" multiple>
+                    <?php foreach ($membership_plans as $plan_id => $plan_name): ?>
+                        <option value="<?= $plan_id ?>"<?= in_array($plan_id, $access_membership_plans) ? ' selected' : ''; ?>><?= $plan_name ?></option>
+                    <?php endforeach; ?>
                 </select>
             </td>
         </tr>
@@ -149,6 +170,7 @@ $noaccess_action_redirect_custom_url = ppressPOST_var('noaccess_action_redirect_
 
                 switch (val) {
                     case 'everyone':
+                        $('#pp-cc-access-membership-plans-row').hide();
                         $('#pp-cc-access-role-row').hide();
                         $('#pp-cc-access-wp-users-row').hide();
                         $('#pp-cc-access-noaccess-action-row').hide();
@@ -163,11 +185,13 @@ $noaccess_action_redirect_custom_url = ppressPOST_var('noaccess_action_redirect_
                         $('#pp-cc-access-noaccess-action-redirect-custom-url-row').hide();
                         $('#pp-cc-access-noaccess-action-message-row').hide();
                         // all show code must be after hide()
-                        $('#pp-cc-access-role-row').show()
+                        $('#pp-cc-access-membership-plans-row').show();
+                        $('#pp-cc-access-role-row').show();
                         $('#pp-cc-access-wp-users-row').show();
                         $('#pp-cc-access-noaccess-action-row').show().find('select').change();
                         break;
                     case 'logout':
+                        $('#pp-cc-access-membership-plans-row').hide();
                         $('#pp-cc-access-role-row').hide();
                         $('#pp-cc-access-wp-users-row').hide();
                         $('#pp-cc-access-noaccess-action-message-custom-row').hide();

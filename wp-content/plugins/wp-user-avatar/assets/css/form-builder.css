@@ -458,10 +458,6 @@ ol.pp-form-builder-field-type {
     padding: 0;
 }
 
-li {
-    list-style: none !important;
-}
-
 ol.pp-form-builder-field-type li {
     float: left;
     width: 50%;

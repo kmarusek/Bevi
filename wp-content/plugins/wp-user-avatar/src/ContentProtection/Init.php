@@ -10,10 +10,6 @@ class Init
 {
     public function __construct()
     {
-        add_action('ppress_admin_hooks', function () {
-            SettingsPage::get_instance();
-        });
-
         add_action('wp_ajax_ppress_content_condition_field', [$this, 'get_content_condition_field']);
         add_action('wp_ajax_ppress_cr_object_search', [$this, 'get_content_condition_search']);
 

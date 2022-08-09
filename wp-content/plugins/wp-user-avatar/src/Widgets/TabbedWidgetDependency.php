@@ -79,7 +79,7 @@ class TabbedWidgetDependency
         }
 
         $data = array(
-            'reg_username' => sanitize_user($username),
+            'reg_username' => sanitize_user($username, true),
             'reg_email'    => sanitize_email($email),
             'reg_password' => $password
         );

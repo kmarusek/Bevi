@@ -14,9 +14,7 @@ $current_user = get_user_by('id', get_current_user_id());
         <h2><?= esc_html__('Email Notifications', 'wp-user-avatar') ?></h2>
 
         <?php if (isset($_GET['edit']) && $_GET['edit'] == 'true') : ?>
-            <div class="profilepress-myaccount-alert pp-alert-success" role="alert">
-                <?= apply_filters('ppmyac_email_notifications_success_message', esc_html__('Account was updated successfully.', 'wp-user-avatar')); ?>
-            </div>
+            <?php MyAccountTag::alert_message(apply_filters('ppmyac_email_notifications_success_message', esc_html__('Account was updated successfully.', 'wp-user-avatar'))) ?>
         <?php endif;
 
         $contents = MyAccountTag::email_notification_endpoint_content();

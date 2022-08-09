@@ -1,10 +1,22 @@
 ﻿== Changelog ==
 
-= 3.2.16 =
-* Added unique classes to my account page - account details section.
-* Fixed bug with member directory search not working in some cases.
+= 4.0.3 =
+* Fixed critical bug causing checkout not to work.
+* Fixed bug where plan with empty description caused checkout not to work.
+* Enhancement: Added endpoint as class to My Account tabs.
+
+= 4.0.2 =
+* Enhancement: Store admin bar menu now only display for active store.
+* Fixed bug where Stripe scripts were loaded when not enabled.
+* Fixed bug where pages where auto-created.
+
+= 4.0.1 =
+* Fixed bug with member directory role restriction not working.
+* Fixed: Uncaught Error: Call to a member function exists().
+
+= 4.0.0 =
+* Added [paid membership feature](https://profilepress.com/announcing-paid-membership/?ref=changelog).
 * Fixed bug where upload field with data is still required.
-* Fixed XSS on member directory search field.
 
 = 3.2.15 =
 * Fixed bug where social icons where showing when disabled.

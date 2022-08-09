@@ -57,42 +57,13 @@ class Base
         CreateDBTables::make();
         self::default_settings();
         self::create_default_forms();
+        self::clear_wpengine_cache();
 
         add_option('ppress_install_date', current_time('mysql'));
         add_option('ppress_plugin_activated', 'true');
+        add_option('ppress_new_v4_install', 'true');
 
         flush_rewrite_rules();
-    }
-
-    public static function default_settings()
-    {
-        $settings = [
-            'login_username_email_restrict'    => 'both',
-            'myac_edit_account_endpoint'       => 'edit-profile',
-            'myac_change_password_endpoint'    => 'change-password',
-            'set_user_profile_slug'            => 'profile',
-            'set_login_redirect'               => 'dashboard',
-            'global_site_access'               => 'everyone',
-            'global_restricted_access_message' => '<p>You are unauthorized to view this page.</p>',
-
-            'admin_email_addresses' => ppress_admin_email(),
-            'email_sender_name'     => ppress_site_title(),
-            'email_sender_email'    => 'wordpress@' . ppress_site_url_without_scheme(),
-            'email_content_type'    => 'text/html',
-            'email_template_type'   => 'default',
-
-            'password_reset_email_enabled' => 'on',
-            'password_reset_email_subject' => sprintf(__('[%s] Password Reset'), ppress_site_title()),
-            'password_reset_email_content' => ppress_password_reset_content_default(),
-
-            'new_user_admin_email_email_enabled' => 'on',
-            'new_user_admin_email_email_subject' => sprintf(__('[%s] New User Registration'), ppress_site_title()),
-            'new_user_admin_email_email_content' => ppress_new_user_admin_notification_message_default(),
-        ];
-
-        foreach ($settings as $key => $value) {
-            ppress_update_settings($key, $value);
-        }
     }
 
     public static function create_default_forms()
@@ -148,33 +119,127 @@ class Base
         );
     }
 
+    public static function default_settings()
+    {
+        $settings = [
+            'login_username_email_restrict'    => 'both',
+            'myac_edit_account_endpoint'       => 'edit-profile',
+            'myac_change_password_endpoint'    => 'change-password',
+            'set_user_profile_slug'            => 'profile',
+            'set_login_redirect'               => 'dashboard',
+            'global_site_access'               => 'everyone',
+            'global_restricted_access_message' => '<p>' . esc_html__('You are unauthorized to view this page.', 'wp-user-avatar') . '</p>',
+
+            'admin_email_addresses' => ppress_admin_email(),
+            'email_sender_name'     => ppress_site_title(),
+            'email_sender_email'    => 'wordpress@' . ppress_site_url_without_scheme(),
+            'email_content_type'    => 'text/html',
+            'email_template_type'   => 'default',
+
+            'password_reset_email_enabled' => 'on',
+            'password_reset_email_subject' => sprintf(__('[%s] Password Reset'), ppress_site_title()),
+            'password_reset_email_content' => ppress_password_reset_content_default(),
+
+            'new_user_admin_email_email_enabled' => 'on',
+            'new_user_admin_email_email_subject' => sprintf(__('[%s] New User Registration'), ppress_site_title()),
+            'new_user_admin_email_email_content' => ppress_new_user_admin_notification_message_default(),
+        ];
+
+        foreach ($settings as $key => $value) {
+            ppress_update_settings($key, $value);
+        }
+
+        self::membership_default_settings();
+    }
+
+    public static function membership_default_settings()
+    {
+        $settings = [
+            // Business info
+            'business_name'               => ppress_site_title(),
+            'business_country'            => 'US',
+            // Payment settings
+            //'payment_currency'            => 'USD', excluded so onboarding checklist can ask user to set currency
+            'currency_position'           => 'left',
+            'currency_decimal_separator'  => '.',
+            'currency_thousand_separator' => ',',
+            'currency_decimal_number'     => '2',
+            'terms_agreement_label'       => sprintf(__('I have read and agree to the website %s', 'wp-user-avatar'), '[terms]'),
+        ];
+
+        foreach ($settings as $key => $value) {
+            ppress_update_settings($key, $value);
+        }
+    }
+
     public static function create_pages()
     {
         $pages = [
             'set_login_url'              => [
                 'post_title'   => esc_html__('Log In', 'wp-user-avatar'),
-                'post_content' => sprintf('[profilepress-login id="%s"]', FR::get_form_first_id(FR::LOGIN_TYPE)),
+                'post_content' => sprintf('<!-- wp:shortcode -->[profilepress-login id="%s"]<!-- /wp:shortcode -->', FR::get_form_first_id(FR::LOGIN_TYPE)),
             ],
             'set_registration_url'       => [
                 'post_title'   => esc_html__('Sign Up', 'wp-user-avatar'),
-                'post_content' => sprintf('[profilepress-registration id="%s"]', FR::get_form_first_id(FR::REGISTRATION_TYPE)),
+                'post_content' => sprintf('<!-- wp:shortcode -->[profilepress-registration id="%s"]<!-- /wp:shortcode -->', FR::get_form_first_id(FR::REGISTRATION_TYPE)),
             ],
             'set_lost_password_url'      => [
                 'post_title'   => esc_html__('Reset Password', 'wp-user-avatar'),
-                'post_content' => sprintf('[profilepress-password-reset id="%s"]', FR::get_form_first_id(FR::PASSWORD_RESET_TYPE)),
+                'post_content' => sprintf('<!-- wp:shortcode -->[profilepress-password-reset id="%s"]<!-- /wp:shortcode -->', FR::get_form_first_id(FR::PASSWORD_RESET_TYPE)),
             ],
             'edit_user_profile_url'      => [
                 'post_title'   => esc_html__('My Account', 'wp-user-avatar'),
-                'post_content' => '[profilepress-my-account]',
+                'post_content' => '<!-- wp:shortcode -->[profilepress-my-account]<!-- /wp:shortcode -->',
                 'post_name'    => 'account'
             ],
             'set_user_profile_shortcode' => [
                 'post_title'   => esc_html__('My Profile', 'wp-user-avatar'),
-                'post_content' => sprintf('[profilepress-user-profile id="%s"]', FR::get_form_first_id(FR::USER_PROFILE_TYPE))
+                'post_content' => sprintf('<!-- wp:shortcode -->[profilepress-user-profile id="%s"]<!-- /wp:shortcode -->', FR::get_form_first_id(FR::USER_PROFILE_TYPE))
             ],
             'member_directory'           => [
                 'post_title'   => esc_html__('Member Directory', 'wp-user-avatar'),
-                'post_content' => sprintf('[profilepress-member-directory id="%s"]', FR::get_form_first_id(FR::MEMBERS_DIRECTORY_TYPE))
+                'post_content' => sprintf('<!-- wp:shortcode -->[profilepress-member-directory id="%s"]<!-- /wp:shortcode -->', FR::get_form_first_id(FR::MEMBERS_DIRECTORY_TYPE))
+            ]
+        ];
+
+        foreach ($pages as $key => $page) {
+
+            $insert = wp_insert_post(
+                array_merge(
+                    ['post_status' => 'publish', 'post_type' => 'page'],
+                    $page
+                ),
+                true
+            );
+
+            if ($insert && ! is_wp_error($insert)) {
+                ppress_update_settings($key, $insert);
+            }
+        }
+
+        self::create_membership_pages();
+    }
+
+    public static function create_membership_pages()
+    {
+        $pages = [
+            'checkout_page_id'        => [
+                'post_title'   => esc_html__('Checkout', 'wp-user-avatar'),
+                'post_content' => '<!-- wp:shortcode -->[profilepress-checkout]<!-- /wp:shortcode -->'
+            ],
+            'payment_success_page_id' => [
+                'post_title'   => esc_html__('Order Confirmation', 'wp-user-avatar'),
+                'post_content' => sprintf(
+                    '<!-- wp:paragraph --><p>%s</p><!-- /wp:paragraph --><!-- wp:shortcode -->[profilepress-receipt]<!-- /wp:shortcode -->',
+                    esc_html__('Thank you for your order!', 'wp-user-avatar')
+                )
+            ],
+            'payment_failure_page_id' => [
+                'post_title'   => esc_html__('Order Failed', 'wp-user-avatar'),
+                'post_content' => sprintf(
+                    '<!-- wp:paragraph --><p>%s</p><!-- /wp:paragraph -->',
+                    esc_html__('Your transaction failed, please try again or contact support.', 'wp-user-avatar')
+                )
             ]
         ];
 
@@ -194,4 +259,22 @@ class Base
         }
     }
 
+    public static function clear_wpengine_cache()
+    {
+        if ( ! class_exists('\WpeCommon')) {
+            return;
+        }
+
+        if (method_exists('\WpeCommon', 'purge_memcached')) {
+            \WpeCommon::purge_memcached();
+        }
+
+        if (method_exists('\WpeCommon', 'clear_maxcdn_cache')) {
+            \WpeCommon::clear_maxcdn_cache();
+        }
+
+        if (method_exists('\WpeCommon', 'purge_varnish_cache')) {
+            \WpeCommon::purge_varnish_cache();
+        }
+    }
 }

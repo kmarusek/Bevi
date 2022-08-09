@@ -4,30 +4,42 @@ namespace ProfilePress\Core\ContentProtection\Frontend;
 
 
 use ProfilePress\Core\ContentProtection\ContentConditions;
+use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
 
 class Checker
 {
-    public static function is_blocked($who_can_access = 'everyone', $roles = [], $wp_users = [])
+    public static function is_blocked($who_can_access = 'everyone', $roles = [], $wp_users = [], $membership_plans = [])
     {
         if ('login' == $who_can_access) {
 
             if ( ! is_user_logged_in()) return true;
 
+            if ( ! empty($membership_plans)) {
+
+                $customer = CustomerFactory::fromUserId(get_current_user_id());
+
+                $membership_plans = array_map('absint', $membership_plans);
+
+                foreach ($membership_plans as $plan_id) {
+                    if ($customer->has_active_subscription($plan_id)) return false;
+                }
+            }
+
             if ( ! empty($roles)) {
 
                 $user_roles = wp_get_current_user()->roles;
 
-                if (!empty(array_intersect($roles, $user_roles))) return false;
+                if ( ! empty(array_intersect($roles, $user_roles))) return false;
             }
 
             if ( ! empty($wp_users)) {
 
                 $users = array_map('absint', $wp_users);
 
-                if ( in_array(get_current_user_id(), $users)) return false;
+                if (in_array(get_current_user_id(), $users)) return false;
             }
 
-            if(empty($roles) && empty($wp_users)) return false;
+            if (empty($roles) && empty($wp_users) && empty($membership_plans)) return false;
 
             // returning true to make users and user role combined rule OR instead of AND
             return true;

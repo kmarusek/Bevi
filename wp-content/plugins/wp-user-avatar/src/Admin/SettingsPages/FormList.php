@@ -144,7 +144,8 @@ class FormList extends \WP_List_Table
     {
         return esc_url_raw(admin_url(
             sprintf(
-                'admin.php?page=pp-forms&action=delete&form_type=%s&id=%d&_wpnonce=%s',
+                'admin.php?page=%s&action=delete&form_type=%s&id=%d&_wpnonce=%s',
+                PPRESS_FORMS_SETTINGS_SLUG,
                 sanitize_text_field($form_type),
                 absint($form_id),
                 ppress_create_nonce()
@@ -156,7 +157,8 @@ class FormList extends \WP_List_Table
     {
         return esc_url_raw(admin_url(
             sprintf(
-                'admin.php?page=pp-forms&action=clone&form_type=%s&id=%d&_wpnonce=%s',
+                'admin.php?page=%s&action=clone&form_type=%s&id=%d&_wpnonce=%s',
+                PPRESS_FORMS_SETTINGS_SLUG,
                 sanitize_text_field($form_type),
                 absint($form_id),
                 ppress_create_nonce()

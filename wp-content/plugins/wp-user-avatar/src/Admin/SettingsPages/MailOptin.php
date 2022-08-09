@@ -21,7 +21,7 @@ class MailOptin
 
     public function __construct()
     {
-        if ( ! $this->is_configured()) {
+        if ( ! $this->is_activated()) {
             add_action('ppress_admin_hooks', function () {
                 add_action('ppress_register_menu_page', array($this, 'register_settings_page'));
             });
@@ -73,7 +73,7 @@ class MailOptin
         $url = esc_url_raw(
             add_query_arg(
                 [
-                    'page' => 'pp-extensions',
+                    'page' => 'ppress-extensions',
                 ],
                 admin_url('admin.php')
             )
@@ -173,7 +173,7 @@ class MailOptin
     public function register_settings_page()
     {
         add_submenu_page(
-            PPRESS_SETTINGS_SLUG,
+            PPRESS_DASHBOARD_SETTINGS_SLUG,
             'Popups & Optin Forms',
             esc_html__('Popups & Optins', 'wp-user-avatar'),
             'manage_options',

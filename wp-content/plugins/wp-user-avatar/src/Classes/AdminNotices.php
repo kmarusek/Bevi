@@ -2,7 +2,7 @@
 
 namespace ProfilePress\Core\Classes;
 
-use PAnD;
+use ProfilePressVendor\PAnD;
 
 class AdminNotices
 {
@@ -19,9 +19,10 @@ class AdminNotices
             add_filter('removable_query_args', [$this, 'removable_query_args']);
         });
 
-        if (class_exists('PAnD')) {
+        if (class_exists('\ProfilePressVendor\PAnD')) {
             // persist admin notice dismissal initialization
-            add_action('admin_init', array('PAnD', 'init'));
+            add_action('admin_init', array('ProfilePressVendor\PAnD', 'init'));
+            add_action('wp_ajax_dismiss_admin_notice', ['ProfilePressVendor\PAnD', 'dismiss_admin_notice']);
         }
         add_action('admin_init', array($this, 'act_on_request'));
 
@@ -34,7 +35,7 @@ class AdminNotices
 
         if (empty ($current_screen)) return $classes;
 
-        if (false !== strpos($current_screen->id, 'pp-')) {
+        if (false !== strpos($current_screen->id, 'ppress-')) {
             // Leave space on both sides so other plugins do not conflict.
             $classes .= ' ppress-admin ';
         }
@@ -45,6 +46,8 @@ class AdminNotices
     public function admin_notices_bucket()
     {
         do_action('ppress_admin_notices');
+
+        $this->test_mode_notice();
 
         $this->seo_friendly_permalink_not_set();
 
@@ -72,6 +75,23 @@ class AdminNotices
 
             wp_safe_redirect(esc_url_raw(remove_query_arg('ppress_admin_action')));
             exit;
+        }
+    }
+
+    public function test_mode_notice()
+    {
+        if (ppress_is_test_mode() && current_user_can('manage_options')) {
+            $link = add_query_arg(
+                ['view' => 'payments', 'section' => 'payment-methods'],
+                PPRESS_SETTINGS_SETTING_PAGE
+            );
+
+            $notice = sprintf(__('<strong>Important:</strong> No real payment is being processed because ProfilePress is in test mode. Go to <a href="%s">Payment method settings</a> to disable test mode.', 'wp-user-avatar'), $link);
+            ?>
+            <div class="notice notice-warning">
+                <p><?php echo $notice; ?></p>
+            </div>
+            <?php
         }
     }
 
@@ -167,7 +187,7 @@ class AdminNotices
         $create_page_url = esc_url(add_query_arg(['ppress_create_pages' => 'true', 'ppress_nonce' => wp_create_nonce('ppress_create_pages')]));
 
         $class   = 'notice notice-info is-dismissible';
-        $message = __('ProfilePress needs to create several pages (User Profiles, My Account, Registration, Login, Password Reset, Member Directory) to function correctly.', 'wp-user-avatar');
+        $message = __('ProfilePress needs to create several pages (Checkout, Order Confirmation, User Profile, My Account, Registration, Login, Member Directory) to function correctly.', 'wp-user-avatar');
         $buttons = sprintf(
             '<a href="%s" class="button button-primary">%s</a> <a href="#" class="button-secondary dismiss-this">%s</a>',
             $create_page_url, esc_html__('Create Pages', 'wp-user-avatar'), esc_html__('No Thanks', 'wp-user-avatar')
@@ -187,7 +207,7 @@ class AdminNotices
             return;
         }
 
-        if ( ! class_exists('PAnD')) return;
+        if ( ! class_exists('\ProfilePressVendor\PAnD')) return;
 
         if ( ! PAnD::is_admin_notice_active('pp-registration-disabled-notice-forever')) {
             return;

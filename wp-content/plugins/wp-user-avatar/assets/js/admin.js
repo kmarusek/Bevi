@@ -191,7 +191,7 @@
         $(window).on('hashchange', function () {
             if (hash_event_triggered === true) return;
 
-            // in #registration_page?login_page, registration_page is the tab id and \
+            // in #registration_page?login_page, registration_page is the tab id and
             // login_page the control/settings tr id.
             var hash = this.location.hash, tab_id_len, tab_id, cache;
             if (hash.length === 0) open_active_or_first_tab();
@@ -418,7 +418,6 @@
     };
 
     $(function () {
-
         if (typeof window.cmSettingsInstances === 'undefined') {
             window.cmSettingsInstances = {};
         }
@@ -453,5 +452,171 @@
         }).change();
 
         $('.wp-csa-select2').select2();
+
+        var tmpl = wp.template('ppress-plan-summary'),
+            cache = $('.ppview .billing_details .ppress-plan-billing-details'),
+            billing_data;
+
+        if (cache.length > 0) {
+
+            cache.each(function () {
+                billing_data = $(this).data('billing-details');
+
+                if (typeof billing_data !== 'object') {
+                    billing_data = JSON.parse(billing_data);
+                }
+
+                $(this).html(tmpl(billing_data));
+            });
+        }
+        // date picker for order filter
+        $('.ppress_datepicker').flatpickr({dateFormat: "Y-m-d", allowInput: true});
+
+        //date picker for order edit screen
+        $('.ppress_datetime_picker').flatpickr({
+            dateFormat: "Y-m-d H:i",
+            enableTime: true,
+            time_24hr: true,
+            allowInput: true
+        });
+
+        $('.ppress-metabox-data-column a.edit_address').on('click', function (e) {
+            e.preventDefault();
+            $(this).blur();
+            $('.ppress-billing-details').toggle(false);
+            $('.ppress_edit_address_wrap').toggle(true);
+        });
+
+        $('.ppress-select2-field.customer_user').select2({
+            ajax: {
+                url: ajaxurl,
+                delay: 250,
+                cache: true,
+                data: function (params) {
+                    return {
+                        search: params.term,
+                        nonce: ppress_admin_globals.nonce,
+                        action: 'ppress_mb_search_customers'
+                    };
+                }
+            },
+            minimumInputLength: 2
+        });
+
+        $('.ppress-select2-field.customer_wp_user').select2({
+            ajax: {
+                url: ajaxurl,
+                delay: 250,
+                cache: true,
+                data: function (params) {
+                    return {
+                        search: params.term,
+                        nonce: ppress_admin_globals.nonce,
+                        action: 'ppress_mb_search_wp_users'
+                    };
+                }
+            },
+            minimumInputLength: 2
+        });
+
+        // delete order notes in view order admin UI
+        $('.ppress-order-notes-wrap .ppress-delete-note').on('click', function (e) {
+            e.preventDefault();
+
+            if (confirm(pp_form_builder.confirm_delete)) {
+
+                $.post(ajaxurl, {
+                    'action': 'ppress_delete_order_note',
+                    'note_id': $(this).data('note-id'),
+                    'security': ppress_admin_globals.nonce
+                });
+
+                $(this).parents('li.ppress-note').remove();
+            }
+        });
+
+        var tmpl = wp.template('add-replace-order-template');
+        // add/replace order item
+        $('.add-replace-order-item').on('click', function (e) {
+            e.preventDefault();
+            var myModal = new jBox('Modal', {
+                'title': ppress_order_replace_modal_title,
+                content: tmpl(),
+                closeButton: 'title',
+                maxWidth: 400,
+                width: 400,
+                onOpenComplete: function () {
+                    $('.ppress-order-change-modal').select2({
+                        ajax: {
+                            url: ajaxurl,
+                            delay: 250,
+                            cache: true,
+                            data: function (params) {
+                                return {
+                                    search: params.term,
+                                    'type': $(this).attr('id'),
+                                    nonce: ppress_admin_globals.nonce,
+                                    action: 'ppress_mb_order_modal_search'
+                                };
+                            },
+                            processResults: function (data) {
+                                if ('prices' in data) {
+                                    window.ppressModalResultPrices = data.prices;
+                                }
+
+                                return {
+                                    results: data.results
+                                };
+                            }
+                        },
+                        minimumInputLength: 2
+                    });
+
+                    $('.ppress-order-change-modal').on('select2:select', function (e) {
+                        var id = e.params.data.id;
+
+                        if (typeof window.ppressModalResultPrices[id] !== 'undefined') {
+                            $('#sub_plan_price').val(window.ppressModalResultPrices[id])
+                        }
+                    });
+                },
+                onClose: function () {
+                    setTimeout(function () {
+                        myModal.destroy();
+                    }, 1000)
+                }
+            });
+
+            myModal.open();
+        });
+        // replace and save
+        $(document).on('click', '#save-order-change', function (e) {
+            e.preventDefault();
+            var plan = $('#subscription-plans').val(),
+                plan_price = $('#sub_plan_price').val(),
+                order_id = $('#ppress_order_id').val(),
+                tax = $('#tax-amount').val(),
+                order_coupon = $('#order_coupon').val();
+
+            if (plan === "") {
+                alert(ppress_modal_empty_plan_error);
+            } else {
+
+                $(this).prop("disabled", true);
+
+                $.post(ajaxurl, {
+                        'action': 'ppress_modal_replace_order_item',
+                        'order_id': order_id,
+                        'plan': plan,
+                        'plan_price': plan_price,
+                        'tax': tax,
+                        'coupon_code': order_coupon,
+                        'security': ppress_admin_globals.nonce
+                    }, function () {
+                        window.location.reload();
+                    }
+                );
+            }
+        });
     });
 })(jQuery);

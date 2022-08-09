@@ -6,6 +6,7 @@ $background_color      = DT::get_customizer_value('background_color');
 $background_text_color = DT::get_customizer_value('background_text_color');
 
 $content_background_color = DT::get_customizer_value('content_background_color');
+$content_header_color     = DT::get_customizer_value('content_header_color');
 $content_text_color       = DT::get_customizer_value('content_text_color');
 
 $header  = DT::get_customizer_value('header_text');
@@ -54,7 +55,7 @@ $footer_text = DT::get_customizer_value('footer_text');
 
         h1 {
             margin-top: 0;
-            color: #333333;
+            color: <?=$content_header_color?>;
             font-size: 22px;
             font-weight: bold;
             text-align: left;
@@ -62,7 +63,7 @@ $footer_text = DT::get_customizer_value('footer_text');
 
         h2 {
             margin-top: 0;
-            color: #333333;
+            color: <?=$content_header_color?>;
             font-size: 16px;
             font-weight: bold;
             text-align: left;
@@ -70,7 +71,7 @@ $footer_text = DT::get_customizer_value('footer_text');
 
         h3 {
             margin-top: 0;
-            color: #333333;
+            color: <?=$content_header_color?>;
             font-size: 14px;
             font-weight: bold;
             text-align: left;
@@ -241,7 +242,7 @@ $footer_text = DT::get_customizer_value('footer_text');
         }
 
         <?php do_action('ppress_send_email_default_template_style'); ?>
-        
+
     </style>
     <!--[if mso]>
     <style type="text/css">

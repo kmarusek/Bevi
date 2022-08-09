@@ -24,7 +24,8 @@ class ExtensionManager
 
     public static function is_premium()
     {
-        return defined('PROFILEPRESS_PRO_DETACH_LIBSODIUM');
+        return class_exists('\ProfilePress\Libsodium\Libsodium') &&
+               defined('PROFILEPRESS_PRO_DETACH_LIBSODIUM');
     }
 
     public static function class_map()

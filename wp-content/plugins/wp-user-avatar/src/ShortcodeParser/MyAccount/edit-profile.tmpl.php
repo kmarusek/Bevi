@@ -1,9 +1,11 @@
 <?php
 
+use ProfilePress\Core\Admin\ProfileCustomFields;
 use ProfilePress\Core\Classes\EditUserProfile;
 use ProfilePress\Core\Classes\ExtensionManager;
 use ProfilePress\Core\Classes\PROFILEPRESS_sql;
 use ProfilePress\Core\Classes\UserAvatar;
+use ProfilePress\Core\Membership\CheckoutFields;
 
 if ( ! defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -154,10 +156,12 @@ $sub_menus = apply_filters('ppress_my_account_settings_sub_menus', ['general' =>
                     <?= '[edit-profile-bio id="edit-profile-bio" class="profilepress-myaccount-form-control"]'; ?>
                 </div>
 
+                <?php $billing_fields = CheckoutFields::standard_billing_fields() ?>
+
                 <?php if (is_array($contact_infos) && ! empty($contact_infos)) : ?>
 
                     <?php foreach ($contact_infos as $field_key => $label) : ?>
-
+                        <?php if (in_array($field_key, array_keys($billing_fields))) continue; ?>
                         <div class="profilepress-myaccount-form-field <?= $field_key ?>">
                             <label for="<?= $field_key ?>"><?= $label ?></label>
                             <?= sprintf('[edit-profile-cpf key="%1$s" id="%1$s" type="%2$s" class="profilepress-myaccount-form-control"]', $field_key, 'text'); ?>
@@ -171,6 +175,8 @@ $sub_menus = apply_filters('ppress_my_account_settings_sub_menus', ['general' =>
                     <?php foreach ($custom_fields as $custom_field) :
 
                         $field_key = $custom_field['field_key'];
+
+                        if (in_array($field_key, array_keys($billing_fields))) continue;
 
                         // skip woocommerce core billing / shipping fields added to wordpress profile admin page.
                         if (in_array($field_key, ppress_woocommerce_billing_shipping_fields())) continue;

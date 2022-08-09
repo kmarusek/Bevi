@@ -19,7 +19,7 @@ class AddNewForm
     public function settings_admin_page()
     {
         add_action('wp_cspa_before_closing_header', [$this, 'back_to_overview']);
-        add_action('wp_cspa_before_post_body_content', array($this, 'sub_header'), 10, 2);
+        add_action('wp_cspa_before_post_body_content', array($this, 'sub_header'));
         add_filter('wp_cspa_main_content_area', [$this, 'form_list']);
 
         $instance = Custom_Settings_Page_Api::instance();

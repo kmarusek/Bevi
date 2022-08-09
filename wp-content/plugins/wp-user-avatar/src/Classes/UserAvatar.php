@@ -172,7 +172,7 @@ class UserAvatar
 
         $avatar_url = get_avatar_url($id_or_email, ['size' => $size, 'ppress-full' => $original]);
 
-        $alt_attr = ! empty($alt) ? " alt=\"{$alt}\"" : '';
+        $alt_attr = apply_filters('ppress_avatar_img_alt', ! empty($alt) ? " alt=\"{$alt}\"" : '', $id_or_email);
 
         return "<img data-del=\"avatar\"" . $alt_attr . " src='{$avatar_url}' class='avatar pp-user-avatar avatar-{$size} photo {$class}' height='{$size}' width='{$size}'$css_id/>";
     }

@@ -2,6 +2,8 @@
 
 namespace ProfilePress\Core\ContentProtection\Frontend;
 
+use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
+
 class RestrictionShortcode
 {
     public function __construct()
@@ -14,19 +16,33 @@ class RestrictionShortcode
         $atts = shortcode_atts(array(
             'roles'  => '',
             'users'  => '',
+            'plans'  => '',
             'action' => 'show' // value can be "show" or "hide"
         ), $atts);
 
         if ($atts['action'] == 'hide') {
-            return $this->rule_matches($atts['roles'], $atts['users']) ? '' : \do_shortcode($content);
+            return $this->rule_matches($atts['roles'], $atts['users'], $atts['plans']) ? '' : \do_shortcode($content);
         } else {
-            return $this->rule_matches($atts['roles'], $atts['users']) ? \do_shortcode($content) : '';
+            return $this->rule_matches($atts['roles'], $atts['users'], $atts['plans']) ? \do_shortcode($content) : '';
         }
     }
 
-    public function rule_matches($roles = [], $user_ids = [])
+    public function rule_matches($roles = '', $user_ids = '', $plans = '')
     {
         if (is_user_logged_in()) {
+
+            $current_user_id = get_current_user_id();
+
+            if ( ! empty($plans)) {
+
+                $plans = array_map('absint', explode(',', $plans));
+
+                $customer = CustomerFactory::fromUserId($current_user_id);
+
+                foreach ($plans as $plan_id) {
+                    if ($customer->has_active_subscription($plan_id)) return true;
+                }
+            }
 
             if ( ! empty($roles)) {
 
@@ -43,7 +59,7 @@ class RestrictionShortcode
 
                 foreach ($user_ids as $user_id) {
 
-                    if (is_numeric($user_id) && get_current_user_id() == absint($user_id)) {
+                    if (is_numeric($user_id) && $current_user_id == absint($user_id)) {
                         return true;
                     } else {
                         $user = get_user_by('login', $user_id);
@@ -51,7 +67,7 @@ class RestrictionShortcode
                             $user = get_user_by('email', $user_id);
                         }
 
-                        if ($user instanceof \WP_User && get_current_user_id() == absint($user->ID)) {
+                        if ($user instanceof \WP_User && $current_user_id == absint($user->ID)) {
                             return true;
                         }
                     }

@@ -1,6 +1,5 @@
 <?php
 
-use ProfilePress\Core\Classes\PROFILEPRESS_sql;
 use ProfilePress\Core\ShortcodeParser\MyAccount\MyAccountTag;
 
 if ( ! defined('ABSPATH')) {

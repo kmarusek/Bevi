@@ -76,6 +76,8 @@ class LoginAuth
         add_filter('wp_redirect', [__CLASS__, 'wp_redirect_intercept'], 999999999, 2);
         remove_all_actions('wp_login_failed');
 
+        remove_all_actions('wp_login_failed');
+
         self::$redirect      = $redirect;
         self::$secure_cookie = $secure_cookie;
         self::$username      = $username;

@@ -6,8 +6,6 @@ use WP_Error;
 
 /**
  * @package ProfilePress custom file upload PHP class
- *
- * @since 1.10
  */
 class FileUploader
 {

@@ -4,6 +4,7 @@ namespace ProfilePress\Core\Classes;
 
 use ProfilePress\Core\Admin\SettingsPages\FormList;
 use ProfilePress\Core\Base;
+use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
 use ProfilePress\Core\Themes\Shortcode\ThemesRepository as ShortcodeThemesRepository;
 use ProfilePress\Core\Themes\DragDrop\ThemesRepository as DragDropThemesRepository;
 use ProfilePress\Core\Widgets\TabbedWidgetDependency;
@@ -127,8 +128,6 @@ class AjaxHandler
         $theme_type  = esc_attr($theme['theme_type']);
 
         $upgrade_url = 'https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=premium_template';
-
-        /** @todo add preview support of templates */
 
         $is_premium_theme_disallowed = ! ExtensionManager::is_premium() && ppress_var($theme, 'flag') == 'premium';
 
@@ -413,7 +412,7 @@ class AjaxHandler
 
                 $ajax_response = [
                     'success' => false,
-                    'code' => $response->get_error_code(),
+                    'code'    => $response->get_error_code(),
                     'message' => $login_error
                 ];
             }

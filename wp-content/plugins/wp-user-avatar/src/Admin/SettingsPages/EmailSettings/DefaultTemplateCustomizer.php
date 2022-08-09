@@ -169,6 +169,7 @@ class DefaultTemplateCustomizer
             'background_color'         => '#f2f4f6',
             'background_text_color'    => '#a8aaaf',
             'content_background_color' => '#ffffff',
+            'content_header_color'       => '#333333',
             'content_text_color'       => '#51545e',
             'header_text'              => self::$site_title,
             'footer_text'              => sprintf(esc_html__('© %s %s. All rights reserved.'), date('Y'), '{{siteTitle}}')
@@ -195,6 +196,11 @@ class DefaultTemplateCustomizer
         $wp_customize->add_setting(self::get_prefixed_id('content_background_color'), [
             'type'    => 'option',
             'default' => self::defaults('content_background_color')
+        ]);
+
+        $wp_customize->add_setting(self::get_prefixed_id('content_header_color'), [
+            'type'    => 'option',
+            'default' => self::defaults('content_header_color')
         ]);
 
         $wp_customize->add_setting(self::get_prefixed_id('content_text_color'), [
@@ -251,6 +257,17 @@ class DefaultTemplateCustomizer
                 'section'  => self::body_section,
                 'settings' => self::get_prefixed_id('content_background_color'),
                 'priority' => 30
+            )
+        ));
+
+        $wp_customize->add_control(new \WP_Customize_Color_Control(
+            $wp_customize,
+            self::get_prefixed_id('content_header_color'),
+            array(
+                'label'    => __('Content Header Color', 'wp-user-avatar'),
+                'section'  => self::body_section,
+                'settings' => self::get_prefixed_id('content_header_color'),
+                'priority' => 40
             )
         ));
 

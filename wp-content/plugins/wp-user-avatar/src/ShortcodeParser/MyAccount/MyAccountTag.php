@@ -2,7 +2,10 @@
 
 namespace ProfilePress\Core\ShortcodeParser\MyAccount;
 
+use ProfilePress\Core\Classes\PROFILEPRESS_sql;
 use ProfilePress\Core\Classes\UserAvatar;
+use ProfilePress\Core\Membership\Models\Subscription\SubscriptionFactory;
+use ProfilePress\Core\Membership\Services\SubscriptionService;
 use ProfilePress\Core\ShortcodeParser\FormProcessor;
 
 class MyAccountTag extends FormProcessor
@@ -22,6 +25,7 @@ class MyAccountTag extends FormProcessor
             add_filter('pre_get_document_title', [$this, 'page_endpoint_title'], 999999999);
             add_filter('wp_title', [$this, 'page_endpoint_title'], 999999999);
 
+            add_action('wp', [$this, 'handle_subscription_actions']);
             add_action('wp', [$this, 'process_myaccount_change_password']);
             add_action('wp', [$this, 'process_edit_profile_form'], 999999999);
         }
@@ -29,10 +33,8 @@ class MyAccountTag extends FormProcessor
 
     public function redirect_non_logged_in_users()
     {
-        global $post;
-
         // check if the page being viewed contains the "profilepress-my-account" shortcode. if true, redirect to login page
-        if (is_singular() && isset($post->post_content) && has_shortcode($post->post_content, 'profilepress-my-account')) {
+        if (ppress_post_content_has_shortcode('profilepress-my-account')) {
             if ( ! is_user_logged_in()) {
                 nocache_headers();
                 wp_safe_redirect(ppress_login_url());
@@ -53,17 +55,41 @@ class MyAccountTag extends FormProcessor
                     'priority' => 10,
                     'icon'     => 'home'
                 ],
+                'list-subscriptions' => [
+                    'title'    => esc_html__('Subscriptions', 'wp-user-avatar'),
+                    /** @todo implement customizing this endpoint */
+                    'endpoint' => esc_html(ppress_settings_by_key('myac_subscriptions_endpoint', 'list-subscriptions', true)),
+                    'priority' => 20,
+                    'icon'     => 'card_membership',
+                    'callback' => [__CLASS__, 'subscriptions_callback']
+                ],
+                'list-orders'        => [
+                    'title'    => esc_html__('Orders', 'wp-user-avatar'),
+                    /** @todo implement customizing this endpoint */
+                    'endpoint' => esc_html(ppress_settings_by_key('myac_orders_endpoint', 'list-orders', true)),
+                    'priority' => 30,
+                    'icon'     => 'shopping_cart',
+                    'callback' => [__CLASS__, 'orders_callback']
+                ],
+                'billing-details'    => [
+                    'title'    => esc_html__('Billing Address', 'wp-user-avatar'),
+                    /** @todo implement customizing this endpoint */
+                    'endpoint' => esc_html(ppress_settings_by_key('myac_billing_details_endpoint', 'my-billing-address', true)),
+                    'priority' => 40,
+                    'icon'     => 'map',
+                    'callback' => [__CLASS__, 'billing_details_callback']
+                ],
                 'edit-profile'       => [
                     'title'    => esc_html__('Account Details', 'wp-user-avatar'),
                     'endpoint' => esc_html(ppress_settings_by_key('myac_edit_account_endpoint', 'edit-profile', true)),
-                    'priority' => 20,
+                    'priority' => 45,
                     'icon'     => 'account_box',
                     'callback' => [__CLASS__, 'edit_profile_callback']
                 ],
                 'change-password'    => [
                     'title'    => esc_html__('Change Password', 'wp-user-avatar'),
                     'endpoint' => esc_html(ppress_settings_by_key('myac_change_password_endpoint', 'change-password', true)),
-                    'priority' => 30,
+                    'priority' => 50,
                     'icon'     => 'vpn_key',
                     'callback' => [__CLASS__, 'change_password_callback']
                 ],
@@ -79,7 +105,7 @@ class MyAccountTag extends FormProcessor
                 $tabs['email-notifications'] = [
                     'title'    => esc_html__('Email Notifications', 'wp-user-avatar'),
                     'endpoint' => esc_html(ppress_settings_by_key('myac_email_notifications_endpoint', 'email-notifications', true)),
-                    'priority' => 35,
+                    'priority' => 55,
                     'icon'     => 'email',
                     'callback' => [__CLASS__, 'email_notification_callback']
                 ];
@@ -130,17 +156,17 @@ class MyAccountTag extends FormProcessor
 
     public function email_notification_callback()
     {
-        require apply_filters('ppress_my_account_email_notification_template', dirname(__FILE__) . '/email-notifications.tmpl.php');
+        require apply_filters('ppress_my_account_email_notification_template', wp_normalize_path(dirname(__FILE__) . '/email-notifications.tmpl.php'));
     }
 
     public function account_settings_callback()
     {
-        require apply_filters('ppress_my_account_account_settings_template', dirname(__FILE__) . '/account-settings.tmpl.php');
+        require apply_filters('ppress_my_account_account_settings_template', wp_normalize_path(dirname(__FILE__) . '/account-settings.tmpl.php'));
     }
 
     public function change_password_callback()
     {
-        require apply_filters('ppress_my_account_change_password_template', dirname(__FILE__) . '/change-password.tmpl.php');
+        require apply_filters('ppress_my_account_change_password_template', wp_normalize_path(dirname(__FILE__) . '/change-password.tmpl.php'));
     }
 
     public function display_name_select_dropdown()
@@ -185,7 +211,81 @@ class MyAccountTag extends FormProcessor
 
     public function edit_profile_callback()
     {
-        require apply_filters('ppress_my_account_edit_profile_template', dirname(__FILE__) . '/edit-profile.tmpl.php');
+        require apply_filters('ppress_my_account_edit_profile_template', wp_normalize_path(dirname(__FILE__) . '/edit-profile.tmpl.php'));
+    }
+
+    public function handle_subscription_actions()
+    {
+        if (isset($_GET['ppress_myac_sub_action'], $_GET['sub_id'])) {
+
+            $action = sanitize_text_field($_GET['ppress_myac_sub_action']);
+            $sub_id = (int)$_GET['sub_id'];
+            $sub    = SubscriptionFactory::fromId((int)$_GET['sub_id']);
+
+            check_admin_referer($sub_id . $action);
+
+            if ($action == 'cancel') {
+                $sub->cancel(true);
+            }
+
+            if ($action == 'resubscribe') {
+                wp_safe_redirect(ppress_plan_checkout_url($sub->plan_id));
+                exit;
+            }
+
+            do_action('ppress_handle_subscription_actions', $action, $sub);
+
+            wp_safe_redirect(
+                add_query_arg(
+                    ['ppress-myac-sub-message' => $action],
+                    SubscriptionService::init()->frontend_view_sub_url($sub_id)
+                )
+            );
+            exit;
+        }
+    }
+
+    public function subscriptions_callback()
+    {
+        if ( ! empty($_GET['sub_id'])) {
+            add_action('ppress_myaccount_subscription_action_status', function ($sub, $action) {
+                switch ($action) {
+                    case 'cancel':
+                        self::alert_message(esc_html__('Subscription successfully cancelled.', 'wp-user-avatar'));
+                        break;
+                }
+            }, 10, 2);
+
+            require apply_filters('ppress_my_account_view_subscription_template', wp_normalize_path(dirname(__FILE__) . '/view-subscription.tmpl.php'));
+
+            return;
+        }
+
+        require apply_filters('ppress_my_account_orders_template', wp_normalize_path(dirname(__FILE__) . '/subscriptions.tmpl.php'));
+    }
+
+    public function orders_callback()
+    {
+        if ( ! empty($_GET['order_key'])) {
+            require apply_filters('ppress_my_account_view_order_template', wp_normalize_path(dirname(__FILE__) . '/view-order.tmpl.php'));
+
+            return;
+        }
+
+        require apply_filters('ppress_my_account_orders_template', wp_normalize_path(dirname(__FILE__) . '/orders.tmpl.php'));
+    }
+
+    public function billing_details_callback()
+    {
+        require apply_filters('ppress_my_account_billing_details_template', wp_normalize_path(dirname(__FILE__) . '/billing-details.tmpl.php'));
+    }
+
+    public static function alert_message($message, $type = 'success')
+    {
+        $type = $type == 'error' ? 'danger' : $type;
+        printf('<div class="profilepress-myaccount-alert pp-alert-%s" role="alert">', $type);
+        echo $message;
+        echo '</div>';
     }
 
     public function page_endpoint_title($title)
@@ -466,7 +566,7 @@ class MyAccountTag extends FormProcessor
                     <div class="profilepress-myaccount-nav">
                         <?php foreach ($tabs as $key => $tab) :
                             ?>
-                            <a class="ppmyac-dashboard-item<?= self::is_endpoint($key) ? ' isactive' : ''; ?>" href="<?= $this->get_endpoint_url($key); ?>">
+                            <a class="ppmyac-dashboard-item <?= $key ?><?= self::is_endpoint($key) ? ' isactive' : ''; ?>" href="<?= $this->get_endpoint_url($key); ?>">
                                 <i class="ppmyac-icons">
                                     <?= isset($tab['icon']) ? $tab['icon'] : 'settings'; ?>
                                 </i>
@@ -498,7 +598,7 @@ class MyAccountTag extends FormProcessor
                     }
 
                     if ( ! $flag) {
-                        require apply_filters('ppress_my_account_dashboard_template', dirname(__FILE__) . '/dashboard.tmpl.php');
+                        require apply_filters('ppress_my_account_dashboard_template', wp_normalize_path(dirname(__FILE__) . '/dashboard.tmpl.php'));
                     }
                     ?>
                 </div>

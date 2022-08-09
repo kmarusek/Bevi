@@ -13,10 +13,16 @@ function ppress_mo_uninstall_function()
 {
     if (ppress_get_setting('remove_plugin_data') == 'yes') {
 
+        wp_clear_scheduled_hook('ppress_daily_recurring_job');
+
         delete_option('ppress_cpf_select_multi_selectable');
         delete_option(PPRESS_SETTINGS_DB_OPTION_NAME);
         delete_option(PPRESS_CONTACT_INFO_OPTION_NAME);
+        delete_option(PPRESS_FORMS_DB_OPTION_NAME);
+        delete_option(PPRESS_PAYMENT_METHODS_OPTION_NAME);
+        delete_option(PPRESS_TAXES_OPTION_NAME);
         delete_option('ppress_plugin_activated');
+        delete_option('ppress_new_v4_install');
         delete_option('ppress_license_key');
         delete_option('ppress_license_status');
         delete_option('ppress_db_ver');
@@ -27,6 +33,9 @@ function ppress_mo_uninstall_function()
         delete_site_option('pand-' . md5('ppress-review-plugin-notice'));
         delete_site_option('pand-' . md5('pp-registration-disabled-notice'));
         delete_site_option('pand-' . md5('wp_user_avatar_now_ppress_notice'));
+
+        // Admin dashboard access control
+        delete_option('ppress_abdc_options');
 
         // wp user avatar
         delete_option('avatar_default_wp_user_avatar');
@@ -54,6 +63,13 @@ function ppress_mo_uninstall_function()
         $drop_tables[] = Base::form_db_table();
         $drop_tables[] = Base::form_meta_db_table();
         $drop_tables[] = Base::meta_data_db_table();
+        $drop_tables[] = Base::subscription_plans_db_table();
+        $drop_tables[] = Base::customers_db_table();
+        $drop_tables[] = Base::orders_db_table();
+        $drop_tables[] = Base::order_meta_db_table();
+        $drop_tables[] = Base::subscriptions_db_table();
+        $drop_tables[] = Base::coupons_db_table();
+        $drop_tables[] = $wpdb->prefix . 'ppress_sessions';
 
         $drop_tables = apply_filters('ppress_drop_database_tables', $drop_tables);
 

@@ -16,12 +16,12 @@ if ( ! class_exists('\PPressBFnote')) {
 
         public function dismiss_admin_notice()
         {
-            if ( ! isset($_GET['ppress-adaction']) || $_GET['ppress-adaction'] != 'ppressbfnote_dismiss_adnotice') {
+            if ( ! isset($_GET['ppress-adaction']) || $_GET['ppress-adaction'] != 'ppressbfnote2022_dismiss_adnotice') {
                 return;
             }
 
             $url = admin_url();
-            update_option('ppressbfnote_dismiss_adnotice', 'true');
+            update_option('ppressbfnote2022_dismiss_adnotice', 'true');
 
             wp_redirect($url);
             exit;
@@ -37,27 +37,28 @@ if ( ! class_exists('\PPressBFnote')) {
 
             if ( ! current_user_can('administrator')) return;
 
-            $start = strtotime('november 24th, 2021');
-            $end   = strtotime('december 1st, 2021');
+            $start = strtotime('november 24th, 2022');
+            $end   = strtotime('december 1st, 2022');
             $now   = time();
 
             if ($now < $start || $now > $end) return;
 
-            if (get_option('ppressbfnote_dismiss_adnotice', 'false') == 'true') {
+            if (get_option('ppressbfnote2022_dismiss_adnotice', 'false') == 'true') {
                 return;
             }
 
             $dismiss_url = esc_url_raw(
                 add_query_arg(
                     array(
-                        'ppress-adaction' => 'ppressbfnote_dismiss_adnotice'
+                        'ppress-adaction' => 'ppressbfnote2022_dismiss_adnotice'
                     ),
                     admin_url()
                 )
             );
+
             $this->notice_css();
 
-            $bf_url = 'https://profilepress.com/pricing/?utm_source=wp-admin&utm_medium=admin-notice&utm_id=bf2021'
+            $bf_url = 'https://profilepress.com/pricing/?utm_source=wp-admin&utm_medium=admin-notice&utm_id=bf2022'
 
             ?>
             <div class="ppressbfnote-admin-notice notice notice-success">
@@ -65,7 +66,7 @@ if ( ! class_exists('\PPressBFnote')) {
                     <p>
                         <?php
                         printf(
-                            __('%1$sHuge Black Friday Sale%2$s: Get 25%% off your ProfilePress plugin upgrade today with the coupon %3$sBFCM2021%4$s', 'peters-login-redirect'),
+                            __('%1$sHuge Black Friday Sale%2$s: Get 25%% off your ProfilePress plugin upgrade today with the coupon %3$sBFCM2022%4$s'),
                             '<span class="ppressbfnote-stylize"><strong>', '</strong></span>', '<code>', '</code>');
                         ?>
                     </p>
@@ -74,7 +75,7 @@ if ( ! class_exists('\PPressBFnote')) {
                 </div>
                 <div class="ppressbfnote-notice-other-half">
                     <a target="_blank" class="button button-primary button-hero" href="<?php echo $bf_url; ?>">
-                        <?php _e('Save 25% Now!', 'peters-login-redirect'); ?>
+                        <?php _e('Save 25% Now!'); ?>
                     </a>
                     <div class="ppressbfnote-notice-learn-more">
                         <a target="_blank" href="<?php echo $bf_url; ?>">Learn more</a>
@@ -82,7 +83,7 @@ if ( ! class_exists('\PPressBFnote')) {
                 </div>
                 <a href="<?php echo $dismiss_url; ?>">
                     <button type="button" class="notice-dismiss">
-                        <span class="screen-reader-text"><?php _e('Dismiss this notice', 'peters-login-redirect'); ?>.</span>
+                        <span class="screen-reader-text"><?php _e('Dismiss this notice'); ?>.</span>
                     </button>
                 </a>
             </div>

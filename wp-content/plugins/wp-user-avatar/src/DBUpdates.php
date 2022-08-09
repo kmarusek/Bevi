@@ -43,7 +43,7 @@ class DBUpdates
             $current_db_ver++;
 
             // each db version will require a separate update function
-            $update_method = "ppress_update_routine_{$current_db_ver}";
+            $update_method = "update_routine_{$current_db_ver}";
 
             if (method_exists($this, $update_method)) {
                 call_user_func(array($this, $update_method));

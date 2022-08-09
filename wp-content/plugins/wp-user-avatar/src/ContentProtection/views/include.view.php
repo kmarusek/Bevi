@@ -56,13 +56,9 @@ add_action('add_meta_boxes', function () {
     );
 });
 
-do_action('add_meta_boxes', 'ppcontentprotection', '');
+do_action('add_meta_boxes', 'ppcontentprotection', new WP_Post(new stdClass()));
 ?>
 <style type="text/css">
-    .handle-actions {
-        display: none
-    }
-
     .pp-content-protection-access-box th {
         width: 33%;
     }

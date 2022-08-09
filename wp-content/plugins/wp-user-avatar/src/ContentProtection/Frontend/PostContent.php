@@ -37,13 +37,15 @@ class PostContent
 
                 $access_wp_users = ppress_var($access_condition, 'access_wp_users', []);
 
+                $access_membership_plans = ppress_var($access_condition, 'access_membership_plans', []);
+
                 $noaccess_message_type = ppress_var($access_condition, 'noaccess_action_message_type', 'global');
 
                 $custom_message = ppress_var($access_condition, 'noaccess_action_message_custom', 'global');
 
                 if (Checker::content_match($meta['content'])) {
 
-                    if (Checker::is_blocked($who_can_access, $access_roles, $access_wp_users)) {
+                    if (Checker::is_blocked($who_can_access, $access_roles, $access_wp_users, $access_membership_plans)) {
                         $content = $this->get_restricted_message($noaccess_message_type, $custom_message);
                     }
 

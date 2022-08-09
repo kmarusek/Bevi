@@ -1,12 +1,13 @@
 <?php
 
 use ProfilePress\Core\Admin\SettingsPages\MailOptin;
+use ProfilePress\Core\Admin\ProfileCustomFields;
 use ProfilePress\Core\Base;
 use ProfilePress\Core\Classes\ExtensionManager as EM;
 use ProfilePress\Core\Classes\FormRepository as FR;
 use ProfilePress\Core\Classes\PROFILEPRESS_sql as PROFILEPRESS_sql;
 use ProfilePress\Core\Classes\SendEmail;
-use ProfilePress\Core\ShortcodeParser\Builder\FieldsShortcodeCallback;
+use ProfilePress\Core\Membership\CheckoutFields;
 
 /** Plugin DB settings data */
 function ppress_db_data()
@@ -82,17 +83,10 @@ function ppress_woocommerce_billing_shipping_fields()
  */
 function ppress_settings_by_key($key = '', $default = false, $is_empty = false)
 {
-    $cache_key = 'ppress_settings_db_data';
-
-    $data = wp_cache_get($cache_key);
-
-    if (false === $data) {
-        $data = ppress_db_data();
-        wp_cache_set($key, $data);
-    }
+    $data = ppress_db_data();
 
     if ($is_empty === true) {
-        return ! empty($data[$key]) ? $data[$key] : $default;
+        return isset($data[$key]) && ( ! empty($data[$key]) || ppress_is_boolean($data[$key])) ? $data[$key] : $default;
     }
 
     return isset($data[$key]) ? $data[$key] : $default;
@@ -496,10 +490,15 @@ function ppress_is_admin_page()
 {
     $pp_builder_pages = [
         PPRESS_SETTINGS_SLUG,
+        PPRESS_MEMBERSHIP_ORDERS_SETTINGS_SLUG,
+        PPRESS_MEMBERSHIP_SUBSCRIPTIONS_SETTINGS_SLUG,
+        PPRESS_MEMBERSHIP_PLANS_SETTINGS_SLUG,
+        PPRESS_MEMBERSHIP_CUSTOMERS_SETTINGS_SLUG,
         PPRESS_FORMS_SETTINGS_SLUG,
         PPRESS_MEMBER_DIRECTORIES_SLUG,
         PPRESS_CONTENT_PROTECTION_SETTINGS_SLUG,
         PPRESS_EXTENSIONS_SETTINGS_SLUG,
+        PPRESS_DASHBOARD_SETTINGS_SLUG,
         MailOptin::SLUG
     ];
 
@@ -913,11 +912,35 @@ function ppress_nonce_action_string()
 /**
  * Return array of countries.
  *
+ * @param string $country_code
+ *
+ * @return mixed|string
+ */
+function ppress_array_of_world_countries($country_code = '')
+{
+    $list = apply_filters('ppress_countries_list', include(PROFILEPRESS_SRC . 'Functions/data/countries.php'));
+
+    if ( ! empty($country_code)) {
+        return ppress_var($list, $country_code);
+    }
+
+    return $list;
+}
+
+/**
+ * @param $country
+ *
  * @return mixed
  */
-function ppress_array_of_world_countries()
+function ppress_array_of_world_states($country = '')
 {
-    return apply_filters('ppress_countries_custom_field_data', include(PROFILEPRESS_SRC . 'Functions/data/countries.php'));
+    $states = apply_filters('ppress_countries_states_list', include(PROFILEPRESS_SRC . 'Functions/data/states.php'));
+
+    if ( ! empty($country)) {
+        return ppress_var($states, $country, []);
+    }
+
+    return $states;
 }
 
 function ppress_create_nonce()
@@ -952,6 +975,25 @@ function ppress_md5($string)
     return substr(base_convert(md5($string), 16, 32), 0, 12);
 }
 
+/**
+ * Generate unique ID
+ *
+ * @param int $length
+ *
+ * @return string
+ */
+function ppress_generate_unique_id($length = 10)
+{
+    $characters       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString     = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[mt_rand(0, $charactersLength - 1)];
+    }
+
+    return ppress_md5(time() . $randomString);
+}
+
 function ppress_minify_css($buffer)
 {
     $buffer = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $buffer);
@@ -973,22 +1015,42 @@ function ppress_minify_js($code)
     return $code;
 }
 
+function ppress_minify_html($html)
+{
+    $lines = explode(PHP_EOL, $html);
+    array_walk($lines, function (&$line) {
+        $line = trim($line);
+    });
+
+    $lines = array_filter($lines, function ($line) {
+        return $line !== '';
+    });
+
+    return implode(PHP_EOL, $lines);
+}
+
 function ppress_get_ip_address()
 {
-    $ip = '127.0.0.1';
+    $ip = false;
 
     if ( ! empty($_SERVER['HTTP_CLIENT_IP'])) {
+        //check ip from share internet
         $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif ( ! empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        //to check ip is pass from proxy
+        // can include more than 1 ip, first is the public one
+        $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+        $ip = $ip[0];
     } elseif ( ! empty($_SERVER['REMOTE_ADDR'])) {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
 
     // Fix potential CSV returned from $_SERVER variables
-    $ip_array = array_map('trim', explode(',', $ip));
+    $ip_array = explode(',', $ip);
+    $user_ip  = ! empty($ip_array[0]) ? $ip_array[0] : '127.0.0.1';
+    $user_ip  = filter_var(wp_unslash(trim($user_ip)), FILTER_VALIDATE_IP);
 
-    return $ip_array[0] != '::1' ? $ip_array[0] : '';
+    return apply_filters('ppress_get_ip', $user_ip);
 }
 
 /**
@@ -1098,7 +1160,6 @@ function ppress_normalize_attributes($atts)
     return $atts;
 }
 
-/** @todo link to doc on reserve words/text here */
 function ppress_dnd_field_key_description()
 {
     return esc_html__('It must be unique for each field, not a reserve text, in lowercase letters only with an underscore ( _ ) separating words e.g job_title', 'wp-user-avatar');
@@ -1166,22 +1227,11 @@ function ppress_is_http_code_success($code)
  *
  * @param $time
  *
- * @param null|int $now
- *
  * @return false|int
  */
-function ppress_strtotime_utc($time, $now = null)
+function ppress_strtotime_utc($time)
 {
-    if (is_null($now)) $now = time();
-
-    $old = date_default_timezone_get();
-
-    date_default_timezone_set('UTC');
-    $val = strtotime($time, $now);
-
-    date_default_timezone_set($old);
-
-    return $val;
+    return strtotime($time . ' UTC');
 }
 
 function ppress_array_flatten($array)
@@ -1239,6 +1289,10 @@ function ppress_custom_fields_key_value_pair($remove_default = false)
 
     if ($remove_default === false) {
         $defined_custom_fields[''] = esc_html__('Select...', 'wp-user-avatar');
+    }
+
+    foreach (CheckoutFields::standard_billing_fields() as $key => $field) {
+        $defined_custom_fields[$key] = $field['label'];
     }
 
     if (EM::is_premium()) {
@@ -1340,6 +1394,11 @@ function ppress_is_my_own_profile()
     return ppress_var_obj($ppress_frontend_profile_user_obj, 'ID') == get_current_user_id();
 }
 
+function ppress_is_my_account_page()
+{
+    return ppress_post_content_has_shortcode('profilepress-my-account');
+}
+
 function ppress_social_network_fields()
 {
     return apply_filters('ppress_core_contact_info_fields', [
@@ -1437,23 +1496,19 @@ function ppress_content_http_redirect($myURL)
     <?php
 }
 
-function ppress_shortcode_exist_in_post($shortcode)
+function ppress_is_json($str)
 {
-    global $post;
+    $json = json_decode($str);
 
-    if (isset($post->post_content) && has_shortcode($post->post_content, $shortcode)) {
-        return true;
-    }
-
-    return false;
+    return $json && $str != $json;
 }
 
-function ppress_clean($var)
+function ppress_clean($var, $callback = 'sanitize_textarea_field')
 {
     if (is_array($var)) {
         return array_map('ppress_clean', $var);
     } else {
-        return is_scalar($var) ? sanitize_textarea_field($var) : $var;
+        return is_scalar($var) ? call_user_func($callback, $var) : $var;
     }
 }
 
@@ -1476,4 +1531,59 @@ function ppress_is_base64($s)
     if (base64_encode($decoded) != $s) return false;
 
     return true;
+}
+
+function ppress_plan_checkout_url($plan_id)
+{
+    $page_id = ppress_settings_by_key('checkout_page_id');
+    if ( ! empty($page_id)) {
+        return add_query_arg('plan', absint($plan_id), get_permalink($page_id));
+    }
+
+    return false;
+}
+
+/**
+ * Generate unique ID for each optin form.
+ *
+ * @param int $length
+ *
+ * @return string
+ */
+function ppress_generateUniqueId($length = 10)
+{
+    $characters       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString     = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[mt_rand(0, $charactersLength - 1)];
+    }
+
+    return ppress_md5(time() . $randomString);
+}
+
+function ppress_render_view($template, $vars = [], $parentDir = '')
+{
+    if (empty($parentDir)) $parentDir = dirname(__FILE__, 2) . '/templates/';
+
+    $path = $parentDir . $template . '.php';
+
+    extract($vars);
+    require apply_filters('ppress_render_view', $path, $vars, $template, $parentDir);
+}
+
+function ppress_post_content_has_shortcode($tag = '', $post = null)
+{
+    if (is_null($post)) {
+        global $post;
+    }
+
+    return is_singular() && is_a($post, 'WP_Post') && has_shortcode($post->post_content, $tag);
+}
+
+function ppress_maybe_define_constant($name, $value)
+{
+    if ( ! defined($name)) {
+        define($name, $value);
+    }
 }

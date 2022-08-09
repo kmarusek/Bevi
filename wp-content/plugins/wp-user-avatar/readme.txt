@@ -1,20 +1,22 @@
-﻿=== WordPress Membership, User Registration, Login Form, User Profile & Restrict Content Plugin – ProfilePress ===
+﻿=== Paid Membership, User Registration, User Profile & Restrict Content Plugin – ProfilePress ===
 Contributors: properfraction, collizo4sky
 Donate link: https://profilepress.com/pricing/
-Tags: membership, user registration, user profile, registration form, login form, 2fa, two-factor authenticator, login, registration, password reset, members, users, profile, front-end profile, edit profile, avatar, profile picture
-Requires at least: 4.7
-Requires PHP: 7.1.0
+Tags: membership, ecommerce, user registration, user profile, stripe, login form, 2fa, two-factor authenticator, login, registration, password reset, members, users, profile, front-end profile, edit profile, avatar, profile picture
+Requires at least: 5.3
+Requires PHP: 7.1.8
 Tested up to: 6.0
-Stable tag: 3.2.16
+Stable tag: 4.0.3
 License: GPLv2 or later
 
-Modern membership plugin: restrict content, user registration, front-end login form, customizable user profile & member directory.
+WordPress paid membership plugin: accept payments, sell subscriptions, restrict content, user registration, frontend login form, user profile & member directory.
 
 == Description ==
 
 = Modern Membership, User Registration, Profile & Login Form Plugin =
 
-[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) (formerly WP User Avatar) is a lightweight membership plugin that lets you create beautiful user profiles, member directories and frontend user registration form, login form, password reset and editing profile information. It also allows you to restrict content and control user access.
+[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful eCommerce and paid membership plugin for accepting one-time and recurring payments and selling subscriptions via Stripe as well as restricting content and control user access.
+
+ProfilePress lets you create beautiful user profiles, member directories, frontend login, and user registration forms, password reset and edit profile forms.
 
 Our Drag-and-Drop form builder makes building forms easy. It is the perfect solution for creating online communities and membership sites where users can register or signup to become members.
 
@@ -22,56 +24,77 @@ Our Drag-and-Drop form builder makes building forms easy. It is the perfect solu
 
 ### Excellent Features of ProfilePress
 
+ProfilePress is suited for selling non-physical goods, including online courses, paid memberships, subscriptions, selling services, selling event tickets, accepting donations, selling digital downloads, etc.
+
+= Multiple Payment Processors =
+
+Easily connect to Stripe to collect payments. We are working on adding additional gateways (PayPal, Mollie, Square, PayStack, RazorPay, Mercado Pago) in the future.
+
+= Powerful Payment Options =
+
+One-time payments, subscriptions, subscriptions with free trials, payment plans (installments), donations. We cover ways you may want to get paid.
+
+= Coupon Discounts =
+
+Incentivize your buyers with a coupon discount to increase sales. You can easily create unlimited coupons and automatically add coupons with a URL parameter.
+
 = Custom Frontend Forms =
 
-Create amazing login, user registration, password reset and edit profile forms with our drag-and-drop and advanced builders. Your members will never have to see your WordPress admin panel. Everything is handled on the frontend.
+Create excellent checkout, login, user registration, password reset, and edit profile forms with our drag-and-drop builder. Your members will never have to see your WordPress admin panel. Everything is handled in the frontend.
 
+* **Conversion Optimized Checkout** – Let users make payments to you and subscribe to your membership plans.
 * **User Registration Forms** – Let users signup via a custom registration form.
 * **Login & Password Reset Forms** – Allow users to log in and reset their passwords.
 * **User Dashboard** – My Account page and edit profile forms for users to manage their profile details and account settings.
 * **Automatic Registration & Login Redirect** – Auto login users after they register and redirect them after they sign in, log out and reset their passwords.
-* Add login, logout, register and profile links to your website navigation menu that will change based on whether the user is logged in or not.
+* Add login, logout, register, and profile links to your website navigation menu that will change based on whether the user is logged in.
 
 = User Profiles & Member Directories =
 
-Add beautiful user profiles to your site that display the profile picture and information of your users. And create searchable and filterable member directories allowing users to find each other.
+Add beautiful user profiles to your site that display your users' profile pictures and information. And create searchable and filterable member directories allowing users to find each other.
 
-We also provide shortcodes to display users avatars and allow users to upload their profile pictures from the front-end of your site.
+We also provide shortcodes to display users' avatars and allow users to upload their profile pictures from the front-end of your site.
 
 = Advanced and Drag-and-Drop Form Builder =
 
-We took the pain out of creating user profiles, member directories, forms with our intuitive drag-and-drop builder.
+We took out the pain of creating user profiles, member directories, and forms with our intuitive drag-and-drop builder.
 
-We also provide an advanced form builder that gives you the flexibility to build any type of form. With knowledge of HTML, you code the form in combination with our expressive shortcodes, make it pretty with CSS and we handle the rest.
+We also provide an advanced form builder that gives you the flexibility to build any form. With knowledge of HTML, you code the form with our expressive shortcodes, make it pretty with CSS, and we handle the rest.
 
 = Customisable Pre-Built Templates =
 
-Never start from scratch again. ProfilePress comes with several beautiful, customizable pre-built templates for user profile, member directory and forms to help you save even more time.
+Never start from scratch again. ProfilePress comes with several beautiful, customizable pre-built templates for user profiles, member directory, and forms to help you save even more time.
 
 = Access & Content Restriction =
 
-ProfilePress gives you fine-grained control over what content your users can see based on your [protection rules](https://profilepress.com/article/adding-content-protection-rules/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) and [shortcodes](https://profilepress.com/article/wordpress-content-restriction-shortcodes/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion). You can restrict content including pages, child pages, posts, custom post types, categories, tags and custom taxonomies based on their user roles, usernames, email address, and logged-in status.
+ProfilePress gives you fine-grained control over what content your users can see based on your [protection rules](https://profilepress.com/article/adding-content-protection-rules/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) and [shortcodes](https://profilepress.com/article/wordpress-content-restriction-shortcodes/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion). You can restrict content including pages, child pages, posts, custom post types, categories, tags and custom taxonomies based on their membership plans, user roles, usernames, and logged-in status.
 
-ProfilePress also lets you:
+= Detailed eCommerce Reports =
 
+We provide a complete reports section where you can Keep track of your earnings, refunds, sales, and more. You can view reports for any period or drill down to specific membership plans.
+
+= Other Payment & Membership Features =
+
+* Complete customer management to view and manage detailed records of all customers and their order history.
+* Collect EU Vat or Tax from your users depending on their location, with complete control over tax rates and who to charge.
 * Disable the admin bar and restrict access to the WordPress dashboard based on user roles.
-* Redirect the WordPress default login page (wp-login.php) to your custom login, registration page and password reset pages.
+* Redirect the WordPress default login page (wp-login.php) to your custom login, registration page, and password reset pages.
 
 = Email Customizer =
 
-Customize the email templates for each email that can be sent to users and administrators. You also have the flexibility of changing the sender name and email address as well as activate and deactivate the email type that can be sent.
+Customize the email templates for each email that can be sent to users and administrators. You also have the flexibility of changing the sender name and email address and activating and deactivating the email type that can be sent.
 
-### Powerful Premium Addons
+### Powerful Premium Features
 
-Extend the capabilities of ProfilePress with our powerful addons.
+Extend the capabilities of ProfilePress with our powerful addons and remove the additional 2% Stripe processing fee.
 
 * [Custom Fields](https://profilepress.com/addons/custom-fields/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Collect additional information from users besides the standard profile data.
 * [Email Confirmation](https://profilepress.com/addons/email-confirmation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Ensure registered users confirm their email addresses before they can log in.
 * [User Moderation](https://profilepress.com/addons/user-moderation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Decide whether to approve newly registered users or not. You can also block and unblock users at any time.
-* [Social Login](https://profilepress.com/addons/social-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users register & login to your site via Facebook, Twitter, Google, LinkedIn, GitHub and VK.
+* [Social Login](https://profilepress.com/addons/social-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users register & login to your site via Facebook, Twitter, Google, LinkedIn, GitHub, and VK.
 * [Two-Factor Authentication (2FA)](https://profilepress.com/addons/2fa/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Adds an additional layer of security to users accounts by requiring more than just a password to log in.
 * [Passwordless Login](https://profilepress.com/addons/passwordless-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users log in to your site via a one-time URL sent to their email addresses.
-* [WooCommerce](https://profilepress.com/addons/woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Manage WooCommerce billing and shipping fields, replace WooCommerce login and edit account forms in checkout and “My Account” pages with that of ProfilePress.
+* [WooCommerce](https://profilepress.com/addons/woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Manage WooCommerce billing and shipping fields, replace WooCommerce login and edit account forms in checkout and "My Account" pages with that of ProfilePress.
 * [Google reCAPTCHA](https://profilepress.com/addons/recaptcha/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Protect your forms against spam and bot attacks.
 * [Site Creation](https://profilepress.com/addons/site-creation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Allow users to create new sites on a multisite network via a registration form powered by ProfilePress.
 * [Mailchimp](https://profilepress.com/addons/mailchimp/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Subscribe members to your Mailchimp audiences when they register and automatically sync profile changes with Mailchimp.
@@ -79,21 +102,22 @@ Extend the capabilities of ProfilePress with our powerful addons.
 * [BuddyPress Profile Sync](https://profilepress.com/addons/buddypress-profile-sync/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  This addon provides 2-way synchronization between WordPress profile fields and BuddyPress extended profile.
 * [Join BuddyPress Groups](https://profilepress.com/addons/join-buddypress-groups/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Let users select the BuddyPress groups to join during registration.
 * [Akismet](https://profilepress.com/addons/akismet/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Block spam and bot user registrations with Akismet and keep your membership site safe and secured.
-* [Polylang](https://profilepress.com/addons/polylang/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Build multilingual login, registration, password reset and edit profile forms.
+* [Polylang](https://profilepress.com/addons/polylang/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Build multilingual login, registration, password reset, and edit profile forms.
 
 = What's Next =
 
 If you like this plugin, then consider checking out our other products:
 
-* <a href="https://mailoptin.io/" title="MailOptin">MailOptin</a> - Create popups and optin forms for capturing email newsletter subscribers. Integrates with Mailchimp, ConvertKit, Infusionsoft, ActiveCampaign, Campaign Monitor, Constant Contact & more.
+* <a href="https://mailoptin.io/">MailOptin</a> - Create popups and optin forms for capturing email newsletter subscribers. Integrates with Mailchimp, ConvertKit, Infusionsoft, ActiveCampaign, Campaign Monitor, Constant Contact & more.
+* <a href="https://loginwp.com/">LoginWP</a> - Redirect users to different URLs after they log in, log out and register based on different conditions including user role, capability and more.
 
 == Installation ==
 
 Installing ProfilePress is just like any other WordPress plugin.
 
-Navigate to your WordPress “Plugins” page, inside of your WordPress dashboard, and follow these instructions:
+Navigate to your WordPress "Plugins" page, inside of your WordPress dashboard, and follow these instructions:
 
-1. In the search field enter **ProfilePress**. Click "Search Plugins", or hit Enter.
+1. In the search field, enter **ProfilePress**. Click "Search Plugins", or hit Enter.
 1. Select **ProfilePress** and click either "Details" or "Install Now".
 1. Once installed, click "Activate".
 
@@ -101,69 +125,40 @@ Navigate to your WordPress “Plugins” page, inside of your WordPress dashboar
 
 = Do I need to have coding skills to use ProfilePress? =
 
-No. You can create and manage your forms, user profiles and member directories without any coding knowledge (Intuitive form & email template builder).
+No. You can create and manage your forms, user profiles, and member directories without any coding knowledge (Intuitive form & email template builder).
 
 == Screenshots ==
 
-1. Frontend User Profile
-2. Member Directory
-3. User Registration Form
-4. Custom Login Form
-5. Drag and Drop Form builder
-6. Email Customizer and Settings
-7. My Account Page
-8. Content Protection
-9. WP User Avatar and Cover Image Settings
-10. Admin Bar and Dashboard Access
+1. Detailed and actionable reports
+2. Order History
+3. Admin subscription detail
+4. Checkout Page
+5. My Account - Subscriptions
+6. Frontend User Profile
+7. Member Directory
+8. User Registration Form
+9. Custom Login Form
+10. Drag and Drop Form builder
+11. Content Protection
 
 == Changelog ==
 
-= 3.2.16 =
-* Added unique classes to my account page - account details section.
-* Fixed bug with member directory search not working in some cases.
+= 4.0.3 =
+* Fixed critical bug causing checkout not to work.
+* Fixed bug where plan with empty description caused checkout not to work.
+* Enhancement: Added endpoint as class to My Account tabs.
+
+= 4.0.2 =
+* Enhancement: Store admin bar menu now only display for active store.
+* Fixed bug where Stripe scripts were loaded when not enabled.
+* Fixed bug where pages where auto-created.
+
+= 4.0.1 =
+* Fixed bug with member directory role restriction not working.
+* Fixed: Uncaught Error: Call to a member function exists().
+
+= 4.0.0 =
+* Added [paid membership feature](https://profilepress.com/announcing-paid-membership/?ref=changelog).
 * Fixed bug where upload field with data is still required.
-* Fixed XSS on member directory search field.
-
-= 3.2.15 =
-* Fixed bug where social icons where showing when disabled.
-* Removed display name from sorted field options.
-* Added filter to member directory filter fields.
-
-= 3.2.14 =
-* Improve PHP 8 compatibility.
-
-= 3.2.13 =
-* Fixed bug where custom html texts where scribbled.
-
-= 3.2.12 =
-* Fixed user roles not recognized during member directory search.
-* Fixed fatal error caused by empty member directory search field.
-* Fixed bug with shortcodes not working in custom html.
-* Fixed conflict where media uploader was not working for other plugins.
-* Fixed Buddypress signup page override not working.
-* Fixed My Account page visitor redirect bug.
-* Improvement: scroll to member directory section after search.
-* Improved ajax login process.
-* Added Slim SEO compatibility.
-
-= 3.2.11 =
-* Fixed PHP Fatal error:  Uncaught Error: Call to a member function wpua_get_default_avatar_url() on null
-* Upgrade jbox and flatpickr libs.
-
-= 3.2.10 =
-* Added noncache to temporary redirects.
-* Fixed fatal error caused by user avatar functions.
-
-= 3.2.9 =
-* Fixed bug where reset password enforcement not working.
-* Made sure select2 is only loaded where needed in admin screens.
-
-= 3.2.8 =
-* Fixed bug with content restriction shortcode not working correctly.
-* Fixed bug with item dragging in the form builder.
-* Added: Clear form after registration.
-* Added action hook to email template.
-* [Pro](https://profilepress.com/addons/passwordless-login/) Added enabling/disabling of passwordless login per form.
-* [Pro](https://profilepress.com/addons/woocommerce/) support for replacing the registration form in WooCommerce my account page
 
 See the [changelog file](https://plugins.svn.wordpress.org/wp-user-avatar/trunk/changelog.txt) for full change log information.

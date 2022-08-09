@@ -1,5 +1,7 @@
 <?php
 
+use ProfilePress\Core\ShortcodeParser\MyAccount\MyAccountTag;
+
 if ( ! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -11,15 +13,11 @@ $success_message = apply_filters('ppress_password_change_confirmation_message', 
     <div class="profilepress-myaccount-change-password">
 
         <?php if (isset($_GET['edit']) && $_GET['edit'] == 'true') : ?>
-            <div class="profilepress-myaccount-alert pp-alert-success" role="alert">
-                <?= $success_message ?>
-            </div>
+            <?php MyAccountTag::alert_message($success_message) ?>
         <?php endif; ?>
 
         <?php if ( ! empty($this->myac_change_password_error)) : ?>
-            <div class="profilepress-myaccount-alert pp-alert-danger" role="alert">
-                <?= $this->myac_change_password_error ?>
-            </div>
+            <?php MyAccountTag::alert_message($this->myac_change_password_error, 'error') ?>
         <?php endif; ?>
 
         <h2><?= esc_html__('Change Password', 'wp-user-avatar') ?></h2>

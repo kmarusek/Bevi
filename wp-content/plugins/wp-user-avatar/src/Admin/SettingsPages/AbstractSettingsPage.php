@@ -26,7 +26,7 @@ abstract class AbstractSettingsPage
             esc_html__('ProfilePress - WordPress User Registration & Profile Plugin', 'wp-user-avatar'),
             'ProfilePress',
             'manage_options',
-            PPRESS_SETTINGS_SLUG,
+            PPRESS_DASHBOARD_SETTINGS_SLUG,
             '',
             $this->getMenuIcon(),
             '80.0015'
@@ -35,6 +35,10 @@ abstract class AbstractSettingsPage
         do_action('ppress_register_menu_page_' . $this->active_menu_tab() . '_' . $this->active_submenu_tab());
 
         do_action('ppress_register_menu_page');
+
+        add_filter('list_pages', function ($title, $page) {
+            return sprintf('%s (ID: %s)', $title, $page->ID);
+        }, 10, 2);
     }
 
     /** --------------------------------------------------------------- */
@@ -93,6 +97,7 @@ abstract class AbstractSettingsPage
             ?>
         </div>
         <?php
+        do_action('ppress_settings_page_header', $active_menu, $active_submenu);
     }
 
     public function settings_page_header_menus($active_menu)

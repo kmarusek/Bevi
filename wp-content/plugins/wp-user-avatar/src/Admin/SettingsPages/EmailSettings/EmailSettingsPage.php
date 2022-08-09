@@ -3,29 +3,41 @@
 namespace ProfilePress\Core\Admin\SettingsPages\EmailSettings;
 
 use ProfilePress\Core\Classes\SendEmail;
+use ProfilePress\Core\Membership\Emails\EmailDataTrait;
 use ProfilePress\Custom_Settings_Page_Api;
 
 class EmailSettingsPage
 {
+    use EmailDataTrait;
+
+    const ACCOUNT_EMAIL_TYPE = 'account';
+    const ORDER_EMAIL_TYPE = 'order';
+    const SUBSCRIPTION_EMAIL_TYPE = 'subscription';
+
     public $email_notification_list_table;
 
     public $settingsPageInstance;
 
     public function __construct()
     {
-        add_action('ppress_admin_settings_page_email', [$this, 'admin_page']);
+        add_filter('ppress_settings_page_submenus_tabs', [$this, 'menu_tab']);
+        add_action('ppress_admin_settings_submenu_page_email_account', [$this, 'emails_admin_page']);
+        add_action('ppress_admin_settings_submenu_page_email_order', [$this, 'emails_admin_page']);
+        add_action('ppress_admin_settings_submenu_page_email_subscription', [$this, 'emails_admin_page']);
+        add_action('ppress_admin_settings_submenu_page_email_settings', [$this, 'email_settings_admin_page']);
+
         add_action('ppress_settings_page_screen_option', [$this, 'screen_option']);
         add_action('admin_init', [$this, 'handle_email_preview']);
 
         add_action('admin_enqueue_scripts', function ($hook_suffix) {
-            if ($hook_suffix == 'toplevel_page_pp-config') {
+            if ($hook_suffix == 'profilepress_page_ppress-config') {
                 wp_enqueue_script('customize-loader');
             }
         });
 
         add_filter('ppress_general_settings_admin_page_title', function ($title) {
             if (isset($_GET['view']) && $_GET['view'] == 'email') {
-                $title = esc_html__('Emails', 'wp-user-avatar');
+                $title = $this->get_admin_title();
             }
 
             return $title;
@@ -54,19 +66,57 @@ class EmailSettingsPage
         if (isset($_GET['view']) && $_GET['view'] == 'email') {
             add_filter('screen_options_show_screen', '__return_false');
 
-            $this->email_notification_list_table = new WPListTable($this->email_notifications());
+            $type = ppressGET_var('section', self::ACCOUNT_EMAIL_TYPE, true);
+
+            $this->email_notification_list_table = new WPListTable($this->email_notifications($type));
         }
+    }
+
+    public function menu_tab($tabs)
+    {
+        $tabs[214] = [
+            'parent' => 'email',
+            'id'     => 'account',
+            'label'  => esc_html__('Account', 'wp-user-avatar')
+        ];
+
+        $tabs[215] = [
+            'parent' => 'email',
+            'id'     => 'order',
+            'label'  => esc_html__('Order', 'wp-user-avatar')
+        ];
+
+        $tabs[216] = [
+            'parent' => 'email',
+            'id'     => 'subscription',
+            'label'  => esc_html__('Subscription', 'wp-user-avatar')
+        ];
+
+        $tabs[217] = [
+            'parent' => 'email',
+            'id'     => 'settings',
+            'label'  => esc_html__('Settings', 'wp-user-avatar')
+        ];
+
+
+        return $tabs;
+    }
+
+    public function get_admin_title()
+    {
+        return esc_html__('Emails', 'wp-user-avatar');
     }
 
     /**
      * @return mixed|void
      */
-    public function email_notifications()
+    public function email_notifications($type = '')
     {
         $site_title = ppress_site_title();
 
-        return apply_filters('ppress_email_notifications', [
+        $notifications = apply_filters('ppress_email_notifications', [
             [
+                'type'         => self::ACCOUNT_EMAIL_TYPE,
                 'key'          => 'welcome_message',
                 'title'        => esc_html__('Account Welcome Email', 'wp-user-avatar'),
                 'subject'      => sprintf(esc_html__('Welcome To %s', 'wp-user-avatar'), $site_title),
@@ -81,10 +131,11 @@ class EmailSettingsPage
                     '{{first_name}}'          => esc_html__('First Name entered by user on registration.', 'wp-user-avatar'),
                     '{{last_name}}'           => esc_html__('Last Name entered by user on registration.', 'wp-user-avatar'),
                     '{{password_reset_link}}' => esc_html__('URL to reset password.', 'wp-user-avatar'),
-                    '{{login_link}}'          => esc_html__('URL to login..', 'wp-user-avatar'),
-                ]
+                    '{{login_link}}'          => esc_html__('URL to login.', 'wp-user-avatar'),
+                ],
             ],
             [
+                'type'         => self::ACCOUNT_EMAIL_TYPE,
                 'key'          => 'password_reset',
                 'title'        => esc_html__('Password Reset Email', 'wp-user-avatar'),
                 'subject'      => sprintf(esc_html__('[%s] Password Reset', 'wp-user-avatar'), $site_title),
@@ -99,41 +150,274 @@ class EmailSettingsPage
                 ]
             ],
             [
+                'type'         => self::ACCOUNT_EMAIL_TYPE,
                 'key'          => 'new_user_admin_email',
                 'title'        => esc_html__('New User Admin Notification', 'wp-user-avatar'),
                 'subject'      => sprintf(esc_html__('[%s] New User Registration', 'wp-user-avatar'), $site_title),
                 'message'      => ppress_new_user_admin_notification_message_default(),
-                'description'  => esc_html__('Email that is sent to admins when there is a new user registration', 'wp-user-avatar'),
-                'recipient'    => esc_html__('Administrators', 'wp-user-avatar'),
+                'description'  => esc_html__('Email that is sent to the admin when there is a new user registration.', 'wp-user-avatar'),
+                'recipient'    => ppress_get_admin_notification_emails(),
                 'placeholders' => [
                     '{{username}}'   => esc_html__('Username of the newly registered user.', 'wp-user-avatar'),
                     '{{email}}'      => esc_html__('Email address of the newly registered user.', 'wp-user-avatar'),
                     '{{first_name}}' => esc_html__('First name of the newly registered user.', 'wp-user-avatar'),
                     '{{last_name}}'  => esc_html__('Last name of the newly registered user.', 'wp-user-avatar'),
-                    '{{site_title}}' => esc_html__('Website name or name.', 'wp-user-avatar'),
+                    '{{site_title}}' => esc_html__('Website title or name.', 'wp-user-avatar'),
                     '{{field_key}}'  => sprintf(
                         esc_html__('Replace "field_key" with the %scustom field key%s or usermeta key.', 'wp-user-avatar'),
                         '<a href="' . PPRESS_CUSTOM_FIELDS_SETTINGS_PAGE . '" target="_blank">', '</a>'
                     )
                 ]
-            ]
+            ],
+            [
+                'type'         => self::ORDER_EMAIL_TYPE,
+                'key'          => 'new_order_receipt',
+                'title'        => esc_html__('New Order Receipt', 'wp-user-avatar'),
+                'subject'      => sprintf(esc_html__('New Order Receipt', 'wp-user-avatar'), $site_title),
+                'message'      => $this->get_order_receipt_content(),
+                'description'  => esc_html__('Email sent whenever a customer completes an order.', 'wp-user-avatar'),
+                'recipient'    => esc_html__('Customers', 'wp-user-avatar'),
+                'placeholders' => $this->get_order_placeholders()
+            ],
+            [
+                'type'         => self::ORDER_EMAIL_TYPE,
+                'key'          => 'renewal_order_receipt',
+                'title'        => esc_html__('Renewal Order Receipt', 'wp-user-avatar'),
+                'subject'      => sprintf(esc_html__('Subscription Renewal Receipt', 'wp-user-avatar'), $site_title),
+                'message'      => $this->get_order_receipt_content(true),
+                'description'  => esc_html__('Email sent to customer whenever a renewal order occurs.', 'wp-user-avatar'),
+                'recipient'    => esc_html__('Customers', 'wp-user-avatar'),
+                'placeholders' => $this->get_order_placeholders()
+            ],
+            [
+                'type'         => self::ORDER_EMAIL_TYPE,
+                'key'          => 'new_order_admin_notification',
+                'title'        => esc_html__('New Order Admin Notification', 'wp-user-avatar'),
+                'subject'      => sprintf(esc_html__('New Order #{{order_id}}', 'wp-user-avatar'), $site_title),
+                'message'      => $this->get_new_order_admin_notification_content(),
+                'description'  => esc_html__('Email sent to the admin when there is a new order.', 'wp-user-avatar'),
+                'recipient'    => ppress_get_admin_notification_emails(),
+                'placeholders' => $this->get_order_placeholders()
+            ],
+            [
+                'type'         => self::SUBSCRIPTION_EMAIL_TYPE,
+                'key'          => 'subscription_cancelled_notification',
+                'title'        => esc_html__('Subscription Cancelled Notification', 'wp-user-avatar'),
+                'subject'      => sprintf(esc_html__('Your subscription has been cancelled.', 'wp-user-avatar'), $site_title),
+                'message'      => $this->get_subscription_cancelled_content(),
+                'description'  => esc_html__('Email sent to customer whenever their subscription is cancelled.', 'wp-user-avatar'),
+                'recipient'    => esc_html__('Customers', 'wp-user-avatar'),
+                'placeholders' => $this->get_subscription_placeholders()
+            ],
+            [
+                'type'         => self::SUBSCRIPTION_EMAIL_TYPE,
+                'key'          => 'subscription_expired_notification',
+                'title'        => esc_html__('Subscription Expired Notification', 'wp-user-avatar'),
+                'subject'      => sprintf(esc_html__('Your subscription has expired.', 'wp-user-avatar'), $site_title),
+                'message'      => $this->get_subscription_expired_content(),
+                'description'  => esc_html__('Email sent to customer whenever their subscription expires.', 'wp-user-avatar'),
+                'recipient'    => esc_html__('Customers', 'wp-user-avatar'),
+                'placeholders' => $this->get_subscription_placeholders()
+            ],
+            [
+                'type'         => self::SUBSCRIPTION_EMAIL_TYPE,
+                'key'          => 'subscription_completed_notification',
+                'title'        => esc_html__('Subscription Completed Notification', 'wp-user-avatar'),
+                'subject'      => sprintf(esc_html__('Your subscription is now complete.', 'wp-user-avatar'), $site_title),
+                'message'      => $this->get_subscription_completed_content(),
+                'description'  => esc_html__('Email sent to customer whenever they complete their subscription payments.', 'wp-user-avatar'),
+                'recipient'    => esc_html__('Customers', 'wp-user-avatar'),
+                'placeholders' => $this->get_subscription_placeholders()
+            ],
+            [
+                'type'          => self::SUBSCRIPTION_EMAIL_TYPE,
+                'key'           => 'subscription_renewal_reminder',
+                'title'         => esc_html__('Upcoming Renewal Reminder', 'wp-user-avatar'),
+                'subject'       => sprintf(esc_html__('Your subscription is renewing soon.', 'wp-user-avatar'), $site_title),
+                'message'       => $this->get_subscription_renewal_reminder_content(),
+                'description'   => esc_html__('Email sent to customer to remind them that their subscription is approaching its renewal.', 'wp-user-avatar'),
+                'recipient'     => esc_html__('Customers', 'wp-user-avatar'),
+                'placeholders'  => $this->get_subscription_placeholders(),
+                'reminder_days' => '1'
+            ],
+            [
+                'type'          => self::SUBSCRIPTION_EMAIL_TYPE,
+                'key'           => 'subscription_expiration_reminder',
+                'title'         => esc_html__('Upcoming Expiration Reminder', 'wp-user-avatar'),
+                'subject'       => sprintf(esc_html__('Your subscription is expiring soon.', 'wp-user-avatar'), $site_title),
+                'message'       => $this->get_subscription_renewal_reminder_content(true),
+                'description'   => esc_html__('Email sent to customer to remind them that their subscription is approaching its expiration.', 'wp-user-avatar'),
+                'recipient'     => esc_html__('Customers', 'wp-user-avatar'),
+                'placeholders'  => $this->get_subscription_placeholders(),
+                'reminder_days' => '1'
+            ],
+            [
+                'type'          => self::SUBSCRIPTION_EMAIL_TYPE,
+                'key'           => 'subscription_after_expired_reminder',
+                'title'         => esc_html__('After Subscription Expired Notification', 'wp-user-avatar'),
+                'subject'       => sprintf(esc_html__('Your subscription has expired.', 'wp-user-avatar'), $site_title),
+                'message'       => $this->get_subscription_expired_content(),
+                'description'   => esc_html__('Email sent to customer few days after their subscription expires.', 'wp-user-avatar'),
+                'recipient'     => esc_html__('Customers', 'wp-user-avatar'),
+                'placeholders'  => $this->get_subscription_placeholders(),
+                'reminder_days' => '2'
+            ],
         ]);
+
+        if ( ! empty($type)) {
+            return wp_list_filter($notifications, ['type' => $type]);
+        }
+
+        return $notifications;
     }
 
-    public function admin_page()
+    public function email_edit_screen_setup()
+    {
+        $key  = sanitize_text_field($_GET['type']);
+        $data = wp_list_filter($this->email_notifications(), ['key' => $key]);
+
+        $data = array_shift($data);
+
+        if (empty($data)) {
+            wp_safe_redirect(PPRESS_SETTINGS_SETTING_PAGE);
+            exit;
+        }
+
+        $page_header = $data['title'];
+
+        $email_content_field_type = 'email_editor';
+        $content_type             = ppress_get_setting('email_content_type', 'text/html');
+
+        if ($content_type == 'text/html' && ppress_get_setting('email_template_type', 'default') == 'default') {
+            $email_content_field_type = 'wp_editor';
+        }
+
+        if ($content_type == 'text/plain') {
+            $email_content_field_type = 'textarea';
+        }
+
+        add_action('wp_cspa_media_button', function () use ($key) {
+            add_action('media_buttons', function () use ($key) {
+                $url = add_query_arg([
+                    'pp_email_preview' => $key,
+                    '_wpnonce'         => ppress_create_nonce()
+                ],
+                    admin_url()
+                );
+
+                printf(
+                    '<a target="_blank" href="%s" class="button"><span class="wp-media-buttons-icon dashicons dashicons-visibility"></span> %s</a>',
+                    $url,
+                    esc_html__('Preview Email', 'wp-user-avatar')
+                );
+            });
+        });
+
+        add_action('wp_cspa_after_wp_editor_field', function () use ($data) {
+            if (isset($data['placeholders'])) {
+                $this->placeholder_tags_table($data['placeholders']);
+            }
+        });
+
+        add_action('wp_cspa_after_email_editor_field', function () use ($data) {
+            if (isset($data['placeholders'])) {
+                $this->placeholder_tags_table($data['placeholders']);
+            }
+        });
+
+        $email_settings = [
+            [
+                $key . '_email_enabled' => [
+                    'type'           => 'checkbox',
+                    'label'          => esc_html__('Enable Notification', 'wp-user-avatar'),
+                    'checkbox_label' => esc_html__('Enable', 'wp-user-avatar'),
+                    'value'          => 'on',
+                    'default_value'  => 'on',
+                    'description'    => esc_html__('Check to enable this email notification.', 'wp-user-avatar')
+                ],
+                $key . '_email_subject' => [
+                    'type'        => 'text',
+                    'value'       => $data['subject'],
+                    'label'       => esc_html__('Subject Line', 'wp-user-avatar'),
+                    'description' => esc_html__('Enter the subject or title for the welcome message email.', 'wp-user-avatar')
+                ],
+                $key . '_email_content' => [
+                    'type'  => $email_content_field_type,
+                    'value' => $data['message'],
+                    'label' => esc_html__('Message Body', 'wp-user-avatar'),
+                ],
+            ]
+        ];
+
+        if ($key == 'subscription_renewal_reminder') {
+            $email_settings[0][$key . '_reminder_days'] = [
+                'type'        => 'number',
+                'value'       => $data['reminder_days'],
+                'label'       => esc_html__('Reminder Days', 'wp-user-avatar'),
+                'description' => esc_html__('The number of days before the upcoming payment due date to notify the customer.', 'wp-user-avatar')
+            ];
+        }
+
+        if ($key == 'subscription_expiration_reminder') {
+            $email_settings[0][$key . '_reminder_days'] = [
+                'type'        => 'number',
+                'value'       => $data['reminder_days'],
+                'label'       => esc_html__('Reminder Days', 'wp-user-avatar'),
+                'description' => esc_html__('The number of days before the subscription expiration due date to notify the customer.', 'wp-user-avatar')
+            ];
+        }
+
+        if ($key == 'subscription_after_expired_reminder') {
+            $email_settings[0][$key . '_reminder_days'] = [
+                'type'        => 'number',
+                'value'       => $data['reminder_days'],
+                'label'       => esc_html__('Reminder Days', 'wp-user-avatar'),
+                'description' => esc_html__('The number of days after the subscription expired to notify the customer.', 'wp-user-avatar')
+            ];
+        }
+
+        return [
+            'page_header'    => $page_header,
+            'email_settings' => $email_settings
+        ];
+    }
+
+    public function emails_admin_page()
     {
         if ( ! isset($_GET['type'])) {
-            add_filter('wp_cspa_main_content_area', function ($content_area) {
+            add_filter('wp_cspa_main_content_area', function () {
                 ob_start();
                 $this->email_notification_list_table->prepare_items();
                 $this->email_notification_list_table->display();
 
-                return ob_get_clean() . $content_area;
+                return ob_get_clean();
             });
         }
 
-        $page_header = esc_html__('Emails', 'wp-user-avatar');
+        $page_header = $this->get_admin_title();
 
+        $email_settings = [];
+
+        if (isset($_GET['type'])) {
+
+            $edit_screen_setup_args = $this->email_edit_screen_setup();
+
+            $page_header = $edit_screen_setup_args['page_header'];
+
+            $email_settings = $edit_screen_setup_args['email_settings'];
+        }
+
+        $this->settingsPageInstance->page_header($page_header);
+        $this->settingsPageInstance->main_content($email_settings);
+        $this->settingsPageInstance->remove_white_design();
+        $this->settingsPageInstance->header_without_frills();
+        $this->settingsPageInstance->build(true);
+
+        $this->toggle_field_js_script();
+    }
+
+    public function email_settings_admin_page()
+    {
         $email_settings = [
             [
                 'admin_email_addresses'      => [
@@ -185,86 +469,7 @@ class EmailSettingsPage
             ],
         ];
 
-        if (isset($_GET['type'])) {
-
-            $key  = sanitize_text_field($_GET['type']);
-            $data = wp_list_filter($this->email_notifications(), ['key' => $key]);
-
-            $data = array_shift($data);
-
-            if (empty($data)) {
-                wp_safe_redirect(PPRESS_SETTINGS_SETTING_PAGE);
-                exit;
-            }
-
-            $page_header = $data['title'];
-
-            $email_content_field_type = 'email_editor';
-            $content_type             = ppress_get_setting('email_content_type', 'text/html');
-
-            if ($content_type == 'text/html' && ppress_get_setting('email_template_type', 'default') == 'default') {
-                $email_content_field_type = 'wp_editor';
-            }
-
-            if ($content_type == 'text/plain') {
-                $email_content_field_type = 'textarea';
-            }
-
-            add_action('wp_cspa_media_button', function () use ($key) {
-                add_action('media_buttons', function () use ($key) {
-                    $url = add_query_arg([
-                        'pp_email_preview' => $key,
-                        '_wpnonce'         => ppress_create_nonce()
-                    ],
-                        admin_url()
-                    );
-
-                    printf(
-                        '<a target="_blank" href="%s" class="button"><span class="wp-media-buttons-icon dashicons dashicons-visibility"></span> %s</a>',
-                        $url,
-                        esc_html__('Preview Email', 'wp-user-avatar')
-                    );
-                });
-            });
-
-            add_action('wp_cspa_after_wp_editor_field', function () use ($data) {
-                if (isset($data['placeholders'])) {
-                    $this->placeholder_tags_table($data['placeholders']);
-                }
-            });
-
-            add_action('wp_cspa_after_email_editor_field', function () use ($data) {
-                if (isset($data['placeholders'])) {
-                    $this->placeholder_tags_table($data['placeholders']);
-                }
-            });
-
-            $email_settings = [
-                [
-                    $key . '_email_enabled' => [
-                        'type'           => 'checkbox',
-                        'label'          => esc_html__('Enable Notification', 'wp-user-avatar'),
-                        'checkbox_label' => esc_html__('Enable', 'wp-user-avatar'),
-                        'value'          => 'on',
-                        'default_value'  => 'on',
-                        'description'    => esc_html__('Check to enable this email notification.', 'wp-user-avatar')
-                    ],
-                    $key . '_email_subject' => [
-                        'type'        => 'text',
-                        'value'       => $data['subject'],
-                        'label'       => esc_html__('Subject Line', 'wp-user-avatar'),
-                        'description' => esc_html__('Enter the subject or title for the welcome message email.', 'wp-user-avatar')
-                    ],
-                    $key . '_email_content' => [
-                        'type'  => $email_content_field_type,
-                        'value' => $data['message'],
-                        'label' => esc_html__('Message Body', 'wp-user-avatar'),
-                    ],
-                ]
-            ];
-        }
-
-        $this->settingsPageInstance->page_header($page_header);
+        $this->settingsPageInstance->page_header($this->get_admin_title());
         $this->settingsPageInstance->main_content($email_settings);
         $this->settingsPageInstance->remove_white_design();
         $this->settingsPageInstance->header_without_frills();
@@ -282,7 +487,6 @@ class EmailSettingsPage
         ppress_verify_nonce();
 
         $key = sanitize_text_field($_GET['pp_email_preview']);
-
 
         $data = wp_list_filter($this->email_notifications(), ['key' => $key]);
 

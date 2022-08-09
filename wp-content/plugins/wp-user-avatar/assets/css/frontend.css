@@ -1,4 +1,6 @@
 @import url("hint.min.css");
+@import url("checkout.css");
+@import url("myac-payment-pages.css");
 
 @font-face {
     font-family: 'Material Icons';
@@ -1019,7 +1021,7 @@ html .pp-form-container .select2 input.select2-search__field {
     text-decoration: none !important;
     position: relative;
     display: block;
-    padding: .75rem 1.25rem;
+    padding: .75em 1.25em;
     margin-bottom: -1px;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, .125);
@@ -1036,18 +1038,18 @@ html .pp-form-container .select2 input.select2-search__field {
 }
 
 #profilepress-myaccount-wrapper .ppmyac-dashboard-item:first-child {
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
+    border-top-left-radius: .25em;
+    border-top-right-radius: .25em;
 }
 
 #profilepress-myaccount-wrapper .ppmyac-dashboard-item:last-child {
     margin-bottom: 0;
-    border-bottom-right-radius: .25rem;
-    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25em;
+    border-bottom-left-radius: .25em;
 }
 
 #profilepress-myaccount-wrapper .ppmyac-icons {
-    margin-right: .5rem;
+    margin-right: .5em;
     vertical-align: text-bottom;
 }
 
@@ -1106,19 +1108,19 @@ html .pp-form-container .select2 input.select2-search__field {
 #profilepress-myaccount-wrapper .profilepress-myaccount-content h2,
 #profilepress-myaccount-wrapper .profilepress-myaccount-content h3 {
     margin-top: 0 !important;
-    margin-bottom: 1.8rem !important;
+    margin-bottom: 1em !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
-    font-size: 2rem !important;
+    font-size: 2em !important;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-submenus-wrap {
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-submenu-wrap {
     display: inline;
-    padding-right: 1rem;
+    padding-right: 1em;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-submenu-item {
@@ -1132,17 +1134,17 @@ html .pp-form-container .select2 input.select2-search__field {
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content h3 {
     font-weight: 500 !important;
-    font-size: 1.2rem !important;
-    margin-bottom: 1rem !important;
+    font-size: 1.2em !important;
+    margin-bottom: 1em !important;
 }
 
 .profilepress-myaccount-alert,
 .profilepress-myaccount-edit-profile .profilepress-edit-profile-status {
     position: relative;
-    padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
+    padding: .75em 1.25em;
+    margin-bottom: 1em;
     border: 1px solid transparent;
-    border-radius: .25rem;
+    border-radius: .25em;
 }
 
 .profilepress-myaccount-alert.pp-alert-danger,
@@ -1160,8 +1162,8 @@ html .pp-form-container .select2 input.select2-search__field {
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-form-field {
-    margin-top: .5rem;
-    margin-bottom: 1rem;
+    margin-top: .5em;
+    margin-bottom: 1em;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-cover-image-empty {
@@ -1170,11 +1172,11 @@ html .pp-form-container .select2 input.select2-search__field {
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-delete-cover-image-wrap {
-    padding: .75rem;
+    padding: .75em;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, .125);
     margin-bottom: 0;
-    border-radius: .25rem;
+    border-radius: .25em;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-delete-cover-image-wrap img {
@@ -1183,16 +1185,16 @@ html .pp-form-container .select2 input.select2-search__field {
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-email-notifications-wrap .profilepress-myaccount-form-field {
-    margin-top: .5rem;
-    margin-bottom: .5rem;
+    margin-top: .5em;
+    margin-bottom: .5em;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-email-notifications-wrap {
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-form-field label {
-    margin-bottom: .2rem;
+    margin-bottom: .2em;
     font-weight: 500;
     display: block;
 }
@@ -1208,15 +1210,15 @@ html .pp-form-container .select2 input.select2-search__field {
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-form-wrap select {
     display: block;
     width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
+    height: calc(1.5em + .75em + 2px);
+    padding: .375em .75em;
+    font-size: 1em;
     font-weight: 400;
     line-height: 1.5;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
-    border-radius: .25rem;
+    border-radius: .25em;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     overflow: visible;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.125);
@@ -1254,7 +1256,7 @@ html .pp-form-container .select2 input.select2-search__field {
     position: relative;
     display: inline-block;
     width: 100%;
-    height: calc(1.5em + .75rem + 2px);
+    height: calc(1.5em + .75em + 2px);
     margin-bottom: 0;
 }
 
@@ -1262,7 +1264,7 @@ html .pp-form-container .select2 input.select2-search__field {
     position: relative;
     z-index: 2;
     width: 100%;
-    height: calc(1.5em + .75rem + 2px);
+    height: calc(1.5em + .75em + 2px);
     margin: 0;
     opacity: 0;
 }
@@ -1273,14 +1275,14 @@ html .pp-form-container .select2 input.select2-search__field {
     right: 0;
     left: 0;
     z-index: 1;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
+    height: calc(1.5em + .75em + 2px);
+    padding: .375em .75em;
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
     background-color: #fff;
     border: 1px solid #ced4da;
-    border-radius: .25rem;
+    border-radius: .25em;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-form-wrap .ppmyac-custom-file-label::after {
@@ -1291,14 +1293,14 @@ html .pp-form-container .select2 input.select2-search__field {
     bottom: 0;
     z-index: 3;
     display: block;
-    height: calc(1.5em + .75rem);
-    padding: .375rem .75rem;
+    height: calc(1.5em + .75em);
+    padding: .375em .75em;
     line-height: 1.5;
     color: #495057;
     content: "Browse";
     background-color: #e9ecef;
     border-left: inherit;
-    border-radius: 0 .25rem .25rem 0;
+    border-radius: 0 .25em .25em 0;
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-form-wrap .ppmyac-custom-file-input ~ .ppmyac-custom-file-label[data-browse]::after {
@@ -1320,11 +1322,11 @@ html .pp-form-container .select2 input.select2-search__field {
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-delete-avatar {
     position: relative;
-    padding: .75rem 1.25rem;
+    padding: .75em 1.25em;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, .125);
     margin-bottom: 0;
-    border-radius: .25rem;
+    border-radius: .25em;
     justify-content: space-between !important;
     display: flex !important;
 }
@@ -1339,12 +1341,12 @@ html .pp-form-container .select2 input.select2-search__field {
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .ppmyac-remove-avatar {
-    margin-bottom: .5rem !important;
-    margin-top: .5rem !important;
-    padding: .25rem .5rem;
-    font-size: .875rem;
+    margin-bottom: .5em !important;
+    margin-top: .5em !important;
+    padding: .25em .5em;
+    font-size: .875em;
     line-height: 1.5;
-    border-radius: .2rem;
+    border-radius: .2em;
     color: #fff;
     height: 35px;
     background-color: #6c757d;
@@ -1360,7 +1362,7 @@ html .pp-form-container .select2 input.select2-search__field {
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .profilepress-myaccount-delete-cover-image-wrap .ppmyac-remove-avatar {
-    margin-top: .75rem !important;
+    margin-top: .75em !important;
     margin-bottom: 0 !important;
 }
 
@@ -1372,7 +1374,7 @@ html .pp-form-container .select2 input.select2-search__field {
 }
 
 #profilepress-myaccount-wrapper .profilepress-myaccount-content .select2-selection {
-    border-radius: .25rem;
+    border-radius: .25em;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.125);
 }

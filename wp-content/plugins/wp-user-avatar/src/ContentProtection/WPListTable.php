@@ -225,6 +225,17 @@ class WPListTable extends \WP_List_Table
                     return get_userdata($user_id)->user_login;
                 }, $item['meta_value']['access_condition']['access_wp_users']));
             }
+
+            if (
+                isset($item['meta_value']['access_condition']['who_can_access']) &&
+                $item['meta_value']['access_condition']['who_can_access'] == 'login' &&
+                ! empty($item['meta_value']['access_condition']['access_membership_plans']) &&
+                is_array($item['meta_value']['access_condition']['access_membership_plans'])
+            ) {
+                $logged_in_users_rules[] = implode(', ', array_map(function ($plan_id) {
+                    return sprintf(esc_html__('%s plan'), ppress_get_plan($plan_id)->name);
+                }, $item['meta_value']['access_condition']['access_membership_plans']));
+            }
         }
 
         if ( ! empty($logged_in_users_rules)) {

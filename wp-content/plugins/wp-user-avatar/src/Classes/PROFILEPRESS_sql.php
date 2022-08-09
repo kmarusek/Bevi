@@ -112,6 +112,15 @@ class PROFILEPRESS_sql
         return $result !== false;
     }
 
+    public static function delete_meta_data_by_meta_key($meta_key)
+    {
+        global $wpdb;
+
+        $result = $wpdb->delete(Base::meta_data_db_table(), ['meta_key' => $meta_key], ['%s']);
+
+        return $result !== false;
+    }
+
     /**
      * Query for profile placement if user can view the his profile
      *
@@ -119,6 +128,8 @@ class PROFILEPRESS_sql
      */
     public static function get_profile_custom_fields()
     {
+        if ( ! ExtensionManager::is_premium()) return [];
+
         global $wpdb;
 
         return $wpdb->get_results(
@@ -138,6 +149,8 @@ class PROFILEPRESS_sql
     {
         global $wpdb;
 
+        if ( ! ExtensionManager::is_premium()) return [];
+
         $table = Base::profile_fields_db_table();
 
         return $wpdb->get_row(
@@ -155,6 +168,8 @@ class PROFILEPRESS_sql
      */
     public static function get_profile_custom_field_by_key($field_key)
     {
+        if ( ! ExtensionManager::is_premium()) return [];
+
         global $wpdb;
 
         $table = Base::profile_fields_db_table();
@@ -167,6 +182,8 @@ class PROFILEPRESS_sql
 
     public static function get_profile_custom_fields_by_types($types)
     {
+        if ( ! ExtensionManager::is_premium()) return [];
+
         global $wpdb;
 
         $sql = sprintf("SELECT * FROM %s", Base::profile_fields_db_table());
@@ -198,6 +215,8 @@ class PROFILEPRESS_sql
      */
     public static function get_profile_field_ids()
     {
+        if ( ! ExtensionManager::is_premium()) return [];
+
         global $wpdb;
 
         $table = Base::profile_fields_db_table();
@@ -214,6 +233,8 @@ class PROFILEPRESS_sql
      */
     public static function is_profile_field_key_exist($field_key)
     {
+        if ( ! ExtensionManager::is_premium()) return false;
+
         global $wpdb;
 
         $table = Base::profile_fields_db_table();
@@ -341,6 +362,8 @@ class PROFILEPRESS_sql
      */
     public static function get_field_option_values($field_key)
     {
+        if ( ! ExtensionManager::is_premium()) return '';
+
         global $wpdb;
 
         $table = Base::profile_fields_db_table();
@@ -355,6 +378,8 @@ class PROFILEPRESS_sql
      */
     public static function get_field_label($field_key)
     {
+        if ( ! ExtensionManager::is_premium()) return '';
+
         global $wpdb;
 
         $table = Base::profile_fields_db_table();
@@ -364,6 +389,8 @@ class PROFILEPRESS_sql
 
     public static function get_field_type($field_key)
     {
+        if ( ! ExtensionManager::is_premium()) return '';
+
         global $wpdb;
 
         $table = Base::profile_fields_db_table();

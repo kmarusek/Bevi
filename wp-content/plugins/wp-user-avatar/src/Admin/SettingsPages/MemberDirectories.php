@@ -50,8 +50,8 @@ class MemberDirectories extends AbstractSettingsPage
     public function register_settings_page()
     {
         $hook = add_submenu_page(
-            PPRESS_SETTINGS_SLUG,
-            $this->admin_page_title() . ' - ProfilePress',
+            PPRESS_DASHBOARD_SETTINGS_SLUG,
+            'ProfilePress ' . $this->admin_page_title(),
             esc_html__('Member Directories', 'wp-user-avatar'),
             'manage_options',
             PPRESS_MEMBER_DIRECTORIES_SLUG,
