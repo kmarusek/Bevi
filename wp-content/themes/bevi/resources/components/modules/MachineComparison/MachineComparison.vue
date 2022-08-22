@@ -10,7 +10,7 @@
             <td
               v-for="counter in counters"
               :key="counter.id"
-              class="lg:px-16 px-12 sm:px-3 xl:px-32 pb-8 gsap-fade border-blue-200 border"
+              class="lg:px-16 px-3 xl:px-32 pb-8 gsap-fade border-blue-200 border"
             >
               <div class="relative mt-auto">
                 <img
