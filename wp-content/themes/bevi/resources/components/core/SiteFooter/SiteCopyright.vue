@@ -15,7 +15,7 @@
             class="link"
           >
             <span>
-              {{ item.name }}
+              {{ item.label }}
             </span>
           </a>
         </li>
@@ -37,6 +37,14 @@
 </template>
 
 <script>
+/**
+ * navitem items:
+ * label: Menu item title
+ * name: Original post title
+ * pageId: 7
+ * pageNavId: 539
+ * url: page url
+ */
   export default {
     props: {
       navigation: {
@@ -47,6 +55,9 @@
     methods: {
       scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      log(item) {
+        console.log(item)
       },
     },
   };
