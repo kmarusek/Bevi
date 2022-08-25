@@ -14,7 +14,10 @@
             :href="item.url"
             class="link"
           >
-            <span>
+            <span v-if=item.label>
+              {{ item.label }}
+            </span>
+            <span v-else>
               {{ item.name }}
             </span>
           </a>
