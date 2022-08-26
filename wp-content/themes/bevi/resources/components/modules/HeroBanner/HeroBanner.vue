@@ -69,12 +69,12 @@
           >
             {{ block.small_title }}
           </h6>
-          <p
+          <h1
             v-if="block.large_title"
             :class="block.text_position === 'Center' ? 'heading-one' : 'my-4 heading-two'"
           >
             {{ block.large_title }}
-          </p>
+          </h1>
 
           <div
             v-if="block.main_text && block.text_position != 'Center'"

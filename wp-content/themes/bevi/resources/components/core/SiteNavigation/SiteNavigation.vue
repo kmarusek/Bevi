@@ -116,6 +116,13 @@
       MenuItems,
       MenuItem,
     },
+    mounted () {
+      // set active menu item
+      var loc = window.location;
+      jQuery('.menu-item-link').each(function() {
+        jQuery(this).toggleClass('active', jQuery(this).attr('href') == loc);
+      });
+    },
   };
 </script>
 
