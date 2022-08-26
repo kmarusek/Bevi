@@ -95,7 +95,7 @@
       </div>
       <div
         v-if="block.feature_image"
-        class="flex-1 block flex mt-10 pt-32 lg:mt-0 -z-10"
+        class="flex-1 block flex mt-10 pt-2 xl:pt-32 lg:mt-0 -z-10"
         :class="block.align_feature_image_bottom ? 'items-end' : 'items-center'"
       >
         <img
