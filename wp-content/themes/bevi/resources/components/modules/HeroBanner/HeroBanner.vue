@@ -46,7 +46,7 @@
           'pt-20 xs:py-32 lg:w-2/4' : block.text_position === 'Left' && block.feature_image || block.text_position === 'Right' && block.feature_image,
           'py-20 pb-64 xs:py-32 xs:pb-32 lg:w-2/4' : block.text_position === 'Left' && !block.feature_image || 'Right' && !block.feature_image,
           'py-32 lg:w-full' : block.text_position === 'Center' && !block.feature_image,
-          'py-20 lg:pt-32 lg:w-full' : block.text_position === 'Center' && block.feature_image,
+          'py-0 lg:pt-32 lg:w-full' : block.text_position === 'Center' && block.feature_image,
           'narrower': block.narrower_content,
         }"
         class="flex items-center"
