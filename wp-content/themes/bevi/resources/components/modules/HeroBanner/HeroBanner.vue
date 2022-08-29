@@ -1,6 +1,6 @@
 <template>
   <section
-    class="bg-cover bg-no-repeat bg-center flex relative overflow-hidden main-banner large-banner pb-32 md:pb-0"
+    class="bg-cover bg-no-repeat bg-center flex relative overflow-hidden main-banner large-banner pb-0 md:pb-0"
     :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
     :class="[block.text_position === 'Center' ? 'min-h-auto lg:min-h-screen ' : 'min-h-screen ', { wave : block.wave }]"
   >
@@ -95,7 +95,7 @@
       </div>
       <div
         v-if="block.feature_image"
-        class="block flex mt-10 pt-2 lg:mt-0 -z-10"
+        class="block flex mt-16 pt-2 -z-10"
         :class="block.align_feature_image_bottom ? 'items-end' : 'items-center'"
       >
         <img

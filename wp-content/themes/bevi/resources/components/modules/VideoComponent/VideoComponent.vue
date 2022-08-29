@@ -1,7 +1,7 @@
 <template>
   <section>
     <div
-      class="overflow-hidden bg-cover bg-no-repeat bg-center -mt-12"
+      class="overflow-hidden bg-cover bg-no-repeat bg-center mt-0"
       :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
     >
       <video
