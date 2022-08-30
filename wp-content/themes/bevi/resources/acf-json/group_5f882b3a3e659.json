@@ -577,7 +577,15 @@
                             "type": "button_group",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_5fae7b0767f97",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -4412,5 +4420,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1661861605
+    "modified": 1661864310
 }
