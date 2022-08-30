@@ -5,7 +5,7 @@
     :class="[block.text_position === 'Center' ? 'min-h-auto lg:min-h-screen ' : 'min-h-screen ', { wave : block.wave }]"
   >
     <video
-      v-if="block.add_background_video && windowWidth >= 768"
+      v-if="block.add_background_video && windowWidth >= 768 && block.video_source_hb !== 'embed'"
       :poster="block.background_image.sizes.large"
       autoplay
       muted
@@ -17,6 +17,16 @@
         type="video/mp4"
       >
     </video>
+
+    <div
+        v-if="block.add_background_video && windowWidth >= 768 && block.video_embed && block.video_source_hb === 'embed'"
+        v-html="block.video_embed"
+        id="videos"
+        class="absolute w-full h-full top-20 left-0 z-1 object-cover"
+    >
+
+    </div>
+
     <div
       class="bubbles"
       v-if="block.show_bubbles"

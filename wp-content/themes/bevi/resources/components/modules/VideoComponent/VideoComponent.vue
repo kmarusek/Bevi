@@ -5,7 +5,7 @@
       :style="{ 'background-image': 'url(' + backgroundImage() + ')' }"
     >
       <video
-        v-if="block.video.url"
+        v-if="block.video.url && block.video_source !== 'embed'"
         id="videos"
         muted
         loop
@@ -18,6 +18,15 @@
           type="video/mp4"
         >
       </video>
+
+      <div
+          v-if="block.video_embed && block.video_source === 'embed'"
+          v-html="block.video_embed"
+          id="videos"
+          class="h-full w-full object-cover"
+      >
+
+      </div>
     </div>
   </section>
 </template>

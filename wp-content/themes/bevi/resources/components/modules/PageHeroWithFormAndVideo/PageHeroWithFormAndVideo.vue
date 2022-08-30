@@ -8,7 +8,7 @@
     ]"
   >
     <video
-      v-if="!isMobile"
+      v-if="!isMobile && block.video_source_ph === 'embed'"
       autoplay
       muted
       loop
@@ -19,6 +19,16 @@
         type="video/mp4"
       >
     </video>
+
+    <div
+        v-if="block.video_embed && block.video_source_ph === 'embed'"
+        v-html="block.video_embed"
+        id="videos"
+        class="absolute w-full h-full top-0 left-0 -z-10 object-cover"
+    >
+
+    </div>
+
     <div class="container flex flex-col lg:flex-row">
       <div class="grid grid-cols-2 xl:grid-cols-8 items-end justify-between pt-20 xs:py-32 w-full lg:gap-20">
         <div class="sm:col-span-1 xl:col-span-3 space-y-4 pb-20">

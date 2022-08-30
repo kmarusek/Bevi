@@ -571,6 +571,28 @@
                             "ui_off_text": ""
                         },
                         {
+                            "key": "field_630dfaae769b2",
+                            "label": "Video source (HB)",
+                            "name": "video_source_hb",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "file": "File",
+                                "embed": "Embed"
+                            },
+                            "allow_null": 0,
+                            "default_value": "file",
+                            "layout": "horizontal",
+                            "return_format": "value"
+                        },
+                        {
                             "key": "field_5fae7b2667f98",
                             "label": "Video",
                             "name": "video",
@@ -583,6 +605,11 @@
                                         "field": "field_5fae7b0767f97",
                                         "operator": "==",
                                         "value": "1"
+                                    },
+                                    {
+                                        "field": "field_630dfaae769b2",
+                                        "operator": "==",
+                                        "value": "file"
                                     }
                                 ]
                             ],
@@ -596,6 +623,38 @@
                             "min_size": "",
                             "max_size": "",
                             "mime_types": ""
+                        },
+                        {
+                            "key": "field_630dfad7769b3",
+                            "label": "Video embed",
+                            "name": "video_embed",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_630dfaae769b2",
+                                        "operator": "==",
+                                        "value": "embed"
+                                    },
+                                    {
+                                        "field": "field_5fae7b0767f97",
+                                        "operator": "==",
+                                        "value": "1"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
                         },
                         {
                             "key": "field_5fca39d19392d",
@@ -947,13 +1006,43 @@
                             "delay": 0
                         },
                         {
+                            "key": "field_630df46e99d73",
+                            "label": "Video source",
+                            "name": "video_source",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "file": "File",
+                                "embed": "Embed"
+                            },
+                            "allow_null": 0,
+                            "default_value": "file",
+                            "layout": "horizontal",
+                            "return_format": "value"
+                        },
+                        {
                             "key": "field_5fb780f57e317",
                             "label": "Video",
                             "name": "video",
                             "type": "file",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_630df46e99d73",
+                                        "operator": "==",
+                                        "value": "file"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -964,6 +1053,33 @@
                             "min_size": "",
                             "max_size": "",
                             "mime_types": ""
+                        },
+                        {
+                            "key": "field_630df4a299d74",
+                            "label": "Video embed",
+                            "name": "video_embed",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_630df46e99d73",
+                                        "operator": "==",
+                                        "value": "embed"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
                         },
                         {
                             "key": "field_5fb781227e318",
@@ -3427,13 +3543,43 @@
                             "return_format": "array"
                         },
                         {
+                            "key": "field_630dfea252571",
+                            "label": "Video source (PH)",
+                            "name": "video_source_ph",
+                            "type": "button_group",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "file": "File",
+                                "embed": "Embed"
+                            },
+                            "allow_null": 0,
+                            "default_value": "file",
+                            "layout": "horizontal",
+                            "return_format": "value"
+                        },
+                        {
                             "key": "field_6093f9137438a",
                             "label": "Background Video",
                             "name": "background_video",
                             "type": "file",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_630dfea252571",
+                                        "operator": "==",
+                                        "value": "file"
+                                    }
+                                ]
+                            ],
                             "wrapper": {
                                 "width": "",
                                 "class": "",
@@ -3444,6 +3590,33 @@
                             "min_size": "",
                             "max_size": "",
                             "mime_types": ""
+                        },
+                        {
+                            "key": "field_630dfe8752570",
+                            "label": "Video embed",
+                            "name": "video_embed",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": [
+                                [
+                                    {
+                                        "field": "field_630dfea252571",
+                                        "operator": "==",
+                                        "value": "embed"
+                                    }
+                                ]
+                            ],
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
                         },
                         {
                             "key": "field_6093f9137438b",
@@ -4239,5 +4412,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1661777252
+    "modified": 1661861605
 }
