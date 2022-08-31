@@ -65,11 +65,15 @@
             class="comparison--block grow md:w-1/2 bg-grey-light m-3">
 
           <div class="w-full text-center">
-            <img
-                :src="item.image"
-                class="max-h-80 inline"
-                alt="{{ item.title }}"
-            />
+            <div class="h-80 flex items-end">
+              <div class="w-full content-center">
+                <img
+                    :src="item.image"
+                    class="max-h-80 inline object-bottom"
+                    alt="Dispenser"
+                />
+              </div>
+            </div>
             <h3 class="gsap-fades my-4 text-2.5xl font-semibold mt-6 text-blue">{{ item.title }}</h3>
             <p class="gsap-fades mt-4 mb-12 px-4">{{ item.description }}</p>
           </div>
