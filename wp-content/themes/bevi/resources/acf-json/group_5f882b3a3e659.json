@@ -4160,7 +4160,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "return_format": "array",
+                                    "return_format": "url",
                                     "preview_size": "medium",
                                     "library": "all",
                                     "min_width": "",
@@ -4350,7 +4350,7 @@
                                     "key": "field_630cb51053894",
                                     "label": "CTA",
                                     "name": "cta",
-                                    "type": "url",
+                                    "type": "link",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -4359,8 +4359,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "default_value": "",
-                                    "placeholder": ""
+                                    "return_format": "array"
                                 },
                                 {
                                     "key": "field_630cb52653895",
@@ -4420,5 +4419,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1661864310
+    "modified": 1661947093
 }

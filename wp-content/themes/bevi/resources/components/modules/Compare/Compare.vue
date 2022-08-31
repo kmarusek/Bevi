@@ -1,6 +1,6 @@
 <template>
 
-  <section class="container mx-auto bg-gray-100 comparison">
+  <section class="w-full bg-gray-100 comparison">
     <div class="relative flex min-h-screen flex-col overflow-hidden">
 
       <div class="block-content py-16 pb-4 px-0 lg:px-48 text-center">
@@ -53,122 +53,62 @@
         >
       </div>
 
-      <div class="block-content w-full py-16 pb-4 px-0 lg:px-48 flex">
 
-        <div class="grow w-full md:w-1/2 bg-grey-light m-3">
+      <div class="comparison--nav block-content py-16 pb-4 px-0 lg:px-48 text-center  block md:hidden">
+      </div>
+
+      <div class="comparison--blocks container block-content py-16 pb-4 px-0 lg:px-48 flex-columns md:flex z-10">
+
+        <div
+            v-for="(item, idx) in block.dispenser"
+            :key="idx"
+            class="comparison--block grow md:w-1/2 bg-grey-light m-3">
+
           <div class="w-full text-center">
-              <img class="max-h-80 inline" src="http://bevi.local/wp-content/uploads/2022/03/2.0_Drawing-01.png" alt="Dispenser" />
-              <h3 class="gsap-fades my-4 text-2.5xl font-semibold mt-6 text-blue">The Standup 2.0</h3>
-              <p class="gsap-fades mt-4 mb-12 px-4">Mix flavors and add enhancements in just 2.5 sq feet.</p>
+            <img class="max-h-80 inline" src="http://bevi.local/wp-content/uploads/2022/03/2.0_Drawing-01.png"
+                 alt="Dispenser"/>
+            <h3 class="gsap-fades my-4 text-2.5xl font-semibold mt-6 text-blue">{{ item.title }}</h3>
+            <p class="gsap-fades mt-4 mb-12 px-4">{{ item.description }}</p>
           </div>
           <div class="w-full bg-gray-200 px-8 py-6 rounded-2xl">
 
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-true.png" alt=""></div>
-            </div>
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-true.png" alt=""></div>
-            </div>
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-true.png" alt=""></div>
-            </div>
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700 text-body">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-false.png" alt=""></div>
-            </div>
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700 text-body">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-false.png" alt=""></div>
-            </div>
-
-            <div class="flex my-2 py-2 border-t border-gray mt-4">
-              <div class="flex-auto w-1/2 text-gray-700 text-body">Max flavors</div>
-              <div class="flex-auto w-1/2 text-right">
-                <div class="w-full">
-                  up to 5
-                </div>
-                <div class="w-full text-sm">
-                  max 3 flavors
-                </div>
+            <div
+                v-for="(feature, idx) in item.features"
+                :key="idx"
+                class="flex my-2 gsap-fade">
+              <div class="flex-auto w-5/6 text-gray-700">{{ feature.feature }}</div>
+              <div class="flex-auto text-right">
+                <img
+                    :src= "feature.enabled === true ? '/wp-content/themes/bevi/dist/images/chk-true.png' : '/wp-content/themes/bevi/dist/images/chk-false.png'"
+                    class="inline"
+                    alt=""
+                >
               </div>
             </div>
-            <div class="flex my-2 py-2 border-t border-gray mt-4">
-              <div class="flex-auto w-1/2 text-gray-700 text-body">Max flavors</div>
+
+            <div
+                v-for="(property, idx) in item.properties"
+                :key="idx"
+                class="flex my-2 py-2 border-t border-gray mt-4">
+              <div class="flex-auto w-1/2 text-gray-700 text-body">{{ property.property }}</div>
               <div class="flex-auto w-1/2 text-right">
                 <div class="w-full">
-                  up to 5
+                  {{ property.property_value }}
                 </div>
                 <div class="w-full text-sm">
-                  max 3 flavors
+                  {{ property.property_info }}
                 </div>
               </div>
             </div>
 
-            <a href="" class="btn w-full mb-2">Get a quote</a>
+            <a
+                v-if="item.cta"
+                v-bind:href="item.cta.url"
+                :class="item.cta_color === true? 'btn w-full mb-2' : 'block rounded-full py-3 px-3 text-center w-full mb-2 text-blue bg-white border border-2 border-blue hover:text-white hover:bg-blue transform transition duration-500'"
+            >{{ item.cta.title }}</a>
 
           </div>
-        </div>
 
-
-
-        <div class="grow w-full md:w-1/2 bg-grey-light m-3">
-          <div class="w-full text-center">
-            <img class="max-h-80 inline" src="http://bevi.local/wp-content/uploads/2022/03/2.0_Drawing-01.png" alt="Dispenser" />
-            <h3 class="gsap-fades my-4 text-2.5xl font-semibold mt-6 text-blue">The Standup 2.0</h3>
-            <p class="gsap-fades mt-4 mb-12 px-4">Mix flavors and add enhancements in just 2.5 sq feet.</p>
-          </div>
-          <div class="w-full bg-gray-200 px-8 py-6 rounded-2xl">
-
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-true.png" alt=""></div>
-            </div>
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-true.png" alt=""></div>
-            </div>
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-true.png" alt=""></div>
-            </div>
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700 text-body">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-false.png" alt=""></div>
-            </div>
-            <div class="flex my-2">
-              <div class="flex-auto w-5/6 text-gray-700 text-body">Filtered still + sparkling</div>
-              <div class="flex-auto text-right"><img class="inline" src="/wp-content/themes/bevi/dist/images/chk-false.png" alt=""></div>
-            </div>
-
-            <div class="flex my-2 py-2 border-t border-gray mt-4">
-              <div class="flex-auto w-1/2 text-gray-700 text-body">Max flavors</div>
-              <div class="flex-auto w-1/2 text-right">
-                <div class="w-full">
-                  up to 5
-                </div>
-                <div class="w-full text-sm">
-                  max 3 flavors
-                </div>
-              </div>
-            </div>
-            <div class="flex my-2 py-2 border-t border-gray mt-4">
-              <div class="flex-auto w-1/2 text-gray-700 text-body">Max flavors</div>
-              <div class="flex-auto w-1/2 text-right">
-                <div class="w-full">
-                  up to 5
-                </div>
-                <div class="w-full text-sm">
-                  max 3 flavors
-                </div>
-              </div>
-            </div>
-
-            <a href="" class="btn w-full mb-2">Get a quote</a>
-
-          </div>
         </div>
 
       </div>
@@ -183,11 +123,19 @@
   background-image: url("/wp-content/themes/bevi/dist/images/bluewave.png");
   background-position: bottom;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
- .max-h-80 {
-   max-height: 314px;
- }
+
+.max-h-80 {
+  max-height: 314px;
+}
+.navigator {
+  display: inline-block;
+  height: 4px;
+  width: 24px;
+  margin: 4px;
+  border-radius: 2px;
+}
 </style>
 
 <script>
@@ -199,8 +147,45 @@ export default {
     },
   },
   mounted() {
-    jQuery('.smtg').each(function() {
-      let date = jQuery(this).html();
+
+    jQuery('.comparison--blocks').each(function () {
+      var isMobile = (jQuery(this).children('.comparison--block:not(:first-child)').css('display') === 'none');
+      var touchstartX = 0;
+      var touchendX = 0;
+
+      var totalHpBlurb = 0;
+      jQuery(this).children('.comparison--block').each(function () {
+        totalHpBlurb++;
+        jQuery(this).attr('data-index', totalHpBlurb);
+        jQuery('.comparison--nav').append('<span class="navigator" data-index="' + totalHpBlurb + '"> </span>');
+      })
+      jQuery('.comparison--nav .navigator:first-child').addClass('bg-blue');
+      jQuery('.comparison--nav .navigator:not(:first-child)').addClass('bg-gray-200');
+
+      jQuery(this).children('.comparison--block').on("touchstart", function (e) {
+        touchstartX = e.changedTouches[0].screenX;
+      });
+
+      jQuery(this).children('.comparison--block').on("touchend", function (e) {
+
+        touchendX = e.changedTouches[0].screenX;
+
+        if ( Math.abs(touchstartX - touchendX) > 100 && isMobile) {
+          var index = jQuery(this).attr('data-index');
+          jQuery(this).hide().removeClass('active');
+          jQuery('.comparison--nav .navigator[data-index="' + index + '"]').removeClass('bg-blue').addClass('bg-gray-200');
+
+          if (index < totalHpBlurb) {
+            index++;
+            jQuery('.comparison--block[data-index="' + index + '"]').show().addClass('active');
+            jQuery('.comparison--nav .navigator[data-index="' + index + '"]').removeClass('bg-gray-200').addClass('bg-blue');
+          } else {
+            jQuery('.comparison--block[data-index="1"]').show().addClass('active');
+            jQuery('.comparison--nav .navigator[data-index="1"]').removeClass('bg-gray-200').addClass('bg-blue');
+          }
+        }
+      });
+
     });
   },
 };
