@@ -65,8 +65,11 @@
             class="comparison--block grow md:w-1/2 bg-grey-light m-3">
 
           <div class="w-full text-center">
-            <img class="max-h-80 inline" src="http://bevi.local/wp-content/uploads/2022/03/2.0_Drawing-01.png"
-                 alt="Dispenser"/>
+            <img
+                :src="item.image"
+                class="max-h-80 inline"
+                alt="{{ item.title }}"
+            />
             <h3 class="gsap-fades my-4 text-2.5xl font-semibold mt-6 text-blue">{{ item.title }}</h3>
             <p class="gsap-fades mt-4 mb-12 px-4">{{ item.description }}</p>
           </div>
