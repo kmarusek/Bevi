@@ -139,9 +139,9 @@
   }
 
   .menu-item-link {
-    @apply relative text-2xl font-space font-semibold text-blue-600 transition-all duration-300 flex items-center;
+    @apply relative text-2xl font-space font-semibold text-blue-600 transition-all duration-300 inline items-center;
     @screen lg {
-      @apply text-sm;
+      @apply text-sm flex;
     }
     span {
       @apply z-10;
