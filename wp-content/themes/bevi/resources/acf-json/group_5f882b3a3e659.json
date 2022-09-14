@@ -2017,6 +2017,25 @@
                             }
                         },
                         {
+                            "key": "field_6321be9c0c9b8",
+                            "label": "Pardot form fallback",
+                            "name": "pardot_form_fallback",
+                            "type": "textarea",
+                            "instructions": "Insert the iframe code for the form here, if the select box above is not working.\r\nInstructions to get the iframe code: \r\n<a href=\"https:\/\/help.salesforce.com\/s\/articleView?id=sf.pardot_forms_deploying_forms.htm&type=5\" target=\"_blank\">Click here<\/a>",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        },
+                        {
                             "key": "field_5f9ad6f88adea",
                             "label": "Show Blue Background?",
                             "name": "show_blue_background",
@@ -3410,6 +3429,25 @@
                             }
                         },
                         {
+                            "key": "field_6321be5a0c9b7",
+                            "label": "Pardot form fallback",
+                            "name": "pardot_form_fallback",
+                            "type": "textarea",
+                            "instructions": "Insert the iframe code for the form here, if the select box above is not working.\r\nInstructions to get the iframe code: \r\n<a href=\"https:\/\/help.salesforce.com\/s\/articleView?id=sf.pardot_forms_deploying_forms.htm&type=5\" target=\"_blank\">Click here<\/a>",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        },
+                        {
                             "key": "field_607eba87001db",
                             "label": "Form Height",
                             "name": "form_height",
@@ -3675,6 +3713,25 @@
                                 "class": "",
                                 "id": ""
                             }
+                        },
+                        {
+                            "key": "field_6321b9e132729",
+                            "label": "Pardot form fallback",
+                            "name": "pardot_form_fallback",
+                            "type": "textarea",
+                            "instructions": "Insert the iframe code for the form here, if the select box above is not working.\r\nInstructions to get the iframe code: \r\n<a href=\"https:\/\/help.salesforce.com\/s\/articleView?id=sf.pardot_forms_deploying_forms.htm&type=5\" target=\"_blank\">Click here<\/a>",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
                         },
                         {
                             "key": "field_5ff43c8834a3c",
@@ -4419,5 +4476,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1661947093
+    "modified": 1663156084
 }
