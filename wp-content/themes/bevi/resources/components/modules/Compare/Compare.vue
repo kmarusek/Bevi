@@ -55,64 +55,70 @@
 
 
       <div class="comparison--nav block-content py-16 pb-4 px-0 lg:px-48 text-center  block md:hidden">
+        <span id="prev" class="navigator bg-blue" data-index="1"> </span>
+        <span id="next" class="navigator bg-gray-200" data-index="2"> </span>
       </div>
 
-      <div class="comparison--blocks container block-content py-10 pb-4 px-0 mb-16 lg:px-48 flex-columns md:flex z-10">
+      <div id="comparison-slide" class="comparison--blocks container block-content py-10 pb-4 px-0 mb-16 lg:px-48 z-10">
 
-        <div
-            v-for="(item, idx) in block.dispenser"
-            :key="idx"
-            class="comparison--block grow md:w-1/2 bg-grey-light m-3">
+        <div class="swipe-wrap block md:flex">
 
-          <div class="w-full text-center">
-            <div class="h-62 flex items-end">
-              <div class="w-full content-center">
-                <img
-                    :src="item.image"
-                    class="max-h-80 inline object-bottom"
-                    alt="Dispenser"
-                />
-              </div>
-            </div>
-            <h3 class="gsap-fades mt-4 text-2.5xl font-semibold mt-6 text-blue-500">{{ item.title }}</h3>
-            <p class="gsap-fades mt-0 mb-12 px-24 text-small">{{ item.description }}</p>
-          </div>
-          <div class="w-full bg-gray-200 px-8 py-6 rounded-2xl">
+          <div
+              v-for="(item, idx) in block.dispenser"
+              :key="idx"
+              class="comparison--block bg-grey-light p-3 md:p-0 md:m-3">
 
-            <div
-                v-for="(feature, idx) in item.features"
-                :key="idx"
-                class="flex my-6 gsap-fade">
-              <div class="flex-auto w-5/6 text-gray-700 text-lg">{{ feature.feature }}</div>
-              <div class="flex-auto text-right">
-                <img
-                    :src= "feature.enabled === true ? '/wp-content/themes/bevi/dist/images/chk-true.png' : '/wp-content/themes/bevi/dist/images/chk-false.png'"
-                    class="inline"
-                    alt=""
-                >
-              </div>
-            </div>
-
-            <div
-                v-for="(property, idx) in item.properties"
-                :key="idx"
-                class="flex my-2 py-2 border-t border-gray mt-4">
-              <div class="flex-auto w-1/2 text-gray-700 text-lg">{{ property.property }}</div>
-              <div class="flex-auto w-1/2 text-right">
-                <div class="w-full font-bold text-lg">
-                  {{ property.property_value }}
-                </div>
-                <div class="w-full text-sm">
-                  {{ property.property_info }}
+            <div class="w-full text-center">
+              <div class="h-62 flex items-end">
+                <div class="w-full content-center">
+                  <img
+                      :src="item.image"
+                      class="max-h-80 inline object-bottom"
+                      alt="Dispenser"
+                  />
                 </div>
               </div>
+              <h3 class="gsap-fades mt-4 text-2.5xl font-semibold mt-6 text-blue-500">{{ item.title }}</h3>
+              <p class="gsap-fades mt-0 mb-12 px-24 text-small">{{ item.description }}</p>
             </div>
+            <div class="w-full bg-gray-200 px-8 py-6 rounded-2xl">
 
-            <a
-                v-if="item.cta"
-                v-bind:href="item.cta.url"
-                :class="item.cta_color === true? 'btn w-full mb-2' : 'block rounded-full font-bold py-3 px-3 text-center w-full mb-2 text-blue bg-transparent border border-2 border-blue hover:text-white hover:bg-blue transform transition duration-500'"
-            >{{ item.cta.title }}</a>
+              <div
+                  v-for="(feature, idx) in item.features"
+                  :key="idx"
+                  class="flex my-6 gsap-fade">
+                <div class="flex-auto w-5/6 text-gray-700 text-lg">{{ feature.feature }}</div>
+                <div class="flex-auto text-right">
+                  <img
+                      :src= "feature.enabled === true ? '/wp-content/themes/bevi/dist/images/chk-true.png' : '/wp-content/themes/bevi/dist/images/chk-false.png'"
+                      class="inline"
+                      alt=""
+                  >
+                </div>
+              </div>
+
+              <div
+                  v-for="(property, idx) in item.properties"
+                  :key="idx"
+                  class="flex my-2 py-2 border-t border-gray mt-4">
+                <div class="flex-auto w-1/2 text-gray-700 text-lg">{{ property.property }}</div>
+                <div class="flex-auto w-1/2 text-right">
+                  <div class="w-full font-bold text-lg">
+                    {{ property.property_value }}
+                  </div>
+                  <div class="w-full text-sm">
+                    {{ property.property_info }}
+                  </div>
+                </div>
+              </div>
+
+              <a
+                  v-if="item.cta"
+                  v-bind:href="item.cta.url"
+                  :class="item.cta_color === true? 'btn w-full mb-2' : 'block rounded-full font-bold py-3 px-3 text-center w-full mb-2 text-blue bg-transparent border border-2 border-blue hover:text-white hover:bg-blue transform transition duration-500'"
+              >{{ item.cta.title }}</a>
+
+            </div>
 
           </div>
 
@@ -122,6 +128,13 @@
 
     </div>
   </section>
+
+  <!--section id="demo">
+    <div class="demo-controls">
+      <a class="btn btn-primary" id="prev">Prev</a>
+      <a class="btn btn-primary" id="next">Next</a>
+    </div>
+  </section-->
 
 </template>
 
@@ -143,6 +156,28 @@
   margin: 4px;
   border-radius: 2px;
 }
+
+
+   /* Swipe 2 required styles */
+
+ .swipe {
+   overflow: hidden;
+   visibility: hidden;
+   position: relative;
+ }
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > div {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+/* END required styles */
+
+
 </style>
 
 <script>
@@ -154,7 +189,7 @@ export default {
     },
   },
   mounted() {
-
+/*
     jQuery('.comparison--blocks').each(function () {
       var isMobile = (jQuery(this).children('.comparison--block:not(:first-child)').css('display') === 'none');
       var touchstartX = 0;
@@ -192,7 +227,34 @@ export default {
           }
         }
       });
+      */
 
+
+
+    let carouselcompares;
+    jQuery(document).ready(function () {
+      // pure JS
+      var element = document.getElementById('comparison-slide'),
+          prevBtn = document.getElementById('prev'),
+          nextBtn = document.getElementById('next');
+
+      // using jQuery
+      carouselcompares = jQuery('#comparison-slide');
+      if ( carouselcompares.find('.swipe-wrap').css('display') === 'block' ) {
+        window.mySwipe = carouselcompares.Swipe({
+          startSlide: 0,
+          draggable: true,
+          continuous: true,
+          stopPropagation: true,
+          disableScroll: true,
+          transitionEnd: function(index, element) {
+            jQuery('.comparison--nav .navigator').toggleClass("bg-blue bg-gray-200");
+          }
+        }).data('Swipe');
+      }
+
+      prevBtn.onclick = mySwipe.prev;
+      nextBtn.onclick = mySwipe.next;
     });
   },
 };

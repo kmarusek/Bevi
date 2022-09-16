@@ -3,6 +3,9 @@ import { createApp } from 'vue';
 
 import { registerScrollSpy } from 'vue3-scroll-spy';
 
+
+import Swipe from './slider';
+
 // Plugins
 import iframeResizer from 'iframe-resizer';
 import gsap from 'gsap';
