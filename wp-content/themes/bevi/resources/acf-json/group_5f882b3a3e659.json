@@ -4445,7 +4445,7 @@
                 },
                 "layout_632482f33954b": {
                     "key": "layout_632482f33954b",
-                    "name": "gravity_form",
+                    "name": "gravityform",
                     "label": "Gravity form",
                     "display": "block",
                     "sub_fields": [
@@ -4503,5 +4503,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1663337293
+    "modified": 1663339392
 }

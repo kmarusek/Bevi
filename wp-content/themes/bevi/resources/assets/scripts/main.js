@@ -50,6 +50,7 @@ import ImageGallery from '~/components/modules/ImageGallery/ImageGallery';
 import Sidenav from '~/components/modules/Sidenav/Sidenav';
 import Events from '~/components/modules/Events/Events';
 import Compare from '~/components/modules/Compare/Compare';
+import GravityForm from '~/components/modules/GravityForm/GravityForm';
 import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
 import AllFlavors from '~/components/modules/AllFlavors/AllFlavors';
 import FlavorsFilter from '~/components/modules/AllFlavors/FlavorsFilter';
@@ -135,5 +136,6 @@ app.component('PardotForm', PardotForm);
 app.component('Accordion', Accordion);
 app.component('CustomDrinkBuilder', CustomDrinkBuilder);
 app.component('SkipLink', SkipLink);
+app.component('GravityForm', GravityForm);
 
 app.mount('#app');
