@@ -154,11 +154,30 @@
 }
 
 .quiz .gform_wrapper.gravity-theme .imageinput .gfield-choice-input+label {
+  cursor: pointer;
   margin-bottom: 24px;
   vertical-align: middle;
   display: flex;
   width: 100%;
   align-items: center;
+}
+
+.quiz .gform_wrapper.gravity-theme .fancyradio .gfield-choice-input+label {
+  cursor: pointer;
+  margin-bottom: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 48px;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: initial;
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/radio-unchecked.svg");
+}
+
+.quiz .gform_wrapper.gravity-theme .fancyradio .gfield-choice-input:checked+label {
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/radio-checked.svg");
+  color:
 }
 
 .quiz .gform_wrapper.gravity-theme .gf_progressbar_blue {
@@ -186,7 +205,7 @@
   margin-right: 10px;
 }
 
-.quiz .gform_wrapper.gravity-theme .gfield-choice-input:checked+label {
+.quiz .gform_wrapper.gravity-theme .imageinput .gfield-choice-input:checked+label {
   filter: invert(32%) sepia(73%) saturate(3215%) hue-rotate(213deg) brightness(102%) contrast(101%);
 }
 
@@ -213,6 +232,7 @@
   width: 40%;
 }
 
+.quiz .fancyradio .gchoice input,
 .quiz .imageinput .gchoice input {
   display: none !important;
 }
