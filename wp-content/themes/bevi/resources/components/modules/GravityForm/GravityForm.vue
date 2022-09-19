@@ -241,6 +241,7 @@
   width: 80%;
 }
 
+.quiz .gform_button,
 .quiz #gform_submit_button_1,
 .quiz .gform_next_button {
   cursor: pointer;
