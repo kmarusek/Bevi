@@ -237,6 +237,7 @@
   display: none !important;
 }
 
+.quiz .ginput_container.ginput_container_select,
 .quiz .ginput_container.ginput_container_text {
   width: 80%;
 }
