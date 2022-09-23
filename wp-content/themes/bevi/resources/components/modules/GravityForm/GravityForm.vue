@@ -82,19 +82,13 @@
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-3.1.svg");
 }
 
-@media screen and (max-width: 425px) {
-  .quiz .gform-body .gform_page {
-    background-image: none !important;
-  }
-}
-
 .quiz .gform-body .gform_page.result {
   background-image: none;
   padding-top: 0;
 }
 
 .quiz .quiz-1-title {
-  width: 400px;
+  max-width: 400px;
   font-size: 40px;
   font-weight: 600;
   font-stretch: expanded;
@@ -268,6 +262,17 @@
   margin-left: 48px !important;
 }
 
+@media screen and (max-width: 425px) {
+  .quiz .gform-body .gform_page {
+    background-image: none !important;
+    margin: 20px;
+  }
+  .quiz #gform_submit_button_1,
+  .quiz .gform_next_button {
+    float: right;
+  }
+}
+
 .quiz .bubbles {
   z-index: -1;
 }
@@ -297,6 +302,7 @@
   color: #000;
 }
 
+.quiz .gform_wrapper select,
 .quiz .gform_wrapper input[type=text] {
   border-bottom: 1px solid #a8c3e4;  font-size: 14px;
   font-weight: normal;
