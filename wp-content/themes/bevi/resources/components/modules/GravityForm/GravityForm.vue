@@ -59,7 +59,7 @@
 <style>
 
 .quiz .gform-body .gform_page {
-  width: 736px;
+  max-width: 736px;
   min-height: 400px;
   margin: auto;
   border-radius: 24px;
@@ -80,6 +80,12 @@
 
 .quiz .gform-body .gform_page.page3 {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-3.1.svg");
+}
+
+@media screen and (max-width: 425px) {
+  .quiz .gform-body .gform_page {
+    background-image: none !important;
+  }
 }
 
 .quiz .gform-body .gform_page.result {
