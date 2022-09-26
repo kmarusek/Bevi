@@ -2,7 +2,7 @@
 Contributors: MooveAgency
 Donate link: https://www.mooveagency.com/wordpress-plugins/gdpr-cookie-compliance/
 Tags: GDPR, CCPA, cookie banner, cookie law, cookie consent, cookie notice, dsgvo, rgpd
-Stable tag: 4.8.11
+Stable tag: 4.8.12
 Requires at least: 4.5
 Tested up to: 6.0
 Requires PHP: 5.6 or higher
@@ -31,7 +31,7 @@ Cookie Compliance for GDPR & CCPA, European and other cookie law and consent not
 * Sleek animations to enhance the user experience
 * **Mobile responsive** design
 * **SEO friendly**
-* Optimised for **WCAG/ADA compliance**
+* Optimised for **WCAG & ADA compliance**
 * [WPML](https://wpml.org/?aid=85067&affiliate_key=oYH2FlnrApDE), QTranslate, WP Multilang, TranslatePress and Polylang compatible, .pot file for translations included
 * **CDN** base URL supported
 * Supports all major **caching** servers and plugins
@@ -275,6 +275,9 @@ The Brazilian General Data Protection Law (“Lei Geral de Proteção de Dados�
 39. GDPR Cookie Compliance - Front-end - Cookie Shortcode [Premium]
 
 == Changelog ==
+= 4.8.12: 17 August 2022 =
+* WCAG improvements - modal footer buttons
+
 = 4.8.11: 05 August 2022 =
 * WCAG improvements
 
@@ -285,7 +288,7 @@ The Brazilian General Data Protection Law (“Lei Geral de Proteção de Dados�
 * Tabindex filter implemented, snippet added to Documentation
 
 = 4.8.8: 29 June 2022 =
-* Logo queries optimized
+* Logo queries optimised
 
 = 4.8.7: 14 June 2022 =
 * Added support for TranslatePress plugin
