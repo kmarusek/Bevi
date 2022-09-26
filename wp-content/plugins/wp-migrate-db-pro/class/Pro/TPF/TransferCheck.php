@@ -6,6 +6,7 @@ namespace DeliciousBrains\WPMDB\Pro\TPF;
 use DeliciousBrains\WPMDB\Common\Error\ErrorLog;
 use DeliciousBrains\WPMDB\Common\FormData\FormData;
 use DeliciousBrains\WPMDB\Common\Http\Http;
+use DeliciousBrains\WPMDB\Common\MigrationPersistence\Persistence;
 
 class TransferCheck {
 
@@ -46,7 +47,7 @@ class TransferCheck {
 		// ***+=== @TODO - revisit usage of parse_migration_form_data
 		$form_data = $this->form_data->parse_and_save_migration_form_data($state_data['form_data'] );
 
-        if (!in_array('theme_files', $form_data['current_migration']['stages']) && !in_array('plugin_files', $form_data['current_migration']['stages'])) {
+		if (empty(array_diff(['theme_files', 'plugin_files', 'muplugins', 'other_files'], $form_data['current_migration']['stages']))) {
 			return;
 		}
 
@@ -55,7 +56,7 @@ class TransferCheck {
 
 			return $this->http->end_ajax( json_encode( [
 				'wpmdb_error' => 1,
-				'body'        => __( 'A problem occurred starting the Theme & Plugin files migration.', 'wp-migrate-db' ),
+				'body'        => __( 'A problem occurred starting the Themes & Plugins migration.', 'wp-migrate-db' ),
 			] ) );
 		}
 
@@ -64,13 +65,13 @@ class TransferCheck {
 		$tmp_folder_writable = $site_details['local_tmp_folder_writable'];
 
 		// $tmp_folder_writable is `null` if remote doesn't have T&P addon installed
-		if ( false !== $tmp_folder_writable ) {
+		if ( false !== $tmp_folder_writable || false !== Persistence::getRemoteWPECookie() ) {
 			return;
 		}
 
 		$tmp_folder_error_message = isset( $site_details['local_tmp_folder_check']['message'] ) ? $site_details['local_tmp_folder_check']['message'] : '';
 
-		$error_message = __( 'Unfortunately it looks like we can\'t migrate your theme or plugin files. However, running a migration without theme and plugin files should work. Please uncheck the Theme Files checkbox, uncheck the Plugin Files checkbox, and try your migration again.', 'wp-migrate-db' );
+		$error_message = __( 'Unfortunately it looks like we can\'t migrate your themes or plugins. However, running a migration without themes and plugins should work. Please uncheck the Themes checkbox, uncheck the Plugins checkbox, and try your migration again.', 'wp-migrate-db' );
 		$link          = 'https://deliciousbrains.com/wp-migrate-db-pro/doc/theme-plugin-files-errors/';
 		$more          = __( 'More Details »', 'wp-migrate-db' );
 
