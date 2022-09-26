@@ -170,6 +170,8 @@ class UserAvatar
 
         $size = apply_filters('ppress_user_avatar_image_size', absint($size), $id_or_email);
 
+        if ($original === true) $size = 800;
+
         $avatar_url = get_avatar_url($id_or_email, ['size' => $size, 'ppress-full' => $original]);
 
         $alt_attr = apply_filters('ppress_avatar_img_alt', ! empty($alt) ? " alt=\"{$alt}\"" : '', $id_or_email);

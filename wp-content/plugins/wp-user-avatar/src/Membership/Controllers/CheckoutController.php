@@ -89,8 +89,7 @@ class CheckoutController extends BaseController
         $response = LoginAuth::login_auth(
             trim($_POST['ppmb_user_login']),
             $_POST['ppmb_user_pass'],
-            true,
-            ppress_plan_checkout_url(absint($_GET['plan']))
+            true
         );
 
         if (is_wp_error($response)) {
@@ -290,7 +289,7 @@ class CheckoutController extends BaseController
                 'redirect_url'      => $process_payment->redirect_url,
                 'gateway_response'  => $process_payment->gateway_response,
                 'error_message'     => $this->alert_message($process_payment->error_message),
-                'order_success_url' => add_query_arg(['payment_method' => $order->payment_method], ppress_get_success_url($order->order_key)),
+                'order_success_url' => ppress_get_success_url($order->order_key, $order->payment_method),
             ]);
 
         } catch (\Exception $e) {
@@ -384,6 +383,8 @@ class CheckoutController extends BaseController
                     esc_html__('Please enter a plan ID.', 'wp-user-avatar')
                 );
             }
+
+            global $cart_vars;
 
             $planObj = ppress_get_plan(absint($_POST['plan_id']));
 

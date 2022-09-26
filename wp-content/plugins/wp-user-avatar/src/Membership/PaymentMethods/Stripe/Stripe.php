@@ -14,7 +14,7 @@ use ProfilePress\Core\Membership\Models\Subscription\SubscriptionEntity;
 use ProfilePress\Core\Membership\Models\Subscription\SubscriptionFactory;
 use ProfilePress\Core\Membership\PaymentMethods\AbstractPaymentMethod;
 use ProfilePress\Core\Membership\PaymentMethods\PaymentMethods;
-use ProfilePress\Core\Membership\PaymentMethods\Stripe\WebhookHandlers\WebhookHandlerInterface;
+use ProfilePress\Core\Membership\PaymentMethods\WebhookHandlerInterface;
 use ProfilePress\Core\Membership\Services\Calculator;
 use ProfilePress\Core\RegisterScripts;
 use ProfilePressVendor\Stripe\Webhook as StripeWebhook;
@@ -28,7 +28,7 @@ class Stripe extends AbstractPaymentMethod
 
         $this->id          = 'stripe';
         $this->title       = 'Credit Card (Stripe)';
-        $this->description = esc_html__('Accept credit card payment via Stripe', 'wp-user-avatar');
+        $this->description = esc_html__('Pay with your credit card via Stripe', 'wp-user-avatar');
 
         $this->method_title       = 'Stripe';
         $this->method_description = esc_html__('Credit card payment method that integrates with your Stripe account.', 'wp-user-avatar');
@@ -38,6 +38,8 @@ class Stripe extends AbstractPaymentMethod
                 '<a target="_blank" href="https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=stripe-gateway-method">', '</a>'
             )
             : '';
+
+        $this->icon = PPRESS_ASSETS_URL . '/images/cards-icon.svg';
 
         $this->supports = [
             self::SUBSCRIPTIONS,
@@ -339,7 +341,7 @@ class Stripe extends AbstractPaymentMethod
         return substr($statement_descriptor, 0, 22);
     }
 
-    public function link_transaction_id($transaction_id)
+    public function link_transaction_id($transaction_id, $order)
     {
         if ( ! empty($transaction_id)) {
             return sprintf('<a target="_blank" href="https://dashboard.stripe.com/payments/%1$s">%1$s</a>', $transaction_id);
@@ -348,7 +350,7 @@ class Stripe extends AbstractPaymentMethod
         return $transaction_id;
     }
 
-    public function link_profile_id($profile_id)
+    public function link_profile_id($profile_id, $subscription)
     {
         if ( ! empty($profile_id)) {
             return sprintf('<a target="_blank" href="https://dashboard.stripe.com/subscriptions/%1$s">%1$s</a>', $profile_id);
@@ -576,6 +578,8 @@ class Stripe extends AbstractPaymentMethod
     {
         try {
 
+            PaymentHelpers::empty_coupon_bucket();
+
             $product_price = PaymentHelpers::get_product_price($subscription, $this->get_statement_descriptor());
 
             if (is_wp_error($product_price)) {
@@ -611,16 +615,27 @@ class Stripe extends AbstractPaymentMethod
 
             if ($plan->has_signup_fee()) {
 
-                $create_session_args['line_items'][] = [
-                    'quantity'   => 1,
-                    'price_data' => [
-                        'unit_amount'  => PaymentHelpers::process_amount($order->total),
-                        'currency'     => ppress_get_currency(),
-                        'product_data' => [
-                            'name' => PaymentHelpers::get_signup_fee_label(),
-                        ],
-                    ]
-                ];
+                $signup_fee = $plan->has_free_trial() ? $order->total : '0';
+
+                if (
+                    ! $plan->has_free_trial() &&
+                    Calculator::init($order->total)->isGreaterThan($subscription->recurring_amount)) {
+                    $signup_fee = Calculator::init($order->total)->minus($subscription->recurring_amount)->val();
+                }
+
+                if (Calculator::init($signup_fee)->isGreaterThanZero()) {
+
+                    $create_session_args['line_items'][] = [
+                        'quantity'   => 1,
+                        'price_data' => [
+                            'unit_amount'  => PaymentHelpers::process_amount($signup_fee),
+                            'currency'     => ppress_get_currency(),
+                            'product_data' => [
+                                'name' => PaymentHelpers::get_signup_fee_label(),
+                            ],
+                        ]
+                    ];
+                }
             }
 
             if ($plan->has_free_trial()) {
@@ -630,6 +645,24 @@ class Stripe extends AbstractPaymentMethod
                 if ($trial_period_days > 0) {
                     $create_session_args['subscription_data']['trial_period_days'] = $trial_period_days;
                 }
+            }
+
+            if (
+                ! $plan->has_free_trial() &&
+                Calculator::init($order->total)->isLessThan($subscription->recurring_amount)
+            ) {
+
+                $discount_amount = Calculator::init($subscription->recurring_amount)->minus($order->total)->val();
+
+                $stripe_coupon = APIClass::stripeClient()->coupons->create([
+                    'amount_off' => PaymentHelpers::process_amount($discount_amount),
+                    'currency'   => ppress_get_currency(),
+                    'duration'   => 'once'
+                ])->toArray();
+
+                $create_session_args['discounts'][] = ['coupon' => $stripe_coupon['id']];
+
+                PaymentHelpers::add_coupon_to_bucket($stripe_coupon['id']);
             }
 
             $create_session_args = apply_filters('ppress_stripe_create_session_args', $create_session_args, $this);
@@ -648,6 +681,7 @@ class Stripe extends AbstractPaymentMethod
             $checkoutResponse = new CheckoutResponse();
 
             if (isset($session_response['url'])) {
+
                 return $checkoutResponse
                     ->set_is_success(true)
                     ->set_redirect_url($session_response['url'])
@@ -679,6 +713,8 @@ class Stripe extends AbstractPaymentMethod
         }
 
         try {
+
+            $stripe_coupon = false;
 
             $customer_id = PaymentHelpers::get_stripe_customer_id($customer);
 
@@ -719,6 +755,8 @@ class Stripe extends AbstractPaymentMethod
 
                 $signup_fee = Calculator::init($order->total)->minus($subscription->recurring_amount)->val();
 
+                // if there is a free trial, no amount is charged hence order total is 0
+                // however if the plan has a signup fee, it becomes the order total hence the below code.
                 if ($plan->has_free_trial()) {
 
                     $signup_fee = $order->total;
@@ -730,7 +768,7 @@ class Stripe extends AbstractPaymentMethod
                     }
                 }
 
-                if ($plan->has_signup_fee()) {
+                if ($plan->has_signup_fee() && Calculator::init($signup_fee)->isGreaterThanZero()) {
 
                     $create_subscription_args['add_invoice_items'][] = [
                         'quantity'   => 1,
@@ -740,6 +778,22 @@ class Stripe extends AbstractPaymentMethod
                             'currency'    => ppress_get_currency(),
                         ]
                     ];
+                }
+
+                if (
+                    ! $plan->has_free_trial() &&
+                    Calculator::init($order->total)->isLessThan($subscription->recurring_amount)
+                ) {
+
+                    $discount_amount = Calculator::init($subscription->recurring_amount)->minus($order->total)->val();
+
+                    $stripe_coupon = APIClass::stripeClient()->coupons->create([
+                        'amount_off' => PaymentHelpers::process_amount($discount_amount),
+                        'currency'   => ppress_get_currency(),
+                        'duration'   => 'once'
+                    ])->toArray();
+
+                    $create_subscription_args['coupon'] = $stripe_coupon['id'];
                 }
 
                 $create_subscription_args = apply_filters('ppress_stripe_create_subscription_args', $create_subscription_args, $this);
@@ -756,10 +810,13 @@ class Stripe extends AbstractPaymentMethod
                     $subscription->update_profile_id($response['id']);
                 }
 
+                if (false !== $stripe_coupon) {
+                    PaymentHelpers::delete_coupon($stripe_coupon['id']);
+                }
+
                 return (new CheckoutResponse())
                     ->set_is_success(true)
                     ->set_gateway_response($response);
-
             }
 
             $create_payment_intent_args = [
@@ -801,6 +858,39 @@ class Stripe extends AbstractPaymentMethod
             return (new CheckoutResponse())
                 ->set_is_success(false)
                 ->set_error_message($e->getMessage());
+        }
+    }
+
+    public function process_refund($order_id, $amount = null, $reason = '')
+    {
+        try {
+
+            $order = OrderFactory::fromId($order_id);
+
+            $response = APIClass::stripeClient()->refunds->create([
+                'payment_intent' => $order->transaction_id,
+            ]);
+
+            switch ($response->status) {
+                case 'succeeded':
+                    return true;
+                case 'pending':
+                    $order->add_note(esc_html__('Refund request is pending', 'profilepress-pro'));
+                    break;
+                case 'failed':
+                    $order->add_note(esc_html__('Refund request failed', 'profilepress-pro'));
+                    break;
+                default:
+                    $order->add_note(sprintf(esc_html__('Refund request failed. Status: %s', 'profilepress-pro'), $response->status));
+                    break;
+            }
+
+            return false;
+
+        } catch (\Exception $e) {
+            ppress_log_error($e->getMessage() . '; OrderID:' . $order_id);
+
+            return false;
         }
     }
 

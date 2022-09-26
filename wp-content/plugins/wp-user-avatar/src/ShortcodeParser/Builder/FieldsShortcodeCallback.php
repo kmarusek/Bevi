@@ -762,6 +762,7 @@ class FieldsShortcodeCallback
 
             $_POST = $this->GET_POST();
 
+            $html .= '<option value="">&mdash;&mdash;&mdash;</option>';
             foreach ($option_values as $option_value => $value) {
 
                 $option_value = is_string($option_value) ? trim($option_value) : '';

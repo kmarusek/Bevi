@@ -238,7 +238,13 @@ class WPListTable extends \WP_List_Table
             }
         }
 
-        if ( ! empty($logged_in_users_rules)) {
+        if ( ! empty($who_can_access) && empty($logged_in_users_rules)) {
+            $html .= sprintf(
+                '<p><strong>%s</strong>', $who_can_access
+            );
+        }
+
+        if ( ! empty($who_can_access) && ! empty($logged_in_users_rules)) {
             foreach ($logged_in_users_rules as $rule) {
                 $html .= sprintf(
                     '<p><strong>%s</strong>%s', $who_can_access,

@@ -32,7 +32,9 @@ class Redirect
 
                 $redirect_url = '';
 
-                $current_url = ppress_get_current_url_query_string();
+                $current_url_raw = ppress_get_current_url_query_string();
+
+                $current_url = untrailingslashit(strtok($current_url_raw, '?'));
 
                 if ('custom_url' == ppress_var($access_condition, 'noaccess_action_redirect_url')) {
                     $redirect_url = ppress_var($access_condition, 'noaccess_action_redirect_custom_url');
@@ -51,11 +53,11 @@ class Redirect
                 $password_reset_url = untrailingslashit(strtok(ppress_password_reset_url(), '?'));
                 $edit_profile_url   = untrailingslashit(strtok(ppress_edit_profile_url(), '?'));
 
-                if (strpos($current_url, $comp_redirect_url) !== false) continue;
-                if (strpos($current_url, $login_url) !== false) continue;
-                if (strpos($current_url, $registration_url) !== false) continue;
-                if (strpos($current_url, $password_reset_url) !== false) continue;
-                if (strpos($current_url, $edit_profile_url) !== false) continue;
+                if ($current_url == $comp_redirect_url) continue;
+                if ($current_url == $login_url) continue;
+                if ($current_url == $registration_url) continue;
+                if ($current_url == $password_reset_url) continue;
+                if ($current_url == $edit_profile_url) continue;
 
                 $who_can_access = ppress_var($access_condition, 'who_can_access', 'everyone');
 

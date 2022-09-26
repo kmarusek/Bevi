@@ -157,17 +157,17 @@
         },
         {
             "name": "nesbot\/carbon",
-            "version": "2.60.0",
-            "version_normalized": "2.60.0.0",
+            "version": "2.62.1",
+            "version_normalized": "2.62.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/briannesbitt\/Carbon.git",
-                "reference": "00a259ae02b003c563158b54fb6743252b638ea6"
+                "reference": "01bc4cdefe98ef58d1f9cb31bdbbddddf2a88f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/briannesbitt\/Carbon\/zipball\/00a259ae02b003c563158b54fb6743252b638ea6",
-                "reference": "00a259ae02b003c563158b54fb6743252b638ea6",
+                "url": "https:\/\/api.github.com\/repos\/briannesbitt\/Carbon\/zipball\/01bc4cdefe98ef58d1f9cb31bdbbddddf2a88f7a",
+                "reference": "01bc4cdefe98ef58d1f9cb31bdbbddddf2a88f7a",
                 "shasum": ""
             },
             "require": {
@@ -190,7 +190,7 @@
                 "phpunit\/phpunit": "^7.5.20 || ^8.5.26 || ^9.5.20",
                 "squizlabs\/php_codesniffer": "^3.4"
             },
-            "time": "2022-07-27T15:57:48+00:00",
+            "time": "2022-09-02T07:48:13+00:00",
             "bin": [
                 "bin\/carbon"
             ],
@@ -343,26 +343,26 @@
         },
         {
             "name": "sniccowp\/php-scoper-wordpress-excludes",
-            "version": "6.0.0",
-            "version_normalized": "6.0.0.0",
+            "version": "6.0.1",
+            "version_normalized": "6.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/snicco\/php-scoper-wordpress-excludes.git",
-                "reference": "9fe5eeb044f7837b32df274857a91a635052fa49"
+                "reference": "6fce87f9c5463223013745ec5489967198c11348"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/snicco\/php-scoper-wordpress-excludes\/zipball\/9fe5eeb044f7837b32df274857a91a635052fa49",
-                "reference": "9fe5eeb044f7837b32df274857a91a635052fa49",
+                "url": "https:\/\/api.github.com\/repos\/snicco\/php-scoper-wordpress-excludes\/zipball\/6fce87f9c5463223013745ec5489967198c11348",
+                "reference": "6fce87f9c5463223013745ec5489967198c11348",
                 "shasum": ""
             },
             "require-dev": {
                 "php": "^7.4",
                 "php-stubs\/wordpress-globals": "0.2.0",
-                "php-stubs\/wordpress-stubs": "6.0.0",
+                "php-stubs\/wordpress-stubs": "6.0.1",
                 "sniccowp\/php-scoper-excludes": "dev-master"
             },
-            "time": "2022-05-27T01:48:22+00:00",
+            "time": "2022-07-16T01:54:10+00:00",
             "type": "library",
             "installation-source": "dist",
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -387,7 +387,7 @@
             ],
             "support": {
                 "issues": "https:\/\/github.com\/snicco\/php-scoper-wordpress-excludes\/issues",
-                "source": "https:\/\/github.com\/snicco\/php-scoper-wordpress-excludes\/tree\/6.0.0"
+                "source": "https:\/\/github.com\/snicco\/php-scoper-wordpress-excludes\/tree\/6.0.1"
             },
             "install-path": "..\/sniccowp\/php-scoper-wordpress-excludes"
         },
@@ -697,17 +697,17 @@
         },
         {
             "name": "symfony\/translation",
-            "version": "v4.4.44",
-            "version_normalized": "4.4.44.0",
+            "version": "v4.4.45",
+            "version_normalized": "4.4.45.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/translation.git",
-                "reference": "af947fefc306cec6ea5a1f6160c7e305a71f2493"
+                "reference": "4e6b4c0dbeb04d6f004ed7f43eb0905ce8396def"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/translation\/zipball\/af947fefc306cec6ea5a1f6160c7e305a71f2493",
-                "reference": "af947fefc306cec6ea5a1f6160c7e305a71f2493",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/translation\/zipball\/4e6b4c0dbeb04d6f004ed7f43eb0905ce8396def",
+                "reference": "4e6b4c0dbeb04d6f004ed7f43eb0905ce8396def",
                 "shasum": ""
             },
             "require": {
@@ -741,7 +741,7 @@
                 "symfony\/config": "",
                 "symfony\/yaml": ""
             },
-            "time": "2022-07-20T09:59:04+00:00",
+            "time": "2022-08-02T12:44:49+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -769,7 +769,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https:\/\/symfony.com",
             "support": {
-                "source": "https:\/\/github.com\/symfony\/translation\/tree\/v4.4.44"
+                "source": "https:\/\/github.com\/symfony\/translation\/tree\/v4.4.45"
             },
             "funding": [
                 {

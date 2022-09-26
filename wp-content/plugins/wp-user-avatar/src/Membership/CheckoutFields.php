@@ -358,7 +358,7 @@ class CheckoutFields
         if (in_array($field_id, $standard_billing_fields_keys) || in_array($field_id, array_keys($custom_fields))) {
 
             $args = [
-                'key'      => $payment_method . '_' . $field_id,
+                'key'      => in_array($field_id, $standard_billing_fields_keys) ? $payment_method . '_' . $field_id : $field_id,
                 'type'     => $field_type,
                 'id'       => self::get_field_id($field_id, $payment_method),
                 'class'    => 'ppress-checkout-field__input ' . $field_id,

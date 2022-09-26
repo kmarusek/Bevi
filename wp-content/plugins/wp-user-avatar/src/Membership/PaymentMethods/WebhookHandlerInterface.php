@@ -1,6 +1,6 @@
 <?php
 
-namespace ProfilePress\Core\Membership\PaymentMethods\Stripe\WebhookHandlers;
+namespace ProfilePress\Core\Membership\PaymentMethods;
 
 interface WebhookHandlerInterface
 {

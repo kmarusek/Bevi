@@ -1,20 +1,20 @@
 ﻿=== Paid Membership, User Registration, User Profile & Restrict Content Plugin – ProfilePress ===
 Contributors: properfraction, collizo4sky
 Donate link: https://profilepress.com/pricing/
-Tags: membership, ecommerce, user registration, user profile, stripe, login form, 2fa, two-factor authenticator, login, registration, password reset, members, users, profile, front-end profile, edit profile, avatar, profile picture
+Tags: membership, ecommerce, user registration, user profile, stripe, paypal, login form, 2fa, two-factor authenticator, login, registration, password reset, members, users, profile, front-end profile, edit profile, avatar, profile picture
 Requires at least: 5.3
 Requires PHP: 7.1.8
 Tested up to: 6.0
-Stable tag: 4.0.3
+Stable tag: 4.1.4
 License: GPLv2 or later
 
-WordPress paid membership plugin: accept payments, sell subscriptions, restrict content, user registration, frontend login form, user profile & member directory.
+Paid membership plugin: accept payments, sell subscriptions, restrict content, user registration, frontend login form, user profile & member directory.
 
 == Description ==
 
 = Modern Membership, User Registration, Profile & Login Form Plugin =
 
-[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful eCommerce and paid membership plugin for accepting one-time and recurring payments and selling subscriptions via Stripe as well as restricting content and control user access.
+[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful eCommerce and paid membership plugin for accepting one-time and recurring payments and selling subscriptions via Stripe & PayPal, restrict content and control user access.
 
 ProfilePress lets you create beautiful user profiles, member directories, frontend login, and user registration forms, password reset and edit profile forms.
 
@@ -28,7 +28,7 @@ ProfilePress is suited for selling non-physical goods, including online courses,
 
 = Multiple Payment Processors =
 
-Easily connect to Stripe to collect payments. We are working on adding additional gateways (PayPal, Mollie, Square, PayStack, RazorPay, Mercado Pago) in the future.
+Easily connect to Stripe & PayPal to collect payments. We are working on adding additional gateways (Mollie, Square, PayStack, RazorPay, Mercado Pago) in the future.
 
 = Powerful Payment Options =
 
@@ -69,6 +69,8 @@ Never start from scratch again. ProfilePress comes with several beautiful, custo
 
 ProfilePress gives you fine-grained control over what content your users can see based on your [protection rules](https://profilepress.com/article/adding-content-protection-rules/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) and [shortcodes](https://profilepress.com/article/wordpress-content-restriction-shortcodes/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion). You can restrict content including pages, child pages, posts, custom post types, categories, tags and custom taxonomies based on their membership plans, user roles, usernames, and logged-in status.
 
+You can also control the visibility of [navigation menus](https://profilepress.com/article/wordpress-navigation-menu-restriction/) and widgets, modules & contents in [Elementor](https://profilepress.com/article/restrict-elementor-sections-widgets/) & [Beaver Builder](https://profilepress.com/article/restrict-content-beaver-builder-visibility/).
+
 = Detailed eCommerce Reports =
 
 We provide a complete reports section where you can Keep track of your earnings, refunds, sales, and more. You can view reports for any period or drill down to specific membership plans.
@@ -88,6 +90,7 @@ Customize the email templates for each email that can be sent to users and admin
 
 Extend the capabilities of ProfilePress with our powerful addons and remove the additional 2% Stripe processing fee.
 
+* [PayPal Checkout](https://profilepress.com/addons/paypal/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept payments including Visa, Mastercard, Venmo, Discover, iDEAL, American Express, Bancontact, BLIK, giropay, MyBank, Przelewy24 via PayPal.
 * [Custom Fields](https://profilepress.com/addons/custom-fields/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Collect additional information from users besides the standard profile data.
 * [Email Confirmation](https://profilepress.com/addons/email-confirmation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Ensure registered users confirm their email addresses before they can log in.
 * [User Moderation](https://profilepress.com/addons/user-moderation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Decide whether to approve newly registered users or not. You can also block and unblock users at any time.
@@ -143,22 +146,24 @@ No. You can create and manage your forms, user profiles, and member directories 
 
 == Changelog ==
 
-= 4.0.3 =
-* Fixed critical bug causing checkout not to work.
-* Fixed bug where plan with empty description caused checkout not to work.
-* Enhancement: Added endpoint as class to My Account tabs.
+= 4.1.4 =
+* Updated Stripe API to 2022-08-01.
+* Fixed blurry gravatar in member directory.
+* Fixed bug with [custom fields](https://profilepress.com/addons/custom-fields/) not showing up in checkout
+* Fixed bug where content protection listing page had missing Access info.
+* Fixed bug with add new content protection page displaying multiple sidebars.
+* Fixed bug with children of core pages not getting protected.
 
-= 4.0.2 =
-* Enhancement: Store admin bar menu now only display for active store.
-* Fixed bug where Stripe scripts were loaded when not enabled.
-* Fixed bug where pages where auto-created.
-
-= 4.0.1 =
-* Fixed bug with member directory role restriction not working.
-* Fixed: Uncaught Error: Call to a member function exists().
-
-= 4.0.0 =
-* Added [paid membership feature](https://profilepress.com/announcing-paid-membership/?ref=changelog).
-* Fixed bug where upload field with data is still required.
+= 4.1.3 =
+* Added [navigation menu protection](https://profilepress.com/article/wordpress-navigation-menu-restriction/).
+* Added [Elementor content restriction](https://profilepress.com/article/restrict-elementor-sections-widgets/).
+* Added [Beaver Builder content restriction](https://profilepress.com/article/restrict-content-beaver-builder-visibility/).
+* Added support for discounting subscription first payment.
+* Added support for [purchase note](https://profilepress.com/article/plan-purchase-note/?ref=changelog).
+* Added support for [checking active subscription via PHP](https://profilepress.com/article/php-check-user-has-active-subscription/).
+* Fixed bug where new order creation with missing payment method failed.
+* Fixed couple of date/time related query bugs.
+* Fixed bug where cancelled one-time subscription was still active.
+* Fixed bug where non-completed order email receipt can be sent.
 
 See the [changelog file](https://plugins.svn.wordpress.org/wp-user-avatar/trunk/changelog.txt) for full change log information.
