@@ -33,6 +33,7 @@ final class Transaction extends \Sentry\Tracing\Span
         parent::__construct($context);
         $this->hub = $hub ?? \Sentry\SentrySdk::getCurrentHub();
         $this->name = $context->getName();
+        $this->transaction = $this;
     }
     /**
      * Gets the name of this transaction.

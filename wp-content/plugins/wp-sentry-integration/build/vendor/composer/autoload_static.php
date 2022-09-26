@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite6959121e58d048ae46f77b4be44fac4
+class ComposerStaticInitc66a155dae6e4421813ad4e36829b2fe
 {
     public static $files = array (
         'wp-sentry-7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -359,6 +359,7 @@ class ComposerStaticInite6959121e58d048ae46f77b4be44fac4
         'WPSentry\\ScopedVendor\\GuzzleHttp\\Psr7\\StreamWrapper' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/StreamWrapper.php',
         'WPSentry\\ScopedVendor\\GuzzleHttp\\Psr7\\UploadedFile' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UploadedFile.php',
         'WPSentry\\ScopedVendor\\GuzzleHttp\\Psr7\\Uri' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Uri.php',
+        'WPSentry\\ScopedVendor\\GuzzleHttp\\Psr7\\UriComparator' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriComparator.php',
         'WPSentry\\ScopedVendor\\GuzzleHttp\\Psr7\\UriNormalizer' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriNormalizer.php',
         'WPSentry\\ScopedVendor\\GuzzleHttp\\Psr7\\UriResolver' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/UriResolver.php',
         'WPSentry\\ScopedVendor\\GuzzleHttp\\Psr7\\Utils' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/Utils.php',
@@ -574,9 +575,9 @@ class ComposerStaticInite6959121e58d048ae46f77b4be44fac4
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite6959121e58d048ae46f77b4be44fac4::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite6959121e58d048ae46f77b4be44fac4::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite6959121e58d048ae46f77b4be44fac4::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc66a155dae6e4421813ad4e36829b2fe::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc66a155dae6e4421813ad4e36829b2fe::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitc66a155dae6e4421813ad4e36829b2fe::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -345,11 +345,8 @@ final class Scope
      */
     public function getTransaction() : ?\Sentry\Tracing\Transaction
     {
-        $span = $this->span;
-        if (null !== $span && null !== $span->getSpanRecorder() && !empty($span->getSpanRecorder()->getSpans())) {
-            // The first span in the recorder is considered to be a Transaction
-            /** @var Transaction */
-            return $span->getSpanRecorder()->getSpans()[0];
+        if (null !== $this->span) {
+            return $this->span->getTransaction();
         }
         return null;
     }

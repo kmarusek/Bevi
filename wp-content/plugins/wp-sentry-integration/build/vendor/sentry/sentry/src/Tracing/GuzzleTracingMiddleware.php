@@ -28,7 +28,7 @@ final class GuzzleTracingMiddleware
                 $spanContext->setOp('http.client');
                 $spanContext->setDescription($request->getMethod() . ' ' . $request->getUri());
                 $childSpan = $span->startChild($spanContext);
-                $request->withHeader('sentry-trace', $childSpan->toTraceparent());
+                $request = $request->withHeader('sentry-trace', $childSpan->toTraceparent());
                 $handlerPromiseCallback = static function ($responseOrException) use($hub, $request, $childSpan) {
                     // We finish the span (which means setting the span end timestamp) first to ensure the measured time
                     // the span spans is as close to only the HTTP request time and do the data collection afterwards
