@@ -1,9 +1,20 @@
 <template>
+  <section class="container mx-auto bg-white">
+    <div class="relative flex flex-col overflow-hidden">
+      <div class="grid grid-cols-5 gap-4 mt-24 h-header">
+        <div class="col-span-5 md:col-span-2 relative h-full flex items-align-center">
+          <h1 v-bind:style="{ 'background-image': 'url(/wp-content/themes/bevi/dist/images/eventblob.png)' }" class="heading-two text-center block w-72 h-64 bg-cover m-auto align-middle pt-24">{{ block.main_title }}</h1>
+        </div>
+        <div v-bind:style="{ 'background-image': 'url(' + block.top_image + ')' }" class="col-start-1 md:col-start-3 col-span-3 hidden md:block h-full bg-cover halfborder">
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="container mx-auto bg-gray-100">
     <div class="relative flex min-h-screen flex-col overflow-hidden">
 
       <div class="block-content py-16 pb-4 px-0 lg:px-48" data-v-c5a16a1c="">
-        <h1 class="gsap-fades my-4 heading-two">{{ block.events_title }}</h1>
+        <!--h1 class="gsap-fades my-4 heading-two">{{ block.events_title }}</h1-->
         <div class="grid grid-cols-5 gap-4">
           <div class="col-start-1 col-end-6 md:col-end-3">
             <p>{{ block.events_description }}</p>
@@ -92,6 +103,14 @@
 </script>
 
 <style>
+.halfborder {
+  border-bottom-left-radius: 60px 35%;
+  border-top-left-radius: 100px 60%;
+}
+
+.h-header {
+  height: 500px;
+}
 .eventcard:hover .eventcard-hover\:text-blue {
   color: #246eff;
 }
