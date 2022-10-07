@@ -7,10 +7,10 @@
           <img :src="block.image" class="m-auto" />
           <div class="thankyou-title w-full mt-16">{{ block.title }}</div>
           <div class="desctption w-full">{{ block.description }}</div>
-          <a v-bind:href="block.linkedin_url" class="social mx-2">ICON</a>
-          <a v-bind:href="block.instagram_url" class="social mx-2">ICON</a>
-          <a v-bind:href="block.facebook_url" class="social mx-2">ICON</a>
-          <a v-bind:href="block.twitter_url" class="social mx-2">ICON</a>
+          <a v-bind:href="block.linkedin_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Linkedin.svg" /></a>
+          <a v-bind:href="block.instagram_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Instagram.svg" /></a>
+          <a v-bind:href="block.facebook_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Facebook.svg" /></a>
+          <a v-bind:href="block.twitter_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Twitter.svg" /></a>
 
         </div>
       </div>
@@ -137,6 +137,7 @@
 .thankyou--body .social {
   width: 48px;
   height: 48px;
+  display: inline-block;
 }
 
 </style>
