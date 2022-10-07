@@ -1,0 +1,1 @@
+<thank-you :block="{{ json_encode($block) }}"></thank-you>

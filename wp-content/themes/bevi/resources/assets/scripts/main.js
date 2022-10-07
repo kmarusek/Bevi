@@ -51,6 +51,7 @@ import Sidenav from '~/components/modules/Sidenav/Sidenav';
 import Events from '~/components/modules/Events/Events';
 import Compare from '~/components/modules/Compare/Compare';
 import GravityForm from '~/components/modules/GravityForm/GravityForm';
+import ThankYou from '~/components/modules/ThankYou/ThankYou';
 import AuthorBlock from '~/components/modules/AuthorBlock/AuthorBlock';
 import AllFlavors from '~/components/modules/AllFlavors/AllFlavors';
 import FlavorsFilter from '~/components/modules/AllFlavors/FlavorsFilter';
@@ -137,5 +138,6 @@ app.component('Accordion', Accordion);
 app.component('CustomDrinkBuilder', CustomDrinkBuilder);
 app.component('SkipLink', SkipLink);
 app.component('GravityForm', GravityForm);
+app.component('ThankYou', ThankYou);
 
 app.mount('#app');
