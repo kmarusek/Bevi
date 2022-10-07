@@ -3,7 +3,7 @@
     <div class="relative flex flex-col overflow-hidden">
       <div class="grid grid-cols-5 gap-4 mt-24 h-header">
         <div class="col-span-5 md:col-span-2 relative h-full flex items-align-center">
-          <h1 v-bind:style="{ 'background-image': 'url(/wp-content/themes/bevi/dist/images/eventblob.png)' }" class="heading-two text-center block w-72 h-64 bg-cover m-auto align-middle pt-24">{{ block.main_title }}</h1>
+          <h1 v-bind:style="{ 'background-image': 'url(/wp-content/themes/bevi/dist/images/eventblob.png)' }" class="heading-two text-center block w-72 h-64 bg-cover m-auto align-middle eventblobtext">{{ block.main_title }}</h1>
         </div>
         <div v-bind:style="{ 'background-image': 'url(' + block.top_image + ')' }" class="col-start-1 md:col-start-3 col-span-3 hidden md:block h-full bg-cover halfborder">
         </div>
@@ -104,8 +104,11 @@
 
 <style>
 .halfborder {
-  border-bottom-left-radius: 60px 35%;
-  border-top-left-radius: 100px 60%;
+  clip-path: circle(600px at 75% 60%);
+}
+
+.eventblobtext {
+  padding-top: 105px;
 }
 
 .h-header {
