@@ -4,7 +4,7 @@
     <div class="relative flex flex-col overflow-hidden">
       <div class="block-content">
         <div class="thankyou--body my-4 text-center">
-          <img :src="block.image" />
+          <img :src="block.image" class="m-auto" />
           <div class="thankyou-title w-full mt-16">{{ block.title }}</div>
           <div class="desctption w-full">{{ block.description }}</div>
           <a v-bind:href="block.linkedin_url" class="social mx-2">ICON</a>
