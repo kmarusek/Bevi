@@ -124,4 +124,19 @@
 .clip-polygon {
   clip-path: circle(50% at center);
 }
+@media screen and (max-width: 1440px) {
+  .halfborder {
+    clip-path: circle(600px at 85% 60%);
+  }
+}
+@media screen and (max-width: 1024px) {
+  .halfborder {
+    clip-path: circle(600px at 105% 60%);
+  }
+}
+@media screen and (max-width: 768px) {
+  .halfborder {
+    clip-path: circle(600px at 140% 60%);
+  }
+}
 </style>
