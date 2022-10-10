@@ -1,13 +1,13 @@
 <template>
 
-  <section class="quiz w-full bg-gray-200 py-24">
+  <section class="quiz w-full bg-gray-200 py-16 md:py-24">
     <div class="relative flex flex-col overflow-hidden">
       <div class="block-content">
         <div class="thankyou--body my-4 text-center">
           <img :src="block.image" class="m-auto" />
           <div class="thankyou-title w-full mt-16">{{ block.title }}</div>
           <div class="desctption w-full">{{ block.description }}</div>
-          <a v-bind:href="block.linkedin_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Linkedin.svg" /></a>
+          <a v-bind:href="block.linkedin_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/LinkedIn.svg" /></a>
           <a v-bind:href="block.instagram_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Instagram.svg" /></a>
           <a v-bind:href="block.facebook_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Facebook.svg" /></a>
           <a v-bind:href="block.twitter_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Twitter.svg" /></a>
@@ -128,6 +128,9 @@
     letter-spacing: 1.5px;
     text-align: left;
     color: #00223e;
+  }
+  .thankyou--body .desctption {
+    font-size: 14px;
   }
 }
 
