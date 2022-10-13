@@ -104,7 +104,7 @@
 
 <style>
 .halfborder {
-  clip-path: circle(600px at 75% 60%);
+  clip-path: circle(600px at 82% 60%);
 }
 
 .eventblobtext {
