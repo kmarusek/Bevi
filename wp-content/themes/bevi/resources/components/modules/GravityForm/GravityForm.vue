@@ -240,11 +240,6 @@
   display: none !important;
 }
 
-.quiz .ginput_container.ginput_container_select,
-.quiz .ginput_container.ginput_container_text {
-  width: 80%;
-}
-
 .quiz .gform_button,
 .quiz #gform_submit_button_1,
 .quiz .gform_next_button {
