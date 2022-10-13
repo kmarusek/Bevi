@@ -86,6 +86,9 @@
   background-image: none;
   padding-top: 0;
 }
+#gform_page_2_11 {
+  padding-top: 48px !important;
+}
 
 .quiz .quiz-1-title {
   max-width: 400px;
@@ -304,6 +307,8 @@
 }
 
 .quiz .gform_wrapper select,
+.quiz .gform_wrapper input[type=tel],
+.quiz .gform_wrapper input[type=email],
 .quiz .gform_wrapper input[type=text] {
   border-bottom: 1px solid #a8c3e4;  font-size: 14px;
   font-weight: normal;
@@ -313,6 +318,9 @@
   letter-spacing: 0.56px;
   text-align: left;
   color: #aaa;
+}
+.quiz .gform_wrapper select {
+  height: 41px;
 }
 
 .quiz .gform_wrapper .ginput_container_select,
