@@ -120,7 +120,7 @@
                 <a
                     v-if="item.cta"
                     v-bind:href="item.cta.url"
-                    :class="item.cta_color === true? 'btn w-full mb-2' : 'block rounded-full font-bold py-3 px-3 text-center w-full mb-2 text-blue bg-transparent border border-2 border-blue hover:text-white hover:bg-blue transform transition duration-500'"
+                    :class="item.cta_color === true? 'btn w-full mb-2' : 'btn outline-blue w-full mb-2'"
                 >{{ item.cta.title }}</a>
 
               </div>
