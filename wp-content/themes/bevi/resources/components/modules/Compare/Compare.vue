@@ -156,9 +156,15 @@
 <style>
 .comparison {
   background-image: url("/wp-content/themes/bevi/dist/images/bluewave.png");
-  background-position: bottom;
+  background-position: left bottom -600px;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@media screen and (max-width: 425px) {
+  .comparison {
+    background-position: left bottom -350px;
+  }
 }
 
 .max-h-80 {
