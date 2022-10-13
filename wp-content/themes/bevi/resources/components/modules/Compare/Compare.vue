@@ -84,7 +84,7 @@
                   </div>
                 </div>
                 <h3 class="gsap-fades mt-4 text-2.5xl font-semibold mt-6 text-blue-500">{{ item.title }}</h3>
-                <p class="gsap-fades mt-0 mb-12 px-24 text-small">{{ item.description }}</p>
+                <p class="gsap-fades mt-0 mb-12 px-16 text-small">{{ item.description }}</p>
               </div>
               <div class="w-full bg-gray-200 px-8 py-6 rounded-2xl">
 
@@ -155,7 +155,7 @@
 
 <style>
 .comparison {
-  background-image: url("/wp-content/themes/bevi/dist/images/bluewave.png");
+  background-image: url("/wp-content/themes/bevi/dist/images/bluewavebig.png");
   background-position: left bottom -600px;
   background-repeat: no-repeat;
   background-size: cover;

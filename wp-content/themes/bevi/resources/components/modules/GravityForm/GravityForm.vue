@@ -313,6 +313,10 @@
   letter-spacing: 0.56px;
   text-align: left;
   color: #aaa;
+}
+
+.quiz .gform_wrapper .ginput_container_select,
+.quiz .gform_wrapper input[type=text] {
   padding-left: 30px !important;
   background-position: left;
   background-repeat: no-repeat;
@@ -323,7 +327,7 @@
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/map.svg");
 }
 
-.quiz .people select,
+.quiz .people .ginput_container_select,
 .quiz .people input {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/people.svg");
 }
