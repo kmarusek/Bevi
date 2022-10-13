@@ -129,12 +129,12 @@
     clip-path: circle(600px at 85% 60%);
   }
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1439px) {
   .halfborder {
     clip-path: circle(600px at 105% 60%);
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1023px) {
   .halfborder {
     clip-path: circle(600px at 140% 60%);
   }
