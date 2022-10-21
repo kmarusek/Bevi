@@ -77,11 +77,12 @@
 .quiz .gform-body .gform_page.page2 {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.1.svg");
 }
-
+.quiz .gform-body #gform_page_2_4 {
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.4.svg");
+}
 .quiz .gform-body .gform_page.page3 {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-3.1.svg");
 }
-
 .quiz .gform-body .gform_page.result {
   background-image: none;
   padding-top: 0;
@@ -92,6 +93,10 @@
 }
 #gform_page_2_4 .gform_button {
   margin-left: 75px !important;
+}
+#gform_page_2_4 .qustion-2_4-svg img{
+    height: 100px;
+    margin-bottom: 48px;
 }
 #gform_page_2_11 {
   padding-top: 48px !important;
@@ -246,7 +251,9 @@
 .quiz .imageinput .gchoice input {
   display: none !important;
 }
-
+#gform_page_2_4 .gform_button {
+  background-color: #4b273a;
+}
 .quiz .gform_button,
 .quiz #gform_submit_button_1,
 .quiz .gform_next_button {
@@ -271,6 +278,10 @@
 @media screen and (max-width: 425px) {
   #gform_page_2_4 .gform_page_footer {
   bottom: 35px;
+  }
+  #gform_page_2_4 .qustion-2_4-svg img{
+    height: 64px;
+    margin-bottom: 40px;
   }
   .quiz .gform-body .gform_page {
     background-image: none !important;
