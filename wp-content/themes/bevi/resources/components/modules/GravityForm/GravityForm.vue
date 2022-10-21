@@ -86,6 +86,13 @@
   background-image: none;
   padding-top: 0;
 }
+#gform_page_2_4 .gform_page_footer {
+  position: absolute;
+  bottom: 28px;
+}
+#gform_page_2_4 .gform_button {
+  margin-left: 75px !important;
+}
 #gform_page_2_11 {
   padding-top: 48px !important;
 }
@@ -247,7 +254,7 @@
   width: 160px;
   height: 48px;
   display: inline;
-  padding: 16px 40px;
+  padding: 16px 20px;
   border-radius: 24px;
   background-color: #246dff;
   font-size: 16px;
@@ -262,6 +269,9 @@
 }
 
 @media screen and (max-width: 425px) {
+  #gform_page_2_4 .gform_page_footer {
+  bottom: 35px;
+  }
   .quiz .gform-body .gform_page {
     background-image: none !important;
     margin: 20px;
