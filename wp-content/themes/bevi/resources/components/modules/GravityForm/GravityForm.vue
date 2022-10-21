@@ -78,7 +78,7 @@
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.1.svg");
 }
 .quiz .gform-body #gform_page_2_4 {
-  background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.4.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.5.svg");
 }
 .quiz .gform-body .gform_page.page3 {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-3.1.svg");
@@ -94,7 +94,7 @@
 #gform_page_2_4 .gform_button {
   margin-left: 75px !important;
 }
-#gform_page_2_4 .qustion-2_4-svg img{
+#gform_page_2_4 .house-svg img{
     height: 100px;
     margin-bottom: 48px;
 }
