@@ -279,7 +279,7 @@
   #gform_page_2_4 .gform_page_footer {
   bottom: 35px;
   }
-  #gform_page_2_4 .qustion-2_4-svg img{
+  #gform_page_2_4 .house-svg img{
     height: 64px;
     margin-bottom: 40px;
   }
