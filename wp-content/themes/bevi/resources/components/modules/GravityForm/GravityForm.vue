@@ -101,7 +101,7 @@
   line-height: 1.71;
   letter-spacing: 0.56px;
 }
-#gform_page_2_4 .quiz #inpute_2_61{
+#gform_page_2_4 #inpute_2_61{
   border-bottom: 2px solid #f5f5f5;
 }
 #gform_page_2_4 .gform_button {
