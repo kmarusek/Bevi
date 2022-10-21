@@ -91,6 +91,20 @@
   position: absolute;
   bottom: 28px;
 }
+#gform_page_2_4 .gform_wrapper.gravity-theme .gfield.gfield--width-full {
+  grid-column: span 8;
+  margin-bottom: 48px;
+}
+#gform_page_2_4 .gfield_label {
+  color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.71;
+  letter-spacing: 0.56px;
+}
+#gform_page_2_4 .quiz .gform_wrapper input[type=text]{
+  border-bottom: 2px solid #f5f5f5;
+}
 #gform_page_2_4 .gform_button {
   margin-left: 75px !important;
 }
@@ -276,6 +290,23 @@
 }
 
 @media screen and (max-width: 425px) {
+  #gform_page_2_4 .gform_wrapper.gravity-theme .gfield.gfield--width-full {
+  grid-column: span 12;
+  margin-bottom: 40px;
+  }
+  .quiz .gform-body #gform_page_2_4 {
+  background-image: none;
+  }
+  #gform_page_2_4 .gfield_label {
+  color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.71;
+  letter-spacing: 0.56px;
+  }
+  #gform_page_2_4 .quiz .gform_wrapper input[type=text]{
+  border-bottom: 2px solid #f5f5f5;
+  }
   #gform_page_2_4 .gform_page_footer {
   bottom: 35px;
   }
