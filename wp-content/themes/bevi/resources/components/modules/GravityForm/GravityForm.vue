@@ -242,7 +242,9 @@
 .quiz .check-with-label:checked + .label-for-check {
   font-weight: bold;
 }
-
+#field_2_54 {
+  margin-bottom: 20px;
+}
 .quiz .gchoice {
   cursor: pointer;
   height: 60px;
@@ -326,7 +328,9 @@
   .quiz .gform_wrapper.gravity-theme .gf_progressbar_blue {
     width: 330px;
   }
-  
+  #field_2_54 {
+  margin-bottom: 10px;
+  }
   .quiz .gform-body .gform_page {
     background-image: none !important;
     margin: 20px;
