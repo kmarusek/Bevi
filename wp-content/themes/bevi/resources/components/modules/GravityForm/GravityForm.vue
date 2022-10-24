@@ -358,7 +358,7 @@
   border-bottom: 2px solid #f5f5f5;
   }
   #gform_page_2_4 .gform_page_footer {
-  bottom: 35px;
+  bottom: 25px;
   padding: 0;
   }
   #gform_page_2_4 .house-svg img{
@@ -385,6 +385,9 @@
   /**
   * Other Radio
   */
+  #input_2_34 .gchoise {
+    width: 100%;
+  }
   #input_2_40 .gchoice {
     width: 100%;
   }
@@ -396,6 +399,12 @@
   font-size: 30px;
   line-height: normal;
  }
+ /*
+ * Final Page
+  */
+  #gform_page_2_12{
+    padding-top: 30px;
+  }
 }
 
 
