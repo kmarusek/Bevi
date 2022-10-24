@@ -68,20 +68,20 @@
 }
 
 .quiz .gform-body .gform_page {
-  background-image: url("/wp-content/themes/dist/images/quiz/question-1.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-1.svg");
   background-position: right;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 .quiz .gform-body .gform_page.page2 {
-  background-image: url("/wp-content/themes/dist/images/quiz/question-2.1.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.1.svg");
 }
 .quiz .gform-body #gform_page_2_4 {
-  background-image: url("/wp-content/themes/dist/images/quiz/question-2.5.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.5.svg");
 }
 .quiz .gform-body .gform_page.page3 {
-  background-image: url("/wp-content/themes/dist/images/quiz/question-3.1.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-3.1.svg");
 }
 .quiz .gform-body .gform_page.result {
   background-image: none;
@@ -202,11 +202,11 @@
   background-position: left;
   background-repeat: no-repeat;
   background-size: initial;
-  background-image: url("/wp-content/themes/dist/images/quiz/radio-unchecked.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/radio-unchecked.svg");
 }
 
 .quiz .gform_wrapper.gravity-theme .fancyradio .gfield-choice-input:checked+label {
-  background-image: url("/wp-content/themes/dist/images/quiz/radio-checked.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/radio-checked.svg");
   /* color: */
 }
 
@@ -399,7 +399,7 @@
   cursor: pointer;
   width: 48px;
   height: 48px;
-  background-image: url("/wp-content/themes/dist/images/quiz/back.png");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/back.png");
   background-position: right;
   background-repeat: no-repeat;
   background-size: contain;
@@ -450,12 +450,12 @@
 }
 
 .quiz .ginput_address_zip input {
-  background-image: url("/wp-content/themes/dist/images/quiz/map.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/map.svg");
 }
 
 .quiz .people .ginput_container_select,
 .quiz .people input {
-  background-image: url("/wp-content/themes/dist/images/quiz/people.svg");
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/people.svg");
 }
 
 </style>
