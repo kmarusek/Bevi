@@ -40,3 +40,6 @@ advanced-cache.php
 *.exe
 wp-content/plugins/official-facebook-pixel/vendor/facebook/php-business-sdk/test/misc/video.mp4
 .idea/*
+
+
+package-lock.json
