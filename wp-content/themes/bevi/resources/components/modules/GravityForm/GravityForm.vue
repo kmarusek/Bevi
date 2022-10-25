@@ -466,10 +466,10 @@
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/map.svg");
 }
 
-.quiz .people .ginput_container_select,
+/* .quiz .people .ginput_container_select,
 .quiz .people input {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/people.svg");
-}
+} */
 
 </style>
 
