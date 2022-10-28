@@ -11,7 +11,12 @@
           <a v-bind:href="block.instagram_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Instagram.svg" /></a>
           <a v-bind:href="block.facebook_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Facebook.svg" /></a>
           <a v-bind:href="block.twitter_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Twitter.svg" /></a>
-
+          <div class="thankyou-cta">
+            <a
+                    v-if="cta"
+                    v-bind:href="cta.url"
+                >{{ cta.title }}</a>
+          </div>
         </div>
       </div>
 
