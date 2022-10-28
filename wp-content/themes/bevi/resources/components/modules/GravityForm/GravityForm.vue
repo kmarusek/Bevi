@@ -303,7 +303,7 @@
  }
 
 @media screen and (max-width: 430px) {
- #gform_page_2_1 .gform_page_footer .top_label{
+ #gform_page_2_1 .gform_page_footer.top_label{
   justify-content: space-around;
  }
  #gform_next_button_2_1 {
