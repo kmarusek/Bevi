@@ -342,7 +342,7 @@
   /*
   * Buttons 
   */
-  .gform_page_footer .top_label {
+  .gform_page_footer.top_label {
     display: flex;
     justify-content: space-between;
   }
