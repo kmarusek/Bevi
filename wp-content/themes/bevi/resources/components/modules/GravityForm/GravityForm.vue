@@ -58,6 +58,12 @@
 
 <style>
 
+*:focus {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
 .quiz .gform-body .gform_page {
   max-width: 736px;
   min-height: 400px;
