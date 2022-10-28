@@ -302,7 +302,7 @@
   line-height: 1.08;
  }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 430px) {
  #gform_next_button_2_1 {
   float: none;
   margin-left: 68px !important;
@@ -337,7 +337,7 @@
   }
   .quiz #gform_submit_button_1,
   .quiz .gform_next_button {
-    float: right;
+    float: none;
   }
 
   /**
