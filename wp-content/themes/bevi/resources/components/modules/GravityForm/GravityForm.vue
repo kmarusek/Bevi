@@ -77,21 +77,46 @@
 .quiz .gform-body .gform_page.page2 {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.1.svg");
 }
-
+.quiz .gform-body #gform_page_2_4 {
+  background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-2.4.svg");
+}
 .quiz .gform-body .gform_page.page3 {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/question-3.1.svg");
 }
-
 .quiz .gform-body .gform_page.result {
   background-image: none;
   padding-top: 0;
+}
+#gform_page_2_4 .gform_page_footer {
+  position: absolute;
+  bottom: 28px;
+}
+#gform_page_2_4 #field_2_61 {
+  margin-bottom: 48px;
+}
+#gform_page_2_4 .gfield_label {
+  color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.71;
+  letter-spacing: 0.56px;
+}
+#gform_page_2_4 #input_2_61{
+  border-bottom: 2px solid #f5f5f5;
+}
+#gform_page_2_4 .gform_button {
+  margin-left: 75px !important;
+}
+#gform_page_2_4 .house-svg img{
+    height: 100px;
+    margin-bottom: 48px;
 }
 #gform_page_2_11 {
   padding-top: 48px !important;
 }
 
 .quiz .quiz-1-title {
-  max-width: 400px;
+  max-width: 500px;
   font-size: 40px;
   font-weight: 600;
   font-stretch: expanded;
@@ -100,7 +125,7 @@
   letter-spacing: 2px;
   text-align: left;
   color: #00223e;
-  margin-bottom: 48px;
+  margin-bottom: 15px;
 }
 
 .quiz .quiz-1-title.w-full {
@@ -109,7 +134,7 @@
 }
 
 .desctption {
-  width: 432px;
+  max-width: 432px;
   margin: 24px 0 48px;
   font-size: 16px;
   font-weight: normal;
@@ -155,7 +180,9 @@
   margin-top: 48px !important;
   margin-bottom: 0 !important;
 }
-
+.gform_wrapper.gravity-theme .gfield_checkbox label, .gform_wrapper.gravity-theme .gfield_radio label{
+  font-size: 16px;
+}
 .quiz .gform_wrapper.gravity-theme .imageinput .gfield-choice-input+label {
   cursor: pointer;
   margin-bottom: 24px;
@@ -180,7 +207,7 @@
 
 .quiz .gform_wrapper.gravity-theme .fancyradio .gfield-choice-input:checked+label {
   background-image: url("/wp-content/themes/bevi/dist/images/quiz/radio-checked.svg");
-  color:
+  /* color: */
 }
 
 .quiz .gform_wrapper.gravity-theme .gf_progressbar_blue {
@@ -209,13 +236,15 @@
 }
 
 .quiz .gform_wrapper.gravity-theme .imageinput .gfield-choice-input:checked+label {
-  filter: invert(32%) sepia(73%) saturate(3215%) hue-rotate(213deg) brightness(102%) contrast(101%);
+  font-size: 16px;
 }
 
 .quiz .check-with-label:checked + .label-for-check {
   font-weight: bold;
 }
-
+#field_2_54 {
+  margin-bottom: 20px;
+}
 .quiz .gchoice {
   cursor: pointer;
   height: 60px;
@@ -239,7 +268,9 @@
 .quiz .imageinput .gchoice input {
   display: none !important;
 }
-
+#gform_page_2_4 .gform_button {
+  background-color: #4b273a;
+}
 .quiz .gform_button,
 .quiz #gform_submit_button_1,
 .quiz .gform_next_button {
@@ -247,7 +278,7 @@
   width: 160px;
   height: 48px;
   display: inline;
-  padding: 16px 40px;
+  padding: 16px 20px;
   border-radius: 24px;
   background-color: #246dff;
   font-size: 16px;
@@ -260,8 +291,46 @@
   color: #f5f5f5;
   margin-left: 48px !important;
 }
+.quiz .gform_wrapper.gravity-theme .imageinput .gfield-choice-input:checked+label {
+  filter: invert(32%) sepia(73%) saturate(3215%) hue-rotate(213deg) brightness(102%) contrast(101%);
+}
+/*
+* Recommendation Pages
+ */
+ #gform_page_2_10 .quiz-1-title {
+  font-size: 48px;
+  line-height: 1.08;
+ }
 
 @media screen and (max-width: 425px) {
+ #gform_next_button_2_1 {
+  float: none;
+  margin-left: 68px !important;
+ }
+  .quiz .gform-body .gform_page {
+  padding: 30px 24px 24px;
+  }
+  .quiz .quiz-1-title {
+    font-size: 30px;
+    letter-spacing: 1.5px;
+  }
+  #gform_page_2_4 #field_2_61 {
+  margin-bottom: 40px;
+  }
+  .quiz .gform-body #gform_page_2_4 {
+  background-image: none;
+  }
+  .quiz .gform_button,
+  .quiz #gform_submit_button_1,
+  .quiz .gform_next_button {
+  line-height: 0 !important;
+  }
+  .quiz .gform_wrapper.gravity-theme .gf_progressbar_blue {
+    width: 330px;
+  }
+  #field_2_54 {
+  margin-bottom: 10px;
+  }
   .quiz .gform-body .gform_page {
     background-image: none !important;
     margin: 20px;
@@ -270,11 +339,74 @@
   .quiz .gform_next_button {
     float: right;
   }
+
+  /**
+  * Unit unavailable screen
+   */
+   #field_2_59 {
+    margin-bottom: 12px;
+    text-align: right;
+   }
+   #gform_page_2_4 #inpute_2_61 {
+  color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.71;
+  letter-spacing: 0.56px;
+  }
+  #gform_page_2_4 .quiz .gform_wrapper input[type=text]{
+  border-bottom: 2px solid #f5f5f5;
+  }
+  #gform_page_2_4 .gform_page_footer {
+  bottom: 25px;
+  padding: 0;
+  }
+  #gform_page_2_4 .house-svg img{
+    height: 64px;
+    margin-bottom: 40px;
+  }
+  /*
+  * Radio Buttons
+ */
+ .gfield_radio{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+ }
+  .quiz .imageinput .gchoice {
+    float: left;
+    width: 100%;
+  }
+  .quiz .bubbles {
+  z-index: -1;
+  }
+
+  /**
+  * Other Radio
+  */
+  #input_2_34 .gchoise {
+    width: 100%;
+  }
+  #input_2_40 .gchoice {
+    width: 100%;
+  }
+
+  /*
+  * Recommendation 
+   */
+  #gform_page_2_10 .quiz-1-title {
+  font-size: 30px;
+  line-height: normal;
+ }
+ /*
+ * Final Page
+  */
+  #gform_page_2_12{
+    padding-top: 30px;
+  }
 }
 
-.quiz .bubbles {
-  z-index: -1;
-}
 
 .quiz .gform_previous_button {
   cursor: pointer;
@@ -317,8 +449,12 @@
 .quiz .gform_wrapper select {
   height: 41px;
 }
-
-.quiz .gform_wrapper .ginput_container_select,
+.gform_wrapper.gravity-theme .gform_page_footer, .quiz .gform_wrapper.gravity-theme .gform_footer {
+    margin-top: 30px!important;
+}
+.quiz .gform_wrapper{
+  padding: 0 30px;
+}
 .quiz .gform_wrapper input[type=text] {
   padding-left: 30px !important;
   background-position: left;
