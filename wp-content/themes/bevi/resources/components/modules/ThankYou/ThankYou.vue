@@ -12,7 +12,7 @@
           <a v-bind:href="block.facebook_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Facebook.svg" /></a>
           <a v-bind:href="block.twitter_url" class="social mx-2"><img src="/wp-content/themes/bevi/dist/images/thankyou/Twitter.svg" /></a>
           <div class="thankyou-btn-wrap">
-            <a v-bind:href="block.cta.url" class="thankyou-btn">{{ block.cta.title }}</a>
+            <a v-bind:href="block.cta.url" class="btn w-full mb-2">{{ block.cta.title }}</a>
           </div>
         </div>
       </div>
