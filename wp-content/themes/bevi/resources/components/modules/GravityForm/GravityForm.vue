@@ -254,7 +254,7 @@
 .quiz .gchoice {
   cursor: pointer;
   height: 60px;
-  margin: 16px 0 18px 10px;
+  margin-bottom: 20px;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
