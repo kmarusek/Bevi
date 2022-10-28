@@ -339,10 +339,16 @@
   .quiz .gform_next_button {
     float: none;
   }
-
+  /*
+  * Buttons 
+  */
+  .gform_page_footer .top_label {
+    display: flex;
+    justify-content: space-between;
+  }
   /**
   * Unit unavailable screen
-   */
+  */
    #field_2_59 {
     margin-bottom: 12px;
     text-align: right;
