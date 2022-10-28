@@ -15,7 +15,7 @@
             <a
                     v-if="cta"
                     v-bind:href="cta.url"
-                >{{ cta.title }}</a>
+            >{{ cta.title }}</a>
           </div>
         </div>
       </div>
