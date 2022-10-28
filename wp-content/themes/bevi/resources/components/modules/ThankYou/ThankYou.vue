@@ -114,7 +114,10 @@
 .thankyou--body .desctption.w-full {
   width: 100%;
 }
-
+.thankyou-btn-wrap {
+  max-width: 200px;
+  margin: 20px auto;
+}
 @media screen and (max-width: 425px) {
   .thankyou--body {
     background-image: none !important;
