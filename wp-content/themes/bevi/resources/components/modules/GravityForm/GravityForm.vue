@@ -325,9 +325,6 @@
   .quiz .gform_next_button {
   line-height: 0 !important;
   }
-  .quiz .gform_wrapper.gravity-theme .gf_progressbar_blue {
-    width: 330px;
-  }
   #field_2_54 {
   margin-bottom: 10px;
   }
@@ -338,6 +335,12 @@
   .quiz #gform_submit_button_1,
   .quiz .gform_next_button {
     float: none;
+  }
+  /*
+  * Progress Bar
+  */
+  .quiz .gform_wrapper.gravity-theme .gf_progressbar_blue {
+    width: 330px;
   }
   /*
   * Buttons 
@@ -417,7 +420,14 @@
     padding-top: 30px;
   }
 }
-
+@media screen and (max-width: 400px) {
+   /*
+  * Progress Bar
+  */
+  .quiz .gform_wrapper.gravity-theme .gf_progressbar_blue {
+    width: 250px;
+  }
+}
 
 .quiz .gform_previous_button {
   cursor: pointer;
