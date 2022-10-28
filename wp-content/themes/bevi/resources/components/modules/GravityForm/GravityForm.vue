@@ -289,7 +289,7 @@
   letter-spacing: normal;
   text-align: center;
   color: #f5f5f5;
-  margin-left: 48px !important;
+  margin-left: 10px !important;
 }
 .quiz .gform_wrapper.gravity-theme .imageinput .gfield-choice-input:checked+label {
   filter: invert(32%) sepia(73%) saturate(3215%) hue-rotate(213deg) brightness(102%) contrast(101%);
