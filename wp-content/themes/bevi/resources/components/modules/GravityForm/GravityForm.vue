@@ -289,7 +289,7 @@
   letter-spacing: normal;
   text-align: center;
   color: #f5f5f5;
-  margin-left: 10px !important;
+  margin-left: 48px !important;
 }
 .quiz .gform_wrapper.gravity-theme .imageinput .gfield-choice-input:checked+label {
   filter: invert(32%) sepia(73%) saturate(3215%) hue-rotate(213deg) brightness(102%) contrast(101%);
@@ -345,6 +345,11 @@
   .gform_page_footer.top_label {
     display: flex;
     justify-content: space-between;
+  }
+  .quiz .gform_button,
+  .quiz #gform_submit_button_1,
+  .quiz .gform_next_button {
+  margin-left: 10px !important;
   }
   /**
   * Unit unavailable screen
