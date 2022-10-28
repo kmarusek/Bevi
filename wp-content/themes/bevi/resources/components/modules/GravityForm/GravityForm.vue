@@ -305,7 +305,7 @@
 @media screen and (max-width: 430px) {
  #gform_next_button_2_1 {
   float: none;
-  margin-left: 68px !important;
+  margin-left: 0px !important;
  }
   .quiz .gform-body .gform_page {
   padding: 30px 24px 24px;
