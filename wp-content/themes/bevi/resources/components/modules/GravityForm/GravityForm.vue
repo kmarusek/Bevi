@@ -187,7 +187,17 @@
   text-align: left;
   color: #000;
 }
-
+#gform_fields_2_11 label {
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.21;
+  letter-spacing: normal;
+  font-family: Space Grotesk, sans-serif;
+  text-align: left;
+  color: #000;
+}
 .quiz .gform_wrapper.gravity-theme .gform_footer, .gform_wrapper.gravity-theme .gform_page_footer {
   margin-top: 48px !important;
   margin-bottom: 0 !important;
