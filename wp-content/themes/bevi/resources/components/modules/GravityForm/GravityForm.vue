@@ -57,7 +57,9 @@
 </template>
 
 <style>
-
+.gform_body.gform-body {
+  font-family: Space Grotesk, sans-serif !important;
+}
 *:focus {
     -webkit-tap-highlight-color: transparent;
     outline: none;
@@ -126,7 +128,10 @@
 #gform_page_2_11 {
   padding-top: 48px !important;
 }
-
+#input_2_50{
+  display: flex;
+  align-items: flex-end;
+}
 .quiz .quiz-1-title {
   max-width: 500px;
   font-size: 40px;
