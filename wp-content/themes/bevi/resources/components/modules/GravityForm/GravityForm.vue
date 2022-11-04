@@ -69,6 +69,9 @@
 .gform_wrapper.gravity-theme input:not([type=radio]):not([type=checkbox]):not([type=image]):not([type=file]) {
   line-height: 0;
 }
+.quiz {
+  padding-top: 8vw;
+}
 .quiz .gform-body .gform_page {
   max-width: 736px;
   min-height: 400px;
