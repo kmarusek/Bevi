@@ -57,14 +57,14 @@
 </template>
 
 <style>
-.gform_body.gform-body {
-  font-family: Space Grotesk, sans-serif !important;
-}
 *:focus {
     -webkit-tap-highlight-color: transparent;
     outline: none;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
+}
+.gform_body.gform-body {
+  font-family: Space Grotesk, sans-serif !important;
 }
 .gform_wrapper.gravity-theme input:not([type=radio]):not([type=checkbox]):not([type=image]):not([type=file]) {
   line-height: 0;
