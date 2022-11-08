@@ -409,8 +409,8 @@
   * Unit unavailable screen
   */
    #field_2_68 {
-    margin-bottom: 12px;
-    text-align: right;
+    margin-bottom: 24px;
+    text-align: left;
    }
    #gform_page_2_4 .gfield_label {
     color: #aaaaaa;
