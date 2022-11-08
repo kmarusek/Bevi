@@ -157,7 +157,7 @@
 
 .desctption {
   max-width: 432px;
-  margin: 24px 0 48px;
+  margin: 24px 0 24px;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
