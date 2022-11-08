@@ -540,9 +540,9 @@
   border-bottom: 2px solid#246dff
 }
 .quiz .gform_wrapper select,
-.quiz .gform_wrapper input[type=tel]:active,
-.quiz .gform_wrapper input[type=email]:active,
-.quiz .gform_wrapper input[type=text]:active {
+.quiz .gform_wrapper input[type=tel]:focus,
+.quiz .gform_wrapper input[type=email]:focus,
+.quiz .gform_wrapper input[type=text]:focus {
   caret-color: #246dff;
   border-bottom: 2px solid#246dff
 }
