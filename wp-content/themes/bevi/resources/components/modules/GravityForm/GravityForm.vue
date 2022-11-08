@@ -383,8 +383,9 @@
     height: 64px;
     margin-bottom: 40px;
   }
-
-
+  .gform_wrapper.gravity-theme .gfield_header_item, .gform_wrapper.gravity-theme .gform_fileupload_rules, .gform_wrapper.gravity-theme .ginput_complex label {
+    color: #a9a9a9;
+  }
 @media screen and (max-width: 430px) {
  #gform_page_2_1 .gform_page_footer.top_label{
   justify-content: space-around;
