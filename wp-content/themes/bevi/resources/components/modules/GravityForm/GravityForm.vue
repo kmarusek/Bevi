@@ -316,6 +316,7 @@
 }
 #gform_page_2_4 .gform_button {
   background-color: #4b273a;
+  padding: 14.5px 20px;
 }
 .quiz .gform_button,
 .quiz #gform_submit_button_1,
@@ -408,6 +409,14 @@
   /**
   * Unit unavailable screen
   */
+  #gform_page_2_4 {
+    position: relative;
+  }
+  #field_2_55 {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 83px;
+  }
    #field_2_68 {
     margin-bottom: 24px;
     text-align: left;
@@ -480,7 +489,10 @@
   }
   .gform_wrapper.gravity-theme .gfield input.medium, .gform_wrapper.gravity-theme .gfield select.medium {
     width: 100% !important;
-}
+  }
+  #field_2_55 {
+    margin-bottom: 44px;
+  }
 }
 
 .quiz .gform_previous_button {
