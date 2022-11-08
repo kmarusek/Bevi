@@ -357,9 +357,6 @@
     position: relative;
   }
   #field_2_55 {
-    margin-bottom: 44px;
-  }
-  #field_2_55 {
     position: absolute;
     bottom: 0;
     margin-bottom: 83px;
@@ -396,6 +393,9 @@
  #gform_next_button_2_1 {
   float: none;
  }
+ #field_2_55 {
+    margin-bottom: 44px;
+  }
   .quiz .gform-body .gform_page {
   padding: 30px 24px 24px;
   }
