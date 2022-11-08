@@ -145,9 +145,11 @@
   letter-spacing: 2px;
   text-align: left;
   color: #00223e;
-  margin-bottom: 15px;
+  margin-bottom: 48px;
 }
-
+#gform_next_button_2_1 {
+  margin-left: 0px !important;
+ }
 .quiz .quiz-1-title.w-full {
   width: 100%;
   color: #787878;
@@ -219,7 +221,8 @@
   vertical-align: middle;
   display: flex;
   width: 100%;
-  align-items: center;
+  height: 100%;
+  align-items: flex-end;
 }
 
 .quiz .gform_wrapper.gravity-theme .fancyradio .gfield-choice-input+label {
@@ -273,12 +276,12 @@
   font-weight: bold;
 }
 #field_2_54 {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 .quiz .gchoice {
   cursor: pointer;
-  height: 60px;
-  margin-bottom: 20px;
+  height: 64px;
+  margin-bottom: 24px;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -339,7 +342,6 @@
  }
  #gform_next_button_2_1 {
   float: none;
-  margin-left: 0px !important;
  }
   .quiz .gform-body .gform_page {
   padding: 30px 24px 24px;
@@ -500,6 +502,20 @@
   letter-spacing: 0.56px;
   text-align: left;
   color: #aaa;
+}
+.quiz .gform_wrapper select,
+.quiz .gform_wrapper input[type=tel]:active,
+.quiz .gform_wrapper input[type=email]:active,
+.quiz .gform_wrapper input[type=text]:active {
+  caret-color: #246dff;
+  border-bottom: 2px solid#246dff
+}
+.quiz .gform_wrapper select,
+.quiz .gform_wrapper input[type=tel]:active,
+.quiz .gform_wrapper input[type=email]:active,
+.quiz .gform_wrapper input[type=text]:active {
+  caret-color: #246dff;
+  border-bottom: 2px solid#246dff
 }
 .quiz .gform_wrapper select {
   height: 41px;
