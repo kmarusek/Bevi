@@ -171,7 +171,7 @@
   transform: scale3d(0,1,1);
   transition: transform 0.3s;
 }
-.quiz-result-cta:hover::before{
+.quiz-result-cta:hover:before{
   transform-origin: 0% 50%;
   transform: scale3d(1,1,1);
 }
