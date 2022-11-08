@@ -104,6 +104,7 @@
   margin-top: 60px !important;
 }
 #gform_page_2_4 .gform_page_footer {
+  position: absolute;
   bottom: 28px;
 }
 #gform_page_2_4 #field_2_61 {
@@ -490,7 +491,7 @@
     width: 100% !important;
   }
   #field_2_55 {
-    margin-bottom: 44px;
+    margin-bottom: 83px;
   }
 }
 
