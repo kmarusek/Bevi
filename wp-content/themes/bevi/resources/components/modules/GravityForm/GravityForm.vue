@@ -104,7 +104,6 @@
   margin-top: 60px !important;
 }
 #gform_page_2_4 .gform_page_footer {
-  position: absolute;
   bottom: 28px;
 }
 #gform_page_2_4 #field_2_61 {
@@ -133,6 +132,9 @@
 #input_2_50{
   display: flex;
   align-items: flex-end;
+}
+#input_2_11_5{
+  padding-left: 30px !important;
 }
 .quiz .quiz-1-title {
   max-width: 500px;
@@ -348,7 +350,42 @@
   font-size: 48px;
   line-height: 1.08;
  }
-
+  /**
+  * Unit unavailable screen
+  */
+  #gform_page_2_4 {
+    position: relative;
+  }
+  #field_2_55 {
+    margin-bottom: 44px;
+  }
+  #field_2_55 {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 83px;
+  }
+   #field_2_68 {
+    margin-bottom: 24px;
+    text-align: left;
+   }
+   #gform_page_2_4 .gfield_label {
+    color: #aaaaaa;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.71;
+    letter-spacing: 0.56px;
+  }
+  #gform_page_2_4 #input_2_68{
+  border-bottom: 2px solid #f5f5f5;
+  }
+  #gform_page_2_4 .gform_page_footer {
+  bottom: 25px;
+  padding: 0;
+  }
+  #gform_page_2_4 .house-svg img{
+    height: 64px;
+    margin-bottom: 40px;
+  }
 
 
 @media screen and (max-width: 430px) {
@@ -406,39 +443,7 @@
   .quiz .gform_next_button {
   margin-left: 10px !important;
   }
-  /**
-  * Unit unavailable screen
-  */
-  #gform_page_2_4 {
-    position: relative;
-  }
-  #field_2_55 {
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 83px;
-  }
-   #field_2_68 {
-    margin-bottom: 24px;
-    text-align: left;
-   }
-   #gform_page_2_4 .gfield_label {
-    color: #aaaaaa;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.71;
-    letter-spacing: 0.56px;
-  }
-  #gform_page_2_4 #input_2_68{
-  border-bottom: 2px solid #f5f5f5;
-  }
-  #gform_page_2_4 .gform_page_footer {
-  bottom: 25px;
-  padding: 0;
-  }
-  #gform_page_2_4 .house-svg img{
-    height: 64px;
-    margin-bottom: 40px;
-  }
+
   /*
   * Radio Buttons
  */
@@ -490,9 +495,7 @@
   .gform_wrapper.gravity-theme .gfield input.medium, .gform_wrapper.gravity-theme .gfield select.medium {
     width: 100% !important;
   }
-  #field_2_55 {
-    margin-bottom: 83px;
-  }
+
 }
 
 .quiz .gform_previous_button {
