@@ -408,18 +408,18 @@
   /**
   * Unit unavailable screen
   */
-   #field_2_59 {
+   #field_2_68 {
     margin-bottom: 12px;
     text-align: right;
    }
-   #gform_page_2_4 #inpute_2_61 {
-  color: #aaaaaa;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.71;
-  letter-spacing: 0.56px;
+   #gform_page_2_4 .gfield_label {
+    color: #aaaaaa;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.71;
+    letter-spacing: 0.56px;
   }
-  #gform_page_2_4 .quiz .gform_wrapper input[type=text]{
+  #gform_page_2_4 #input_2_68{
   border-bottom: 2px solid #f5f5f5;
   }
   #gform_page_2_4 .gform_page_footer {
@@ -478,6 +478,9 @@
   .quiz .gform_wrapper.gravity-theme .gf_progressbar_blue {
     width: 250px;
   }
+  .gform_wrapper.gravity-theme .gfield input.medium, .gform_wrapper.gravity-theme .gfield select.medium {
+    width: 100% !important;
+}
 }
 
 .quiz .gform_previous_button {
