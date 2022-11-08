@@ -156,11 +156,12 @@
 .quiz-result-cta {
   color: #246eff;
   font-weight: 600;
+  position: relative !important;
 }
 .quiz-result-cta::before{
   position: absolute;
   width: 100%;
-  height: 1px;
+  height: 1.5px;
   background: #246eff;
   content: ' ';
   top: 100%;
