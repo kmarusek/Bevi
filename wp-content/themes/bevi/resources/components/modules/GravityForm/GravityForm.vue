@@ -542,7 +542,6 @@
   padding: 0 30px;
 }
 .quiz .gform_wrapper input[type=text] {
-  padding-left: 30px !important;
   background-position: left;
   background-repeat: no-repeat;
   background-size: initial;
