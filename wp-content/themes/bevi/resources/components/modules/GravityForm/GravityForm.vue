@@ -104,7 +104,6 @@
   margin-top: 60px !important;
 }
 #gform_page_2_4 .gform_page_footer {
-  position: absolute;
   bottom: 28px;
 }
 #gform_page_2_4 #field_2_61 {
