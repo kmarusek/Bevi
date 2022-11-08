@@ -162,7 +162,7 @@
   width: 100%;
   height: 1px;
   background: #246eff;
-  content: '';
+  content: ' ';
   top: 100%;
   left: 0;
   pointer-events: none;
