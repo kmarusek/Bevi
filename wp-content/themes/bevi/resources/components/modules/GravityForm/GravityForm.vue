@@ -158,7 +158,7 @@
   font-weight: 600;
   position: relative !important;
 }
-.quiz-result-cta::before{
+.quiz-result-cta:before{
   position: absolute;
   width: 100%;
   height: 1.5px;
