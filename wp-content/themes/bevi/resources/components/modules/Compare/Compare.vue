@@ -53,11 +53,11 @@
         >
       </div>
 
-
+<!-- 
       <div class="comparison--nav block-content py-16 pb-0 px-0 lg:px-48 text-center  block md:hidden z-10">
         <span id="prev" class="navigator bg-blue" data-index="1"> </span>
         <span id="next" class="navigator bg-gray-200" data-index="2"> </span>
-      </div>
+      </div> -->
 
       <div class="comparison--nav block-content pb-0 px-0 lg:px-48 text-right  block md:hidden z-10">
         <a class="nextarrow" id="nexttop"><img class="pr-3 float-right" width="65" src="/wp-content/themes/bevi/dist/images/arrow.svg" /></a>
