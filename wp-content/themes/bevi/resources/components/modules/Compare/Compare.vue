@@ -78,7 +78,7 @@
                   <div class="w-full content-center">
                     <img
                         :src="item.image"
-                        class="max-h-80 inline object-bottom"
+                        class="max-h-full inline object-bottom"
                         alt="Dispenser"
                     />
                   </div>
