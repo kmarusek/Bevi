@@ -74,7 +74,7 @@
 
             <div class="w-full bg-gray-200 md:bg-transparent rounded-2xl pt-10 md:pt-24 ">
               <div class="w-full text-center">
-                <div class="h-62 flex items-end">
+                <div class="max-h-full flex items-end">
                   <div class="w-full content-center">
                     <img
                         :src="item.image"
