@@ -133,7 +133,7 @@
   display: flex;
   align-items: flex-end;
 }
-#input_2_11_5{
+#input_2_11_5, #input_2_50_5{
   padding-left: 30px !important;
 }
 .quiz .quiz-1-title {
