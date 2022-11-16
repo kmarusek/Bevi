@@ -356,10 +356,11 @@
   #gform_page_2_4 {
     position: relative;
   }
-  #field_2_55 {
+  #field_2_55 .gform_button {
+    line-height: 1 !important;
     position: absolute;
     bottom: 0;
-    margin-bottom: 83px;
+    margin-bottom: 56px;
   }
    #field_2_68 {
     margin-bottom: 24px;
@@ -387,6 +388,9 @@
     color: #a9a9a9;
   }
 @media screen and (max-width: 430px) {
+  #field_2_55 .gform_button {
+    margin-bottom: 28px;
+  }
  #gform_page_2_1 .gform_page_footer.top_label{
   justify-content: space-around;
   margin-top: 30px !important;
@@ -394,9 +398,6 @@
  #gform_next_button_2_1 {
   float: none;
  }
- #field_2_55 {
-    margin-bottom: 44px;
-  }
   .quiz .gform-body .gform_page {
   padding: 30px 24px 24px;
   }
@@ -415,6 +416,7 @@
   .quiz .gform_next_button {
   line-height: 0 !important;
   }
+
   #field_2_54 {
   margin-bottom: 10px;
   }
