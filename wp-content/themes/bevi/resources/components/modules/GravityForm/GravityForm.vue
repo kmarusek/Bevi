@@ -356,7 +356,7 @@
   #gform_page_2_4 {
     position: relative;
   }
-  #field_2_55 .gform_button {
+  #gform_page_2_4 .gform_button {
     line-height: 1 !important;
     position: absolute;
     bottom: 0;
@@ -388,7 +388,7 @@
     color: #a9a9a9;
   }
 @media screen and (max-width: 430px) {
-  #field_2_55 .gform_button {
+  #gfomr_page_2_4 .gform_button {
     margin-bottom: 28px;
   }
  #gform_page_2_1 .gform_page_footer.top_label{
