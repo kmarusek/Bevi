@@ -388,7 +388,7 @@
     color: #a9a9a9;
   }
 @media screen and (max-width: 430px) {
-  #gfomr_page_2_4 .gform_button {
+  #gform_page_2_4 .gform_button {
     margin-bottom: 28px;
   }
  #gform_page_2_1 .gform_page_footer.top_label{
