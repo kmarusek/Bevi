@@ -28,6 +28,7 @@ import NewsContent from '~/components/core/News/NewsContent';
 import FaqsListing from '~/components/core/FaqsListing/FaqsListing';
 
 // Components
+import InformationBanner from '~/components/core/InformationBanner/InformationBanner';
 import TextBlock from '~/components/modules/TextBlock/TextBlock';
 import FeatureBlock from '~/components/modules/FeatureBlock/FeatureBlock';
 import ImageCarousel from '~/components/modules/ImageCarousel/ImageCarousel';
@@ -139,5 +140,6 @@ app.component('CustomDrinkBuilder', CustomDrinkBuilder);
 app.component('SkipLink', SkipLink);
 app.component('GravityForm', GravityForm);
 app.component('ThankYou', ThankYou);
+app.component('InformationBanner', InformationBanner);
 
 app.mount('#app');

@@ -95,7 +95,7 @@
             ]
         },
         {
-            "key": "field_61e54d5fc86f7",
+            "key": "field_6382b86dca318",
             "label": "Information Banner",
             "name": "information_banner",
             "type": "group",
@@ -110,42 +110,57 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_61e54d72c86f8",
-                    "label": "Show?",
+                    "key": "field_638374edc4102",
+                    "label": "Show Banner?",
                     "name": "show",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "50",
+                        "width": "",
                         "class": "",
                         "id": ""
                     },
                     "message": "",
                     "default_value": 0,
-                    "ui": 1,
                     "ui_on_text": "",
-                    "ui_off_text": ""
+                    "ui_off_text": "",
+                    "ui": 1
                 },
                 {
-                    "key": "field_61e54d87c86f9",
-                    "label": "Content",
-                    "name": "content",
-                    "type": "wysiwyg",
+                    "key": "field_638368f9d80d5",
+                    "label": "Banner Text",
+                    "name": "text",
+                    "type": "textarea",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "50",
+                        "width": "",
                         "class": "",
                         "id": ""
                     },
                     "default_value": "",
-                    "tabs": "visual",
-                    "toolbar": "basic",
-                    "media_upload": 0,
-                    "delay": 0
+                    "maxlength": "",
+                    "rows": "",
+                    "placeholder": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_63837582c4104",
+                    "label": "CTA",
+                    "name": "cta",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
                 }
             ]
         }
@@ -168,5 +183,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1642417587
+    "modified": 1669561030
 }

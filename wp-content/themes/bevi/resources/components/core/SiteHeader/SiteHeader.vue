@@ -42,6 +42,9 @@
         :cta="cta"
       />
     </div>
+    <InformationBanner
+      :banner="banner"
+    />
   </header>
 </template>
 
@@ -56,6 +59,10 @@
         type: Array,
       },
       cta: {
+        required: false,
+        type: Object,
+      },
+      banner: {
         required: false,
         type: Object,
       },
