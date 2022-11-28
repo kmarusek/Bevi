@@ -142,7 +142,7 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "maxlength": "",
+                    "maxlength": 70,
                     "rows": "",
                     "placeholder": "",
                     "new_lines": ""
@@ -161,6 +161,23 @@
                         "id": ""
                     },
                     "return_format": "array"
+                },
+                {
+                    "key": "field_638510e1a912d",
+                    "label": "Banner Color",
+                    "name": "color",
+                    "type": "color_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "enable_opacity": 0,
+                    "return_format": "string"
                 }
             ]
         }
@@ -183,5 +200,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1669561030
+    "modified": 1669674114
 }
