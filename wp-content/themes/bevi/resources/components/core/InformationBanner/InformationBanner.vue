@@ -36,9 +36,10 @@
         background-color: #246eff;
         padding: 8px 0px;
         color: #ffffff;
-        margin-top: 16px;
         display:flex;
         justify-content: center;
+        margin-top: -16px;
+        margin-bottom: 16px;
         align-items: center;
         font-family: Space Grotesk,sans-serif;
     }

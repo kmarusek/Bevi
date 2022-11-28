@@ -3,6 +3,9 @@
     class="header"
     :class="{ 'nav-open' : isMobileNavOpen }"
   >
+  <InformationBanner
+    :banner="banner"
+  />
     <div class="px-4 md:px-10">
       <nav class="nav">
         <div class="logo-container">
@@ -42,9 +45,7 @@
         :cta="cta"
       />
     </div>
-    <InformationBanner
-      :banner="banner"
-    />
+
   </header>
 </template>
 
