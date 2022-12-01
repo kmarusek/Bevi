@@ -1,1 +1,0 @@
-<all-flavors :block="{{ json_encode($block) }}" :flavors="{{ json_encode($get_flavors) }}" :tags="{{ json_encode($get_flavors_tags) }}"></all-flavors>

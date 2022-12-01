@@ -11,4 +11,11 @@
         <br><?php esc_html_e('Content to restrict will go here', 'wp-user-avatar') ?><br>
         [/pp-restrict-content]
     </div>
+    <p>
+        <?php
+        printf(
+            esc_html__('Want to restrict contents in the block editor? %sLearn how to%s', 'wp-user-avatar'),
+            '<a target="_blank" href="https://profilepress.com/article/restrict-visibility-contents-wordpress-block-editor/">', '</a>'
+        ); ?>
+    </p>
 </div>

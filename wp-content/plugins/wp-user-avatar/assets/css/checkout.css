@@ -25,6 +25,10 @@
     margin: 0 0 5px;
 }
 
+.ppress-checkout__form .ppress-main-checkout-form__block .ppress-main-checkout-form__social_login_wrap {
+    padding: 5px;
+}
+
 .ppress-checkout__form .ppress-main-checkout-form__block .ppress-main-checkout-form__login_form_wrap {
     display: flex;
     flex-wrap: wrap;
@@ -337,7 +341,7 @@
     text-align: center;
     -webkit-appearance: none;
     width: 100%;
-    height:auto;
+    height: auto;
 }
 
 .ppress-checkout__form .ppress-checkout-section.ppress-checkout_main input[type=submit]:disabled {

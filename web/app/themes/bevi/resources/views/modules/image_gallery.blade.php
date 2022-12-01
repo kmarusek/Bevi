@@ -1,1 +1,0 @@
-<image-gallery :block="{{ json_encode($block) }}"></image-gallery>

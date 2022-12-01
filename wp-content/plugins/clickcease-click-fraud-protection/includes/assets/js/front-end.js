@@ -3,7 +3,7 @@ function onCheqResponse(encryptedMessage){
     let request = new XMLHttpRequest();
     request.open('POST', ajax_obj.ajax_url, true);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    request.send('action='+ajax_obj.ajax_action+'&nonce='+ajax_obj.nonce+'&cheq_hash='+encryptedMessage);
+    request.send('action='+ajax_obj.ajax_action+'&security='+ajax_obj.cc_nonce+'&cheq_hash='+encryptedMessage);
     request.onreadystatechange = function() {
         if (request.readyState === 4) {
             if (request.status === 200) {

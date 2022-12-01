@@ -13,8 +13,6 @@ export default Backbone.View.extend({
         $('.pp-color-field', this.$el).wpColorPicker();
         $('.ppselect2', this.$el).select2();
 
-        this.tabify();
-
         new jBox('Tooltip', {
             attach: '.pp-form-builder-help-tip',
             maxWidth: 200,
@@ -23,17 +21,6 @@ export default Backbone.View.extend({
 
         // Makes tooltip close to the color picker field
         $('.form-field .wp-picker-container', this.$el).parent('.pp-field-row-content').css('width', 'auto');
-    },
-
-    tabify() {
-        $('ul.pp-tabs li a', this.$el).on('click', function (e) {
-            e.preventDefault();
-            $('.pp-form-builder_options_panel').hide();
-            $('#pp-form-builder-metabox ul.pp-tabs li').removeClass('active');
-            $(this).parent().addClass('active');
-            $($(this).attr('href')).show();
-
-        }).get(0).click();
     },
 
     media_upload(e) {

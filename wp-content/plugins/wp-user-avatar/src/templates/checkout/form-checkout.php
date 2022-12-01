@@ -1,9 +1,6 @@
 <?php
 
-/** @var ProfilePress\Core\Membership\Models\Plan\PlanEntity $planObj
- * @var ProfilePress\Core\Membership\PaymentMethods\PaymentMethodInterface[] $payment_methods
- * @var string $default_payment_method
- */
+/** @var ProfilePress\Core\Membership\Models\Plan\PlanEntity $planObj */
 
 use ProfilePress\Core\Membership\Controllers\CheckoutSessionData;
 use ProfilePress\Core\Membership\Services\OrderService;
@@ -58,6 +55,8 @@ $cart_vars = OrderService::init()->checkout_order_calculation([
             ]); ?>
 
             <?php ppress_render_view('checkout/form-terms'); ?>
+
+            <?php do_action('ppress_checkout_before_submit_button', $cart_vars, $planObj); ?>
 
             <?php ppress_render_view('checkout/form-checkout-submit-btn', [
                 'order_total' => $cart_vars->total,

@@ -339,7 +339,7 @@ class EmailSettingsPage
                     'type'        => 'text',
                     'value'       => $data['subject'],
                     'label'       => esc_html__('Subject Line', 'wp-user-avatar'),
-                    'description' => esc_html__('Enter the subject or title for the welcome message email.', 'wp-user-avatar')
+                    'description' => esc_html__('Enter the subject or title of the email.', 'wp-user-avatar')
                 ],
                 $key . '_email_content' => [
                     'type'  => $email_content_field_type,

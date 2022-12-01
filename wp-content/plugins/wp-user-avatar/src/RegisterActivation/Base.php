@@ -3,6 +3,7 @@
 namespace ProfilePress\Core\RegisterActivation;
 
 use ProfilePress\Core\Classes\FormRepository as FR;
+use ProfilePress\Core\Membership\DigitalProducts\UploadHandler;
 
 class Base
 {
@@ -55,6 +56,9 @@ class Base
         if ( ! current_user_can('activate_plugins') || get_option('ppress_plugin_activated') == 'true') return;
 
         CreateDBTables::make();
+
+        UploadHandler::get_instance()->create_protection_files(true);
+
         self::default_settings();
         self::create_default_forms();
         self::clear_wpengine_cache();

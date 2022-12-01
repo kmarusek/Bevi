@@ -205,6 +205,20 @@ class CheckoutController extends BaseController
 
             $plan_id = (int)$_POST['plan_id'];
 
+            if ( ! isset($_POST['_ppress_timestamp']) || intval($_POST['_ppress_timestamp']) > (time() - 2)) {
+                throw new \Exception('spam');
+            }
+
+            if ( ! isset($_POST['_ppress_honeypot']) || ! empty($_POST['_ppress_honeypot'])) {
+                throw new \Exception('spam');
+            }
+
+            $checkout_errors = apply_filters('ppress_checkout_validation', new \WP_Error(), $plan_id, $_POST);
+
+            if (is_wp_error($checkout_errors) && $checkout_errors->get_error_code() != '') {
+                throw new \Exception($checkout_errors->get_error_message());
+            }
+
             if ( ! empty(ppress_settings_by_key('terms_page_id')) && empty($_POST['ppress-terms'])) {
                 throw new \Exception(
                     esc_html__('Please read and accept the terms and conditions to proceed with your order.', 'wp-user-avatar')

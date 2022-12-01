@@ -1,1 +1,0 @@
-<video-component :block="{{ json_encode($block) }}"></video-component>

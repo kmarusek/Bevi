@@ -4,10 +4,12 @@ namespace ProfilePress\Core\Membership\Models\Subscription;
 
 use ProfilePress\Core\Classes\PROFILEPRESS_sql;
 use ProfilePress\Core\Membership\Models\AbstractModel;
+use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
 use ProfilePress\Core\Membership\Models\ModelInterface;
 use ProfilePress\Core\Membership\Models\Order\OrderEntity as OrderEntity;
 use ProfilePress\Core\Membership\Models\Order\OrderFactory;
 use ProfilePress\Core\Membership\Models\Order\OrderStatus;
+use ProfilePress\Core\Membership\Models\Plan\PlanEntity as PlanEntity;
 use ProfilePress\Core\Membership\PaymentMethods\PaymentMethods;
 use ProfilePress\Core\Membership\Repositories\OrderRepository;
 use ProfilePress\Core\Membership\Repositories\SubscriptionRepository;
@@ -249,6 +251,14 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         return absint($this->parent_order_id);
     }
 
+    /**
+     * @return PlanEntity
+     */
+    public function get_plan()
+    {
+        return ppress_get_plan($this->get_plan_id());
+    }
+
     public function get_plan_id()
     {
         return absint($this->plan_id);
@@ -257,6 +267,11 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
     public function get_customer_id()
     {
         return absint($this->customer_id);
+    }
+
+    public function get_customer()
+    {
+        return CustomerFactory::fromId($this->get_customer_id());
     }
 
     /**
@@ -340,6 +355,11 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         return apply_filters('ppress_subscription_status', $this->status, $this->get_id(), $this);
     }
 
+    public function get_status_label()
+    {
+        return SubscriptionStatus::get_label($this->get_status());
+    }
+
     public function get_payment_method()
     {
         return OrderFactory::fromId($this->parent_order_id)->payment_method;
@@ -403,6 +423,22 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         ]);
     }
 
+    public function add_plan_role_to_customer()
+    {
+        $customer = CustomerFactory::fromId($this->customer_id);
+        $plan     = ppress_get_plan($this->plan_id);
+
+        $customer->get_wp_user()->add_role($plan->user_role);
+    }
+
+    public function remove_plan_role_from_customer()
+    {
+        $customer = CustomerFactory::fromId($this->customer_id);
+        $plan     = ppress_get_plan($this->plan_id);
+
+        $customer->get_wp_user()->remove_role($plan->user_role);
+    }
+
     /**
      * @param $profile_id
      *
@@ -419,6 +455,8 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         }
 
         $sub_id = $this->save();
+
+        $this->add_plan_role_to_customer();
 
         do_action('ppress_subscription_activated', $this);
 
@@ -443,6 +481,8 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         }
 
         $sub_id = $this->save();
+
+        $this->add_plan_role_to_customer();
 
         do_action('ppress_subscription_enabled_trial', $this);
 
@@ -549,6 +589,10 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
             PaymentMethods::get_instance()->get_by_id($this->get_payment_method())->cancel($sub);
         }
 
+        if ($this->is_lifetime()) {
+            $this->remove_plan_role_from_customer();
+        }
+
         $this->add_cancellation_requested();
 
         do_action('ppress_subscription_cancelled', $this, $old_status);
@@ -563,6 +607,8 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         if ($this->is_cancelled()) return false;
 
         if ($this->update_status(SubscriptionStatus::COMPLETED)) {
+
+            $this->add_plan_role_to_customer();
 
             do_action('ppress_subscription_completed', $this);
         }
@@ -587,6 +633,8 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         }
 
         $this->update_status(SubscriptionStatus::EXPIRED);
+
+        $this->remove_plan_role_from_customer();
 
         do_action('ppress_subscription_expired', $this);
     }
@@ -641,6 +689,8 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         $this->status = SubscriptionStatus::ACTIVE;
         $this->save();
 
+        $this->add_plan_role_to_customer();
+
         $this->maybe_complete_subscription();
 
         do_action('ppress_subscription_post_renew', $this->id, $expiration, $this);
@@ -655,6 +705,7 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         // Complete subscription if applicable
         if ($this->total_payments > 0 && $times_billed >= $this->total_payments) {
             $this->complete();
+            $this->add_plan_role_to_customer();
         }
     }
 

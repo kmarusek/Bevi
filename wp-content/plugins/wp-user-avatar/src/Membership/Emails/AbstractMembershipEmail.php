@@ -9,6 +9,7 @@ use ProfilePress\Core\Membership\Models\Subscription\SubscriptionEntity;
 use ProfilePress\Core\Membership\PaymentMethods\PaymentMethods;
 use ProfilePress\Core\Membership\Services\OrderService;
 use ProfilePress\Core\Membership\Services\SubscriptionService;
+use ProfilePress\Core\ShortcodeParser\MyAccount\MyAccountTag;
 
 abstract class AbstractMembershipEmail
 {
@@ -27,11 +28,15 @@ abstract class AbstractMembershipEmail
             '{{email}}'                => $customer->get_email(),
             '{{first_name}}'           => $customer->get_first_name(),
             '{{last_name}}'            => $customer->get_last_name(),
+            '{{customer_id}}'          => $customer->get_id(),
             '{{billing_address}}'      => $order->get_customer_full_address(),
             '{{billing_phone}}'        => $order->billing_phone,
             '{{customer_tax_id}}'      => $order->get_customer_tax_id(),
             '{{transaction_id}}'       => $order->get_transaction_id(),
             '{{order_id}}'             => $order->get_order_id(),
+            '{{downloads_url}}'        => $adminview === true ?
+                OrderService::init()->admin_view_order_url($order->id) :
+                MyAccountTag::get_endpoint_url('list-downloads'),
             '{{order_url}}'            => $adminview === true ?
                 OrderService::init()->admin_view_order_url($order->id) :
                 OrderService::init()->frontend_view_order_url($order->order_key),
@@ -45,7 +50,7 @@ abstract class AbstractMembershipEmail
             '{{site_title}}'           => ppress_site_title(),
             '{{business_name}}'        => ppress_business_name(),
             '{{business_address}}'     => ppress_business_full_address(),
-            '{{business_tax_id}}'      => ppress_business_tax_id(),
+            '{{business_tax_id}}'      => ppress_business_tax_id()
         ]);
 
         return array_map(function ($val) {
@@ -81,6 +86,31 @@ abstract class AbstractMembershipEmail
         ]);
     }
 
+    public function custom_profile_field_search_replace($message)
+    {
+        // handle support for custom fields placeholder.
+        preg_match_all('#({{[a-z_-]+}})#', $message, $matches);
+
+        if (isset($matches[1]) && ! empty($matches[1])) {
+
+            foreach ($matches[1] as $match) {
+                $key = str_replace(['{', '}'], '', $match);
+
+                if (isset($user->{$key})) {
+                    $value = $user->{$key};
+
+                    if (is_array($value)) {
+                        $value = implode(', ', $value);
+                    }
+
+                    $message = str_replace($match, $value, $message);
+                }
+            }
+        }
+
+        return $message;
+    }
+
     /**
      * @param string $content
      * @param array $placeholders
@@ -89,7 +119,7 @@ abstract class AbstractMembershipEmail
      */
     public function parse_placeholders($content, $placeholders)
     {
-        return str_replace(array_keys($placeholders), array_values($placeholders), $content);
+        return $this->custom_profile_field_search_replace(str_replace(array_keys($placeholders), array_values($placeholders), $content));
     }
 
     /**

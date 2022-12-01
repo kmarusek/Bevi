@@ -2,7 +2,6 @@
 
     <div class="ppress-main-checkout-form__login_form_wrap" style="display:none">
 
-
         <div class="ppress-main-checkout-form__block__item ppress-co-half">
             <label for="ppmb_user_login">
                 <?php esc_html_e('Username or Email', 'wp-user-avatar') ?>
@@ -21,6 +20,22 @@
             <p><?php esc_html_e('Or continue with your order below.', 'wp-user-avatar') ?></p>
         </div>
     </div>
+
+    <?php
+    $social_login_buttons = ppress_settings_by_key('checkout_social_login_buttons');
+    if (is_array($social_login_buttons)) {
+        $social_login_buttons = array_filter($social_login_buttons);
+    }
+
+    if ( ! empty($social_login_buttons)) {
+        $redirect_to = ppress_get_current_url_query_string();
+        echo '<div class="ppress-main-checkout-form__social_login_wrap">';
+        foreach ($social_login_buttons as $social_login_button) {
+            echo do_shortcode(sprintf('[pp-social-login type="%s" redirect="%s"]', $social_login_button, $redirect_to), true) . '&nbsp;';
+        }
+        echo '</div>';
+    }
+    ?>
 
 <?php else : $user = wp_get_current_user(); ?>
 

@@ -23,6 +23,13 @@ function Frontend() {
             _this.defaultUserProfileResponsive();
         });
 
+        $(document).on('click', '.ppress-confirm-delete', function (e) {
+            e.preventDefault();
+            if (confirm(pp_ajax_form.confirm_delete)) {
+                window.location.href = $(this).attr('href');
+            }
+        });
+
         // only enable if pp_disable_ajax_form filter is false.
         if (pp_ajax_form.disable_ajax_form === 'true') return;
 
@@ -30,13 +37,6 @@ function Frontend() {
         $(document).on('submit', 'form[data-pp-form-submit="signup"]', this.ajax_registration);
         $(document).on('submit', 'form[data-pp-form-submit="passwordreset"]', this.ajax_password_reset);
         $(document).on('submit', 'form[data-pp-form-submit="editprofile"]', this.ajax_edit_profile);
-
-        $('.ppress-confirm-delete').on('click', function (e) {
-            e.preventDefault();
-            if (confirm(pp_ajax_form.confirm_delete)) {
-                window.location.href = $(this).attr('href');
-            }
-        });
     };
 
     this.recaptcha_processing = function () {
@@ -71,6 +71,10 @@ function Frontend() {
                 });
 
                 $form.on('pp_form_submitted', function () {
+                    grecaptcha.reset(widgetId1)
+                });
+
+                $(document).on('ppress_process_checkout_success_callback ppress_process_checkout_error_callback', function () {
                     grecaptcha.reset(widgetId1)
                 });
             }

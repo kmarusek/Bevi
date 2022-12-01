@@ -355,7 +355,9 @@ class PaymentHelpers
          * Do not add a fee if account country does not support application fees.
          * @see https://stripe.com/docs/connect/direct-charges#collecting-fees
          */
-        if (in_array(strtolower($account_country), ['br'], true)) return false;
+        if (in_array(strtolower($account_country), apply_filters('ppress_stripe_country_disallowed_list', ['br']), true)) {
+            return false;
+        }
 
         return true;
     }

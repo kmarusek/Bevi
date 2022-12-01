@@ -57,7 +57,7 @@ class MyAccountTag extends FormProcessor
                 ],
                 'list-subscriptions' => [
                     'title'    => esc_html__('Subscriptions', 'wp-user-avatar'),
-                    /** @todo implement customizing this endpoint */
+                    /** @todo implement customizing this endpoint and title */
                     'endpoint' => esc_html(ppress_settings_by_key('myac_subscriptions_endpoint', 'list-subscriptions', true)),
                     'priority' => 20,
                     'icon'     => 'card_membership',
@@ -65,11 +65,19 @@ class MyAccountTag extends FormProcessor
                 ],
                 'list-orders'        => [
                     'title'    => esc_html__('Orders', 'wp-user-avatar'),
-                    /** @todo implement customizing this endpoint */
+                    /** @todo implement customizing this endpoint as well as the title */
                     'endpoint' => esc_html(ppress_settings_by_key('myac_orders_endpoint', 'list-orders', true)),
                     'priority' => 30,
                     'icon'     => 'shopping_cart',
                     'callback' => [__CLASS__, 'orders_callback']
+                ],
+                'list-downloads'        => [
+                    'title'    => esc_html__('Downloads', 'wp-user-avatar'),
+                    /** @todo implement customizing this endpoint */
+                    'endpoint' => esc_html(ppress_settings_by_key('myac_downloads_endpoint', 'list-downloads', true)),
+                    'priority' => 35,
+                    'icon'     => 'file_download',
+                    'callback' => [__CLASS__, 'downloads_callback']
                 ],
                 'billing-details'    => [
                     'title'    => esc_html__('Billing Address', 'wp-user-avatar'),
@@ -273,6 +281,11 @@ class MyAccountTag extends FormProcessor
         }
 
         require apply_filters('ppress_my_account_orders_template', wp_normalize_path(dirname(__FILE__) . '/orders.tmpl.php'));
+    }
+
+    public function downloads_callback()
+    {
+        require apply_filters('ppress_my_account_downloads_template', wp_normalize_path(dirname(__FILE__) . '/downloads.tmpl.php'));
     }
 
     public function billing_details_callback()

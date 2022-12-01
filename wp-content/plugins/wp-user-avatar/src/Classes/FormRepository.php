@@ -275,23 +275,23 @@ class FormRepository
                 self::add_form_meta($form_id, $form_type, self::FORM_STRUCTURE, $structure);
                 self::add_form_meta($form_id, $form_type, self::FORM_CSS, $css);
 
-                if (method_exists($theme_instance, self::PASSWORD_RESET_HANDLER)) {
+                if (is_object($theme_instance) && method_exists($theme_instance, self::PASSWORD_RESET_HANDLER)) {
                     self::add_form_meta($form_id, $form_type, self::PASSWORD_RESET_HANDLER, $theme_instance->password_reset_handler());
                 }
 
-                if (method_exists($theme_instance, self::SUCCESS_MESSAGE)) {
+                if (is_object($theme_instance) && method_exists($theme_instance, self::SUCCESS_MESSAGE)) {
                     self::add_form_meta($form_id, $form_type, self::SUCCESS_MESSAGE, $theme_instance->success_message());
                 }
 
-                if (method_exists($theme_instance, 'edit_profile_success_message')) {
+                if (is_object($theme_instance) && method_exists($theme_instance, 'edit_profile_success_message')) {
                     self::add_form_meta($form_id, $form_type, self::MELANGE_EDIT_PROFILE_SUCCESS_MESSAGE, $theme_instance->edit_profile_success_message());
                 }
 
-                if (method_exists($theme_instance, 'password_reset_success_message')) {
+                if (is_object($theme_instance) && method_exists($theme_instance, 'password_reset_success_message')) {
                     self::add_form_meta($form_id, $form_type, self::MELANGE_PASSWORD_RESET_SUCCESS_MESSAGE, $theme_instance->password_reset_success_message());
                 }
 
-                if (method_exists($theme_instance, 'registration_success_message')) {
+                if (is_object($theme_instance) && method_exists($theme_instance, 'registration_success_message')) {
                     self::add_form_meta($form_id, $form_type, self::MELANGE_REGISTRATION_SUCCESS_MESSAGE, $theme_instance->registration_success_message());
                 }
             }
@@ -312,7 +312,7 @@ class FormRepository
 
                 $theme_class = self::make_class($form_theme_class, $form_type);
 
-                if (method_exists($theme_class, 'default_field_listing')) {
+                if (class_exists($theme_class) && method_exists($theme_class, 'default_field_listing')) {
 
                     $field_listing = call_user_func([$theme_class, 'default_field_listing']);
 
@@ -323,7 +323,7 @@ class FormRepository
 
                 $theme_instance = self::forge_class($form_id, $form_theme_class, $form_type);
 
-                if (method_exists($theme_instance, 'default_metabox_settings')) {
+                if (is_object($theme_instance) && method_exists($theme_instance, 'default_metabox_settings')) {
                     $default_metabox_settings = call_user_func([$theme_instance, 'default_metabox_settings']);
                     if (is_array($default_metabox_settings) && ! empty($default_metabox_settings)) {
                         foreach ($default_metabox_settings as $key => $value) {

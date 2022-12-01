@@ -385,7 +385,7 @@ class CheckoutFields
 
                 if ( ! empty($states)) {
                     $args['type']              = 'select';
-                    $args['key_value_options'] = ['' => '&mdash;&mdash;&mdash;'] + $states;
+                    $args['key_value_options'] = $states;
                 }
 
                 if ( ! empty($session_state)) {

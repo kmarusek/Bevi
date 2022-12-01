@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Clickcease - Click Fraud Protection
  * Description: Plugin adds the ClickCease click fraud protection code.
- * Version: 3.0.8
+ * Version: 3.1.0
  * Requires at least: 5.6
  * Requires PHP: 5.6
  * Author: ClickCease
@@ -12,7 +12,7 @@
 if (!defined('ABSPATH')) {
     die();
 }
-define('clickcease_plugin_VERSION', '3.0.8');
+define('clickcease_plugin_VERSION', '3.1.0');
 define('clickcease_plugin_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('clickcease_plugin_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -132,16 +132,6 @@ class WP_clickcease_plugin
                 header('HTTP/1.0 403 Forbidden');
                 exit();
             }
-            LogService::log(
-                "Server",
-                'No action',
-                isset($validated['output']->version) ? $validated['output']->version : '',
-                isset($validated['output']->isInvalid) ? $validated['output']->isInvalid : '',
-                isset($validated['output']->threatTypeCode) ? $validated['output']->threatTypeCode : '',
-                isset($validated['output']->requestId) ? $validated['output']->requestId : '',
-                isset($validated['output']->riskScore) ? $validated['output']->riskScore : '',
-                isset($validated['output']->setCookie) ? $validated['output']->setCookie : ''
-            );
         } else {
             $logMsg =
                 "clickcease_api_key : " .
@@ -170,7 +160,6 @@ class WP_clickcease_plugin
     }
     public function cc_redirect($cc_get_value = 'invalid', $cc_get_key = 'clickcease')
     {
-        $formService = new FormService();
         if (strpos(Utils::getServerVariable('REQUEST_URI'), '?') === false) {
             return Utils::getServerVariable('REQUEST_URI') . '?' . $cc_get_key . '=' . $cc_get_value;
         } else {
@@ -221,9 +210,9 @@ class WP_clickcease_plugin
         $api_key = get_option('clickcease_domain_key');
         $botzappingAuth = get_option('clickcease_bot_zapping_authenticated', '');
         if ($botzappingAuth && $api_key) {
-            wp_enqueue_script('clickceaseFrontEnd', plugin_dir_url(__FILE__) . 'includes/assets/js/front-end.js', ['jquery']);
+            wp_enqueue_script('clickceaseFrontEnd', plugin_dir_url(__FILE__) . 'includes/assets/js/front-end.js', ['jquery'], "1.0");
             wp_localize_script('clickceaseFrontEnd', 'ajax_obj', [
-                'nonce' => wp_create_nonce('ajax-nonce'),
+                'cc_nonce' => wp_create_nonce('cc_ajax_nonce'),
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'ajax_action' => 'validate_clickcease_response',
             ]);

@@ -268,7 +268,7 @@ class SettingsPage extends AbstractSettingsPage
 
                     $payment_method = ppress_get_payment_method($order->payment_method);
 
-                    if (method_exists($payment_method, 'process_refund')) {
+                    if (is_object($payment_method) && method_exists($payment_method, 'process_refund')) {
 
                         $response = $payment_method->process_refund(
                             $order->get_id(),
@@ -398,7 +398,12 @@ class SettingsPage extends AbstractSettingsPage
         $subscription->expiration_date   = SubscriptionService::init()->get_plan_expiration_datetime($plan_obj->id);
 
         if ($order->is_completed()) {
-            $subscription_id = $subscription->activate_subscription();
+            if ($subscription->has_trial()) {
+                $subscription_id = $subscription->enable_subscription_trial();
+            } else {
+                $subscription_id = $subscription->activate_subscription();
+            }
+
         } else {
             $subscription_id = $subscription->save();
         }

@@ -2,12 +2,10 @@
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url(./material-icons/MaterialIcons-Regular.eot); /* For IE6-8 */
     src: local('Material Icons'),
     local('MaterialIcons-Regular'),
     url(./material-icons/MaterialIcons-Regular.woff2) format('woff2'),
     url(./material-icons/MaterialIcons-Regular.woff) format('woff'),
-    url(./material-icons/MaterialIcons-Regular.ttf) format('truetype');
 }
 
 /* from woo */
@@ -321,7 +319,7 @@ h2 .pp-form-builder-help-tip {
     color: #a00
 }
 
-.pp-form-builder_options_panel .description {
+.pp-form-builder_options_panel span.description {
     padding: 0;
     margin: 0 0 0 7px;
     clear: none;

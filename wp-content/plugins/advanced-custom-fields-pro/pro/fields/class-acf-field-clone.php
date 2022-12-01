@@ -866,12 +866,12 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 			acf_render_field_setting(
 				$field,
 				array(
-					'label' => __( 'Prefix Field Labels', 'acf' ),
-					'hint'  => $instructions,
-					'name'  => 'prefix_label',
-					'class' => 'setting-prefix-label',
-					'type'  => 'true_false',
-					'ui'    => 1,
+					'label'        => __( 'Prefix Field Labels', 'acf' ),
+					'instructions' => $instructions,
+					'name'         => 'prefix_label',
+					'class'        => 'setting-prefix-label',
+					'type'         => 'true_false',
+					'ui'           => 1,
 				)
 			);
 
@@ -881,12 +881,12 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 			acf_render_field_setting(
 				$field,
 				array(
-					'label' => __( 'Prefix Field Names', 'acf' ),
-					'hint'  => $instructions,
-					'name'  => 'prefix_name',
-					'class' => 'setting-prefix-name',
-					'type'  => 'true_false',
-					'ui'    => 1,
+					'label'        => __( 'Prefix Field Names', 'acf' ),
+					'instructions' => $instructions,
+					'name'         => 'prefix_name',
+					'class'        => 'setting-prefix-name',
+					'type'         => 'true_false',
+					'ui'           => 1,
 				)
 			);
 
@@ -952,12 +952,14 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 				return '';
 			}
 
+			// phpcs:disable WordPress.Security.NonceVerification.Missing -- Verified elsewhere.
 			// ajax_fields
 			if ( isset( $_POST['fields'][ $selector ] ) ) {
 
-				return $this->get_clone_setting_field_choice( $_POST['fields'][ $selector ] );
+				return $this->get_clone_setting_field_choice( acf_sanitize_request_args( $_POST['fields'][ $selector ] ) );
 
 			}
+			// phpcs:enable WordPress.Security.NonceVerification.Missing
 
 			// field
 			if ( acf_is_field_key( $selector ) ) {

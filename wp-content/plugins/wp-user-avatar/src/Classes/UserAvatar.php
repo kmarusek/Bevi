@@ -14,45 +14,10 @@ class UserAvatar
 
             $original = ppress_var($args, 'ppress-full') === true;
 
-            if ( ! empty($size)) $size = absint($size);
+            $avatar_url = self::get_avatar_complete_url($id_or_email, $size, $original);
 
-            if (self::user_has_pp_avatar($id_or_email)) {
-
-                $args['url'] = self::get_pp_avatar_url($id_or_email, $size, $original);
-
-            } else {
-                /** WP User Avatar Adapter STARTS */
-                global $wpua_disable_gravatar, $wpua_functions;
-
-                // First checking custom avatar.
-                if ($wpua_disable_gravatar == '1') {
-                    $args['url'] = $wpua_functions->wpua_get_default_avatar_url($size);
-                } else {
-
-                    $has_valid_url = false;
-
-                    if (method_exists($wpua_functions, 'wpua_has_gravatar')) {
-                        $has_valid_url = $wpua_functions->wpua_has_gravatar($id_or_email);
-                    } elseif (class_exists('\WP_User_Avatar_Functions')) {
-
-                        $obj = new \WP_User_Avatar_Functions();
-                        if (method_exists($obj, 'wpua_has_gravatar')) {
-                            $has_valid_url = $obj->wpua_has_gravatar($id_or_email);
-                        }
-                    }
-
-                    if ( ! $has_valid_url) {
-                        $wpua_size = ! empty($size) ? $size : 96;
-
-                        if (method_exists($wpua_functions, 'wpua_get_default_avatar_url')) {
-                            $args['url'] = $wpua_functions->wpua_get_default_avatar_url($wpua_size);
-                        }
-                    }
-                }
-                /** WP User Avatar Adapter ENDS */
-            }
-
-            if ( ! empty($args['url'])) {
+            if ( ! empty($avatar_url)) {
+                $args['url']          = $avatar_url;
                 $args['found_avatar'] = true;
             }
 
@@ -84,6 +49,62 @@ class UserAvatar
             return $avatar;
 
         }, PHP_INT_MAX - 1, 6);
+    }
+
+    /**
+     * Get user profile picture. Falls back to default avatar or gravatar set in settings.
+     *
+     * @param string|int $id_or_email
+     * @param int $size
+     * @param bool $original
+     *
+     * @return false|string
+     */
+    public static function get_avatar_complete_url($id_or_email, $size = '', $original = false)
+    {
+        $url = false;
+
+        if ( ! empty($size)) $size = absint($size);
+
+        if (self::user_has_pp_avatar($id_or_email)) {
+
+            $url = self::get_pp_avatar_url($id_or_email, $size, $original);
+
+        } else {
+
+            /** WP User Avatar Adapter STARTS */
+            global $wpua_disable_gravatar, $wpua_functions;
+
+            // First checking custom avatar.
+            if ($wpua_disable_gravatar == '1') {
+                $url = $wpua_functions->wpua_get_default_avatar_url($size);
+            } else {
+
+                $has_valid_url = false;
+
+                if (is_object($wpua_functions) && method_exists($wpua_functions, 'wpua_has_gravatar')) {
+                    $has_valid_url = $wpua_functions->wpua_has_gravatar($id_or_email);
+                } elseif (class_exists('\WP_User_Avatar_Functions')) {
+
+                    $obj = new \WP_User_Avatar_Functions();
+                    if (method_exists($obj, 'wpua_has_gravatar')) {
+                        $has_valid_url = $obj->wpua_has_gravatar($id_or_email);
+                    }
+                }
+
+                if ( ! $has_valid_url) {
+
+                    $wpua_size = ! empty($size) ? $size : 96;
+
+                    if (is_object($wpua_functions) && method_exists($wpua_functions, 'wpua_get_default_avatar_url')) {
+                        $url = $wpua_functions->wpua_get_default_avatar_url($wpua_size);
+                    }
+                }
+            }
+            /** WP User Avatar Adapter ENDS */
+        }
+
+        return $url;
     }
 
     public static function user_has_pp_avatar($id_or_email)

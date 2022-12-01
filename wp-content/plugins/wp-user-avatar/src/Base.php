@@ -68,6 +68,7 @@ define('PPRESS_USER_PROFILES_SETTINGS_PAGE', add_query_arg('form-type', 'user-pr
 define('PPRESS_CONTENT_PROTECTION_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_CONTENT_PROTECTION_SETTINGS_SLUG));
 define('PPRESS_EXTENSIONS_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_EXTENSIONS_SETTINGS_SLUG));
 define('PPRESS_DASHBOARD_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_DASHBOARD_SETTINGS_SLUG));
+define('PPRESS_MEMBERSHIP_DOWNLOAD_LOGS_SETTINGS_PAGE', add_query_arg('view', 'download-logs', PPRESS_DASHBOARD_SETTINGS_PAGE));
 define('PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_MEMBERSHIP_PLANS_SETTINGS_SLUG));
 define('PPRESS_MEMBERSHIP_COUPONS_SETTINGS_PAGE', add_query_arg('view', 'coupons', PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE));
 define('PPRESS_MEMBERSHIP_ORDERS_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_MEMBERSHIP_ORDERS_SETTINGS_SLUG));
@@ -80,6 +81,7 @@ define('PPRESS_SETTINGS_DB_OPTION_NAME', 'ppress_settings_data');
 define('PPRESS_FORMS_DB_OPTION_NAME', 'pp_forms');
 define('PPRESS_CONTACT_INFO_OPTION_NAME', 'ppress_contact_info');
 define('PPRESS_PAYMENT_METHODS_OPTION_NAME', 'ppress_payment_methods');
+define('PPRESS_FILE_DOWNLOADS_OPTION_NAME', 'ppress_file_downloads');
 define('PPRESS_TAXES_OPTION_NAME', 'ppress_taxes');
 
 define('PPRESS_ASSETS_URL', plugin_dir_url(PROFILEPRESS_SYSTEM_FILE_PATH) . 'assets');
@@ -189,6 +191,7 @@ class Base extends DBTables
         CheckListHeader::get_instance();
 
         Admin\SettingsPages\Membership\DashboardPage\SettingsPage::get_instance();
+        Admin\SettingsPages\Membership\DownloadLogsPage\SettingsPage::get_instance();
         PlansSettingsPage::get_instance();
         OrdersPageSettingsPage::get_instance();
         SubscriptionsPageSettingsPage::get_instance();

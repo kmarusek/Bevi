@@ -83,10 +83,23 @@ let App = {
         });
 
         new MetaboxView();
+    },
+
+    tabify() {
+        $('ul.pp-tabs li a', '#pp-form-builder-metabox').on('click', function (e) {
+            e.preventDefault();
+            $('.pp-form-builder_options_panel').hide();
+            $('#pp-form-builder-metabox ul.pp-tabs li').removeClass('active');
+            $(this).parent().addClass('active');
+            $($(this).attr('href')).show();
+
+        }).get(0).click();
     }
 };
 
 $(function () {
+    // also used by plan edit screen
+    App.tabify();
 
     let cache = $('.pp-dnd-form-builder-wrap');
 

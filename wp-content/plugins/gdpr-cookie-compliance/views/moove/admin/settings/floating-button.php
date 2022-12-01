@@ -88,21 +88,6 @@ endif;
 
 			<tr class="gdpr-conditional-field" data-dependency="#moove_gdpr_floating_button_enable">
 				<th scope="row">
-					<label for="moove_gdpr_floating_button_position"><?php esc_html_e( 'Button - Custom Position (CSS)', 'gdpr-cookie-compliance' ); ?></label>
-				</th>
-				<td>
-					<input name="moove_gdpr_floating_button_position" type="text" id="moove_gdpr_floating_button_position" value="<?php echo isset( $gdpr_options['moove_gdpr_floating_button_position'] ) && $gdpr_options['moove_gdpr_floating_button_position'] ? esc_attr( $gdpr_options['moove_gdpr_floating_button_position'] ) : 'bottom: 20px; left: 20px;'; ?>" class="regular-text">
-					<p class="description" id="moove_gdpr_floating_button_position-description">
-						<?php
-							$content = __( 'You can align the position eg.: <strong>top: 20px; right: 20px;</strong>', 'gdpr-cookie-compliance' );
-							apply_filters( 'gdpr_cc_keephtml', $content, true );
-						?>
-						</p>
-				</td>
-			</tr>
-
-			<tr class="gdpr-conditional-field" data-dependency="#moove_gdpr_floating_button_enable">
-				<th scope="row">
 					<label for="moove_gdpr_floating_mobile"><?php esc_html_e( 'Visibility on mobile', 'gdpr-cookie-compliance' ); ?></label>
 				</th>
 				<td>
@@ -112,47 +97,6 @@ endif;
 						<span class="gdpr-checkbox-slider" data-enable="<?php esc_html_e( 'Visible', 'gdpr-cookie-compliance' ); ?>" data-disable="<?php esc_html_e( 'Hidden', 'gdpr-cookie-compliance' ); ?>"></span>
 					</label>
 
-				</td>
-			</tr>
-
-			<tr class="gdpr-conditional-field" data-dependency="#moove_gdpr_floating_button_enable">
-				<th scope="row">
-					<label for="moove_gdpr_floating_button_background_colour"><?php esc_html_e( 'Button - Background Colour', 'gdpr-cookie-compliance' ); ?></label>
-				</th>
-				<td>
-					<div class="iris-colorpicker-group-cnt">
-						<?php $color = isset( $gdpr_options['moove_gdpr_floating_button_background_colour'] ) && $gdpr_options['moove_gdpr_floating_button_background_colour'] ? $gdpr_options['moove_gdpr_floating_button_background_colour'] : '373737'; ?>
-						<input class="iris-colorpicker regular-text" type="text" name="moove_gdpr_floating_button_background_colour" value="<?php echo esc_attr( $color ); ?>" style="background-color: <?php echo esc_attr( $color ); ?>;" >
-						<span class="iris-selectbtn"><?php esc_html_e( 'Select', 'gdpr-cookie-compliance' ); ?></span>
-					</div>
-				</td>
-			</tr>
-
-			<tr class="gdpr-conditional-field" data-dependency="#moove_gdpr_floating_button_enable">
-				<th scope="row">
-					<label for="moove_gdpr_floating_button_hover_background_colour"><?php esc_html_e( 'Button - Hover Background Colour', 'gdpr-cookie-compliance' ); ?></label>
-				</th>
-				<td>
-					<div class="iris-colorpicker-group-cnt">
-						<?php
-						$color = isset( $gdpr_options['moove_gdpr_floating_button_hover_background_colour'] ) && $gdpr_options['moove_gdpr_floating_button_hover_background_colour'] ? $gdpr_options['moove_gdpr_floating_button_hover_background_colour'] : '000000';
-						?>
-						<input class="iris-colorpicker regular-text" type="text" name="moove_gdpr_floating_button_hover_background_colour" value="<?php echo esc_attr( $color ); ?>" style="background-color: <?php echo esc_attr( $color ); ?>;" >
-						<span class="iris-selectbtn"><?php esc_html_e( 'Select', 'gdpr-cookie-compliance' ); ?></span>
-					</div>
-				</td>
-			</tr>
-
-			<tr class="gdpr-conditional-field" data-dependency="#moove_gdpr_floating_button_enable">
-				<th scope="row">
-					<label for="moove_gdpr_floating_button_font_colour"><?php esc_html_e( 'Button - Font Colour', 'gdpr-cookie-compliance' ); ?></label>
-				</th>
-				<td>
-					<div class="iris-colorpicker-group-cnt">
-						<?php $color = isset( $gdpr_options['moove_gdpr_floating_button_font_colour'] ) && $gdpr_options['moove_gdpr_floating_button_font_colour'] ? $gdpr_options['moove_gdpr_floating_button_font_colour'] : 'ffffff'; ?>
-						<input class="iris-colorpicker regular-text" type="text" name="moove_gdpr_floating_button_font_colour" value="<?php echo esc_attr( $color ); ?>" style="background-color: <?php echo esc_attr( $color ); ?>;" >
-						<span class="iris-selectbtn"><?php esc_html_e( 'Select', 'gdpr-cookie-compliance' ); ?></span>
-					</div>
 				</td>
 			</tr>
 

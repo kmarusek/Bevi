@@ -1,22 +1,24 @@
-﻿=== Paid Membership, User Registration, User Profile & Restrict Content Plugin – ProfilePress ===
+﻿=== Paid Membership, Ecommerce, User Registration, Login, User Profile & Restrict Content Plugin – ProfilePress ===
 Contributors: properfraction, collizo4sky
 Donate link: https://profilepress.com/pricing/
-Tags: membership, ecommerce, user registration, user profile, stripe, paypal, login form, 2fa, two-factor authenticator, login, registration, password reset, members, users, profile, front-end profile, edit profile, avatar, profile picture
+Tags: membership, ecommerce, user registration, user profile, paid membership, members, stripe, paypal, mollie, login form, login, registration, password reset, member, users, profile, front-end profile, avatar
 Requires at least: 5.3
-Requires PHP: 7.1.8
-Tested up to: 6.0
-Stable tag: 4.1.4
+Requires PHP: 7.2.0
+Tested up to: 6.1
+Stable tag: 4.3.2
 License: GPLv2 or later
 
-Paid membership plugin: accept payments, sell subscriptions, restrict content, user registration, frontend login form, user profile & member directory.
+Paid membership plugin: accept payments, sell subscriptions & digital downloads, restrict content, user registration, login form, user profile & member directory.
 
 == Description ==
 
-= Modern Membership, User Registration, Profile & Login Form Plugin =
+= Modern Membership, Ecommerce, Digital Downloads, User Profile, Registration & Login Form Plugin =
 
-[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful eCommerce and paid membership plugin for accepting one-time and recurring payments and selling subscriptions via Stripe & PayPal, restrict content and control user access.
+[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful ecommerce and paid membership plugin for accepting one-time and recurring payments, selling subscriptions and digital products or digital downloads (downloadable files) via Stripe, Mollie & PayPal, restrict content and control user access.
 
-ProfilePress lets you create beautiful user profiles, member directories, frontend login, and user registration forms, password reset and edit profile forms.
+ProfilePress is the best Stripe (Credit Card), PayPal, & Mollie payment forms plugin for WordPress to quickly accept payments and provide your users the ultimate member experience.
+
+ProfilePress lets you create beautiful user profiles, member directories, frontend login, and user registration forms, member password reset and edit profile forms.
 
 Our Drag-and-Drop form builder makes building forms easy. It is the perfect solution for creating online communities and membership sites where users can register or signup to become members.
 
@@ -24,11 +26,11 @@ Our Drag-and-Drop form builder makes building forms easy. It is the perfect solu
 
 ### Excellent Features of ProfilePress
 
-ProfilePress is suited for selling non-physical goods, including online courses, paid memberships, subscriptions, selling services, selling event tickets, accepting donations, selling digital downloads, etc.
+ProfilePress ecommerce plugin is suited for selling non-physical goods, including online courses, digital downloads, downloadable files, paid memberships, subscriptions, selling services, selling event tickets, accepting donations, selling digital downloads, etc.
 
 = Multiple Payment Processors =
 
-Easily connect to Stripe & PayPal to collect payments. We are working on adding additional gateways (Mollie, Square, PayStack, RazorPay, Mercado Pago) in the future.
+Easily connect to Stripe (supports Stripe hosted checkout page and on-site payment form), PayPal & Mollie to collect payments. We are working on adding additional gateways (Square, PayStack, RazorPay, Mercado Pago) in the future.
 
 = Powerful Payment Options =
 
@@ -36,15 +38,15 @@ One-time payments, subscriptions, subscriptions with free trials, payment plans 
 
 = Coupon Discounts =
 
-Incentivize your buyers with a coupon discount to increase sales. You can easily create unlimited coupons and automatically add coupons with a URL parameter.
+Incentivize your buyers with a coupon discount to increase sales. With our ecommerce and membership plugin, you can easily create unlimited coupons and automatically add coupons with a URL parameter.
 
 = Custom Frontend Forms =
 
-Create excellent checkout, login, user registration, password reset, and edit profile forms with our drag-and-drop builder. Your members will never have to see your WordPress admin panel. Everything is handled in the frontend.
+Create excellent checkout page, member login forms, user registration forms, password reset forms, and edit profile forms with our drag-and-drop builder. Your members will never have to see your WordPress admin panel. Everything is handled in the frontend.
 
-* **Conversion Optimized Checkout** – Let users make payments to you and subscribe to your membership plans.
+* **Conversion Optimized Checkout Form** – Let users make payments to you and subscribe to your membership plans.
 * **User Registration Forms** – Let users signup via a custom registration form.
-* **Login & Password Reset Forms** – Allow users to log in and reset their passwords.
+* **Login & Password Reset Forms** – Allow users to log in and reset their passwords via custom frontent forms.
 * **User Dashboard** – My Account page and edit profile forms for users to manage their profile details and account settings.
 * **Automatic Registration & Login Redirect** – Auto login users after they register and redirect them after they sign in, log out and reset their passwords.
 * Add login, logout, register, and profile links to your website navigation menu that will change based on whether the user is logged in.
@@ -69,16 +71,18 @@ Never start from scratch again. ProfilePress comes with several beautiful, custo
 
 ProfilePress gives you fine-grained control over what content your users can see based on your [protection rules](https://profilepress.com/article/adding-content-protection-rules/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) and [shortcodes](https://profilepress.com/article/wordpress-content-restriction-shortcodes/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion). You can restrict content including pages, child pages, posts, custom post types, categories, tags and custom taxonomies based on their membership plans, user roles, usernames, and logged-in status.
 
-You can also control the visibility of [navigation menus](https://profilepress.com/article/wordpress-navigation-menu-restriction/) and widgets, modules & contents in [Elementor](https://profilepress.com/article/restrict-elementor-sections-widgets/) & [Beaver Builder](https://profilepress.com/article/restrict-content-beaver-builder-visibility/).
+You can also control the visibility of [navigation menus](https://profilepress.com/article/wordpress-navigation-menu-restriction/) and widgets, modules & contents in the [block editor](https://profilepress.com/article/restrict-visibility-contents-wordpress-block-editor/), [Elementor](https://profilepress.com/article/restrict-elementor-sections-widgets/) & [Beaver Builder](https://profilepress.com/article/restrict-content-beaver-builder-visibility/) page builders.
 
-= Detailed eCommerce Reports =
+= Detailed Ecommerce Reports =
 
-We provide a complete reports section where you can Keep track of your earnings, refunds, sales, and more. You can view reports for any period or drill down to specific membership plans.
+We provide a complete reports section where you can Keep track of your earnings, refunds, sales, download logs and more. You can view reports for any period or drill down to specific membership plans.
 
 = Other Payment & Membership Features =
 
+* Accept one-time, recurring payments and charge for subscriptions with Stripe, PayPal and Mollie.
+* Smart fraud protection & spam prevention on the user registration form, login form and checkout page.
 * Complete customer management to view and manage detailed records of all customers and their order history.
-* Collect EU Vat or Tax from your users depending on their location, with complete control over tax rates and who to charge.
+* Collect EU Vat or Tax from your users with our ecommerce plugin depending on their location, with complete control over tax rates and who to charge.
 * Disable the admin bar and restrict access to the WordPress dashboard based on user roles.
 * Redirect the WordPress default login page (wp-login.php) to your custom login, registration page, and password reset pages.
 
@@ -90,22 +94,27 @@ Customize the email templates for each email that can be sent to users and admin
 
 Extend the capabilities of ProfilePress with our powerful addons and remove the additional 2% Stripe processing fee.
 
-* [PayPal Checkout](https://profilepress.com/addons/paypal/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept payments including Visa, Mastercard, Venmo, Discover, iDEAL, American Express, Bancontact, BLIK, giropay, MyBank, Przelewy24 via PayPal.
-* [Custom Fields](https://profilepress.com/addons/custom-fields/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Collect additional information from users besides the standard profile data.
-* [Email Confirmation](https://profilepress.com/addons/email-confirmation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Ensure registered users confirm their email addresses before they can log in.
+* [PayPal Checkout](https://profilepress.com/addons/paypal/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept Visa, Mastercard, Venmo, Discover, iDEAL, American Express, Bancontact, BLIK, giropay, MyBank and Przelewy24 payments via PayPal.
+* [Mollie Checkout](https://profilepress.com/addons/mollie/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept payments via Credit Card, iDEAL, SEPA Direct Debit, Apple Pay, PayPal, Klarna, Bancontact, Bank transfer & Gift Card with Mollie.
+* [Custom Fields](https://profilepress.com/addons/custom-fields/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Collect additional information from users besides the standard profile data during user registration and payment checkout.
+* [Email Confirmation](https://profilepress.com/addons/email-confirmation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Ensure registered users confirm their email addresses before they can sign in via the login form.
 * [User Moderation](https://profilepress.com/addons/user-moderation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Decide whether to approve newly registered users or not. You can also block and unblock users at any time.
-* [Social Login](https://profilepress.com/addons/social-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users register & login to your site via Facebook, Twitter, Google, LinkedIn, GitHub, and VK.
+* [Social Login](https://profilepress.com/addons/social-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users checkout, register & login to your site via Facebook, Twitter, Google, LinkedIn, GitHub, and VK.
 * [Two-Factor Authentication (2FA)](https://profilepress.com/addons/2fa/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Adds an additional layer of security to users accounts by requiring more than just a password to log in.
 * [Passwordless Login](https://profilepress.com/addons/passwordless-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users log in to your site via a one-time URL sent to their email addresses.
 * [WooCommerce](https://profilepress.com/addons/woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Manage WooCommerce billing and shipping fields, replace WooCommerce login and edit account forms in checkout and "My Account" pages with that of ProfilePress.
-* [Google reCAPTCHA](https://profilepress.com/addons/recaptcha/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Protect your forms against spam and bot attacks.
-* [Site Creation](https://profilepress.com/addons/site-creation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Allow users to create new sites on a multisite network via a registration form powered by ProfilePress.
-* [Mailchimp](https://profilepress.com/addons/mailchimp/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Subscribe members to your Mailchimp audiences when they register and automatically sync profile changes with Mailchimp.
-* [Campaign Monitor](https://profilepress.com/addons/campaign-monitor/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Subscribe members to your Campaign Monitor lists when they register and automatically sync profile changes with Campaign Monitor.
+* [Google reCAPTCHA](https://profilepress.com/addons/recaptcha/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Protect your user registration, login, checkout and password reset forms against spam and bot attacks.
+* [Site Creation](https://profilepress.com/addons/site-creation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Allow users to create new sites on a multisite network via a user registration form powered by ProfilePress.
+* [Mailchimp](https://profilepress.com/addons/mailchimp/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Subscribe members to your Mailchimp audiences after they register, made a purchase and payment, subscribe to membership plans and automatically sync profile changes with Mailchimp.
+* [Campaign Monitor](https://profilepress.com/addons/campaign-monitor/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Subscribe members to your Campaign Monitor lists when they register, subscribe to membership plans via checkout form, and automatically sync profile changes with Campaign Monitor.
 * [BuddyPress Profile Sync](https://profilepress.com/addons/buddypress-profile-sync/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  This addon provides 2-way synchronization between WordPress profile fields and BuddyPress extended profile.
 * [Join BuddyPress Groups](https://profilepress.com/addons/join-buddypress-groups/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Let users select the BuddyPress groups to join during registration.
 * [Akismet](https://profilepress.com/addons/akismet/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Block spam and bot user registrations with Akismet and keep your membership site safe and secured.
 * [Polylang](https://profilepress.com/addons/polylang/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Build multilingual login, registration, password reset, and edit profile forms.
+
+ProfilePress is the Ecommerce platform of your dreams. It delivers a complete Ecommerce experience with everything needed for selling online.
+
+If you're looking to build a business out of your membership site by creating paid memberships, there's no better way than to use ProfilePress which provide the ultimate member experience and will help you start and profit from your WordPress membership sites.
 
 = What's Next =
 
@@ -130,6 +139,17 @@ Navigate to your WordPress "Plugins" page, inside of your WordPress dashboard, a
 
 No. You can create and manage your forms, user profiles, and member directories without any coding knowledge (Intuitive form & email template builder).
 
+
+= Can I accept credit card payments on mobile? =
+
+Yes. Stripe, PayPal and Mollie Checkout are optimized to accept mobile credit card payments and can automatically presents Apple Pay or Google Pay options when available.
+
+= Does ProfilePress require WooCommerce? =
+No. ProfilePress is a standalone ecommerce, payments & membership plugin and does not require other payment or ecommerce plugins, such as WooCommerce or Easy Digital Downloads to work.
+
+= Which file types can I sell? =
+Any file type can be sold using ProfilePress ecommerce and membership plugin, including .PDF, .DOC, .MP3, .MOV, .EPUB, .PSD, .MP4, .JPG, or any other extension which exists. On the product creation form, there is a file upload field which will accept any file type. Whatever file is uploaded to that field is the file customers will receive instantly when they complete a purchase.
+
 == Screenshots ==
 
 1. Detailed and actionable reports
@@ -146,24 +166,19 @@ No. You can create and manage your forms, user profiles, and member directories 
 
 == Changelog ==
 
-= 4.1.4 =
-* Updated Stripe API to 2022-08-01.
-* Fixed blurry gravatar in member directory.
-* Fixed bug with [custom fields](https://profilepress.com/addons/custom-fields/) not showing up in checkout
-* Fixed bug where content protection listing page had missing Access info.
-* Fixed bug with add new content protection page displaying multiple sidebars.
-* Fixed bug with children of core pages not getting protected.
+= Paid Membership, Ecommerce & User Registration 4.3.2 =
+* PHP 8 compatibility improvements.
+* Fixed bug where default avatar wasn't reflecting in buddypress.
+* Fixed bug where nocache header might be applied site-wide.
+* Fixed bug where session might have started where unnecessary.
 
-= 4.1.3 =
-* Added [navigation menu protection](https://profilepress.com/article/wordpress-navigation-menu-restriction/).
-* Added [Elementor content restriction](https://profilepress.com/article/restrict-elementor-sections-widgets/).
-* Added [Beaver Builder content restriction](https://profilepress.com/article/restrict-content-beaver-builder-visibility/).
-* Added support for discounting subscription first payment.
-* Added support for [purchase note](https://profilepress.com/article/plan-purchase-note/?ref=changelog).
-* Added support for [checking active subscription via PHP](https://profilepress.com/article/php-check-user-has-active-subscription/).
-* Fixed bug where new order creation with missing payment method failed.
-* Fixed couple of date/time related query bugs.
-* Fixed bug where cancelled one-time subscription was still active.
-* Fixed bug where non-completed order email receipt can be sent.
+= Paid Membership, Ecommerce & User Registration 4.3.1 =
+* Pro: [Checkout social login support](https://profilepress.com/addons/social-login/?ref=changelog).
+* Pro: [Checkout reCAPTCHA support](https://profilepress.com/addons/recaptcha/?ref=changelog).
+* Pro: [Checkout Akismet support](https://profilepress.com/addons/akismet/?ref=changelog).
+* Added checkout compatibility with other addons.
+* Added honeypot field to checkout to prevent spam.
+* Added filters for adding custom tabs to user profile.
+* Fixed store status admin menu styling not working.
 
 See the [changelog file](https://plugins.svn.wordpress.org/wp-user-avatar/trunk/changelog.txt) for full change log information.

@@ -40,7 +40,7 @@ class UserSignupLocationListingPage
 
                 switch ($val) {
                     case 'checkout':
-                        $status = esc_html__('Checkout Form', 'wp-user-avatar');
+                        $status = esc_html__('Checkout', 'wp-user-avatar');
                         break;
                     case 'facebook':
                         $status = esc_html__('Facebook', 'wp-user-avatar');

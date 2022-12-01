@@ -1,18 +1,18 @@
-=== GDPR Cookie Compliance (CCPA ready) ===
+=== GDPR Cookie Compliance (CCPA, DSGVO, Cookie Consent) ===
 Contributors: MooveAgency
 Donate link: https://www.mooveagency.com/wordpress-plugins/gdpr-cookie-compliance/
-Tags: GDPR, CCPA, cookie banner, cookie law, cookie consent, cookie notice, dsgvo, rgpd
-Stable tag: 4.8.12
+Tags: GDPR, CCPA, DSGVO, cookie banner, cookie notice
+Stable tag: 4.9.5
 Requires at least: 4.5
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.6 or higher
 License: GPLv3
 
-Cookie Compliance for GDPR & CCPA, European and other cookie law and consent notice requirements on your website.
+Cookie notice for GDPR, CCPA, DSGVO, European and other cookie law and consent notice requirements on your website.
 
 == Description ==
 
-**Prepare your website for cookie compliance related to GDPR & CCPA, EU cookie law and consent notice requirements with this incredibly powerful, easy-to-use, well supported and 100% free WordPress plugin.**
+**Prepare your website for cookie consent requirements related to GDPR, CCPA, DSGVO, EU cookie law and notice requirements with this incredibly powerful, easy-to-use, well supported and 100% free WordPress plugin.**
 
 
 ### Key Features
@@ -46,7 +46,7 @@ Cookie Compliance for GDPR & CCPA, European and other cookie law and consent not
 * **WordPress Multisite features** - you can manage the plugin settings globally, and clone them from one site to another within your multi-site setup. You can also sync users consent between individual subsites on your multisite network
 * **Accept on Scroll / Hide timer** - allow users to accept cookies by scrolling down the page OR by setting a timer (ie. Hide banner after 5 seconds)
 * **Renew Consent** - ask users to renew their consent if there is a change in privacy or cookie policy on your site
-* **Geo-location** - if enabled, the Cookie Consent Banner will only be shown to visitors from the European Union or selected countries (ie. Canada, United States etc.)
+* **Geo-location** - if enabled, the Cookie Consent Banner will only be shown to visitors from the European Union or selected countries (ie. Canada, California etc.)
 * **iFrame Blocker** - blocks users from viewing 3rd party resources (such as Youtube) until they accept cookies
 * **Language Specific Scripts** - insert different Tag Manager Scripts for different languages, supports WPML and other language plugins
 * **Premium Shortcodes** that can be added to your ‘Privacy & Cookie Policy’ and allow your users to manage their consent with ease.
@@ -85,7 +85,7 @@ You can view a demo of the plugin here:
 
 ### Live Examples
 
-* You can choose to setup our GDPR plugin in any way that you like. 
+* You can choose to setup our cookie plugin in any way that you like. 
 * We have created the plugin with as much flexibility as possible as organisations interpret the Cookie Law and Cookie Consent Policy differently.
 * A few examples of how you can setup our plugin in various ways are below:
 
@@ -275,6 +275,26 @@ The Brazilian General Data Protection Law (“Lei Geral de Proteção de Dados�
 39. GDPR Cookie Compliance - Front-end - Cookie Shortcode [Premium]
 
 == Changelog ==
+= 4.9.5: 29 November 2022 =
+* Excluded cookie HTML from Divi Builder
+
+= 4.9.4: 11 November 2022 =
+* Floating Button styles and options improved
+
+= 4.9.3: 10 November 2022 =
+* Floating Button styles improved
+
+= 4.9.2: 7 November 2022 =
+* Cookie Settings Screen mobile improvements
+* Accessibility options added to plugin settings (for tabindex)
+
+= 4.9.1: 2 November 2022 =
+* Icons removed from Cookie Setting Screen
+
+= 4.8.13: 13 October 2022 =
+* JS toggle improved
+* Minor fixes
+
 = 4.8.12: 17 August 2022 =
 * WCAG improvements - modal footer buttons
 
@@ -285,7 +305,7 @@ The Brazilian General Data Protection Law (“Lei Geral de Proteção de Dados�
 * GA4 cookie removal script improved
 
 = 4.8.9: 05 June 2022 =
-* Tabindex filter implemented, snippet added to Documentation
+* Tabindex filter implemented
 
 = 4.8.8: 29 June 2022 =
 * Logo queries optimised

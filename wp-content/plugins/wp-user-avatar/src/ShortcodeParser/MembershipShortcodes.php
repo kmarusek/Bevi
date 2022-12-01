@@ -87,6 +87,7 @@ class MembershipShortcodes
                     ppress_render_view('checkout/form-checkout', [
                         'planObj' => $planObj
                     ]);
+
                 } else {
                     do_action('ppress_membership_checkout_invalid_plan');
                     echo '<p>' . esc_html__('Invalid subscription plan.', 'wp-user-avatar') . '</p>';

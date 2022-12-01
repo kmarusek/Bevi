@@ -13,6 +13,7 @@ use ProfilePress\Core\Membership\Services\OrderService;
 /**
  * @property int $id
  * @property string $name
+ * @property string $user_role
  * @property string $order_note
  * @property string $description
  * @property string $price
@@ -24,11 +25,15 @@ use ProfilePress\Core\Membership\Services\OrderService;
  */
 class PlanEntity extends AbstractModel implements ModelInterface
 {
+    const PLAN_EXTRAS = 'plan_extras';
+
     protected $id = 0;
 
     protected $name = '';
 
     protected $description = '';
+
+    protected $user_role = '';
 
     protected $order_note = '';
 
@@ -178,6 +183,58 @@ class PlanEntity extends AbstractModel implements ModelInterface
         return ppress_plan_checkout_url($this->get_id());
     }
 
+    /**
+     * @return bool
+     */
+    public function has_downloads()
+    {
+        $val = $this->get_downloads();
+
+        return isset($val['files']) && is_array($val['files']) && ! empty($val['files']);
+    }
+
+    public function get_downloads()
+    {
+        $cache_key = sprintf('ppress_plan_%d_downloads', $this->get_id());
+
+        $ret = wp_cache_get($cache_key);
+
+        if (false === $ret) {
+
+            $ret = [];
+
+            $extras = $this->get_plan_extras();
+
+            $file_names = ppress_var($extras, 'df_names');
+            $file_urls  = ppress_var($extras, 'df_urls');
+
+            if ( ! is_array($file_urls) || empty($file_urls)) return false;
+
+            foreach ($file_urls as $index => $file_url) {
+                if ( ! empty($file_url)) {
+                    $ret['files'][$file_url] = ppress_var($file_names, $index, pathinfo($file_url)['filename']);
+                }
+            }
+
+            $ret['download_limit'] = ppress_is_boolean($extras['df_download_limit']) || ! empty($extras['df_download_limit']) ?
+                absint($extras['df_download_limit']) :
+                absint(ppress_get_file_downloads_setting('download_limit', 0, true));
+
+            $ret['download_expiry'] = ppress_is_boolean($extras['df_download_expiry']) || ! empty($extras['df_download_expiry']) ?
+                absint($extras['df_download_expiry']) :
+                absint(ppress_get_file_downloads_setting('download_expiry', 0, true));
+
+            wp_cache_set($cache_key, $ret, "", MINUTE_IN_SECONDS);
+        }
+
+        return $ret;
+    }
+
+    public function get_plan_extras()
+    {
+        return $this->get_meta(self::PLAN_EXTRAS);
+    }
+
     public function update_meta($meta_key, $meta_value)
     {
         $this->meta_data[$meta_key] = $meta_value;
@@ -213,7 +270,6 @@ class PlanEntity extends AbstractModel implements ModelInterface
             'meta_data',
             \wp_json_encode($this->meta_data)
         );
-
     }
 
     /**

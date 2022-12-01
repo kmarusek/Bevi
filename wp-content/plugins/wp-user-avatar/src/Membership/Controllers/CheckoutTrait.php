@@ -422,6 +422,11 @@ trait CheckoutTrait
             RegistrationAuth::send_welcome_email($user_id, $password);
 
             ppress_wp_new_user_notification($user_id, null, 'admin');
+
+            /**
+             * Fires after a user registration is completed.
+             */
+            do_action('ppress_after_registration', 0, $user_data, $user_id, false);
         }
 
         return $customer_id;

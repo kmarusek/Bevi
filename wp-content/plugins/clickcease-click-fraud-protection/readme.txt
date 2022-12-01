@@ -31,6 +31,7 @@ Secure your ad campaigns and website from malicious bots and competitors with Cl
 **What else do I need for this plugin to work?**
 You will need to sign up for a ClickCease subscription at ClickCease.com. Our free 7 day trial allows you to get started blocking bad traffic.
 == Changelog ==
-3.0.8
+--Fix ononce 
+3.1.0
 
 

@@ -3,12 +3,14 @@
 namespace ProfilePress\Core;
 
 use ProfilePress\Core\Classes\ExtensionManager;
+use ProfilePress\Core\Membership\DigitalProducts\UploadHandler;
+use ProfilePress\Libsodium\Licensing\Licensing;
 
 class DBUpdates
 {
     public static $instance;
 
-    const DB_VER = 3;
+    const DB_VER = 6;
 
     public function init_options()
     {
@@ -86,6 +88,48 @@ class DBUpdates
 
         $wpdb->query("ALTER TABLE $table CHANGE type coupon_type varchar(50) NULL;");
         $wpdb->query("ALTER TABLE $table2 ADD COLUMN order_note text NULL AFTER description;");
+    }
+
+    public function update_routine_4()
+    {
+        global $wpdb;
+
+        $table = DBTables::subscription_plans_db_table();
+
+        $wpdb->query("ALTER TABLE $table ADD COLUMN user_role varchar(50) NULL AFTER description;");
+    }
+
+    public function update_routine_5()
+    {
+        UploadHandler::get_instance()->create_protection_files(true);
+
+        flush_rewrite_rules();
+
+        if (class_exists('\ProfilePress\Libsodium\Licensing\Licensing')) {
+
+            $response = Licensing::get_instance()->license_control_instance()->check_license();
+
+            if (is_wp_error($response)) return false;
+
+            if ( ! empty($response->license)) {
+                if ($response->license == 'valid') {
+                    update_option('ppress_license_status', 'valid');
+                    update_option('ppress_license_expired_status', 'false');
+                } else {
+                    if (in_array($response->license, ['expired', 'disabled'])) {
+                        update_option('ppress_license_expired_status', 'true');
+                    }
+                    update_option('ppress_license_status', 'invalid');
+                }
+            }
+        }
+    }
+
+    public function update_routine_6()
+    {
+        $a                           = get_option(ExtensionManager::DB_OPTION_NAME);
+        $a[ExtensionManager::MOLLIE] = 'true';
+        update_option(ExtensionManager::DB_OPTION_NAME, $a);
     }
 
     public static function get_instance()

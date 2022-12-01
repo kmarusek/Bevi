@@ -40,4 +40,4 @@ return ['year' => ':count an|:count ans', 'a_year' => 'un an|:count ans', 'y' =>
         case 'W':
             return $number . ($number === 1 ? 're' : 'e');
     }
-}, 'first_day_of_week' => 1, 'day_of_first_week_of_year' => 4, 'list' => [', ', ' et ']];
+}, 'first_day_of_week' => 1, 'day_of_first_week_of_year' => 4, 'list' => [', ', ' et '], 'ordinal_words' => ['of' => 'de', 'first' => 'premier', 'second' => 'deuxième', 'third' => 'troisième', 'fourth' => 'quatrième', 'fifth' => 'cinquième', 'last' => 'dernier']];

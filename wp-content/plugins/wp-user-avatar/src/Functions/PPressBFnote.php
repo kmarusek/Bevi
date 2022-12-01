@@ -6,24 +6,34 @@ if ( ! class_exists('\PPressBFnote')) {
 
     class PPressBFnote
     {
+        private $this_year;
+        private $last_year;
+        private $start;
+        private $end;
+
         public function __construct()
         {
             add_action('ppress_admin_notices', array($this, 'admin_notice'));
             add_action('network_admin_notices', array($this, 'admin_notice'));
 
             add_action('admin_init', array($this, 'dismiss_admin_notice'));
+
+            $this->this_year = '2022';
+            $this->last_year = $this->this_year - 1;
+            $this->start     = strtotime('november 25th, ' . $this->this_year);
+            $this->end       = strtotime('december 1st, ' . $this->this_year);
         }
 
         public function dismiss_admin_notice()
         {
-            if ( ! isset($_GET['ppress-adaction']) || $_GET['ppress-adaction'] != 'ppressbfnote2022_dismiss_adnotice') {
+            if ( ! isset($_GET['ppressbfnote-adaction']) || $_GET['ppressbfnote-adaction'] != 'ppressbfnote_dismiss_adnotice') {
                 return;
             }
 
             $url = admin_url();
-            update_option('ppressbfnote2022_dismiss_adnotice', 'true');
+            update_option('ppressbfnote_dismiss_adnotice_' . $this->this_year, 'true');
 
-            wp_redirect($url);
+            wp_safe_redirect($url);
             exit;
         }
 
@@ -31,34 +41,38 @@ if ( ! class_exists('\PPressBFnote')) {
         {
             global $pagenow;
 
-            if ($pagenow != 'index.php' && strpos(ppress_var($_GET, 'page'), 'pp-') === false) return;
+            if ($pagenow != 'index.php' && strpos(ppress_var($_GET, 'page'), 'ppress-') === false) return;
 
             if (ExtensionManager::is_premium()) return;
 
             if ( ! current_user_can('administrator')) return;
 
-            $start = strtotime('november 24th, 2022');
-            $end   = strtotime('december 1st, 2022');
-            $now   = time();
+            $now = time();
 
-            if ($now < $start || $now > $end) return;
+            if ($now < $this->start || $now > $this->end) return;
 
-            if (get_option('ppressbfnote2022_dismiss_adnotice', 'false') == 'true') {
+            if ( ! empty(get_option('ppressbfnote2022_dismiss_adnotice', 0))) {
+                delete_option('ppressbfnote2022_dismiss_adnotice');
+            }
+
+            if ( ! empty(get_option('ppressbfnote_dismiss_adnotice_' . $this->last_year, 0))) {
+                delete_option('ppressbfnote_dismiss_adnotice_' . $this->last_year);
+            }
+
+            if (get_option('ppressbfnote_dismiss_adnotice_' . $this->this_year, 'false') == 'true') {
                 return;
             }
 
             $dismiss_url = esc_url_raw(
-                add_query_arg(
-                    array(
-                        'ppress-adaction' => 'ppressbfnote2022_dismiss_adnotice'
-                    ),
+                add_query_arg([
+                    'ppressbfnote-adaction' => 'ppressbfnote_dismiss_adnotice'
+                ],
                     admin_url()
                 )
             );
-
             $this->notice_css();
 
-            $bf_url = 'https://profilepress.com/pricing/?utm_source=wp-admin&utm_medium=admin-notice&utm_id=bf2022'
+            $bf_url = 'https://profilepress.com/pricing/?utm_source=wp-admin&utm_medium=admin-notice&utm_campaign=bf' . $this->this_year
 
             ?>
             <div class="ppressbfnote-admin-notice notice notice-success">
@@ -66,8 +80,8 @@ if ( ! class_exists('\PPressBFnote')) {
                     <p>
                         <?php
                         printf(
-                            __('%1$sHuge Black Friday Sale%2$s: Get 25%% off your ProfilePress plugin upgrade today with the coupon %3$sBFCM2022%4$s'),
-                            '<span class="ppressbfnote-stylize"><strong>', '</strong></span>', '<code>', '</code>');
+                            __('%1$sHuge Black Friday Sale%2$s: Get 25%% off your ProfilePress plugin upgrade today with the coupon %3$sBFCM%4$s'),
+                            '<span class="ppressbfnote-stylize"><strong>', '</strong></span>', '<code>', $this->this_year . '</code>');
                         ?>
                     </p>
                     <p style="text-decoration: underline;font-size: 12px;">Hurry as the deal is expiring soon.</p>
@@ -107,6 +121,7 @@ if ( ! class_exists('\PPressBFnote')) {
 
                 .ppressbfnote-admin-notice .ppressbfnote-stylize {
                     line-height: 2;
+                    font-size: 16px;
                 }
 
                 .ppressbfnote-admin-notice .button-primary {

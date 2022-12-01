@@ -25,7 +25,10 @@ class SettingsPage extends AbstractSettingsPage
 
     public function admin_page_title()
     {
-        return esc_html__('Dashboard', 'wp-user-avatar');
+        return apply_filters(
+            'ppress_membership_dashboard_settings_page_title',
+            esc_html__('Dashboard', 'wp-user-avatar')
+        );
     }
 
     public function register_cpf_settings_page()
@@ -39,6 +42,18 @@ class SettingsPage extends AbstractSettingsPage
             array($this, 'admin_page_callback'));
 
         do_action('ppress_membership_reports_settings_page_register', $hook);
+    }
+
+    public function header_menu_tabs()
+    {
+        $tabs = apply_filters('ppress_membership_dashboard_settings_page_tabs', [
+            5  => ['id' => $this->default_header_menu(), 'url' => PPRESS_DASHBOARD_SETTINGS_PAGE, 'label' => esc_html__('Reports', 'wp-user-avatar')],
+            10 => ['id' => 'download-logs', 'url' => PPRESS_MEMBERSHIP_DOWNLOAD_LOGS_SETTINGS_PAGE, 'label' => esc_html__('Download Logs', 'wp-user-avatar')]
+        ]);
+
+        ksort($tabs);
+
+        return $tabs;
     }
 
     public function default_header_menu()

@@ -296,6 +296,8 @@ export default function () {
                 dataType: 'json',
                 success: function (response) {
 
+                    $(document.body).trigger('ppress_process_checkout_success_callback', [response]);
+
                     if ('success' in response) {
 
                         if (response.success === true) {
@@ -330,6 +332,7 @@ export default function () {
                     _this.remove_spinner();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
+                    $(document.body).trigger('ppress_process_checkout_error_callback', [jqXHR, textStatus, errorThrown]);
                     _this.createAlertMessage(errorThrown);
                 }
             }, 'json',);

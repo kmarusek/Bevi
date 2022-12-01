@@ -260,7 +260,7 @@ class List_Table extends WP_List_Table {
 			);
 		}
 
-		return apply_filters( 'code_snippets/list_table/row_actions', $actions );
+		return apply_filters( 'code_snippets/list_table/row_actions', $actions, $snippet );
 	}
 
 	/**
@@ -725,13 +725,13 @@ class List_Table extends WP_List_Table {
 				return 'deleted';
 
 			case 'export':
-				$export = new Export( $id );
-				$export->export_snippets();
+				$export = new Export_Attachment( $id );
+				$export->download_snippets_json();
 				break;
 
 			case 'download':
-				$export = new Export( $id );
-				$export->download_snippets();
+				$export = new Export_Attachment( $id );
+				$export->download_snippets_code();
 				break;
 		}
 
@@ -826,13 +826,13 @@ class List_Table extends WP_List_Table {
 				break;
 
 			case 'export-selected':
-				$export = new Export( $ids );
-				$export->export_snippets();
+				$export = new Export_Attachment( $ids );
+				$export->download_snippets_json();
 				break;
 
 			case 'download-selected':
-				$export = new Export( $ids );
-				$export->download_snippets();
+				$export = new Export_Attachment( $ids );
+				$export->download_snippets_code();
 				break;
 
 			case 'clone-selected':
@@ -1297,6 +1297,7 @@ class List_Table extends WP_List_Table {
 
 			/* translators: %s: snippet title */
 			$snippet->name = sprintf( __( '%s [CLONE]', 'code-snippets' ), $snippet->name );
+			$snippet = apply_filters( 'code_snippets/list_table/clone_snippet', $snippet );
 
 			save_snippet( $snippet );
 		}

@@ -86,7 +86,7 @@ class RTI_Service
             "is_valid" => true,
             "output" => [],
         ];
-        
+
         $domain = Utils::getDomain();
         $client_ip = Utils::get_the_user_ip();
 
@@ -208,7 +208,7 @@ class RTI_Service
         }
 
         // Validate nonce
-        if (!wp_verify_nonce($_POST["nonce"], "ajax-nonce")) {
+        if (!check_ajax_referer("cc_ajax_nonce", "security")) {
             echo json_encode([
                 "status" => 400,
                 "message" => "Request could not be validated",
@@ -265,8 +265,6 @@ class RTI_Service
                     $required_action = "blockuser";
                 }
             }
-
-            LogService::log("Front", $required_action ? $required_action : 'No action', $output[0], $output[1], $output[2], $output[3]);
         }
 
         // Send response to Ajax
@@ -280,7 +278,7 @@ class RTI_Service
     }
 
     public function updateUserStatus($api_key, $client_id, $status)
-    {        
+    {
         $data = new stdClass();
         $data->Address = Utils::getDomain();
         $data->State = $status;
@@ -300,7 +298,7 @@ class RTI_Service
         ];
 
         // add route
-        $apiResponse = wp_remote_post(Urls::CLICKCEASE_MONITORING . '/State', $request);
+        $apiResponse = wp_remote_post(Urls::CLICKCEASE_BOTZAPPING . '/State', $request);
 
         if (is_wp_error($apiResponse)) {
             $error_message = $apiResponse->get_error_message();
@@ -313,7 +311,7 @@ class RTI_Service
             $this->send_error($request, $response_body);
         }
         return $response_code == HTTPCode::SUCCESS;
-        }
+    }
 
 
     private function send_error($request_params, $error)

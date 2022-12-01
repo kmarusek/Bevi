@@ -89,7 +89,7 @@ $payment_method = PaymentMethods::get_instance()->get_by_id($sub->get_payment_me
                                 <td>
                                     <?php foreach ($actions as $action => $label) :
                                         $url = wp_nonce_url(
-                                            add_query_arg(['ppress_myac_sub_action' => $action, 'sub_id' => $sub->id]),
+                                            remove_query_arg('ppress-myac-sub-message', add_query_arg(['ppress_myac_sub_action' => $action, 'sub_id' => $sub->id])),
                                             $sub->id . $action
                                         ); ?>
                                         <a href="<?php echo esc_url($url); ?>" class="ppress-myac-action ppress-<?php echo sanitize_html_class($action) ?> ppress-confirm-delete"><?php echo esc_html($label); ?></a>
@@ -104,7 +104,7 @@ $payment_method = PaymentMethods::get_instance()->get_by_id($sub->get_payment_me
 
             <?php if ( ! empty($sub_orders)) : ?>
 
-            <h2><?= sprintf(esc_html__('Subscription Orders', 'wp-user-avatar'), $sub->id) ?></h2>
+            <h2><?= esc_html__('Subscription Orders', 'wp-user-avatar') ?></h2>
 
             <div class="profilepress-myaccount-sub-order-details-wrap">
                 <div class="profilepress-myaccount-sub-order-details-table-wrap">

@@ -1,1 +1,0 @@
-<form-component :block="{{ json_encode($block) }}"></form-component>

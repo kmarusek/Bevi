@@ -58,7 +58,7 @@ class GDPR_Modules {
 		if ( $infobar_hidden ) :
 			$floating_button_class = 'button-visible';
 		endif;
-		$floating_button_position = isset( $modal_options['moove_gdpr_floating_button_position'] ) ? $modal_options['moove_gdpr_floating_button_position'] : '';
+		$floating_button_position = false;
 		$data                     = new stdClass();
 		$data->options            = $modal_options;
 		$data->wpml_lang          = $wpml_lang;
@@ -348,9 +348,9 @@ class GDPR_Modules {
 		$data                   = new stdClass();
 		$data->primary_colour   = isset( $modal_options['moove_gdpr_brand_colour'] ) && $modal_options['moove_gdpr_brand_colour'] ? $modal_options['moove_gdpr_brand_colour'] : '#0C4DA2';
 		$data->secondary_colour = '#000000';
-		$data->button_bg        = isset( $modal_options['moove_gdpr_floating_button_background_colour'] ) && $modal_options['moove_gdpr_floating_button_background_colour'] ? $modal_options['moove_gdpr_floating_button_background_colour'] : '#373737';
-		$data->button_hover_bg  = isset( $modal_options['moove_gdpr_floating_button_hover_background_colour'] ) && $modal_options['moove_gdpr_floating_button_hover_background_colour'] ? $modal_options['moove_gdpr_floating_button_hover_background_colour'] : '#000000';
-		$data->button_font      = isset( $modal_options['moove_gdpr_floating_button_font_colour'] ) && $modal_options['moove_gdpr_floating_button_font_colour'] ? $modal_options['moove_gdpr_floating_button_font_colour'] : '#ffffff';
+		$data->button_bg        = '#373737';
+		$data->button_hover_bg  = '#000000';
+		$data->button_font      = '#ffffff';
 		$data->font_family      = $font_family;
 		return $view_controller->load( 'branding-styles', $data );
 

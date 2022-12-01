@@ -2763,6 +2763,18 @@ Content-Type: text/html;
 		return get_option( 'rg_gforms_key' );
 	}
 
+	/**
+	 * Gets the support url configured for the current environment.
+	 *
+	 * @since 2.6.7
+	 *
+	 * @return string Returns the support URL.
+	 */
+	public static function get_support_url() {
+		$env_handler = GFForms::get_service_container()->get( Gravity_Forms\Gravity_Forms\Environment_Config\GF_Environment_Config_Service_Provider::GF_ENVIRONMENT_CONFIG_HANDLER );
+		return $env_handler->get_support_url();
+	}
+
 	public static function has_update( $use_cache = true ) {
 		$version_info = GFCommon::get_version_info( $use_cache );
 		$version      = rgar( $version_info, 'version' );
@@ -7227,6 +7239,42 @@ Content-Type: text/html;
 	 */
 	public static function form_has_fields( $form ) {
 		return ! empty( $form['fields'] ) && is_array( $form['fields'] );
+	}
+
+	/**
+	 * Determines if the user must be logged in to view and submit the form.
+	 *
+	 * @since 2.6.9
+	 *
+	 * @param array $form The current form object.
+	 *
+	 * @return bool
+	 */
+	public static function form_requires_login( $form ) {
+		$form_id       = absint( rgar( $form, 'id' ) );
+		$key           = __METHOD__ . $form_id;
+		$require_login = GFCache::get( $key, $found );
+
+		if ( $found ) {
+			return $require_login;
+		}
+
+		/**
+		 * Filter whether the user must be logged-in to view and submit the form.
+		 *
+		 * @since 2.4
+		 *
+		 * @param bool  $require_login Indicates if the form requires the user to be logged-in.
+		 * @param array $form          The current form object.
+		 */
+		$require_login = (bool) gf_apply_filters( array(
+			'gform_require_login',
+			$form_id,
+		), (bool) rgar( $form, 'requireLogin' ), $form );
+
+		GFCache::set( $key, $require_login );
+
+		return $require_login;
 	}
 
 	/**

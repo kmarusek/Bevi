@@ -32,6 +32,11 @@ function ppress_get_payment_method($payment_method_id)
     return PaymentMethods::get_instance()->get_by_id($payment_method_id);
 }
 
+/**
+ * Check if website has an active membership plan.
+ *
+ * @return bool
+ */
 function ppress_is_any_active_plan()
 {
     global $wpdb;
@@ -41,6 +46,11 @@ function ppress_is_any_active_plan()
     return absint($wpdb->get_var("SELECT COUNT(id) FROM $table WHERE status = 'true'")) > 0;
 }
 
+/**
+ * Check if website has an active payment method.
+ *
+ * @return bool
+ */
 function ppress_is_any_enabled_payment_method()
 {
     $check = PaymentGateways::get_instance()->get_enabled_methods(true);
@@ -48,6 +58,11 @@ function ppress_is_any_enabled_payment_method()
     return ! empty($check);
 }
 
+/**
+ * Check if website has an active coupon.
+ *
+ * @return bool
+ */
 function ppress_is_any_active_coupon()
 {
     global $wpdb;
@@ -613,6 +628,21 @@ function ppress_get_payment_method_setting($key = '', $default = false, $is_empt
     return isset($data[$key]) ? $data[$key] : $default;
 }
 
+function ppress_get_file_downloads_setting($key = '', $default = false, $is_empty = false)
+{
+    static $data = null;
+
+    if (is_null($data)) {
+        $data = get_option(PPRESS_FILE_DOWNLOADS_OPTION_NAME, []);
+    }
+
+    if ($is_empty === true) {
+        return isset($data[$key]) && ( ! empty($data[$key]) || ppress_is_boolean($data[$key])) ? $data[$key] : $default;
+    }
+
+    return isset($data[$key]) ? $data[$key] : $default;
+}
+
 /**
  * @return PPRESS_Session
  */
@@ -751,4 +781,51 @@ function ppress_has_active_subscription($user_id, $plan_id, $by_customer_id = fa
     }
 
     return $customer->has_active_subscription($plan_id);
+}
+
+/**
+ * Checks whether function is disabled.
+ *
+ * @param string $function Name of the function.
+ *
+ * @return bool Whether or not function is disabled.
+ */
+function ppress_is_func_disabled($function)
+{
+    $disabled = explode(',', @ini_get('disable_functions'));
+
+    return in_array($function, $disabled, true);
+}
+
+/**
+ * Ignore the time limit set by the server (likely from php.ini.)
+ *
+ * This is usually only necessary during upgrades and exports. If you need to
+ * use this function directly, please be careful in doing so.
+ *
+ * The $time_limit parameter is filterable, but infinite values are not allowed
+ * so any erroneous processes are able to terminate normally.
+ *
+ * @param boolean $ignore_user_abort Whether to call ignore_user_about( true )
+ * @param int $time_limit How long to set the time limit to. Cannot be 0. Default 6 hours.
+ */
+function ppress_set_time_limit($ignore_user_abort = true, $time_limit = 21600)
+{
+    // Default time limit is 6 hours
+    $default = HOUR_IN_SECONDS * 6;
+
+    // Only abort if true and if function is enabled
+    if ((true === $ignore_user_abort) && ! ppress_is_func_disabled('ignore_user_abort')) {
+        @ignore_user_abort(true);
+    }
+
+    // Disallow infinite values
+    if (empty($time_limit)) $time_limit = $default;
+
+    // Set time limit to non-infinite value if function is enabled
+    if ( ! ppress_is_func_disabled('set_time_limit')) {
+        @set_time_limit($time_limit);
+    }
+
+    wp_raise_memory_limit('ppress');
 }

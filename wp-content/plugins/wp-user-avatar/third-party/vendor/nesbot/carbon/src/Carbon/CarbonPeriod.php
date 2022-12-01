@@ -23,6 +23,7 @@ use ProfilePressVendor\Carbon\Exceptions\UnreachableException;
 use ProfilePressVendor\Carbon\Traits\IntervalRounding;
 use ProfilePressVendor\Carbon\Traits\Mixin;
 use ProfilePressVendor\Carbon\Traits\Options;
+use ProfilePressVendor\Carbon\Traits\ToStringFormat;
 use Closure;
 use Countable;
 use DateInterval;
@@ -173,6 +174,7 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
         Mixin::mixin as baseMixin;
     }
     use Options;
+    use ToStringFormat;
     /**
      * Built-in filter for limit by recurrences.
      *
@@ -1121,7 +1123,7 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
      *
      * @return bool
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->validateCurrentDate() === \true;
@@ -1131,7 +1133,7 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
      *
      * @return int|null
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->valid() ? $this->key : null;
@@ -1141,7 +1143,7 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
      *
      * @return CarbonInterface|null
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->valid() ? $this->prepareForReturn($this->current) : null;
@@ -1153,7 +1155,7 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
      *
      * @return void
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function next()
     {
         if ($this->current === null) {
@@ -1177,7 +1179,7 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
      *
      * @return void
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->key = 0;
@@ -1235,9 +1237,13 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
      */
     public function toString()
     {
+        $format = $this->localToStringFormat ?? static::$toStringFormat;
+        if ($format instanceof Closure) {
+            return $format($this);
+        }
         $translator = [$this->dateClass, 'getTranslator']();
         $parts = [];
-        $format = !$this->startDate->isStartOfDay() || $this->endDate && !$this->endDate->isStartOfDay() ? 'Y-m-d H:i:s' : 'Y-m-d';
+        $format = $format ?? (!$this->startDate->isStartOfDay() || $this->endDate && !$this->endDate->isStartOfDay() ? 'Y-m-d H:i:s' : 'Y-m-d');
         if ($this->recurrences !== null) {
             $parts[] = $this->translate('period_recurrences', [], $this->recurrences, $translator);
         }
@@ -1336,7 +1342,7 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
      *
      * @return int
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return \count($this->toArray());
@@ -1899,7 +1905,7 @@ class CarbonPeriod implements Iterator, Countable, JsonSerializable
      *
      * @return CarbonInterface[]
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();

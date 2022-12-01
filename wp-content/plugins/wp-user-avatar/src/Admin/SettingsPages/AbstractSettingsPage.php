@@ -75,7 +75,7 @@ abstract class AbstractSettingsPage
                         <span class="dashicons dashicons-admin-users"></span> <?= __('Support', 'wp-user-avatar'); ?>
                     </a></span>
                     <?php else : ?>
-                        <span><a class="ppress-active" rel="noopener" href="https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=ppress_header_topright_menu" target="_blank">
+                        <span><a class="ppress-active" rel="noopener" href="<?php echo ppress_upgrade_urls_affilify('https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=ppress_header_topright_menu'); ?>" target="_blank">
                         <span class="dashicons dashicons-info"></span> <?= __('Pro Upgrade', 'wp-user-avatar'); ?>
                     </a></span>
                     <?php endif; ?>

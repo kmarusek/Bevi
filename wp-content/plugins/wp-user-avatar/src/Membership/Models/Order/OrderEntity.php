@@ -3,11 +3,16 @@
 namespace ProfilePress\Core\Membership\Models\Order;
 
 use ProfilePress\Core\Membership\Models\AbstractModel;
+use ProfilePress\Core\Membership\Models\Customer\CustomerEntity as CustomerEntity;
 use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
 use ProfilePress\Core\Membership\Models\ModelInterface;
+use ProfilePress\Core\Membership\Models\Plan\PlanEntity;
+use ProfilePress\Core\Membership\Models\Subscription\SubscriptionEntity as SubscriptionEntity;
+use ProfilePress\Core\Membership\Models\Subscription\SubscriptionFactory;
 use ProfilePress\Core\Membership\PaymentMethods\AbstractPaymentMethod;
 use ProfilePress\Core\Membership\PaymentMethods\PaymentMethods;
 use ProfilePress\Core\Membership\Repositories\OrderRepository;
+use ProfilePress\Core\Membership\Services\Calculator;
 use ProfilePress\Core\Membership\Services\OrderService;
 
 /**
@@ -378,9 +383,33 @@ class OrderEntity extends AbstractModel implements ModelInterface
         return absint($this->subscription_id);
     }
 
+    /**
+     * @return SubscriptionEntity
+     */
+    public function get_subscription()
+    {
+        return SubscriptionFactory::fromId($this->get_subscription_id());
+    }
+
     public function get_customer_id()
     {
         return absint($this->customer_id);
+    }
+
+    /**
+     * @return CustomerEntity
+     */
+    public function get_customer()
+    {
+        return CustomerFactory::fromId($this->customer_id);
+    }
+
+    /**
+     * @return PlanEntity
+     */
+    public function get_plan()
+    {
+        return ppress_get_plan($this->get_plan_id());
     }
 
     public function get_customer_email()
@@ -450,6 +479,10 @@ class OrderEntity extends AbstractModel implements ModelInterface
     public function is_refundable()
     {
         $payment_method = PaymentMethods::get_instance()->get_by_id($this->payment_method);
+
+        if (Calculator::init($this->get_total())->isNegativeOrZero()) {
+            return false;
+        }
 
         if ( ! $payment_method instanceof AbstractPaymentMethod) {
             return false;

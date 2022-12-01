@@ -98,7 +98,7 @@ class PaymentMethods
                     ],
                     'test_mode_reconnection_notice' => [
                         'label' => '',
-                        'data'  => '<style>#test_mode_reconnection_notice_row {display:none}</style><div class="pp-alert-notice pp-alert-notice-info"><p>' . __('Switching test/live modes might require payment methods reconnection or setup.', 'wp-user-avatar') . '</p></div>',
+                        'data'  => '<style>#test_mode_reconnection_notice_row {display:none}</style><div class="pp-alert-notice pp-alert-notice-info"><p>' . __('Switching test/live modes would require payment methods reconnection or setup.', 'wp-user-avatar') . '</p></div>',
                         'type'  => 'custom_field_block'
                     ],
                     'default_payment_method'        => [

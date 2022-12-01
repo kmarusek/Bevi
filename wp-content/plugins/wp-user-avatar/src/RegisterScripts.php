@@ -21,23 +21,23 @@ class RegisterScripts
 
     function admin_css()
     {
-        wp_enqueue_style('ppress-select2', PPRESS_ASSETS_URL . '/select2/select2.min.css');
+        wp_enqueue_style('ppress-select2', PPRESS_ASSETS_URL . '/select2/select2.min.css', [], PPRESS_VERSION_NUMBER);
         wp_enqueue_style('ppress-flatpickr', PPRESS_ASSETS_URL . '/flatpickr/flatpickr.min.css', false, PPRESS_VERSION_NUMBER);
 
         wp_enqueue_style('wp-color-picker');
 
-        wp_enqueue_style('ppress-admin', PPRESS_ASSETS_URL . '/css/admin.min.css');
+        wp_enqueue_style('ppress-admin', PPRESS_ASSETS_URL . '/css/admin.min.css', [], PPRESS_VERSION_NUMBER);
 
         // only load in profilepress settings pages.
         if ( ! ppress_is_admin_page()) return;
 
         wp_enqueue_style('ppress-hint-tooltip', PPRESS_ASSETS_URL . "/css/hint.min.css", false, PPRESS_VERSION_NUMBER);
 
-        wp_enqueue_style('ppress-form-builder-styles', PPRESS_ASSETS_URL . '/css/form-builder.css');
+        wp_enqueue_style('ppress-form-builder-styles', PPRESS_ASSETS_URL . '/css/form-builder.css', [], PPRESS_VERSION_NUMBER);
 
         wp_enqueue_style('ppress-codemirror', PPRESS_ASSETS_URL . '/codemirror/codemirror.css');
 
-        wp_enqueue_style('ppress-jbox', PPRESS_ASSETS_URL . '/jbox/jBox.all.min.css');
+        wp_enqueue_style('ppress-jbox', PPRESS_ASSETS_URL . '/jbox/jBox.all.min.css', [], PPRESS_VERSION_NUMBER);
     }
 
     function public_css()
@@ -80,9 +80,9 @@ class RegisterScripts
             wp_enqueue_script('password-strength-meter');
         }
 
-        wp_enqueue_script('ppress-flatpickr', PPRESS_ASSETS_URL . '/flatpickr/flatpickr.min.js', array('jquery'));
+        wp_enqueue_script('ppress-flatpickr', PPRESS_ASSETS_URL . '/flatpickr/flatpickr.min.js', array('jquery'), PPRESS_VERSION_NUMBER);
 
-        wp_enqueue_script('ppress-select2', PPRESS_ASSETS_URL . '/select2/select2.min.js', array('jquery'));
+        wp_enqueue_script('ppress-select2', PPRESS_ASSETS_URL . '/select2/select2.min.js', array('jquery'), PPRESS_VERSION_NUMBER);
 
         $frontend_dependencies = ['jquery', 'ppress-flatpickr', 'ppress-select2'];
         if (ppress_is_my_account_page()) {
@@ -90,14 +90,14 @@ class RegisterScripts
         }
         wp_enqueue_script('ppress-frontend-script', PPRESS_ASSETS_URL . "/js/frontend.min.js", $frontend_dependencies, PPRESS_VERSION_NUMBER, true);
         wp_localize_script('ppress-frontend-script', 'pp_ajax_form', [
-            'ajaxurl'           => admin_url('admin-ajax.php'),
-            'confirm_delete'    => esc_html__('Are you sure?', 'wp-user-avatar'),
-            'deleting_text'     => esc_html__('Deleting...', 'wp-user-avatar'),
-            'deleting_error'    => esc_html__('An error occurred. Please try again.', 'wp-user-avatar'),
-            'nonce'             => wp_create_nonce('ppress-frontend-nonce'),
-            'disable_ajax_form' => apply_filters('ppress_disable_ajax_form', (string)$is_ajax_mode_disabled),
-            'is_checkout'       => ppress_is_checkout() ? '1' : '0',
-            'is_checkout_tax_enabled'       => $this->is_tax_enabled_in_checkout() ? '1' : '0'
+            'ajaxurl'                 => admin_url('admin-ajax.php'),
+            'confirm_delete'          => esc_html__('Are you sure?', 'wp-user-avatar'),
+            'deleting_text'           => esc_html__('Deleting...', 'wp-user-avatar'),
+            'deleting_error'          => esc_html__('An error occurred. Please try again.', 'wp-user-avatar'),
+            'nonce'                   => wp_create_nonce('ppress-frontend-nonce'),
+            'disable_ajax_form'       => apply_filters('ppress_disable_ajax_form', (string)$is_ajax_mode_disabled),
+            'is_checkout'             => ppress_is_checkout() ? '1' : '0',
+            'is_checkout_tax_enabled' => $this->is_tax_enabled_in_checkout() ? '1' : '0'
         ]);
 
         if (isset($_GET['pp_preview_form']) || ppress_post_content_has_shortcode('profilepress-member-directory')) {
@@ -119,52 +119,64 @@ class RegisterScripts
         wp_enqueue_script('jquery-ui-draggable');
         wp_enqueue_script('wp-util');
 
-        wp_enqueue_script('ppress-flatpickr', PPRESS_ASSETS_URL . '/flatpickr/flatpickr.min.js', array('jquery'));
+        wp_enqueue_script('ppress-flatpickr', PPRESS_ASSETS_URL . '/flatpickr/flatpickr.min.js', array('jquery'), PPRESS_VERSION_NUMBER);
 
         if (in_array($pagenow, ['user-edit.php', 'profile.php']) || ppress_is_admin_page()) {
-            wp_enqueue_script('ppress-select2', PPRESS_ASSETS_URL . '/select2/select2.min.js', array('jquery'));
+            wp_enqueue_script('ppress-select2', PPRESS_ASSETS_URL . '/select2/select2.min.js', array('jquery'), PPRESS_VERSION_NUMBER);
         }
 
         if ( ! ppress_is_admin_page()) return;
+
+        wp_enqueue_script('postbox');
 
         if ($ppress_customer_page == $hook) {
             // Load the password show/hide feature and strength meter.
             wp_enqueue_script('user-profile');
         }
 
-        wp_enqueue_script('ppress-chartjs', PPRESS_ASSETS_URL . '/js/admin/chart.min.js', array('jquery'));
-        wp_enqueue_script('ppress-reports', PPRESS_ASSETS_URL . '/js/admin/reports.js', array('jquery', 'ppress-chartjs'));
+        wp_enqueue_script('ppress-chartjs', PPRESS_ASSETS_URL . '/js/admin/chart.min.js', array('jquery'), PPRESS_VERSION_NUMBER);
+        wp_enqueue_script('ppress-reports', PPRESS_ASSETS_URL . '/js/admin/reports.js', array('jquery', 'ppress-chartjs'), PPRESS_VERSION_NUMBER);
 
         wp_enqueue_media();
 
-        wp_enqueue_script('ppress-jbox', PPRESS_ASSETS_URL . '/jbox/jBox.all.min.js', array('jquery'));
-        wp_enqueue_script('ppress-jbox-init', PPRESS_ASSETS_URL . '/jbox/init.js', array('ppress-jbox'));
+        wp_enqueue_script('ppress-jbox', PPRESS_ASSETS_URL . '/jbox/jBox.all.min.js', array('jquery'), PPRESS_VERSION_NUMBER);
+        wp_enqueue_script('ppress-jbox-init', PPRESS_ASSETS_URL . '/jbox/init.js', array('ppress-jbox'), PPRESS_VERSION_NUMBER);
 
-        wp_enqueue_script('ppress-clipboardjs', PPRESS_ASSETS_URL . '/js/clipboard.min.js');
+        wp_enqueue_script('ppress-clipboardjs', PPRESS_ASSETS_URL . '/js/clipboard.min.js', [], PPRESS_VERSION_NUMBER);
 
-        wp_enqueue_script('ppress-admin-scripts', PPRESS_ASSETS_URL . '/js/admin.js', array('jquery', 'jquery-ui-sortable'));
+        wp_enqueue_script('ppress-admin-scripts', PPRESS_ASSETS_URL . '/js/admin.js', array('jquery', 'jquery-ui-sortable'), PPRESS_VERSION_NUMBER);
 
         wp_localize_script('ppress-admin-scripts', 'ppress_admin_globals', [
             'nonce' => wp_create_nonce('ppress-admin-nonce')
         ]);
 
         if (ppressGET_var('section') == 'checkout-fields') {
-            wp_enqueue_script('ppress-checkout-field-manager', PPRESS_ASSETS_URL . '/js/checkout-fields-manager.js');
+            wp_enqueue_script('ppress-checkout-field-manager', PPRESS_ASSETS_URL . '/js/checkout-fields-manager.js', [], PPRESS_VERSION_NUMBER);
         }
 
-        wp_enqueue_script('ppress-create-form', PPRESS_ASSETS_URL . '/js/create-form.js', array('jquery'));
-        wp_enqueue_script('ppress-content-control', PPRESS_ASSETS_URL . '/js/content-control.js', array('jquery'));
+        if (ppressGET_var('page') == PPRESS_MEMBERSHIP_PLANS_SETTINGS_SLUG) {
+            wp_enqueue_script(
+                'ppress-digital-files-chooser',
+                PPRESS_ASSETS_URL . '/js/admin/digital-files-chooser.js',
+                ['wp-util', 'jquery-ui-sortable'],
+                PPRESS_VERSION_NUMBER
+            );
+        }
+
+        wp_enqueue_script('ppress-create-form', PPRESS_ASSETS_URL . '/js/create-form.js', array('jquery'), PPRESS_VERSION_NUMBER);
+        wp_enqueue_script('ppress-content-control', PPRESS_ASSETS_URL . '/js/content-control.js', array('jquery'), PPRESS_VERSION_NUMBER);
         wp_enqueue_script(
             'ppress-form-builder',
             PPRESS_ASSETS_URL . '/js/builder/app.min.js',
-            ['jquery', 'backbone', 'wp-util', 'jquery-ui-draggable', 'jquery-ui-core', 'jquery-ui-sortable', 'wp-color-picker']
+            ['jquery', 'backbone', 'wp-util', 'jquery-ui-draggable', 'jquery-ui-core', 'jquery-ui-sortable', 'wp-color-picker'],
+            PPRESS_VERSION_NUMBER
         );
 
         wp_localize_script('ppress-form-builder', 'pp_form_builder', [
             'confirm_delete' => esc_html__('Are you sure?', 'wp-user-avatar')
         ]);
 
-        wp_enqueue_script('ppress-jquery-blockui', PPRESS_ASSETS_URL . '/js/jquery.blockUI.js', array('jquery'));
+        wp_enqueue_script('ppress-jquery-blockui', PPRESS_ASSETS_URL . '/js/jquery.blockUI.js', array('jquery'), PPRESS_VERSION_NUMBER);
 
         wp_enqueue_script('ppress-codemirror', PPRESS_ASSETS_URL . '/codemirror/codemirror.js');
         wp_enqueue_script('ppress-codemirror-css', PPRESS_ASSETS_URL . '/codemirror/css.js', ['ppress-codemirror']);

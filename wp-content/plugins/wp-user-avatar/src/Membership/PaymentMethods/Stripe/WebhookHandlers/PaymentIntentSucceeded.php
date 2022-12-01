@@ -11,7 +11,9 @@ class PaymentIntentSucceeded implements WebhookHandlerInterface
 {
     public function handle($event_data)
     {
-        $order = OrderFactory::fromId($event_data['metadata']['order_id']);
+        $order = OrderFactory::fromId(
+            $event_data['metadata']['order_id'] ?? 0
+        );
 
         $payment_intent_id = $event_data['id'];
 

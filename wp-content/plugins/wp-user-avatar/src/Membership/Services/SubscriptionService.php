@@ -61,6 +61,8 @@ class SubscriptionService
      */
     public function delete_subscription($sub_id)
     {
+        SubscriptionFactory::fromId($sub_id)->remove_plan_role_from_customer();
+
         return SubscriptionRepository::init()->delete($sub_id);
     }
 

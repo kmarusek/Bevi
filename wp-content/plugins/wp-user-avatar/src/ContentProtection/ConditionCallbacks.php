@@ -18,7 +18,7 @@ class ConditionCallbacks
     {
         global $post;
 
-        $post_id = absint($post->ID) > 0 ? $post->ID : get_queried_object_id();
+        $post_id = isset($post->ID) && absint($post->ID) > 0 ? $post->ID : get_queried_object_id();
 
         $target = explode('_', $condition_id);
 

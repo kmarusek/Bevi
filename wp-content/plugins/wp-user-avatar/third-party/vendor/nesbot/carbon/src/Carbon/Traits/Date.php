@@ -625,7 +625,7 @@ trait Date
      *
      * @link https://php.net/manual/en/datetime.gettimezone.php
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function getTimezone()
     {
         return CarbonTimeZone::instance(parent::getTimezone());
@@ -1232,8 +1232,12 @@ trait Date
      */
     public function weekday($value = null)
     {
-        $dayOfWeek = ($this->dayOfWeek + 7 - (int) ($this->getTranslationMessage('first_day_of_week') ?? 0)) % 7;
-        return $value === null ? $dayOfWeek : $this->addDays($value - $dayOfWeek);
+        if ($value === null) {
+            return $this->dayOfWeek;
+        }
+        $firstDay = (int) ($this->getTranslationMessage('first_day_of_week') ?? 0);
+        $dayOfWeek = ($this->dayOfWeek + 7 - $firstDay) % 7;
+        return $this->addDays(($value + 7 - $firstDay) % 7 - $dayOfWeek);
     }
     /**
      * Get/set the ISO weekday from 1 (Monday) to 7 (Sunday).
@@ -1325,7 +1329,7 @@ trait Date
      *
      * @return static
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function setDate($year, $month, $day)
     {
         return parent::setDate((int) $year, (int) $month, (int) $day);
@@ -1341,7 +1345,7 @@ trait Date
      *
      * @return static
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function setISODate($year, $week, $day = 1)
     {
         return parent::setISODate((int) $year, (int) $week, (int) $day);
@@ -1375,7 +1379,7 @@ trait Date
      *
      * @return static
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function setTime($hour, $minute, $second = 0, $microseconds = 0)
     {
         return parent::setTime((int) $hour, (int) $minute, (int) $second, (int) $microseconds);
@@ -1389,7 +1393,7 @@ trait Date
      *
      * @return static
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function setTimestamp($unixTimestamp)
     {
         [$timestamp, $microseconds] = self::getIntegerAndDecimalParts($unixTimestamp);
@@ -1441,7 +1445,7 @@ trait Date
      *
      * @return static
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function setTimezone($value)
     {
         $tz = static::safeCreateDateTimeZone($value);
@@ -1685,7 +1689,7 @@ trait Date
      */
     public function getIsoFormats($locale = null)
     {
-        return ['LT' => $this->getTranslationMessage('formats.LT', $locale, 'h:mm A'), 'LTS' => $this->getTranslationMessage('formats.LTS', $locale, 'h:mm:ss A'), 'L' => $this->getTranslationMessage('formats.L', $locale, 'MM/DD/YYYY'), 'LL' => $this->getTranslationMessage('formats.LL', $locale, 'MMMM D, YYYY'), 'LLL' => $this->getTranslationMessage('formats.LLL', $locale, 'MMMM D, YYYY h:mm A'), 'LLLL' => $this->getTranslationMessage('formats.LLLL', $locale, 'dddd, MMMM D, YYYY h:mm A')];
+        return ['LT' => $this->getTranslationMessage('formats.LT', $locale, 'h:mm A'), 'LTS' => $this->getTranslationMessage('formats.LTS', $locale, 'h:mm:ss A'), 'L' => $this->getTranslationMessage('formats.L', $locale, 'MM/DD/YYYY'), 'LL' => $this->getTranslationMessage('formats.LL', $locale, 'MMMM D, YYYY'), 'LLL' => $this->getTranslationMessage('formats.LLL', $locale, 'MMMM D, YYYY h:mm A'), 'LLLL' => $this->getTranslationMessage('formats.LLLL', $locale, 'dddd, MMMM D, YYYY h:mm A'), 'l' => $this->getTranslationMessage('formats.l', $locale), 'll' => $this->getTranslationMessage('formats.ll', $locale), 'lll' => $this->getTranslationMessage('formats.lll', $locale), 'llll' => $this->getTranslationMessage('formats.llll', $locale)];
     }
     /**
      * Returns list of calendar formats for ISO formatting.
@@ -1848,7 +1852,7 @@ trait Date
                 continue;
             }
             $input = \mb_substr($format, $i);
-            if (\preg_match('/^(LTS|LT|[Ll]{1,4})/', $input, $match)) {
+            if (\preg_match('/^(LTS|LT|l{1,4}|L{1,4})/', $input, $match)) {
                 if ($formats === null) {
                     $formats = $this->getIsoFormats();
                 }

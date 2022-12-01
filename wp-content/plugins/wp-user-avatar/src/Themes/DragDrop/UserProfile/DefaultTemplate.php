@@ -263,7 +263,9 @@ class DefaultTemplate extends AbstractTheme
             return ! empty($item);
         });
 
-        if (empty($saved_tabs)) $saved_tabs = ['main', 'posts' . 'comments'];
+        if (empty($saved_tabs)) $saved_tabs = ['main', 'posts', 'comments'];
+
+        $saved_tabs = apply_filters('ppress_dpf_saved_tabs', $saved_tabs, $this);
 
         $profile_tabs = $this->profile_tabs();
 
@@ -272,7 +274,7 @@ class DefaultTemplate extends AbstractTheme
             echo '<div class="ppress-dpf-profile-nav">';
 
             foreach ($saved_tabs as $tab_id) :
-                $url = esc_url(remove_query_arg('pfpage', add_query_arg('tab', $tab_id)));
+                $url = $profile_tabs[$tab_id]['url'] ?? esc_url(remove_query_arg('pfpage', add_query_arg('tab', $tab_id)));
                 ?>
                 <div class="ppress-dpf-profile-nav-item ppress-dpf-nav-<?= $tab_id ?><?= $this->active_tab() == $tab_id ? ' ppress-dpf-active' : ''; ?>">
                     <a href="<?= $url ?>">

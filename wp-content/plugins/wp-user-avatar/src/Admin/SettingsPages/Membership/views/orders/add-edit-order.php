@@ -33,6 +33,18 @@ add_action('add_meta_boxes', function () use ($order_data, $order_id) {
         'ppmembershiporder'
     );
 
+    if ( ! empty($order_data->get_plan()->has_downloads())) {
+
+        add_meta_box(
+            'ppress-membership-plan-downloads',
+            esc_html__('Digital Products', 'wp-user-avatar'),
+            function () use ($order_data) {
+                require __DIR__ . '/digital-products-metabox.php';
+            },
+            'ppmembershiporder'
+        );
+    }
+
     add_meta_box(
         'submitdiv',
         __('Publish', 'wp-user-avatar'),
@@ -79,6 +91,18 @@ add_action('add_meta_boxes', function () use ($order_data, $order_id) {
             __('Order Notes', 'wp-user-avatar'),
             function () use ($order_notes) {
                 require __DIR__ . '/order-notes-sidebar.php';
+            },
+            'ppmembershiporder',
+            'sidebar'
+        );
+    }
+
+    if ($order_data->get_plan()->has_downloads()) {
+        add_meta_box(
+            'ppress-membership-order-download-logs',
+            __('Logs', 'wp-user-avatar'),
+            function () use ($order_data) {
+                require __DIR__ . '/download-logs-sidebar.php';
             },
             'ppmembershiporder',
             'sidebar'

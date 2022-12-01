@@ -44,6 +44,8 @@ class SubscriptionPlanController extends BaseController
 
         $result = PlanRepository::init()->delete($plan->get_id());
 
+        remove_role('ppress_plan_' . $plan->get_id());
+
         do_action('ppress_membership_delete_plan', $plan);
 
         return $result;
@@ -56,9 +58,9 @@ class SubscriptionPlanController extends BaseController
     {
         $plan = is_int($id_or_obj) ? ppress_get_plan($id_or_obj) : $id_or_obj;
 
-        $plan->name .= ' – Copy';
-
-        $result = PlanRepository::init()->add($plan);
+        $plan->name      .= ' – Copy';
+        $plan->user_role = '';
+        $result          = PlanRepository::init()->add($plan);
 
         do_action('ppress_membership_duplicate_plan', $plan);
 

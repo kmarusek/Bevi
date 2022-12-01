@@ -2,16 +2,15 @@
 @import url("checkout.css");
 @import url("myac-payment-pages.css");
 
+/* https://github.com/marella/material-icons/ */
 @font-face {
     font-family: 'Material Icons';
     font-style: normal;
     font-weight: 400;
-    src: url(./material-icons/MaterialIcons-Regular.eot); /* For IE6-8 */
     src: local('Material Icons'),
     local('MaterialIcons-Regular'),
     url(./material-icons/MaterialIcons-Regular.woff2) format('woff2'),
-    url(./material-icons/MaterialIcons-Regular.woff) format('woff'),
-    url(./material-icons/MaterialIcons-Regular.ttf) format('truetype');
+    url(./material-icons/MaterialIcons-Regular.woff) format('woff')
 }
 
 .ppress-material-icons,
@@ -317,7 +316,7 @@
 }
 
 .pp-form-wrapper .ppress-pf-social-icon.dpf-instagram svg,
-.pp-form-wrapper .ppress-pf-social-icon.dpf-github svg, 
+.pp-form-wrapper .ppress-pf-social-icon.dpf-github svg,
 .pp-form-wrapper .ppress-pf-social-icon.dpf-pinterest svg {
     padding: 3px;
 }

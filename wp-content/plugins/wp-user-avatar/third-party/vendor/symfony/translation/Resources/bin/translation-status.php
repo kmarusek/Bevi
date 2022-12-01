@@ -10,6 +10,9 @@ namespace ProfilePressVendor;
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+if ('cli' !== \PHP_SAPI) {
+    throw new \Exception('This script must be run from the command line.');
+}
 $usageInstructions = <<<END
 
   Usage instructions

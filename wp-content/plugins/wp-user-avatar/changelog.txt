@@ -1,5 +1,39 @@
 ﻿== Changelog ==
 
+= 4.3.2 =
+* PHP 8 compatibility improvements.
+* Fixed bug where default avatar wasn't reflecting in buddypress.
+* Fixed bug where nocache header might be applied site-wide.
+* Fixed bug where session might have started where unnecessary.
+
+= 4.3.1 =
+* Pro: [Checkout social login support](https://profilepress.com/addons/social-login/?ref=changelog).
+* Pro: [Checkout reCAPTCHA support](https://profilepress.com/addons/recaptcha/?ref=changelog).
+* Pro: [Checkout Akismet support](https://profilepress.com/addons/akismet/?ref=changelog).
+* Added checkout compatibility with other addons.
+* Added honeypot field to checkout to prevent spam.
+* Added filters for adding custom tabs to user profile.
+* Fixed store status admin menu styling not working.
+
+= 4.3.0 =
+* Pro: [Mollie Addon](https://profilepress.com/addons/mollie/?ref=changelog).
+* Added integration with Conditional Blocks plugin.
+* Added customer ID placeholder support to order email.
+* Added custom fields support to order emails.
+* Fixed: Index column size too large error when creating subscriptions DB table.
+* Fixed bug where download details was showing for order without downloads.
+
+= 4.2.0 =
+* New: [Support for selling digital products](https://profilepress.com/article/sell-downloads-wordpress-membership/?ref=changelog)
+* Added support for [associating role to membership plans](https://profilepress.com/article/create-wordpress-membership-plans/#role-sync).
+* Added subscription details to view order page.
+* Added support for toggling Metaboxes.
+* Added "add new plan" button to plan edit screen.
+* Enhancement: Delete transient on plugin uninstallation.
+* Fixed bug with manually creating order not working.
+* Updated material icons and dropped EOT and TTF files.
+* Added button to reinstall missing DB tables
+
 = 4.1.4 =
 * Fixed blurry gravatar in member directory.
 * Fixed bug with [custom fields](https://profilepress.com/addons/custom-fields/) not showing up in checkout

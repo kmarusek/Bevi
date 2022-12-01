@@ -31,15 +31,21 @@ function enqueue_code_editor( $type, $extra_atts = [] ) {
 
 	$default_atts = [
 		'mode'          => $modes[ $type ],
+		'inputStyle'    => 'textarea',
 		'matchBrackets' => true,
 		'extraKeys'     => [
 			'Alt-F'      => 'findPersistent',
 			'Ctrl-Space' => 'autocomplete',
+			'Ctrl-/'     => 'toggleComment',
+			'Cmd-/'      => 'toggleComment',
+			'Alt-Up'     => 'swapLineUp',
+			'Alt-Down'   => 'swapLineDown',
 		],
-		'gutters'       => [ 'CodeMirror-lint-markers' ],
+		'gutters'       => [ 'CodeMirror-lint-markers', 'CodeMirror-foldgutter' ],
 		'lint'          => 'css' === $type || 'php' === $type,
 		'direction'     => 'ltr',
 		'colorpicker'   => [ 'mode' => 'edit' ],
+		'foldOptions'   => [ 'widget' => '...' ],
 	];
 
 	// Add relevant saved setting values to the default attributes.
@@ -91,18 +97,16 @@ function enqueue_code_editor( $type, $extra_atts = [] ) {
 /**
  * Retrieve a list of the available CodeMirror themes.
  *
- * @param boolean $include_default Whether to include the default theme on the list.
- *
  * @return array The available themes.
  */
-function get_editor_themes( $include_default = true ) {
+function get_editor_themes() {
 	static $themes = null;
 
 	if ( ! is_null( $themes ) ) {
 		return $themes;
 	}
 
-	$themes = $include_default ? array( 'default' ) : array();
+	$themes = array();
 	$themes_dir = plugin_dir_path( PLUGIN_FILE ) . 'dist/editor-themes/';
 
 	$theme_files = glob( $themes_dir . '*.css' );

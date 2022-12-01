@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Money Formatter
- * @package   easy-digital-downloads
- * @copyright Copyright (c) 2021, Sandhills Development, LLC
- */
-
 namespace ProfilePress\Core\Membership;
 
 use ProfilePress\Core\Membership\Services\Calculator;

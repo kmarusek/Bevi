@@ -8,10 +8,11 @@ class PROFILEPRESS_sql
 {
     /** @param $meta_key
      * @param $meta_value
+     * @param $flag
      *
      * @return bool|int
      */
-    public static function add_meta_data($meta_key, $meta_value)
+    public static function add_meta_data($meta_key, $meta_value, $flag = '')
     {
         global $wpdb;
 
@@ -20,8 +21,10 @@ class PROFILEPRESS_sql
             [
                 'meta_key'   => $meta_key,
                 'meta_value' => serialize($meta_value),
+                'flag'       => $flag,
             ],
             [
+                '%s',
                 '%s',
                 '%s',
             ]
@@ -79,6 +82,30 @@ class PROFILEPRESS_sql
         $sql = "SELECT * FROM $table WHERE meta_key = %s";
 
         $result = $wpdb->get_results($wpdb->prepare($sql, $meta_key), 'ARRAY_A');
+
+        if (empty($result)) return false;
+
+        $output = [];
+        foreach ($result as $key => $meta) {
+            $output[$key] = array_reduce(array_keys($meta), function ($carry, $item) use ($meta) {
+                $carry[$item] = ($item == 'meta_value') ? unserialize($meta[$item]) : $meta[$item];
+
+                return $carry;
+            });
+        }
+
+        return $output;
+    }
+
+    public static function get_meta_data_by_flag($flag)
+    {
+        global $wpdb;
+
+        $table = Base::meta_data_db_table();
+
+        $sql = "SELECT * FROM $table WHERE flag = %s";
+
+        $result = $wpdb->get_results($wpdb->prepare($sql, $flag), 'ARRAY_A');
 
         if (empty($result)) return false;
 

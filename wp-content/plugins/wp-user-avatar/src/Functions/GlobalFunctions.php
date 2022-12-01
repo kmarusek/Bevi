@@ -717,7 +717,17 @@ function ppress_wp_new_user_notification($user_id, $deprecated = null, $notify =
     // We want to reverse this for the plain text arena of emails.
     $blogname = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 
-    if ('user' !== $notify) {
+    /**
+     * Filters whether the admin is notified of a new user registration.
+     *
+     * @since 6.1.0
+     *
+     * @param bool    $send Whether to send the email. Default true.
+     * @param WP_User $user User object for new user.
+     */
+    $send_notification_to_admin = apply_filters( 'wp_send_new_user_notification_to_admin', true, $user );
+
+    if ('user' !== $notify && true === $send_notification_to_admin) {
 
         if (ppress_get_setting('new_user_admin_email_email_enabled', 'on') !== 'on') return;
 
@@ -780,8 +790,18 @@ function ppress_wp_new_user_notification($user_id, $deprecated = null, $notify =
         ppress_send_email($admin_email, $title, $message);
     }
 
+    /**
+     * Filters whether the user is notified of their new user registration.
+     *
+     * @since 6.1.0
+     *
+     * @param bool    $send Whether to send the email. Default true.
+     * @param WP_User $user User object for new user.
+     */
+    $send_notification_to_user = apply_filters( 'wp_send_new_user_notification_to_user', true, $user );
+
     // `$deprecated` was pre-4.3 `$plaintext_pass`. An empty `$plaintext_pass` didn't sent a user notification.
-    if ('admin' === $notify || (empty($deprecated) && empty($notify))) {
+    if ( 'admin' === $notify || true !== $send_notification_to_user || ( empty( $deprecated ) && empty( $notify ) ) ) {
         return;
     }
 
@@ -1415,6 +1435,18 @@ function ppress_social_network_fields()
     ]);
 }
 
+function ppress_social_login_networks()
+{
+    return apply_filters('ppress_social_login_networks', [
+        'facebook' => 'Facebook',
+        'twitter'  => 'Twitter',
+        'google'   => 'Google',
+        'linkedin' => 'LinkedIn',
+        'github'   => 'GitHub',
+        'vk'       => 'VK.com'
+    ]);
+}
+
 function ppress_mb_function($function_names, $args)
 {
     $mb_function_name = $function_names[0];
@@ -1590,4 +1622,9 @@ function ppress_maybe_define_constant($name, $value)
     if ( ! defined($name)) {
         define($name, $value);
     }
+}
+
+function ppress_upgrade_urls_affilify($url)
+{
+    return apply_filters('ppress_pro_upgrade_url', $url);
 }

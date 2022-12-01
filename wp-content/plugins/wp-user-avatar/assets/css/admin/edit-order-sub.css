@@ -1,4 +1,5 @@
-.ppress-admin .handle-actions {
+.ppress-admin .handle-actions .handle-order-higher,
+.ppress-admin .handle-actions .handle-order-lower {
     display: none;
 }
 
@@ -17,10 +18,10 @@
 .ppress-admin #ppress-membership-customer-content .inside,
 .ppress-admin #ppress-membership-customer-subscriptions .inside,
 .ppress-admin #ppress-membership-subscription-content .inside,
-.ppress-admin #ppress-membership-subscription-payments .inside {
+.ppress-admin #ppress-membership-subscription-payments .inside,
+.ppress-admin #ppress-membership-plan-downloads .inside {
     margin: 0;
     padding: 0;
-    display: block !important;
 }
 
 .ppress-admin .ppress-membership-order-details,
@@ -249,7 +250,8 @@
     text-align: left;
 }
 
-.ppress-admin #ppress-membership-order-subscription a {
+.ppress-admin #ppress-membership-order-subscription a,
+.ppress-admin .ppress_orders.ppview a {
     text-decoration: none;
 }
 

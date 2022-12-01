@@ -25,11 +25,11 @@ class WP_Rest_Route
       $botzappingAuth = get_option('clickcease_bot_zapping_authenticated', '');
       $whitelist = get_option('clickcease_whitelist', []);
       $clientId = get_option('clickcease_client_id', null);
-      if(!$clientId){
+      if (!$clientId) {
         $rtiService = new RTI_Service();
         $clientId = $rtiService->auth_with_botzapping($clickcease_api_key, $clickcease_domain_key, $secret_key);
-        if($clientId)
-         update_option('clickcease_client_id', $clientId);
+        if ($clientId)
+          update_option('clickcease_client_id', $clientId);
       }
       $response = [
         'authKey' => $clickcease_api_key,
@@ -74,14 +74,13 @@ class WP_Rest_Route
             header('Status: ' . HTTPCode::BAD_REQUEST);
             $res = Utils::getHttpErrorResponse(ResponseMessage::INVALID_KEYS);
             $validAuth = false;
-          }
-          else{
-            update_option('clickcease_client_id', $clientId);            
+          } else {
+            update_option('clickcease_client_id', $clientId);
             $res = Utils::getHttpSuccessResponse(['clientId' => $clientId]);
-          }          
+          }
         } else {
           header('Status: ' . HTTPCode::BAD_REQUEST);
-          $res = Utils::getHttpErrorResponse(ResponseMessage::INVALID_DOAMIN);          
+          $res = Utils::getHttpErrorResponse(ResponseMessage::INVALID_DOAMIN);
           $validAuth = false;
         }
         if ($validAuth) {
@@ -91,6 +90,7 @@ class WP_Rest_Route
         }
       } else {
         $validAuth = !$deactivate;
+        WP_clickcease_plugin::deactivate_plugin();
         LogService::logErrorCode(ErrorCodes::PLUGIN_REMOVE);
       }
 

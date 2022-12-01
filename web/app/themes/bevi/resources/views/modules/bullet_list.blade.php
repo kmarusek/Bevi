@@ -1,1 +1,0 @@
-<bullet-list :block="{{ json_encode($block) }}"></bullet-list>

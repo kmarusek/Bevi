@@ -16,7 +16,6 @@ $option_name          = $gdpr_default_content->moove_gdpr_get_option_name();
 $gdpr_options         = get_option( $option_name );
 $wpml_lang            = $gdpr_default_content->moove_gdpr_get_wpml_lang();
 $gdpr_options         = is_array( $gdpr_options ) ? $gdpr_options : array();
-
 if ( isset( $_POST ) && isset( $_POST['moove_gdpr_nonce'] ) ) :
 	$nonce = sanitize_key( $_POST['moove_gdpr_nonce'] );
 	if ( ! wp_verify_nonce( $nonce, 'moove_gdpr_nonce_field' ) ) :
@@ -31,6 +30,7 @@ if ( isset( $_POST ) && isset( $_POST['moove_gdpr_nonce'] ) ) :
 				'moove_gdpr_settings_button_enable',
 				'moove_gdpr_close_button_enable',
 				'moove_gdpr_colour_scheme',
+				'gdpr_accesibility',
 			);
 			// Cookie Banner Visibility.
 			$moove_gdpr_infobar_visibility = 'hidden';
@@ -81,6 +81,14 @@ if ( isset( $_POST ) && isset( $_POST['moove_gdpr_nonce'] ) ) :
 				$moove_gdpr_colour_scheme = '1';
 			endif;
 			$gdpr_options['moove_gdpr_colour_scheme'] = $moove_gdpr_colour_scheme;
+
+			// Cookie Banner Accesibility.
+			$gdpr_accesibility = '0';
+			
+			if ( isset( $_POST['gdpr_accesibility'] ) ) :
+				$gdpr_accesibility = '1';
+			endif;
+			$gdpr_options['gdpr_accesibility'] = $gdpr_accesibility;
 
 			update_option( $option_name, $gdpr_options );
 
@@ -401,6 +409,30 @@ $buttons_order 				= isset( $gdpr_options['gdpr_bs_buttons_order'] ) ? json_deco
 						<input type="checkbox" name="moove_gdpr_colour_scheme" <?php echo isset( $gdpr_options['moove_gdpr_colour_scheme'] ) ? ( 1 === intval( $gdpr_options['moove_gdpr_colour_scheme'] ) ? 'checked' : ( ! isset( $gdpr_options['moove_gdpr_colour_scheme'] ) ? 'checked' : '' ) ) : 'checked'; ?> >
 						<span class="gdpr-checkbox-slider" data-enable="<?php esc_html_e( 'Dark', 'gdpr-cookie-compliance' ); ?>" data-disable="<?php esc_html_e( 'Light', 'gdpr-cookie-compliance' ); ?>"></span>
 					</label>                   
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" style="padding: 0;">
+					<hr />
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row">
+					<label for="gdpr_accesibility"><?php esc_html_e( 'Accessibility', 'gdpr-cookie-compliance' ); ?></label>
+				</th>
+				<td>
+					<label class="gdpr-checkbox-toggle gdpr-color-scheme-toggle">
+						<input type="checkbox" name="gdpr_accesibility" <?php echo isset( $gdpr_options['gdpr_accesibility'] ) ? ( 1 === intval( $gdpr_options['gdpr_accesibility'] ) ? 'checked' : ( ! isset( $gdpr_options['gdpr_accesibility'] ) ? '' : '' ) ) : ''; ?> >
+						<span class="gdpr-checkbox-slider" data-enable="<?php esc_html_e( 'Cookie Banner', 'gdpr-cookie-compliance' ); ?>" data-disable="<?php esc_html_e( 'Content', 'gdpr-cookie-compliance' ); ?>"></span>
+					</label>
+					<p class="description">
+						<?php
+							$content = __( 'Choose the right accessibility experience for your users. You can decide wether pressing tab key on your keyboard should first focus on the Cookie Banner or on your website\'s content.', 'gdpr-cookie-compliance' );			
+							apply_filters( 'gdpr_cc_keephtml', $content, true );
+						?>
+					</p>            
 				</td>
 			</tr>
 

@@ -64,7 +64,7 @@ class Custom_Settings_Page_Api
     protected function __construct($main_content_config = [], $option_name = '', $page_header = '')
     {
         $this->db_options          = get_option($option_name, []);
-        $this->db_options          = empty($this->db_options) ? [] : $this->db_options;
+        $this->db_options          = !is_array($this->db_options) || empty($this->db_options) ? [] : $this->db_options;
         $this->option_name         = $option_name;
         $this->main_content_config = $main_content_config;
         $this->page_header         = $page_header;
@@ -205,6 +205,11 @@ class Custom_Settings_Page_Api
                                 <h3 class="hndle is-non-sortable">
                                     <span><?=$arg['section_title']; ?></span>
                                 </h3>
+                                <div class="handle-actions hide-if-no-js">
+                                    <button type="button" class="handlediv" aria-expanded="true">
+                                        <span class="toggle-indicator" aria-hidden="true"></span>
+                                    </button>
+                                </div>
                             </div>
 
                             <div class="inside">
@@ -318,21 +323,6 @@ class Custom_Settings_Page_Api
         <?php
     }
 
-    public function metabox_toggle_script()
-    {
-        ?>
-        <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                $('.wp_csa_view .handlediv').on('click', function () {
-                    $(this).parent().toggleClass("closed").addClass('postbox');
-                });
-            });
-        </script>
-        <?php
-
-        do_action('wp_cspa_scripts');
-    }
-
     private function remove_white_styling_css()
     {
         ?>
@@ -378,8 +368,8 @@ class Custom_Settings_Page_Api
         }
 
         .remove_white_styling #post-body-content input.regular-text {
-            width: 100%;
-            max-width: 900px;
+            width: 100% !important;
+            max-width: 900px !important;
         }
 
         .remove_white_styling #post-body-content textarea{
@@ -1059,7 +1049,14 @@ public function _header($args)
     <div class="postbox">
         <?php do_action('wp_cspa_header', $args, $this->option_name); ?>
         <?php if(!empty($args['section_title'])) : ?>
-        <div class="postbox-header"><h3 class="hndle is-non-sortable"><span><?=$args['section_title']; ?></span></h3></div>
+        <div class="postbox-header">
+        <h3 class="hndle is-non-sortable"><span><?=$args['section_title']; ?></span></h3>
+        <div class="handle-actions hide-if-no-js">
+            <button type="button" class="handlediv" aria-expanded="true">
+                <span class="toggle-indicator" aria-hidden="true"></span>
+            </button>
+        </div>
+        </div>
         <?php endif; ?>
         <div class="inside">
             <table class="form-table">
@@ -1164,8 +1161,6 @@ public function _header($args)
                 </div>
             </div>
         </div>
-
-        <?php $this->metabox_toggle_script(); ?>
         <?php
     }
 

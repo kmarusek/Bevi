@@ -423,7 +423,7 @@ class Stripe extends AbstractPaymentMethod
             $subscription->add_note(
                 sprintf(
                     esc_html__('Attempted cancellation but was unable. Message was "%s".', 'wp-user-avatar'),
-                    wp_json_encode($e)
+                    wp_json_encode($e->getMessage())
                 )
             );
 

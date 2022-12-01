@@ -1,1 +1,0 @@
-<flavors :block="{{ json_encode($block) }}"></flavors>

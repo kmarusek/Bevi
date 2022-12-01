@@ -297,9 +297,18 @@ if ( ! class_exists( 'ExactDN' ) ) {
 				$this->debug_message( "could not break down URL: $this->site_url" );
 				return;
 			}
-			if ( ! $this->get_exactdn_option( 'local_domain' ) ) {
-				$this->set_exactdn_option( 'local_domain', $this->upload_domain );
+
+			$stored_local_domain = $this->get_exactdn_option( 'local_domain' );
+			if ( empty( $stored_local_domain ) ) {
+				$this->set_exactdn_option( 'local_domain', base64_encode( $this->upload_domain ) );
+				$stored_local_domain = $this->upload_domain;
+			} elseif ( false !== strpos( $stored_local_domain, '.' ) ) {
+				$this->set_exactdn_option( 'local_domain', base64_encode( $stored_local_domain ) );
+			} else {
+				$stored_local_domain = base64_decode( $stored_local_domain );
 			}
+			$this->debug_message( "saved domain is $stored_local_domain" );
+
 			$this->debug_message( "allowing images from here: $this->upload_domain" );
 			if (
 				(
@@ -313,8 +322,8 @@ if ( ! class_exists( 'ExactDN' ) ) {
 				$this->debug_message( "removing this from urls: $this->remove_path" );
 			}
 			if (
-				$this->get_exactdn_option( 'local_domain' ) !== $this->upload_domain &&
-				! $this->allow_image_domain( $this->get_exactdn_option( 'local_domain' ) ) &&
+				$stored_local_domain !== $this->upload_domain &&
+				! $this->allow_image_domain( $stored_local_domain ) &&
 				is_admin()
 			) {
 				add_action( 'admin_notices', $this->prefix . 'notice_exactdn_domain_mismatch' );
@@ -2333,7 +2342,6 @@ if ( ! class_exists( 'ExactDN' ) ) {
 			}
 
 			$this->debug_message( "image_src = $image_src" );
-			$upload_dir      = wp_get_upload_dir();
 			$resize_existing = defined( 'EXACTDN_RESIZE_EXISTING' ) && EXACTDN_RESIZE_EXISTING;
 			$w_descriptor    = true;
 
@@ -2372,10 +2380,16 @@ if ( ! class_exists( 'ExactDN' ) ) {
 				$this->debug_message( 'continuing: ' . $width . ' vs. ' . $source['value'] );
 
 				// It's quicker to get the full size with the data we have already, if available.
-				if ( ! empty( $attachment_id ) ) {
-					$url = wp_get_attachment_url( $attachment_id );
+				if ( ! empty( $full_url ) ) {
+					$url = $full_url;
+				} elseif ( ! empty( $attachment_id ) ) {
+					$full_url = wp_get_attachment_url( $attachment_id );
+					$url      = $full_url;
 				} else {
-					$url = $this->strip_image_dimensions_maybe( $url );
+					$full_url = $this->strip_image_dimensions_maybe( $url );
+					if ( $full_url === $url ) {
+						$full_url = '';
+					}
 				}
 				$this->debug_message( "building srcs from $url" );
 
@@ -2406,8 +2420,40 @@ if ( ! class_exists( 'ExactDN' ) ) {
 			 */
 			$multipliers = apply_filters( 'exactdn_srcset_multipliers', array( .2, .4, .6, .8, 1, 2, 3, 1920 ) );
 
-			$this->debug_message( "building url from {$upload_dir['baseurl']} and {$image_meta['file']}" );
-			$url = trailingslashit( $upload_dir['baseurl'] ) . $image_meta['file'];
+			if ( empty( $url ) || empty( $multipliers ) ) {
+				// No URL, or no multipliers, bail!
+				return $sources;
+			}
+
+			if ( ! empty( $full_url ) ) {
+				$this->debug_message( "already built url via db: $full_url" );
+				$url = $full_url;
+			} elseif ( 0 === strpos( $image_meta['file'], '/' ) ) {
+				$this->debug_message( 'full meta appears to be absolute path, retrieving URL via wp_get_attachment_url()' );
+				$url = \wp_get_attachment_url( $attachment_id );
+			} else {
+				$base_dir  = \dirname( $url );
+				$meta_file = $image_meta['file'];
+				$this->debug_message( "checking to see if we can join $base_dir with $meta_file" );
+				if ( false !== \strpos( $meta_file, '/' ) ) {
+					$meta_dir = \dirname( $meta_file );
+					if ( \str_ends_with( $base_dir, $meta_dir ) ) {
+						$meta_file = \wp_basename( $meta_file );
+						$this->debug_message( "trimmed file down to $meta_file" );
+					} else {
+						// This happens if there is object versioning, or thumbs in a sub-folder.
+						$this->debug_message( "could not splice $base_dir and $meta_file" );
+						$base_dir = false;
+					}
+				}
+				if ( $base_dir ) {
+					$this->debug_message( "building url from $base_dir and $meta_file" );
+					$url = \trailingslashit( $base_dir ) . $meta_file;
+				} else {
+					$this->debug_message( 'splicing disabled previously, or empty base_dir, so retrieving URL via wp_get_attachment_url()' );
+					$url = \wp_get_attachment_url( $attachment_id );
+				}
+			}
 
 			if ( ! $w_descriptor ) {
 				$this->debug_message( 'using x descriptors instead of w' );

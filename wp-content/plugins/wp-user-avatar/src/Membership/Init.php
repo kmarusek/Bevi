@@ -2,6 +2,7 @@
 
 namespace ProfilePress\Core\Membership;
 
+use ProfilePress\Core\Admin\SettingsPages\Membership\FileDownloads;
 use ProfilePress\Core\Membership\Controllers\CheckoutController;
 use ProfilePress\Core\Membership\Controllers\FrontendController;
 use ProfilePress\Core\Membership\Emails\NewOrderAdminNotification;
@@ -22,9 +23,12 @@ class Init
     public static function init()
     {
         PaymentMethods::get_instance();
+        FileDownloads::get_instance();
 
         FrontendController::get_instance();
         CheckoutController::get_instance();
+
+        DigitalProducts\Init::get_instance();
 
         NewOrderReceipt::init();
         NewOrderAdminNotification::init();

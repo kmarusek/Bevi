@@ -575,7 +575,7 @@ abstract class AbstractMemberDirectoryTheme extends AbstractTheme
                 $query->query_where = str_replace('AND ()', '', $query->query_where);
 
                 if ( ! empty($roles)) {
-                    // remove query LIMIT so we can get actual total number of result
+                    // remove query LIMIT so we can get actual total number of result when filitering by roles
                     unset($query->query_limit);
                 }
             });

@@ -4,8 +4,8 @@ Donate link: https://codesnippets.pro
 Tags: snippets, functions, multisite, code, php, html, css, javascript
 License: MIT
 License URI: license.txt
-Stable tag: 3.2.0
-Tested up to: 6.0.1
+Stable tag: 3.2.2
+Tested up to: 6.1.1
 
 An easy, clean and simple way to run code snippets on your site.
 
@@ -13,7 +13,11 @@ An easy, clean and simple way to run code snippets on your site.
 
 Code Snippets is an easy, clean and simple way to run code snippets on your site. It removes the need to add custom snippets to your theme's `functions.php` file.
 
-[**Code Snippets Pro** is now available, with full CSS, JavaScript, Gutenberg and Elementor integrations.](https://codesnippets.pro/pricing/)
+[**Black Friday is here! Get 40% off all Code Snippets Pro plans.**](https://codesnippets.pro/pricing/)
+
+Code Snippets Pro comes with full-featured CSS and JavaScript snippets and integration with Gutenberg and Elementor.
+
+**What is Code Snippets?**
 
 A snippet is a small chunk of PHP code that you can use to extend the functionality of a WordPress-powered website; essentially a mini-plugin with less load on your site.
 
@@ -127,6 +131,20 @@ The best way to do this is to fork the [repository on GitHub](https://github.com
 4. Importing snippets from an export file
 
 == Changelog ==
+
+= 3.2.2 (17 Nov 2022) =
+* Fixed: Plugin lacking a valid header error on activation.
+
+= 3.2.1 (05 Oct 2022) =
+* Fixed: Issue making survey reminder notice not dismissible.
+* Added: `Ctrl`+`/` or `Cmd`+`/` as shortcut for commenting out code in the snippet editor.
+* Added: Additional hooks to various snippet actions, thanks to contributions made by [ancient-spirit](https://github.com/ancient-spirit).
+* Added: Fold markers, additional keyboard shortcuts and keymap options to snippet editor,
+thanks to contributions made by [Amaral Krichman](https://github.com/karmaral).
+* Improved: Removed duplicate tables exist query. ([#](https://wordpress.org/support/topic/duplicate-queries-21)).
+* Improved: Enabled 'add paragraphs and formatting' option by default for newly inserted content snippets.
+* Added: WP-CLI commands for retrieving, activating, deactivating, deleting, creating, updating, exporting and importing snippets.
+* Fixed: Path to iron visible when updating the pro plugin.
 
 = 3.2.0 (22 July 2022) =
 * Fixed: Remove default value from SQL columns to improve compatibility with certain versions of MySQL.
@@ -268,5 +286,5 @@ __New in Pro__
 
 == Upgrade Notice ==
 
-= 3.2.0 =
-Code Snippets Pro is here! Improvements to front-end syntax highlighter in this version.
+= 3.2.2 =
+Tested with WordPress 6.1.1.

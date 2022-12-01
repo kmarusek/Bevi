@@ -62,8 +62,9 @@ class SettingsPage extends AbstractSettingsPage
 
         if ( ! current_user_can('manage_options')) return;
 
-        $subscription               = SubscriptionFactory::fromId(absint(ppressGET_var('id')));
-        $cloned_subscription        = clone $subscription;
+        $subscription            = SubscriptionFactory::fromId(absint(ppressGET_var('id')));
+        $subscription_old_status = $subscription->status;
+
         $subscription->created_date = ppress_local_datetime_to_utc(sanitize_text_field($_POST['sub_created_date']));
         if ( ! $subscription->is_lifetime()) {
             $expiration_date = CarbonImmutable::createFromFormat('Y-m-d', sanitize_text_field($_POST['sub_expiration_date']), wp_timezone())
@@ -101,6 +102,10 @@ class SettingsPage extends AbstractSettingsPage
         }
 
         $subscription_id = $subscription->save();
+
+        $cloned_subscription         = clone $subscription;
+        // doing this so transition from old to new status via update_status() becomes accurate.
+        $cloned_subscription->status = $subscription_old_status;
 
         switch ($subscription->status) {
             case SubscriptionStatus::EXPIRED :

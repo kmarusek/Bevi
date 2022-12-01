@@ -54,10 +54,10 @@ class BuddyPressBbPress
     public static function override_html_avatar($image_in_html, $params, $item_id)
     {
         if (isset($params['object']) && 'user' == $params['object']) {
-            $user_id = $item_id;
-            if (UserAvatar::user_has_pp_avatar($user_id)) {
-                $avatar_url = UserAvatar::get_pp_avatar_url($user_id);
 
+            $avatar_url = UserAvatar::get_avatar_complete_url($item_id);
+
+            if ( ! empty($avatar_url)) {
                 return preg_replace('/src=".+?"/', 'src="' . esc_url($avatar_url) . '"', $image_in_html);
             }
         }
@@ -76,9 +76,13 @@ class BuddyPressBbPress
     public static function override_avatar_url($image_url, $params)
     {
         if (isset($params['object']) && 'user' == $params['object']) {
+
             $user_id = absint($params['item_id']);
-            if (UserAvatar::user_has_pp_avatar($user_id)) {
-                $image_url = UserAvatar::get_pp_avatar_url($user_id);
+
+            $avatar_url = UserAvatar::get_avatar_complete_url($user_id);
+
+            if ( ! empty($avatar_url)) {
+                $image_url = $avatar_url;
             }
         }
 

@@ -36,7 +36,9 @@ class FieldsShortcodeCallback
         $flag = false;
         if (function_exists('wp_get_current_user')) {
             $this->get_current_user();
-            if (method_exists($this->current_user, 'exists') && $this->current_user->exists()) $flag = true;
+            if (is_object($this->current_user) && method_exists($this->current_user, 'exists') && $this->current_user->exists()) {
+                $flag = true;
+            }
         }
 
         if ( ! $flag) {

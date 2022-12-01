@@ -436,7 +436,7 @@
         sb.edit_profile();
 
         // confirm before deleting form
-        $('.pp-form-listing.pp-forms .pp-form-delete, .pp-builder-action-btn-block .pp-form-delete, .pp-confirm-delete').on('click', function (e) {
+        $('.pp-form-listing.pp-forms .pp-form-delete, .pp-builder-action-btn-block .pp-form-delete, .pp-confirm-delete, .ppress-confirm-delete').on('click', function (e) {
             e.preventDefault();
             if (confirm(pp_form_builder.confirm_delete)) {
                 window.location.href = $(this).attr('href');
@@ -618,5 +618,9 @@
                 );
             }
         });
+
+        if ( typeof postboxes !== 'undefined' && /ppress/.test( pagenow ) ) {
+            postboxes.add_postbox_toggles( pagenow );
+        }
     });
 })(jQuery);

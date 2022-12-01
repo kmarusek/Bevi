@@ -280,14 +280,7 @@ abstract class AbstractBuildScratch extends AbstractTheme
             $settings[] = [
                 'id'       => 'buildscratch_form_social_buttons',
                 'type'     => 'select2',
-                'options'  => [
-                    'facebook' => esc_html__('Facebook', 'wp-user-avatar'),
-                    'twitter'  => esc_html__('Twitter', 'wp-user-avatar'),
-                    'google'   => esc_html__('Google', 'wp-user-avatar'),
-                    'linkedin' => esc_html__('LinkedIn', 'wp-user-avatar'),
-                    'github'   => esc_html__('GitHub', 'wp-user-avatar'),
-                    'vk'       => esc_html__('VK.com', 'wp-user-avatar')
-                ],
+                'options'  => ppress_social_login_networks(),
                 'label'    => esc_html__('Social Login Buttons', 'wp-user-avatar'),
                 'priority' => 40
             ];

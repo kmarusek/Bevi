@@ -219,7 +219,12 @@ class PlanWPListTable extends \WP_List_Table
 
             if ( ! current_user_can('manage_options')) return;
 
-            SubscriptionPlanController::get_instance()->duplicate_plan($planObj);
+            $dup_plan_id = SubscriptionPlanController::get_instance()->duplicate_plan($planObj);
+
+            if (is_int($dup_plan_id)) {
+                wp_safe_redirect(add_query_arg(['ppress_subp_action' => 'edit', 'id' => $dup_plan_id, 'saved' => 'true'], PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE));
+                exit;
+            }
         }
 
         if ('bulk-delete' === $this->current_action()) {

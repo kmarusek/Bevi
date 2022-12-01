@@ -4,7 +4,6 @@ declare (strict_types=1);
 namespace Sentry;
 
 use WPSentry\ScopedVendor\GuzzleHttp\Promise\PromiseInterface;
-use WPSentry\ScopedVendor\Jean85\PrettyVersions;
 use WPSentry\ScopedVendor\Psr\Log\LoggerInterface;
 use WPSentry\ScopedVendor\Psr\Log\NullLogger;
 use Sentry\Integration\IntegrationInterface;
@@ -29,6 +28,10 @@ final class Client implements \Sentry\ClientInterface
      * The identifier of the SDK.
      */
     public const SDK_IDENTIFIER = 'sentry.php';
+    /**
+     * The version of the SDK.
+     */
+    public const SDK_VERSION = '3.9.1';
     /**
      * @var Options The client options
      */
@@ -83,7 +86,7 @@ final class Client implements \Sentry\ClientInterface
         $this->representationSerializer = $representationSerializer ?? new \Sentry\Serializer\RepresentationSerializer($this->options);
         $this->stacktraceBuilder = new \Sentry\StacktraceBuilder($options, $this->representationSerializer);
         $this->sdkIdentifier = $sdkIdentifier ?? self::SDK_IDENTIFIER;
-        $this->sdkVersion = $sdkVersion ?? \WPSentry\ScopedVendor\Jean85\PrettyVersions::getVersion('sentry/sentry')->getPrettyVersion();
+        $this->sdkVersion = $sdkVersion ?? self::SDK_VERSION;
     }
     /**
      * {@inheritdoc}
@@ -91,6 +94,22 @@ final class Client implements \Sentry\ClientInterface
     public function getOptions() : \Sentry\Options
     {
         return $this->options;
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getCspReportUrl() : ?string
+    {
+        $dsn = $this->options->getDsn();
+        if (null === $dsn) {
+            return null;
+        }
+        $endpoint = $dsn->getCspReportEndpointUrl();
+        $query = \array_filter(['sentry_release' => $this->options->getRelease(), 'sentry_environment' => $this->options->getEnvironment()]);
+        if (!empty($query)) {
+            $endpoint .= '&' . \http_build_query($query, '', '&');
+        }
+        return $endpoint;
     }
     /**
      * {@inheritdoc}

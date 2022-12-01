@@ -26,9 +26,9 @@ class FrontendController extends BaseController
             ppress_settings_by_key('edit_user_profile_url', false, true)
         ]);
 
-        $do_not_cache = apply_filters('ppress_no_cache', is_page($page_ids));
+        $do_not_cache = apply_filters('ppress_no_cache', ( ! empty($page_ids)) ? true : false);
 
-        if ($do_not_cache) {
+        if ($do_not_cache && is_page($page_ids)) {
 
             add_filter('nocache_headers', [$this, 'additional_nocache_headers'], 99);
 
@@ -98,8 +98,8 @@ class FrontendController extends BaseController
                 return;
             }
 
-            $path = wp_parse_url(get_permalink(), PHP_URL_PATH);
-            $cookie_domain = ! defined( 'COOKIE_DOMAIN' ) ? false : COOKIE_DOMAIN;
+            $path          = wp_parse_url(get_permalink(), PHP_URL_PATH);
+            $cookie_domain = ! defined('COOKIE_DOMAIN') ? false : COOKIE_DOMAIN;
             setcookie('wordpress_wpe_no_cache', '1', 0, $path, $cookie_domain, is_ssl(), true);
         }
     }

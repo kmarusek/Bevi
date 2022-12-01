@@ -1,8 +1,35 @@
 <?php
 
+use ProfilePress\Core\Admin\SettingsPages\Membership\PlanIntegrationsMetabox;
 use ProfilePress\Core\Admin\SettingsPages\Membership\SettingsFieldsParser;
 use ProfilePress\Core\Membership\Models\Subscription\SubscriptionBillingFrequency;
 use ProfilePress\Core\Membership\Models\Subscription\SubscriptionTrialPeriod;
+
+$plan_data   = ppress_get_plan(absint(ppressGET_var('id')));
+$plan_extras = $plan_data->get_meta($plan_data::PLAN_EXTRAS);
+
+if (ppressGET_var('ppress_subp_action') == 'edit' && ! $plan_data->exists()) {
+    ppress_content_http_redirect(PPRESS_MEMBERSHIP_PLANS_SETTINGS_SLUG);
+
+    return;
+}
+
+$append = ['create_new' => esc_html__('Create user role for this membership plan', 'wp-user-avatar')];
+
+if ( ! is_null(get_role('ppress_plan_' . $plan_data->id))) {
+    $append = [];
+}
+
+$user_roles = $append + (function () {
+        $core_roles = ppress_wp_roles_key_value();
+        unset($core_roles['administrator']);
+        unset($core_roles['editor']);
+        unset($core_roles['author']);
+        unset($core_roles['contributor']);
+        unset($core_roles['subscriber']);
+
+        return $core_roles;
+    })();
 
 $plan_details = [
     [
@@ -21,6 +48,13 @@ $plan_details = [
         'type'        => 'textarea',
         'label'       => esc_html__('Purchase Note', 'wp-user-avatar'),
         'description' => esc_html__('Enter an optional note or special instructions to send the customer after purchase. These will be added to the order receipt.', 'wp-user-avatar')
+    ],
+    [
+        'id'          => 'user_role',
+        'type'        => 'select',
+        'options'     => $user_roles,
+        'label'       => esc_html__('User Role', 'wp-user-avatar'),
+        'description' => esc_html__('Select the user role to associate with this membership plan. Users that subscribe to this plan will be assigned this user role.', 'wp-user-avatar')
     ],
     [
         'id'          => 'price',
@@ -67,15 +101,42 @@ $subscription_settings = [
     ]
 ];
 
-$plan_data = ppress_get_plan(absint(ppressGET_var('id')));
+$file_downloads_setting_url = add_query_arg(['view' => 'payments', 'section' => 'file-downloads'], PPRESS_SETTINGS_SETTING_PAGE);
 
-if (ppressGET_var('ppress_subp_action') == 'edit' && ! $plan_data->exists()) {
-    ppress_content_http_redirect(PPRESS_MEMBERSHIP_PLANS_SETTINGS_SLUG);
+$meta_box_settings = apply_filters('ppress_form_builder_meta_box_settings', [
+    'appearance' => [
+        'tab_title' => esc_html__('Digital Products', 'wp-user-avatar'),
+        [
+            'id'          => 'df',
+            'type'        => 'digital_files',
+            'label'       => esc_html__('Product Files', 'wp-user-avatar'),
+            'description' => esc_html__('Upload eBooks, music, videos, software or anything else digital.', 'wp-user-avatar'),
+            'priority'    => 5
+        ],
+        [
+            'id'          => 'df_download_limit',
+            'type'        => 'number',
+            'label'       => esc_html__('Download Limit', 'wp-user-avatar'),
+            'description' => sprintf(
+                esc_html__('Set to 0 for unlimited re-downloads. Leave blank to use %sglobal setting%s', 'wp-user-avatar'),
+                '<a target="_blank" href="' . $file_downloads_setting_url . '">', '</a>'
+            ),
+            'priority'    => 10
+        ],
+        [
+            'id'          => 'df_download_expiry',
+            'type'        => 'number',
+            'label'       => esc_html__('Download Expiry', 'wp-user-avatar'),
+            'description' => sprintf(
+                esc_html__('Enter the number of days before a download link expires. Set to 0 for no expiration. Leave blank to use %sglobal setting%s.', 'wp-user-avatar'),
+                '<a target="_blank" href="' . $file_downloads_setting_url . '">', '</a>'
+            ),
+            'priority'    => 15
+        ]
+    ]
+]);
 
-    return;
-}
-
-add_action('add_meta_boxes', function () use ($subscription_settings, $plan_details, $plan_data) {
+add_action('add_meta_boxes', function () use ($subscription_settings, $plan_details, $plan_data, $plan_extras, $meta_box_settings) {
     add_meta_box(
         'ppress-membership-plan-content',
         esc_html__('Plan Details', 'wp-user-avatar'),
@@ -93,6 +154,17 @@ add_action('add_meta_boxes', function () use ($subscription_settings, $plan_deta
         function () use ($subscription_settings, $plan_data) {
             echo '<div class="ppress-subscription-plan-settings">';
             (new SettingsFieldsParser($subscription_settings, $plan_data))->build();
+            echo '</div>';
+        },
+        'ppmembershipplan'
+    );
+
+    add_meta_box(
+        'pp-form-builder-metabox',
+        esc_html__('Downloads & Integrations', 'wp-user-avatar'),
+        function () use ($meta_box_settings, $plan_extras) {
+            echo '<div class="ppress-plan-integrations">';
+            (new PlanIntegrationsMetabox($meta_box_settings, $plan_extras))->build();
             echo '</div>';
         },
         'ppmembershipplan'

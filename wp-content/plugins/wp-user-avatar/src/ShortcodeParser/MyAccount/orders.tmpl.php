@@ -4,7 +4,6 @@ use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
 use ProfilePress\Core\Membership\Models\Order\OrderStatus;
 use ProfilePress\Core\Membership\Models\Order\OrderType;
 use ProfilePress\Core\Membership\Services\OrderService;
-use ProfilePress\Core\ShortcodeParser\MyAccount\MyAccountTag;
 
 if ( ! defined('ABSPATH')) {
     exit;

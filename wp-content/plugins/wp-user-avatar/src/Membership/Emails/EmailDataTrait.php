@@ -10,10 +10,16 @@ trait EmailDataTrait
             '{{email}}'                => esc_html__('Email address of the customer.', 'wp-user-avatar'),
             '{{first_name}}'           => esc_html__('First name of the customer.', 'wp-user-avatar'),
             '{{last_name}}'            => esc_html__('Last name of the customer.', 'wp-user-avatar'),
+            '{{field_key}}'            => sprintf(
+                esc_html__('User custom profile field information. Replace "field_key" with the %scustom field key%s or usermeta key.', 'wp-user-avatar'),
+                '<a href="' . PPRESS_CUSTOM_FIELDS_SETTINGS_PAGE . '" target="_blank">', '</a>'
+            ),
+            '{{customer_id}}'            => esc_html__('ID of the customer.', 'wp-user-avatar'),
             '{{billing_address}}'      => esc_html__("Customer's billing address.", 'wp-user-avatar'),
             '{{billing_phone}}'        => esc_html__("Customer's phone number.", 'wp-user-avatar'),
             '{{customer_tax_id}}'      => esc_html__("Customer's Tax ID.", 'wp-user-avatar'),
             '{{order_id}}'             => esc_html__("Order ID.", 'wp-user-avatar'),
+            '{{downloads_url}}'        => esc_html__("URL to view and download order's digital products.", 'wp-user-avatar'),
             '{{order_url}}'            => esc_html__("URL to view order.", 'wp-user-avatar'),
             '{{plan_name}}'            => esc_html__("Name or title of plan ordered.", 'wp-user-avatar'),
             '{{order_subtotal}}'       => esc_html__("Order price before taxes.", 'wp-user-avatar'),

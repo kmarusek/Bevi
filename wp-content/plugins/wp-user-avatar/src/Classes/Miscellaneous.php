@@ -9,6 +9,10 @@ class Miscellaneous
         $basename = plugin_basename(PROFILEPRESS_SYSTEM_FILE_PATH);
         $prefix   = is_network_admin() ? 'network_admin_' : '';
         add_filter("{$prefix}plugin_action_links_$basename", [$this, 'action_links'], 10, 4);
+
+        add_filter('plugin_row_meta', array(__CLASS__, 'plugin_row_meta'), 10, 2);
+
+
         // slim seo compatibility
         add_filter('slim_seo_skipped_shortcodes', [$this, 'skip_ppress_shortcodes']);
         add_action('admin_bar_menu', [$this, 'maybe_add_store_mode_admin_bar_menu'], 9999);
@@ -115,13 +119,12 @@ class Miscellaneous
 
     public function store_mode_admin_bar_print_link_styles()
     {
-
         // Bail if user cannot manage shop settings
-        if ( ! current_user_can('manage_shop_settings')) {
+        if ( ! current_user_can('manage_options')) {
             return;
         } ?>
 
-        <style type="text/css" id="edd-store-menu-styling">
+        <style type="text/css" id="ppress-store-menu-styling">
             #wp-admin-bar-ppress-store-menu .ppress-mode {
                 color: #fff;
                 background-color: #0073aa;
@@ -150,8 +153,41 @@ class Miscellaneous
             'settings' => sprintf('<a href="%s">%s</a>', PPRESS_SETTINGS_SETTING_PAGE, esc_html__('Settings', 'wp-user-avatar')),
         );
 
+        if ( ! ExtensionManager::is_premium()) {
+            $custom_actions['ppress_upgrade'] = sprintf(
+                '<a style="color:#d54e21;font-weight:bold" href="%s" target="_blank">%s</a>', 'https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=action_link',
+                __('Go Premium', 'wp-user-avatar')
+            );
+        }
+
         // add the links to the front of the actions list
         return array_merge($custom_actions, $actions);
+    }
+
+    /**
+     * Show row meta on the plugin screen.
+     *
+     * @param mixed $links Plugin Row Meta
+     * @param mixed $file Plugin Base file
+     *
+     * @return    array
+     */
+    public static function plugin_row_meta($links, $file)
+    {
+        if (strpos($file, 'wp-user-avatar.php') !== false) {
+            $row_meta = array(
+                'docs' => '<a target="_blank" href="' . ppress_upgrade_urls_affilify('https://profilepress.com/docs/') . '" aria-label="' . esc_attr__('View ProfilePress documentation', 'wp-user-avatar') . '">' . esc_html__('Docs', 'wp-user-avatar') . '</a>',
+            );
+
+            if ( ! ExtensionManager::is_premium()) {
+                $url                     = 'https://profilepress.com/pricing/?utm_source=wp_dashboard&utm_medium=upgrade&utm_campaign=row_meta';
+                $row_meta['upgrade_pro'] = '<a target="_blank" style="color:#d54e21;font-weight:bold" href="' . ppress_upgrade_urls_affilify($url) . '" aria-label="' . esc_attr__('Upgrade to PRO', 'wp-user-avatar') . '">' . esc_html__('Go Premium', 'wp-user-avatar') . '</a>';
+            }
+
+            return array_merge($links, $row_meta);
+        }
+
+        return (array)$links;
     }
 
     public function skip_ppress_shortcodes($shortcodes)

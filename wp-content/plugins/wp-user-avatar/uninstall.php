@@ -33,6 +33,7 @@ function ppress_mo_uninstall_function()
         delete_site_option('pand-' . md5('ppress-review-plugin-notice'));
         delete_site_option('pand-' . md5('pp-registration-disabled-notice'));
         delete_site_option('pand-' . md5('wp_user_avatar_now_ppress_notice'));
+        delete_site_option('pand-' . md5('ppress_dismissed_uploads_directory_is_unprotected'));
 
         // Admin dashboard access control
         delete_option('ppress_abdc_options');
@@ -58,6 +59,12 @@ function ppress_mo_uninstall_function()
         update_option('avatar_default', 'mystery');
 
         global $wpdb;
+
+        // Remove any transients we've left behind
+        $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '\_transient\_pp%'");
+        $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '\_site\_transient\_pp%'");
+        $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '\_transient\_timeout\_pp%'");
+        $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '\_site\_transient\_timeout\_pp%'");
 
         $drop_tables   = [];
         $drop_tables[] = Base::form_db_table();

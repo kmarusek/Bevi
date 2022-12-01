@@ -92,10 +92,11 @@ class SendEmail
             }
 
             if (class_exists('DOMDocument') && ! is_customize_preview()) {
-                /** @see https://github.com/MyIntervals/emogrifier/tree/v2.2.0 */
-                $emogrifier = new Emogrifier();
-                $emogrifier->setHtml($message);
-                $message = $emogrifier->emogrify();
+                try {
+                    $message = Emogrifier\CssInliner::fromHtml($message)->inlineCss()->render();
+                } catch (\Exception $e) {
+                    //
+                }
             }
         }
 

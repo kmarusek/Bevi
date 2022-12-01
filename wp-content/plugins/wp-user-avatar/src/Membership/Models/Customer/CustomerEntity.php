@@ -197,7 +197,7 @@ class CustomerEntity extends AbstractModel implements ModelInterface
     /**
      * @param $include_trial
      *
-     * @return array
+     * @return SubscriptionEntity[]
      */
     public function get_active_subscriptions($include_trial = true)
     {

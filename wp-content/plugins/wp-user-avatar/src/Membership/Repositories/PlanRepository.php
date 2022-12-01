@@ -30,6 +30,7 @@ class PlanRepository extends BaseRepository
             array(
                 'name'                => $data->name,
                 'description'         => $data->description,
+                'user_role'           => $data->user_role,
                 'order_note'          => $data->order_note,
                 'price'               => $data->price,
                 'billing_frequency'   => $data->billing_frequency,
@@ -39,6 +40,7 @@ class PlanRepository extends BaseRepository
                 'free_trial'          => $data->free_trial
             ),
             array(
+                '%s',
                 '%s',
                 '%s',
                 '%s',
@@ -69,6 +71,7 @@ class PlanRepository extends BaseRepository
             [
                 'name'                => $data->name,
                 'description'         => $data->description,
+                'user_role'           => $data->user_role,
                 'order_note'          => $data->order_note,
                 'price'               => $data->price,
                 'billing_frequency'   => $data->billing_frequency,
@@ -79,6 +82,7 @@ class PlanRepository extends BaseRepository
             ],
             ['id' => $data->id],
             [
+                '%s',
                 '%s',
                 '%s',
                 '%s',

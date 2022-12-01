@@ -172,6 +172,10 @@ class PPRESS_Session
             $start_session = false;
         }
 
+        if ( ! ppress_is_any_active_plan() && ! ExtensionManager::is_enabled(ExtensionManager::SOCIAL_LOGIN)) {
+            $start_session = false;
+        }
+
         return apply_filters('ppress_should_start_session', $start_session);
     }
 

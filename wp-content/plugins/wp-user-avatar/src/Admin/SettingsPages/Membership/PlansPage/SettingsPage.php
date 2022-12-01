@@ -4,6 +4,11 @@ namespace ProfilePress\Core\Admin\SettingsPages\Membership\PlansPage;
 
 use ProfilePress\Core\Admin\SettingsPages\AbstractSettingsPage;
 use ProfilePress\Core\Membership\CurrencyFormatter;
+use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
+use ProfilePress\Core\Membership\Models\Subscription\SubscriptionStatus;
+use ProfilePress\Core\Membership\Repositories\CustomerRepository;
+use ProfilePress\Core\Membership\Repositories\PlanRepository;
+use ProfilePress\Core\Membership\Repositories\SubscriptionRepository;
 use ProfilePress\Custom_Settings_Page_Api;
 
 class SettingsPage extends AbstractSettingsPage
@@ -24,7 +29,7 @@ class SettingsPage extends AbstractSettingsPage
         if (ppressGET_var('page') == PPRESS_MEMBERSHIP_PLANS_SETTINGS_SLUG) {
 
             add_action('admin_init', function () {
-                $this->save_subscription_plan();
+                $this->save_changes();
             });
         }
     }
@@ -77,7 +82,7 @@ class SettingsPage extends AbstractSettingsPage
         return apply_filters('ppress_membership_plans_settings_page_title', $title);
     }
 
-    public function save_subscription_plan()
+    public function save_changes()
     {
         if ( ! isset($_POST['ppress_save_subscription_plan'])) return;
 
@@ -98,7 +103,15 @@ class SettingsPage extends AbstractSettingsPage
             }
         }
 
-        $plan                      = ppress_get_plan(absint(ppressGET_var('id')));
+        $plan = ppress_get_plan(absint(ppressGET_var('id')));
+
+        $current_role = $plan->user_role;
+        $new_role     = sanitize_text_field($_POST['user_role']);
+
+        if ($new_role != 'create_new') {
+            $plan->user_role = $new_role;
+        }
+
         $plan->name                = sanitize_text_field($_POST['name']);
         $plan->description         = stripslashes(wp_kses_post($_POST['description']));
         $plan->order_note          = stripslashes(wp_kses_post($_POST['order_note']));
@@ -112,6 +125,55 @@ class SettingsPage extends AbstractSettingsPage
         $plan->signup_fee = ppress_sanitize_amount($_POST['signup_fee']);
         $plan->free_trial = sanitize_text_field($_POST['free_trial']);
         $plan_id          = $plan->save();
+        $plan->id         = $plan_id;
+
+        if (intval($plan_id) > 0) {
+
+            if ('create_new' == $new_role) {
+                $new_role = 'ppress_plan_' . $plan_id;
+                add_role($new_role, $plan->name, ['read' => true]);
+                $plan->user_role = $new_role;
+                $plan->save();
+            }
+
+            if ( ! empty($new_role) && $current_role != $new_role) {
+
+                $subs = SubscriptionRepository::init()->retrieveBy([
+                    'plan_id' => $plan_id,
+                    'status'  => [
+                        SubscriptionStatus::ACTIVE,
+                        SubscriptionStatus::COMPLETED,
+                        SubscriptionStatus::CANCELLED
+                    ]
+                ]);
+
+                if ( ! empty($subs) && is_array($subs)) {
+                    foreach ($subs as $sub) {
+                        if ($sub->is_active()) {
+                            $customer = CustomerFactory::fromId($sub->customer_id);
+                            if ($customer->user_exists()) {
+                                $customer->get_wp_user()->remove_role($current_role);
+                                $customer->get_wp_user()->add_role($new_role);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $plan_extras  = [];
+        $skip_props = array_map(function ($val) {
+                return $val->getName();
+            }, (new \ReflectionClass($plan))->getProperties());
+
+        array_push($skip_props, 'ppress_save_subscription_plan', 'wp_csa_nonce');
+
+        foreach ($_POST as $key => $value) {
+            if (in_array($key, $skip_props)) continue;
+            $plan_extras[$key] = ppress_clean($value);
+        }
+
+        $plan->update_meta('plan_extras', $plan_extras);
 
         wp_safe_redirect(add_query_arg(['ppress_subp_action' => 'edit', 'id' => $plan_id, 'saved' => 'true'], PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE));
         exit;
@@ -168,7 +230,7 @@ class SettingsPage extends AbstractSettingsPage
 
     public function add_new_button()
     {
-        if ( ! isset($_GET['ppress_subp_action'])) {
+        if ( ! isset($_GET['ppress_subp_action']) || ppressGET_var('ppress_subp_action') == 'edit') {
             $url = esc_url_raw(add_query_arg('ppress_subp_action', 'new', PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE));
             echo "<a class=\"add-new-h2\" href=\"$url\">" . esc_html__('Add New Plan', 'wp-user-avatar') . '</a>';
         }

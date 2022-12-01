@@ -3,6 +3,7 @@
 namespace ProfilePress\Core\Admin\SettingsPages\Membership;
 
 use ProfilePress\Core\Admin\SettingsPages\AbstractSettingsPage;
+use ProfilePress\Core\Classes\ExtensionManager;
 use ProfilePress\Core\Membership\CheckoutFields;
 use ProfilePress\Custom_Settings_Page_Api;
 
@@ -112,6 +113,23 @@ class PaymentSettings extends AbstractSettingsPage
                 ]
             ]
         ];
+
+        if (ExtensionManager::is_enabled(ExtensionManager::RECAPTCHA)) {
+            $settings[1]['checkout_recaptcha'] = [
+                'label'       => esc_html__('Checkout reCAPTCHA', 'wp-user-avatar'),
+                'description' => esc_html__('Enable to display reCAPTCHA on the checkout page to prevent spam and abuse.', 'wp-user-avatar'),
+                'type'        => 'checkbox'
+            ];
+        }
+
+        if (ExtensionManager::is_enabled(ExtensionManager::SOCIAL_LOGIN)) {
+            $settings[1]['checkout_social_login_buttons'] = [
+                'label'       => esc_html__('Checkout Social Login', 'wp-user-avatar'),
+                'description' => esc_html__('Select the social login buttons to display on the checkout page.', 'wp-user-avatar'),
+                'type'        => 'select2',
+                'options'     => ppress_social_login_networks()
+            ];
+        }
 
         $settingsPageInstance = Custom_Settings_Page_Api::instance('', PPRESS_SETTINGS_DB_OPTION_NAME);
         $settingsPageInstance->page_header($page_header);

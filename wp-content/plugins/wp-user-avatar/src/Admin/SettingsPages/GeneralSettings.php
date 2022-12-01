@@ -4,6 +4,7 @@ namespace ProfilePress\Core\Admin\SettingsPages;
 
 use ProfilePress\Core\Classes\ExtensionManager;
 use ProfilePress\Core\Classes\FormRepository;
+use ProfilePress\Core\RegisterActivation\CreateDBTables;
 use ProfilePress\Custom_Settings_Page_Api;
 
 class GeneralSettings extends AbstractSettingsPage
@@ -24,6 +25,8 @@ class GeneralSettings extends AbstractSettingsPage
         add_action('ppress_admin_settings_submenu_page_general_general', [$this, 'settings_admin_page_callback']);
 
         add_action('admin_footer', [$this, 'js_script']);
+
+        add_action('admin_init', [$this, 'install_missing_db_tables']);
 
         // flush rewrite rule on save/persistence
         add_action('wp_cspa_persist_settings', function () {
@@ -119,20 +122,30 @@ class GeneralSettings extends AbstractSettingsPage
             $login_redirect_page_dropdown_args[1] = ['key' => 'previous_page', 'label' => esc_html__('Previous/Referrer page', 'wp-user-avatar')];
         }
 
+        $fix_db_url = wp_nonce_url(
+            add_query_arg('ppress-install-missing-db', 'true', PPRESS_SETTINGS_SETTING_PAGE),
+            'ppress_install_missing_db_tables'
+        );
+
         $args = [
             'global_settings'           => apply_filters('ppress_global_settings_page', [
                 'tab_title' => esc_html__('Global', 'wp-user-avatar'),
                 'dashicon'  => 'dashicons-admin-site-alt',
                 [
-                    'section_title'      => esc_html__('Global Settings', 'wp-user-avatar'),
-                    'disable_ajax_mode'  => [
+                    'section_title'             => esc_html__('Global Settings', 'wp-user-avatar'),
+                    'disable_ajax_mode'         => [
                         'type'           => 'checkbox',
                         'label'          => esc_html__('Disable Ajax Mode', 'wp-user-avatar'),
                         'value'          => 'yes',
                         'checkbox_label' => esc_html__('Disable', 'wp-user-avatar'),
                         'description'    => esc_html__('Check this box to disable ajax behaviour(whereby forms do not require page reload when submitted) in forms.', 'wp-user-avatar'),
                     ],
-                    'remove_plugin_data' => [
+                    'install_missing_db_tables' => [
+                        'type'  => 'custom_field_block',
+                        'label' => __('Install Missing DB Tables', 'mailoptin'),
+                        'data'  => "<a href='$fix_db_url' class='button action ppress-confirm-delete'>" . __('Fix Database', 'mailoptin') . '</a>',
+                    ],
+                    'remove_plugin_data'        => [
                         'type'           => 'checkbox',
                         'value'          => 'yes',
                         'label'          => esc_html__('Remove Data on Uninstall', 'wp-user-avatar'),
@@ -248,7 +261,7 @@ class GeneralSettings extends AbstractSettingsPage
                         'data'        => $this->page_dropdown('payment_failure_page_id'),
                         'description' => esc_html__('The page customers are sent to after a failed order.', 'wp-user-avatar')
                     ],
-                    'terms_page_id'         => [
+                    'terms_page_id'           => [
                         'label'       => esc_html__('Terms & Conditions Page', 'wp-user-avatar'),
                         'description' => esc_html__('If you select a "Terms" page, customers will be asked if they accept them when checking out.', 'wp-user-avatar'),
                         'type'        => 'custom_field_block',
@@ -520,6 +533,25 @@ class GeneralSettings extends AbstractSettingsPage
 
         $this->settingsPageInstance->main_content(apply_filters('ppress_settings_page_args', $args));
         $this->settingsPageInstance->build_sidebar_tab_style();
+    }
+
+    public function install_missing_db_tables()
+    {
+        if (defined('DOING_AJAX')) return;
+
+        if (ppressGET_var('ppress-install-missing-db') == 'true' && current_user_can('manage_options')) {
+
+            check_admin_referer('ppress_install_missing_db_tables');
+
+            CreateDBTables::make();
+
+            if (class_exists('\ProfilePress\Libsodium\Libsodium')) {
+                \ProfilePress\Libsodium\Libsodium::create_db_tables();
+            }
+
+            wp_safe_redirect(add_query_arg('settings-updated', 'true', PPRESS_SETTINGS_SETTING_PAGE));
+            exit;
+        }
     }
 
     public function custom_sanitize()

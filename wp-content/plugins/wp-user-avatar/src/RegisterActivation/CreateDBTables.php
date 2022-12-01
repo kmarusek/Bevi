@@ -110,7 +110,7 @@ class CreateDBTables
                       KEY status (status),
                       KEY parent_order_id (parent_order_id),
                       KEY customer_and_status (customer_id,status),
-                      KEY profile_id (profile_id)
+                      KEY profile_id (profile_id(191))
                     ) $collate;
 				";
 

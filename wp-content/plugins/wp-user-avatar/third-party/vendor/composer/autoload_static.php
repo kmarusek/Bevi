@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit13871557f7044ac7e50e2cd95ebfff1e
+class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -20,8 +20,9 @@ class ComposerStaticInit13871557f7044ac7e50e2cd95ebfff1e
             'ProfilePressVendor\\Symfony\\Component\\Translation\\' => 49,
             'ProfilePressVendor\\Symfony\\Component\\CssSelector\\' => 49,
             'ProfilePressVendor\\Stripe\\' => 26,
+            'ProfilePressVendor\\Sabberworm\\CSS\\' => 34,
             'ProfilePressVendor\\ProfilePress\\Core\\' => 37,
-            'ProfilePressVendor\\Pelago\\' => 26,
+            'ProfilePressVendor\\Pelago\\Emogrifier\\' => 37,
             'ProfilePressVendor\\Carbon\\' => 26,
             'ProfilePressVendor\\Brick\\Math\\' => 30,
             'ProfilePressVendor\\Barryvdh\\Composer\\' => 37,
@@ -53,11 +54,15 @@ class ComposerStaticInit13871557f7044ac7e50e2cd95ebfff1e
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
+        'ProfilePressVendor\\Sabberworm\\CSS\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
+        ),
         'ProfilePressVendor\\ProfilePress\\Core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'ProfilePressVendor\\Pelago\\' => 
+        'ProfilePressVendor\\Pelago\\Emogrifier\\' => 
         array (
             0 => __DIR__ . '/..' . '/pelago/emogrifier/src',
         ),
@@ -169,21 +174,63 @@ class ComposerStaticInit13871557f7044ac7e50e2cd95ebfff1e
         'ProfilePressVendor\\Carbon\\Traits\\Serialization' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Serialization.php',
         'ProfilePressVendor\\Carbon\\Traits\\Test' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Test.php',
         'ProfilePressVendor\\Carbon\\Traits\\Timestamp' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Timestamp.php',
+        'ProfilePressVendor\\Carbon\\Traits\\ToStringFormat' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/ToStringFormat.php',
         'ProfilePressVendor\\Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'ProfilePressVendor\\Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'ProfilePressVendor\\Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
         'ProfilePressVendor\\Carbon\\TranslatorImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorImmutable.php',
         'ProfilePressVendor\\Carbon\\TranslatorStrongTypeInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorStrongTypeInterface.php',
         'ProfilePressVendor\\PAnD' => __DIR__ . '/..' . '/collizo4sky/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php',
-        'ProfilePressVendor\\Pelago\\Emogrifier' => __DIR__ . '/..' . '/pelago/emogrifier/src/Emogrifier.php',
-        'ProfilePressVendor\\Pelago\\Emogrifier\\CssInliner' => __DIR__ . '/..' . '/pelago/emogrifier/src/Emogrifier/CssInliner.php',
-        'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\AbstractHtmlProcessor' => __DIR__ . '/..' . '/pelago/emogrifier/src/Emogrifier/HtmlProcessor/AbstractHtmlProcessor.php',
-        'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\CssToAttributeConverter' => __DIR__ . '/..' . '/pelago/emogrifier/src/Emogrifier/HtmlProcessor/CssToAttributeConverter.php',
-        'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\HtmlNormalizer' => __DIR__ . '/..' . '/pelago/emogrifier/src/Emogrifier/HtmlProcessor/HtmlNormalizer.php',
-        'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\HtmlPruner' => __DIR__ . '/..' . '/pelago/emogrifier/src/Emogrifier/HtmlProcessor/HtmlPruner.php',
-        'ProfilePressVendor\\Pelago\\Emogrifier\\Utilities\\ArrayIntersector' => __DIR__ . '/..' . '/pelago/emogrifier/src/Emogrifier/Utilities/ArrayIntersector.php',
-        'ProfilePressVendor\\Pelago\\Emogrifier\\Utilities\\CssConcatenator' => __DIR__ . '/..' . '/pelago/emogrifier/src/Emogrifier/Utilities/CssConcatenator.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\Caching\\SimpleStringCache' => __DIR__ . '/..' . '/pelago/emogrifier/src/Caching/SimpleStringCache.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\CssInliner' => __DIR__ . '/..' . '/pelago/emogrifier/src/CssInliner.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\Css\\CssDocument' => __DIR__ . '/..' . '/pelago/emogrifier/src/Css/CssDocument.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\Css\\StyleRule' => __DIR__ . '/..' . '/pelago/emogrifier/src/Css/StyleRule.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\AbstractHtmlProcessor' => __DIR__ . '/..' . '/pelago/emogrifier/src/HtmlProcessor/AbstractHtmlProcessor.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\CssToAttributeConverter' => __DIR__ . '/..' . '/pelago/emogrifier/src/HtmlProcessor/CssToAttributeConverter.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\HtmlNormalizer' => __DIR__ . '/..' . '/pelago/emogrifier/src/HtmlProcessor/HtmlNormalizer.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\HtmlPruner' => __DIR__ . '/..' . '/pelago/emogrifier/src/HtmlProcessor/HtmlPruner.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\Utilities\\ArrayIntersector' => __DIR__ . '/..' . '/pelago/emogrifier/src/Utilities/ArrayIntersector.php',
+        'ProfilePressVendor\\Pelago\\Emogrifier\\Utilities\\CssConcatenator' => __DIR__ . '/..' . '/pelago/emogrifier/src/Utilities/CssConcatenator.php',
         'ProfilePressVendor\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/AtRuleBlockList.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\CSSList\\CSSBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/CSSBlockList.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\CSSList\\CSSList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/CSSList.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\CSSList\\Document' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/Document.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\CSSList\\KeyFrame' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/KeyFrame.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Comment\\Comment' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Comment/Comment.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Comment\\Commentable' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Comment/Commentable.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\OutputFormat' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/OutputFormat.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\OutputFormatter' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/OutputFormatter.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Parser' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Parser.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Parsing\\OutputException' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Parsing/OutputException.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Parsing\\ParserState' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Parsing/ParserState.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Parsing\\SourceException' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Parsing/SourceException.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Parsing\\UnexpectedEOFException' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Parsing/UnexpectedEOFException.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Parsing\\UnexpectedTokenException' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Parsing/UnexpectedTokenException.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Property\\AtRule' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Property/AtRule.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Property\\CSSNamespace' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Property/CSSNamespace.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Property\\Charset' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Property/Charset.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Property\\Import' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Property/Import.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Property\\KeyframeSelector' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Property/KeyframeSelector.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Property\\Selector' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Property/Selector.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Renderable' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Renderable.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\RuleSet\\AtRuleSet' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/RuleSet/AtRuleSet.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\RuleSet\\DeclarationBlock' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/RuleSet/DeclarationBlock.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\RuleSet\\RuleSet' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/RuleSet/RuleSet.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Rule\\Rule' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Rule/Rule.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Settings' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Settings.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\CSSFunction' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/CSSFunction.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\CSSString' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/CSSString.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\CalcFunction' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/CalcFunction.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\CalcRuleValueList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/CalcRuleValueList.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\Color' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/Color.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\LineName' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/LineName.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\PrimitiveValue' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/PrimitiveValue.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\RuleValueList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/RuleValueList.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\Size' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/Size.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\URL' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/URL.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\Value' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/Value.php',
+        'ProfilePressVendor\\Sabberworm\\CSS\\Value\\ValueList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/ValueList.php',
         'ProfilePressVendor\\Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'ProfilePressVendor\\Stripe\\Account' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Account.php',
         'ProfilePressVendor\\Stripe\\AccountLink' => __DIR__ . '/..' . '/stripe/stripe-php/lib/AccountLink.php',
@@ -563,9 +610,9 @@ class ComposerStaticInit13871557f7044ac7e50e2cd95ebfff1e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit13871557f7044ac7e50e2cd95ebfff1e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit13871557f7044ac7e50e2cd95ebfff1e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit13871557f7044ac7e50e2cd95ebfff1e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc::$classMap;
 
         }, null, ClassLoader::class);
     }

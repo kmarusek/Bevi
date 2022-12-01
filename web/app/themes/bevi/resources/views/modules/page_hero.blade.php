@@ -1,1 +1,0 @@
-<page-hero :block="{{ json_encode($block) }}"></page-hero>

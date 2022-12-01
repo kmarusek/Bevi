@@ -85,7 +85,7 @@ abstract class AbstractReport
             $variables[] = $this->plan_id;
         }
 
-        if($groupBy) {
+        if ($groupBy) {
             $sql .= " GROUP BY order_time ORDER BY order_time ASC";
         }
 
@@ -168,7 +168,7 @@ abstract class AbstractReport
 
         // ensures labels are sorted from earliest to latest
         uasort($labels, function ($a, $b) {
-            return (strtotime($a) > strtotime($b));
+            return (strtotime($a) <=> strtotime($b));
         });
 
         return $labels;

@@ -277,6 +277,11 @@ class Metabox
             <div id="pp-form-builder-metabox" class="postbox">
                 <div class="postbox-header"><h2 class="hndle is-non-sortable">
                         <span><?= esc_html($metabox_title) ?></span></h2>
+                    <div class="handle-actions hide-if-no-js">
+                        <button type="button" class="handlediv" aria-expanded="true">
+                            <span class="toggle-indicator" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="inside">
                     <div class="panel-wrap pp-form-builder-mb-data">

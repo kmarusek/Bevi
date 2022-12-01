@@ -72,7 +72,8 @@ class Edit_Menu extends Admin_Menu {
 		}
 
 		// Disallow visiting the edit snippet page without a valid ID.
-		if ( $screen->base === $edit_hook && ( empty( $_REQUEST['id'] ) || 0 === $this->snippet->id || null === $this->snippet->id ) ) {
+		if ( $screen->base === $edit_hook && ( empty( $_REQUEST['id'] ) || 0 === $this->snippet->id || null === $this->snippet->id ) &&
+		     ! isset( $_REQUEST['preview'] ) ) {
 			wp_safe_redirect( code_snippets()->get_menu_url( 'add' ) );
 			exit;
 		}
@@ -130,6 +131,8 @@ class Edit_Menu extends Admin_Menu {
 				$snippet->scope = 'site-head-js';
 			}
 		}
+
+		$this->snippet = apply_filters( 'code_snippets/admin/load_snippet_data', $snippet );
 	}
 
 	/**
@@ -159,15 +162,17 @@ class Edit_Menu extends Admin_Menu {
 
 			/* Export the snippet if the button was clicked */
 			if ( isset( $_POST['export_snippet'] ) ) {
-				$export = new Export( $snippet_id );
-				$export->export_snippets();
+				$export = new Export_Attachment( $snippet_id );
+				$export->download_snippets_json();
 			}
 
 			/* Download the snippet if the button was clicked */
 			if ( isset( $_POST['download_snippet'] ) ) {
-				$export = new Export( $snippet_id );
-				$export->download_snippets();
+				$export = new Export_Attachment( $snippet_id );
+				$export->download_snippets_code();
 			}
+
+			do_action( 'code_snippets/admin/process_actions', $snippet_id );
 		}
 	}
 
@@ -269,6 +274,8 @@ class Edit_Menu extends Admin_Menu {
 				$snippet->set_field( substr( $field, 8 ), stripslashes( $value ) );
 			}
 		}
+
+		$snippet = apply_filters( 'code_snippets/save/post_set_fields', $snippet );
 
 		if ( isset( $_POST['save_snippet_execute'] ) && 'single-use' !== $snippet->scope ) {
 			unset( $_POST['save_snippet_execute'] );
@@ -420,7 +427,7 @@ class Edit_Menu extends Admin_Menu {
 
 		<input type="text" id="snippet_tags" name="snippet_tags" style="width: 100%;"
 		       placeholder="<?php esc_html_e( 'Enter a list of tags; separated by commas', 'code-snippets' ); ?>"
-		       value="<?php echo esc_attr( $snippet->tags_list ); ?>"/>
+		       value="<?php echo esc_attr( $snippet->tags_list ); ?>" />
 		<?php
 	}
 
@@ -822,10 +829,13 @@ class Edit_Menu extends Admin_Menu {
 				'Shift'  => _x( 'Shift', 'keyboard key', 'code-snippets' ),
 				'Option' => _x( 'Option', 'keyboard key', 'code-snippets' ),
 				'Alt'    => _x( 'Alt', 'keyboard key', 'code-snippets' ),
+				'Up'     => _x( 'Up', 'keyboard key', 'code-snippets' ),
+				'Down'   => _x( 'Down', 'keyboard key', 'code-snippets' ),
 				'F'      => _x( 'F', 'keyboard key', 'code-snippets' ),
 				'G'      => _x( 'G', 'keyboard key', 'code-snippets' ),
 				'R'      => _x( 'R', 'keyboard key', 'code-snippets' ),
 				'S'      => _x( 'S', 'keyboard key', 'code-snippets' ),
+				'/'      => _x( '/', 'keyboard key', 'code-snippets' ),
 			);
 		}
 

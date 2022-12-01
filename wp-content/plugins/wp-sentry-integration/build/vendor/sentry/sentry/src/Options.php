@@ -339,6 +339,25 @@ final class Options
         $this->options = $this->resolver->resolve($options);
     }
     /**
+     * Gets an allow list of trace propagation targets.
+     *
+     * @return string[]
+     */
+    public function getTracePropagationTargets() : array
+    {
+        return $this->options['trace_propagation_targets'];
+    }
+    /**
+     * Set an allow list of trace propagation targets.
+     *
+     * @param string[] $tracePropagationTargets Trace propagation targets
+     */
+    public function setTracePropagationTargets(array $tracePropagationTargets) : void
+    {
+        $options = \array_merge($this->options, ['trace_propagation_targets' => $tracePropagationTargets]);
+        $this->options = $this->resolver->resolve($options);
+    }
+    /**
      * Gets a list of default tags for events.
      *
      * @return array<string, string>
@@ -657,7 +676,7 @@ final class Options
     {
         $resolver->setDefaults(['integrations' => [], 'default_integrations' => \true, 'send_attempts' => 0, 'prefixes' => \array_filter(\explode(\PATH_SEPARATOR, \get_include_path() ?: '')), 'sample_rate' => 1, 'traces_sample_rate' => 0, 'traces_sampler' => null, 'attach_stacktrace' => \false, 'context_lines' => 5, 'enable_compression' => \true, 'environment' => $_SERVER['SENTRY_ENVIRONMENT'] ?? null, 'logger' => 'php', 'release' => $_SERVER['SENTRY_RELEASE'] ?? null, 'dsn' => $_SERVER['SENTRY_DSN'] ?? null, 'server_name' => \gethostname(), 'before_send' => static function (\Sentry\Event $event) : Event {
             return $event;
-        }, 'tags' => [], 'error_types' => null, 'max_breadcrumbs' => self::DEFAULT_MAX_BREADCRUMBS, 'before_breadcrumb' => static function (\Sentry\Breadcrumb $breadcrumb) : Breadcrumb {
+        }, 'trace_propagation_targets' => [], 'tags' => [], 'error_types' => null, 'max_breadcrumbs' => self::DEFAULT_MAX_BREADCRUMBS, 'before_breadcrumb' => static function (\Sentry\Breadcrumb $breadcrumb) : Breadcrumb {
             return $breadcrumb;
         }, 'in_app_exclude' => [], 'in_app_include' => [], 'send_default_pii' => \false, 'max_value_length' => 1024, 'http_proxy' => null, 'http_connect_timeout' => self::DEFAULT_HTTP_CONNECT_TIMEOUT, 'http_timeout' => self::DEFAULT_HTTP_TIMEOUT, 'capture_silenced_errors' => \false, 'max_request_body_size' => 'medium', 'class_serializers' => []]);
         $resolver->setAllowedTypes('send_attempts', 'int');
@@ -676,6 +695,7 @@ final class Options
         $resolver->setAllowedTypes('dsn', ['null', 'string', 'bool', \Sentry\Dsn::class]);
         $resolver->setAllowedTypes('server_name', 'string');
         $resolver->setAllowedTypes('before_send', ['callable']);
+        $resolver->setAllowedTypes('trace_propagation_targets', 'string[]');
         $resolver->setAllowedTypes('tags', 'string[]');
         $resolver->setAllowedTypes('error_types', ['null', 'int']);
         $resolver->setAllowedTypes('max_breadcrumbs', 'int');

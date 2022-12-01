@@ -19,7 +19,8 @@ if (!\class_exists(LazyMacro::class, \false)) {
          */
         public function getFileName() : ?string
         {
-            return $this->reflectionFunction->getFileName();
+            $file = $this->reflectionFunction->getFileName();
+            return (($file ? \realpath($file) : null) ?: $file) ?: null;
         }
         /**
          * {@inheritdoc}

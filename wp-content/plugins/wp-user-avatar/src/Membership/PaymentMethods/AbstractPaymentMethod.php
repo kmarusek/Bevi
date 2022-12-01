@@ -258,7 +258,13 @@ abstract class AbstractPaymentMethod implements PaymentMethodInterface
 
     public function get_webhook_url()
     {
-        return add_query_arg(['ppress-listener' => $this->id], home_url('/'));
+        $domain = home_url('/');
+
+        if (defined('PPRESS_WEBHOOK_DOMAIN') && PPRESS_WEBHOOK_DOMAIN) {
+            $domain = PPRESS_WEBHOOK_DOMAIN;
+        }
+
+        return add_query_arg(['ppress-listener' => $this->id], $domain);
     }
 
     /**

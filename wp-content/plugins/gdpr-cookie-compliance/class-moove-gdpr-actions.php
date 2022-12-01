@@ -90,6 +90,8 @@ class Moove_GDPR_Actions {
 			add_action( 'gdpr_language_alert_bottom', array( &$this, 'gdpr_translatepress_language_select_extension' ), 10, 1 );
 			add_action( 'admin_url', array( &$this, 'gdpr_form_admin_url_filter' ), 10, 1 );
 		endif;
+
+		add_action( 'gdpr_template_html_load', array( &$this, 'gdpr_prevent_html_load_to_divi_builder' ), 10, 1);
 	}
 	/**
 	 * TranslatePress plugin support to switch language inside GDPR Cookie Compliance admin page
@@ -101,6 +103,16 @@ class Moove_GDPR_Actions {
 			$url 			= add_query_arg( 'gdpr-lang', $lang_code, $url );
 		endif;
 		return $url;
+	}
+
+	/**
+	 * Prevent loading GDPR HTML templates to Divi Builder
+	 */
+	public static function gdpr_prevent_html_load_to_divi_builder( $load ) {
+		if ( function_exists( 'et_core_is_fb_enabled' ) && et_core_is_fb_enabled() ) :
+			$load = false;
+		endif;
+		return $load;
 	}
 
 	public static function gdpr_translatepress_language_select_extension( $language ) {
@@ -145,8 +157,15 @@ class Moove_GDPR_Actions {
 	 * @param string $index_value Index Value.
 	 */
 	public static function gdpr_insert_tabindex_attribute( $tabindex, $index_value ) {
-		if ( $index_value ) :
-			$tabindex = ' tabindex="' . esc_attr( $index_value ) . '" ';
+		$gdpr_default_content = new Moove_GDPR_Content();
+		$option_name          = $gdpr_default_content->moove_gdpr_get_option_name();
+		$gdpr_options         = get_option( $option_name );
+		if ( isset( $gdpr_options['gdpr_accesibility'] ) && intval( $gdpr_options['gdpr_accesibility'] ) === 1 ) :
+			if ( $index_value ) :
+				$tabindex = ' tabindex="' . esc_attr( $index_value ) . '" ';
+			endif;
+		else :
+			$tabindex = '';
 		endif;
 		return $tabindex;
 	}

@@ -19,6 +19,8 @@ class Init
         NavMenuProtection::get_instance();
         ElementorRestriction::get_instance();
         CapabilityCheck::get_instance();
+
+        ConditionalBlocksIntegration::get_instance();
     }
 
     public function get_content_condition_field()

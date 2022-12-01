@@ -23,6 +23,7 @@ use ProfilePressVendor\Carbon\Traits\IntervalRounding;
 use ProfilePressVendor\Carbon\Traits\IntervalStep;
 use ProfilePressVendor\Carbon\Traits\Mixin;
 use ProfilePressVendor\Carbon\Traits\Options;
+use ProfilePressVendor\Carbon\Traits\ToStringFormat;
 use Closure;
 use DateInterval;
 use DateTimeInterface;
@@ -186,6 +187,7 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
         Mixin::mixin as baseMixin;
     }
     use Options;
+    use ToStringFormat;
     /**
      * Interval spec period designators
      */
@@ -638,6 +640,8 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
                 case 'year':
                 case 'years':
                 case 'y':
+                case 'yr':
+                case 'yrs':
                     $years += $intValue;
                     break;
                 case 'quarter':
@@ -647,6 +651,7 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
                 case 'month':
                 case 'months':
                 case 'mo':
+                case 'mos':
                     $months += $intValue;
                     break;
                 case 'week':
@@ -832,7 +837,7 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
      *
      * @link https://php.net/manual/en/dateinterval.createfromdatestring.php
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public static function createFromDateString($time)
     {
         $interval = @parent::createFromDateString(\strtr($time, [',' => ' ', ' and ' => ' ']));
@@ -1446,7 +1451,7 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
      */
     public function __toString()
     {
-        $format = $this->localToStringFormat;
+        $format = $this->localToStringFormat ?? static::$toStringFormat;
         if (!$format) {
             return $this->forHumans();
         }
