@@ -4,6 +4,7 @@
     :class="{ 'nav-open' : isMobileNavOpen }"
   >
   <InformationBanner
+    v-if="banner.show === true"
     :banner="banner"
   />
     <div class="px-4 md:px-10">
