@@ -38,7 +38,6 @@
           ref="pardot"
           class="pardot-form"
           v-html="block.pardot_form ? block.pardot_form : block.pardot_form_fallback"
-          :style="[ isMobile ? { 'height' : `${block.form_height.mobile}px` } : { 'height' : `${block.form_height.desktop}px` } ]"
         />
       </div>
     </div>
@@ -70,16 +69,10 @@
 </script>
 
 <style lang="scss" scoped>
-// min-heights replaced with automatic resizing from iframe-resizer
-// .pardot-form {
-//   :deep(iframe.pardotform) {
-//     min-height: 1000px;
 
-//     @screen lg {
-//       min-height: 550px;
-//     }
-//   }
-// }
+.pardot-form {
+  height: 100%;
+}
 .bubble-one {
   top: 25%;
   left: 5%;
