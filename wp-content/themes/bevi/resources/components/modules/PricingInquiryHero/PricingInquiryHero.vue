@@ -41,7 +41,6 @@
             ref="pardot"
             class="pardot-form"
             v-html="block.pardot_form"
-            :style="[ isMobile ? { 'height' : `${block.form_height.mobile}px` } : { 'height' : `${block.form_height.desktop}px` } ]"
           />
         </div>
       </div>
@@ -77,6 +76,9 @@
 </script>
 
 <style lang="scss" scoped>
+.pardot-form {
+  height: 100%;
+}
 .wave {
   clip-path: url(#banner-wave);
   @apply -mb-6 relative;
