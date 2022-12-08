@@ -29,7 +29,7 @@
 
     </div>
 
-    <div class="container flex flex-col lg:flex-row mb-9.5">
+    <div class="container flex flex-col lg:flex-row">
       <div class="grid grid-cols-2 xl:grid-cols-8 items-end justify-between pt-20 xs:py-32 w-full lg:gap-20">
         <div class="sm:col-span-1 xl:col-span-3 space-y-4 pb-20">
           <h3
