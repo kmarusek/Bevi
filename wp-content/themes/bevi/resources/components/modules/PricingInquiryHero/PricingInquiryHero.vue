@@ -78,6 +78,7 @@
 <style lang="scss" scoped>
 .pardot-form {
   height: 100%;
+  padding-bottom: 20px;
 }
 .wave {
   clip-path: url(#banner-wave);
