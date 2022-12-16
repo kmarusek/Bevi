@@ -247,7 +247,9 @@
     max-width: 33%;
   }
 }
-
+.block-content{
+  padding-bottom: 20px;
+}
 .block-content:deep(p, ul) {
   @apply text-gray-550;
 }
