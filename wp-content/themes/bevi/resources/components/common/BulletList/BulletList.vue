@@ -3,7 +3,7 @@
     class="gsap-fade-section"
     :class="[{ wave : block.wave }, block.padding]"
   >
-    <div class="flex flex-wrap flex-col sm:flex-row container justify-center">
+    <div class="pt-2.5 flex flex-wrap flex-col sm:flex-row container justify-center">
       <div
         v-for="bullet in block.bullets"
         :key="bullet.id"
