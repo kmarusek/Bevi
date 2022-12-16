@@ -59,7 +59,7 @@
         height: 64px;
         font-family: Space Grotesk,sans-serif;
        .informationBanner-content {
-            width: 59%;
+            width: 60%;
             p{
             font-size: 16px;
             line-height: 30px;
