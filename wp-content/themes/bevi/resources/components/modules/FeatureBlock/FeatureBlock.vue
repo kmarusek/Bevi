@@ -22,7 +22,7 @@
           class="mt-2 md:mt-4 block-content gsap-fade"
         />
       </div>
-      <div class="mx-auto md:mx-0 md:w-1/2 flex justify-center relative">
+      <div class="pt-2.5 mx-auto md:mx-0 md:w-1/2 flex justify-center relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="66.877"
