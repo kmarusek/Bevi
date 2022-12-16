@@ -3,7 +3,7 @@
     class="gsap-fade-section"
     :class="[{ wave : block.wave }, block.padding]"
   >
-    <div class="pt-2.5 flex flex-wrap flex-col sm:flex-row container justify-center">
+    <div class="bullet-container flex flex-wrap flex-col sm:flex-row container justify-center">
       <div
         v-for="bullet in block.bullets"
         :key="bullet.id"
@@ -53,5 +53,8 @@
 .wave {
   clip-path: url(#bullet-wave);
   @apply -mb-6 relative bg-white;
+}
+.bullet-container{
+  padding-top: 10px;
 }
 </style>
