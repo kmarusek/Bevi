@@ -41,6 +41,16 @@
           <div class="flex">
             <a
               target="_blank"
+              href="https://www.linkedin.com/company/bevi"
+              class="icon mr-3"
+            >
+              <img
+                :src="require('~/assets/images/icons/linkedin.svg').default"
+                alt="Share on LinkedIn, opens in new tab"
+              >
+            </a>
+            <a
+              target="_blank"
               href="https://www.facebook.com/getBevi/"
               class="icon"
             >
