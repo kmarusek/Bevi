@@ -77,7 +77,7 @@ class CouponWPListTable extends \WP_List_Table
 
         $actions['delete'] = sprintf('<a class="pp-confirm-delete" href="%s">%s</a>', $delete_link, esc_html__('Delete', 'wp-user-avatar'));
 
-        $a = '<a href="' . $edit_link . '">' . sanitize_text_field($item->code) . '</a>';
+        $a = '<a href="' . $edit_link . '">' . esc_html($item->code) . '</a>';
 
         $coupon_type = $item->is_recurring() ? esc_html__('Recurring', 'wp-user-avatar') : esc_html__('One-time', 'wp-user-avatar');
 

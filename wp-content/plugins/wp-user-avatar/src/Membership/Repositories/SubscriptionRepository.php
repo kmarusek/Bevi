@@ -166,11 +166,12 @@ class SubscriptionRepository extends BaseRepository
      * @param $args
      * @param $count
      *
-     * @return SubscriptionEntity[]|string|int
+     * @return SubscriptionEntity[]|[]|string|int
      */
     public function retrieveBy($args = array(), $count = false)
     {
         $defaults = [
+            'fields'          => '*',
             'subscription_id' => 0,
             'search'          => '',
             'number'          => 10,
@@ -187,7 +188,8 @@ class SubscriptionRepository extends BaseRepository
             'date_compare'    => '=',
             'date_column'     => 'created_date',
             'order'           => 'DESC',
-            'orderby'         => 'id'
+            'orderby'         => 'id',
+            'raw_response'    => false
         ];
 
         $args = wp_parse_args($args, $defaults);
@@ -197,7 +199,7 @@ class SubscriptionRepository extends BaseRepository
         $offset = $args['offset'];
         $search = $args['search'];
 
-        $sql = "SELECT * FROM $this->table";
+        $sql = sprintf("SELECT %s FROM $this->table", esc_sql(sanitize_text_field($args['fields'])));
 
         if ($count === true) {
             $sql = "SELECT COUNT(id) FROM $this->table";
@@ -293,7 +295,9 @@ class SubscriptionRepository extends BaseRepository
             }
         }
 
-        $sql .= sprintf(" ORDER BY %s %s", esc_sql($args['orderby']), esc_sql($args['order']));
+        if ( ! empty($args['orderby'])) {
+            $sql .= sprintf(" ORDER BY %s %s", esc_sql($args['orderby']), esc_sql($args['order']));
+        }
 
         if ($count === false) {
             if ($limit > 0) {
@@ -314,7 +318,7 @@ class SubscriptionRepository extends BaseRepository
         $result = $this->wpdb()->get_results($this->wpdb()->prepare($sql, $replacement), 'ARRAY_A');
 
         if (is_array($result) && ! empty($result)) {
-            return array_map([SubscriptionFactory::class, 'make'], $result);
+            return $args['raw_response'] ? $result : array_map([SubscriptionFactory::class, 'make'], $result);
         }
 
         return [];

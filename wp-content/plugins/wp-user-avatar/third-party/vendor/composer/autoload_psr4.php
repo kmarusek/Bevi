@@ -6,8 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ProfilePressVendor\\Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
-    'ProfilePressVendor\\Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'ProfilePressVendor\\Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
     'ProfilePressVendor\\Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'ProfilePressVendor\\Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),

@@ -16,8 +16,8 @@ class LogService
             $log_message .= "\tisInvalid: " . $isInvalid . "\n";
             $log_message .= "\tThreatType: " . $threatType . "\n";
             $log_message .= "\tRequestID: " . $request_id . "\n";
-            $log_message .= "\Referer: " . Utils::getServerVariable('HTTP_REFERER'). "\n";
-            $log_message .= "\ClientIp: " . Utils::get_the_user_ip(). "\n";
+            $log_message .= "\Referer: " . Utils::getServerVariable('HTTP_REFERER') . "\n";
+            $log_message .= "\ClientIp: " . Utils::get_the_user_ip() . "\n";
 
             if (!is_null($risk_score)) {
                 $log_message .= "\tRiskScore: " . $risk_score . "\n";
@@ -40,7 +40,7 @@ class LogService
 
     public static function logErrorCode(int $errorCode)
     {
-      LogService::log("Server", "", "", "", "", "", "", "", $errorCode);
+        LogService::log("Server", "", "", "", "", "", "", "", $errorCode);
     }
 
     public static function remote_log($level, $tag_hash, $api_key, $message, $application, $action, $site_url, $errorCode)

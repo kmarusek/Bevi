@@ -38,20 +38,9 @@ class NitroPack {
     public function getSiteConfig() {
         $siteConfig = null;
         $npConfig = $this->Config->get();
+	    $currentUrl = $this -> getCurrentUrl();
 
-        if (! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] )) {
-            $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
-        } else {
-            $host = !empty($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : "";
-        }
-
-        $uri = !empty($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "";
-        $currentUrl = $host . $uri;
-        $matchLength = 0;
-
-        if (stripos($currentUrl, "www.") === 0) {
-            $currentUrl = substr($currentUrl, 4);
-        }
+	    $matchLength = 0;
 
         foreach ($npConfig as $siteUrl => $config) {
             if (stripos($siteUrl, "www.") === 0) {
@@ -63,6 +52,25 @@ class NitroPack {
                 $matchLength = strlen($siteUrl);
             }
         }
+
+        if (!$siteConfig) {
+            $matchLength = 0;
+            foreach ($npConfig as $siteUrl => $config) {
+                if (isset($config['additional_domains'])) {
+                    foreach ($config['additional_domains'] as $additionalDomain) {
+                        if (stripos($additionalDomain, "www.") === 0) {
+                            $additionalDomain = substr($additionalDomain, 4);
+                        }
+
+                        if (stripos($currentUrl, $additionalDomain) === 0 && strlen($additionalDomain) > $matchLength) {
+                            $siteConfig = $config;
+                            $matchLength = strlen($additionalDomain);
+                        }
+                    }
+                }
+            }
+        }
+
         return $siteConfig;
     }
 
@@ -82,6 +90,18 @@ class NitroPack {
      */
     public static function getConfigKey() {
         return preg_replace("/^https?:\/\/(.*)/", "$1", get_home_url());
+    }
+
+    public function getAdditionalDomains($siteId, $siteSecret) {
+        if (null !== $nitro = $this->getSdk($siteId, $siteSecret)) {
+            $config = $nitro->getConfig();
+            if (!property_exists($config->AdditionalDomains, 'Domains')) {
+                $nitro->fetchConfig();
+            }
+            return $config->AdditionalDomains->Domains;
+        }
+
+        return [];
     }
 
     public function isConnected() {
@@ -122,6 +142,7 @@ class NitroPack {
             "dlm_download_endpoint" => \NitroPack\Integration\Plugin\DownloadManager::isActive() ? \NitroPack\Integration\Plugin\DownloadManager::downloadEndpoint() : NULL,
             "pluginVersion" => NITROPACK_VERSION,
             "options_cache" => [],
+            "additional_domains" => $this->getAdditionalDomains($siteId, $siteSecret),
         );
         foreach (self::$optionsToCache as $opt) {
             if (is_array($opt)) {
@@ -253,4 +274,31 @@ class NitroPack {
     public function getPageType() {
         return $this->pageType;
     }
+
+	/**
+	 * Get current url
+	 *
+	 * @return string The current url
+	 */
+	public function getCurrentUrl() {
+		if (! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] )) {
+			$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+		} else {
+			$host = !empty($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : "";
+		}
+
+		$uri = !empty($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "";
+		$currentUrl = $host . $uri;
+
+		if (empty($currentUrl)) {
+			$site_url = parse_url(apply_filters('nitropack_current_host', get_site_url()));
+			$currentUrl = $site_url["host"];
+		}
+
+		if (stripos($currentUrl, "www.") === 0) {
+			$currentUrl = substr($currentUrl, 4);
+		}
+
+		return $currentUrl;
+	}
 }

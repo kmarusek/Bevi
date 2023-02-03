@@ -6,19 +6,19 @@ $postedData = ppress_var(@$_POST['ppress_cc_data'], 'access_condition', []);
 
 $who_can_access                      = ppressPOST_var('who_can_access', ppress_var($accessConditionData, 'who_can_access'), false, $postedData);
 $access_roles                        = ppressPOST_var('access_roles', ppress_var($accessConditionData, 'access_roles', []), [], $postedData);
-$access_membership_plans                     = ppressPOST_var('access_membership_plans', ppress_var($accessConditionData, 'access_membership_plans', []), [], $postedData);
+$access_membership_plans             = ppressPOST_var('access_membership_plans', ppress_var($accessConditionData, 'access_membership_plans', []), [], $postedData);
 $access_wp_users                     = ppressPOST_var('access_wp_users', ppress_var($accessConditionData, 'access_wp_users', []), [], $postedData);
 $noaccess_action                     = ppressPOST_var('noaccess_action', ppress_var($accessConditionData, 'noaccess_action'), false, $postedData);
 $noaccess_action_message_type        = ppressPOST_var('noaccess_action_message_type', ppress_var($accessConditionData, 'noaccess_action_message_type'), false, $postedData);
 $noaccess_action_message_custom      = ppressPOST_var('noaccess_action_message_custom', ppress_var($accessConditionData, 'noaccess_action_message_custom'), false, $postedData);
 $noaccess_action_redirect_url        = ppressPOST_var('noaccess_action_redirect_url', ppress_var($accessConditionData, 'noaccess_action_redirect_url'), false, $postedData);
+$noaccess_action_message_style       = ppressPOST_var('noaccess_action_message_style', ppress_var($accessConditionData, 'noaccess_action_message_style'), false, $postedData);
 $noaccess_action_redirect_custom_url = ppressPOST_var('noaccess_action_redirect_custom_url', ppress_var($accessConditionData, 'noaccess_action_redirect_custom_url'), false, $postedData);
 
 $membership_plans = [];
 foreach (PlanRepository::init()->retrieveAll() as $plan) {
     $membership_plans[$plan->id] = $plan->name;
 }
-
 ?>
 
 <div class="pp-content-protection-access-box">
@@ -70,7 +70,7 @@ foreach (PlanRepository::init()->retrieveAll() as $plan) {
             <td>
                 <select id="pp-cc-access-wp-users" name="ppress_cc_data[access_condition][access_wp_users][]" multiple>
                     <?php foreach ($access_wp_users as $user_id): $user = get_userdata($user_id); ?>
-                        <option value="<?= $user_id ?>" selected>
+                        <option value="<?= esc_attr($user_id) ?>" selected>
                             <?= $user->user_login ?> (<?= $user->user_email ?>)
                         </option>
                     <?php endforeach; ?>
@@ -98,16 +98,16 @@ foreach (PlanRepository::init()->retrieveAll() as $plan) {
             </th>
             <td>
                 <select id="pp-cc-access-noaccess-action-message" name="ppress_cc_data[access_condition][noaccess_action_message_type]">
-                    <option value="global" <?php selected($noaccess_action_message_type, 'global') ?>><?= esc_html__('Global Restrict Access Message', 'wp-user-avatar') ?></option>
+                    <option value="global" <?php selected($noaccess_action_message_type, 'global') ?>><?= esc_html__('Global Restricted Access Message', 'wp-user-avatar') ?></option>
                     <option value="custom" <?php selected($noaccess_action_message_type, 'custom') ?>><?= esc_html__('Custom Message', 'wp-user-avatar') ?></option>
                     <option value="post_excerpt" <?php selected($noaccess_action_message_type, 'post_excerpt') ?>><?= esc_html__('Post Excerpt', 'wp-user-avatar') ?></option>
-                    <option value="post_excerpt_global" <?php selected($noaccess_action_message_type, 'post_excerpt_global') ?>><?= esc_html__('Post Excerpt + Global Restrict Access Message', 'wp-user-avatar') ?></option>
+                    <option value="post_excerpt_global" <?php selected($noaccess_action_message_type, 'post_excerpt_global') ?>><?= esc_html__('Post Excerpt + Global Restricted Access Message', 'wp-user-avatar') ?></option>
                     <option value="post_excerpt_custom" <?php selected($noaccess_action_message_type, 'post_excerpt_custom') ?>><?= esc_html__('Post Excerpt + Custom Message', 'wp-user-avatar') ?></option>
                 </select>
                 <p class="description">
                     <?= sprintf(
                         esc_html__('Note that Global Restrict Access Message can be %scustomized here%s.'),
-                        '<a href="' . PPRESS_SETTINGS_SETTING_PAGE . '#access_settings?global_restricted_access_message_row" target="_blank">', '</a>'
+                        '<a href="' . PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#access_settings?global_restricted_access_message_row" target="_blank">', '</a>'
                     ); ?>
                 </p>
             </td>
@@ -132,6 +132,19 @@ foreach (PlanRepository::init()->retrieveAll() as $plan) {
                     'media_buttons' => false,
                 ]);
                 ?>
+            </td>
+        </tr>
+        <tr id="pp-cc-access-noaccess-action-message-style-row">
+            <th>
+                <label for="pp-cc-access-noaccess-action-message-style">
+                    <?= esc_html__('Restricted Access Message Style', 'wp-user-avatar') ?>
+                </label>
+            </th>
+            <td>
+                <select id="pp-cc-access-noaccess-action-message-style" name="ppress_cc_data[access_condition][noaccess_action_message_style]">
+                    <option value="none" <?php selected($noaccess_action_message_style, 'none') ?>><?= esc_html__('None', 'wp-user-avatar') ?></option>
+                    <option value="default" <?php selected($noaccess_action_message_style, 'default') ?>><?= esc_html__('Blur & Fade Effect', 'wp-user-avatar') ?></option>
+                </select>
             </td>
         </tr>
         <tr id="pp-cc-access-noaccess-action-redirect-row">
@@ -175,6 +188,7 @@ foreach (PlanRepository::init()->retrieveAll() as $plan) {
                         $('#pp-cc-access-wp-users-row').hide();
                         $('#pp-cc-access-noaccess-action-row').hide();
                         $('#pp-cc-access-noaccess-action-message-row').hide();
+                        $('#pp-cc-access-noaccess-action-message-style-row').hide();
                         $('#pp-cc-access-noaccess-action-message-custom-row').hide();
                         $('#pp-cc-access-noaccess-action-redirect-row').hide();
                         $('#pp-cc-access-noaccess-action-redirect-custom-url-row').hide();
@@ -184,6 +198,7 @@ foreach (PlanRepository::init()->retrieveAll() as $plan) {
                         $('#pp-cc-access-noaccess-action-redirect-row').hide();
                         $('#pp-cc-access-noaccess-action-redirect-custom-url-row').hide();
                         $('#pp-cc-access-noaccess-action-message-row').hide();
+                        $('#pp-cc-access-noaccess-action-message-style-row').hide();
                         // all show code must be after hide()
                         $('#pp-cc-access-membership-plans-row').show();
                         $('#pp-cc-access-role-row').show();
@@ -215,9 +230,11 @@ foreach (PlanRepository::init()->retrieveAll() as $plan) {
                         $('#pp-cc-access-noaccess-action-redirect-custom-url-row').hide();
                         // all show code must be after hide()
                         $('#pp-cc-access-noaccess-action-message-row').show().find('select').change();
+                        $('#pp-cc-access-noaccess-action-message-style-row').show();
                         break;
                     case 'redirect':
                         $('#pp-cc-access-noaccess-action-message-row').hide();
+                        $('#pp-cc-access-noaccess-action-message-style-row').hide();
                         $('#pp-cc-access-noaccess-action-message-custom-row').hide();
                         $('#pp-cc-access-noaccess-action-redirect-custom-url-row').hide();
                         // all show code must be after hide()
@@ -232,6 +249,7 @@ foreach (PlanRepository::init()->retrieveAll() as $plan) {
 
                 switch (val) {
                     case 'global':
+                    case 'post_excerpt':
                     case 'post_excerpt_global':
                         $('#pp-cc-access-noaccess-action-message-custom-row').hide();
                         $('#pp-cc-access-noaccess-action-redirect-row').hide();

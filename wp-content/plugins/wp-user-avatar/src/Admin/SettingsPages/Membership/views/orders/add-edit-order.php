@@ -59,6 +59,8 @@ add_action('add_meta_boxes', function () use ($order_data, $order_id) {
         $order_data->get_subscription_id()
     );
 
+    do_action('ppress_order_admin_page_sidebar', $order_data);
+
     if ($subscriptionObj->exists()) {
         add_meta_box(
             'ppress-membership-order-subscription',

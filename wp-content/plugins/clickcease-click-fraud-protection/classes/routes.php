@@ -90,7 +90,7 @@ class WP_Rest_Route
         }
       } else {
         $validAuth = !$deactivate;
-        WP_clickcease_plugin::deactivate_plugin();
+        (new RTI_Service())->update_user_status(DomainState::BZ_PLUGIN_DEACTIVATED);
         LogService::logErrorCode(ErrorCodes::PLUGIN_REMOVE);
       }
 

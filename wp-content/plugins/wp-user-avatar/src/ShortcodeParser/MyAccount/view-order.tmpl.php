@@ -38,7 +38,7 @@ $customer_id = CustomerFactory::fromUserId(get_current_user_id())->id;
                         <tbody>
                         <tr>
                             <td><?php esc_html_e('Order', 'wp-user-avatar'); ?></td>
-                            <td><?= $order->get_reduced_order_key() ?></td>
+                            <td><?= $order->get_reduced_order_key() ?> <?php do_action('ppress_myaccount_view_order_details_order_row', $order); ?></td>
                         </tr>
                         <tr>
                             <td><?php esc_html_e('Date Placed', 'wp-user-avatar'); ?></td>
@@ -231,4 +231,4 @@ $customer_id = CustomerFactory::fromUserId(get_current_user_id())->id;
     </div>
 <?php
 
-do_action('ppress_myaccount_view_order_details');
+do_action('ppress_myaccount_view_order_details', $order);

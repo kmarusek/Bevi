@@ -21,6 +21,7 @@ use ProfilePressVendor\Carbon\Exceptions\UnknownSetterException;
 use ProfilePressVendor\Carbon\Exceptions\UnknownUnitException;
 use ProfilePressVendor\Carbon\Traits\IntervalRounding;
 use ProfilePressVendor\Carbon\Traits\IntervalStep;
+use ProfilePressVendor\Carbon\Traits\MagicParameter;
 use ProfilePressVendor\Carbon\Traits\Mixin;
 use ProfilePressVendor\Carbon\Traits\Options;
 use ProfilePressVendor\Carbon\Traits\ToStringFormat;
@@ -45,7 +46,7 @@ use Throwable;
  * @property int $minutes Total minutes of the current interval.
  * @property int $seconds Total seconds of the current interval.
  * @property int $microseconds Total microseconds of the current interval.
- * @property int $milliseconds Total microseconds of the current interval.
+ * @property int $milliseconds Total milliseconds of the current interval.
  * @property int $microExcludeMilli Remaining microseconds without the milliseconds.
  * @property int $dayzExcludeWeeks Total days remaining in the final week of the current instance (days % 7).
  * @property int $daysExcludeWeeks alias of dayzExcludeWeeks
@@ -183,6 +184,7 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
 {
     use IntervalRounding;
     use IntervalStep;
+    use MagicParameter;
     use Mixin {
         Mixin::mixin as baseMixin;
     }
@@ -264,7 +266,11 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
      */
     public static function getCascadeFactors()
     {
-        return static::$cascadeFactors ?: ['milliseconds' => [Carbon::MICROSECONDS_PER_MILLISECOND, 'microseconds'], 'seconds' => [Carbon::MILLISECONDS_PER_SECOND, 'milliseconds'], 'minutes' => [Carbon::SECONDS_PER_MINUTE, 'seconds'], 'hours' => [Carbon::MINUTES_PER_HOUR, 'minutes'], 'dayz' => [Carbon::HOURS_PER_DAY, 'hours'], 'weeks' => [Carbon::DAYS_PER_WEEK, 'dayz'], 'months' => [Carbon::WEEKS_PER_MONTH, 'weeks'], 'years' => [Carbon::MONTHS_PER_YEAR, 'months']];
+        return static::$cascadeFactors ?: static::getDefaultCascadeFactors();
+    }
+    protected static function getDefaultCascadeFactors() : array
+    {
+        return ['milliseconds' => [Carbon::MICROSECONDS_PER_MILLISECOND, 'microseconds'], 'seconds' => [Carbon::MILLISECONDS_PER_SECOND, 'milliseconds'], 'minutes' => [Carbon::SECONDS_PER_MINUTE, 'seconds'], 'hours' => [Carbon::MINUTES_PER_HOUR, 'minutes'], 'dayz' => [Carbon::HOURS_PER_DAY, 'hours'], 'weeks' => [Carbon::DAYS_PER_WEEK, 'dayz'], 'months' => [Carbon::WEEKS_PER_MONTH, 'weeks'], 'years' => [Carbon::MONTHS_PER_YEAR, 'months']];
     }
     private static function standardizeUnit($unit)
     {
@@ -727,14 +733,14 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
     {
         return static::fromString(Carbon::translateTimeString($interval, $locale ?: static::getLocale(), 'en'));
     }
-    private static function castIntervalToClass(DateInterval $interval, string $className)
+    private static function castIntervalToClass(DateInterval $interval, string $className, array $skip = [])
     {
         $mainClass = DateInterval::class;
         if (!\is_a($className, $mainClass, \true)) {
             throw new InvalidCastException("{$className} is not a sub-class of {$mainClass}.");
         }
         $microseconds = $interval->f;
-        $instance = new $className(static::getDateIntervalSpec($interval));
+        $instance = new $className(static::getDateIntervalSpec($interval, \false, $skip));
         if ($microseconds) {
             $instance->f = $microseconds;
         }
@@ -777,9 +783,9 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
      *
      * @return static
      */
-    public static function instance(DateInterval $interval)
+    public static function instance(DateInterval $interval, array $skip = [])
     {
-        return self::castIntervalToClass($interval, static::class);
+        return self::castIntervalToClass($interval, static::class, $skip);
     }
     /**
      * Make a CarbonInterval instance from given variable if possible.
@@ -837,7 +843,7 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
      *
      * @link https://php.net/manual/en/dateinterval.createfromdatestring.php
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public static function createFromDateString($time)
     {
         $interval = @parent::createFromDateString(\strtr($time, [',' => ' ', ' and ' => ' ']));
@@ -1109,10 +1115,12 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
             return $roundedValue;
         }
         if (\preg_match('/^(?<method>add|sub)(?<unit>[A-Z].*)$/', $method, $match)) {
-            return $this->{$match['method']}($parameters[0], $match['unit']);
+            $value = $this->getMagicParameter($parameters, 0, Carbon::pluralUnit($match['unit']), 0);
+            return $this->{$match['method']}($value, $match['unit']);
         }
+        $value = $this->getMagicParameter($parameters, 0, Carbon::pluralUnit($method), 1);
         try {
-            $this->set($method, \count($parameters) === 0 ? 1 : $parameters[0]);
+            $this->set($method, $value);
         } catch (UnknownSetterException $exception) {
             if ($this->localStrictModeEnabled ?? Carbon::isStrictModeEnabled()) {
                 throw new BadFluentSetterException($method, 0, $exception);
@@ -1151,9 +1159,9 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
         $minimumUnit = 's';
         $skip = [];
         \extract($this->getForHumansInitialVariables($syntax, $short));
-        $skip = \array_filter((array) $skip, static function ($value) {
+        $skip = \array_map('strtolower', \array_filter((array) $skip, static function ($value) {
             return \is_string($value) && $value !== '';
-        });
+        }));
         if ($syntax === null) {
             $syntax = CarbonInterface::DIFF_ABSOLUTE;
         }
@@ -1494,7 +1502,7 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
     /**
      * Invert the interval.
      *
-     * @param bool|int $inverted if a parameter is passed, the passed value casted as 1 or 0 is used
+     * @param bool|int $inverted if a parameter is passed, the passed value cast as 1 or 0 is used
      *                           as the new value of the ->invert property.
      *
      * @return $this
@@ -1717,9 +1725,12 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
      *
      * @return string
      */
-    public static function getDateIntervalSpec(DateInterval $interval, bool $microseconds = \false)
+    public static function getDateIntervalSpec(DateInterval $interval, bool $microseconds = \false, array $skip = [])
     {
         $date = \array_filter([static::PERIOD_YEARS => \abs($interval->y), static::PERIOD_MONTHS => \abs($interval->m), static::PERIOD_DAYS => \abs($interval->d)]);
+        if ($interval->days >= CarbonInterface::DAYS_PER_WEEK * CarbonInterface::WEEKS_PER_MONTH && (!isset($date[static::PERIOD_YEARS]) || \count(\array_intersect(['y', 'year', 'years'], $skip))) && (!isset($date[static::PERIOD_MONTHS]) || \count(\array_intersect(['m', 'month', 'months'], $skip)))) {
+            $date = [static::PERIOD_DAYS => \abs($interval->days)];
+        }
         $seconds = \abs($interval->s);
         if ($microseconds && $interval->f > 0) {
             $seconds = \sprintf('%d.%06d', $seconds, \abs($interval->f) * 1000000);
@@ -2174,6 +2185,11 @@ class CarbonInterval extends DateInterval implements CarbonConverterInterface
      */
     public function roundUnit($unit, $precision = 1, $function = 'round')
     {
+        if (static::getCascadeFactors() !== static::getDefaultCascadeFactors()) {
+            $value = $function($this->total($unit) / $precision) * $precision;
+            $inverted = $value < 0;
+            return $this->copyProperties(self::fromString(\number_format(\abs($value), 12, '.', '') . ' ' . $unit)->invert($inverted)->cascade());
+        }
         $base = CarbonImmutable::parse('2000-01-01 00:00:00', 'UTC')->roundUnit($unit, $precision, $function);
         $next = $base->add($this);
         $inverted = $next < $base;

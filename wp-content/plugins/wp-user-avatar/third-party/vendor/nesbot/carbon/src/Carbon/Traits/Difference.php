@@ -73,9 +73,9 @@ trait Difference
      *
      * @return CarbonInterval
      */
-    protected static function fixDiffInterval(DateInterval $diff, $absolute)
+    protected static function fixDiffInterval(DateInterval $diff, $absolute, array $skip = [])
     {
-        $diff = CarbonInterval::instance($diff);
+        $diff = CarbonInterval::instance($diff, $skip);
         // Work-around for https://bugs.php.net/bug.php?id=77145
         // @codeCoverageIgnoreStart
         if ($diff->f > 0 && $diff->y === -1 && $diff->m === 11 && $diff->d >= 27 && $diff->h === 23 && $diff->i === 59 && $diff->s === 59) {
@@ -106,7 +106,7 @@ trait Difference
      *
      * @return DateInterval
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function diff($date = null, $absolute = \false)
     {
         $other = $this->resolveCarbon($date);
@@ -131,9 +131,9 @@ trait Difference
      *
      * @return CarbonInterval
      */
-    public function diffAsCarbonInterval($date = null, $absolute = \true)
+    public function diffAsCarbonInterval($date = null, $absolute = \true, array $skip = [])
     {
-        return static::fixDiffInterval($this->diff($this->resolveCarbon($date), $absolute), $absolute);
+        return static::fixDiffInterval($this->diff($this->resolveCarbon($date), $absolute), $absolute, $skip);
     }
     /**
      * Get the difference in years
@@ -169,8 +169,16 @@ trait Difference
      */
     public function diffInMonths($date = null, $absolute = \true)
     {
-        $date = $this->resolveCarbon($date);
-        return $this->diffInYears($date, $absolute) * static::MONTHS_PER_YEAR + (int) $this->diff($date, $absolute)->format('%r%m');
+        $date = $this->resolveCarbon($date)->avoidMutation()->tz($this->tz);
+        [$yearStart, $monthStart, $dayStart] = \explode('-', $this->format('Y-m-dHisu'));
+        [$yearEnd, $monthEnd, $dayEnd] = \explode('-', $date->format('Y-m-dHisu'));
+        $diff = ((int) $yearEnd - (int) $yearStart) * static::MONTHS_PER_YEAR + (int) $monthEnd - (int) $monthStart;
+        if ($diff > 0) {
+            $diff -= $dayStart > $dayEnd ? 1 : 0;
+        } elseif ($diff < 0) {
+            $diff += $dayStart < $dayEnd ? 1 : 0;
+        }
+        return $absolute ? \abs($diff) : $diff;
     }
     /**
      * Get the difference in weeks rounded down.
@@ -737,7 +745,8 @@ trait Difference
         $intSyntax = (int) ($intSyntax ?? static::DIFF_RELATIVE_AUTO);
         $intSyntax = $intSyntax === static::DIFF_RELATIVE_AUTO && $other === null ? static::DIFF_RELATIVE_TO_NOW : $intSyntax;
         $parts = \min(7, \max(1, (int) $parts));
-        return $this->diffAsCarbonInterval($other, \false)->setLocalTranslator($this->getLocalTranslator())->forHumans($syntax, (bool) $short, $parts, $options ?? $this->localHumanDiffOptions ?? static::getHumanDiffOptions());
+        $skip = \is_array($syntax) ? $syntax['skip'] ?? [] : [];
+        return $this->diffAsCarbonInterval($other, \false, (array) $skip)->setLocalTranslator($this->getLocalTranslator())->forHumans($syntax, (bool) $short, $parts, $options ?? $this->localHumanDiffOptions ?? static::getHumanDiffOptions());
     }
     /**
      * @alias diffForHumans

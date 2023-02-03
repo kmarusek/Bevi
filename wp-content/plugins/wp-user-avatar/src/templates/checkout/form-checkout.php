@@ -58,6 +58,11 @@ $cart_vars = OrderService::init()->checkout_order_calculation([
 
             <?php do_action('ppress_checkout_before_submit_button', $cart_vars, $planObj); ?>
 
+            <label style="display: none !important;">
+                <input style="display:none !important" type="text" name="_ppress_honeypot" value="" tabindex="-1" autocomplete="off"/>
+            </label>
+            <input type="hidden" name="_ppress_timestamp" value="<?= time() ?>"/>
+
             <?php ppress_render_view('checkout/form-checkout-submit-btn', [
                 'order_total' => $cart_vars->total,
                 'plan'        => $planObj

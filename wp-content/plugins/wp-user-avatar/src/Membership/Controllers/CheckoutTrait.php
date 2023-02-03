@@ -214,6 +214,9 @@ trait CheckoutTrait
         return $customer_id;
     }
 
+    /**
+     * @return int|\WP_Error
+     */
     public function register_update_user()
     {
         $error_bucket = new \WP_Error();
@@ -339,7 +342,7 @@ trait CheckoutTrait
         $valid_userdata_fields = array_keys(CF::standard_account_info_fields()) + ['ppmb_password_present'];
 
         $real_userdata = array_filter(apply_filters('ppress_checkout_registration_user_data', [
-            'user_login'   => isset($username) ? $username : '',
+            'user_login'   => isset($username) && ! empty($username) ? $username : $email,
             'user_pass'    => isset($password) ? $password : '',
             'user_email'   => $email,
             'user_url'     => ppressPOST_var(CF::ACCOUNT_WEBSITE, ''),
@@ -356,8 +359,10 @@ trait CheckoutTrait
         // loop over the $_POST data and create an array of the invalid userdata/ custom usermeta
         foreach ($_POST as $key => $value) {
 
-            // remove payment method prefix from key
-            $key = str_replace($payment_method . '_', '', $key);
+            if ( ! empty($payment_method)) {
+                // remove payment method prefix from key
+                $key = str_replace($payment_method . '_', '', $key);
+            }
 
             if (in_array($key, $valid_userdata_fields) || in_array($key, ppress_reserved_field_keys())) continue;
 
@@ -373,7 +378,7 @@ trait CheckoutTrait
         $reg_form_errors = apply_filters('ppress_checkout_registration_validation', $error_bucket, $user_data);
 
         if (is_wp_error($reg_form_errors) && $reg_form_errors->get_error_code() != '') {
-            return $reg_form_errors->get_error_message();
+            return $reg_form_errors;
         }
 
         do_action('ppress_before_checkout_registration', $user_data);
@@ -387,9 +392,7 @@ trait CheckoutTrait
             $user_id = wp_insert_user($real_userdata);
         }
 
-        if (is_wp_error($user_id)) {
-            return $user_id->get_error_message();
-        }
+        if (is_wp_error($user_id)) return $user_id;
 
         $customer_id = $this->create_customer($user_id);
 

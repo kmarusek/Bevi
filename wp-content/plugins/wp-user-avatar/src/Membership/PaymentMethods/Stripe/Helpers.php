@@ -69,7 +69,7 @@ class Helpers
     public static function get_connect_url($redirect_url = '')
     {
         if (empty($redirect_url)) {
-            $redirect_url = PPRESS_SETTINGS_SETTING_PAGE;
+            $redirect_url = PPRESS_SETTINGS_SETTING_GENERAL_PAGE;
         }
 
         return add_query_arg(

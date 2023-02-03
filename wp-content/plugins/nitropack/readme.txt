@@ -4,7 +4,7 @@ Tags: cache,performance,optimize,pagespeed,lazy load,cdn,critical css,compressio
 Requires at least: 4.7
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 1.5.18
+Stable tag: 1.5.19
 License: GNU General Public License, version 2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,10 @@ No. We’ve designed NitroPack to be a very lightweight solution that adds no CP
 2. Dashboard - see and manage the data in your Nitropack.io
 
 == Changelog ==
+
+= 1.5.19 =
+* New Feature: Add support for additional domains
+* Bug fix: Resolve errors for undefined host in WP-CLI
 
 = 1.5.18 =
 * Improvement: More reliable way to determine to current hostname

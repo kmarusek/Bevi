@@ -249,10 +249,15 @@ abstract class AbstractPaymentMethod implements PaymentMethodInterface
 
     public function get_admin_page_url()
     {
+        return self::get_payment_method_admin_page_url($this->get_id());
+    }
+
+    public static function get_payment_method_admin_page_url($payment_method)
+    {
         return add_query_arg([
             'view'    => 'payments',
             'section' => 'payment-methods',
-            'method'  => $this->get_id()
+            'method'  => $payment_method
         ], PPRESS_SETTINGS_SETTING_PAGE);
     }
 
@@ -344,7 +349,7 @@ abstract class AbstractPaymentMethod implements PaymentMethodInterface
     /**
      * Process refund.
      *
-     * If the p declares 'refunds' support, this will allow it to refund a passed in amount.
+     * If the payment gateway declares 'refunds' support, this will allow it to refund a passed in amount.
      *
      * @param int $order_id Order ID.
      * @param string $amount Refund amount.

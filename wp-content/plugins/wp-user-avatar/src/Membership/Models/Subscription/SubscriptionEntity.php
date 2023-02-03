@@ -428,7 +428,11 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         $customer = CustomerFactory::fromId($this->customer_id);
         $plan     = ppress_get_plan($this->plan_id);
 
-        $customer->get_wp_user()->add_role($plan->user_role);
+        $user = $customer->get_wp_user();
+
+        if ($user instanceof \WP_User) {
+            $user->add_role($plan->user_role);
+        }
     }
 
     public function remove_plan_role_from_customer()
@@ -436,7 +440,11 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         $customer = CustomerFactory::fromId($this->customer_id);
         $plan     = ppress_get_plan($this->plan_id);
 
-        $customer->get_wp_user()->remove_role($plan->user_role);
+        $user = $customer->get_wp_user();
+
+        if ($user instanceof \WP_User) {
+            $user->remove_role($plan->user_role);
+        }
     }
 
     /**
@@ -448,6 +456,7 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
     {
         if ($this->is_active()) return false;
 
+        // important we don't use update_status() as it's mostly needed when sub moved from one status to another.
         $this->status = SubscriptionStatus::ACTIVE;
 
         if ( ! empty($profile_id)) {
@@ -474,6 +483,7 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
     {
         if ($this->is_active()) return false;
 
+        // important we don't use update_status() as it's mostly needed when sub moved from one status to another.
         $this->status = SubscriptionStatus::TRIALLING;
 
         if ( ! empty($profile_id)) {

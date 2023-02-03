@@ -241,7 +241,7 @@ class WP_User_Avatar_Admin
         $wpua_list .= ' ' . __('Default Profile Picture', 'wp-user-avatar') . '</label>';
         $wpua_list .= '<p id="wpua-edit"><button type="button" class="button" id="wpua-add" name="wpua-add" data-avatar_default="true" data-title="' . __('Choose Image') . ': ' . __('Default Profile Picture') . '">' . __('Choose Image', 'wp-user-avatar') . '</button>';
         $wpua_list .= '<span id="wpua-remove-button"' . $hide_remove . '><a href="#" id="wpua-remove">' . __('Remove', 'wp-user-avatar') . '</a></span><span id="wpua-undo-button"><a href="#" id="wpua-undo">' . __('Undo', 'wp-user-avatar') . '</a></span></p>';
-        $wpua_list .= '<input type="hidden" id="wp-user-avatar" name="avatar_default_wp_user_avatar" value="' . $wpua_avatar_default . '">';
+        $wpua_list .= '<input type="hidden" id="wp-user-avatar" name="avatar_default_wp_user_avatar" value="' . esc_attr($wpua_avatar_default) . '">';
         $wpua_list .= '<div id="wpua-modal"></div>';
         if ((bool)$wpua_disable_gravatar != 1) {
             return $wpua_list . '<div id="wp-avatars">' . $avatar_list . '</div>';

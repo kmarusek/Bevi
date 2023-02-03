@@ -170,10 +170,10 @@ class Dixon extends AbstractTheme
 
     public function form_structure()
     {
-        $header_text = $this->get_profile_field($this->get_meta('dixon_profile_header_text'));
+        $header_text = wp_kses_post($this->get_profile_field($this->get_meta('dixon_profile_header_text')));
 
-        $header_byline       = $this->get_meta('dixon_profile_header_byline');
-        $section_header_text = $this->get_meta('dixon_profile_section_header_text');
+        $header_byline       = wp_kses_post($this->get_meta('dixon_profile_header_byline'));
+        $section_header_text = wp_kses_post($this->get_meta('dixon_profile_section_header_text'));
 
         $social_links_block = $this->social_links_block();
 
@@ -218,14 +218,14 @@ HTML;
         $form_id   = $this->form_id;
         $form_type = $this->form_type;
 
-        $bg_color                = $this->get_meta('dixon_profile_bg_color');
-        $header_bg_color         = $this->get_meta('dixon_profile_header_bg_color');
-        $header_text_color       = $this->get_meta('dixon_profile_header_text_color');
-        $avatar_border_color     = $this->get_meta('dixon_profile_avatar_border_color');
-        $text_underline_color    = $this->get_meta('dixon_profile_header_text_underline_color');
-        $info_border_color       = $this->get_meta('dixon_profile_info_border_color');
-        $profile_info_background = $this->get_meta('dixon_profile_info_bg_color');
-        $profile_info_text       = $this->get_meta('dixon_profile_info_text_color');
+        $bg_color                = esc_html($this->get_meta('dixon_profile_bg_color'));
+        $header_bg_color         = esc_html($this->get_meta('dixon_profile_header_bg_color'));
+        $header_text_color       = esc_html($this->get_meta('dixon_profile_header_text_color'));
+        $avatar_border_color     = esc_html($this->get_meta('dixon_profile_avatar_border_color'));
+        $text_underline_color    = esc_html($this->get_meta('dixon_profile_header_text_underline_color'));
+        $info_border_color       = esc_html($this->get_meta('dixon_profile_info_border_color'));
+        $profile_info_background = esc_html($this->get_meta('dixon_profile_info_bg_color'));
+        $profile_info_text       = esc_html($this->get_meta('dixon_profile_info_text_color'));
 
         $google_font = apply_filters('ppress_disable_google_fonts', false) ? '' :
             "@import url('https://fonts.googleapis.com/css?family=Lato:300,400,600,700|Raleway:300,400,600,700&display=swap');";

@@ -10,10 +10,12 @@
  */
 namespace ProfilePressVendor\Carbon\PHPStan;
 
+use ProfilePressVendor\PHPStan\Reflection\Assertions;
 use ProfilePressVendor\PHPStan\Reflection\ClassReflection;
 use ProfilePressVendor\PHPStan\Reflection\MethodReflection;
 use ProfilePressVendor\PHPStan\Reflection\MethodsClassReflectionExtension;
 use ProfilePressVendor\PHPStan\Reflection\Php\PhpMethodReflectionFactory;
+use ProfilePressVendor\PHPStan\Reflection\ReflectionProvider;
 use ProfilePressVendor\PHPStan\Type\TypehintHelper;
 /**
  * Class MacroExtension.
@@ -34,10 +36,11 @@ final class MacroExtension implements MethodsClassReflectionExtension
      * Extension constructor.
      *
      * @param PhpMethodReflectionFactory $methodReflectionFactory
+     * @param ReflectionProvider         $reflectionProvider
      */
-    public function __construct(PhpMethodReflectionFactory $methodReflectionFactory)
+    public function __construct(PhpMethodReflectionFactory $methodReflectionFactory, ReflectionProvider $reflectionProvider)
     {
-        $this->scanner = new MacroScanner();
+        $this->scanner = new MacroScanner($reflectionProvider);
         $this->methodReflectionFactory = $methodReflectionFactory;
     }
     /**
@@ -53,6 +56,7 @@ final class MacroExtension implements MethodsClassReflectionExtension
     public function getMethod(ClassReflection $classReflection, string $methodName) : MethodReflection
     {
         $builtinMacro = $this->scanner->getMethod($classReflection->getName(), $methodName);
-        return $this->methodReflectionFactory->create($classReflection, null, $builtinMacro, $classReflection->getActiveTemplateTypeMap(), [], TypehintHelper::decideTypeFromReflection($builtinMacro->getReturnType()), null, null, $builtinMacro->isDeprecated()->yes(), $builtinMacro->isInternal(), $builtinMacro->isFinal(), $builtinMacro->getDocComment());
+        $supportAssertions = \class_exists(Assertions::class);
+        return $this->methodReflectionFactory->create($classReflection, null, $builtinMacro, $classReflection->getActiveTemplateTypeMap(), [], TypehintHelper::decideTypeFromReflection($builtinMacro->getReturnType()), null, null, $builtinMacro->isDeprecated()->yes(), $builtinMacro->isInternal(), $builtinMacro->isFinal(), $supportAssertions ? null : $builtinMacro->getDocComment(), $supportAssertions ? Assertions::createEmpty() : null, null, $builtinMacro->getDocComment(), []);
     }
 }

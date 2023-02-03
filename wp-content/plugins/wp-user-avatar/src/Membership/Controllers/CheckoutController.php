@@ -271,6 +271,8 @@ class CheckoutController extends BaseController
                 throw new \Exception($subscription_id->get_error_message());
             }
 
+            do_action('ppress_process_checkout_after_order_subscription_creation', $order_id, $subscription_id);
+
             SubscriptionRepository::init()->updateColumn($subscription_id, 'parent_order_id', $order_id);
             OrderRepository::init()->updateColumn($order_id, 'subscription_id', $subscription_id);
 

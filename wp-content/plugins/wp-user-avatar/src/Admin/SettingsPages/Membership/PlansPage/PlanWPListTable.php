@@ -76,7 +76,7 @@ class PlanWPListTable extends \WP_List_Table
 
         $actions['delete'] = sprintf('<a class="pp-confirm-delete" href="%s">%s</a>', $delete_link, esc_html__('Delete', 'wp-user-avatar'));
 
-        $a = '<a href="' . $edit_link . '">' . sanitize_text_field($item->name) . '</a>';
+        $a = '<a href="' . $edit_link . '">' . esc_html($item->name) . '</a>';
 
         return '<strong>' . $a . '</strong>' . $this->row_actions($actions);
     }

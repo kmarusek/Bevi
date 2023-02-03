@@ -6,7 +6,7 @@ trait EmailDataTrait
 {
     public function get_order_placeholders()
     {
-        return [
+        return apply_filters('ppress_email_order_placeholder_definitions', [
             '{{email}}'                => esc_html__('Email address of the customer.', 'wp-user-avatar'),
             '{{first_name}}'           => esc_html__('First name of the customer.', 'wp-user-avatar'),
             '{{last_name}}'            => esc_html__('Last name of the customer.', 'wp-user-avatar'),
@@ -31,19 +31,19 @@ trait EmailDataTrait
             '{{site_title}}'           => esc_html__('Name or title of this website.', 'wp-user-avatar'),
             '{{business_name}}'        => sprintf(
                 esc_html__('Your business name as defined in %sSettings%s.', 'wp-user-avatar'),
-                '<a target="_blank" href="' . PPRESS_SETTINGS_SETTING_PAGE . '#business_info">', '</a>'
+                '<a target="_blank" href="' . PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#business_info">', '</a>'
             ),
             '{{business_address}}'     => sprintf(
                 esc_html__('Your business address as defined in %sSettings%s.', 'wp-user-avatar'),
-                '<a target="_blank" href="' . PPRESS_SETTINGS_SETTING_PAGE . '#business_info">', '</a>'
+                '<a target="_blank" href="' . PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#business_info">', '</a>'
             ),
             '{{business_tax_id}}'      => sprintf(
                 esc_html__('Your business Tax ID as defined in %sSettings%s.', 'wp-user-avatar'),
-                '<a target="_blank" href="' . PPRESS_SETTINGS_SETTING_PAGE . '#business_info">', '</a>'
+                '<a target="_blank" href="' . PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#business_info">', '</a>'
             ),
             '{{password_reset_link}}'  => esc_html__('URL to reset password.', 'wp-user-avatar'),
             '{{login_link}}'           => esc_html__('URL to login.', 'wp-user-avatar'),
-        ];
+        ]);
     }
 
     public function get_subscription_placeholders()

@@ -10,6 +10,7 @@ use ProfilePress\Core\Membership\Models\Plan\PlanEntity;
 use ProfilePress\Core\Membership\PaymentMethods\AbstractPaymentMethod;
 use ProfilePress\Core\Membership\PaymentMethods\PaymentMethods;
 use ProfilePress\Core\Membership\PaymentMethods\PaymentMethods as PaymentGateways;
+use ProfilePress\Core\Membership\Services\Calculator;
 use ProfilePressVendor\Carbon\CarbonImmutable;
 
 /**
@@ -516,6 +517,18 @@ function ppress_sanitize_amount($amount)
 }
 
 /**
+ * Converts price, fee or amount in cent to decimal
+ *
+ * @param $amount
+ *
+ * @return string
+ */
+function ppress_cent_to_decimal($amount)
+{
+    return ppress_sanitize_amount(Calculator::init($amount)->dividedBy('100')->val());
+}
+
+/**
  * Force https for urls.
  *
  * @param mixed $content
@@ -595,6 +608,8 @@ function ppress_format_date_time($timestamp, $format = '')
  */
 function ppress_format_date($timestamp, $format = '')
 {
+    if (empty($timestamp)) return '';
+
     /**
      * force strtotime to use date as UTC.
      * @see https://stackoverflow.com/a/6275660/2648410

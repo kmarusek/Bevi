@@ -375,43 +375,17 @@
     width: 2px
 }
 
-.wp_csa_view.pp-license .banner {
-    position: absolute;
-    left: 10%;
+.wp_csa_view.pp-license .ppress-banner {
     display: block;
-    margin: 10px 5px 20px;
-    width: 600px;
+    margin: 0 0 20px;
+    width: 100%;
     height: 60px;
-    border: 1px solid #8a1;
-    font: 400 30px/60px Rye;
+    border-left: 2px solid #2271b1;
+    font: 400 30px/60px '';
     text-align: center;
-    color: #451;
-    background: #9b2;
+    color: #ffffff;
+    background: #2271b1;
     border-radius: 4px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .15) inset, 0 6px 10px rgba(0, 0, 0, .15)
-}
-
-.wp_csa_view.pp-license .banner::after, .wp_csa_view.pp-license .banner::before {
-    content: '';
-    position: absolute;
-    left: -70px;
-    top: 24px;
-    display: block;
-    width: 40px;
-    height: 0;
-    border: 30px solid #9b2;
-    border-right: 20px solid #791;
-    border-bottom-color: #94b81e;
-    border-left-color: transparent;
-    transform: rotate(-5deg)
-}
-
-.wp_csa_view.pp-license .banner::after {
-    left: auto;
-    right: -70px;
-    border-left: 20px solid #791;
-    border-right: 30px solid transparent;
-    transform: rotate(5deg)
 }
 
 .ppview .pp-settings-wrap {
@@ -618,7 +592,7 @@
     right: -8px;
     width: 90px;
     height: 81px;
-    background-image: url(../../images/themes/premium-theme.png);
+    background-image: url(../images/themes/premium-theme.png);
     background-size: 90px 81px;
     transform: rotate(70deg)
 }
@@ -1282,7 +1256,8 @@ textarea.wp-editor-area {
     padding: 0 5px;
 }
 
-.ppview .pp-custom-field-notice {
+.ppview .pp-custom-field-notice,
+.ppview .ppress-sub-header-notice {
     background: #fff;
     border-left: 4px solid #fff;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
@@ -1294,7 +1269,8 @@ textarea.wp-editor-area {
     clear: left;
 }
 
-.ppview .pp-custom-field-notice p {
+.ppview .pp-custom-field-notice p,
+.ppview .ppress-sub-header-notice p {
     margin: .5em 0;
     padding: 2px 5px;
 }
@@ -1719,6 +1695,7 @@ textarea.wp-editor-area {
     background-color: #f9f9fa;
     padding: 12px;
     min-height: 43px;
+    display: flex;
 }
 
 .ppress-extensions-items-wrap .ppress-extension-card-install-activate {
@@ -1727,6 +1704,17 @@ textarea.wp-editor-area {
     justify-content: flex-end;
     height: 30px;
     position: relative;
+}
+
+.ppress-extension-card-settings, .ppress-extension-card-install-activate {
+    width: 50%;
+}
+
+.ppress-extension-card-footer > .ppress-extension-card-install-activate {
+    width: 100%;
+}
+
+.ppress-extension-card-install-activate {
 }
 
 .ppress-extensions-items-wrap .ppress-extension-card-install-activate .ppress-extension-card-status {
@@ -2115,7 +2103,8 @@ textarea.wp-editor-area {
 }
 
 .ppress_payment_methods .ppress-payment-methods-wrap .ppress-payment-method-icon,
-.ppress_taxes .ppress-tax-rates-wrap .ppress-tax-rate-table-actions .ppress-tax-rate-icon {
+.ppress_taxes .ppress-tax-rates-wrap .ppress-tax-rate-table-actions .ppress-tax-rate-icon,
+.ppress-admin .ppress-table-repeater-icon {
     background: #aaa;
     border-radius: 50% !important;
     padding: 2px;
@@ -2123,8 +2112,24 @@ textarea.wp-editor-area {
     color: #fff;
 }
 
-/* payment methods UI*/
+.remove_white_styling.ppress_limit_post_views #post-body-content .form-table input[type=number] {
+    width: auto !important;
+    max-width: 60px !important;
+}
 
+.remove_white_styling.ppress_limit_post_views #post-body-content .form-table select {
+    width: auto !important;
+}
+
+.remove_white_styling #post-body-content .form-table .ppress-metered-paywall-restriction-wrap th {
+    padding: 10px;
+}
+
+.remove_white_styling #post-body-content .form-table .ppress-metered-paywall-restriction-wrap th.ppress-metered-paywall-table-actions {
+    width: 50px;
+}
+
+/* payment methods UI*/
 .ppress_payment_methods .ppress-payment-methods-wrap .ppress-payment-method-icon.ico-yes {
     background: #2271b1;
 }
@@ -2178,11 +2183,13 @@ textarea.wp-editor-area {
     width: 12em !important;
 }
 
-.ppress_taxes .ppress-tax-rates-wrap .ppress-tax-rate-icon {
+.ppress_taxes .ppress-tax-rates-wrap .ppress-tax-rate-icon,
+.ppress-admin .ppress-table-repeater-icon {
     cursor: pointer;
 }
 
-.ppress_taxes .ppress-tax-rates-wrap table tbody tr {
+.ppress_taxes .ppress-tax-rates-wrap table tbody tr,
+.ppress-admin .ppress-table-repeater-wrap table tbody tr {
     background-color: #f9f9f9;
 }
 
@@ -2576,4 +2583,143 @@ textarea.wp-editor-area {
 .ppress-report-charts-container .ppress-report-chart-bottom-card-item-view-more-block a {
     font-weight: 500;
     text-decoration: none;
+}
+
+/*lite license page */
+.ppress-lite-license-wrap .ppress-license-field {
+    display: flex;
+    align-items: center;
+}
+
+.wp-core-ui .ppress-lite-license-wrap .button.ppress-license-button.button-secondary {
+    font-size: 1rem;
+    line-height: 1;
+    margin: 0 8px;
+    padding: 13px;
+}
+
+.ppress-lite-license-wrap .ppress-license-message {
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade {
+    margin-top: 20px;
+    padding: 1px;
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 20%), 0 5px 10px rgb(0 0 0 / 10%);
+    max-width: 680px;
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade__inner {
+    text-align: center;
+    margin: 0;
+    padding: 30px;
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade h3 {
+    line-height: 1.5;
+    font-size: 22px;
+    margin: 0 0 1.5rem;
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade ul {
+    margin: 1.5rem 0 calc(1.5rem - 6px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+@media screen and (min-width: 782px) {
+    .ppress-lite-license-wrap .ppress-settings-upgrade ul {
+        margin-left: 4rem;
+        margin-right: 4rem
+    }
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade li {
+    font-size: 15px;
+    margin: 6px 0;
+    width: 100%
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade li a {
+    color: #3c434a;
+    text-decoration: none
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade li a:hover {
+    color: var(--wp-admin-theme-color);
+    text-decoration: underline
+}
+
+@media screen and (min-width: 782px) {
+    .ppress-lite-license-wrap .ppress-settings-upgrade li {
+        text-align: left;
+        width: 50%
+    }
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade .button.button-large {
+    font-size: 17px;
+    line-height: 30px;
+    padding: 10px 20px
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade .ppress-upgrade-btn-subtext {
+    text-align: center;
+    margin: 0;
+    padding: 30px 20px 20px;
+    background-color: #fcf9e8;
+    border: 1px solid #edeac9;
+    border-width: 1px 0 0;
+    position: relative;
+    border-radius: 0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: #3c434a;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media screen and (min-width: 782px) {
+    .ppress-lite-license-wrap .ppress-settings-upgrade .ppress-upgrade-btn-subtext {
+        padding-left: 4rem;
+        padding-right: 4rem
+    }
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade .ppress-upgrade-btn-subtext svg {
+    background: #00a32a;
+    fill: #fff;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 1px #edeac9;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    margin-left: -18px
+}
+
+.ppress-lite-license-wrap .ppress-upgrade-btn-subtext a {
+    text-decoration: none;
+    display: block;
+    margin-top: 6px;
+    font-weight: bold;
+}
+
+
+.ppress-lite-license-wrap .ppress-settings-upgrade .ppress-upgrade-btn-subtext a {
+    font-weight: normal;
+    display: inline-block;
+}
+
+.ppress-lite-license-wrap .ppress-settings-upgrade .ppress-upgrade-btn-subtext u {
+    text-decoration: none;
+    font-weight: bold;
+    color: #00a32a;
 }

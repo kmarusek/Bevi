@@ -349,25 +349,25 @@ h2 .pp-form-builder-help-tip {
 
 .pp-form-builder_options_panel input.button {
     width: auto;
-    margin-left: 8px
+    margin-left: 8px;
 }
 
 .pp-form-builder_options_panel select {
-    float: left
+    float: left;
 }
 
-.pp-form-builder_options_panel .short {
-    width: 95%
+.postbox .pp-form-builder_options_panel .short {
+    width: 95% !important;
 }
 
 .pp-form-builder_options_panel .sized {
     width: auto !important;
-    margin-right: 6px
+    margin-right: 6px;
 }
 
 .pp-form-builder_options_panel .options_group {
     border-top: 1px solid #fff;
-    border-bottom: 1px solid #eee
+    border-bottom: 1px solid #eee;
 }
 
 .pp-form-builder_options_panel .options_group:first-child {

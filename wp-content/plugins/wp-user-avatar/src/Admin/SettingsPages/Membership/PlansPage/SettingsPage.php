@@ -6,8 +6,6 @@ use ProfilePress\Core\Admin\SettingsPages\AbstractSettingsPage;
 use ProfilePress\Core\Membership\CurrencyFormatter;
 use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
 use ProfilePress\Core\Membership\Models\Subscription\SubscriptionStatus;
-use ProfilePress\Core\Membership\Repositories\CustomerRepository;
-use ProfilePress\Core\Membership\Repositories\PlanRepository;
 use ProfilePress\Core\Membership\Repositories\SubscriptionRepository;
 use ProfilePress\Custom_Settings_Page_Api;
 
@@ -161,10 +159,15 @@ class SettingsPage extends AbstractSettingsPage
             }
         }
 
-        $plan_extras  = [];
+        $plan_extras = $plan->get_meta('plan_extras');
+
+        if ( ! is_array($plan_extras) || empty($plan_extras)) {
+            $plan_extras = [];
+        }
+
         $skip_props = array_map(function ($val) {
-                return $val->getName();
-            }, (new \ReflectionClass($plan))->getProperties());
+            return $val->getName();
+        }, (new \ReflectionClass($plan))->getProperties());
 
         array_push($skip_props, 'ppress_save_subscription_plan', 'wp_csa_nonce');
 

@@ -60,7 +60,7 @@ class MailOptin
             wp_send_json_error($generic_error);
         }
 
-        $error = $type === 'plugin' ? esc_html__('Could not install plugin. Please download and install manually.', 'wp-user-avatar') : esc_html__('Could not install addon. Please download from wpforms.com and install manually.', 'wp-user-avatar');
+        $error = $type === 'plugin' ? esc_html__('Could not install plugin. Please download and install manually.', 'wp-user-avatar') : esc_html__('Could not install addon. Please download from mailoptin.io and install manually.', 'wp-user-avatar');
 
         if (empty($_POST['plugin'])) {
             wp_send_json_error($error);
@@ -471,7 +471,7 @@ class MailOptin
             esc_url(PPRESS_ASSETS_URL . '/images/profilepressxmailoptin.png'),
             esc_attr__('ProfilePress ♥ MailOptin', 'wp-user-avatar'),
             esc_html__('#1 Popup, Optin Forms & Marketing Automation Plugin', 'wp-user-avatar'),
-            esc_html__('MailOptin lets you create popups and newsletter opt-in forms that integrates with Mailchimp, Aweber, Constant Contact, Active Campaign & more.', 'wp-user-avatar')
+            esc_html__('MailOptin lets you display your registration and login forms as popups, create newsletter opt-in forms that integrates with Mailchimp, Aweber, Constant Contact, Active Campaign & more.', 'wp-user-avatar')
         );
     }
 

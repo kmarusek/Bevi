@@ -78,10 +78,10 @@ class CheckListHeader
             return;
         }
 
-        $required_pages_url = PPRESS_SETTINGS_SETTING_PAGE . '#global_pages?checkout_page_id_row';
+        $required_pages_url = PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#global_pages?checkout_page_id_row';
         $payment_method_url = add_query_arg(['view' => 'payments', 'section' => 'payment-methods'], PPRESS_SETTINGS_SETTING_PAGE);
         $set_currency_url   = add_query_arg(['view' => 'payments'], PPRESS_SETTINGS_SETTING_PAGE);
-        $business_info_url  = PPRESS_SETTINGS_SETTING_PAGE . '#business_info';
+        $business_info_url  = PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#business_info';
         $plan_url           = PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE;
         ?>
         <div class="ppress-checklist">

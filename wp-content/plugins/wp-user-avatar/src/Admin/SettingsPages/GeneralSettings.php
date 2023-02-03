@@ -123,7 +123,7 @@ class GeneralSettings extends AbstractSettingsPage
         }
 
         $fix_db_url = wp_nonce_url(
-            add_query_arg('ppress-install-missing-db', 'true', PPRESS_SETTINGS_SETTING_PAGE),
+            add_query_arg('ppress-install-missing-db', 'true', PPRESS_SETTINGS_SETTING_GENERAL_PAGE),
             'ppress_install_missing_db_tables'
         );
 
@@ -201,8 +201,16 @@ class GeneralSettings extends AbstractSettingsPage
                 'tab_title' => esc_html__('Pages', 'wp-user-avatar'),
                 'dashicon'  => 'dashicons-admin-page',
                 [
-                    'section_title'         => esc_html__('Global Pages', 'wp-user-avatar'),
-                    'set_login_url'         => [
+                    'section_title'                => esc_html__('Global Pages', 'wp-user-avatar'),
+                    'create_required_pages_notice' => [
+                        'type'        => 'arbitrary',
+                        'data'        => '',
+                        'description' => sprintf(
+                            '<div class="ppress-settings-page-notice">' . esc_html__('Assign the WordPress pages for each required ProfilePress page, or %sclick here to let us generate them%s.', 'wp-user-avatar'),
+                            '<a href="' . esc_url(add_query_arg(['ppress_create_pages' => 'true', 'ppress_nonce' => wp_create_nonce('ppress_create_pages')])) . '">', '</a>'
+                        )
+                    ],
+                    'set_login_url'                => [
                         'type'        => 'custom_field_block',
                         'label'       => esc_html__('Login Page', 'wp-user-avatar'),
                         'data'        => $this->page_dropdown('set_login_url'),
@@ -210,7 +218,7 @@ class GeneralSettings extends AbstractSettingsPage
                             esc_html__('Select the page you wish to make WordPress default Login page. %3$s This should be the page that contains a %1$slogin form shortcode%2$s.', 'wp-user-avatar'),
                             '<a href="' . add_query_arg('form-type', 'login', PPRESS_FORMS_SETTINGS_PAGE) . '">', '</a>', '<br/>'),
                     ],
-                    'set_registration_url'  => [
+                    'set_registration_url'         => [
                         'type'        => 'custom_field_block',
                         'label'       => esc_html__('Registration Page', 'wp-user-avatar'),
                         'data'        => $this->page_dropdown('set_registration_url'),
@@ -218,7 +226,7 @@ class GeneralSettings extends AbstractSettingsPage
                             esc_html__('Select the page you wish to make WordPress default Registration page. %3$s This should be the page that contains a %1$sregistration form shortcode%2$s.', 'wp-user-avatar'),
                             '<a href="' . add_query_arg('form-type', 'registration', PPRESS_FORMS_SETTINGS_PAGE) . '">', '</a>', '<br/>'),
                     ],
-                    'set_lost_password_url' => [
+                    'set_lost_password_url'        => [
                         'type'        => 'custom_field_block',
                         'label'       => esc_html__('Password Reset Page', 'wp-user-avatar'),
                         'data'        => $this->page_dropdown('set_lost_password_url'),
@@ -226,7 +234,7 @@ class GeneralSettings extends AbstractSettingsPage
                             esc_html__('Select the page you wish to make WordPress default "Lost Password page". %3$s This should be the page that contains a %1$spassword reset form shortcode%2$s.', 'wp-user-avatar'),
                             '<a href="' . add_query_arg('form-type', 'password-reset', PPRESS_FORMS_SETTINGS_PAGE) . '">', '</a>', '<br/>'),
                     ],
-                    'edit_user_profile_url' => [
+                    'edit_user_profile_url'        => [
                         'type'        => 'custom_field_block',
                         'label'       => esc_html__('My Account Page', 'wp-user-avatar'),
                         'data'        => $this->page_dropdown('edit_user_profile_url'),
@@ -471,12 +479,26 @@ class GeneralSettings extends AbstractSettingsPage
                 ],
                 'global_restricted_access_message'  => [
                     'type'        => 'wp_editor',
+                    'settings'    => ['textarea_rows' => 5, 'wpautop' => false],
                     'value'       => esc_html__('You are unauthorized to view this page.', 'wp-user-avatar'),
                     'label'       => esc_html__('Global Restricted Access Message', 'wp-user-avatar'),
                     'description' => esc_html__('This is the message shown to users that do not have permission to view the content.', 'wp-user-avatar')
                 ],
+                'blocked_email_addresses'           => [
+                    'type'        => 'textarea',
+                    'placeholder' => "hello@example.com" . "\r\n" . '@domain.com' . "\r\n" . '.gov',
+                    'label'       => esc_html__('Blocked Email Addresses', 'wp-user-avatar'),
+                    'description' => sprintf(
+                        esc_html__('Block users from registering and checking out with email addresses in this list. You can use full email address (%1$suser@email.com%2$s), domains (%1$s@example.com%2$s), or TLDs (%1$s.gov%2$s). Use a new line for each item.', 'wp-user-avatar'),
+                        '<code>', '</code>'
+                    )
+                ]
             ])
         ];
+
+        if ( ! $this->is_core_page_missing()) {
+            unset($args['global_pages'][0]['create_required_pages_notice']);
+        }
 
         $business_country = ppress_business_country();
 
@@ -535,6 +557,32 @@ class GeneralSettings extends AbstractSettingsPage
         $this->settingsPageInstance->build_sidebar_tab_style();
     }
 
+    private function is_core_page_missing()
+    {
+        $required_pages = [
+            'set_login_url',
+            'set_registration_url',
+            'set_lost_password_url',
+            'edit_user_profile_url',
+            'set_user_profile_shortcode',
+            'checkout_page_id',
+            'payment_success_page_id',
+            'payment_failure_page_id'
+        ];
+
+        $result = false;
+
+        foreach ($required_pages as $required_page) {
+
+            if (empty(ppress_settings_by_key($required_page, ''))) {
+                $result = true;
+                break;
+            }
+        }
+
+        return $result;
+    }
+
     public function install_missing_db_tables()
     {
         if (defined('DOING_AJAX')) return;
@@ -543,13 +591,15 @@ class GeneralSettings extends AbstractSettingsPage
 
             check_admin_referer('ppress_install_missing_db_tables');
 
+            delete_option('ppress_db_ver');
+
             CreateDBTables::make();
 
             if (class_exists('\ProfilePress\Libsodium\Libsodium')) {
                 \ProfilePress\Libsodium\Libsodium::create_db_tables();
             }
 
-            wp_safe_redirect(add_query_arg('settings-updated', 'true', PPRESS_SETTINGS_SETTING_PAGE));
+            wp_safe_redirect(add_query_arg('settings-updated', 'true', PPRESS_SETTINGS_SETTING_GENERAL_PAGE));
             exit;
         }
     }

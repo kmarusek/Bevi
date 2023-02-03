@@ -106,6 +106,35 @@ class CustomerRepository extends BaseRepository
     }
 
     /**
+     * @param int $plan_id
+     * @param array $status
+     * @param array $extra_args
+     *
+     * @return array|CustomerEntity
+     */
+    public function retrieveBySubscription($plan_id, $status = [], $extra_args = [])
+    {
+        $args = wp_parse_args($extra_args, [
+            'plan_id'      => absint($plan_id),
+            'status'       => $status,
+            'number'       => 0,
+            'fields'       => "DISTINCT(customer_id)",
+            'raw_response' => true,
+            'orderby'      => ''
+        ]);
+
+        $subs = SubscriptionRepository::init()->retrieveBy($args);
+
+        if (is_array($subs) && ! empty($subs)) {
+            return array_map(function ($sub) {
+                return self::retrieve($sub['customer_id']);
+            }, $subs);
+        }
+
+        return [];
+    }
+
+    /**
      * @param $user_id
      *
      * @return CustomerEntity
@@ -140,6 +169,7 @@ class CustomerRepository extends BaseRepository
             'number'       => 10,
             'offset'       => 0,
             'user_id'      => 0,
+            'plan_id'      => 0,
             'status'       => '',
             'date_created' => '',
             'start_date'   => '',
@@ -156,6 +186,8 @@ class CustomerRepository extends BaseRepository
         $offset = $args['offset'];
         $search = $args['search'];
 
+        $subscriptions_table = Base::subscriptions_db_table();
+
         $sql = "SELECT DISTINCT customers.* FROM $this->table AS customers";
 
         if ($count === true) {
@@ -163,8 +195,11 @@ class CustomerRepository extends BaseRepository
         }
 
         if ( ! empty($args['status']) && in_array($args['status'], array_keys(CustomerStatus::get_all()))) {
-            $subscriptions_table = Base::subscriptions_db_table();
-            $sql                 .= " INNER JOIN $subscriptions_table subs ON customers.id = subs.customer_id";
+            $sql .= " INNER JOIN $subscriptions_table subs ON customers.id = subs.customer_id";
+        }
+
+        if ( ! empty($args['plan_id']) && intval($args['plan_id']) > 0) {
+            $sql .= " INNER JOIN $subscriptions_table subs ON customers.id = subs.customer_id";
         }
 
         $user_table = $this->wpdb()->users;
@@ -191,6 +226,13 @@ class CustomerRepository extends BaseRepository
             $replacement[] = SubscriptionStatus::ACTIVE;
             $replacement[] = SubscriptionStatus::TRIALLING;
             $replacement[] = SubscriptionStatus::COMPLETED;
+        }
+
+
+        if ( ! empty($args['plan_id']) && intval($args['plan_id']) > 0) {
+            $sql .= " AND subs.plan_id = %s";
+
+            $replacement[] = intval($args['plan_id']);
         }
 
         if ($args['user_id'] > 0) {

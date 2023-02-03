@@ -194,7 +194,7 @@ final class Hub implements \Sentry\State\HubInterface
             if (null !== $tracesSampler) {
                 $sampleRate = $tracesSampler($samplingContext);
             } else {
-                $sampleRate = $this->getSampleRate($samplingContext->getParentSampled(), $options->getTracesSampleRate());
+                $sampleRate = $this->getSampleRate($samplingContext->getParentSampled(), $options->getTracesSampleRate() ?? 0);
             }
             if (!$this->isValidSampleRate($sampleRate)) {
                 $transaction->setSampled(\false);

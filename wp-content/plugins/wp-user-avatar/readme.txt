@@ -1,22 +1,22 @@
-﻿=== Paid Membership, Ecommerce, User Registration, Login, User Profile & Restrict Content Plugin – ProfilePress ===
+=== Paid Membership Plugin, Ecommerce, Registration Form, Login Form, User Profile & Restrict Content – ProfilePress ===
 Contributors: properfraction, collizo4sky
 Donate link: https://profilepress.com/pricing/
-Tags: membership, ecommerce, user registration, user profile, paid membership, members, stripe, paypal, mollie, login form, login, registration, password reset, member, users, profile, front-end profile, avatar
+Tags: membership, ecommerce, user registration, user profile, membership plugin, members, stripe, paypal, razorpay, mollie, login form, login, registration, password reset, member, users, profile, front-end profile, avatar
 Requires at least: 5.3
 Requires PHP: 7.2.0
 Tested up to: 6.1
-Stable tag: 4.3.2
+Stable tag: 4.6.0
 License: GPLv2 or later
 
-Paid membership plugin: accept payments, sell subscriptions & digital downloads, restrict content, user registration, login form, user profile & member directory.
+Paid membership plugin: accept payments, sell subscriptions & digital downloads, paywall & restrict content, create user registration form & login form, user profile & member directory.
 
 == Description ==
 
-= Modern Membership, Ecommerce, Digital Downloads, User Profile, Registration & Login Form Plugin =
+= Modern Membership Plugin for Ecommerce, Digital Downloads, User Profile, Registration & Login Form =
 
-[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful ecommerce and paid membership plugin for accepting one-time and recurring payments, selling subscriptions and digital products or digital downloads (downloadable files) via Stripe, Mollie & PayPal, restrict content and control user access.
+[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful ecommerce and paid membership plugin for accepting one-time and recurring payments, selling subscriptions and digital products or digital downloads (downloadable files) via Stripe, RazorPay, Mollie & PayPal, paywall & restrict content and control user access.
 
-ProfilePress is the best Stripe (Credit Card), PayPal, & Mollie payment forms plugin for WordPress to quickly accept payments and provide your users the ultimate member experience.
+ProfilePress is the best Stripe (Credit Card), PayPal, RazorPay & Mollie payment forms plugin for WordPress to quickly accept payments and provide your users the ultimate member experience.
 
 ProfilePress lets you create beautiful user profiles, member directories, frontend login, and user registration forms, member password reset and edit profile forms.
 
@@ -24,13 +24,19 @@ Our Drag-and-Drop form builder makes building forms easy. It is the perfect solu
 
 [Website](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) | [Addons](https://profilepress.com/addons/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) | [Documentation](https://profilepress.com/docs/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) | [Support](https://profilepress.com/support/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion)
 
+https://www.youtube.com/watch?v=OXkWVm53Xzo&rel=0
+
 ### Excellent Features of ProfilePress
 
 ProfilePress ecommerce plugin is suited for selling non-physical goods, including online courses, digital downloads, downloadable files, paid memberships, subscriptions, selling services, selling event tickets, accepting donations, selling digital downloads, etc.
 
+= Protect Registration Forms Against Banned Email Addresses =
+
+ProfilePress can prevent spam registrations and abuse by [blocking user registration from a banned email address or email domain](https://profilepress.com/block-wordpress-registration-specific-email-domains/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion).
+
 = Multiple Payment Processors =
 
-Easily connect to Stripe (supports Stripe hosted checkout page and on-site payment form), PayPal & Mollie to collect payments. We are working on adding additional gateways (Square, PayStack, RazorPay, Mercado Pago) in the future.
+Easily connect to Stripe (supports Stripe hosted checkout page and on-site payment form), PayPal, RazorPay & Mollie to collect payments with our membership plugin. We are working on adding additional gateways (Square, PayStack, Mercado Pago) in the future.
 
 = Powerful Payment Options =
 
@@ -49,7 +55,7 @@ Create excellent checkout page, member login forms, user registration forms, pas
 * **Login & Password Reset Forms** – Allow users to log in and reset their passwords via custom frontent forms.
 * **User Dashboard** – My Account page and edit profile forms for users to manage their profile details and account settings.
 * **Automatic Registration & Login Redirect** – Auto login users after they register and redirect them after they sign in, log out and reset their passwords.
-* Add login, logout, register, and profile links to your website navigation menu that will change based on whether the user is logged in.
+* Add login and logout links, register and profile links to your website navigation menu that will change based on whether the user is logged in.
 
 = User Profiles & Member Directories =
 
@@ -67,7 +73,9 @@ We also provide an advanced form builder that gives you the flexibility to build
 
 Never start from scratch again. ProfilePress comes with several beautiful, customizable pre-built templates for user profiles, member directory, and forms to help you save even more time.
 
-= Access & Content Restriction =
+= Access Control, Paywall & Content Restriction =
+
+Hide any article, post and content behind a paywall. With a few clicks, you can set up a [WordPress paywall](https://profilepress.com/add-wordpress-paywall-content/) to protect members-only content.
 
 ProfilePress gives you fine-grained control over what content your users can see based on your [protection rules](https://profilepress.com/article/adding-content-protection-rules/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) and [shortcodes](https://profilepress.com/article/wordpress-content-restriction-shortcodes/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion). You can restrict content including pages, child pages, posts, custom post types, categories, tags and custom taxonomies based on their membership plans, user roles, usernames, and logged-in status.
 
@@ -77,9 +85,9 @@ You can also control the visibility of [navigation menus](https://profilepress.c
 
 We provide a complete reports section where you can Keep track of your earnings, refunds, sales, download logs and more. You can view reports for any period or drill down to specific membership plans.
 
-= Other Payment & Membership Features =
+= Other Payment & Membership Plugin Features =
 
-* Accept one-time, recurring payments and charge for subscriptions with Stripe, PayPal and Mollie.
+* Accept one-time, recurring payments and charge for subscriptions with Stripe, PayPal, RazorPay and Mollie.
 * Smart fraud protection & spam prevention on the user registration form, login form and checkout page.
 * Complete customer management to view and manage detailed records of all customers and their order history.
 * Collect EU Vat or Tax from your users with our ecommerce plugin depending on their location, with complete control over tax rates and who to charge.
@@ -95,11 +103,14 @@ Customize the email templates for each email that can be sent to users and admin
 Extend the capabilities of ProfilePress with our powerful addons and remove the additional 2% Stripe processing fee.
 
 * [PayPal Checkout](https://profilepress.com/addons/paypal/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept Visa, Mastercard, Venmo, Discover, iDEAL, American Express, Bancontact, BLIK, giropay, MyBank and Przelewy24 payments via PayPal.
+* [RazorPay Checkout](https://profilepress.com/addons/razorPay/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept Credit/Debit cards, Netbanking, UPI, Wallets and more from Indian customers via RazorPay.
 * [Mollie Checkout](https://profilepress.com/addons/mollie/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept payments via Credit Card, iDEAL, SEPA Direct Debit, Apple Pay, PayPal, Klarna, Bancontact, Bank transfer & Gift Card with Mollie.
 * [Custom Fields](https://profilepress.com/addons/custom-fields/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Collect additional information from users besides the standard profile data during user registration and payment checkout.
-* [Email Confirmation](https://profilepress.com/addons/email-confirmation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Ensure registered users confirm their email addresses before they can sign in via the login form.
+* [Email Confirmation](https://profilepress.com/addons/email-confirmation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Ensure registered users confirm their email addresses before they can sign in via the login form or social login.
 * [User Moderation](https://profilepress.com/addons/user-moderation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Decide whether to approve newly registered users or not. You can also block and unblock users at any time.
-* [Social Login](https://profilepress.com/addons/social-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users checkout, register & login to your site via Facebook, Twitter, Google, LinkedIn, GitHub, and VK.
+* [Metered Paywall](https://profilepress.com/addons/metered-paywall/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Let guest and visitors view limited number of restricted content using the best leaky paywall plugin. Metered paywalls allows free readers to access a few articles before restricting the rest to subscribers only.
+* [PDF Receipt](https://profilepress.com/addons/receipt/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) –  Allow customers to view, print and download as PDF, the receipt or invoice of their orders after payment.
+* [Social Login](https://profilepress.com/addons/social-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users checkout, register & login to your site with social login via Facebook, Twitter, Google, LinkedIn, Yahoo, Microsoft, Amazon, GitHub, VK and WordPress.com.
 * [Two-Factor Authentication (2FA)](https://profilepress.com/addons/2fa/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Adds an additional layer of security to users accounts by requiring more than just a password to log in.
 * [Passwordless Login](https://profilepress.com/addons/passwordless-login/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Let users log in to your site via a one-time URL sent to their email addresses.
 * [WooCommerce](https://profilepress.com/addons/woocommerce/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Manage WooCommerce billing and shipping fields, replace WooCommerce login and edit account forms in checkout and "My Account" pages with that of ProfilePress.
@@ -114,7 +125,7 @@ Extend the capabilities of ProfilePress with our powerful addons and remove the 
 
 ProfilePress is the Ecommerce platform of your dreams. It delivers a complete Ecommerce experience with everything needed for selling online.
 
-If you're looking to build a business out of your membership site by creating paid memberships, there's no better way than to use ProfilePress which provide the ultimate member experience and will help you start and profit from your WordPress membership sites.
+If you're looking to build a business out of your membership site by creating paid memberships, there's no better way than to use ProfilePress membership plugin which provide the ultimate member experience and will help you start and profit from your WordPress membership sites.
 
 = What's Next =
 
@@ -142,7 +153,7 @@ No. You can create and manage your forms, user profiles, and member directories 
 
 = Can I accept credit card payments on mobile? =
 
-Yes. Stripe, PayPal and Mollie Checkout are optimized to accept mobile credit card payments and can automatically presents Apple Pay or Google Pay options when available.
+Yes. Stripe, PayPal, RazorPay and Mollie Checkout are optimized to accept mobile credit card payments and can automatically presents Apple Pay or Google Pay options when available.
 
 = Does ProfilePress require WooCommerce? =
 No. ProfilePress is a standalone ecommerce, payments & membership plugin and does not require other payment or ecommerce plugins, such as WooCommerce or Easy Digital Downloads to work.
@@ -166,19 +177,18 @@ Any file type can be sold using ProfilePress ecommerce and membership plugin, in
 
 == Changelog ==
 
-= Paid Membership, Ecommerce & User Registration 4.3.2 =
-* PHP 8 compatibility improvements.
-* Fixed bug where default avatar wasn't reflecting in buddypress.
-* Fixed bug where nocache header might be applied site-wide.
-* Fixed bug where session might have started where unnecessary.
+= Paid Membership, Ecommerce & User Registration 4.6.0 =
+* Added [RazorPay addon](https://profilepress.com/addons/razorPay/?ref=changelog).
+* Added support for 'url' config when adding myaccount page menu tabs.
+* Added color fields to settings API.
+* Fixed bug where admin couldn't delete other users cover photo in the admin dashboard.
+* Fixed incorrect currency in order listing display.
 
-= Paid Membership, Ecommerce & User Registration 4.3.1 =
-* Pro: [Checkout social login support](https://profilepress.com/addons/social-login/?ref=changelog).
-* Pro: [Checkout reCAPTCHA support](https://profilepress.com/addons/recaptcha/?ref=changelog).
-* Pro: [Checkout Akismet support](https://profilepress.com/addons/akismet/?ref=changelog).
-* Added checkout compatibility with other addons.
-* Added honeypot field to checkout to prevent spam.
-* Added filters for adding custom tabs to user profile.
-* Fixed store status admin menu styling not working.
+= Paid Membership, Ecommerce & User Registration 4.5.5 =
+* Fixed PHP Warning: Undefined array key "user_login".
+* Added missing text domain to strings.
+* Bumped Stripe API version to latest.
+* Fixed XSS in shortcode & content protection admin page.
+* Added settings button to [addons page](https://profilepress.com/addons/?ref=changelog).
 
 See the [changelog file](https://plugins.svn.wordpress.org/wp-user-avatar/trunk/changelog.txt) for full change log information.

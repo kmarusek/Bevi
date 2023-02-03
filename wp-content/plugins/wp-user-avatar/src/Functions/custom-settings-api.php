@@ -45,6 +45,7 @@ class Custom_Settings_Page_Api
     private $main_content_config = [];
 
     private $remove_white_design = false;
+    private $remove_h2_header = false;
     private $header_without_frills = false;
 
     /** @var array config of settings page sidebar */
@@ -122,6 +123,11 @@ class Custom_Settings_Page_Api
     public function remove_white_design()
     {
         $this->remove_white_design = true;
+    }
+
+    public function remove_h2_header()
+    {
+        $this->remove_h2_header = true;
     }
 
     public function header_without_frills()
@@ -340,6 +346,10 @@ class Custom_Settings_Page_Api
             border: 0;
         }
 
+        .remove_white_styling #post-body-content .postbox .postbox-header .handle-actions {
+            display:none;
+        }
+
         .remove_white_styling #post-body-content .CodeMirror {
             width: 100%;
             max-width: 900px;
@@ -391,7 +401,13 @@ class Custom_Settings_Page_Api
 
     public function settings_page_heading()
     {
-        echo '<h2>';
+        $style = '';
+
+        if($this->remove_h2_header) {
+            $style =' style="display:none;"';
+        }
+
+        printf('<h2%s>', $style);
         echo $this->page_header;
         do_action('wp_cspa_before_closing_header');
         echo '</h2>';
@@ -532,6 +548,11 @@ class Custom_Settings_Page_Api
         return "<tr id=\"$tr_id\"><td colspan=\"5\" style='margin:0;padding:0;'>" . $data . $description . '</td></tr>';
     }
 
+    public function _color($db_options, $key, $args) {
+        $args['class'] = 'ppress-color-picker';
+        return $this->_text($db_options, $key, $args);
+    }
+
     /**
      * Renders the text field
      *
@@ -552,6 +573,7 @@ class Custom_Settings_Page_Api
         $name_attr   = $option_name . '[' . $key . ']';
         $value       = ! empty($db_options[$key]) ? $db_options[$key] : $defvalue;
         $class    = 'regular-text '. esc_attr(ppress_var($args, 'class', ''));
+        $placeholder = ppress_var($args, 'placeholder', '');
 
         if (isset($args['obfuscate_val']) && in_array($args['obfuscate_val'], [true, 'true'])) {
             $value = $this->obfuscate_string($value);
@@ -562,7 +584,7 @@ class Custom_Settings_Page_Api
             <th scope="row"><label for="<?=$key; ?>"><?=$label; ?></label></th>
             <td>
                 <?php do_action('wp_cspa_before_text_field', $db_options, $option_name, $key, $args); ?>
-                <?php $this->_text_field($key, $name_attr, $value, $class); ?>
+                <?php $this->_text_field($key, $name_attr, $value, $class,$placeholder); ?>
                 <?php do_action('wp_cspa_after_text_field', $db_options, $option_name, $key, $args); ?>
                 <p class="description"><?=$description; ?></p>
             </td>
@@ -631,13 +653,14 @@ class Custom_Settings_Page_Api
         $description = @$args['description'];
         $option_name = $this->option_name;
         $value       = ! empty($db_options[$key]) ? $db_options[$key] : $defvalue;
+        $placeholder = ppress_var($args, 'placeholder', '');
+
         ob_start(); ?>
         <tr id="<?=$tr_id; ?>">
             <th scope="row"><label for="<?=$key; ?>"><?=$label; ?></label></th>
             <td>
                 <?php do_action('wp_cspa_before_number_field', $db_options, $option_name, $key, $args); ?>
-                <input type="number" id="<?=$key; ?>" name="<?=$option_name, '[', $key, ']'; ?>"
-                       class="regular-text" value="<?=$value; ?>"/>
+                <input type="number" id="<?=$key; ?>" name="<?=$option_name, '[', $key, ']'; ?>" class="regular-text" value="<?=$value; ?>" placeholder="<?=$placeholder?>"/>
                 <?php do_action('wp_cspa_after_number_field', $db_options, $option_name, $key, $args); ?>
 
                 <p class="description"><?=$description; ?></p>
@@ -736,6 +759,7 @@ class Custom_Settings_Page_Api
         $cols        = ! empty($args['column']) ? $args['column'] : '';
         $option_name = $this->option_name;
         $value       = ! empty($db_options[$key]) ? stripslashes($db_options[$key]) : @$args['value'];
+        $placeholder = ppress_var($args, 'placeholder', '');
         ob_start();
         ?>
         <tr id="<?=$tr_id; ?>">
@@ -744,6 +768,7 @@ class Custom_Settings_Page_Api
                 <?php do_action('wp_cspa_before_textarea_field', $db_options, $option_name, $key, $args); ?>
                 <textarea rows="<?=$rows; ?>" cols="<?=$cols; ?>"
                           name="<?=$option_name, '[', $key, ']'; ?>"
+                          placeholder="<?=$placeholder?>"
                           id="<?=$key; ?>"><?=$value; ?></textarea>
                 <?php do_action('wp_cspa_after_textarea_field', $db_options, $option_name, $key, $args); ?>
 

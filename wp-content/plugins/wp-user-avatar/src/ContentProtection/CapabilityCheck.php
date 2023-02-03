@@ -2,8 +2,6 @@
 
 namespace ProfilePress\Core\ContentProtection;
 
-use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
-
 class CapabilityCheck
 {
     public function __construct()

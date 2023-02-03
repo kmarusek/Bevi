@@ -90,7 +90,7 @@ class PerfectoLite extends AbstractTheme
     {
         $fields              = $this->field_listing();
         $registration_button = $this->form_submit_button();
-        $headline            = $this->get_meta('perfectolite_registration_headline');
+        $headline            = wp_kses_post($this->get_meta('perfectolite_registration_headline'));
 
         return <<<HTML
 [pp-form-wrapper class="perfecto"]
@@ -107,12 +107,12 @@ HTML;
         $form_id   = $this->form_id;
         $form_type = $this->form_type;
 
-        $bg_color          = $this->get_meta('perfectolite_registration_bg_color');
-        $border_color      = $this->get_meta('perfectolite_registration_border');
-        $text_color        = $this->get_meta('perfectolite_registration_text_color');
-        $placeholder_color = $this->get_meta('perfectolite_registration_placeholder_color');
-        $button_bg_color   = $this->get_meta('perfectolite_registration_button_bg_color');
-        $button_text_color = $this->get_meta('perfectolite_registration_button_text_color');
+        $bg_color          = esc_html($this->get_meta('perfectolite_registration_bg_color'));
+        $border_color      = esc_html($this->get_meta('perfectolite_registration_border'));
+        $text_color        = esc_html($this->get_meta('perfectolite_registration_text_color'));
+        $placeholder_color = esc_html($this->get_meta('perfectolite_registration_placeholder_color'));
+        $button_bg_color   = esc_html($this->get_meta('perfectolite_registration_button_bg_color'));
+        $button_text_color = esc_html($this->get_meta('perfectolite_registration_button_text_color'));
 
         return <<<CSS
 /*  css class for the form generated errors */

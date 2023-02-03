@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
+class ComposerStaticInit5365385809e382577fa6df13f4b2898a
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -12,10 +12,13 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+        ),
         'P' => 
         array (
-            'ProfilePressVendor\\Symfony\\Polyfill\\Php80\\' => 42,
-            'ProfilePressVendor\\Symfony\\Polyfill\\Mbstring\\' => 45,
             'ProfilePressVendor\\Symfony\\Contracts\\Translation\\' => 49,
             'ProfilePressVendor\\Symfony\\Component\\Translation\\' => 49,
             'ProfilePressVendor\\Symfony\\Component\\CssSelector\\' => 49,
@@ -30,11 +33,11 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
     );
 
     public static $prefixDirsPsr4 = array (
-        'ProfilePressVendor\\Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'ProfilePressVendor\\Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
@@ -81,8 +84,9 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
     );
 
     public static $classMap = array (
+        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'ProfilePressVendor\\Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'ProfilePressVendor\\Barryvdh\\Composer\\CleanupPlugin' => __DIR__ . '/..' . '/barryvdh/composer-cleanup-plugin/src/CleanupPlugin.php',
         'ProfilePressVendor\\Barryvdh\\Composer\\CleanupRules' => __DIR__ . '/..' . '/barryvdh/composer-cleanup-plugin/src/CleanupRules.php',
         'ProfilePressVendor\\Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
@@ -107,6 +111,7 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
         'ProfilePressVendor\\Carbon\\CarbonInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterface.php',
         'ProfilePressVendor\\Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'ProfilePressVendor\\Carbon\\CarbonPeriod' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonPeriod.php',
+        'ProfilePressVendor\\Carbon\\CarbonPeriodImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonPeriodImmutable.php',
         'ProfilePressVendor\\Carbon\\CarbonTimeZone' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonTimeZone.php',
         'ProfilePressVendor\\Carbon\\Cli\\Invoker' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Cli/Invoker.php',
         'ProfilePressVendor\\Carbon\\Doctrine\\CarbonDoctrineType' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Doctrine/CarbonDoctrineType.php',
@@ -149,6 +154,7 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
         'ProfilePressVendor\\Carbon\\FactoryImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/FactoryImmutable.php',
         'ProfilePressVendor\\Carbon\\Language' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Language.php',
         'ProfilePressVendor\\Carbon\\Laravel\\ServiceProvider' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Laravel/ServiceProvider.php',
+        'ProfilePressVendor\\Carbon\\MessageFormatter\\MessageFormatterMapper' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/MessageFormatter/MessageFormatterMapper.php',
         'ProfilePressVendor\\Carbon\\PHPStan\\AbstractMacro' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/PHPStan/AbstractMacro.php',
         'ProfilePressVendor\\Carbon\\PHPStan\\Macro' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/PHPStan/Macro.php',
         'ProfilePressVendor\\Carbon\\PHPStan\\MacroExtension' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/PHPStan/MacroExtension.php',
@@ -165,6 +171,7 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
         'ProfilePressVendor\\Carbon\\Traits\\IntervalStep' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/IntervalStep.php',
         'ProfilePressVendor\\Carbon\\Traits\\Localization' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Localization.php',
         'ProfilePressVendor\\Carbon\\Traits\\Macro' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Macro.php',
+        'ProfilePressVendor\\Carbon\\Traits\\MagicParameter' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/MagicParameter.php',
         'ProfilePressVendor\\Carbon\\Traits\\Mixin' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Mixin.php',
         'ProfilePressVendor\\Carbon\\Traits\\Modifiers' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Modifiers.php',
         'ProfilePressVendor\\Carbon\\Traits\\Mutability' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Mutability.php',
@@ -191,7 +198,6 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
         'ProfilePressVendor\\Pelago\\Emogrifier\\HtmlProcessor\\HtmlPruner' => __DIR__ . '/..' . '/pelago/emogrifier/src/HtmlProcessor/HtmlPruner.php',
         'ProfilePressVendor\\Pelago\\Emogrifier\\Utilities\\ArrayIntersector' => __DIR__ . '/..' . '/pelago/emogrifier/src/Utilities/ArrayIntersector.php',
         'ProfilePressVendor\\Pelago\\Emogrifier\\Utilities\\CssConcatenator' => __DIR__ . '/..' . '/pelago/emogrifier/src/Utilities/CssConcatenator.php',
-        'ProfilePressVendor\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'ProfilePressVendor\\Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/AtRuleBlockList.php',
         'ProfilePressVendor\\Sabberworm\\CSS\\CSSList\\CSSBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/CSSBlockList.php',
         'ProfilePressVendor\\Sabberworm\\CSS\\CSSList\\CSSList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/CSSList.php',
@@ -231,7 +237,6 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
         'ProfilePressVendor\\Sabberworm\\CSS\\Value\\URL' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/URL.php',
         'ProfilePressVendor\\Sabberworm\\CSS\\Value\\Value' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/Value.php',
         'ProfilePressVendor\\Sabberworm\\CSS\\Value\\ValueList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/Value/ValueList.php',
-        'ProfilePressVendor\\Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'ProfilePressVendor\\Stripe\\Account' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Account.php',
         'ProfilePressVendor\\Stripe\\AccountLink' => __DIR__ . '/..' . '/stripe/stripe-php/lib/AccountLink.php',
         'ProfilePressVendor\\Stripe\\AlipayAccount' => __DIR__ . '/..' . '/stripe/stripe-php/lib/AlipayAccount.php',
@@ -600,19 +605,20 @@ class ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc
         'ProfilePressVendor\\Symfony\\Contracts\\Translation\\Test\\TranslatorTest' => __DIR__ . '/..' . '/symfony/translation-contracts/Test/TranslatorTest.php',
         'ProfilePressVendor\\Symfony\\Contracts\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/translation-contracts/TranslatorInterface.php',
         'ProfilePressVendor\\Symfony\\Contracts\\Translation\\TranslatorTrait' => __DIR__ . '/..' . '/symfony/translation-contracts/TranslatorTrait.php',
-        'ProfilePressVendor\\Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'ProfilePressVendor\\Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
-        'ProfilePressVendor\\Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
-        'ProfilePressVendor\\UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-        'ProfilePressVendor\\ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
+        'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
+        'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
+        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf80efe29f3ebb8c0557bf24a1ea3eedc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5365385809e382577fa6df13f4b2898a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5365385809e382577fa6df13f4b2898a::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5365385809e382577fa6df13f4b2898a::$classMap;
 
         }, null, ClassLoader::class);
     }

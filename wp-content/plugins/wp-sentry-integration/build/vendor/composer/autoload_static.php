@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4601fe6477c0873c98ff5519056d838d
+class ComposerStaticInit7eed52de2ed39e5525c50672b3942e39
 {
     public static $files = array (
         'wp-sentry-7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -574,9 +574,9 @@ class ComposerStaticInit4601fe6477c0873c98ff5519056d838d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4601fe6477c0873c98ff5519056d838d::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4601fe6477c0873c98ff5519056d838d::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4601fe6477c0873c98ff5519056d838d::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7eed52de2ed39e5525c50672b3942e39::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7eed52de2ed39e5525c50672b3942e39::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7eed52de2ed39e5525c50672b3942e39::$classMap;
 
         }, null, ClassLoader::class);
     }

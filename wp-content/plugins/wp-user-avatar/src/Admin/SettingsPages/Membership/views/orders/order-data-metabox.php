@@ -18,8 +18,11 @@ $transaction_id       = $order_data->transaction_id;
 
 if ( ! empty($order_data->payment_method)) {
     $payment_method_instance = PaymentMethods::get_instance()->get_by_id($order_data->payment_method);
-    $transaction_id          = $payment_method_instance->link_transaction_id($transaction_id, $order_data);
-    $payment_method_title    = $payment_method_instance->get_method_title();
+
+    if ($payment_method_instance) {
+        $transaction_id       = $payment_method_instance->link_transaction_id($transaction_id, $order_data);
+        $payment_method_title = $payment_method_instance->get_method_title();
+    }
 }
 
 $customer = CustomerFactory::fromId($order_data->customer_id);

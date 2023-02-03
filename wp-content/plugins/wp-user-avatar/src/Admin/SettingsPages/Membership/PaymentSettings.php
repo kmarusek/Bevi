@@ -107,7 +107,7 @@ class PaymentSettings extends AbstractSettingsPage
                     'label'       => esc_html__('Terms & Conditions Label', 'wp-user-avatar'),
                     'description' => sprintf(
                         esc_html__('Label for the "Agree to Terms" checkbox where "[terms]" is a link to the %sterms and condition page%s', 'wp-user-avatar'),
-                        '<a href="' . PPRESS_SETTINGS_SETTING_PAGE . '#global_pages?terms_page_id_row" target="_blank">', '</a>'
+                        '<a href="' . PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#global_pages?terms_page_id_row" target="_blank">', '</a>'
                     ),
                     'type'        => 'text'
                 ]
@@ -133,7 +133,7 @@ class PaymentSettings extends AbstractSettingsPage
 
         $settingsPageInstance = Custom_Settings_Page_Api::instance('', PPRESS_SETTINGS_DB_OPTION_NAME);
         $settingsPageInstance->page_header($page_header);
-        $settingsPageInstance->main_content($settings);
+        $settingsPageInstance->main_content(apply_filters('ppress_payment_admin_settings', $settings));
         $settingsPageInstance->sidebar(AbstractSettingsPage::sidebar_args());
         $settingsPageInstance->build();
     }

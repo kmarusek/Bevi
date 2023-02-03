@@ -9,7 +9,7 @@ class Redirect
 {
     public function __construct()
     {
-        add_action('template_redirect', [$this, 'handler']);
+        add_action('template_redirect', [$this, 'handler'], -1);
     }
 
     public function handler()

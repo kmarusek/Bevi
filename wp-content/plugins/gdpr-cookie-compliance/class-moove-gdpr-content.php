@@ -194,12 +194,33 @@ class Moove_GDPR_Content {
 				$trp_languages = trp_get_languages();
 				return isset( $trp_languages[$lang_code] ) ? $trp_languages[$lang_code] : '';
 			endif;
+		elseif ( class_exists( 'Falang' ) && isset( $_GET['gdpr-lang'] ) && is_admin() ) :
+			$lang_code = sanitize_text_field( wp_unslash( $_GET['gdpr-lang'] ) );
+			if ( $type === 'code' ) :
+				return $lang_code;
+			else :
+				$falang_languages 		= Falang()->get_model()->get_languages_list();
+				$lang_name 						= $lang_code;
+				foreach ( $falang_languages as $language ) :
+					$_code 			= isset( $language->locale ) ? $language->locale : ( isset( $language->slug ) ? $language->slug : '' );
+					$lang_name 	= $_code === $lang_code && isset( $language->name ) ? $language->name : $lang_name;
+				endforeach;
+				return $lang_name;
+			endif;
 		else :
-			if ( function_exists( 'trp_get_languages' ) ) {
+			if ( function_exists( 'trp_get_languages' ) ) :
 				$trp_languages = trp_get_languages();
 				global $TRP_LANGUAGE;
 				return $type === 'code' ? $TRP_LANGUAGE : $trp_languages[ $TRP_LANGUAGE ];
-			}elseif ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+			elseif ( class_exists( 'Falang' ) ) :
+				$current_language = Falang()->get_current_language();
+				if ( $type === 'code' ) :
+					$lang = isset( $current_language->locale ) ? $current_language->locale : ( isset( $current_language->slug ) ? $current_language->slug : '' );
+				else :
+					$lang = isset( $current_language->name ) ? $current_language->name : '';
+				endif;
+				return $lang;
+			elseif ( defined( 'ICL_LANGUAGE_CODE' ) ) :
 				$language_code = ICL_LANGUAGE_CODE;
 				if ( ICL_LANGUAGE_CODE === 'all' ) :
 					if ( function_exists( 'pll_default_language' ) ) :
@@ -210,11 +231,11 @@ class Moove_GDPR_Content {
 					endif;
 				endif;
 				return '_' . $language_code;
-			} elseif ( isset( $GLOBALS['q_config']['language'] ) ) {
+			elseif ( isset( $GLOBALS['q_config']['language'] ) ) :
 				return $GLOBALS['q_config']['language'];
-			} elseif ( function_exists( 'wpm_get_user_language' ) ) {
+			elseif ( function_exists( 'wpm_get_user_language' ) ) :
 				return wpm_get_user_language();
-			}
+			endif;
 		endif;
 		return '';
 	}

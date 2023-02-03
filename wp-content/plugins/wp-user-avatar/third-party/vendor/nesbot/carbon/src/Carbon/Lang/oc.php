@@ -17,7 +17,7 @@ namespace ProfilePressVendor;
 // @codeCoverageIgnoreStart
 use ProfilePressVendor\Symfony\Component\Translation\PluralizationRules;
 if (\class_exists('ProfilePressVendor\\Symfony\\Component\\Translation\\PluralizationRules')) {
-    PluralizationRules::set(function ($number) {
+    PluralizationRules::set(static function ($number) {
         return $number == 1 ? 0 : 1;
     }, 'oc');
 }

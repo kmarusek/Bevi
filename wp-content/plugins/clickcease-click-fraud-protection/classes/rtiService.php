@@ -86,68 +86,31 @@ class RTI_Service
             "is_valid" => true,
             "output" => [],
         ];
+        $error_message = "";
 
-        $domain = Utils::getDomain();
-        $client_ip = Utils::get_the_user_ip();
+        try {
+            $request = $this->create_rti_request($api_key, $request_url, $event_type, $tag_hash);
+            $apiResponse = wp_remote_post(Urls::RTI_SERVER_EUROPE, $request);
 
-
-        $request_params = [
-            'ApiKey' => $api_key,
-            'ClientIP' => $client_ip,
-            'RequestURL' => $request_url,
-            'ResourceType' => 'text/html',
-            'Method' => 'GET',
-            'Host' => strtok($domain, '/'),
-            'UserAgent' => Utils::getServerVariable('HTTP_USER_AGENT'),
-            'Accept' => Utils::getServerVariable('HTTP_ACCEPT'),
-            'AcceptLanguage' => Utils::getServerVariable('HTTP_ACCEPT_LANGUAGE'),
-            'AcceptEncoding' => Utils::getServerVariable('HTTP_ACCEPT_ENCODING'),
-            'HeaderNames' => 'Host,User-Agent,Accept,Accept-Langauge,Accept-Encoding',
-            'EventType' => $event_type,
-            'TagHash' => $tag_hash,
-        ];
-
-        if ($event_type == 'page_load') {
-            $request_params['HeaderNames'] = 'Host,User-Agent,Accept,Accept-Langauge,Accept-Encoding,Cookie';
-            $request_params['CheqCookie'] = Utils::getCookieVariable('_cheq_rti');
-            $request_params['Referer'] = Utils::getServerVariable('HTTP_REFERER');
-            $request_params['Connection'] = Utils::getServerVariable('HTTP_CONNECTION');
-        }
-
-        $query_string = '';
-        $counter = 0;
-        foreach ($request_params as $key => $value) {
-            if ($counter > 0) {
-                $query_string .= "&";
+            if (is_wp_error($apiResponse)) {
+                $error_message = $apiResponse->get_error_message();
+                $this->send_error($request, $error_message);
             }
-            $query_string .= $key . '=' . $value;
-            $counter++;
+            if (!$error_message) {
+                $response_code = wp_remote_retrieve_response_code($apiResponse);
+                $response_body = wp_remote_retrieve_body($apiResponse);
+                if ($response_code !== HTTPCode::SUCCESS && !is_wp_error($apiResponse)) {
+                    $this->send_error($request, $response_body);
+                } else if ($response_code == HTTPCode::SUCCESS) {
+                    $res = $this->validate_rti_response($apiResponse, $request);
+                }
+            } else {
+                $this->handleRTIError();
+            }
+        } catch (Exception $e) { {
+                LogService::log("Plugin", "", "", "", "", "", "", "", ErrorCodes::ERROR, $e->getMessage());
+            }
         }
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, [
-            CURLOPT_URL => Urls::RTI_SERVER_EUROPE,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => $query_string,
-            CURLOPT_HTTPHEADER => ['Content-Type: application/x-www-form-urlencoded'],
-        ]);
-
-        $response = curl_exec($curl);
-
-        if ($response === false) {
-            $error = curl_error($curl);
-            $this->send_error($request_params, $error);
-        } else {
-            $res = $this->validate_rti_response($response, $request_params);
-        }
-        curl_close($curl);
         return $res;
     }
 
@@ -158,46 +121,43 @@ class RTI_Service
             "output" => [],
         ];
         if (!empty($response)) {
-            $output = json_decode($response);
-            if (is_object($output)) {
-                if (!isset($output->setCookie)) {
-                    LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_MISSING_COOKIE);
-                } else {
-                    $cookie_values = explode(';', $output->setCookie);
-                    $cookie_name_value = explode('=', $cookie_values[0], 2);
-                    if (isset($cookie_name_value) && isset($cookie_values) && count($cookie_name_value) > 1 && count($cookie_values) > 2) {
-                        setcookie($cookie_name_value[0], $cookie_name_value[1], strtotime(explode('=', $cookie_values[1])[1]), explode('=', $cookie_values[3])[1]);
-                    } else {
-                        LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_INCORRECT_COOKIE);
-                    }
-                }
-                if (!isset($output->version) || !is_numeric($output->version)) {
-                    update_option('cheq_invalid_secret', true);
-                    LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_AUTH_ERROR);
-                } else {
-                    update_option('cheq_invalid_secret', false);
-                }
-
-                if (!isset($output->threatTypeCode)) {
-                    LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_MISSING_THREAT_TYPE);
-                } elseif (!in_array($output->threatTypeCode, ALLOWED_CODES) && $output->isInvalid) {
-                    $res = [
-                        "is_valid" => false,
-                        "output" => $output,
-                    ];
-                } else {
-                    if (!isset($output)) {
-                        LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_EMPTY_RESPONSE_FORMAT);
-                    } elseif (!is_object($output)) {
-                        LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_INVALID_RESPONSE_FORMAT);
-                    }
-                }
+            $response = json_decode($response["body"]);
+            if (!isset($response->setCookie)) {
+                LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_MISSING_COOKIE);
             } else {
-                $this->send_error($request_params, $response);
+                $cookie_values = explode(';', $response->setCookie);
+                $cookie_name_value = explode('=', $cookie_values[0], 2);
+                if (isset($cookie_name_value) && isset($cookie_values) && count($cookie_name_value) > 1 && count($cookie_values) > 2) {
+                    setcookie($cookie_name_value[0], $cookie_name_value[1], strtotime(explode('=', $cookie_values[1])[1]), explode('=', $cookie_values[3])[1]);
+                } else {
+                    LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_INCORRECT_COOKIE);
+                }
+            }
+            if (!isset($response->version) || !is_numeric($response->version)) {
+                update_option('cheq_invalid_secret', true);
+                LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_AUTH_ERROR);
+            } else {
+                update_option('cheq_invalid_secret', false);
+            }
+
+            if (!isset($response->threatTypeCode)) {
+                LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_MISSING_THREAT_TYPE);
+            } elseif (!in_array($response->threatTypeCode, ALLOWED_CODES) && $response->isInvalid) {
+                $res = [
+                    "is_valid" => false,
+                    "output" => $response,
+                ];
+            } else {
+                if (!isset($response)) {
+                    LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_EMPTY_RESPONSE_FORMAT);
+                } elseif (!is_object($response)) {
+                    LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_INVALID_RESPONSE_FORMAT);
+                }
             }
         } else {
-            LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::RTI_SERVER_NO_RESPONSE);
+            $this->send_error($request_params, $response);
         }
+
 
         return $res;
     }
@@ -239,9 +199,9 @@ class RTI_Service
         $options = 0;
         $iv = substr($message, 0, 16);
         $encrypted_message = substr($message, 16);
-        $domain_key = get_option('clickcease_secret_key', '');
+        $secret_key = get_option('clickcease_secret_key', '');
 
-        $decrypted_message = openssl_decrypt($encrypted_message, $ciphering, $domain_key, $options, $iv);
+        $decrypted_message = openssl_decrypt($encrypted_message, $ciphering, $secret_key, $options, $iv);
 
         $output = explode(":", $decrypted_message);
 
@@ -254,7 +214,8 @@ class RTI_Service
         $required_action = "";
         if (count($output) < 4) {
             update_option('cheq_invalid_secret', true);
-            LogService::log("Front", "", "", "", "", "", "", ErrorCodes::INCORRECT_SECRET_KEY);
+            $msg = "Secret =" . $secret_key . ",Output=" . print_r($output, true);
+            LogService::log("Front", "", "", "", "", "", "", "", ErrorCodes::INCORRECT_SECRET_KEY, $msg);
         } else {
             $is_monitoring = get_option('monitoring', false);
             update_option('cheq_invalid_secret', false);
@@ -285,6 +246,40 @@ class RTI_Service
         $data->ClientId = $client_id;
         $dataStr = json_encode($data);
 
+        $request =  $this->get_clickcease_request($api_key, $dataStr);
+        // add route
+        $apiResponse = wp_remote_post(Urls::CLICKCEASE_BOTZAPPING . '/State', $request);
+        $response_code = $this->get_response_code($request, $apiResponse);
+
+        return $response_code == HTTPCode::SUCCESS;
+    }
+
+    public function update_bz_domain($api_key, $client_id, $plugin_latests_version)
+    {
+        $data = new stdClass();
+        $data->Address = Utils::getDomain();
+        $data->PluginLatestsVersion = $plugin_latests_version;
+        $data->ClientId = $client_id;
+        $dataStr = json_encode($data);
+
+        $request =  $this->get_clickcease_request($api_key, $dataStr);
+
+        // add route
+        $apiResponse = wp_remote_post(Urls::CLICKCEASE_BOTZAPPING . '/update', $request);
+        $response_code = $this->get_response_code($request, $apiResponse);
+
+        return $response_code == HTTPCode::SUCCESS;
+    }
+    public  function update_user_status($state)
+    {
+        $clickcease_api_key = get_option('clickcease_api_key', '');
+        $client_id = get_option('clickcease_client_id', '');
+        if ($client_id !== '') {
+            $this->updateUserStatus($clickcease_api_key, $client_id, $state);
+        }
+    }
+    private function get_clickcease_request($api_key, $dataStr)
+    {
         $request =  [
             'method' => 'POST',
             'timeout' => 10,
@@ -296,31 +291,85 @@ class RTI_Service
             ],
             'body' => $dataStr,
         ];
+        return $request;
+    }
 
-        // add route
-        $apiResponse = wp_remote_post(Urls::CLICKCEASE_BOTZAPPING . '/State', $request);
-
+    private function get_response_code($request, $apiResponse)
+    {
+        $response_code = 200;
         if (is_wp_error($apiResponse)) {
             $error_message = $apiResponse->get_error_message();
             $this->send_error($request, $error_message);
         }
-
         $response_code = wp_remote_retrieve_response_code($apiResponse);
         if ($response_code !== HTTPCode::SUCCESS && !is_wp_error($apiResponse)) {
             $response_body = wp_remote_retrieve_body($apiResponse);
             $this->send_error($request, $response_body);
         }
-        return $response_code == HTTPCode::SUCCESS;
+        return $response_code;
     }
-
 
     private function send_error($request_params, $error)
     {
+        if (is_array($error))
+            $error = json_encode($error);
         $request = json_encode($request_params);
         $msg = "{\"Request\":{$request} , \"Error\":\"{$error}\"}";
         LogService::log("Plugin", "", "", "", "", "", "", "", ErrorCodes::ERROR, $msg);
     }
+    private function create_rti_request($api_key, $request_url, $event_type, $tag_hash)
+    {
+
+        $domain = Utils::get_host();
+        $client_ip = Utils::get_the_user_ip();
+
+
+        $request_params = [
+            'ApiKey' => $api_key,
+            'ClientIP' => $client_ip,
+            'RequestURL' => $request_url,
+            'ResourceType' => 'text/html',
+            'Method' => 'GET',
+            'Host' => strtok($domain, '/'),
+            'UserAgent' => Utils::getServerVariable('HTTP_USER_AGENT'),
+            'Accept' => Utils::getServerVariable('HTTP_ACCEPT'),
+            'AcceptLanguage' => Utils::getServerVariable('HTTP_ACCEPT_LANGUAGE'),
+            'AcceptEncoding' => Utils::getServerVariable('HTTP_ACCEPT_ENCODING'),
+            'HeaderNames' => 'Host,User-Agent,Accept,Accept-Langauge,Accept-Encoding',
+            'EventType' => $event_type,
+            'TagHash' => $tag_hash,
+        ];
+
+        if ($event_type == 'page_load') {
+            $request_params['HeaderNames'] = 'Host,User-Agent,Accept,Accept-Langauge,Accept-Encoding,Cookie';
+            $request_params['CheqCookie'] = Utils::getCookieVariable('_cheq_rti');
+            $request_params['Referer'] = Utils::getServerVariable('HTTP_REFERER');
+            $request_params['Connection'] = Utils::getServerVariable('HTTP_CONNECTION');
+        }
+
+        $request =  [
+            'method' => 'POST',
+            'timeout' => 2,
+            'redirection' => 10,
+            'httpversion' => '1.1',
+            'body' => $request_params,
+        ];
+        return $request;
+    }
+    public function handleRTIError()
+    {
+        $clickcease_api_key = get_option('clickcease_api_key', '');
+        $clickcease_domain_key = get_option('clickcease_domain_key', '');
+        $secret_key = get_option('clickcease_secret_key', '');
+
+        $clientId = $this->auth_with_botzapping($clickcease_api_key, $clickcease_domain_key, $secret_key);
+        if (!$clientId) {
+            update_option('clickcease_bot_zapping_authenticated', false);
+            (new RTI_Service())->update_user_status(DomainState::PLUGIN_ACTIVATED);
+        }
+    }
 }
+
 require_once clickcease_plugin_PLUGIN_PATH . 'classes/logService.php';
 require_once clickcease_plugin_PLUGIN_PATH . 'classes/formService.php';
 require_once clickcease_plugin_PLUGIN_PATH . 'classes/utils.php';

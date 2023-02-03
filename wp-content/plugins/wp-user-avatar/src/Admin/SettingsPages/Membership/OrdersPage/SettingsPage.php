@@ -50,6 +50,7 @@ class SettingsPage extends AbstractSettingsPage
             });
         }
 
+        add_action('wp_ajax_ppress_mb_search_plans', [$this, 'search_membership_plans']);
         add_action('wp_ajax_ppress_mb_search_customers', [$this, 'search_customers']);
         add_action('wp_ajax_ppress_delete_order_note', [$this, 'delete_order_note']);
         add_action('wp_ajax_ppress_mb_order_modal_search', [$this, 'search_plan_coupon']);
@@ -74,6 +75,46 @@ class SettingsPage extends AbstractSettingsPage
         add_action("load-$hook", array($this, 'add_options'));
 
         do_action('ppress_membership_orders_settings_page_register', $hook);
+    }
+
+    public function search_membership_plans()
+    {
+        if ( ! current_user_can('manage_options')) return;
+
+        check_ajax_referer('ppress-admin-nonce', 'nonce');
+
+        global $wpdb;
+
+        $plans_table = Base::subscription_plans_db_table();
+
+        $search = '%' . $wpdb->esc_like(sanitize_text_field($_GET['search'])) . '%';
+
+        $results['results'] = [];
+
+        $plans = $wpdb->get_results(
+            $wpdb->prepare("SELECT id, name  FROM $plans_table WHERE name LIKE %s", $search),
+            ARRAY_A
+        );
+
+        if (is_array($plans) && ! empty($plans)) {
+
+            foreach ($plans as $plan) {
+
+                if ( ! empty($plan['id'])) {
+
+                    $plan_id = (int)$plan['id'];
+
+                    $results['results'][$plan_id] = [
+                        'id'   => $plan_id,
+                        'text' => esc_html($plan['name'])
+                    ];
+                }
+            }
+        }
+
+        $results['results'] = array_values($results['results']);
+
+        wp_send_json($results, 200);
     }
 
     public function search_customers()
@@ -419,7 +460,7 @@ class SettingsPage extends AbstractSettingsPage
         $order->id              = $order_id;
         $order->subscription_id = $subscription_id;
         if ($order->is_completed()) {
-            $order->date_completed = current_time('mysql');
+            $order->date_completed = current_time('mysql', true);
         }
         $order->save();
 
@@ -606,10 +647,10 @@ class SettingsPage extends AbstractSettingsPage
         echo '<input type="hidden" name="page" value="' . PPRESS_MEMBERSHIP_ORDERS_SETTINGS_SLUG . '" />';
         echo '<input type="hidden" name="view" value="orders" />';
         if (isset($_GET['status'])) {
-            echo '<input type="hidden" name="status" value="' . sanitize_text_field($_GET['status']) . '" />';
+            echo '<input type="hidden" name="status" value="' . esc_attr($_GET['status']) . '" />';
         }
         if (isset($_GET['by_ci'])) {
-            echo '<input type="hidden" name="by_ci" value="' . sanitize_text_field($_GET['by_ci']) . '" />';
+            echo '<input type="hidden" name="by_ci" value="' . esc_attr($_GET['by_ci']) . '" />';
         }
         $this->orderListTable->views();
         $this->orderListTable->filter_bar();

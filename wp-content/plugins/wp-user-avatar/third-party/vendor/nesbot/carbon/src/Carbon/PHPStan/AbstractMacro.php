@@ -217,6 +217,10 @@ abstract class AbstractMacro implements BuiltinMethodReflection
     {
         return null;
     }
+    public function returnsByReference() : TrinaryLogic
+    {
+        return TrinaryLogic::createNo();
+    }
     private static function adaptType($type)
     {
         $method = \method_exists(AdapterReflectionType::class, 'fromTypeOrNull') ? 'fromTypeOrNull' : 'fromReturnTypeOrNull';

@@ -100,7 +100,7 @@ class SettingsFieldsParser
             <?php foreach ($this->config as $config) : ?>
                 <tr class="form-field" id="field-role-<?= esc_attr($config['id']) ?>">
                     <th scope="row" valign="top">
-                        <label for="<?= esc_attr($config['id']) ?>"><?= sanitize_text_field($config['label']) ?></label>
+                        <label for="<?= esc_attr($config['id']) ?>"><?= esc_html($config['label']) ?></label>
                     </th>
                     <td>
                         <?php $this->field_output($config); ?>

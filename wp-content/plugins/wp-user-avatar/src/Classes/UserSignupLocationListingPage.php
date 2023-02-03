@@ -12,8 +12,8 @@ class UserSignupLocationListingPage
     public function __construct()
     {
         // add custom column to use listing
-        add_filter('manage_users_columns', array($this, 'add_column'));
-        add_action('manage_users_custom_column', array($this, 'populate_column'), 10, 3);
+        add_filter('manage_users_columns', [$this, 'add_column']);
+        add_action('manage_users_custom_column', [$this, 'populate_column'], 10, 3);
     }
 
     public function add_column($columns)
@@ -30,7 +30,8 @@ class UserSignupLocationListingPage
         if ('signup_via' == $column_name) {
 
             $melange_form_id = get_user_meta($user_id, '_pp_signup_melange_via', true);
-            $val             = get_user_meta($user_id, '_pp_signup_via', true);
+
+            $val = get_user_meta($user_id, '_pp_signup_via', true);
 
             if ( ! empty($melange_val)) {
                 return FormRepository::get_name($melange_form_id, FormRepository::MELANGE_TYPE);
@@ -38,38 +39,16 @@ class UserSignupLocationListingPage
 
             if ( ! empty($val)) {
 
-                switch ($val) {
-                    case 'checkout':
-                        $status = esc_html__('Checkout', 'wp-user-avatar');
-                        break;
-                    case 'facebook':
-                        $status = esc_html__('Facebook', 'wp-user-avatar');
-                        break;
+                $social_login_networks = ppress_social_login_networks();
 
-                    case 'twitter':
-                        $status = esc_html__('Twitter', 'wp-user-avatar');
-                        break;
-
-                    case 'google':
-                        $status = esc_html__('Google', 'wp-user-avatar');
-                        break;
-
-                    case 'linkedin':
-                        $status = esc_html__('LinkedIn', 'wp-user-avatar');
-                        break;
-
-                    case 'github':
-                        $status = esc_html__('GitHub', 'wp-user-avatar');
-                        break;
-
-                    case 'vk':
-                        $status = esc_html__('Vkontakte', 'wp-user-avatar');
-                        break;
-                    case 'tab_widget':
-                        $status = esc_html__('ProfilePress Tabbed Widget', 'wp-user-avatar');
-                        break;
-                    default:
-                        return FormRepository::get_name(absint($val), FormRepository::REGISTRATION_TYPE);
+                if ($val == 'checkout') {
+                    $status = esc_html__('Checkout', 'wp-user-avatar');
+                } elseif ($val == 'tab_widget') {
+                    $status = esc_html__('ProfilePress Tabbed Widget', 'wp-user-avatar');
+                } elseif (in_array($val, array_keys($social_login_networks))) {
+                    $status = $social_login_networks[$val];
+                } else {
+                    $status = FormRepository::get_name(absint($val), FormRepository::REGISTRATION_TYPE);
                 }
             }
         }

@@ -56,7 +56,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	$option_name   = $gdpr_default_content->moove_gdpr_get_option_name();
 	$modal_options = get_option( $option_name );
 	$wpml_lang     = $gdpr_default_content->moove_gdpr_get_wpml_lang('label');
-
 	if ( $wpml_lang ) :
 		$_current_user       = wp_get_current_user();
 		$show_language_alert = isset( $modal_options[ 'gdpr_hide_language_notice_' . $_current_user->ID ] ) && 1 === intval( $modal_options[ 'gdpr_hide_language_notice_' . $_current_user->ID ] ) ? 'display: none;' : 'display: inline-block;';

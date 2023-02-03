@@ -123,7 +123,7 @@ class OrderWPListTable extends \WP_List_Table
 
         $title .= '&nbsp;<strong><span class="post-state"> — ' . OrderType::get_label($order->order_type) . '</span></strong>';
 
-        return $title . $this->row_actions($actions);
+        return $title . $this->row_actions(apply_filters('ppress_orders_table_column_order_actions', $actions, $order));
     }
 
     public function column_plan(OrderEntity $order)
@@ -135,12 +135,18 @@ class OrderWPListTable extends \WP_List_Table
     {
         if (empty($order->payment_method)) return '&mdash;';
 
-        return PaymentMethods::get_instance()->get_by_id($order->payment_method)->get_method_title();
+        $payment_method = PaymentMethods::get_instance()->get_by_id($order->payment_method);
+
+        if ($payment_method) {
+            return PaymentMethods::get_instance()->get_by_id($order->payment_method)->get_method_title();
+        }
+
+        return ucwords($order->payment_method);
     }
 
     public function column_order_total(OrderEntity $order)
     {
-        return ppress_display_amount($order->get_total());
+        return ppress_display_amount($order->get_total(), $order->currency);
     }
 
     public function column_date_created(OrderEntity $order)

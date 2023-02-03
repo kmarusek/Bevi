@@ -81,7 +81,7 @@ class SettingsPage
                     ],
                     'description' => sprintf(
                         esc_html__('If "Shop Base Address" is selected, Tax will be calculated based on the location of your %sbusiness in Settings%s.', 'wp-user-avatar'),
-                        '<a target="_blank" href="' . PPRESS_SETTINGS_SETTING_PAGE . '#business_info">', '</a>'
+                        '<a target="_blank" href="' . PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#business_info">', '</a>'
                     )
                 ]
             ],

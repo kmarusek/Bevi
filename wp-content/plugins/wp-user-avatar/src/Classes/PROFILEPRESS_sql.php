@@ -70,7 +70,7 @@ class PROFILEPRESS_sql
         // get the profile fields row for the id and save as array
         $result = $wpdb->get_var($wpdb->prepare($sql, $meta_id, $meta_key));
 
-        return ! is_null($result) ? unserialize($result) : false;
+        return ! is_null($result) ? unserialize($result, ['allowed_classes' => false]) : false;
     }
 
     public static function get_meta_data_by_key($meta_key)
@@ -88,7 +88,7 @@ class PROFILEPRESS_sql
         $output = [];
         foreach ($result as $key => $meta) {
             $output[$key] = array_reduce(array_keys($meta), function ($carry, $item) use ($meta) {
-                $carry[$item] = ($item == 'meta_value') ? unserialize($meta[$item]) : $meta[$item];
+                $carry[$item] = ($item == 'meta_value') ? unserialize($meta[$item], ['allowed_classes' => false]) : $meta[$item];
 
                 return $carry;
             });
@@ -112,7 +112,7 @@ class PROFILEPRESS_sql
         $output = [];
         foreach ($result as $key => $meta) {
             $output[$key] = array_reduce(array_keys($meta), function ($carry, $item) use ($meta) {
-                $carry[$item] = ($item == 'meta_value') ? unserialize($meta[$item]) : $meta[$item];
+                $carry[$item] = ($item == 'meta_value') ? unserialize($meta[$item], ['allowed_classes' => false]) : $meta[$item];
 
                 return $carry;
             });

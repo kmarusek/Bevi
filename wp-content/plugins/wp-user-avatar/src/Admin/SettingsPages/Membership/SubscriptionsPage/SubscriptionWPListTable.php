@@ -226,6 +226,10 @@ class SubscriptionWPListTable extends \WP_List_Table
             $query_args['customer_id'] = absint($_GET['by_ci']);
         }
 
+        if (ppressGET_var('by_plan')) {
+            $query_args['plan_id'] = absint($_GET['by_plan']);
+        }
+
         $this->items = SubscriptionRepository::init()->retrieveBy($query_args);
 
         $total_items = SubscriptionRepository::init()->retrieveBy($query_args, true);
@@ -298,9 +302,10 @@ class SubscriptionWPListTable extends \WP_List_Table
 
     public function filter_bar()
     {
-        $start_date = isset($_GET['start_date']) ? sanitize_text_field($_GET['start_date']) : null;
-        $end_date   = isset($_GET['end_date']) ? sanitize_text_field($_GET['end_date']) : null;
-        $customer   = isset($_GET['by_ci']) ? absint($_GET['by_ci']) : 'all';
+        $start_date      = isset($_GET['start_date']) ? sanitize_text_field($_GET['start_date']) : null;
+        $end_date        = isset($_GET['end_date']) ? sanitize_text_field($_GET['end_date']) : null;
+        $customer        = isset($_GET['by_ci']) ? absint($_GET['by_ci']) : 'all';
+        $membership_plan = isset($_GET['by_plan']) ? absint($_GET['by_plan']) : 'all';
 
         $status    = ppressGET_var('status');
         $clear_url = PPRESS_MEMBERSHIP_SUBSCRIPTIONS_SETTINGS_PAGE;
@@ -327,10 +332,19 @@ class SubscriptionWPListTable extends \WP_List_Table
             </select>
         </span>
 
+        <span id="ppress-plans-filter">
+            <select name="by_plan" class="ppress-select2-field membership_plan" style="min-width:180px">
+                <option value="all"><?= esc_html__('All Membership Plans', 'wp-user-avatar') ?></option>
+                    <?php if ( ! empty($membership_plan) && 'all' != $membership_plan) : ?>
+                        <option value="<?= $membership_plan ?>" selected><?= ppress_get_plan($membership_plan)->get_name() ?></option>
+                    <?php endif; ?>
+            </select>
+        </span>
+
         <span id="ppress-after-core-filters">
 			<input type="submit" class="button button-secondary" value="<?php esc_html_e('Filter', 'wp-user-avatar'); ?>"/>
 
-			<?php if ( ! empty($_GET['s']) || ! empty($start_date) || ! empty($end_date) || $customer !== 'all') : ?>
+			<?php if ( ! empty($_GET['s']) || ! empty($start_date) || ! empty($end_date) || $customer !== 'all' || $membership_plan !== 'all') : ?>
                 <a href="<?php echo esc_url($clear_url); ?>" class="button-secondary">
 					<?php esc_html_e('Clear', 'wp-user-avatar'); ?>
 				</a>

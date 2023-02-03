@@ -390,9 +390,9 @@ class DefaultTemplate extends AbstractTheme
     {
         $active_tab = $this->active_tab();
 
-        $max_width              = $this->get_meta('ppress_dpf_max_width');
-        $profile_area_max_width = $this->get_meta('ppress_dpf_area_max_width');
-        $header_display_name    = $this->get_meta('ppress_dpf_profile_header_display_name');
+        $max_width              = esc_html($this->get_meta('ppress_dpf_max_width'));
+        $profile_area_max_width = esc_html($this->get_meta('ppress_dpf_area_max_width'));
+        $header_display_name    = esc_html($this->get_meta('ppress_dpf_profile_header_display_name'));
 
         /** @see https://stackoverflow.com/a/20373067/2648410  using array_values to reindex array numeric keys */
         $profile_user_meta = array_values(
@@ -499,11 +499,11 @@ class DefaultTemplate extends AbstractTheme
 
         $profile_photo_style = implode(';', $profile_photo_style);
 
-        $header_name_color        = $this->get_meta('ppress_dpf_profile_header_name_color');
-        $body_text_color          = $this->get_meta('ppress_dpf_profile_body_text_color');
-        $menu_background_color    = $this->get_meta('ppress_dpf_profile_menu_background_color');
-        $menu_tab_text_color      = $this->get_meta('ppress_dpf_profile_menu_tab_text_color');
-        $active_menu_tab_bg_color = $this->get_meta('ppress_dpf_profile_active_menu_tab_bg_color');
+        $header_name_color        = esc_html($this->get_meta('ppress_dpf_profile_header_name_color'));
+        $body_text_color          = esc_html($this->get_meta('ppress_dpf_profile_body_text_color'));
+        $menu_background_color    = esc_html($this->get_meta('ppress_dpf_profile_menu_background_color'));
+        $menu_tab_text_color      = esc_html($this->get_meta('ppress_dpf_profile_menu_tab_text_color'));
+        $active_menu_tab_bg_color = esc_html($this->get_meta('ppress_dpf_profile_active_menu_tab_bg_color'));
 
         return <<<CSS
 div#pp-$form_type-$form_id.ppress-default-profile .ppress-dpf-profile-photo {

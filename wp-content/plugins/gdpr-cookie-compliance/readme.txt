@@ -2,13 +2,13 @@
 Contributors: MooveAgency
 Donate link: https://www.mooveagency.com/wordpress-plugins/gdpr-cookie-compliance/
 Tags: GDPR, CCPA, DSGVO, cookie banner, cookie notice
-Stable tag: 4.9.5
+Stable tag: 4.9.8
 Requires at least: 4.5
 Tested up to: 6.1
 Requires PHP: 5.6 or higher
 License: GPLv3
 
-Cookie notice for GDPR, CCPA, DSGVO, European and other cookie law and consent notice requirements on your website.
+Cookie notice banner for GDPR, CCPA, CPRA, LGPD, PECR, AAP, PIPEDA, VCDPA, CPRA, ICO, GPDP, DSGVO, BfDl, CNIL, AEPD, PDPB, DPA, PDPA, TTDSG, POPIA, APA, ePrivacy, COPPA, CASL, European cookie law, data protection and privacy regulations and other cookie law and consent notice requirements on your website.
 
 == Description ==
 
@@ -17,13 +17,14 @@ Cookie notice for GDPR, CCPA, DSGVO, European and other cookie law and consent n
 
 ### Key Features
 
+* **Local Data Storage** - all user data is stored locally on your website only - we do not collect or store any of your user data on our servers
 * **Simple** to use — install & setup in seconds
 * Give your users **full control** over cookies stored on their computer, including the ability for users to **revoke their consent**.
 * **Fully customisable** - upload your own logo, colours, fonts
 * **Fully editable** - change all text
 * **Set the position** of the Cookie Consent Banner: at the top or bottom of your pages
 * **Flexible** - decide which scripts will be loaded by default or only when the user gives consent
-* **'Accept', **'Reject'**, 'Close' and 'Settings' buttons
+* **'Accept'**, **'Reject'**, 'Close' and 'Settings' buttons
 * **Consent expiration** settings
 * Link to **Privacy Policy** page
 * Simple, beautiful & intuitive user interface
@@ -31,30 +32,29 @@ Cookie notice for GDPR, CCPA, DSGVO, European and other cookie law and consent n
 * Sleek animations to enhance the user experience
 * **Mobile responsive** design
 * **SEO friendly**
-* Optimised for **WCAG & ADA compliance**
+* Optimized for **WCAG & ADA** accessibility guidelines
 * [WPML](https://wpml.org/?aid=85067&affiliate_key=oYH2FlnrApDE), QTranslate, WP Multilang, TranslatePress and Polylang compatible, .pot file for translations included
 * **CDN** base URL supported
 * Supports all major **caching** servers and plugins
-* Available in **16 languages**
+* Available in **17 languages**
 * Optimised for PHP 7 and 8
 
 ### Premium Features Available
 
-* **[NEW] Google Site Kit integration** - our plugin supports the Google Site Kit integration natively
+* **[NEW] Google Site Kit integration** - our plugin supports the Google Site Kit natively
 * **Cookie wall / Full-screen layout** - if enabled, the Cookie Consent Banner will be display in a full screen mode, and force users to either accept or reject cookies before they can see your content
 * **Export & import settings** - transfer your custom settings between sites with ease
 * **WordPress Multisite features** - you can manage the plugin settings globally, and clone them from one site to another within your multi-site setup. You can also sync users consent between individual subsites on your multisite network
 * **Accept on Scroll / Hide timer** - allow users to accept cookies by scrolling down the page OR by setting a timer (ie. Hide banner after 5 seconds)
 * **Renew Consent** - ask users to renew their consent if there is a change in privacy or cookie policy on your site
-* **Geo-location** - if enabled, the Cookie Consent Banner will only be shown to visitors from the European Union or selected countries (ie. Canada, California etc.)
+* **Geo-location** - the Cookie Consent Banner can be shown to visitors from the European Union or selected countries only (ie. Canada, California etc.)
 * **iFrame Blocker** - blocks users from viewing 3rd party resources (such as Youtube) until they accept cookies
 * **Language Specific Scripts** - insert different Tag Manager Scripts for different languages, supports WPML and other language plugins
 * **Premium Shortcodes** that can be added to your ‘Privacy & Cookie Policy’ and allow your users to manage their consent with ease.
 * **Hide Cookie Banner** allows you to hide the Cookie Notice Banner on selected pages
-* **Cookie Declaration** allows you to manually declare the exact type of cookies that your site uses, including the cookie name, provider, purpose and expiration
-* **Consent Log** - gives you the ability to store user consent information in the event that you need to prove that consent was given.
+* **Cookie Declaration** allows you to declare the exact type of cookies that your site uses, including the cookie name, provider, purpose and expiration
+* **Consent Log** - gives you the ability to store user consent information in the event that you need to prove that consent was given
 * **Analytics** - stats and charts showing you how many users accepted your cookies (all anonymous)
-* **Local Data Storage** - all user data is stored locally on your website only (ie. Consent log, Analytics features) - we do not collect or store any of your user data on our servers
 * **Fast Premium Support** from our friendly team
 * **12 months** of premium updates included
 
@@ -127,13 +127,13 @@ OUr cookie plugin is very flexible and especially useful in preparing your site 
 * **AAP**: Australia's Privacy Principles (Australia)
 * **PIPEDA**: The Personal Information Protection and Electronic Documents Act (Canada) 
 * **LGPD**: The Brazilian General Data Protection Law (Brazil)
-* **VCDPA, CPRA, ICO, GPDP, DSGVO, BfDl, CNIL, AEPD, PDPB, DPA, PDPA** and other cookie law, data protection and privacy regulations
+* **VCDPA, CPRA, ICO, GPDP, DSGVO, BfDl, CNIL, AEPD, PDPB, DPA, PDPA, DPA, PDPA, TTDSG, POPIA , APA, ePrivacy, COPPA, CASL, Australian Privacy Principles, The “Marco Civil” Privacy Act 1988 ** and other cookie law, data protection and privacy regulations
 
 
 
 ### About us
 
-[Moove Agency](https://www.mooveagency.com/) is a premium supplier of quality WordPress plugins, services and support. [Visit our site](https://www.mooveagency.com/wordpress-plugins/) to learn more.
+[Moove Agency](https://www.mooveagency.com/) is a premium supplier of quality WordPress plugins, services and support. [Visit our WordPress site](https://www.mooveagency.com/wordpress-plugins/) to learn more.
 
 
 ### Disclaimer
@@ -275,6 +275,21 @@ The Brazilian General Data Protection Law (“Lei Geral de Proteção de Dados�
 39. GDPR Cookie Compliance - Front-end - Cookie Shortcode [Premium]
 
 == Changelog ==
+= 4.10.0: 2 February 2023 =
+* Close button options extended with redirect
+* Minor fix in Advanced module template part
+* "Banner initialization delay" option added
+* Minor fixes
+
+= 4.9.7: 12 January 2023 =
+* Cookie removal Google support improved
+* Rel nofollow attribute removed from powered by link
+* Minor CSS fixes
+
+= 4.9.6: 05 December 2022 =
+* GTM4WP compatibility fixed
+* Added support for Falang translation plugin
+
 = 4.9.5: 29 November 2022 =
 * Excluded cookie HTML from Divi Builder
 

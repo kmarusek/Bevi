@@ -11,10 +11,24 @@
 namespace ProfilePressVendor\Carbon\PHPStan;
 
 use ProfilePressVendor\Carbon\CarbonInterface;
+use ProfilePressVendor\PHPStan\Reflection\ReflectionProvider;
 use ReflectionClass;
 use ReflectionException;
 final class MacroScanner
 {
+    /**
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
+    /**
+     * MacroScanner constructor.
+     *
+     * @param \PHPStan\Reflection\ReflectionProvider $reflectionProvider
+     */
+    public function __construct(ReflectionProvider $reflectionProvider)
+    {
+        $this->reflectionProvider = $reflectionProvider;
+    }
     /**
      * Return true if the given pair class-method is a Carbon macro.
      *
@@ -27,7 +41,11 @@ final class MacroScanner
      */
     public function hasMethod(string $className, string $methodName) : bool
     {
-        return \is_a($className, CarbonInterface::class, \true) && \is_callable([$className, 'hasMacro']) && $className::hasMacro($methodName);
+        $classReflection = $this->reflectionProvider->getClass($className);
+        if ($classReflection->getName() !== CarbonInterface::class && !$classReflection->isSubclassOf(CarbonInterface::class)) {
+            return \false;
+        }
+        return \is_callable([$className, 'hasMacro']) && $className::hasMacro($methodName);
     }
     /**
      * Return the Macro for a given pair class-method.

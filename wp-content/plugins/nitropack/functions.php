@@ -571,6 +571,11 @@ function nitropack_is_ajax() {
         !empty($_GET["wc-ajax"]);
 }
 
+/**
+ * Checking if the current request is wp-cli request
+ *
+ * @return bool
+ */
 function nitropack_is_wp_cli() {
     return defined("WP_CLI") && WP_CLI;
 }

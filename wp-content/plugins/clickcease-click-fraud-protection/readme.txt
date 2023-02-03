@@ -19,6 +19,7 @@ ClickCease protects you from invalid traffic by monitoring and protecting your:
 Put a stop to ad and click fraud on your website with our market-leading AI software. Allow yourself to fully focus on growing your business without having online fraud distract you.
 
 You will need an active ClickCease subscription to use this WordPress plugin.
+
 == Installation ==
 Install the plugin, add you keys, and you're protected.
 == Frequently Asked Questions ==
@@ -31,7 +32,5 @@ Secure your ad campaigns and website from malicious bots and competitors with Cl
 **What else do I need for this plugin to work?**
 You will need to sign up for a ClickCease subscription at ClickCease.com. Our free 7 day trial allows you to get started blocking bad traffic.
 == Changelog ==
---Fix ononce 
-3.1.0
-
-
+3.1.4
+--bug fixes

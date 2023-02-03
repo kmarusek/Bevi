@@ -28,7 +28,7 @@ class FrontendController extends BaseController
 
         $do_not_cache = apply_filters('ppress_no_cache', ( ! empty($page_ids)) ? true : false);
 
-        if ($do_not_cache && is_page($page_ids)) {
+        if (apply_filters('ppress_is_prevent_cache', $do_not_cache && is_page($page_ids))) {
 
             add_filter('nocache_headers', [$this, 'additional_nocache_headers'], 99);
 

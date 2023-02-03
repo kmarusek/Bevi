@@ -6,6 +6,7 @@ use ProfilePress\Core\Admin\ProfileCustomFields;
 use ProfilePress\Core\Admin\SettingsPages\AdminFooter;
 use ProfilePress\Core\Admin\SettingsPages\ExtensionsSettingsPage;
 use ProfilePress\Core\Admin\SettingsPages\IDUserColumn;
+use ProfilePress\Core\Admin\SettingsPages\LicenseUpgrader;
 use ProfilePress\Core\Admin\SettingsPages\MailOptin;
 use ProfilePress\Core\Admin\SettingsPages\MemberDirectories;
 use ProfilePress\Core\Admin\SettingsPages\Membership\CheckListHeader;
@@ -18,6 +19,7 @@ use ProfilePress\Core\Admin\SettingsPages\Membership\PaymentSettings;
 use ProfilePress\Core\Admin\SettingsPages\Membership\PlansPage\SettingsPage as PlansSettingsPage;
 use ProfilePress\Core\Admin\SettingsPages\Membership\SubscriptionsPage\SettingsPage as SubscriptionsPageSettingsPage;
 use ProfilePress\Core\Admin\SettingsPages\ToolsSettingsPage;
+use ProfilePress\Core\Classes\BlockRegistrations;
 use ProfilePress\Core\Classes\GlobalSiteAccess;
 use ProfilePress\Core\ContentProtection;
 use ProfilePress\Core\Admin\SettingsPages\EmailSettings\DefaultTemplateCustomizer;
@@ -59,6 +61,7 @@ define('PPRESS_MEMBERSHIP_SUBSCRIPTIONS_SETTINGS_SLUG', 'ppress-subscriptions');
 define('PPRESS_EXTENSIONS_SETTINGS_SLUG', 'ppress-extensions');
 
 define('PPRESS_SETTINGS_SETTING_PAGE', admin_url('admin.php?page=' . PPRESS_SETTINGS_SLUG));
+define('PPRESS_SETTINGS_SETTING_GENERAL_PAGE', add_query_arg(['section' => 'general'], admin_url('admin.php?page=' . PPRESS_SETTINGS_SLUG)));
 define('PPRESS_CUSTOM_FIELDS_SETTINGS_PAGE', add_query_arg(['view' => 'custom-fields'], PPRESS_SETTINGS_SETTING_PAGE));
 define('PPRESS_CONTACT_INFO_SETTINGS_PAGE', add_query_arg(['section' => 'contact-info'], PPRESS_CUSTOM_FIELDS_SETTINGS_PAGE));
 define('PPRESS_SETTINGS_EMAIL_SETTING_PAGE', add_query_arg('view', 'email', PPRESS_SETTINGS_SETTING_PAGE));
@@ -130,7 +133,7 @@ class Base extends DBTables
                 check_admin_referer('ppress_create_pages', 'ppress_nonce');
                 RegisterActivation\Base::create_pages();
                 PAnD::set_admin_notice_cache('ppress-create-plugin-pages-notice', 'forever');
-                wp_safe_redirect(PPRESS_SETTINGS_SETTING_PAGE . '#global_settings');
+                wp_safe_redirect(PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '#global_pages');
                 exit;
             }
         });
@@ -146,6 +149,7 @@ class Base extends DBTables
 
         Cron::get_instance();
         GlobalSiteAccess::init();
+        BlockRegistrations::init();
         DefaultTemplateCustomizer::get_instance();
         RegisterScripts::get_instance();
         PPRESS_Session::get_instance();
@@ -163,6 +167,8 @@ class Base extends DBTables
         ContentProtection\Init::get_instance();
         NavigationMenuLinks\Init::init();
         Membership\Init::init();
+
+        LicenseUpgrader::get_instance();
 
         $this->admin_hooks();
 
@@ -227,9 +233,7 @@ class Base extends DBTables
 
     public function db_updates()
     {
-        if ( ! is_admin()) {
-            return;
-        }
+        if ( ! is_admin()) return;
 
         DBUpdates::get_instance()->maybe_update();
     }

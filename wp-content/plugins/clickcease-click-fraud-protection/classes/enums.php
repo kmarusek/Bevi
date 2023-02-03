@@ -65,4 +65,6 @@ abstract class DomainState
   const BZ_PLUGIN_ACTIVATED = 2;
   const BZ_PLUGIN_DEACTIVATED = 4;
   const BZ_PLUGIN_UNINSTALLED = 5;
+  const PLUGIN_ACTIVATED = 9;
+  const PLUGIN_DEACTIVATED = 10;
 }

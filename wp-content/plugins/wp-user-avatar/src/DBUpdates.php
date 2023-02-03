@@ -10,18 +10,18 @@ class DBUpdates
 {
     public static $instance;
 
-    const DB_VER = 6;
+    const DB_VER = 8;
 
     public function init_options()
     {
-        get_option('ppress_db_ver', 0);
+        add_option('ppress_db_ver', 0);
     }
 
     public function maybe_update()
     {
         $this->init_options();
 
-        if (get_option('ppress_db_ver') >= self::DB_VER) {
+        if (get_option('ppress_db_ver', 0) >= self::DB_VER) {
             return;
         }
 
@@ -52,11 +52,11 @@ class DBUpdates
             if (method_exists($this, $update_method)) {
                 call_user_func(array($this, $update_method));
             }
-
-            // update the option in the database, so that this process can always
-            // pick up where it left off
-            update_option('ppress_db_ver', $current_db_ver);
         }
+
+        // update the option in the database, so that this process can always
+        // pick up where it left off
+        update_option('ppress_db_ver', $current_db_ver);
     }
 
     public function update_routine_1()
@@ -129,6 +129,21 @@ class DBUpdates
     {
         $a                           = get_option(ExtensionManager::DB_OPTION_NAME);
         $a[ExtensionManager::MOLLIE] = 'true';
+        update_option(ExtensionManager::DB_OPTION_NAME, $a);
+    }
+
+    public function update_routine_7()
+    {
+        ppress_update_settings('wordpresscom_button_label', esc_html__('Sign in with WordPress.com', 'profilepress-pro'));
+        ppress_update_settings('yahoo_button_label', esc_html__('Sign in with Yahoo', 'profilepress-pro'));
+        ppress_update_settings('microsoft_button_label', esc_html__('Sign in with Microsoft', 'profilepress-pro'));
+        ppress_update_settings('amazon_button_label', esc_html__('Sign in with Amazon', 'profilepress-pro'));
+    }
+
+    public function update_routine_8()
+    {
+        $a                            = get_option(ExtensionManager::DB_OPTION_NAME);
+        $a[ExtensionManager::RECEIPT] = 'true';
         update_option(ExtensionManager::DB_OPTION_NAME, $a);
     }
 

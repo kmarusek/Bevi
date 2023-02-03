@@ -186,7 +186,7 @@ class FormRepository
 
         $output = [];
         foreach ($result as $value) {
-            $output[] = unserialize($value['meta_value']);
+            $output[] = unserialize($value['meta_value'], ['allowed_classes' => false]);
         }
 
         if ($single && is_array($output)) return $output[0];
@@ -379,7 +379,7 @@ class FormRepository
         );
 
         foreach ($metas as $meta) {
-            self::add_form_meta($new_form_id, $form_type, $meta['meta_key'], unserialize($meta['meta_value']));
+            self::add_form_meta($new_form_id, $form_type, $meta['meta_key'], unserialize($meta['meta_value'], ['allowed_classes' => false]));
         }
     }
 

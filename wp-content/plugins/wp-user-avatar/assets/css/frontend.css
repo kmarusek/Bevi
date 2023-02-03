@@ -418,9 +418,29 @@ a.pp-button-social-login.pp-button-social-login-linkedin {
     border-color: #0077b5;
 }
 
+a.pp-button-social-login.pp-button-social-login-microsoft {
+    background: #404040;
+    border-color: #404040;
+}
+
+a.pp-button-social-login.pp-button-social-login-amazon {
+    background: #f9991d;
+    border-color: #f9991d;
+}
+
 a.pp-button-social-login.pp-button-social-login-vk {
     background: #4a76a8;
     border-color: #4a76a8;
+}
+
+a.pp-button-social-login.pp-button-social-login-wordpresscom {
+    background: #0675c4;
+    border-color: #0675c4;
+}
+
+a.pp-button-social-login.pp-button-social-login-yahoo {
+    background: #430297;
+    border-color: #430297;
 }
 
 a.pp-button-social-login.pp-button-social-login-github {
@@ -431,6 +451,22 @@ a.pp-button-social-login.pp-button-social-login-github {
 /** Amazon:#ff9900; disqus:#2e9fff; instagram: #e4405f; paypal:#00457c; yahoo:#400090 */
 a.pp-button-social-login .ppsc-vk {
     background-image: url(../images/social-login/vk-fa.svg)
+}
+
+a.pp-button-social-login .ppsc-microsoft {
+    background-image: url(../images/social-login/microsoft.svg)
+}
+
+a.pp-button-social-login .ppsc-amazon {
+    background-image: url(../images/social-login/amazon.svg)
+}
+
+a.pp-button-social-login .ppsc-yahoo {
+    background-image: url(../images/social-login/yahoo.svg)
+}
+
+a.pp-button-social-login .ppsc-wordpresscom {
+    background-image: url(../images/social-login/wpcom.svg)
 }
 
 a.pp-button-social-login .ppsc-facebook {
@@ -2510,3 +2546,29 @@ html .select2.select2-container .select2-selection.select2-selection--multiple i
 }
 
 /*********************************** END member directory search and filter CSS ------------------------------------ */
+.ppress-paywall-message-wrap {
+    position: relative;
+    width: 100%;
+    margin: -5em auto 2em;
+    padding: 6em 0 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 0.5em, #fff 5.5em, #fff 100%);
+}
+
+.ppress-paywall-message {
+    box-shadow: 0 0 0.5em 0.25em rgba(0, 0, 0, 0.125);
+    padding: 1.375em;
+    border: 6px solid #ffffff;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    background-color: #f4f4f4;
+    color: #333333;
+}
+
+.ppress-paywall-message p:last-child {
+    margin-bottom: 0 !important;
+}
+
+p:has(+ .ppress-paywall-message-wrap) {
+    margin-bottom: 0;
+}

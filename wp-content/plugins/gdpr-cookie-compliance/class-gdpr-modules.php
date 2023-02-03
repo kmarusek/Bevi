@@ -58,7 +58,7 @@ class GDPR_Modules {
 		if ( $infobar_hidden ) :
 			$floating_button_class = 'button-visible';
 		endif;
-		$floating_button_position = false;
+		$floating_button_position = apply_filters( 'gdpr_floating_button_position',  false );
 		$data                     = new stdClass();
 		$data->options            = $modal_options;
 		$data->wpml_lang          = $wpml_lang;

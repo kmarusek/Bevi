@@ -49,7 +49,7 @@ class SettingsPage extends AbstractSettingsPage
             $title = esc_html__('Add Protection Rule', 'wp-user-avatar');
         }
 
-        return $title;
+        return apply_filters('ppress_content_protection_settings_page_title', $title);
     }
 
     public function register_cpf_settings_page()
@@ -63,6 +63,17 @@ class SettingsPage extends AbstractSettingsPage
             array($this, 'admin_page_callback'));
 
         add_action("load-$hook", array($this, 'add_options'));
+    }
+
+    public function header_menu_tabs()
+    {
+        $tabs = apply_filters('ppress_membership_content_protection_settings_page_tabs', [
+            5 => ['id' => $this->default_header_menu(), 'url' => PPRESS_CONTENT_PROTECTION_SETTINGS_PAGE, 'label' => esc_html__('Content Protection', 'wp-user-avatar')],
+        ]);
+
+        ksort($tabs);
+
+        return $tabs;
     }
 
     public function default_header_menu()

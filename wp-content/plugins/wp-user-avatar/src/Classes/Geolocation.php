@@ -4,7 +4,6 @@ namespace ProfilePress\Core\Classes;
 
 class Geolocation
 {
-
     /**
      * API endpoints for looking up user IP address.
      *

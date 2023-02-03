@@ -51,7 +51,7 @@ abstract class AbstractMembershipEmail
             '{{business_name}}'        => ppress_business_name(),
             '{{business_address}}'     => ppress_business_full_address(),
             '{{business_tax_id}}'      => ppress_business_tax_id()
-        ]);
+        ], $order, $adminview);
 
         return array_map(function ($val) {
             return ! empty($val) ? $val : '—';
@@ -94,17 +94,21 @@ abstract class AbstractMembershipEmail
         if (isset($matches[1]) && ! empty($matches[1])) {
 
             foreach ($matches[1] as $match) {
+
                 $key = str_replace(['{', '}'], '', $match);
 
+                $value = '';
+
                 if (isset($user->{$key})) {
+
                     $value = $user->{$key};
 
                     if (is_array($value)) {
                         $value = implode(', ', $value);
                     }
-
-                    $message = str_replace($match, $value, $message);
                 }
+
+                $message = str_replace($match, $value, $message);
             }
         }
 

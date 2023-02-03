@@ -86,14 +86,19 @@ let App = {
     },
 
     tabify() {
-        $('ul.pp-tabs li a', '#pp-form-builder-metabox').on('click', function (e) {
-            e.preventDefault();
-            $('.pp-form-builder_options_panel').hide();
-            $('#pp-form-builder-metabox ul.pp-tabs li').removeClass('active');
-            $(this).parent().addClass('active');
-            $($(this).attr('href')).show();
 
-        }).get(0).click();
+        let cachez = $('ul.pp-tabs li a', '#pp-form-builder-metabox');
+
+        if (cachez.length > 0) {
+            cachez.on('click', function (e) {
+                e.preventDefault();
+                $('.pp-form-builder_options_panel').hide();
+                $('#pp-form-builder-metabox ul.pp-tabs li').removeClass('active');
+                $(this).parent().addClass('active');
+                $($(this).attr('href')).show();
+
+            }).get(0).click();
+        }
     }
 };
 

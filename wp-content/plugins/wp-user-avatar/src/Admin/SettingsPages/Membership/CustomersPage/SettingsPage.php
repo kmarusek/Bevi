@@ -397,7 +397,7 @@ class SettingsPage extends AbstractSettingsPage
         echo '<input type="hidden" name="page" value="' . PPRESS_MEMBERSHIP_CUSTOMERS_SETTINGS_SLUG . '" />';
         echo '<input type="hidden" name="view" value="customers" />';
         if (isset($_GET['status'])) {
-            echo '<input type="hidden" name="status" value="' . sanitize_text_field($_GET['status']) . '" />';
+            echo '<input type="hidden" name="status" value="' . esc_attr($_GET['status']) . '" />';
         }
         $this->customerListTable->views();
         $this->customerListTable->filter_bar();

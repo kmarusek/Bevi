@@ -1,11 +1,11 @@
-/******/ (function() { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/advanced-custom-fields-pro/assets/src/js/pro/_acf-setting-clone.js":
 /*!********************************************************************************!*\
   !*** ./src/advanced-custom-fields-pro/assets/src/js/pro/_acf-setting-clone.js ***!
   \********************************************************************************/
-/***/ (function() {
+/***/ (() => {
 
 (function ($) {
   /**
@@ -152,7 +152,7 @@
 /*!*******************************************************************************************!*\
   !*** ./src/advanced-custom-fields-pro/assets/src/js/pro/_acf-setting-flexible-content.js ***!
   \*******************************************************************************************/
-/***/ (function() {
+/***/ (() => {
 
 (function ($) {
   /**
@@ -173,8 +173,10 @@
     events: {
       'blur .layout-label': 'onChangeLabel',
       'click .add-layout': 'onClickAdd',
-      'click .duplicate-layout': 'onClickDuplicate',
-      'click .delete-layout': 'onClickDelete'
+      'click .acf-field-settings-fc_head': 'onClickEdit',
+      'click .acf-field-setting-fc-duplicate': 'onClickDuplicate',
+      'click .acf-field-setting-fc-delete': 'onClickDelete',
+      'changed:layoutLabel': 'updateLayoutTitles'
     },
     $input: function (name) {
       return $('#' + this.getInputId() + '-' + name);
@@ -203,7 +205,7 @@
       if (!$tbody.hasClass('ui-sortable')) {
         $tbody.sortable({
           items: '> .acf-field-setting-fc_layout',
-          handle: '.reorder-layout',
+          handle: '.acf-fc_draggable',
           forceHelperSize: true,
           forcePlaceholderSize: true,
           scroll: true,
@@ -215,6 +217,7 @@
 
       // add meta to sub fields
       this.updateFieldLayouts();
+      this.updateLayoutTitles();
     },
     updateFieldLayouts: function () {
       this.getChildren().map(this.updateFieldLayout, this);
@@ -222,9 +225,66 @@
     updateFieldLayout: function (field) {
       field.prop('parent_layout', this.get('id'));
     },
+    updateLayoutTitles: function () {
+      const label = this.get('layoutLabel');
+      const parentLabel = this.$el.find('> .acf-label .acf-fc-layout-name');
+      if (label) {
+        parentLabel.html(label);
+      }
+    },
+    onClickEdit: function (e) {
+      const $target = $(e.target);
+      if ($target.hasClass('acf-btn') || $target.parent().hasClass('acf-btn')) {
+        return;
+      }
+      this.isOpen() ? this.close() : this.open();
+    },
+    isOpen: function (e) {
+      const $settings = this.$el.children('.acf-field-layout-settings');
+      return $settings.hasClass('open');
+    },
+    open: function (element, isAddingLayout) {
+      const $settings = element ? element.children('.acf-field-layout-settings') : this.$el.children('.acf-field-layout-settings');
+      const toggle = element ? element.find('.toggle-indicator').first() : this.$el.find('.toggle-indicator').first();
+
+      // action (show)
+      acf.doAction('show', $settings);
+
+      // open
+      if (isAddingLayout) {
+        $settings.slideDown({
+          complete: function () {
+            $settings.find('.layout-label').trigger('focus');
+          }
+        });
+      } else {
+        $settings.slideDown();
+      }
+      toggle.addClass('open');
+      if (toggle.hasClass('closed')) {
+        toggle.removeClass('closed');
+      }
+      $settings.addClass('open');
+    },
+    close: function () {
+      const $settings = this.$el.children('.acf-field-layout-settings');
+      const toggle = this.$el.find('.toggle-indicator').first();
+
+      // close
+      $settings.slideUp();
+      $settings.removeClass('open');
+      toggle.removeClass('open');
+      if (!toggle.hasClass('closed')) {
+        toggle.addClass('closed');
+      }
+
+      // action (hide)
+      acf.doAction('hide', $settings);
+    },
     onChangeLabel: function (e, $el) {
-      // vars
       var label = $el.val();
+      this.set('layoutLabel', label);
+      this.$el.attr('data-layout-label', label);
       var $name = this.$input('name');
 
       // render name
@@ -233,7 +293,7 @@
       }
     },
     onClickAdd: function (e, $el) {
-      // vars
+      e.preventDefault();
       var prevKey = this.get('id');
       var newKey = acf.uniqid('layout_');
 
@@ -243,7 +303,6 @@
         search: prevKey,
         replace: newKey,
         after: function ($el, $el2) {
-          // vars
           var $list = $el2.find('.acf-field-list:first');
 
           // remove sub fields
@@ -253,7 +312,9 @@
           $list.addClass('-empty');
 
           // reset layout meta values
+          $el2.attr('data-layout-label', '');
           $el2.find('.acf-fc-meta input').val('');
+          $el2.find('.acf-fc-layout-name').html(acf.__('Layout'));
         }
       });
 
@@ -262,12 +323,13 @@
 
       // update hidden input
       layout.$input('key').val(newKey);
+      !this.isOpen() ? this.open(layout.$el, true) : layout.$el.find('.layout-label').trigger('focus');
 
       // save
       this.fieldObject.save();
     },
     onClickDuplicate: function (e, $el) {
-      // vars
+      e.preventDefault();
       var prevKey = this.get('id');
       var newKey = acf.uniqid('layout_');
 
@@ -303,11 +365,12 @@
 
       // update hidden input
       layout.$input('key').val(newKey);
-
+      !this.isOpen() ? this.open(layout.$el, true) : layout.$el.find('.layout-label').trigger('focus');
       // save
       this.fieldObject.save();
     },
     onClickDelete: function (e, $el) {
+      e.preventDefault();
       // Bypass confirmation when holding down "shift" key.
       if (e.shiftKey) {
         return this.delete();
@@ -330,7 +393,6 @@
       });
     },
     delete: function () {
-      // vars
       var $siblings = this.$el.siblings('.acf-field-setting-fc_layout');
 
       // validate
@@ -373,7 +435,6 @@
       change_field_object_parent: 'updateParentLayout'
     },
     updateParentLayout: function (fieldObject) {
-      // vars
       var parent = fieldObject.getParent();
 
       // delete meta
@@ -404,7 +465,7 @@
 /*!***********************************************************************************!*\
   !*** ./src/advanced-custom-fields-pro/assets/src/js/pro/_acf-setting-repeater.js ***!
   \***********************************************************************************/
-/***/ (function() {
+/***/ (() => {
 
 (function ($) {
   /*
@@ -490,49 +551,49 @@
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = function(module) {
+/******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				function() { return module['default']; } :
-/******/ 				function() { return module; };
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 		__webpack_require__.d = (exports, definition) => {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	!function() {
-/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
-/******/ 	}();
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = function(exports) {
+/******/ 		__webpack_require__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
-!function() {
+(() => {
 "use strict";
 /*!*********************************************************************************!*\
   !*** ./src/advanced-custom-fields-pro/assets/src/js/pro/acf-pro-field-group.js ***!
@@ -547,7 +608,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-}();
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=acf-pro-field-group.js.map

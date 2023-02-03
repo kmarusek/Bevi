@@ -397,6 +397,7 @@
 
 .ppress-checkout__form .checkout_order_summary__discount__field_wrap input[type=text].checkout_order_summary__discount__input {
     width: 68%;
+    display: inline-block;
 }
 
 .ppress-checkout__form .ppress-checkout-section input[type="submit"].ppress-apply-discount-btn {
@@ -412,6 +413,7 @@
     font-size: 14px;
     line-height: 20px;
     font-weight: 500;
+    display: inline-block;
 }
 
 .ppress-checkout__form .ppress-checkout-section input[type="submit"].ppress-apply-discount-btn {
@@ -531,14 +533,20 @@
     border-bottom: 1px solid #E4E4E4;
 }
 
-.ppress-checkout__form .ppress-checkout-form__terms_condition_wrap {
+.ppress-checkout__form .ppress-checkout-form__terms_condition_wrap,
+.ppress-checkout__form .ppress-checkout-form__before_button_wrap {
     margin: 0;
     padding: 0;
     border: 0;
     padding-top: 40px;
 }
 
-.ppress-checkout__form .ppress-checkout-form__terms_condition_wrap .ppress-checkout-form__terms_condition__checkbox__label span {
+.ppress-checkout__form .ppress-checkout-form__terms_condition_wrap + .ppress-checkout-form__before_button_wrap {
+    padding-top: 0;
+}
+
+.ppress-checkout__form .ppress-checkout-form__terms_condition_wrap .ppress-checkout-form__terms_condition__checkbox__label span,
+.ppress-checkout__form .ppress-checkout-form__before_button_wrap .ppress-checkout-form__before_button__checkbox__label span {
     vertical-align: middle;
 }
 
@@ -553,7 +561,8 @@
     margin-bottom: 20px;
 }
 
-.ppress-checkout__form .ppress-checkout-form__terms_condition__checkbox_wrap {
+.ppress-checkout__form .ppress-checkout-form__terms_condition__checkbox_wrap,
+.ppress-checkout__form .ppress-checkout-form__before_button__checkbox_wrap {
     margin: 0;
     margin-bottom: 20px;
 }

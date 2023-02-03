@@ -186,6 +186,8 @@ class OrderEntity extends AbstractModel implements ModelInterface
     {
         $this->status = OrderStatus::COMPLETED;
 
+        $this->date_completed = current_time('mysql', true);
+
         if ( ! empty($transaction_id)) {
             $this->transaction_id = $transaction_id;
         }
@@ -211,6 +213,15 @@ class OrderEntity extends AbstractModel implements ModelInterface
         return $order_id;
     }
 
+    public function get_payment_method_title()
+    {
+        $payment_method = ppress_get_payment_method($this->payment_method);
+
+        if ($payment_method) return $payment_method->get_method_title();
+
+        return $payment_method;
+    }
+
     /**
      * @return false|int
      */
@@ -224,7 +235,7 @@ class OrderEntity extends AbstractModel implements ModelInterface
                 sprintf(
                     __('Payment %s has been fully refunded in %s.', 'wp-user-avatar'),
                     $this->transaction_id,
-                    ppress_get_payment_method($this->payment_method)->get_method_title()
+                    $this->get_payment_method_title()
                 )
             );
 

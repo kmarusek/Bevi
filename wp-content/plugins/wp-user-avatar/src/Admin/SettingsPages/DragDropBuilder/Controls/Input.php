@@ -11,7 +11,7 @@ class Input
     {
         $this->args = wp_parse_args(
             $args,
-            ['type' => 'text', 'name' => '', 'value' => sprintf('{{{data.%s}}}', esc_attr($args['name']))]
+            ['type' => 'text', 'name' => '', 'value' => sprintf('{{data.%s}}', esc_attr($args['name']))]
         );
     }
 

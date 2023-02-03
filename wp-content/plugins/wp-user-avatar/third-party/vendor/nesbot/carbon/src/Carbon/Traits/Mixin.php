@@ -132,18 +132,11 @@ trait Mixin
     protected static function bindMacroContext($context, callable $callable)
     {
         static::$macroContextStack[] = $context;
-        $exception = null;
-        $result = null;
         try {
-            $result = $callable();
-        } catch (Throwable $throwable) {
-            $exception = $throwable;
+            return $callable();
+        } finally {
+            \array_pop(static::$macroContextStack);
         }
-        \array_pop(static::$macroContextStack);
-        if ($exception) {
-            throw $exception;
-        }
-        return $result;
     }
     /**
      * Return the current context from inside a macro callee or a null if static.

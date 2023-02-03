@@ -67,8 +67,8 @@ abstract class AbstractSettingsPage
                     <img src="<?= $logo_url ?>" alt="">
                 </div>
                 <div class="ppress-admin-banner__helplinks">
-                <span><a rel="noopener" href="https://wordpress.org/support/plugin/wp-user-avatar/reviews/?filter=5#new-post" target="_blank">
-                    <span class="dashicons dashicons-star-filled"></span> <?= __('Review', 'wp-user-avatar'); ?>
+                <span><a rel="noopener" href="<?= PPRESS_EXTENSIONS_SETTINGS_PAGE ?>">
+                    <span class="dashicons dashicons-star-filled"></span> <?= __('Addons', 'wp-user-avatar'); ?>
                 </a></span>
                     <?php if (ExtensionManager::is_premium()) : ?>
                         <span><a rel="noopener" href="https://profilepress.com/submit-ticket/" target="_blank">
@@ -115,7 +115,7 @@ abstract class AbstractSettingsPage
                     self::$parent_menu_url_map[$id] = $url;
                     ?>
                     <a href="<?php echo esc_url(remove_query_arg(wp_removable_query_args(), $url)); ?>" class="ppress-nav-tab nav-tab<?= $id == $active_menu ? ' ppress-nav-active' : '' ?>">
-                        <?php echo sanitize_text_field($menu['label']) ?>
+                        <?php echo esc_html($menu['label']) ?>
                     </a>
                 <?php endforeach; ?>
             </nav>

@@ -22,8 +22,10 @@ $profile_id           = $subscription_data->profile_id;
 
 if ( ! empty($parent_order_data->payment_method)) {
     $payment_method_instance = PaymentMethods::get_instance()->get_by_id($parent_order_data->payment_method);
-    $profile_id              = $payment_method_instance->link_profile_id($profile_id, $subscription_data);
-    $payment_method_title    = $payment_method_instance->get_method_title();
+    if ($payment_method_instance) {
+        $profile_id           = $payment_method_instance->link_profile_id($profile_id, $subscription_data);
+        $payment_method_title = $payment_method_instance->get_method_title();
+    }
 }
 
 $payment_method_string = '';

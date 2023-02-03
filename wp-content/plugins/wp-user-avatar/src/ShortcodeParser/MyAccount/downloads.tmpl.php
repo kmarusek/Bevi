@@ -3,9 +3,6 @@
 use ProfilePress\Core\Membership\DigitalProducts\DownloadService;
 use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
 use ProfilePress\Core\Membership\Models\Order\OrderFactory;
-use ProfilePress\Core\Membership\Models\Order\OrderStatus;
-use ProfilePress\Core\Membership\Models\Order\OrderType;
-use ProfilePress\Core\Membership\Services\OrderService;
 
 if ( ! defined('ABSPATH')) {
     exit;

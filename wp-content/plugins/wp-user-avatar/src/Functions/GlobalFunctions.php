@@ -573,7 +573,7 @@ function ppress_other_field_atts($atts)
 
     foreach ($atts as $key => $value) {
         if ( ! in_array($key, $official_atts)) {
-            $other_atts[$key] = $value;
+            $other_atts[esc_attr($key)] = esc_attr($value);
         }
     }
 
@@ -720,88 +720,94 @@ function ppress_wp_new_user_notification($user_id, $deprecated = null, $notify =
     /**
      * Filters whether the admin is notified of a new user registration.
      *
+     * @param bool $send Whether to send the email. Default true.
+     * @param WP_User $user User object for new user.
+     *
      * @since 6.1.0
      *
-     * @param bool    $send Whether to send the email. Default true.
-     * @param WP_User $user User object for new user.
      */
-    $send_notification_to_admin = apply_filters( 'wp_send_new_user_notification_to_admin', true, $user );
+    $send_notification_to_admin = apply_filters('wp_send_new_user_notification_to_admin', true, $user);
 
     if ('user' !== $notify && true === $send_notification_to_admin) {
 
-        if (ppress_get_setting('new_user_admin_email_email_enabled', 'on') !== 'on') return;
+        if (ppress_get_setting('new_user_admin_email_email_enabled', 'on') == 'on') {
 
-        $message = ppress_get_setting('new_user_admin_email_email_content', ppress_new_user_admin_notification_message_default(), true);
+            $message = ppress_get_setting('new_user_admin_email_email_content', ppress_new_user_admin_notification_message_default(), true);
 
-        $title = ppress_get_setting('new_user_admin_email_email_subject', sprintf(__('[%s] New User Registration'), $blogname), true);
+            $title = ppress_get_setting('new_user_admin_email_email_subject', sprintf(__('[%s] New User Registration'), $blogname), true);
 
-        // handle support for custom fields placeholder.
-        preg_match_all('#({{[a-z_-]+}})#', $message, $matches);
+            // handle support for custom fields placeholder.
+            preg_match_all('#({{[a-z_-]+}})#', $message, $matches);
 
-        if (isset($matches[1]) && ! empty($matches[1])) {
+            if (isset($matches[1]) && ! empty($matches[1])) {
 
-            foreach ($matches[1] as $match) {
-                $key = str_replace(['{', '}'], '', $match);
+                foreach ($matches[1] as $match) {
+                    $key = str_replace(['{', '}'], '', $match);
 
-                if (isset($user->{$key})) {
-                    $value = $user->{$key};
+                    $value = '';
 
-                    if (is_array($value)) {
-                        $value = implode(', ', $value);
+                    if (isset($user->{$key})) {
+
+                        $value = $user->{$key};
+
+                        if (is_array($value)) {
+                            $value = implode(', ', $value);
+                        }
                     }
 
                     $message = str_replace($match, $value, $message);
                 }
             }
-        }
 
-        $search = array(
-            '{{username}}',
-            '{{user_email}}',
-            '{{site_title}}',
-            '{{first_name}}',
-            '{{last_name}}'
-        );
+            $search = array(
+                '{{username}}',
+                '{{user_email}}',
+                '{{site_title}}',
+                '{{first_name}}',
+                '{{last_name}}'
+            );
 
-        $replace = array(
-            $user->user_login,
-            $user->user_email,
-            $blogname,
-            $user->first_name,
-            $user->last_name
-        );
+            $replace = array(
+                $user->user_login,
+                $user->user_email,
+                $blogname,
+                $user->first_name,
+                $user->last_name
+            );
 
-        $message = htmlspecialchars_decode(
-            apply_filters(
-                'ppress_signup_admin_email_message',
-                str_replace($search, $replace, $message),
+            $message = htmlspecialchars_decode(
+                apply_filters(
+                    'ppress_signup_admin_email_message',
+                    str_replace($search, $replace, $message),
+                    $user
+                )
+            );
+
+            $title = apply_filters(
+                'ppress_signup_admin_email_subject',
+                str_replace($search, $replace, $title),
                 $user
-            )
-        );
+            );
 
-        $title = apply_filters(
-            'ppress_signup_admin_email_subject',
-            str_replace($search, $replace, $title),
-            $user
-        );
+            $admin_email = apply_filters('ppress_signup_notification_admin_email', ppress_get_admin_notification_emails());
 
-        $admin_email = apply_filters('ppress_signup_notification_admin_email', ppress_get_admin_notification_emails());
-
-        ppress_send_email($admin_email, $title, $message);
+            ppress_send_email($admin_email, $title, $message);
+        }
     }
 
     /**
      * Filters whether the user is notified of their new user registration.
      *
+     * @param bool $send Whether to send the email. Default true.
+     * @param WP_User $user User object for new user.
+     *
      * @since 6.1.0
      *
-     * @param bool    $send Whether to send the email. Default true.
-     * @param WP_User $user User object for new user.
      */
-    $send_notification_to_user = apply_filters( 'wp_send_new_user_notification_to_user', true, $user );
+    $send_notification_to_user = apply_filters('wp_send_new_user_notification_to_user', true, $user);
 
     // `$deprecated` was pre-4.3 `$plaintext_pass`. An empty `$plaintext_pass` didn't sent a user notification.
-    if ( 'admin' === $notify || true !== $send_notification_to_user || ( empty( $deprecated ) && empty( $notify ) ) ) {
+    if ('admin' === $notify || true !== $send_notification_to_user || (empty($deprecated) && empty($notify))) {
         return;
     }
 
@@ -963,6 +969,23 @@ function ppress_array_of_world_states($country = '')
     return $states;
 }
 
+function ppress_get_country_title($country)
+{
+    if ( ! empty($country)) {
+
+        $val = ppress_array_of_world_countries($country);
+
+        if ( ! empty($val)) return $val;
+    }
+
+    return $country;
+}
+
+function ppress_get_country_state_title($state, $country)
+{
+    return ppress_var(ppress_array_of_world_states($country), $state, $state, true);
+}
+
 function ppress_create_nonce()
 {
     return wp_create_nonce(ppress_nonce_action_string());
@@ -1051,24 +1074,38 @@ function ppress_minify_html($html)
 
 function ppress_get_ip_address()
 {
-    $ip = false;
+    $user_ip = '127.0.0.1';
 
-    if ( ! empty($_SERVER['HTTP_CLIENT_IP'])) {
-        //check ip from share internet
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif ( ! empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        //to check ip is pass from proxy
-        // can include more than 1 ip, first is the public one
-        $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-        $ip = $ip[0];
-    } elseif ( ! empty($_SERVER['REMOTE_ADDR'])) {
-        $ip = $_SERVER['REMOTE_ADDR'];
+    $keys = array(
+        'HTTP_CLIENT_IP',
+        'HTTP_X_FORWARDED_FOR',
+        'HTTP_X_FORWARDED',
+        'HTTP_X_CLUSTER_CLIENT_IP',
+        'HTTP_FORWARDED_FOR',
+        'HTTP_FORWARDED',
+        'REMOTE_ADDR',
+    );
+
+    foreach ($keys as $key) {
+        // Bail if the key doesn't exists.
+        if ( ! isset($_SERVER[$key])) {
+            continue;
+        }
+
+        if ($key == 'HTTP_X_FORWARDED_FOR' && ! empty($_SERVER[$key])) {
+            //to check ip is pass from proxy
+            // can include more than 1 ip, first is the public one
+            $_SERVER[$key] = explode(',', $_SERVER[$key]);
+            $_SERVER[$key] = $_SERVER[$key][0];
+        }
+
+        // Bail if the IP is not valid.
+        if ( ! filter_var(wp_unslash(trim($_SERVER[$key])), FILTER_VALIDATE_IP)) {
+            continue;
+        }
+
+        $user_ip = str_replace('::1', '127.0.0.1', $_SERVER[$key]);
     }
-
-    // Fix potential CSV returned from $_SERVER variables
-    $ip_array = explode(',', $ip);
-    $user_ip  = ! empty($ip_array[0]) ? $ip_array[0] : '127.0.0.1';
-    $user_ip  = filter_var(wp_unslash(trim($user_ip)), FILTER_VALIDATE_IP);
 
     return apply_filters('ppress_get_ip', $user_ip);
 }
@@ -1144,7 +1181,7 @@ function ppressGET_var($key, $default = false, $empty = false)
 function ppress_var($bucket, $key, $default = false, $empty = false)
 {
     if ($empty) {
-        return ! empty($bucket[$key]) ? $bucket[$key] : $default;
+        return isset($bucket[$key]) && ( ! empty($bucket[$key]) || ppress_is_boolean($bucket[$key])) ? $bucket[$key] : $default;
     }
 
     return isset($bucket[$key]) ? $bucket[$key] : $default;
@@ -1153,7 +1190,7 @@ function ppress_var($bucket, $key, $default = false, $empty = false)
 function ppress_var_obj($bucket, $key, $default = false, $empty = false)
 {
     if ($empty) {
-        return ! empty($bucket->$key) ? $bucket->$key : $default;
+        return isset($bucket->$key) && ( ! empty($bucket->$key) || ppress_is_boolean($bucket->$key)) ? $bucket->$key : $default;
     }
 
     return isset($bucket->$key) ? $bucket->$key : $default;
@@ -1243,7 +1280,7 @@ function ppress_is_http_code_success($code)
 }
 
 /**
- * Converts date/time to UTC timestamp.
+ * Converts date/time which should be in UTC to timestamp.
  *
  * strtotime uses the default timezone set in PHP which may or may not be UTC.
  *
@@ -1438,12 +1475,16 @@ function ppress_social_network_fields()
 function ppress_social_login_networks()
 {
     return apply_filters('ppress_social_login_networks', [
-        'facebook' => 'Facebook',
-        'twitter'  => 'Twitter',
-        'google'   => 'Google',
-        'linkedin' => 'LinkedIn',
-        'github'   => 'GitHub',
-        'vk'       => 'VK.com'
+        'facebook'     => 'Facebook',
+        'twitter'      => 'Twitter',
+        'google'       => 'Google',
+        'linkedin'     => 'LinkedIn',
+        'microsoft'    => 'Microsoft',
+        'yahoo'        => 'Yahoo',
+        'amazon'       => 'Amazon',
+        'github'       => 'GitHub',
+        'wordpresscom' => 'WordPress.com',
+        'vk'           => 'VK.com'
     ]);
 }
 

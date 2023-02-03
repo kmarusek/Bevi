@@ -1,5 +1,58 @@
 ﻿== Changelog ==
 
+= 4.6.0 =
+* Added [RazorPay addon](https://profilepress.com/addons/razorPay/?ref=changelog).
+* Added support for 'url' config when adding myaccount page menu tabs.
+* Added color fields to settings API.
+* Fixed bug where admin couldn't delete other users cover photo in the admin dashboard.
+* Fixed incorrect currency in order listing display.
+
+= 4.5.5 =
+* Fixed PHP Warning: Undefined array key "user_login".
+* Added missing text domain to strings.
+* Bumped Stripe API version to latest.
+* Fixed XSS in shortcode & content protection admin page.
+* Added settings button to [addons page](https://profilepress.com/addons/?ref=changelog).
+
+= 4.5.4 =
+* Fixed more XSS in form builder.
+
+= 4.5.3 =
+* Added option to filter subscriptions by membership plan.
+* Fixed error when retrieving some settings.
+* Fixed fatal error when attempting to remove user role from a user that does not exist.
+
+= 4.5.2 =
+* Pro: [Receipt addon](https://profilepress.com/addons/receipt/?ref=changelog).
+* Added helper link to auto-create required pages.
+* Fixed bug with checkout not working when username field is missing.
+* Fixed bug where payment completed date wasn't updated.
+
+= 4.5.1 =
+* Fixed bug with custom fields added to checkout form not saving after checkout registration.
+* Fixed more XSS issues.
+* Fixed Checkout CSS.
+
+= 4.5.0 =
+* Added [Block Registration by Email](https://profilepress.com/block-wordpress-registration-specific-email-domains/?ref=changelog) feature.
+* Fixed bug where install missing db feature didn't correctly work.
+* Fixed XSS in couple of admin pages
+* Fixed bug with disabled admin new user email causing welcome email to users not to work.
+
+= 4.4.1 =
+* Fixed fatal error caused by the use of str_contains on < PHP 8.
+* Fixed bug that resulted to broken admin css.
+
+= 4.4.0 =
+* Pro: [Metered Paywall addon](https://profilepress.com/addons/metered-paywall/?ref=changelog).
+* Pro: [Added WordPress.com, Yahoo, Microsoft, Amazon social login](https://profilepress.com/addons/social-login/?ref=changelog)
+* Fixed bug with db update not working in some cases.
+* Fixed bug with honeypot preventing some payment gateways from working.
+* Added setting to blur restricted content.
+* Enhancement: Disable content protection on post/page preview and elementor preview.
+* New: Allow licenses to be entered in Lite.
+* Fixed bug where unserialize() call could instantiate classes.
+
 = 4.3.2 =
 * PHP 8 compatibility improvements.
 * Fixed bug where default avatar wasn't reflecting in buddypress.

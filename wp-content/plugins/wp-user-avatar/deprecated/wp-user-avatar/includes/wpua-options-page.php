@@ -31,7 +31,7 @@ $hide_resize = (bool)$wpua_resize_upload != 1 ? ' style="display:none;"' : "";
             </th>
             <td>
                 <fieldset>
-                    <input name="wp_user_cover_upload_size_limit" type="text" id="wp_user_cover_upload_size_limit" value="' . $wpua_cover_upload_size_limit . '" class="regular-text" />
+                    <input name="wp_user_cover_upload_size_limit" type="text" id="wp_user_cover_upload_size_limit" value="' . esc_attr($wpua_cover_upload_size_limit) . '" class="regular-text" />
                     <span id="wpua-cover-readable-size">' . $wpua_cover_upload_size_limit_with_units . '</span>
                     <span id="wpua-cover-readable-size-error">' . sprintf(__('%s exceeds the maximum upload size for this site.', 'wp-user-avatar'), "") . '</span>
                     <div id="wpua-cover-slider"></div>
@@ -49,7 +49,7 @@ $hide_resize = (bool)$wpua_resize_upload != 1 ? ' style="display:none;"' : "";
             </th>
             <td>
                 <fieldset>
-                    <input name="wp_user_cover_default_image_url" type="text" id="wp_user_cover_default_image_url" value="' . $default_cover_image_url . '" class="regular-text" />
+                    <input name="wp_user_cover_default_image_url" type="text" id="wp_user_cover_default_image_url" value="' . esc_attr($default_cover_image_url) . '" class="regular-text" />
                     <br><span class="description">' . __('Please make sure that the default cover is large enough (min. 1000px in width) and respects the ratio you are using for cover photos.', 'wp-user-avatar') . '</span>
                 </fieldset>
             </td>
@@ -63,7 +63,7 @@ $hide_resize = (bool)$wpua_resize_upload != 1 ? ' style="display:none;"' : "";
             </th>
             <td>
                 <fieldset>
-                    <input name="wp_user_avatar_upload_size_limit" type="text" id="wp_user_avatar_upload_size_limit" value="' . $wpua_upload_size_limit . '" class="regular-text" />
+                    <input name="wp_user_avatar_upload_size_limit" type="text" id="wp_user_avatar_upload_size_limit" value="' . esc_attr($wpua_upload_size_limit) . '" class="regular-text" />
                     <span id="wpua-readable-size">' . $wpua_upload_size_limit_with_units . '</span>
                     <span id="wpua-readable-size-error">' . sprintf(__('%s exceeds the maximum upload size for this site.', 'wp-user-avatar'), "") . '</span>
                     <div id="wpua-slider"></div>
@@ -77,9 +77,9 @@ $hide_resize = (bool)$wpua_resize_upload != 1 ? ' style="display:none;"' : "";
                 </fieldset>
                 <fieldset id="wpua-resize-sizes"' . $hide_resize . '>
                 <label for="wp_user_avatar_resize_w">' . __('Width', 'wp-user-avatar') . '</label>
-                <input name="wp_user_avatar_resize_w" type="number" step="1" min="0" id="wp_user_avatar_resize_w" value="' . get_option('wp_user_avatar_resize_w') . '" class="small-text" />
+                <input name="wp_user_avatar_resize_w" type="number" step="1" min="0" id="wp_user_avatar_resize_w" value="' . esc_attr(get_option('wp_user_avatar_resize_w')) . '" class="small-text" />
                 <label for="wp_user_avatar_resize_h">' . __('Height', 'wp-user-avatar') . '</label>
-                <input name="wp_user_avatar_resize_h" type="number" step="1" min="0" id="wp_user_avatar_resize_h" value="' . get_option('wp_user_avatar_resize_h') . '" class="small-text" />
+                <input name="wp_user_avatar_resize_h" type="number" step="1" min="0" id="wp_user_avatar_resize_h" value="' . esc_attr(get_option('wp_user_avatar_resize_h')) . '" class="small-text" />
                 <br />
                 <input name="wp_user_avatar_resize_crop" type="checkbox" id="wp_user_avatar_resize_crop" value="1" ' . checked('1', $wpua_resize_crop, 0) . ' />
                 <label for="wp_user_avatar_resize_crop">' . __('Crop avatars to exact dimensions', 'wp-user-avatar') . '</label>

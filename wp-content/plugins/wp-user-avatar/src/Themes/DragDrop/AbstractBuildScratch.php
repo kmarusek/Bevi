@@ -540,7 +540,7 @@ abstract class AbstractBuildScratch extends AbstractTheme
         $headline       = '';
         $saved_headline = $this->get_meta('buildscratch_form_headline');
         if ( ! empty($saved_headline)) {
-            $headline = '<div class="ppbs-headline">' . $saved_headline . '</div>';
+            $headline = '<div class="ppbs-headline">' . wp_kses_post($saved_headline) . '</div>';
         }
 
         $social_login_buttons = $this->social_login_buttons();
@@ -553,15 +553,15 @@ abstract class AbstractBuildScratch extends AbstractTheme
 
         $button = $this->form_submit_button();
 
-        $fl  = 'ppfl-' . $this->get_meta('buildscratch_field_layout');
+        $fl  = 'ppfl-' . esc_attr($this->get_meta('buildscratch_field_layout'));
         $rf  = $this->get_meta('buildscratch_remove_form_frame') == 'true' ? ' ppf-remove-frame' : '';
         $hra = $this->get_meta('buildscratch_hide_required_asterisk') == 'true' ? ' ppf-hide-asterisk' : '';
 
-        $fs  = ' ppfs-' . $this->get_meta('buildscratch_label_field_size');
-        $fia = ' ppfia-' . $this->get_meta('buildscratch_label_field_icon_alignment');
+        $fs  = ' ppfs-' . esc_attr($this->get_meta('buildscratch_label_field_size'));
+        $fia = ' ppfia-' . esc_attr($this->get_meta('buildscratch_label_field_icon_alignment'));
 
-        $sbl = ' ppsbl-' . $this->get_meta('buildscratch_submit_button_layout');
-        $sbw = ' ppsbw-' . $this->get_meta('buildscratch_submit_button_width');
+        $sbl = ' ppsbl-' . esc_attr($this->get_meta('buildscratch_submit_button_layout'));
+        $sbw = ' ppsbw-' . esc_attr($this->get_meta('buildscratch_submit_button_width'));
 
         $form_link = $this->form_links();
 
@@ -583,9 +583,9 @@ HTML;
         $forgot_password_link  = ppress_password_reset_url();
         $signup_link           = ppress_registration_url();
         $login_link            = ppress_login_url();
-        $forgot_password_label = $this->get_meta('buildscratch_forgot_password_label');
-        $signup_label          = $this->get_meta('buildscratch_signup_label');
-        $login_label           = $this->get_meta('buildscratch_login_label');
+        $forgot_password_label = wp_kses_post($this->get_meta('buildscratch_forgot_password_label'));
+        $signup_label          = wp_kses_post($this->get_meta('buildscratch_signup_label'));
+        $login_label           = wp_kses_post($this->get_meta('buildscratch_login_label'));
 
         $login_form_link = $password_reset_form_link = $signup_form_link = '';
 
@@ -629,31 +629,31 @@ HTML;
         $form_id   = $this->form_id;
         $form_type = $this->form_type;
 
-        $width                          = $this->get_meta('buildscratch_form_width');
-        $form_bg_color                  = $this->get_meta('buildscratch_form_bg_color');
-        $form_font_family               = $this->get_meta('buildscratch_form_font_family');
+        $width                          = esc_html($this->get_meta('buildscratch_form_width'));
+        $form_bg_color                  = esc_html($this->get_meta('buildscratch_form_bg_color'));
+        $form_font_family               = esc_html($this->get_meta('buildscratch_form_font_family'));
         $form_font_family_plus_to_space = str_replace('+', ' ', $form_font_family);
-        $value_font_size                = $this->get_meta('buildscratch_field_value_font_size');
-        $field_icon_color               = $this->get_meta('buildscratch_field_icon_color');
-        $field_border_color             = $this->get_meta('buildscratch_field_border_color');
-        $field_border_focus_color       = $this->get_meta('buildscratch_field_border_focus_color');
-        $field_bg_color                 = $this->get_meta('buildscratch_field_bg_color');
-        $field_bg_focus_color           = $this->get_meta('buildscratch_field_bg_focus_color');
-        $field_value_color              = $this->get_meta('buildscratch_field_value_color');
-        $field_placeholder_color        = $this->get_meta('buildscratch_field_placeholder_color');
-        $field_label_color              = $this->get_meta('buildscratch_label_color');
-        $field_label_font_size          = $this->get_meta('buildscratch_label_font_size');
-        $field_label_font_weight        = $this->get_meta('buildscratch_label_font_weight');
+        $value_font_size                = esc_html($this->get_meta('buildscratch_field_value_font_size'));
+        $field_icon_color               = esc_html($this->get_meta('buildscratch_field_icon_color'));
+        $field_border_color             = esc_html($this->get_meta('buildscratch_field_border_color'));
+        $field_border_focus_color       = esc_html($this->get_meta('buildscratch_field_border_focus_color'));
+        $field_bg_color                 = esc_html($this->get_meta('buildscratch_field_bg_color'));
+        $field_bg_focus_color           = esc_html($this->get_meta('buildscratch_field_bg_focus_color'));
+        $field_value_color              = esc_html($this->get_meta('buildscratch_field_value_color'));
+        $field_placeholder_color        = esc_html($this->get_meta('buildscratch_field_placeholder_color'));
+        $field_label_color              = esc_html($this->get_meta('buildscratch_label_color'));
+        $field_label_font_size          = esc_html($this->get_meta('buildscratch_label_font_size'));
+        $field_label_font_weight        = esc_html($this->get_meta('buildscratch_label_font_weight'));
 
-        $description_color     = $this->get_meta('buildscratch_description_color');
-        $description_alignment = $this->get_meta('buildscratch_description_alignment');
+        $description_color     = esc_html($this->get_meta('buildscratch_description_color'));
+        $description_alignment = esc_html($this->get_meta('buildscratch_description_alignment'));
 
-        $submit_button_font_size        = $this->get_meta('buildscratch_submit_button_font_size');
-        $submit_button_font_weight      = $this->get_meta('buildscratch_submit_button_font_weight');
-        $submit_button_bg_color         = $this->get_meta('buildscratch_submit_button_bg_color');
-        $submit_button_bg_focus_color   = $this->get_meta('buildscratch_submit_button_bg_focus_color');
-        $submit_button_text_color       = $this->get_meta('buildscratch_submit_button_text_color');
-        $submit_button_text_focus_color = $this->get_meta('buildscratch_submit_button_text_focus_color');
+        $submit_button_font_size        = esc_html($this->get_meta('buildscratch_submit_button_font_size'));
+        $submit_button_font_weight      = esc_html($this->get_meta('buildscratch_submit_button_font_weight'));
+        $submit_button_bg_color         = esc_html($this->get_meta('buildscratch_submit_button_bg_color'));
+        $submit_button_bg_focus_color   = esc_html($this->get_meta('buildscratch_submit_button_bg_focus_color'));
+        $submit_button_text_color       = esc_html($this->get_meta('buildscratch_submit_button_text_color'));
+        $submit_button_text_focus_color = esc_html($this->get_meta('buildscratch_submit_button_text_focus_color'));
 
         $status_class = '.profilepress-reg-status';
         switch ($this->form_type) {

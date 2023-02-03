@@ -11,7 +11,7 @@ class WPEditor
     {
         $this->args = wp_parse_args(
             $args,
-            ['name' => '', 'value' => sprintf('{{{data.%s}}}', esc_attr($args['name']))]
+            ['name' => '', 'value' => sprintf('{{data.%s}}', esc_attr($args['name']))]
         );
     }
 

@@ -36,6 +36,10 @@
     grid-column: span 2/span 2;
 }
 
+.profilepress-myaccount-orders-subs .ppress-my-account-order-sub-header--actions a:not(a:first-child) {
+    margin-left: 8px;
+}
+
 .profilepress-myaccount-orders-subs .profilepress-myaccount-orders-subs-wrap .ppress-my-account-order-sub-header--details dt {
     margin: 0;
     font-weight: 500;

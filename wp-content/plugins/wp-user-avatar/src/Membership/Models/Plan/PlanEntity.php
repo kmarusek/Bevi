@@ -230,9 +230,20 @@ class PlanEntity extends AbstractModel implements ModelInterface
         return $ret;
     }
 
-    public function get_plan_extras()
+    /**
+     * @param string $extra_key
+     *
+     * @return false|mixed
+     */
+    public function get_plan_extras($extra_key = '')
     {
-        return $this->get_meta(self::PLAN_EXTRAS);
+        $extras = $this->get_meta(self::PLAN_EXTRAS);
+
+        if ( ! empty($extra_key)) {
+            return ppress_var($extras, $extra_key, '');
+        }
+
+        return $extras;
     }
 
     public function update_meta($meta_key, $meta_value)

@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Clickcease - Click Fraud Protection
  * Description: Plugin adds the ClickCease click fraud protection code.
- * Version: 3.1.0
+ * Version: 3.1.4
  * Requires at least: 5.6
  * Requires PHP: 5.6
  * Author: ClickCease
@@ -12,7 +12,7 @@
 if (!defined('ABSPATH')) {
     die();
 }
-define('clickcease_plugin_VERSION', '3.1.0');
+define('clickcease_plugin_VERSION', '3.1.4');
 define('clickcease_plugin_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('clickcease_plugin_PLUGIN_URL', plugin_dir_url(__FILE__));
 
@@ -35,17 +35,11 @@ class WP_clickcease_plugin
      */
     public function __construct()
     {
+        $whitelist = get_option('clickcease_whitelist', []);
+
         if (!current_user_can('publish_posts')) {
             add_action('wp_enqueue_scripts', [$this, 'add_stats_script'], -998);
             $client_ip = Utils::get_the_user_ip();
-            $whitelist = get_option('clickcease_whitelist', []);
-            $fetch_monitoring_data = $this->send_interval('cc-monitoring-date', '5 minutes');
-            if ($fetch_monitoring_data) {
-                $this->update_monitoring_status();
-            }
-            if ($whitelist)
-                $this->send_whitelist_usage($whitelist);
-
             if (!$client_ip || !in_array($client_ip, $whitelist)) {
                 add_action('send_headers', [$this, 'clickcease_server_validation'], -999);
                 add_action('wp_enqueue_scripts', [$this, 'enqueue_custom_scripts'], -999);
@@ -56,41 +50,39 @@ class WP_clickcease_plugin
 
             if (!$client_ip)
                 LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::NO_CLIENT_IP);
+        } else {
+            $this->init_clickcease_field_setting();
+            $fetch_monitoring_data = $this->send_interval('cc-monitoring-date', '5 minutes');
+            if ($fetch_monitoring_data) {
+                $this->update_monitoring_status();
+            }
+            if ($whitelist)
+                $this->send_whitelist_usage($whitelist);
+
+            $plugin_latests_version  = $this->plugin_latests_version();
+            $this->send_plugin_latest_version($plugin_latests_version);
+
+            $this->send_plugin_state();
         }
-        $this->init_clickcease_field_setting();
     }
 
     public static function activate_plugin()
     {
+        (new RTI_Service())->update_user_status(DomainState::PLUGIN_ACTIVATED);
         $botzappingAuth = get_option('clickcease_bot_zapping_authenticated', '');
-        $client_id = get_option('clickcease_client_id', '');
-        if ($botzappingAuth && $client_id !== '') {
-            $rtiService = new RTI_Service();
-            $clickcease_api_key = get_option('clickcease_api_key', '');
-            $rtiService->updateUserStatus($clickcease_api_key, $client_id, DomainState::BZ_PLUGIN_ACTIVATED);
-        }
+        if ($botzappingAuth) (new RTI_Service())->update_user_status(DomainState::BZ_PLUGIN_ACTIVATED);
     }
 
     public static function deactivate_plugin()
     {
-        $rtiService = new RTI_Service();
-        $clickcease_api_key = get_option('clickcease_api_key', '');
-        $client_id = get_option('clickcease_client_id', '');
-        if ($client_id !== '') {
-            $rtiService->updateUserStatus($clickcease_api_key, $client_id, DomainState::BZ_PLUGIN_DEACTIVATED);
-        }
+        (new RTI_Service())->update_user_status(DomainState::PLUGIN_DEACTIVATED);
     }
 
     public static function uninstall_plugin()
     {
-        $rtiService = new RTI_Service();
-        $clickcease_api_key = get_option('clickcease_api_key', '');
-        $client_id = get_option('clickcease_client_id', '');
-        if ($client_id !== '') {
-            $rtiService->updateUserStatus($clickcease_api_key, $client_id, DomainState::BZ_PLUGIN_UNINSTALLED);
-        }
-    }
 
+        (new RTI_Service())->update_user_status(DomainState::BZ_PLUGIN_UNINSTALLED);
+    }
     public static function init()
     {
         $class = __CLASS__;
@@ -144,7 +136,7 @@ class WP_clickcease_plugin
                 $secret_key .
                 ",invalid_secret: " .
                 $invalid_secret;
-
+            $rtiService->handleRTIError();
             LogService::log("Server", "", "", "", "", "", "", "", ErrorCodes::NO_KEYS, $logMsg);
         }
     }
@@ -156,6 +148,14 @@ class WP_clickcease_plugin
         if ($secret_key && !$new_version_updated) {
             update_option('cc_version_updated', true);
             $rtiService->auth_with_botzapping($clickcease_api_key, $clickcease_domain_key, $secret_key);
+        }
+    }
+    private function send_whitelist_usage($whitelist)
+    {
+        $send_log = $this->send_interval('cc_white_list_send_date', '1 days');
+        if ($send_log) {
+            $log_data_str = json_encode($whitelist);
+            LogService::log("Plugin", "", "", "", "", "", "", "", ErrorCodes::WHITELIST_TRACK, $log_data_str);
         }
     }
     public function cc_redirect($cc_get_value = 'invalid', $cc_get_key = 'clickcease')
@@ -243,6 +243,7 @@ class WP_clickcease_plugin
     {
         // Admin Scripts.
         add_action('admin_enqueue_scripts', [$this, 'admin_enqueue_scripts']);
+        $this->check_plugin_state();
     }
 
     /**
@@ -321,20 +322,79 @@ class WP_clickcease_plugin
         }
     }
 
-    private function send_whitelist_usage($whitelist)
+    private function send_plugin_latest_version($plugin_latests_version)
     {
-        $send_log = $this->send_interval('cc_white_list_send_date', '1 days');
-        if ($send_log) {
-            $log_data_str = json_encode($whitelist);
-            LogService::log("Plugin", "", "", "", "", "", "", "", ErrorCodes::WHITELIST_TRACK, $log_data_str);
+        $send = $this->send_interval('cc_send_plugin_latest_version', '10 minutes');
+        if ($send) {
+            $botzappingAuth = get_option('clickcease_bot_zapping_authenticated', '');
+            $client_id = get_option('clickcease_client_id', '');
+            if ($botzappingAuth && $client_id !== '') {
+                $rtiService = new RTI_Service();
+                $clickcease_api_key = get_option('clickcease_api_key', '');
+                $rtiService->update_bz_domain($clickcease_api_key, $client_id, $plugin_latests_version);
+            }
+        }
+    }
+
+    private function send_plugin_state()
+    {
+        $cc_send_plugin_state = get_option('cc_send_plugin_state', '');
+        if (!$cc_send_plugin_state) {
+            $botzappingAuth = get_option('clickcease_bot_zapping_authenticated', '');
+            if ($botzappingAuth) (new RTI_Service())->update_user_status(DomainState::BZ_PLUGIN_ACTIVATED);
+            else (new RTI_Service())->update_user_status(DomainState::PLUGIN_ACTIVATED);
+            update_option("cc_send_plugin_state", "true");
+        }
+    }
+    private function plugin_latests_version()
+    {
+        $res = true;
+        $plugin_name = $this->get_plugin_name();
+        if (!function_exists('get_plugin_updates')) {
+            require_once(ABSPATH . 'wp-admin/includes/update.php');
+        }
+        $domains_need_update = get_plugin_updates();
+        foreach ($domains_need_update as $domain) {
+            if ($domain->Name === $plugin_name) {
+                $res = false;
+            }
+        }
+        return $res;
+    }
+    private function get_plugin_name()
+    {
+        if (!function_exists('get_plugin_data')) {
+            require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+        }
+        $plugin_data = get_plugin_data(__FILE__);
+        $plugin_name = $plugin_data['Name'];
+        return $plugin_name;
+    }
+    public function check_plugin_state()
+    {
+        $check_plugin_state = get_option('cc_check_plugin_state', '');
+        if (!$check_plugin_state && is_plugin_active(clickcease_plugin_PLUGIN_PATH)) {
+            (new RTI_Service())->update_user_status(DomainState::PLUGIN_ACTIVATED);
+            update_option('cc_check_plugin_state', true);
         }
     }
 }
 
-set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+set_error_handler("error_handler");
+
+function error_handler($errno, $errstr, $errfile, $errline)
+{
     if (strpos($errfile, clickcease_plugin_PLUGIN_PATH) !== false) {
         $error_msg = "errorno:" . $errno . ",errstr:" . $errstr . ",errfile:" . $errfile . ",errline:" . $errline;
         LogService::log("Plugin", "", "", "", "", "", "", "", ErrorCodes::ERROR, $error_msg);
+    }
+    return true;
+}
+
+register_shutdown_function(function () {
+    $err = error_get_last();
+    if (!is_null($err)) {
+        error_handler("", $err['message'], $err['file'], $err['line']);
     }
 });
 

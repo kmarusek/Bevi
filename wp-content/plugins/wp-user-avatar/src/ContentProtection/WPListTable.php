@@ -279,7 +279,7 @@ class WPListTable extends \WP_List_Table
         $output = [];
         foreach ($result as $key => $meta) {
             $output[$key] = array_reduce(array_keys($meta), function ($carry, $item) use ($meta) {
-                $carry[$item] = $item == 'meta_value' ? unserialize($meta[$item]) : $meta[$item];
+                $carry[$item] = $item == 'meta_value' ? unserialize($meta[$item], ['allowed_classes' => false]) : $meta[$item];
 
                 return $carry;
             });

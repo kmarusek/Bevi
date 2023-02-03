@@ -103,8 +103,8 @@ $subscription_settings = [
 
 $file_downloads_setting_url = add_query_arg(['view' => 'payments', 'section' => 'file-downloads'], PPRESS_SETTINGS_SETTING_PAGE);
 
-$meta_box_settings = apply_filters('ppress_form_builder_meta_box_settings', [
-    'appearance' => [
+$meta_box_settings = apply_filters('ppress_admin_membership_plan_metabox_settings', [
+    'digital_products' => [
         'tab_title' => esc_html__('Digital Products', 'wp-user-avatar'),
         [
             'id'          => 'df',

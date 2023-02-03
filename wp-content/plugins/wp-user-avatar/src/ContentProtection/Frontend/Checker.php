@@ -10,9 +10,11 @@ class Checker
 {
     public static function is_blocked($who_can_access = 'everyone', $roles = [], $wp_users = [], $membership_plans = [])
     {
+        $function_args = func_get_args();
+
         if ('login' == $who_can_access) {
 
-            if ( ! is_user_logged_in()) return true;
+            if ( ! is_user_logged_in()) return self::fr(true, ...$function_args);
 
             if ( ! empty($membership_plans)) {
 
@@ -21,7 +23,7 @@ class Checker
                 $membership_plans = array_map('absint', $membership_plans);
 
                 foreach ($membership_plans as $plan_id) {
-                    if ($customer->has_active_subscription($plan_id)) return false;
+                    if ($customer->has_active_subscription($plan_id)) return self::fr(false, ...$function_args);
                 }
             }
 
@@ -29,28 +31,28 @@ class Checker
 
                 $user_roles = wp_get_current_user()->roles;
 
-                if ( ! empty(array_intersect($roles, $user_roles))) return false;
+                if ( ! empty(array_intersect($roles, $user_roles))) return self::fr(false, ...$function_args);
             }
 
             if ( ! empty($wp_users)) {
 
                 $users = array_map('absint', $wp_users);
 
-                if (in_array(get_current_user_id(), $users)) return false;
+                if (in_array(get_current_user_id(), $users)) return self::fr(false, ...$function_args);
             }
 
-            if (empty($roles) && empty($wp_users) && empty($membership_plans)) return false;
+            if (empty($roles) && empty($wp_users) && empty($membership_plans)) return self::fr(false, ...$function_args);
 
             // returning true to make users and user role combined rule OR instead of AND
-            return true;
+            return self::fr(true, ...$function_args);
         }
 
         if ('logout' == $who_can_access) {
 
-            if (is_user_logged_in()) return true;
+            if (is_user_logged_in()) return self::fr(true, ...$function_args);
         }
 
-        return false;
+        return self::fr(false, ...$function_args);
     }
 
     /**
@@ -93,7 +95,6 @@ class Checker
         }
 
         return $content_match;
-
     }
 
     public static function check_condition($condition_id, $rule_saved_value, $is_redirect = false)
@@ -103,5 +104,10 @@ class Checker
         if ( ! $condition) return false;
 
         return call_user_func($condition['callback'], $condition_id, $rule_saved_value, $is_redirect);
+    }
+
+    public static function fr($response, ...$filter_args)
+    {
+        return apply_filters('ppress_content_protection_is_blocked', $response, ...$filter_args);
     }
 }

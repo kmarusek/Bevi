@@ -36,7 +36,6 @@ $plugin_details  = $gdpr_controller->get_gdpr_plugin_details( 'gdpr-cookie-compl
       </div>
 			<!-- gdpr-faq-forum-content -->
 			<hr />
-			<strong>Buy Now for only <span>£59</span></strong>
 			<a href="https://www.mooveagency.com/wordpress-plugins/gdpr-cookie-compliance/" target="_blank" class="plugin-buy-now-btn">Buy Now</a>
 
 		</div>

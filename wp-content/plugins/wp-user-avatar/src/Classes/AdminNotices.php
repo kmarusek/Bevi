@@ -2,6 +2,8 @@
 
 namespace ProfilePress\Core\Classes;
 
+use ProfilePress\Core\Membership\PaymentMethods\AbstractPaymentMethod;
+use ProfilePress\Core\Membership\PaymentMethods\Stripe\Helpers;
 use ProfilePressVendor\PAnD;
 
 class AdminNotices
@@ -50,6 +52,8 @@ class AdminNotices
         $this->test_mode_notice();
 
         $this->seo_friendly_permalink_not_set();
+
+        $this->connect_enabled_stripe_method();
 
         $this->registration_disabled_notice();
 
@@ -100,6 +104,8 @@ class AdminNotices
      */
     public function review_plugin_notice()
     {
+        if ( ! current_user_can('manage_options')) return;
+
         if ( ! PAnD::is_admin_notice_active('ppress-review-plugin-notice-forever')) return;
 
         if (get_option('ppress_dismiss_leave_review_forever', false)) return;
@@ -170,7 +176,7 @@ class AdminNotices
         $notice = sprintf(
             __('Important news! %1$sWP User Avatar%2$s is now %1$sProfilePress%2$s. We added new features such as member directories, frontend user registration & login forms, user profile, content protection and more. %3$sCheck Them Out%5$s | %4$sDismiss Notice%5$s', 'wp-user-avatar'),
             '<strong>', '</strong>',
-            '<a href="' . PPRESS_SETTINGS_SETTING_PAGE . '">', '<a href="' . $dismiss_url . '">', '</a>'
+            '<a href="' . PPRESS_SETTINGS_SETTING_GENERAL_PAGE . '">', '<a href="' . $dismiss_url . '">', '</a>'
         );
 
         echo '<div data-dismissible="wp_user_avatar_now_ppress_notice-forever" class="update-nag notice notice-warning is-dismissible">';
@@ -194,6 +200,28 @@ class AdminNotices
         );
 
         printf('<div data-dismissible="ppress-create-plugin-pages-notice-forever" class="%1$s"><p>%2$s</p><p>%3$s</p></div>', esc_attr($class), esc_html($message), $buttons);
+    }
+
+    public function connect_enabled_stripe_method()
+    {
+        if ( ! PAnD::is_admin_notice_active('ppress-connect-enabled-stripe-method-7')) {
+            return;
+        }
+
+        if (
+            ppress_get_payment_method_setting('stripe_enabled') != 'true' ||
+            ! empty(Helpers::get_secret_key())
+        ) {
+            return;
+        }
+
+        $class = 'notice notice-info is-dismissible';
+
+        $message = $this->stripe_connect_notice_html(
+            esc_html__('You enabled Stripe payment method in ProfilePress but did not connect your Stripe account. Connect now to start accepting payments instantly.', 'wp-user-avatar')
+        );
+
+        printf('<div data-dismissible="ppress-connect-enabled-stripe-method-7" class="%1$s">%2$s</div>', esc_attr($class), $message);
     }
 
     /**
@@ -241,6 +269,28 @@ class AdminNotices
         $args[] = 'license';
 
         return $args;
+    }
+
+    private function stripe_connect_notice_html($message)
+    {
+        ob_start();
+        ?>
+
+        <p>
+            <?php echo $message; ?>
+        </p>
+
+        <p>
+            <?php echo Helpers::get_connect_button(AbstractPaymentMethod::get_payment_method_admin_page_url('stripe')); ?>
+
+            <a href="https://profilepress.com/article/setting-up-stripe/" target="_blank" rel="noopener noreferrer" class="button button-secondary" style="margin-left: 5px;">
+                <?php esc_html_e('Learn More', 'wp-user-avatar'); ?>
+            </a>
+        </p>
+
+        <?php
+
+        return ob_get_clean();
     }
 
     public static function get_instance()

@@ -10,7 +10,6 @@ class GlobalSiteAccess
         add_action('wp', array(__CLASS__, 'global_redirect'), -1);
     }
 
-
     /**
      * Exclude the redirect URL.
      * strtok() remove all query strings and trailing slash. @see https://stackoverflow.com/a/6975045/2648410

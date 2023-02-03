@@ -195,7 +195,7 @@ class DownloadService
 
         $output = [];
         foreach ($result as $meta) {
-            $output[$meta['id']] = ['id' => $meta['id']] + unserialize($meta['meta_value']);
+            $output[$meta['id']] = ['id' => $meta['id']] + unserialize($meta['meta_value'], ['allowed_classes' => false]);
         }
 
         return $output;
@@ -272,6 +272,7 @@ class DownloadService
 
         if ( ! empty($file_url) && absint($download_limit) > 0) {
             $download_count = $this->get_downloads_count($order_id, $plan_id, $file_url);
+
             // max ensures lowest result is 0 and no negative integer.
             return max($download_limit - $download_count, 0);
         }

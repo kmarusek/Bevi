@@ -91,6 +91,12 @@ class Moove_GDPR_Actions {
 			add_action( 'admin_url', array( &$this, 'gdpr_form_admin_url_filter' ), 10, 1 );
 		endif;
 
+		// Falang language support
+		if ( class_exists( 'Falang' ) ) :
+			add_action( 'gdpr_language_alert_bottom', array( &$this, 'gdpr_falang_language_select_extension' ), 10, 1 );
+			add_action( 'admin_url', array( &$this, 'gdpr_form_admin_url_filter' ), 10, 1 );
+		endif;
+
 		add_action( 'gdpr_template_html_load', array( &$this, 'gdpr_prevent_html_load_to_divi_builder' ), 10, 1);
 	}
 	/**
@@ -134,6 +140,44 @@ class Moove_GDPR_Actions {
 							ob_start();
 							?>
 								<a href="<?php echo add_query_arg('gdpr-lang', $lang_code, $actual_link ); ?>" style="color: #fff"><?php echo $lang_name; ?></a>
+							<?php
+							$lang_links[] = ob_get_clean();
+						endif;
+					endforeach;
+					if ( ! empty( $lang_links ) ) :
+						?>
+						<span style="color: #fff">Switch language: </span>
+						<?php
+						echo implode( ' | ', $lang_links );
+					endif;
+				?>
+			</div>
+			<!-- .gdpr-language-switch-admin -->
+			<?php
+		endif;
+	}
+
+	public static function gdpr_falang_language_select_extension( $language ) {
+		if ( class_exists( 'Falang' ) ) :
+			$gdpr_default_content 	= new Moove_GDPR_Content();
+			$wpml_lang            	= $gdpr_default_content->moove_gdpr_get_wpml_lang();
+			$falang_languages 		= Falang()->get_model()->get_languages_list();
+			?>
+			<hr />
+			<div class="gdpr-language-switch-admin">				
+				<?php
+					$server_host      = ( isset( $_SERVER['HTTPS'] ) && sanitize_text_field( wp_unslash( $_SERVER['HTTPS'] ) ) === 'on' ? 'https' : 'http' );
+					$server_http_host = ( isset( $_SERVER['HTTP_HOST'] ) ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : false;
+					$server_req_uri   = ( isset( $_SERVER['REQUEST_URI'] ) ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : false;
+					$actual_link      = $server_host . '://' . $server_http_host . $server_req_uri;
+					$actual_link 		= remove_query_arg( 'gdpr-lang', $actual_link );
+					$lang_links 		= [];
+					foreach ( $falang_languages as $language ) :
+						$lang_name = isset( $language->locale ) ? $language->locale : ( isset( $language->slug ) ? $language->slug : '' );
+						if ( $lang_name !== $wpml_lang ) :
+							ob_start();
+							?>
+								<a href="<?php echo add_query_arg('gdpr-lang', $lang_name, $actual_link ); ?>" style="color: #fff"><?php echo $language->name; ?></a>
 							<?php
 							$lang_links[] = ob_get_clean();
 						endif;
@@ -593,6 +637,16 @@ class Moove_GDPR_Actions {
 			$close_button_v 		 = false;
 		endif;
 
+		$close_cs_action 		= $close_button_v && isset( $modal_options['gdpr_cb_close_button_bhv'] ) && intval( $modal_options['gdpr_cb_close_button_bhv'] ) ? intval( $modal_options['gdpr_cb_close_button_bhv'] ) : 1;
+		$close_cs_redirect 	= $close_cs_action === 4 && isset( $modal_options['gdpr_cb_close_button_bhv_redirect'] ) && sanitize_url( wp_unslash( $modal_options['gdpr_cb_close_button_bhv_redirect'] ) ) ? sanitize_url( wp_unslash( $modal_options['gdpr_cb_close_button_bhv_redirect'] ) ) : '';
+		$close_cs_redirect = apply_filters( 'gdpr_close_cs_redirect', $close_cs_redirect, $modal_options );
+
+		$close_btn_action 	= isset( $modal_options['gdpr_close_button_bhv'] ) && intval( $modal_options['gdpr_close_button_bhv'] ) ? intval( $modal_options['gdpr_close_button_bhv'] ) : 1;
+		$close_btn_redirect 	= $close_btn_action === 4 && isset( $modal_options['gdpr_close_button_bhv_redirect'] ) && sanitize_url( wp_unslash( $modal_options['gdpr_close_button_bhv_redirect'] ) ) ? sanitize_url( wp_unslash( $modal_options['gdpr_close_button_bhv_redirect'] ) ) : '';
+		$close_btn_redirect = apply_filters( 'gdpr_close_btn_redirect', $close_btn_redirect, $modal_options );
+
+		$initalization_delay 	= isset( $modal_options['gdpr_initialization_delay'] ) && intval( $modal_options['gdpr_initialization_delay'] ) ? intval( $modal_options['gdpr_initialization_delay'] ) : apply_filters( 'gdpr_init_script_delay', 2000 );
+
 		$loc_data            = array(
 			'ajaxurl'         	=> admin_url( 'admin-ajax.php' ),
 			'post_id'         	=> get_the_ID(),
@@ -610,9 +664,11 @@ class Moove_GDPR_Actions {
 			'hide_save_btn'		=> $hide_save_btn,
 			'current_user'    	=> get_current_user_id(),
 			'cookie_expiration' 	=> apply_filters( 'gdpr_cookie_expiration_days', $cookie_expiration ),
-			'script_delay'			=> apply_filters( 'gdpr_init_script_delay', 2000 ),
-			'close_btn_action'	=> isset( $modal_options['gdpr_close_button_bhv'] ) && intval( $modal_options['gdpr_close_button_bhv'] ) ? intval( $modal_options['gdpr_close_button_bhv'] ) : 1,
-			'close_cs_action'		=> $close_button_v && isset( $modal_options['gdpr_cb_close_button_bhv'] ) && intval( $modal_options['gdpr_cb_close_button_bhv'] ) ? intval( $modal_options['gdpr_cb_close_button_bhv'] ) : 1,
+			'script_delay'			=> $initalization_delay,
+			'close_btn_action'	=> $close_btn_action,
+			'close_btn_rdr'		=> $close_btn_redirect,
+			'close_cs_action'		=> $close_cs_action,
+			'close_cs_rdr'			=> $close_cs_redirect,
 		);
 
 		$ajax_script_handler = apply_filters( 'gdpr_cc_prevent_ajax_script_inject', false );
@@ -735,7 +791,7 @@ class Moove_GDPR_Actions {
 		ob_start();
 		?>
 
-		<a href="https://wordpress.org/plugins/gdpr-cookie-compliance/" target="_blank" rel="noopener noreferrer nofollow" class='moove-gdpr-branding'><?php echo esc_attr( $powered_label ); ?>&nbsp; <span><?php esc_attr_e( 'GDPR Cookie Compliance', 'gdpr-cookie-compliance' ); ?></span></a>
+		<a href="https://wordpress.org/plugins/gdpr-cookie-compliance/" target="_blank" class='moove-gdpr-branding'><?php echo esc_attr( $powered_label ); ?>&nbsp; <span><?php esc_attr_e( 'GDPR Cookie Compliance', 'gdpr-cookie-compliance' ); ?></span></a>
 		<?php
 		return ob_get_clean();
 	}

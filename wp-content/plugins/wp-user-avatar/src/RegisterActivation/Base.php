@@ -249,16 +249,22 @@ class Base
 
         foreach ($pages as $key => $page) {
 
-            $insert = wp_insert_post(
-                array_merge(
-                    ['post_status' => 'publish', 'post_type' => 'page'],
-                    $page
-                ),
-                true
-            );
+            $page_id     = ppress_settings_by_key($key, '');
+            $page_status = get_post_status($page_id);
 
-            if ($insert && ! is_wp_error($insert)) {
-                ppress_update_settings($key, $insert);
+            if (empty($page_id) || 'publish' !== $page_status) {
+
+                $insert = wp_insert_post(
+                    array_merge(
+                        ['post_status' => 'publish', 'post_type' => 'page'],
+                        $page
+                    ),
+                    true
+                );
+
+                if ($insert && ! is_wp_error($insert)) {
+                    ppress_update_settings($key, $insert);
+                }
             }
         }
     }

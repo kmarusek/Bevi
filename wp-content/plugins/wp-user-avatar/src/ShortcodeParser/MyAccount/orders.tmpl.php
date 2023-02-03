@@ -74,6 +74,7 @@ $total_pages = ceil(absint($total_orders) / absint($orders_per_page));
                                 <a href="<?php echo esc_url($view_order_url) ?>" class="ppress-my-account-order-sub-header--actions--link">
                                     <span><?= esc_html__('View Order', 'wp-user-avatar') ?></span>
                                 </a>
+                                <?php do_action('ppress_myaccount_order_header_actions', $order); ?>
                             </div>
                         </div>
 
@@ -111,4 +112,4 @@ $total_pages = ceil(absint($total_orders) / absint($orders_per_page));
     </div>
 <?php
 
-do_action('ppress_myaccount_order_list');
+do_action('ppress_myaccount_order_list', $orders);

@@ -276,10 +276,10 @@ class SettingsPage extends AbstractSettingsPage
 
         echo '<span id="ppress-date-filters" class="ppress-from-to-wrapper" style="display:none">';
         echo '<span class="ppress-start-date-wrap">';
-        echo '<input type="text" name="start_date" id="start-date" placeholder="' . _x('From', 'date filter', 'wp-user-avatar') . '" value="' . $start_date . '" class="ppress_datepicker">';
+        echo '<input type="text" name="start_date" id="start-date" placeholder="' . _x('From', 'date filter', 'wp-user-avatar') . '" value="' . esc_attr($start_date) . '" class="ppress_datepicker">';
         echo '</span>';
         echo '<span id="ppress-end-date-wrap">';
-        echo '<input type="text" name="end_date" id="end-date" value="' . $end_date . '" placeholder="' . _x('To', 'date filter', 'wp-user-avatar') . '" class="ppress_datepicker">';
+        echo '<input type="text" name="end_date" id="end-date" value="' . esc_attr($end_date) . '" placeholder="' . _x('To', 'date filter', 'wp-user-avatar') . '" class="ppress_datepicker">';
         echo '</span>';
         echo '</span>';
 

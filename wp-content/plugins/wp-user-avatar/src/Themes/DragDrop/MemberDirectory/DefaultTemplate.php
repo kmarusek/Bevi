@@ -205,11 +205,11 @@ class DefaultTemplate extends AbstractMemberDirectoryTheme
         $form_id   = $this->form_id;
         $form_type = $this->form_type;
 
-        $card_text_color                  = $this->get_meta('ppress_md_default_text_color');
-        $card_display_name_color          = $this->get_meta('ppress_md_default_display_name_color');
-        $card_avatar_border_color         = $this->get_meta('ppress_md_default_avatar_border_color');
-        $card_bg_color                    = $this->get_meta('ppress_md_default_background_color');
-        $card_border_color                = $this->get_meta('ppress_md_default_border_color');
+        $card_text_color                  = esc_html($this->get_meta('ppress_md_default_text_color'));
+        $card_display_name_color          = esc_html($this->get_meta('ppress_md_default_display_name_color'));
+        $card_avatar_border_color         = esc_html($this->get_meta('ppress_md_default_avatar_border_color'));
+        $card_bg_color                    = esc_html($this->get_meta('ppress_md_default_background_color'));
+        $card_border_color                = esc_html($this->get_meta('ppress_md_default_border_color'));
         $card_social_profile_border_color = $card_border_color == '#dddddd' ? '#e5e5e5' : $card_border_color;
 
         return parent::form_css() . <<<CSS
