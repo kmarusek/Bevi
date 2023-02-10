@@ -160,7 +160,9 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+.block-content p {
+  min-height: 115px;
+}
 @media screen and (max-width: 425px) {
   .comparison {
     background-position: left bottom -350px;
