@@ -15,7 +15,7 @@
             :key="bullet.id"
             class="flex w-full my-4 sm:my-10"
           >
-            <div class="w-1/5 pr-2 md:pr-0">
+            <div class="pr-2 md:pr-0 w-1/5 md:w-1/6 lg:w-1/5">
               <img
                 :src="bullet.icon.sizes.thumbnail"
                 alt=""

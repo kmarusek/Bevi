@@ -179,7 +179,7 @@
       }
 
       @screen md {
-        top: 12%;
+        top: 21%;
         left: 10%;
       }
     }
@@ -189,8 +189,8 @@
       right: 2%;
 
       @screen md {
-        bottom: 11%;
-        right: 21%;
+        bottom: 21%;
+        right: 32%;
       }
     }
 
@@ -199,7 +199,7 @@
       left: 4%;
 
       @screen md {
-        bottom: 10%;
+        bottom: 23%;
         left: 23%;
       }
     }
@@ -214,8 +214,8 @@
       }
 
       @screen md {
-        top: 14%;
-        right: 12%;
+        top: 18%;
+        right: 14%;
       }
     }
 
@@ -229,7 +229,7 @@
       }
 
       @screen md {
-        top: 4%;
+        top: 12%;
         left: 49%;
       }
     }
@@ -240,6 +240,8 @@
 
       @screen md {
         @apply flex;
+        bottom: 34%;
+        right: 3%;
       }
     }
 
@@ -250,6 +252,8 @@
 
       @screen md {
         @apply flex;
+        bottom: 37%;
+        left: 3%;
       }
     }
   }
