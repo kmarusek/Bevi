@@ -728,14 +728,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 			<div class="gdpr-faq-accordion-content" >
 				<?php ob_start(); ?>
-				add_filter( 'pys_disable_by_gdpr', 'gdpr_cookie_compliance_pys' );
+				add_filter( 'pys_disable_by_gdpr', 'gdpr_cookie_compliance_pys', 100 );
 				function gdpr_cookie_compliance_pys() {
-					if ( function_exists( 'gdpr_cookie_is_accepted' ) ) :
-						$disable_pys = gdpr_cookie_is_accepted( 'thirdparty' ) ? false : true;
-						return $disable_pys;
-					endif;
-					return true;
+				    if ( function_exists( 'gdpr_cookie_is_accepted' ) ) :
+				        $disable_pys = gdpr_cookie_is_accepted( 'thirdparty' ) ? false : true;
+				        return $disable_pys;
+				    endif;
+				    return true;
 				}
+
+				add_action( 'wp_enqueue_scripts', function() {
+				  if ( apply_filters( 'pys_disable_by_gdpr', false ) ) :
+				    wp_deregister_script('pys');
+				  endif;
+				}, 100);
+
 				add_action( 'gdpr_force_reload', '__return_true' );
 				<?php $code = trim( ob_get_clean() ); ?>
 				<textarea id="<?php echo esc_attr( uniqid( strtotime( 'now' ) ) ); ?>"><?php apply_filters( 'gdpr_cc_keephtml', $code, true ); ?></textarea>

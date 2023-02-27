@@ -637,15 +637,11 @@ class Moove_GDPR_Actions {
 			$close_button_v 		 = false;
 		endif;
 
-		$close_cs_action 		= $close_button_v && isset( $modal_options['gdpr_cb_close_button_bhv'] ) && intval( $modal_options['gdpr_cb_close_button_bhv'] ) ? intval( $modal_options['gdpr_cb_close_button_bhv'] ) : 1;
-		$close_cs_redirect 	= $close_cs_action === 4 && isset( $modal_options['gdpr_cb_close_button_bhv_redirect'] ) && sanitize_url( wp_unslash( $modal_options['gdpr_cb_close_button_bhv_redirect'] ) ) ? sanitize_url( wp_unslash( $modal_options['gdpr_cb_close_button_bhv_redirect'] ) ) : '';
-		$close_cs_redirect = apply_filters( 'gdpr_close_cs_redirect', $close_cs_redirect, $modal_options );
-
 		$close_btn_action 	= isset( $modal_options['gdpr_close_button_bhv'] ) && intval( $modal_options['gdpr_close_button_bhv'] ) ? intval( $modal_options['gdpr_close_button_bhv'] ) : 1;
 		$close_btn_redirect 	= $close_btn_action === 4 && isset( $modal_options['gdpr_close_button_bhv_redirect'] ) && sanitize_url( wp_unslash( $modal_options['gdpr_close_button_bhv_redirect'] ) ) ? sanitize_url( wp_unslash( $modal_options['gdpr_close_button_bhv_redirect'] ) ) : '';
 		$close_btn_redirect = apply_filters( 'gdpr_close_btn_redirect', $close_btn_redirect, $modal_options );
 
-		$initalization_delay 	= isset( $modal_options['gdpr_initialization_delay'] ) && intval( $modal_options['gdpr_initialization_delay'] ) ? intval( $modal_options['gdpr_initialization_delay'] ) : apply_filters( 'gdpr_init_script_delay', 2000 );
+		$initalization_delay 	= isset( $modal_options['gdpr_initialization_delay'] ) && intval( $modal_options['gdpr_initialization_delay'] ) >= 0 ? intval( $modal_options['gdpr_initialization_delay'] ) : apply_filters( 'gdpr_init_script_delay', 2000 );
 
 		$loc_data            = array(
 			'ajaxurl'         	=> admin_url( 'admin-ajax.php' ),
@@ -666,9 +662,7 @@ class Moove_GDPR_Actions {
 			'cookie_expiration' 	=> apply_filters( 'gdpr_cookie_expiration_days', $cookie_expiration ),
 			'script_delay'			=> $initalization_delay,
 			'close_btn_action'	=> $close_btn_action,
-			'close_btn_rdr'		=> $close_btn_redirect,
-			'close_cs_action'		=> $close_cs_action,
-			'close_cs_rdr'			=> $close_cs_redirect,
+			'close_btn_rdr'		=> $close_btn_redirect
 		);
 
 		$ajax_script_handler = apply_filters( 'gdpr_cc_prevent_ajax_script_inject', false );
