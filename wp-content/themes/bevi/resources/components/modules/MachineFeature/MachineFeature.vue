@@ -1,6 +1,6 @@
 <template>
   <section class="machine-feature gsap-fade-section">
-    <div class="pb-20 md:py-24 container lg:text-center">
+    <div class="pb-20 md:py-24 container lg:text-center sm:text-center">
       <img
         :src="block.image_desktop.sizes.large"
         :alt="block.image_desktop.alt"

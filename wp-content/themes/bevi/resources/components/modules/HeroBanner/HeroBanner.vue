@@ -57,6 +57,7 @@
           'py-20 pb-64 xs:py-32 xs:pb-32 lg:w-2/4' : block.text_position === 'Left' && !block.feature_image || 'Right' && !block.feature_image,
           'py-32 lg:w-full' : block.text_position === 'Center' && !block.feature_image,
           'pt-20 lg:pt-32 pb-0 lg:w-full' : block.text_position === 'Center' && block.feature_image,
+          'lg:pt-20 pt-64 md:pt-64' : block.add_background_video,
           'narrower': block.narrower_content,
         }"
         class="flex items-center"
@@ -291,5 +292,11 @@
 .block-content:deep(ol) {
   @apply list-decimal pl-10;
   list-style-position: outside;
+}
+@media screen and ( max-width: 860px ) and (min-width: 600px){
+  .main-banner.large-banner {
+    min-height: 51vh;
+    background-position: unset;
+  }
 }
 </style>

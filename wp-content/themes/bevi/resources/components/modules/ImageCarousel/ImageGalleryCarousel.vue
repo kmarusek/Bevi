@@ -61,7 +61,7 @@
       <div
         v-for="bullet in block.bullets"
         :key="bullet.id"
-        class="flex items-start w-full my-4 sm:my-10"
+        class="flex items-start w-full my-4 sm:mt-10"
       >
         <div class="w-1/5 pr-2 md:pr-0">
           <img

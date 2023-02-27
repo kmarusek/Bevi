@@ -59,9 +59,9 @@
         <span id="next" class="navigator bg-gray-200" data-index="2"> </span>
       </div> -->
 
-      <div class="comparison--nav block-content pb-0 px-0 lg:px-48 text-right  block md:hidden z-10">
+      <!-- <div class="comparison--nav block-content pb-0 px-0 lg:px-48 text-right  block md:hidden z-10">
         <a class="nextarrow" id="nexttop"><img class="pr-3 float-right" width="65" src="/wp-content/themes/bevi/dist/images/arrow.svg" /></a>
-      </div>
+      </div> -->
 
       <div id="comparison-slide" class="comparison--blocks container block-content pb-4 px-0 lg:px-48 z-10">
 
@@ -162,6 +162,7 @@
 }
 .block-content p {
   min-height: 115px;
+  
 }
 @media screen and (max-width: 425px) {
   .comparison {
