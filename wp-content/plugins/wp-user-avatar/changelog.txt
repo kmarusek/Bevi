@@ -1,5 +1,10 @@
 ﻿== Changelog ==
 
+= 4.7.0 =
+* Pro: [Paystack addon](https://profilepress.com/addons/paystack/?ref=changelog).
+* Fixed bug where subscription was still active even when order was refunded.
+* Fixed bug with checkout not working when Password reset is not allowed for user.
+
 = 4.6.0 =
 * Added [RazorPay addon](https://profilepress.com/addons/razorPay/?ref=changelog).
 * Added support for 'url' config when adding myaccount page menu tabs.

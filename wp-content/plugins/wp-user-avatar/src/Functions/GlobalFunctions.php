@@ -927,6 +927,11 @@ function ppress_generate_password_reset_url($user_login)
 
     $key = get_password_reset_key($user);
 
+    if(is_wp_error($key)) {
+        ppress_log_error($key->get_error_message());
+        return '';
+    }
+
     return ppress_get_do_password_reset_url($user_login, $key);
 }
 
