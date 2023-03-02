@@ -182,6 +182,7 @@
                             "max": 6,
                             "layout": "table",
                             "button_label": "Add bubble",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_611632eec2f01",
@@ -225,8 +226,7 @@
                                     "delay": 0,
                                     "parent_repeater": "field_611632d5c2f00"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -1120,10 +1120,10 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "layout": "table",
-                            "min": 1,
-                            "max": 20,
                             "collapsed": "",
+                            "min": 1,
+                            "max": 5,
+                            "layout": "table",
                             "button_label": "Add Row",
                             "rows_per_page": 20,
                             "sub_fields": [
@@ -1353,6 +1353,7 @@
                             "max": 5,
                             "layout": "table",
                             "button_label": "Add Row",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_5f8ed78c1671a",
@@ -1422,8 +1423,7 @@
                                     "delay": 0,
                                     "parent_repeater": "field_5f8ed77216719"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         },
                         {
                             "key": "field_5fbe95c0fff8f",
@@ -1523,6 +1523,7 @@
                             "max": 10,
                             "layout": "table",
                             "button_label": "Add Image",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_5f980724369dd",
@@ -1576,8 +1577,7 @@
                                     "mime_types": "",
                                     "parent_repeater": "field_5f98067a369dc"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         },
                         {
                             "key": "field_5fce2d057f394",
@@ -1626,6 +1626,7 @@
                             "max": 4,
                             "layout": "table",
                             "button_label": "Add Row",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_5fce2ddc1cd38",
@@ -1695,8 +1696,7 @@
                                     "new_lines": "",
                                     "parent_repeater": "field_5fce2d267f395"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         },
                         {
                             "key": "field_5fd8f7cabf656",
@@ -1769,6 +1769,7 @@
                             "max": 3,
                             "layout": "table",
                             "button_label": "Add Item",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_5f994c9c3a003",
@@ -1817,8 +1818,7 @@
                                     "new_lines": "",
                                     "parent_repeater": "field_5f994c8f3a002"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         },
                         {
                             "key": "field_5fbe9a3ceef04",
@@ -2058,6 +2058,7 @@
                             "max": 3,
                             "layout": "table",
                             "button_label": "Add Row",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_5f9adce0ac1e4",
@@ -2127,8 +2128,7 @@
                                     "mime_types": "",
                                     "parent_repeater": "field_5f9adccdac1e3"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         },
                         {
                             "key": "field_5ff59c8834a3c",
@@ -2304,6 +2304,7 @@
                             "max": 7,
                             "layout": "table",
                             "button_label": "Add Flavor",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_5f9bf9594bd8c",
@@ -2378,8 +2379,7 @@
                                     "mime_types": "",
                                     "parent_repeater": "field_5f9bf93a4bd8b"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         },
                         {
                             "key": "field_5fbf82145cb9a",
@@ -2457,6 +2457,7 @@
                             "max": 3,
                             "layout": "table",
                             "button_label": "Add Card",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_5fa14419fc693",
@@ -2543,8 +2544,7 @@
                                     "return_format": "array",
                                     "parent_repeater": "field_5fa1415dfc692"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         },
                         {
                             "key": "field_5fbf80c27c46f",
@@ -2881,6 +2881,7 @@
                             "max": 3,
                             "layout": "table",
                             "button_label": "Add Counter",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_6107c5ae33a5d",
@@ -2906,8 +2907,7 @@
                                     "ui": 1,
                                     "parent_repeater": "field_6h07c57153a5c"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -2985,6 +2985,7 @@
                             "max": 3,
                             "layout": "table",
                             "button_label": "Add Counter",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_6107c5ae53a5d",
@@ -3010,8 +3011,7 @@
                                     "ui": 1,
                                     "parent_repeater": "field_6107c57153a5c"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -3042,6 +3042,7 @@
                             "max": 0,
                             "layout": "table",
                             "button_label": "Add Row",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_5fadd7e65091c",
@@ -3085,8 +3086,7 @@
                                     "delay": 0,
                                     "parent_repeater": "field_5fadd6c85091a"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -3835,6 +3835,7 @@
                             "max": 0,
                             "layout": "table",
                             "button_label": "Add Step",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_60f68dcf6df88",
@@ -3883,8 +3884,7 @@
                                     "delay": 0,
                                     "parent_repeater": "field_60f68db76df87"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -4016,6 +4016,7 @@
                             "max": 0,
                             "layout": "table",
                             "button_label": "Add Row",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_62975881b1415",
@@ -4058,6 +4059,23 @@
                                     "parent_repeater": "field_62975843b1414"
                                 },
                                 {
+                                    "key": "field_6297588cb1416",
+                                    "label": "Event location",
+                                    "name": "event_location",
+                                    "aria-label": "",
+                                    "type": "link",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "return_format": "url",
+                                    "parent_repeater": "field_62975843b1414"
+                                },
+                                {
                                     "key": "field_62b8d6474feea",
                                     "label": "Time",
                                     "name": "event_time",
@@ -4076,23 +4094,6 @@
                                     "prepend": "",
                                     "append": "",
                                     "maxlength": "",
-                                    "parent_repeater": "field_62975843b1414"
-                                },
-                                {
-                                    "key": "field_6297588cb1416",
-                                    "label": "Event location",
-                                    "name": "event_location",
-                                    "aria-label": "",
-                                    "type": "link",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "return_format": "array",
                                     "parent_repeater": "field_62975843b1414"
                                 },
                                 {
@@ -4180,8 +4181,7 @@
                                     "append": "",
                                     "parent_repeater": "field_62975843b1414"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -4323,6 +4323,7 @@
                                     "collapsed": "",
                                     "button_label": "Add Row",
                                     "rows_per_page": 20,
+                                    "parent_repeater": "field_63514e163d1a3",
                                     "sub_fields": [
                                         {
                                             "key": "field_63514b22693aa",
@@ -4366,8 +4367,7 @@
                                             "ui_off_text": "",
                                             "parent_repeater": "field_63514ae8693a9"
                                         }
-                                    ],
-                                    "parent_repeater": "field_63514e163d1a3"
+                                    ]
                                 },
                                 {
                                     "key": "field_63514c90693ac",
@@ -4389,6 +4389,7 @@
                                     "collapsed": "",
                                     "button_label": "Add Row",
                                     "rows_per_page": 20,
+                                    "parent_repeater": "field_63514e163d1a3",
                                     "sub_fields": [
                                         {
                                             "key": "field_63514cb6693ad",
@@ -4453,8 +4454,7 @@
                                             "append": "",
                                             "parent_repeater": "field_63514c90693ac"
                                         }
-                                    ],
-                                    "parent_repeater": "field_63514e163d1a3"
+                                    ]
                                 },
                                 {
                                     "key": "field_63514cf8693b0",
@@ -4680,7 +4680,7 @@
                             "append": ""
                         },
                         {
-                            "key": "field_635be992a9dd9",
+                            "key": "field_635ff5e7ede4e",
                             "label": "CTA",
                             "name": "cta",
                             "aria-label": "",
@@ -4732,5 +4732,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1675349995
+    "modified": 1677537955
 }
