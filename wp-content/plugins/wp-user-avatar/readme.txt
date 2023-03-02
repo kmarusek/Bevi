@@ -1,11 +1,11 @@
 === Paid Membership Plugin, Ecommerce, Registration Form, Login Form, User Profile & Restrict Content – ProfilePress ===
 Contributors: properfraction, collizo4sky
 Donate link: https://profilepress.com/pricing/
-Tags: membership, ecommerce, user registration, user profile, membership plugin, members, stripe, paypal, razorpay, mollie, login form, login, registration, password reset, member, users, profile, front-end profile, avatar
+Tags: membership, ecommerce, user registration, user profile, membership plugin, members, stripe, paypal, razorpay, mollie, paystack, login form, login, registration, password reset, member, users, profile, front-end profile, avatar
 Requires at least: 5.3
 Requires PHP: 7.2.0
 Tested up to: 6.1
-Stable tag: 4.6.0
+Stable tag: 4.7.0
 License: GPLv2 or later
 
 Paid membership plugin: accept payments, sell subscriptions & digital downloads, paywall & restrict content, create user registration form & login form, user profile & member directory.
@@ -14,9 +14,9 @@ Paid membership plugin: accept payments, sell subscriptions & digital downloads,
 
 = Modern Membership Plugin for Ecommerce, Digital Downloads, User Profile, Registration & Login Form =
 
-[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful ecommerce and paid membership plugin for accepting one-time and recurring payments, selling subscriptions and digital products or digital downloads (downloadable files) via Stripe, RazorPay, Mollie & PayPal, paywall & restrict content and control user access.
+[ProfilePress](https://profilepress.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) is a simple yet powerful ecommerce and paid membership plugin for accepting one-time and recurring payments, selling subscriptions and digital products or digital downloads (downloadable files) via Stripe, PayPal, RazorPay, Mollie & Paystack, paywall & restrict content and control user access.
 
-ProfilePress is the best Stripe (Credit Card), PayPal, RazorPay & Mollie payment forms plugin for WordPress to quickly accept payments and provide your users the ultimate member experience.
+ProfilePress is the best Stripe (Credit Card), PayPal, RazorPay, Paystack & Mollie payment forms plugin for WordPress to quickly accept payments and provide your users the ultimate member experience.
 
 ProfilePress lets you create beautiful user profiles, member directories, frontend login, and user registration forms, member password reset and edit profile forms.
 
@@ -36,7 +36,7 @@ ProfilePress can prevent spam registrations and abuse by [blocking user registra
 
 = Multiple Payment Processors =
 
-Easily connect to Stripe (supports Stripe hosted checkout page and on-site payment form), PayPal, RazorPay & Mollie to collect payments with our membership plugin. We are working on adding additional gateways (Square, PayStack, Mercado Pago) in the future.
+Easily connect to Stripe (supports Stripe hosted checkout page and on-site payment form), PayPal, RazorPay, Paystack & Mollie to collect payments with our membership plugin. We are working on adding additional gateways (Square, PayStack, Mercado Pago) in the future.
 
 = Powerful Payment Options =
 
@@ -87,7 +87,7 @@ We provide a complete reports section where you can Keep track of your earnings,
 
 = Other Payment & Membership Plugin Features =
 
-* Accept one-time, recurring payments and charge for subscriptions with Stripe, PayPal, RazorPay and Mollie.
+* Accept one-time, recurring payments and charge for subscriptions with Stripe, PayPal, Paystack, RazorPay and Mollie.
 * Smart fraud protection & spam prevention on the user registration form, login form and checkout page.
 * Complete customer management to view and manage detailed records of all customers and their order history.
 * Collect EU Vat or Tax from your users with our ecommerce plugin depending on their location, with complete control over tax rates and who to charge.
@@ -105,6 +105,7 @@ Extend the capabilities of ProfilePress with our powerful addons and remove the 
 * [PayPal Checkout](https://profilepress.com/addons/paypal/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept Visa, Mastercard, Venmo, Discover, iDEAL, American Express, Bancontact, BLIK, giropay, MyBank and Przelewy24 payments via PayPal.
 * [RazorPay Checkout](https://profilepress.com/addons/razorPay/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept Credit/Debit cards, Netbanking, UPI, Wallets and more from Indian customers via RazorPay.
 * [Mollie Checkout](https://profilepress.com/addons/mollie/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept payments via Credit Card, iDEAL, SEPA Direct Debit, Apple Pay, PayPal, Klarna, Bancontact, Bank transfer & Gift Card with Mollie.
+* [Paystack Checkout](https://profilepress.com/addons/paystack/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Accept payments via Credit Card, Bank Transfer, Mobile Money, USSD and more with Paystack.
 * [Custom Fields](https://profilepress.com/addons/custom-fields/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Collect additional information from users besides the standard profile data during user registration and payment checkout.
 * [Email Confirmation](https://profilepress.com/addons/email-confirmation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Ensure registered users confirm their email addresses before they can sign in via the login form or social login.
 * [User Moderation](https://profilepress.com/addons/user-moderation/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion) – Decide whether to approve newly registered users or not. You can also block and unblock users at any time.
@@ -153,7 +154,7 @@ No. You can create and manage your forms, user profiles, and member directories 
 
 = Can I accept credit card payments on mobile? =
 
-Yes. Stripe, PayPal, RazorPay and Mollie Checkout are optimized to accept mobile credit card payments and can automatically presents Apple Pay or Google Pay options when available.
+Yes. Stripe, PayPal, RazorPay, Paystack and Mollie Checkout are optimized to accept mobile credit card payments and can automatically presents Apple Pay or Google Pay options when available.
 
 = Does ProfilePress require WooCommerce? =
 No. ProfilePress is a standalone ecommerce, payments & membership plugin and does not require other payment or ecommerce plugins, such as WooCommerce or Easy Digital Downloads to work.
@@ -176,6 +177,11 @@ Any file type can be sold using ProfilePress ecommerce and membership plugin, in
 11. Content Protection
 
 == Changelog ==
+
+= Paid Membership, Ecommerce & User Registration 4.7.0 =
+* Pro: [Paystack addon](https://profilepress.com/addons/paystack/?ref=changelog).
+* Fixed bug where subscription was still active even when order was refunded.
+* Fixed bug with checkout not working when Password reset is not allowed for user.
 
 = Paid Membership, Ecommerce & User Registration 4.6.0 =
 * Added [RazorPay addon](https://profilepress.com/addons/razorPay/?ref=changelog).

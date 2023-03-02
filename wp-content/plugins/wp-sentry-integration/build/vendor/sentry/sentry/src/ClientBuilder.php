@@ -146,7 +146,7 @@ final class ClientBuilder implements \Sentry\ClientBuilderInterface
     private function createDefaultTransportFactory() : \Sentry\Transport\DefaultTransportFactory
     {
         $streamFactory = \WPSentry\ScopedVendor\Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $httpClientFactory = new \Sentry\HttpClient\HttpClientFactory(\WPSentry\ScopedVendor\Http\Discovery\Psr17FactoryDiscovery::findUriFactory(), \WPSentry\ScopedVendor\Http\Discovery\Psr17FactoryDiscovery::findResponseFactory(), $streamFactory, null, $this->sdkIdentifier, $this->sdkVersion);
+        $httpClientFactory = new \Sentry\HttpClient\HttpClientFactory(null, null, $streamFactory, null, $this->sdkIdentifier, $this->sdkVersion);
         return new \Sentry\Transport\DefaultTransportFactory($streamFactory, \WPSentry\ScopedVendor\Http\Discovery\Psr17FactoryDiscovery::findRequestFactory(), $httpClientFactory, $this->logger);
     }
 }

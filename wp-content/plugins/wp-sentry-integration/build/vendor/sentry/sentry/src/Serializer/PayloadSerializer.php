@@ -176,7 +176,8 @@ final class PayloadSerializer implements \Sentry\Serializer\PayloadSerializerInt
      *     },
      *     mechanism?: array{
      *         type: string,
-     *         handled: boolean
+     *         handled: boolean,
+     *         data?: array<string, mixed>
      *     }
      * }
      */
@@ -190,6 +191,9 @@ final class PayloadSerializer implements \Sentry\Serializer\PayloadSerializerInt
         }
         if (null !== $exceptionMechanism) {
             $result['mechanism'] = ['type' => $exceptionMechanism->getType(), 'handled' => $exceptionMechanism->isHandled()];
+            if ([] !== $exceptionMechanism->getData()) {
+                $result['mechanism']['data'] = $exceptionMechanism->getData();
+            }
         }
         return $result;
     }

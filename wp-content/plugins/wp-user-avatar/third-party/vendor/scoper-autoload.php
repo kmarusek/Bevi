@@ -6,8 +6,8 @@ $loader = require_once __DIR__.'/autoload.php';
 
 // Exposed classes. For more information see:
 // https://github.com/humbug/php-scoper/blob/master/docs/configuration.md#exposing-classes
-if (!class_exists('ComposerAutoloaderInit5365385809e382577fa6df13f4b2898a', false) && !interface_exists('ComposerAutoloaderInit5365385809e382577fa6df13f4b2898a', false) && !trait_exists('ComposerAutoloaderInit5365385809e382577fa6df13f4b2898a', false)) {
-    spl_autoload_call('ProfilePressVendor\ComposerAutoloaderInit5365385809e382577fa6df13f4b2898a');
+if (!class_exists('ComposerAutoloaderInitebf6e8aae2628d0984ab186d6c4c676a', false) && !interface_exists('ComposerAutoloaderInitebf6e8aae2628d0984ab186d6c4c676a', false) && !trait_exists('ComposerAutoloaderInitebf6e8aae2628d0984ab186d6c4c676a', false)) {
+    spl_autoload_call('ProfilePressVendor\ComposerAutoloaderInitebf6e8aae2628d0984ab186d6c4c676a');
 }
 if (!class_exists('PAnD', false) && !interface_exists('PAnD', false) && !trait_exists('PAnD', false)) {
     spl_autoload_call('ProfilePressVendor\PAnD');

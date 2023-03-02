@@ -103,15 +103,6 @@ if ( isset( $_POST ) && isset( $_POST['moove_gdpr_nonce'] ) ) :
 			endif;
 			$gdpr_options['moove_gdpr_cb_close_button_enable'] = $moove_gs_close_enable;
 
-			$gdpr_options['gdpr_cb_close_button_bhv'] = 1;
-			if ( '1' === $moove_gs_close_enable ) :
-				if ( isset( $_POST['gdpr_cb_close_button_bhv'] ) && intval( $_POST['gdpr_cb_close_button_bhv'] ) ) :
-					$gdpr_options['gdpr_cb_close_button_bhv'] = intval( $_POST['gdpr_cb_close_button_bhv'] );
-
-					$gdpr_options['gdpr_cb_close_button_bhv_redirect'] 	= isset( $_POST['gdpr_cb_close_button_bhv_redirect'] ) ? sanitize_url( wp_unslash( $_POST['gdpr_cb_close_button_bhv_redirect'] ) ) : '';
-				endif;
-			endif;
-
 			update_option( $option_name, $gdpr_options );
 
 
@@ -289,7 +280,7 @@ endif;
 									<?php
 								elseif ( 'close' === $button_type ) :
 									?>
-										<div class="gdpr-sortable-button ui-state-disabled" data-type="close">
+										<div class="gdpr-sortable-button ui-state-disabled" data-type="close" style="padding-bottom: 0;">
 											<table>
 												<tbody>
 													<tr>
@@ -304,64 +295,7 @@ endif;
 															</label>
 															
 														</td>
-													</tr>
-													<tr class="gdpr-conditional-field" data-dependency="#moove_gdpr_cb_close_button_enable">
-														<td colspan="2">
-															<hr>
-															<h4><?php esc_html_e( 'Choose how the Close button should behave', 'gdpr-cookie-compliance' ); ?>:</h4>
-															<table>
-																<tr>
-																	<td>
-																		<fieldset class="gdpr-close-options">
-																			<?php 
-																			$gdpr_cb_close_button_bhv = isset( $gdpr_options['gdpr_cb_close_button_bhv'] ) && intval( $gdpr_options['gdpr_cb_close_button_bhv'] ) ? intval( $gdpr_options['gdpr_cb_close_button_bhv'] ) : 1;
-
-																			$gdpr_cb_close_button_bhv_redirect = isset( $gdpr_options['gdpr_cb_close_button_bhv_redirect'] ) && sanitize_url( wp_unslash( $gdpr_options['gdpr_cb_close_button_bhv_redirect'] ) ) ? sanitize_url( wp_unslash( $gdpr_options['gdpr_cb_close_button_bhv_redirect'] ) ) : '';
-																			?>
-					
-																			<label for="gdpr_cb_close_button_bhv_1">
-																				<input name="gdpr_cb_close_button_bhv" type="radio" <?php echo $gdpr_cb_close_button_bhv === 1 ? 'checked' : ''; ?> id="gdpr_cb_close_button_bhv_1" value="1">
-																				<?php esc_html_e( 'as a Close button', 'gdpr-cookie-compliance' ); ?>
-																				<span class="gdpr_cb_bhv_desc"><?php esc_html_e( '(The Cookie Setting Screen will be closed)', 'gdpr-cookie-compliance' ); ?></span>
-																			</label>
-																		
-																			<br /><br />
-
-																			<label for="gdpr_cb_close_button_bhv_2">
-																				<input name="gdpr_cb_close_button_bhv" type="radio" <?php echo $gdpr_cb_close_button_bhv === 2 ? 'checked' : ''; ?> id="gdpr_cb_close_button_bhv_2" value="2">
-																				<?php esc_html_e( 'as a Reject button', 'gdpr-cookie-compliance' ); ?>
-																				<span class="gdpr_cb_bhv_desc"><?php esc_html_e( '(The cookies are rejected and the cookie banner does not re-appear until the cookie consent expires.)', 'gdpr-cookie-compliance' ); ?></span>
-																			</label>
-
-																			<br /><br />
-
-																			<label for="gdpr_cb_close_button_bhv_3">
-																				<input name="gdpr_cb_close_button_bhv" type="radio" <?php echo $gdpr_cb_close_button_bhv === 3 ? 'checked' : ''; ?> id="gdpr_cb_close_button_bhv_3" value="3">
-																				<?php esc_html_e( 'as an Accept button', 'gdpr-cookie-compliance' ); ?>
-																				<span class="gdpr_cb_bhv_desc"><?php esc_html_e( '(The cookies are accepted and the cookie banner does not re-appear until the cookie consent expires.)', 'gdpr-cookie-compliance' ); ?></span>
-																			</label>
-
-																			<br><br>
-
-																			<div class="gdpr-conditional-field-group">
-																				<label for="gdpr_cb_close_button_bhv_4">
-																					<input name="gdpr_cb_close_button_bhv" type="radio" <?php echo $gdpr_cb_close_button_bhv === 4 ? 'checked' : ''; ?> id="gdpr_cb_close_button_bhv_4" value="4">
-																					<?php esc_html_e( 'as a Redirect', 'gdpr-cookie-compliance' ); ?>
-																					<span class="gdpr_cb_bhv_desc"><?php esc_html_e( '(The cookies are rejected and the user will be redirected to the specified URL.)', 'gdpr-cookie-compliance' ); ?></span>
-																				</label>
-																				<br>
-																				<input type="text" name="gdpr_cb_close_button_bhv_redirect" id="gdpr_cb_close_button_bhv_redirect" style="display: none;" class="regular-text" placeholder="<?php esc_html_e('Redirect location', 'gdpr-cookie-compliance') ?>" value="<?php echo esc_url( $gdpr_cb_close_button_bhv_redirect ); ?>">
-																			</div>
-																			<!-- .gdpr-conditional-field-group -->
-
-																			<br />
-
-																		</fieldset>
-																	</td>
-																</tr>
-															</table>
-														</td>
-													</tr>
+													</tr>													
 												</tbody>
 											</table>
 										</div>

@@ -31,7 +31,7 @@ final class Client implements \Sentry\ClientInterface
     /**
      * The version of the SDK.
      */
-    public const SDK_VERSION = '3.12.1';
+    public const SDK_VERSION = '3.13.1';
     /**
      * @var Options The client options
      */
@@ -292,7 +292,7 @@ final class Client implements \Sentry\ClientInterface
         }
         $exceptions = [];
         do {
-            $exceptions[] = new \Sentry\ExceptionDataBag($exception, $this->stacktraceBuilder->buildFromException($exception), $hint->mechanism ?? new \Sentry\ExceptionMechanism(\Sentry\ExceptionMechanism::TYPE_GENERIC, \true));
+            $exceptions[] = new \Sentry\ExceptionDataBag($exception, $this->stacktraceBuilder->buildFromException($exception), $hint->mechanism ?? new \Sentry\ExceptionMechanism(\Sentry\ExceptionMechanism::TYPE_GENERIC, \true, ['code' => $exception->getCode()]));
         } while ($exception = $exception->getPrevious());
         $event->setExceptions($exceptions);
     }

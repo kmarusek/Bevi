@@ -12,6 +12,7 @@ class ExtensionManager
     const PAYPAL = 'paypal';
     const MOLLIE = 'mollie';
     const RAZORPAY = 'razorpay';
+    const PAYSTACK = 'paystack';
     const RECEIPT = 'receipt';
     const JOIN_BUDDYPRESS_GROUPS = 'join_buddypress_groups';
     const BUDDYPRESS_SYNC = 'buddypress_sync';
@@ -42,6 +43,7 @@ class ExtensionManager
             self::PAYPAL                 => 'ProfilePress\Libsodium\PayPal\Init',
             self::MOLLIE                 => 'ProfilePress\Libsodium\Mollie\Init',
             self::RAZORPAY               => 'ProfilePress\Libsodium\Razorpay\Init',
+            self::PAYSTACK               => 'ProfilePress\Libsodium\Paystack\Init',
             self::RECEIPT                => 'ProfilePress\Libsodium\Receipt\Init',
             self::JOIN_BUDDYPRESS_GROUPS => 'ProfilePress\Libsodium\BuddyPressJoinGroupSelect\Init',
             self::BUDDYPRESS_SYNC        => 'ProfilePress\Libsodium\BuddyPressProfileSync',
@@ -83,6 +85,13 @@ class ExtensionManager
                 'url'         => 'https://profilepress.com/addons/razorpay/?utm_source=liteplugin&utm_medium=extension-page&utm_campaign=learn-more',
                 'setting_url' => AbstractPaymentMethod::get_payment_method_admin_page_url(self::RAZORPAY),
                 'description' => esc_html__('Accept payments and sell subscriptions via Razorpay.', 'wp-user-avatar'),
+                'icon'        => '<svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="m64 32c-35.3 0-64 28.7-64 64v32h576v-32c0-35.3-28.7-64-64-64zm512 192h-576v192c0 35.3 28.7 64 64 64h448c35.3 0 64-28.7 64-64zm-464 128h64c8.8 0 16 7.2 16 16s-7.2 16-16 16h-64c-8.8 0-16-7.2-16-16s7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16h128c8.8 0 16 7.2 16 16s-7.2 16-16 16h-128c-8.8 0-16-7.2-16-16z"/></svg>'
+            ],
+            self::PAYSTACK               => [
+                'title'       => esc_html__('Paystack', 'wp-user-avatar'),
+                'url'         => 'https://profilepress.com/addons/paystack/?utm_source=liteplugin&utm_medium=extension-page&utm_campaign=learn-more',
+                'setting_url' => AbstractPaymentMethod::get_payment_method_admin_page_url(self::PAYSTACK),
+                'description' => esc_html__('Accept payments and sell subscriptions via Paystack.', 'wp-user-avatar'),
                 'icon'        => '<svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="m64 32c-35.3 0-64 28.7-64 64v32h576v-32c0-35.3-28.7-64-64-64zm512 192h-576v192c0 35.3 28.7 64 64 64h448c35.3 0 64-28.7 64-64zm-464 128h64c8.8 0 16 7.2 16 16s-7.2 16-16 16h-64c-8.8 0-16-7.2-16-16s7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16h128c8.8 0 16 7.2 16 16s-7.2 16-16 16h-128c-8.8 0-16-7.2-16-16z"/></svg>'
             ],
             self::RECEIPT                => [

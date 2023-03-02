@@ -529,6 +529,18 @@ function ppress_cent_to_decimal($amount)
 }
 
 /**
+ * Converts price, fee or amount in decimal to cent
+ *
+ * @param $amount
+ *
+ * @return string
+ */
+function ppress_decimal_to_cent($amount)
+{
+    return (int)Calculator::init($amount)->toScale(2)->multipliedBy(100)->toScale(0)->val();
+}
+
+/**
  * Force https for urls.
  *
  * @param mixed $content
