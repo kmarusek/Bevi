@@ -17,7 +17,7 @@
         :loop="false"
         :breakpoints="{
           768: {
-            slidesPerView: 6,
+            slidesPerView: 5,
             centeredSlides: false,
           },
         }"
