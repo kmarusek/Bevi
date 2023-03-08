@@ -154,11 +154,16 @@
 </template>
 
 <style>
+
 .comparison {
   background-image: url("/wp-content/themes/bevi/dist/images/bluewavebig.png");
   background-position: left bottom -600px;
   background-repeat: no-repeat;
   background-size: cover;
+}
+#comparison-slide .block{
+  background-color: transparent;
+  padding: 0;
 }
 .block-content p {
   min-height: 115px;
