@@ -48,7 +48,7 @@
       :class="{
         'text-left flex-col lg:flex-row' : block.text_position === 'Right',
         'text-left flex-col lg:flex-row-reverse' : block.text_position === 'Left',
-        'flex-col text-center' : block.text_position === 'Center'
+        'flex-col text-center justify-end' : block.text_position === 'Center',
       }"
     >
       <div
@@ -207,6 +207,10 @@
   }
   .text-gray {
     @apply text-gray;
+  }
+  .block{
+    background-color: transparent;
+    padding-bottom: 0;
   }
 }
 

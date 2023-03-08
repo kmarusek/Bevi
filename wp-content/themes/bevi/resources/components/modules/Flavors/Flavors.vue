@@ -182,6 +182,10 @@
         top: 21%;
         left: 10%;
       }
+      @screen lg {
+        top: 12%;
+        left: 19%;
+      }
     }
 
     &:nth-of-type(2) {
@@ -190,6 +194,10 @@
 
       @screen md {
         bottom: 21%;
+        right: 32%;
+      }
+      @screen lg {
+        bottom: 17%;
         right: 32%;
       }
     }
@@ -230,6 +238,10 @@
 
       @screen md {
         top: 12%;
+        left: 49%;
+      }
+      @screen lg {
+        top: 2%;
         left: 49%;
       }
     }
