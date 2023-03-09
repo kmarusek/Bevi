@@ -165,9 +165,8 @@
   background-color: transparent;
   padding: 0;
 }
-.block-content p {
-  min-height: 115px;
-  
+.comparison--block p {
+  min-height: 115px; 
 }
 @media screen and (max-width: 425px) {
   .comparison {
