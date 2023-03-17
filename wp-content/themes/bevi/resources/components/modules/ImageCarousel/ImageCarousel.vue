@@ -32,7 +32,7 @@
           :id="getDotControlsId(slide)"
         >
           <img
-            :src="slide.logo.sizes.thumbnail"
+            :src="slide.logo.sizes.large"
             :alt="slide.logo.alt"
             class="mx-auto gsap-fade carousel-image"
           >
