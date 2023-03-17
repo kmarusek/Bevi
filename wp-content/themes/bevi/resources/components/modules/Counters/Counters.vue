@@ -8,7 +8,7 @@
         Our Products
       </p>
       <h3 class="h3 font-semibold mb-4 text-blue-600 gsap-fade">
-        Office water dispensers
+        Water Dispensers for Your Business
       </h3>
       <div class="w-full flex flex-col sm:flex-row justify-around flex-wrap">
         <div
