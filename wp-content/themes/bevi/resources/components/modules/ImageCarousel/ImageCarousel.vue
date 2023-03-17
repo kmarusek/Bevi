@@ -134,6 +134,6 @@
 
 .carousel-image {
   height: 4rem;
-  max-width: 120px;
+  max-width: 200px;
 }
 </style>
