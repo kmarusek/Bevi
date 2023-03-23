@@ -1993,11 +1993,11 @@
                         },
                         {
                             "key": "field_641ccfc0b6cad",
-                            "label": "Form Unique Class",
+                            "label": "Unique UTM Form Identifier Class",
                             "name": "pardot_class",
                             "aria-label": "",
                             "type": "text",
-                            "instructions": "",
+                            "instructions": "This needs to be a one word unique name if you need multiple words use \"_\" to connect the words like example: one_word.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -4752,5 +4752,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1679611318
+    "modified": 1679612864
 }

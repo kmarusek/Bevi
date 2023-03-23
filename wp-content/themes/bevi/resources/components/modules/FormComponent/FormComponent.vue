@@ -64,7 +64,12 @@
     mounted() {
       const iframe = this.$refs.pardot.querySelector('iframe');
       const pardotClass = this.block.pardot_class;
+      
+      if(pardotClass != ''){
       iframe.classList.add(pardotClass);
+      }else {
+
+      }
       iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'taggedElement'}, iframe);
     }
   };
