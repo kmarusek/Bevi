@@ -1992,6 +1992,26 @@
                             }
                         },
                         {
+                            "key": "field_641cac4da0d00",
+                            "label": "Unique Class",
+                            "name": "pardot_class",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
                             "key": "field_5f9ad6f88adea",
                             "label": "Show Blue Background?",
                             "name": "show_blue_background",
@@ -4732,5 +4752,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1679074777
+    "modified": 1679600743
 }

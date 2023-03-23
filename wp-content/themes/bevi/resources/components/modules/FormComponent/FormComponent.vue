@@ -63,6 +63,8 @@
     },
     mounted() {
       const iframe = this.$refs.pardot.querySelector('iframe');
+      const form_class = this.block.pardot_class;
+      iframe.classList.add(form_class);
       iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'taggedElement'}, iframe);
     }
   };
