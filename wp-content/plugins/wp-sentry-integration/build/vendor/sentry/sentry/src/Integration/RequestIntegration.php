@@ -3,7 +3,6 @@
 declare (strict_types=1);
 namespace Sentry\Integration;
 
-use WPSentry\ScopedVendor\GuzzleHttp\Psr7\Utils;
 use WPSentry\ScopedVendor\Psr\Http\Message\ServerRequestInterface;
 use WPSentry\ScopedVendor\Psr\Http\Message\UploadedFileInterface;
 use Sentry\Event;
@@ -41,7 +40,7 @@ final class RequestIntegration implements \Sentry\Integration\IntegrationInterfa
      *
      * @deprecated The 'none' option is deprecated since version 3.10, to be removed in 4.0
      */
-    private const MAX_REQUEST_BODY_SIZE_OPTION_TO_MAX_LENGTH_MAP = ['none' => 0, 'never' => 0, 'small' => self::REQUEST_BODY_SMALL_MAX_CONTENT_LENGTH, 'medium' => self::REQUEST_BODY_MEDIUM_MAX_CONTENT_LENGTH, 'always' => -1];
+    private const MAX_REQUEST_BODY_SIZE_OPTION_TO_MAX_LENGTH_MAP = ['none' => 0, 'never' => 0, 'small' => self::REQUEST_BODY_SMALL_MAX_CONTENT_LENGTH, 'medium' => self::REQUEST_BODY_MEDIUM_MAX_CONTENT_LENGTH, 'always' => \PHP_INT_MAX];
     /**
      * This constant defines the default list of headers that may contain
      * sensitive data and that will be sanitized if sending PII is disabled.
@@ -167,11 +166,22 @@ final class RequestIntegration implements \Sentry\Integration\IntegrationInterfa
             return null;
         }
         $requestData = $request->getParsedBody();
-        $requestData = \array_merge($this->parseUploadedFiles($request->getUploadedFiles()), \is_array($requestData) ? $requestData : []);
+        $requestData = \array_replace($this->parseUploadedFiles($request->getUploadedFiles()), \is_array($requestData) ? $requestData : []);
         if (!empty($requestData)) {
             return $requestData;
         }
-        $requestBody = \WPSentry\ScopedVendor\GuzzleHttp\Psr7\Utils::copyToString($request->getBody(), self::MAX_REQUEST_BODY_SIZE_OPTION_TO_MAX_LENGTH_MAP[$maxRequestBodySize]);
+        $requestBody = '';
+        $maxLength = self::MAX_REQUEST_BODY_SIZE_OPTION_TO_MAX_LENGTH_MAP[$maxRequestBodySize];
+        if (0 < $maxLength) {
+            $stream = $request->getBody();
+            while (0 < $maxLength && !$stream->eof()) {
+                if ('' === ($buffer = $stream->read(\min($maxLength, self::REQUEST_BODY_MEDIUM_MAX_CONTENT_LENGTH)))) {
+                    break;
+                }
+                $requestBody .= $buffer;
+                $maxLength -= \strlen($buffer);
+            }
+        }
         if ('application/json' === $request->getHeaderLine('Content-Type')) {
             try {
                 return \Sentry\Util\JSON::decode($requestBody);

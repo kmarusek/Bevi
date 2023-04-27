@@ -16,7 +16,7 @@ abstract class FilteredStream implements \WPSentry\ScopedVendor\Psr\Http\Message
         rewind as private doRewind;
         seek as private doSeek;
     }
-    const BUFFER_SIZE = 8192;
+    public const BUFFER_SIZE = 8192;
     /**
      * @var callable
      */

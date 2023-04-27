@@ -2,8 +2,8 @@
 * Contributors: cookiebot,phpgeekdk,aytac
 * Tags: cookie banner, GDPR, CCPA, WordPress cookie banner, cookie policy, ePrivacy, dsgvo, privacy compliance, cookie law, data privacy, cmp, cookies
 * Requires at least: 4.4
-* Tested up to: 6.1.1
-* Stable tag: 4.2.6
+* Tested up to: 6.2
+* Stable tag: 4.2.9
 * Requires PHP: 5.6
 * License: GPLv2 or later
 
@@ -76,7 +76,11 @@ Display the cookie banner and cookie policy to users from all over the world usi
 
 Watch the below video to learn how to install the Cookiebot CMP WordPress plugin. It’s very easy. Alternatively, read our [step-by-step installation guide](https://support.cookiebot.com/hc/en-us/articles/360003784174-Installing-Cookiebot-CMP-on-WordPress).
 
-[youtube https://youtube.com/watch?v=eSVFnjoMKFk]
+[youtube https://youtube.com/watch?v=QgB315qko-c]
+
+Cookie Declaration
+
+[youtube https://www.youtube.com/watch?v=67XUgTUy3ok]
 
 Need assistance? Visit our [Help Center](https://support.cookiebot.com/hc/en-us) or [contact us](https://support.cookiebot.com/hc/en-us/requests/new).
 
@@ -101,13 +105,13 @@ Our consent technology is trusted by public and private organizations across all
 [Learn more about Cookiebot CMP](https://www.cookiebot.com/en/about/)
 [Learn more about Usercentrics](https://usercentrics.com/about-us/)
 
-[![Sonarcloud](https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg)](https://www.sonarsource.com/products/sonarcloud/)
+<img src="https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg" alt="Sonarcloud"/>
 
-[![Security](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=security_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
-[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=reliability_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=bugs&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
-[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=sqale_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=vulnerabilities&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3)](https://sonarcloud.io/summary/new_code?id=CybotAS_CookiebotWP)
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=security_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Security"/>
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=reliability_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Reliability"/>
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=bugs&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Bugs"/>
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=sqale_rating&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Maintainability"/>
+<img src="https://sonarcloud.io/api/project_badges/measure?project=CybotAS_CookiebotWP&metric=vulnerabilities&token=c3f37bd6b25de5ce675c50dd1bfe06716d3448e3" alt="Vulnerabilities"/>
 
 ## Screenshots ##
 
@@ -131,7 +135,7 @@ You cannot choose whether you want a free plan or a premium plan, as this is det
 
 2. The features you need. The free plan **does not include** all features available in the premium plans. The free plan does not include customization of banner and cookies declaration, multiple languages, email reports, data export, geolocation, bulk consent, consent statistics, internal domain alias for development, test and staging.
 
-If more than 100 subpages are found during the initial website scan, you will be given a free one-month trial of Cookiebot CMP with full functionality.
+If more than 50 subpages are found during the initial website scan, you will be given a free one-month trial of Cookiebot CMP with full functionality.
 
 See all details of Cookiebot CMP [plans and pricing](https://www.cookiebot.com/en/pricing/).
 
@@ -156,7 +160,7 @@ To display your cookie declaration, create a new page on your website and add th
 
 By default, the cookie declaration is displayed in the selected Cookiebot CMP language. You are able to override this setting with a “lang” attribute in the shortcode. E.g.: [cookie_declaration lang=”de”] for a German version. Remember to add all languages used in the [Cookiebot Manager](https://manage.cookiebot.com/en/login).
 
-[youtube https://www.youtube.com/watch?v=OCXz2bt4H_w]
+[youtube https://www.youtube.com/watch?v=67XUgTUy3ok]
 
 ### Cookie-checker: What cookies are in use on my site? ###
 If you are in doubt about what cookies are in use on our site, start with our free compliance test:
@@ -263,6 +267,23 @@ If your favorite plugin isn't supported, feel free to request it via our [GitHub
 
 
 ## Changelog ##
+### 4.2.9 - 2023-04-25 ###
+* Code audit
+* Update readme description
+* Update templates links URLs Props: @chesio
+* Update translations
+* Fix multiple configuration bug
+* Fix notice close link
+* Fix french typo Props: @DevKylian
+
+### 4.2.8 - 2023-04-05 ###
+* Code audit
+* Fix for WordPress 6.2 compatibility
+
+### 4.2.7 - 2023-03-07 ###
+* Update readme description
+* Fix placeholder issue on custom content
+
 ### 4.2.6 - 2023-02-23 ###
 * Fix review recommendation trigger
 

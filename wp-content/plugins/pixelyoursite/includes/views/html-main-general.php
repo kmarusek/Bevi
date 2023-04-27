@@ -258,6 +258,10 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </p>
                 <p><a href="https://www.youtube.com/watch?v=snUKcsTbvCk" target="_blank">Improve META (Facebook) EMQ score
                         with form automatic data detection (11:48) - watch now</a></p>
+                <p><a href="https://www.youtube.com/watch?v=X65h4uhsMJY" target="_blank">
+                        Track ANY WordPress Form - Meta, Google, Pinterest, Bing (3:52) - watch video</a></p>
+                <p><a href="https://www.youtube.com/watch?v=c4Hrb8WK5bw" target="_blank">
+                        Fire a LEAD event on form submit - WordPress & PixelYourSite (5:58) - watch video</a></p>
             </div>
         </div>
         <div class="row">
@@ -289,11 +293,32 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <?php PYS()->render_switcher_input('automatic_event_form_enabled'); ?>Track Forms <?php cardCollapseBtn(); ?>
             </div>
             <div class="card-body">
+                <p>
+                    The Form event will fire when a form is successfully submitted for the following plugins: Contact Form 7, Forminator, WP Forms, Formidable Pro, Ninja Forms, and Fluent Forms. For forms added by different means, we will fire the event when the submit button is clicked. Watch <a href="https://www.youtube.com/watch?v=c4Hrb8WK5bw" target="_blank">this video</a> to learn more.
+                </p>
                 <?php
                 enableEventForEachPixel('automatic_event_form_enabled', true, true, true, true, true, true);
                 ?>
                 <br/>
                 <p>Fires when the website visitor clicks form submit buttons.</p>
+                <br>
+                <?php
+                $eventsFormFactory = apply_filters("pys_form_event_factory",[]);
+                foreach ($eventsFormFactory as $activeFormPlugin) : ?>
+                    <p><strong><?php echo $activeFormPlugin->getName();?> detected</strong> - we will fire the Form event for each successfully submited form.</p>
+
+                <?php
+                endforeach;
+                if($eventsFormFactory) :
+                    ?>
+                    <div class="col">
+                        <?php PYS()->render_checkbox_input( 'enable_success_send_form',
+                            'Fire the event only for the supported plugins, when the form is succesfully submited.' ); ?>
+                    </div>
+                    <br>
+                    <p>Configure Lead or other events using our <a href="<?php echo buildAdminUrl( 'pixelyoursite', 'events' );?>">events triggers</a>. Learn how from <a href="https://www.youtube.com/watch?v=c4Hrb8WK5bw" target="_blank">this video</a></p>
+                    <br>
+                <?php endif;?>
                 <p><strong>Event name: </strong>Form</p>
                 <p><strong>Event name on TikTok: </strong>FormSubmit</p>
                 <p><strong>Specific parameters: </strong><i>text, from_class, form_id</i></p>
@@ -886,6 +911,16 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
 
             <small class="mt-1">Compress JS files (please test all your events if you enable this option because it can create conflicts with various caches).</small>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <div class="form-inline">
+                <?php PYS()->render_switcher_input('hide_version_plugin_in_console'); ?>
+                <h4 class="switcher-label">Remove the name of the plugin from the console</h4>
+            </div>
+
+            <small class="mt-1">Once ON, we remove all mentions about the plugin or add-ons from the console.</small>
         </div>
     </div>
     <div class="row">

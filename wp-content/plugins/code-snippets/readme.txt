@@ -1,10 +1,10 @@
 === Code Snippets ===
-Contributors: bungeshea, ver3
+Contributors: bungeshea, ver3, lightbulbman, codesnippetspro
 Donate link: https://codesnippets.pro
 Tags: snippets, functions, multisite, code, php, html, css, javascript
 License: MIT
 License URI: license.txt
-Stable tag: 3.2.2
+Stable tag: 3.3.0
 Tested up to: 6.1.1
 
 An easy, clean and simple way to run code snippets on your site.
@@ -13,11 +13,7 @@ An easy, clean and simple way to run code snippets on your site.
 
 Code Snippets is an easy, clean and simple way to run code snippets on your site. It removes the need to add custom snippets to your theme's `functions.php` file.
 
-[**Black Friday is here! Get 40% off all Code Snippets Pro plans.**](https://codesnippets.pro/pricing/)
-
-Code Snippets Pro comes with full-featured CSS and JavaScript snippets and integration with Gutenberg and Elementor.
-
-**What is Code Snippets?**
+[**Code Snippets Pro** is now available, with full CSS, JavaScript, Gutenberg and Elementor integrations.](https://codesnippets.pro/pricing/)
 
 A snippet is a small chunk of PHP code that you can use to extend the functionality of a WordPress-powered website; essentially a mini-plugin with less load on your site.
 
@@ -37,7 +33,7 @@ The snippet editor includes fields for a name, a visual editor-enabled descripti
 
 https://youtu.be/29jD2BcBX5w
 
-If you have any feedback, issues, or suggestions for improvements please leave a topic in the [Support Forum](https://wordpress.org/support/plugin/code-snippets), [join the community on Facebook](https://facebook.com/groups/codesnippetsplugin), or [check us out on GitHub](https://github.com/sheabunge/code-snippets).
+If you have any feedback, issues, or suggestions for improvements please leave a topic in the [Support Forum](https://wordpress.org/support/plugin/code-snippets), [join the community on Facebook](https://facebook.com/groups/codesnippetsplugin), or [check us out on GitHub](https://github.com/codesnippetspro/code-snippets).
 
 If you like this plugin, or it is useful to you in some way, please consider reviewing it on [WordPress.org](https://wordpress.org/support/view/plugin-reviews/code-snippets).
 
@@ -118,10 +114,10 @@ You can run snippets across an entire multisite network by **Network Activating*
 Snippets are stored in the `wp_snippets` table in the WordPress database. The table name may differ depending on what your table prefix is set to.
 
 = Where can I go for help or suggest new features? =
-You can get help with Code Snippets, report bugs or errors, and suggest new features and improvements either on the [WordPress Support Forums](https://wordpress.org/support/plugin/code-snippets) or on [GitHub](https://github.com/sheabunge/code-snippets)
+You can get help with Code Snippets, report bugs or errors, and suggest new features and improvements either on the [WordPress Support Forums](https://wordpress.org/support/plugin/code-snippets) or on [GitHub](https://github.com/codesnippetspro/code-snippets)
 
 = How can I help contribute to the development of the Code Snippets plugin? =
-The best way to do this is to fork the [repository on GitHub](https://github.com/sheabunge/code-snippets) and send a pull request.
+The best way to do this is to fork the [repository on GitHub](https://github.com/codesnippetspro/code-snippets) and send a pull request.
 
 == Screenshots ==
 
@@ -131,6 +127,14 @@ The best way to do this is to fork the [repository on GitHub](https://github.com
 4. Importing snippets from an export file
 
 == Changelog ==
+
+= 3.3.0 (09 Mar 2022) =
+* Fixed: Do not enqueue CSS or JS snippet file if no snippets exist. (PRO)
+* Improved: Added additional editor shortcuts to list in tooltip.
+* Added: Filter for changing Snippets admin menu position. [See this help article for more information.](https://help.codesnippets.pro/article/61-how-can-i-change-the-location-of-the-snippets-admin-menu)
+* Added: Ability to filter shortcode output. Thanks to contributions from [Jack Szwergold](https://github.com/JackSzwergold).
+* Fixed: Bug causing all snippets to show in site health information instead of those active.
+* Fixed: Unnecessary sanitization of file upload data causing import process to fail on Windows systems.
 
 = 3.2.2 (17 Nov 2022) =
 * Fixed: Plugin lacking a valid header error on activation.
@@ -282,9 +286,12 @@ __New in Pro__
 * Fixed: Check the referer on the import menu to prevent CSRF attacks. Thanks to [Chloe with the Wordfence Threat Intelligence team](https://www.wordfence.com/blog/author/wfchloe/) for reporting.
 * Fixed: Ensure that individual snippet action links use proper verification.
 
-**[The full changelog is available on GitHub](https://github.com/sheabunge/code-snippets/blob/master/CHANGELOG.md)**
+**[The full changelog is available on GitHub](https://github.com/codesnippetspro/code-snippets/blob/master/CHANGELOG.md)**
 
 == Upgrade Notice ==
+
+= 3.3.0 =
+Assorted bug fixes and additional filter hooks.
 
 = 3.2.2 =
 Tested with WordPress 6.1.1.

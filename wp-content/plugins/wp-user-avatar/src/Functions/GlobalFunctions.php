@@ -927,8 +927,9 @@ function ppress_generate_password_reset_url($user_login)
 
     $key = get_password_reset_key($user);
 
-    if(is_wp_error($key)) {
+    if (is_wp_error($key)) {
         ppress_log_error($key->get_error_message());
+
         return '';
     }
 
@@ -1613,11 +1614,21 @@ function ppress_is_base64($s)
     return true;
 }
 
-function ppress_plan_checkout_url($plan_id)
+/**
+ * @param int $plan_id Plan ID or Subscription ID if change plan URL
+ * @param bool $is_change_plan set to true to return checkout url to change plan
+ *
+ * @return false|string
+ */
+function ppress_plan_checkout_url($plan_id, $is_change_plan = false)
 {
     $page_id = ppress_settings_by_key('checkout_page_id');
+
     if ( ! empty($page_id)) {
-        return add_query_arg('plan', absint($plan_id), get_permalink($page_id));
+
+        $cid = $is_change_plan ? 'change_plan' : 'plan';
+
+        return add_query_arg($cid, absint($plan_id), get_permalink($page_id));
     }
 
     return false;

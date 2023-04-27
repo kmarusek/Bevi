@@ -2,9 +2,9 @@
 
 namespace WPSentry\ScopedVendor\Http\Message\UriFactory;
 
-use function WPSentry\ScopedVendor\GuzzleHttp\Psr7\uri_for;
 use WPSentry\ScopedVendor\GuzzleHttp\Psr7\Utils;
 use WPSentry\ScopedVendor\Http\Message\UriFactory;
+use function WPSentry\ScopedVendor\GuzzleHttp\Psr7\uri_for;
 /**
  * Creates Guzzle URI.
  *

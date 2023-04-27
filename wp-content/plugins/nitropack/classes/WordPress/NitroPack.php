@@ -138,6 +138,7 @@ class NitroPack {
             "isWoocommerceCacheHandlerActive" => \NitroPack\Integration\Plugin\WoocommerceCacheHandler::isActive(),
             "isWoocommerceActive" => \NitroPack\Integration\Plugin\Woocommerce::isActive(),
             "isAeliaCurrencySwitcherActive" => \NitroPack\Integration\Plugin\AeliaCurrencySwitcher::isActive(),
+            "isGeoTargetingWPActive" => \NitroPack\Integration\Plugin\GeoTargetingWP::isActive(),
             "dlm_downloading_url" => \NitroPack\Integration\Plugin\DownloadManager::isActive() ? \NitroPack\Integration\Plugin\DownloadManager::downloadingUrl() : NULL,
             "dlm_download_endpoint" => \NitroPack\Integration\Plugin\DownloadManager::isActive() ? \NitroPack\Integration\Plugin\DownloadManager::downloadEndpoint() : NULL,
             "pluginVersion" => NITROPACK_VERSION,
@@ -166,6 +167,13 @@ class NitroPack {
         if (\NitroPack\Integration\Plugin\AeliaCurrencySwitcher::isActive()) {
             try {
                 \NitroPack\Integration\Plugin\AeliaCurrencySwitcher::configureVariationCookies();
+            } catch (\Exception $e) {
+                // TODO: Log this error
+            }
+        }
+        if (\NitroPack\Integration\Plugin\GeoTargetingWP::isActive()) {
+            try {
+                \NitroPack\Integration\Plugin\GeoTargetingWP::configureVariationCookies();
             } catch (\Exception $e) {
                 // TODO: Log this error
             }
@@ -211,6 +219,7 @@ class NitroPack {
                     if (!defined("NP_COOKIE_FILTER")) {
                         \NitroPack\SDK\NitroPack::addCookieFilter("nitropack_filter_non_original_cookies");
                         define("NP_COOKIE_FILTER", true);
+                        do_action('np_set_cookie_filter');
                     }
                     if (!defined("NP_STORAGE_CONFIGURED")) {
                         if (defined("NITROPACK_USE_REDIS") && NITROPACK_USE_REDIS) {
@@ -275,30 +284,41 @@ class NitroPack {
         return $this->pageType;
     }
 
-	/**
-	 * Get current url
-	 *
-	 * @return string The current url
-	 */
-	public function getCurrentUrl() {
-		if (! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] )) {
-			$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
-		} else {
-			$host = !empty($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : "";
-		}
+    /**
+     * Get current url
+     *
+     * @return string The current url
+     */
+    public function getCurrentUrl() {
+        if (! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] )) {
+            $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+        } else {
+            $host = !empty($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : "";
+        }
 
-		$uri = !empty($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "";
-		$currentUrl = $host . $uri;
+        $uri = !empty($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : "";
+        $currentUrl = $host . $uri;
 
-		if (empty($currentUrl)) {
-			$site_url = parse_url(apply_filters('nitropack_current_host', get_site_url()));
-			$currentUrl = $site_url["host"];
-		}
+        if (empty($currentUrl)) {
 
-		if (stripos($currentUrl, "www.") === 0) {
-			$currentUrl = substr($currentUrl, 4);
-		}
+	        if (function_exists('get_site_url')) {
+		        $host = apply_filters('nitropack_current_host', get_site_url());
+	        } elseif (function_exists('get_option')) {
+		        $host = apply_filters('nitropack_current_host', get_option('siteurl'));
+	        }
 
-		return $currentUrl;
-	}
+			if ($host != '') {
+				$site_url = parse_url($host);
+				if (is_array($site_url) && isset($site_url["host"]) && !empty($site_url["host"])) {
+					$currentUrl = $site_url["host"];
+				}
+			}
+        }
+
+        if (stripos($currentUrl, "www.") === 0) {
+            $currentUrl = substr($currentUrl, 4);
+        }
+
+        return $currentUrl;
+    }
 }

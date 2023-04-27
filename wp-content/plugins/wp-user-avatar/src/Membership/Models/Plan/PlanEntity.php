@@ -6,6 +6,7 @@ use ProfilePress\Core\Membership\Models\AbstractModel;
 use ProfilePress\Core\Membership\Models\ModelInterface;
 use ProfilePress\Core\Membership\Models\Subscription\SubscriptionBillingFrequency;
 use ProfilePress\Core\Membership\Models\Subscription\SubscriptionTrialPeriod;
+use ProfilePress\Core\Membership\Repositories\GroupRepository;
 use ProfilePress\Core\Membership\Repositories\PlanRepository;
 use ProfilePress\Core\Membership\Services\Calculator;
 use ProfilePress\Core\Membership\Services\OrderService;
@@ -94,6 +95,11 @@ class PlanEntity extends AbstractModel implements ModelInterface
     public function is_recurring()
     {
         return ! empty($this->billing_frequency) && $this->billing_frequency != 'lifetime';
+    }
+
+    public function is_lifetime()
+    {
+        return ! empty($this->billing_frequency) && $this->billing_frequency == 'lifetime';
     }
 
     public function has_free_trial()
@@ -224,7 +230,7 @@ class PlanEntity extends AbstractModel implements ModelInterface
                 absint($extras['df_download_expiry']) :
                 absint(ppress_get_file_downloads_setting('download_expiry', 0, true));
 
-            wp_cache_set($cache_key, $ret, "", MINUTE_IN_SECONDS);
+            wp_cache_set($cache_key, $ret, '', MINUTE_IN_SECONDS);
         }
 
         return $ret;
@@ -297,5 +303,21 @@ class PlanEntity extends AbstractModel implements ModelInterface
     public function deactivate()
     {
         return PlanRepository::init()->updateColumn($this->id, 'status', 'false');
+    }
+
+    /**
+     * @return int|false
+     */
+    public function get_group_id()
+    {
+        $groups = GroupRepository::init()->retrieveAll(0, 1, 'ASC');
+
+        foreach ($groups as $group) {
+            if (in_array($this->get_id(), $group->get_plan_ids(), true)) {
+                return $group->get_id();
+            }
+        }
+
+        return false;
     }
 }

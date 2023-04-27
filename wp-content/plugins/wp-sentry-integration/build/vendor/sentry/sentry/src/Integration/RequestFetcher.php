@@ -3,7 +3,7 @@
 declare (strict_types=1);
 namespace Sentry\Integration;
 
-use WPSentry\ScopedVendor\GuzzleHttp\Psr7\ServerRequest;
+use WPSentry\ScopedVendor\Http\Discovery\Psr17Factory;
 use WPSentry\ScopedVendor\Psr\Http\Message\ServerRequestInterface;
 /**
  * Default implementation for RequestFetcherInterface. Creates a request object
@@ -19,6 +19,6 @@ final class RequestFetcher implements \Sentry\Integration\RequestFetcherInterfac
         if (!isset($_SERVER['REQUEST_METHOD']) || \PHP_SAPI === 'cli') {
             return null;
         }
-        return \WPSentry\ScopedVendor\GuzzleHttp\Psr7\ServerRequest::fromGlobals();
+        return (new \WPSentry\ScopedVendor\Http\Discovery\Psr17Factory())->createServerRequestFromGlobals();
     }
 }

@@ -93,6 +93,7 @@ class EventsWoo extends EventsFactory {
             global $post;
             $data = array(
                 'enabled'                       => true,
+                'enabled_save_data_to_orders'  => PYS()->getOption('woo_enabled_save_data_to_orders'),
                 'addToCartOnButtonEnabled'      => PYS()->getOption( 'woo_add_to_cart_enabled' ) && PYS()->getOption( 'woo_add_to_cart_on_button_click' ),
                 'addToCartOnButtonValueEnabled' => PYS()->getOption( 'woo_add_to_cart_value_enabled' ),
                 'addToCartOnButtonValueOption'  => PYS()->getOption( 'woo_add_to_cart_value_option' ),

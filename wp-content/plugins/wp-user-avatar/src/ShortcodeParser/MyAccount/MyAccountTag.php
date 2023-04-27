@@ -241,6 +241,11 @@ class MyAccountTag extends FormProcessor
                 exit;
             }
 
+            if ($action == 'change_plan') {
+                wp_safe_redirect(ppress_plan_checkout_url($sub->id, true));
+                exit;
+            }
+
             do_action('ppress_handle_subscription_actions', $action, $sub);
 
             wp_safe_redirect(

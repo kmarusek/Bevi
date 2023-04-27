@@ -205,12 +205,20 @@ final class Hub implements \Sentry\State\HubInterface
                 $transaction->setSampled(\false);
                 return $transaction;
             }
-            $transaction->setSampled(\mt_rand(0, \mt_getrandmax() - 1) / \mt_getrandmax() < $sampleRate);
+            $transaction->setSampled($this->sample($sampleRate));
         }
         if (!$transaction->getSampled()) {
             return $transaction;
         }
         $transaction->initSpanRecorder();
+        $profilesSampleRate = $options->getProfilesSampleRate();
+        if ($this->sample($profilesSampleRate)) {
+            $transaction->initProfiler();
+            $profiler = $transaction->getProfiler();
+            if (null !== $profiler) {
+                $profiler->start();
+            }
+        }
         return $transaction;
     }
     /**
@@ -258,6 +266,19 @@ final class Hub implements \Sentry\State\HubInterface
             return 0;
         }
         return $fallbackSampleRate;
+    }
+    /**
+     * @param mixed $sampleRate
+     */
+    private function sample($sampleRate) : bool
+    {
+        if (0.0 === $sampleRate) {
+            return \false;
+        }
+        if (1.0 === $sampleRate) {
+            return \true;
+        }
+        return \mt_rand(0, \mt_getrandmax() - 1) / \mt_getrandmax() < $sampleRate;
     }
     /**
      * @param mixed $sampleRate

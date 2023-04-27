@@ -2,10 +2,10 @@
 Contributors: MooveAgency
 Donate link: https://www.mooveagency.com/wordpress-plugins/gdpr-cookie-compliance/
 Tags: GDPR, CCPA, DSGVO, cookie banner, cookie notice
-Stable tag: 4.10.2
+Stable tag: 4.11.2
 Requires at least: 4.5
-Tested up to: 6.1
-Requires PHP: 5.6 or higher
+Tested up to: 6.2
+Requires PHP: 5.6
 License: GPLv3
 
 Cookie notice banner for GDPR, CCPA, CPRA, LGPD, PECR, AAP, PIPEDA, VCDPA, CPRA, ICO, GPDP, DSGVO, BfDl, CNIL, AEPD, PDPB, DPA, PDPA, TTDSG, POPIA, APA, ePrivacy, COPPA, CASL, European cookie law, data protection and privacy regulations and other cookie law and consent notice requirements on your website.
@@ -22,9 +22,10 @@ Cookie notice banner for GDPR, CCPA, CPRA, LGPD, PECR, AAP, PIPEDA, VCDPA, CPRA,
 * Give your users **full control** over cookies stored on their computer, including the ability for users to **revoke their consent**.
 * **Fully customisable** - upload your own logo, colours, fonts
 * **Fully editable** - change all text
+* Direct integration of **GTM, GA, Meta Pixel**, GTM4WP and more
 * **Set the position** of the Cookie Consent Banner: at the top or bottom of your pages
 * **Flexible** - decide which scripts will be loaded by default or only when the user gives consent
-* **'Accept'**, **'Reject'**, 'Close' and 'Settings' buttons
+* **'Accept'**, **'Reject'**, 'Close' and 'Settings' buttons & you can also change their order
 * **Consent expiration** settings
 * Link to **Privacy Policy** page
 * Simple, beautiful & intuitive user interface
@@ -33,11 +34,11 @@ Cookie notice banner for GDPR, CCPA, CPRA, LGPD, PECR, AAP, PIPEDA, VCDPA, CPRA,
 * **Mobile responsive** design
 * **SEO friendly**
 * Optimized for **WCAG & ADA** accessibility guidelines
-* [WPML](https://wpml.org/?aid=85067&affiliate_key=oYH2FlnrApDE), QTranslate, WP Multilang, TranslatePress and Polylang compatible, .pot file for translations included
+* WPML, QTranslate, WP Multilang, TranslatePress and Polylang compatible, .pot file for translations included
 * **CDN** base URL supported
 * Supports all major **caching** servers and plugins
-* Available in **17 languages**
-* Optimised for PHP 7 and 8
+* Available in **18 languages**
+* Optimised for PHP 7 and PHP 8
 
 ### Premium Features Available
 
@@ -275,6 +276,26 @@ The Brazilian General Data Protection Law (“Lei Geral de Proteção de Dados�
 39. GDPR Cookie Compliance - Front-end - Cookie Shortcode [Premium]
 
 == Changelog ==
+= 4.11.2: 25 April 2023 =
+* Hook added to disable AJAX cookie removal
+
+= 4.11.1: 19 April 2023 =
+* Fixed not defined JS variable
+
+= 4.11.0: 18 April 2023 =
+* Direct integration added for GTM, GA, Facebook Pixel, GTM4WP
+
+= 4.10.6: 20 March 2023 =
+* Tabs layout accessibility fixes
+
+= 4.10.5: 15 March 2023 =
+* Admin fixes
+* Fixed PHP problem
+
+= 4.10.4: 13 March 2023 =
+* Translations updated
+* Admin screen improvements
+
 = 4.10.2: 27 February 2023 =
 * WCAG improvements
 * Banner delay improved

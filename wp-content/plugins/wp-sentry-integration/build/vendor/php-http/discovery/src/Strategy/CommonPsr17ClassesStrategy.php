@@ -12,6 +12,8 @@ use WPSentry\ScopedVendor\Psr\Http\Message\UriFactoryInterface;
  * @internal
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ *
+ * Don't miss updating src/Composer/Plugin.php when adding a new supported class.
  */
 final class CommonPsr17ClassesStrategy implements \WPSentry\ScopedVendor\Http\Discovery\Strategy\DiscoveryStrategy
 {

@@ -31,7 +31,7 @@ final class Client implements \Sentry\ClientInterface
     /**
      * The version of the SDK.
      */
-    public const SDK_VERSION = '3.13.1';
+    public const SDK_VERSION = '3.17.0';
     /**
      * @var Options The client options
      */
@@ -51,10 +51,6 @@ final class Client implements \Sentry\ClientInterface
      */
     private $integrations;
     /**
-     * @var RepresentationSerializerInterface The representation serializer of the client
-     */
-    private $representationSerializer;
-    /**
      * @var StacktraceBuilder
      */
     private $stacktraceBuilder;
@@ -73,7 +69,7 @@ final class Client implements \Sentry\ClientInterface
      * @param TransportInterface                     $transport                The transport
      * @param string|null                            $sdkIdentifier            The Sentry SDK identifier
      * @param string|null                            $sdkVersion               The Sentry SDK version
-     * @param SerializerInterface|null               $serializer               The serializer
+     * @param SerializerInterface|null               $serializer               The serializer argument is deprecated since version 3.3 and will be removed in 4.0. It's currently unused.
      * @param RepresentationSerializerInterface|null $representationSerializer The serializer for function arguments
      * @param LoggerInterface|null                   $logger                   The PSR-3 logger
      */
@@ -83,8 +79,7 @@ final class Client implements \Sentry\ClientInterface
         $this->transport = $transport;
         $this->logger = $logger ?? new \WPSentry\ScopedVendor\Psr\Log\NullLogger();
         $this->integrations = \Sentry\Integration\IntegrationRegistry::getInstance()->setupIntegrations($options, $this->logger);
-        $this->representationSerializer = $representationSerializer ?? new \Sentry\Serializer\RepresentationSerializer($this->options);
-        $this->stacktraceBuilder = new \Sentry\StacktraceBuilder($options, $this->representationSerializer);
+        $this->stacktraceBuilder = new \Sentry\StacktraceBuilder($options, $representationSerializer ?? new \Sentry\Serializer\RepresentationSerializer($this->options));
         $this->sdkIdentifier = $sdkIdentifier ?? self::SDK_IDENTIFIER;
         $this->sdkVersion = $sdkVersion ?? self::SDK_VERSION;
     }
@@ -229,6 +224,10 @@ final class Client implements \Sentry\ClientInterface
             $this->logger->info('The event will be discarded because it has been sampled.', ['event' => $event]);
             return null;
         }
+        $event = $this->applyIgnoreOptions($event);
+        if (null === $event) {
+            return null;
+        }
         if (null !== $scope) {
             $beforeEventProcessors = $event;
             $event = $scope->applyToEvent($event, $hint);
@@ -241,6 +240,32 @@ final class Client implements \Sentry\ClientInterface
         $event = $this->applyBeforeSendCallback($event, $hint);
         if (null === $event) {
             $this->logger->info(\sprintf('The event will be discarded because the "%s" callback returned "null".', $this->getBeforeSendCallbackName($beforeSendCallback)), ['event' => $beforeSendCallback]);
+        }
+        return $event;
+    }
+    private function applyIgnoreOptions(\Sentry\Event $event) : ?\Sentry\Event
+    {
+        if ($event->getType() === \Sentry\EventType::event()) {
+            $exceptions = $event->getExceptions();
+            if (empty($exceptions)) {
+                return $event;
+            }
+            foreach ($exceptions as $exception) {
+                if (\in_array($exception->getType(), $this->options->getIgnoreExceptions(), \true)) {
+                    $this->logger->info('The event will be discarded because it matches an entry in "ignore_exceptions".', ['event' => $event]);
+                    return null;
+                }
+            }
+        }
+        if ($event->getType() === \Sentry\EventType::transaction()) {
+            $transactionName = $event->getTransaction();
+            if (null === $transactionName) {
+                return $event;
+            }
+            if (\in_array($transactionName, $this->options->getIgnoreTransactions(), \true)) {
+                $this->logger->info('The event will be discarded because it matches a entry in "ignore_transactions".', ['event' => $event]);
+                return null;
+            }
         }
         return $event;
     }

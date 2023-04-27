@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f
+class ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b
 {
     public static $files = array (
         'wp-sentry-7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -129,6 +129,8 @@ class ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'Sentry\\Breadcrumb' => __DIR__ . '/..' . '/sentry/sentry/src/Breadcrumb.php',
+        'Sentry\\CheckIn' => __DIR__ . '/..' . '/sentry/sentry/src/CheckIn.php',
+        'Sentry\\CheckInStatus' => __DIR__ . '/..' . '/sentry/sentry/src/CheckInStatus.php',
         'Sentry\\Client' => __DIR__ . '/..' . '/sentry/sentry/src/Client.php',
         'Sentry\\ClientBuilder' => __DIR__ . '/..' . '/sentry/sentry/src/ClientBuilder.php',
         'Sentry\\ClientBuilderInterface' => __DIR__ . '/..' . '/sentry/sentry/src/ClientBuilderInterface.php',
@@ -173,6 +175,8 @@ class ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f
         'Sentry\\Monolog\\CompatibilityProcessingHandlerTrait' => __DIR__ . '/..' . '/sentry/sentry/src/Monolog/CompatibilityProcessingHandlerTrait.php',
         'Sentry\\Monolog\\Handler' => __DIR__ . '/..' . '/sentry/sentry/src/Monolog/Handler.php',
         'Sentry\\Options' => __DIR__ . '/..' . '/sentry/sentry/src/Options.php',
+        'Sentry\\Profiling\\Profile' => __DIR__ . '/..' . '/sentry/sentry/src/Profiling/Profile.php',
+        'Sentry\\Profiling\\Profiler' => __DIR__ . '/..' . '/sentry/sentry/src/Profiling/Profiler.php',
         'Sentry\\Response' => __DIR__ . '/..' . '/sentry/sentry/src/Response.php',
         'Sentry\\ResponseStatus' => __DIR__ . '/..' . '/sentry/sentry/src/ResponseStatus.php',
         'Sentry\\SentrySdk' => __DIR__ . '/..' . '/sentry/sentry/src/SentrySdk.php',
@@ -436,6 +440,7 @@ class ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f
         'WPSentry\\ScopedVendor\\Http\\Client\\Promise\\HttpFulfilledPromise' => __DIR__ . '/..' . '/php-http/httplug/src/Promise/HttpFulfilledPromise.php',
         'WPSentry\\ScopedVendor\\Http\\Client\\Promise\\HttpRejectedPromise' => __DIR__ . '/..' . '/php-http/httplug/src/Promise/HttpRejectedPromise.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\ClassDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/ClassDiscovery.php',
+        'WPSentry\\ScopedVendor\\Http\\Discovery\\Composer\\Plugin' => __DIR__ . '/..' . '/php-http/discovery/src/Composer/Plugin.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Exception' => __DIR__ . '/..' . '/php-http/discovery/src/Exception.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Exception\\ClassInstantiationFailedException' => __DIR__ . '/..' . '/php-http/discovery/src/Exception/ClassInstantiationFailedException.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Exception\\DiscoveryFailedException' => __DIR__ . '/..' . '/php-http/discovery/src/Exception/DiscoveryFailedException.php',
@@ -447,6 +452,7 @@ class ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f
         'WPSentry\\ScopedVendor\\Http\\Discovery\\HttpClientDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/HttpClientDiscovery.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\MessageFactoryDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/MessageFactoryDiscovery.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\NotFoundException' => __DIR__ . '/..' . '/php-http/discovery/src/NotFoundException.php',
+        'WPSentry\\ScopedVendor\\Http\\Discovery\\Psr17Factory' => __DIR__ . '/..' . '/php-http/discovery/src/Psr17Factory.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Psr17FactoryDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/Psr17FactoryDiscovery.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Psr18ClientDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/Psr18ClientDiscovery.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Strategy\\CommonClassesStrategy' => __DIR__ . '/..' . '/php-http/discovery/src/Strategy/CommonClassesStrategy.php',
@@ -574,9 +580,9 @@ class ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit00bd21cf915002b6cdf2e37d8add9d2f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b::$classMap;
 
         }, null, ClassLoader::class);
     }

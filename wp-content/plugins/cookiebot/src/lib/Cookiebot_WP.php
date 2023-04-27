@@ -8,10 +8,11 @@ use cybot\cookiebot\gutenberg\Cookiebot_Gutenberg_Declaration_Block;
 use cybot\cookiebot\settings\Menu_Settings;
 use cybot\cookiebot\settings\Network_Menu_Settings;
 use cybot\cookiebot\widgets\Dashboard_Widget_Cookiebot_Status;
+use DomainException;
 use RuntimeException;
 
 class Cookiebot_WP {
-	const COOKIEBOT_PLUGIN_VERSION  = '4.2.6';
+	const COOKIEBOT_PLUGIN_VERSION  = '4.2.9';
 	const COOKIEBOT_MIN_PHP_VERSION = '5.6.0';
 
 	/**
@@ -65,7 +66,7 @@ class Cookiebot_WP {
 				__( 'The Cookiebot plugin requires PHP version %s or greater.', 'cookiebot' ),
 				self::COOKIEBOT_MIN_PHP_VERSION
 			);
-			throw new RuntimeException( $message );
+			throw new DomainException( $message );
 		}
 	}
 
@@ -107,18 +108,14 @@ class Cookiebot_WP {
 	 * @version 3.4.1
 	 */
 	public static function can_current_user_edit_theme() {
-		if ( is_user_logged_in() ) {
-			if ( current_user_can( 'edit_themes' ) ) {
-				return true;
-			}
-
-			if ( current_user_can( 'edit_pages' ) ) {
-				return true;
-			}
-
-			if ( current_user_can( 'edit_posts' ) ) {
-				return true;
-			}
+		if ( is_user_logged_in() &&
+			(
+				current_user_can( 'edit_themes' ) ||
+				current_user_can( 'edit_pages' ) ||
+				current_user_can( 'edit_posts' )
+			)
+		) {
+			return true;
 		}
 
 		return false;
@@ -157,13 +154,13 @@ class Cookiebot_WP {
 	/**
 	 * Cookiebot_WP Check if Cookiebot is active in admin
 	 *
-	 * @version 3.1.0
+	 * @version 4.2.8
 	 * @since       3.1.0
 	 */
 	public static function cookiebot_disabled_in_admin() {
-		if ( is_multisite() && get_site_option( 'cookiebot-nooutput-admin', false ) ) {
-			return true;
-		} elseif ( get_option( 'cookiebot-nooutput-admin', false ) ) {
+		if ( ( is_network_admin() && get_site_option( 'cookiebot-nooutput-admin', false ) ) ||
+			( ! is_network_admin() && get_site_option( 'cookiebot-nooutput-admin', false ) ) ||
+			( ! is_network_admin() && get_option( 'cookiebot-nooutput-admin', false ) ) ) {
 			return true;
 		}
 
@@ -183,12 +180,12 @@ class Cookiebot_WP {
 		);
 
 		foreach ( $options as $option => $default ) {
-			if ( get_option( $option ) === false && ! get_option( $option . '-first-run' ) ) {
+			if ( get_option( $option ) === false && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
 				update_option( $option, $default );
 			}
 
-			if ( ( get_option( $option ) || get_option( $option ) !== false ) && ! get_option( $option . '-first-run' ) ) {
-				update_option( $option . '-first-run', '1' );
+			if ( ( get_option( $option ) || get_option( $option ) !== false ) && ! get_option( $option . self::OPTION_FIRST_RUN_SUFFIX ) ) {
+				update_option( $option . self::OPTION_FIRST_RUN_SUFFIX, '1' );
 			}
 		}
 	}
@@ -230,4 +227,6 @@ class Cookiebot_WP {
 
 		return array_key_exists( $locale, $supported_langs ) ? $supported_langs[ $locale ] : esc_html( 'en' );
 	}
+
+	const OPTION_FIRST_RUN_SUFFIX = '-first-run';
 }

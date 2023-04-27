@@ -3,7 +3,6 @@
 declare (strict_types=1);
 namespace WPSentry\ScopedVendor\Http\Client\Common;
 
-use function array_reverse;
 use WPSentry\ScopedVendor\Http\Client\Common\Exception\LoopException;
 use WPSentry\ScopedVendor\Http\Promise\Promise;
 use WPSentry\ScopedVendor\Psr\Http\Message\RequestInterface;

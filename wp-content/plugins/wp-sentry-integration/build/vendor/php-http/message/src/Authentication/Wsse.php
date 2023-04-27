@@ -3,7 +3,6 @@
 namespace WPSentry\ScopedVendor\Http\Message\Authentication;
 
 use WPSentry\ScopedVendor\Http\Message\Authentication;
-use InvalidArgumentException;
 use WPSentry\ScopedVendor\Psr\Http\Message\RequestInterface;
 /**
  * Authenticate a PSR-7 Request using WSSE.

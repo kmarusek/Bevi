@@ -88,7 +88,7 @@ final class HttpTransport implements \Sentry\Transport\TransportInterface
             $this->logger->warning(\sprintf('Rate limit exceeded for sending requests of type "%s".', (string) $eventType), ['event' => $event]);
             return new \WPSentry\ScopedVendor\GuzzleHttp\Promise\RejectedPromise(new \Sentry\Response(\Sentry\ResponseStatus::rateLimit(), $event));
         }
-        if (\Sentry\EventType::transaction() === $eventType) {
+        if (\Sentry\EventType::transaction() === $eventType || \Sentry\EventType::checkIn() === $eventType) {
             $request = $this->requestFactory->createRequest('POST', $dsn->getEnvelopeApiEndpointUrl())->withHeader('Content-Type', 'application/x-sentry-envelope')->withBody($this->streamFactory->createStream($this->payloadSerializer->serialize($event)));
         } else {
             $request = $this->requestFactory->createRequest('POST', $dsn->getStoreApiEndpointUrl())->withHeader('Content-Type', 'application/json')->withBody($this->streamFactory->createStream($this->payloadSerializer->serialize($event)));

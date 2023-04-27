@@ -143,6 +143,15 @@ final class PYS extends Settings implements Plugin {
                 }
             }
         }
+        $eventsFormFactory = apply_filters("pys_form_event_factory",[]);
+        if(!$eventsFormFactory)
+        {
+            $options = array(
+                'enable_success_send_form'     => false
+            );
+            PYS()->updateOptions($options);
+        }
+
         EnrichOrder()->init();
         AjaxHookEventManager::instance()->addHooks();
     }
@@ -267,10 +276,11 @@ final class PYS extends Settings implements Plugin {
         }
 
     	// output debug info
-	    add_action( 'wp_head', function() {
-		    echo "<script type='application/javascript'>console.log('PixelYourSite Free version " . PYS_FREE_VERSION . "');</script>\r\n";
-	    }, 1 );
-
+        if(!PYS()->getOption( 'hide_version_plugin_in_console')) {
+            add_action('wp_head', function () {
+                echo "<script type='application/javascript'>console.log('PixelYourSite Free version " . PYS_FREE_VERSION . "');</script>\r\n";
+            }, 1);
+        }
 	    if ( isDisabledForCurrentRole() ) {
 	    	return;
 	    }
@@ -278,11 +288,11 @@ final class PYS extends Settings implements Plugin {
         $this->eventsManager = new EventsManager();
 	    // at least one pixel should be configured
 	    if ( ! Facebook()->configured() && ! GA()->configured() && ! Pinterest()->configured() && ! Bing()->configured() ) {
-
-		    add_action( 'wp_head', function() {
-			    echo "<script type='application/javascript'>console.warn('PixelYourSite: no pixel configured.');</script>\r\n";
-		    } );
-
+            if(!PYS()->getOption( 'hide_version_plugin_in_console')) {
+                add_action('wp_head', function () {
+                    echo "<script type='application/javascript'>console.warn('PixelYourSite: no pixel configured.');</script>\r\n";
+                });
+            }
 	    	return;
 
 	    }

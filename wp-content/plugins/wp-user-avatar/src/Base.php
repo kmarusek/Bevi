@@ -13,6 +13,7 @@ use ProfilePress\Core\Admin\SettingsPages\Membership\CheckListHeader;
 use ProfilePress\Core\Admin\SettingsPages\Membership\CheckoutFieldsManager;
 use ProfilePress\Core\Admin\SettingsPages\Membership\CouponsPage\SettingsPage as CouponsSettingsPage;
 use ProfilePress\Core\Admin\SettingsPages\Membership\CustomersPage\SettingsPage as CustomersPageSettingsPage;
+use ProfilePress\Core\Admin\SettingsPages\Membership\GroupsPage\SettingsPage as GroupsSettingsPageAlias;
 use ProfilePress\Core\Admin\SettingsPages\Membership\OrdersPage\SettingsPage as OrdersPageSettingsPage;
 use ProfilePress\Core\Admin\SettingsPages\Membership\PaymentMethods;
 use ProfilePress\Core\Admin\SettingsPages\Membership\PaymentSettings;
@@ -74,6 +75,7 @@ define('PPRESS_DASHBOARD_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_DA
 define('PPRESS_MEMBERSHIP_DOWNLOAD_LOGS_SETTINGS_PAGE', add_query_arg('view', 'download-logs', PPRESS_DASHBOARD_SETTINGS_PAGE));
 define('PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_MEMBERSHIP_PLANS_SETTINGS_SLUG));
 define('PPRESS_MEMBERSHIP_COUPONS_SETTINGS_PAGE', add_query_arg('view', 'coupons', PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE));
+define('PPRESS_MEMBERSHIP_GROUPS_SETTINGS_PAGE', add_query_arg('view', 'groups', PPRESS_MEMBERSHIP_SUBSCRIPTION_PLANS_SETTINGS_PAGE));
 define('PPRESS_MEMBERSHIP_ORDERS_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_MEMBERSHIP_ORDERS_SETTINGS_SLUG));
 define('PPRESS_MEMBERSHIP_SUBSCRIPTIONS_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_MEMBERSHIP_SUBSCRIPTIONS_SETTINGS_SLUG));
 define('PPRESS_MEMBERSHIP_CUSTOMERS_SETTINGS_PAGE', admin_url('admin.php?page=' . PPRESS_MEMBERSHIP_CUSTOMERS_SETTINGS_SLUG));
@@ -199,6 +201,7 @@ class Base extends DBTables
         Admin\SettingsPages\Membership\DashboardPage\SettingsPage::get_instance();
         Admin\SettingsPages\Membership\DownloadLogsPage\SettingsPage::get_instance();
         PlansSettingsPage::get_instance();
+        GroupsSettingsPageAlias::get_instance();
         OrdersPageSettingsPage::get_instance();
         SubscriptionsPageSettingsPage::get_instance();
         CustomersPageSettingsPage::get_instance();

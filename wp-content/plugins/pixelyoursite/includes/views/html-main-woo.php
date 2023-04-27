@@ -47,7 +47,7 @@ use PixelYourSite\Facebook\Helpers;
 
         <div class="row mt-2">
             <div class="col">
-                <?php PYS()->render_switcher_input( 'woo_enabled_save_data_to_orders' ); ?>
+                <?php PYS()->render_switcher_input( 'woo_enabled_save_data_to_orders',false ); ?>
                 <h4 class="switcher-label">Save data to orders</h4>
                 <small class="form-check">Save the <i>landing page, UTMs, client's browser's time, day, and month, the number of orders, lifetime value, and average order</i>. You can view this data when you edit an order. With the professional version you can view it under the <a href="<?=admin_url("admin.php?page=pixelyoursite_woo_reports")?>">WooCommerce Reports</a> section.</small>
             </div>
