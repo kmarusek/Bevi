@@ -84,21 +84,21 @@ class Plugin {
 	public function load_plugin() {
 		$includes_path = __DIR__;
 
-		/* Database operation functions */
+		// Database operation functions.
 		$this->db = new DB();
 
-		/* Snippet operation functions */
+		// Snippet operation functions.
 		require_once $includes_path . '/snippet-ops.php';
 
-		/* CodeMirror editor functions */
+		// CodeMirror editor functions.
 		require_once $includes_path . '/editor.php';
 
-		/* General Administration functions */
+		// General Administration functions.
 		if ( is_admin() ) {
 			$this->admin = new Admin();
 		}
 
-		/* Settings component */
+		// Settings component.
 		require_once $includes_path . '/settings/settings-fields.php';
 		require_once $includes_path . '/settings/editor-preview.php';
 		require_once $includes_path . '/settings/settings.php';
@@ -132,7 +132,7 @@ class Plugin {
 	}
 
 	/**
-	 * Fetch the admin menu slug for a snippets menu.
+	 * Fetch the admin menu slug for a menu.
 	 *
 	 * @param string $menu Name of menu to retrieve the slug for.
 	 *
@@ -247,7 +247,7 @@ class Plugin {
 		if ( is_multisite() ) {
 			$menu_perms = get_site_option( 'menu_items', array() );
 
-			/* If multisite is enabled and the snippet menu is not activated, restrict snippet operations to super admins only */
+			// If multisite is enabled and the snippet menu is not activated, restrict snippet operations to super admins only.
 			if ( empty( $menu_perms['snippets'] ) ) {
 				return $this->get_network_cap_name();
 			}
@@ -275,7 +275,7 @@ class Plugin {
 	/**
 	 * Retrieve a list of available snippet types and their labels.
 	 *
-	 * @return array
+	 * @return array<string, string> Snippet types.
 	 */
 	public static function get_types() {
 		return apply_filters(

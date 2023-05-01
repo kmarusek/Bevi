@@ -92,7 +92,7 @@ class GDPR_Modules {
 		$layout              = isset( $modal_options['moove_gdpr_plugin_layout'] ) ? $modal_options['moove_gdpr_plugin_layout'] : 'v1';
 		$tab_title           = isset( $modal_options[ 'moove_gdpr_privacy_overview_tab_title' . $wpml_lang ] ) && $modal_options[ 'moove_gdpr_privacy_overview_tab_title' . $wpml_lang ] ? $modal_options[ 'moove_gdpr_privacy_overview_tab_title' . $wpml_lang ] : __( 'Privacy Overview', 'gdpr-cookie-compliance' );
 		$data                = new stdClass();
-		$data->logo_position = isset( $modal_options['moove_gdpr_logo_position'] ) ? $modal_options['moove_gdpr_logo_position'] : 'left';
+		$data->logo_position = apply_filters( 'gdpr_logo_position', 'left' );
 		$data->theme         = 'moove_gdpr_modal_theme_' . $layout;
 		$modal_theme         = 'moove_gdpr_modal_theme_' . $layout;
 		$data->modal_title   = 'v1' === $layout ? false : $tab_title;

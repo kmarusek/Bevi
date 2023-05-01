@@ -28,20 +28,21 @@ class EventsManager {
 	}
 
 	public function enqueueScripts() {
-	    
+
         wp_register_script( 'jquery-bind-first', PYS_FREE_URL . '/dist/scripts/jquery.bind-first-0.2.3.min.js', array( 'jquery' ) );
-		wp_enqueue_script( 'jquery-bind-first' );
-  
-        wp_register_script( 'js-cookie', PYS_FREE_URL . '/dist/scripts/js.cookie-2.1.3.min.js', array(), '2.1.3' );
-        wp_enqueue_script( 'js-cookie' );
+        wp_enqueue_script( 'jquery-bind-first' );
+
+        wp_register_script( 'js-cookie-pys', PYS_FREE_URL . '/dist/scripts/js.cookie-2.1.3.min.js', array(), '2.1.3' );
+        wp_enqueue_script( 'js-cookie-pys' );
+
         if ( PYS()->getOption( 'compress_front_js' )){
             wp_enqueue_script( 'pys', PYS_FREE_URL . '/dist/scripts/public.bundle.js',
-                array( 'jquery', 'js-cookie', 'jquery-bind-first' ), PYS_FREE_VERSION );
+                array( 'jquery','js-cookie-pys', 'jquery-bind-first' ), PYS_FREE_VERSION );
         }
         else
         {
             wp_enqueue_script( 'pys', PYS_FREE_URL . '/dist/scripts/public.js',
-                array( 'jquery', 'js-cookie', 'jquery-bind-first' ), PYS_FREE_VERSION );
+                array( 'jquery','js-cookie-pys', 'jquery-bind-first' ), PYS_FREE_VERSION );
         }
 
 
@@ -73,7 +74,8 @@ class EventsManager {
             'ajax_event'                        => wp_create_nonce('ajax-event-nonce'),
             'enable_remove_download_url_param'  => PYS()->getOption( 'enable_remove_download_url_param' ),
             'cookie_duration'                   => PYS()->getOption( 'cookie_duration' ),
-            'last_visit_duration'               => PYS()->getOption('last_visit_duration')
+            'last_visit_duration'               => PYS()->getOption('last_visit_duration'),
+            'enable_success_send_form'         => PYS()->getOption( 'enable_success_send_form' ),
 		);
 
 		$options['gdpr'] = array(

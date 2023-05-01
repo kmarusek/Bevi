@@ -5,6 +5,7 @@ namespace Sentry;
 
 use Sentry\Context\OsContext;
 use Sentry\Context\RuntimeContext;
+use Sentry\Profiling\Profile;
 use Sentry\Tracing\Span;
 /**
  * This is the base class for classes containing event data.
@@ -40,6 +41,10 @@ final class Event
      * @var string|null the name of the transaction (or culprit) which caused this exception
      */
     private $transaction;
+    /**
+     * @var CheckIn|null The check in data
+     */
+    private $checkIn;
     /**
      * @var string|null The name of the server (e.g. the host name)
      */
@@ -135,6 +140,10 @@ final class Event
      * @var EventType The type of the Event
      */
     private $type;
+    /**
+     * @var Profile|null The profile data
+     */
+    private $profile;
     private function __construct(?\Sentry\EventId $eventId, \Sentry\EventType $eventType)
     {
         $this->id = $eventId ?? \Sentry\EventId::generate();
@@ -158,6 +167,10 @@ final class Event
     public static function createTransaction(\Sentry\EventId $eventId = null) : self
     {
         return new self($eventId, \Sentry\EventType::transaction());
+    }
+    public static function createCheckIn(?\Sentry\EventId $eventId = null) : self
+    {
+        return new self($eventId, \Sentry\EventType::checkIn());
     }
     /**
      * Gets the ID of this event.
@@ -267,6 +280,14 @@ final class Event
     public function setTransaction(?string $transaction) : void
     {
         $this->transaction = $transaction;
+    }
+    public function setCheckIn(?\Sentry\CheckIn $checkIn) : void
+    {
+        $this->checkIn = $checkIn;
+    }
+    public function getCheckIn() : ?\Sentry\CheckIn
+    {
+        return $this->checkIn;
     }
     /**
      * Gets the name of the server.
@@ -653,5 +674,21 @@ final class Event
     public function setSpans(array $spans) : void
     {
         $this->spans = $spans;
+    }
+    public function setProfile(?\Sentry\Profiling\Profile $profile) : void
+    {
+        $this->profile = $profile;
+    }
+    public function getProfile() : ?\Sentry\Profiling\Profile
+    {
+        return $this->profile;
+    }
+    public function getTraceId() : ?string
+    {
+        $traceId = $this->getContexts()['trace']['trace_id'];
+        if (\is_string($traceId) && !empty($traceId)) {
+            return $traceId;
+        }
+        return null;
     }
 }

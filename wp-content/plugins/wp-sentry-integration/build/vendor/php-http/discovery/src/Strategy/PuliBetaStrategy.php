@@ -10,6 +10,7 @@ use WPSentry\ScopedVendor\Puli\GeneratedPuliFactory;
  * Find candidates using Puli.
  *
  * @internal
+ *
  * @final
  *
  * @author David de Boer <david@ddeboer.nl>

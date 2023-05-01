@@ -57,6 +57,9 @@ final class EnvironmentIntegration implements \Sentry\Integration\IntegrationInt
         if (null === $osContext->getKernelVersion()) {
             $osContext->setKernelVersion(\php_uname('a'));
         }
+        if (null === $osContext->getMachineType()) {
+            $osContext->setMachineType(\php_uname('m'));
+        }
         return $osContext;
     }
 }

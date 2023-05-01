@@ -575,7 +575,7 @@ abstract class Settings {
 		?>
 
         <input type="hidden" name="<?php esc_attr_e( $attr_name ); ?>" value="">
-        <select class="form-control pys-select2" name="<?php esc_attr_e( $attr_name ); ?>"
+        <select class="form-control pys-pysselect2" name="<?php esc_attr_e( $attr_name ); ?>"
                 id="<?php esc_attr_e( $attr_id ); ?>" <?php disabled( $disabled ); ?> style="width: 100%;"
                 multiple>
 			
@@ -610,7 +610,7 @@ abstract class Settings {
 		?>
 
         <input type="hidden" name="<?php esc_attr_e( $attr_name ); ?>" value="">
-        <select class="form-control pys-tags-select2" name="<?php esc_attr_e( $attr_name ); ?>"
+        <select class="form-control pys-tags-pysselect2" name="<?php esc_attr_e( $attr_name ); ?>"
                 id="<?php esc_attr_e( $attr_id ); ?>" <?php disabled( $disabled ); ?> style="width: 100%;"
                 multiple>
 

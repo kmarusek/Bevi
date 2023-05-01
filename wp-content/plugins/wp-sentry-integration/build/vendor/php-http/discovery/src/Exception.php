@@ -2,7 +2,6 @@
 
 namespace WPSentry\ScopedVendor\Http\Discovery;
 
-use Throwable;
 /**
  * An interface implemented by all discovery related exceptions.
  *

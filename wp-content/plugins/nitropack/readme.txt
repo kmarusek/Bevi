@@ -4,7 +4,7 @@ Tags: cache,performance,optimize,pagespeed,lazy load,cdn,critical css,compressio
 Requires at least: 4.7
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 1.5.19
+Stable tag: 1.6.1
 License: GNU General Public License, version 2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,23 @@ No. We’ve designed NitroPack to be a very lightweight solution that adds no CP
 2. Dashboard - see and manage the data in your Nitropack.io
 
 == Changelog ==
+
+= 1.6.1 =
+* Update: Temporarily disable the changes related to Gravity Forms as further improvements are needed for optimal experience
+
+= 1.6.0 =
+* New Feature: Added compatibility with Geotargeting WP
+* New Feature: Cache warmup now detects sitemap files automatically. Supported providers are: Yoast, RankMath, JetPack & Squirrly
+* Improvement: Detect categories of new posts more accurately for a more precise cache purge
+* Improvement: Automatically clear cache when WP Bakery's custom CSS is updated
+* Improvement: Automatically clear cache when Elementor's custom code is updated
+* Improvement: Resolve issues with gravity forms where forms could not be subitted after certain period of time
+* Improvement: Resolve issues with WPForms where forms could not be subitted after certain period of time
+* Improvement: Better compatibility with WPML's WooCommerce options
+* Improvement: Ability to dismiss notifications
+* Improvement: Various improvements in the UI
+* Improvement: Overall stability improvements
+* Bug fix: Resolve issues when purging cache via WP-CLI
 
 = 1.5.19 =
 * New Feature: Add support for additional domains

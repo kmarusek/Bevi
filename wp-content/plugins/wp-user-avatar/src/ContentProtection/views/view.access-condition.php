@@ -144,6 +144,7 @@ foreach (PlanRepository::init()->retrieveAll() as $plan) {
                 <select id="pp-cc-access-noaccess-action-message-style" name="ppress_cc_data[access_condition][noaccess_action_message_style]">
                     <option value="none" <?php selected($noaccess_action_message_style, 'none') ?>><?= esc_html__('None', 'wp-user-avatar') ?></option>
                     <option value="default" <?php selected($noaccess_action_message_style, 'default') ?>><?= esc_html__('Blur & Fade Effect', 'wp-user-avatar') ?></option>
+                    <option value="custom_template" <?php selected($noaccess_action_message_style, 'custom_template') ?>><?= esc_html__('Restricted Page Template', 'wp-user-avatar') ?></option>
                 </select>
             </td>
         </tr>

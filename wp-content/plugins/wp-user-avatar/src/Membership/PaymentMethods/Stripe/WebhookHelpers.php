@@ -3,6 +3,8 @@
 namespace ProfilePress\Core\Membership\PaymentMethods\Stripe;
 
 use ProfilePress\Core\Membership\PaymentMethods\Stripe\WebhookHandlers\ChargeRefunded;
+use ProfilePress\Core\Membership\PaymentMethods\Stripe\WebhookHandlers\CheckoutSessionAsyncPaymentFailed;
+use ProfilePress\Core\Membership\PaymentMethods\Stripe\WebhookHandlers\CheckoutSessionAsyncPaymentSucceeded;
 use ProfilePress\Core\Membership\PaymentMethods\Stripe\WebhookHandlers\CheckoutSessionCompleted;
 use ProfilePress\Core\Membership\PaymentMethods\Stripe\WebhookHandlers\CustomerSubscriptionCreated;
 use ProfilePress\Core\Membership\PaymentMethods\Stripe\WebhookHandlers\CustomerSubscriptionDeleted;
@@ -15,13 +17,15 @@ class WebhookHelpers
     public static function valid_events()
     {
         return apply_filters('ppress_stripe_webhooks_whitelist', [
-            'checkout.session.completed'    => new CheckoutSessionCompleted(),
-            'customer.subscription.created' => new CustomerSubscriptionCreated(),
-            'customer.subscription.updated' => new CustomerSubscriptionUpdated(),
-            'customer.subscription.deleted' => new CustomerSubscriptionDeleted(), //triggers when sub is cancelled
-            'invoice.payment_succeeded'     => new InvoicePaymentSucceeded(),
-            'payment_intent.succeeded'      => new PaymentIntentSucceeded(),
-            'charge.refunded'               => new ChargeRefunded()
+            'checkout.session.completed'               => new CheckoutSessionCompleted(),
+            'checkout.session.async_payment_succeeded' => new CheckoutSessionAsyncPaymentSucceeded(),
+            'checkout.session.async_payment_failed'    => new CheckoutSessionAsyncPaymentFailed(),
+            'customer.subscription.created'            => new CustomerSubscriptionCreated(),
+            'customer.subscription.updated'            => new CustomerSubscriptionUpdated(),
+            'customer.subscription.deleted'            => new CustomerSubscriptionDeleted(), //triggers when sub is cancelled
+            'invoice.payment_succeeded'                => new InvoicePaymentSucceeded(),
+            'payment_intent.succeeded'                 => new PaymentIntentSucceeded(),
+            'charge.refunded'                          => new ChargeRefunded()
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace ProfilePress\Core\Membership\PaymentMethods\Stripe;
 use ProfilePress\Core\Membership\Controllers\CheckoutResponse;
 use ProfilePress\Core\Membership\Models\Customer\CustomerEntity;
 use ProfilePress\Core\Membership\Models\Customer\CustomerFactory;
+use ProfilePress\Core\Membership\Models\Order\CartEntity;
 use ProfilePress\Core\Membership\Models\Order\OrderEntity;
 use ProfilePress\Core\Membership\Models\Order\OrderFactory;
 use ProfilePress\Core\Membership\Models\Plan\PlanEntity;
@@ -50,6 +51,8 @@ class Stripe extends AbstractPaymentMethod
         add_action('admin_init', [$this, 'disconnect_stripe_account']);
         add_action('admin_init', [$this, 'maybe_update_webhook']);
         add_action('ppress_admin_notices', [$this, 'output_connection_error']);
+
+        add_filter('ppress_update_order_review_response', [$this, 'filter_update_order_review_response'], 10, 2);
     }
 
     public function has_fields()
@@ -291,7 +294,7 @@ class Stripe extends AbstractPaymentMethod
      */
     public function validate_fields()
     {
-        if ( ! $this->is_offsite_checkout_style()) {
+        if ( ! $this->is_offsite_checkout_style() && ! $this->is_billing_fields_removed()) {
 
             if ( ! isset($_POST['stripe-card_name']) || strlen(trim($_POST['stripe-card_name'])) === 0) {
 
@@ -504,12 +507,12 @@ class Stripe extends AbstractPaymentMethod
 
             $stripe_vars = [
                 'publishable_key'   => trim($publishable_key),
-                'createCardOptions' => ['hidePostalCode' => true],
-                'locale'            => apply_filters('ppress_stripe_checkout_locale', 'auto'),
+                'hideBillingFields' => 'true',
+                'locale'            => apply_filters('ppress_stripe_checkout_locale', 'auto')
             ];
 
             if ($this->is_billing_fields_removed()) {
-                $stripe_vars['createCardOptions']['hidePostalCode'] = false;
+                $stripe_vars['hideBillingFields'] = 'false';
             }
 
             $stripe_vars = apply_filters('ppress_stripe_js_vars', $stripe_vars);
@@ -530,20 +533,19 @@ class Stripe extends AbstractPaymentMethod
     public function credit_card_form()
     {
         if ($this->is_offsite_checkout_style()) return;
-        ?>
-        <div class="ppress-main-checkout-form__block__item">
-            <label for="<?= esc_attr($this->id . '-' . 'card_name') ?>">
-                <?php esc_html_e('Name on card', 'wp-user-avatar') ?>
-                <span class="ppress-required">*</span>
-            </label>
-            <input id="<?= esc_attr($this->id . '-' . 'card_name') ?>" name="<?= esc_attr($this->id . '-' . 'card_name') ?>" class="ppress-checkout-field__input" type="text" autocomplete="cc-name">
-        </div>
+
+        if ( ! $this->is_billing_fields_removed()) :
+            ?>
+            <div class="ppress-main-checkout-form__block__item">
+                <label for="<?= esc_attr($this->id . '-' . 'card_name') ?>">
+                    <?php esc_html_e('Name on card', 'wp-user-avatar') ?>
+                    <span class="ppress-required">*</span>
+                </label>
+                <input id="<?= esc_attr($this->id . '-' . 'card_name') ?>" name="<?= esc_attr($this->id . '-' . 'card_name') ?>" class="ppress-checkout-field__input" type="text" autocomplete="cc-name">
+            </div>
+        <?php endif; ?>
 
         <div id="ppress-stripe-card-element-wrapper" class="ppress-main-checkout-form__block__item">
-            <label for="ppress-stripe-card-element">
-                <?php esc_html_e('Credit card', 'wp-user-avatar') ?>
-                <span class="ppress-required">*</span>
-            </label>
             <div id="ppress-stripe-card-element"></div>
         </div>
         <?php
@@ -564,6 +566,23 @@ class Stripe extends AbstractPaymentMethod
             'subscription_id' => $subscription->id,
             'caller'          => __CLASS__ . '|' . __METHOD__ . '|' . __LINE__ . '|' . PPRESS_VERSION_NUMBER,
         ];
+    }
+
+    /**
+     * @param $response
+     * @param CartEntity $cart_vars
+     *
+     * @return void
+     */
+    public function filter_update_order_review_response($response, $cart_vars)
+    {
+        $response['stripe_args'] = [
+            'mode'     => ppress_get_plan($cart_vars->plan_id)->is_recurring() ? 'subscription' : 'payment',
+            'currency' => strtolower(ppress_get_currency()),
+            'amount'   => (int)PaymentHelpers::process_amount($cart_vars->total)
+        ];
+
+        return $response;
     }
 
     /**
@@ -718,23 +737,6 @@ class Stripe extends AbstractPaymentMethod
 
             $customer_id = PaymentHelpers::get_stripe_customer_id($customer);
 
-            if (empty($_POST['ppress_stripe_payment_method'])) {
-                throw new \Exception(
-                    esc_html__('No payment method found. Please try again.', 'wp-user-avatar')
-                );
-            }
-
-            $payment_method = sanitize_text_field($_POST['ppress_stripe_payment_method']);
-
-            APIClass::stripeClient()->paymentMethods->attach(
-                $payment_method,
-                ['customer' => $customer_id]
-            );
-
-            APIClass::stripeClient()->customers->update($customer_id, [
-                'invoice_settings' => ['default_payment_method' => $payment_method]
-            ]);
-
             $product_price = PaymentHelpers::get_product_price($subscription, $this->get_statement_descriptor());
 
             $checkout_metadata = $this->get_order_metadata($order, $subscription);
@@ -742,15 +744,18 @@ class Stripe extends AbstractPaymentMethod
             if ($plan->is_recurring()) {
 
                 $create_subscription_args = [
-                    'customer' => $customer_id,
-                    'items'    => [
+                    'customer'         => $customer_id,
+                    'items'            => [
                         [
                             'price'    => ppress_var($product_price, 'stripe_price_id'),
                             'quantity' => 1,
                             'metadata' => $checkout_metadata
-                        ],
+                        ]
                     ],
-                    'metadata' => $checkout_metadata
+                    'metadata'         => $checkout_metadata,
+                    'payment_behavior' => 'default_incomplete',
+                    'payment_settings' => ['save_default_payment_method' => 'on_subscription'],
+                    'expand'           => ['latest_invoice.payment_intent']
                 ];
 
                 $signup_fee = Calculator::init($order->total)->minus($subscription->recurring_amount)->val();
@@ -802,8 +807,6 @@ class Stripe extends AbstractPaymentMethod
                     $create_subscription_args['application_fee_percent'] = PaymentHelpers::application_fee_percent();
                 }
 
-                $create_subscription_args['expand'] = ['latest_invoice.payment_intent'];
-
                 $response = APIClass::stripeClient()->subscriptions->create($create_subscription_args)->toArray();
 
                 if (isset($response['latest_invoice'])) {
@@ -820,13 +823,12 @@ class Stripe extends AbstractPaymentMethod
             }
 
             $create_payment_intent_args = [
-                'amount'         => PaymentHelpers::process_amount($order->total),
-                'currency'       => ppress_get_currency(),
-                'confirm'        => true,
-                'customer'       => $customer_id,
-                'description'    => $plan->name,
-                'metadata'       => $checkout_metadata,
-                'payment_method' => $payment_method
+                'amount'                    => PaymentHelpers::process_amount($order->total),
+                'currency'                  => ppress_get_currency(),
+                'customer'                  => $customer_id,
+                'description'               => $plan->name,
+                'metadata'                  => $checkout_metadata,
+                'automatic_payment_methods' => ['enabled' => true]
             ];
 
             $statement_descriptor = $this->get_statement_descriptor();
@@ -875,13 +877,13 @@ class Stripe extends AbstractPaymentMethod
                 case 'succeeded':
                     return true;
                 case 'pending':
-                    $order->add_note(esc_html__('Refund request is pending', 'profilepress-pro'));
+                    $order->add_note(esc_html__('Refund request is pending', 'wp-user-avatar'));
                     break;
                 case 'failed':
-                    $order->add_note(esc_html__('Refund request failed', 'profilepress-pro'));
+                    $order->add_note(esc_html__('Refund request failed', 'wp-user-avatar'));
                     break;
                 default:
-                    $order->add_note(sprintf(esc_html__('Refund request failed. Status: %s', 'profilepress-pro'), $response->status));
+                    $order->add_note(sprintf(esc_html__('Refund request failed. Status: %s', 'wp-user-avatar'), $response->status));
                     break;
             }
 
@@ -899,10 +901,12 @@ class Stripe extends AbstractPaymentMethod
         APIClass::_setup();
 
         $endpoint_secret = Helpers::get_webhook_secret();
+        if (defined('PPRESS_STRIPE_WEBHOOK_SECRET')) {
+            $endpoint_secret = PPRESS_STRIPE_WEBHOOK_SECRET;
+        }
 
         $payload    = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
-        $event      = null;
 
         try {
 

@@ -1,21 +1,20 @@
 ;(function () {
     if (typeof wp_sentry === 'object') {
-        var regexUrlList = function (urlList) {
-            for (var url in urlList) {
-                if (urlList.hasOwnProperty(url)) {
-                    if (urlList[url].startsWith('regex:')) {
-                        urlList[url] = new RegExp(urlList[url].slice(6), 'i');
+        var listsWithRegexes = ['allowUrls', 'denyUrls', 'ignoreErrors', 'ignoreTransactions'];
+        var parseListWithRegexes = function (list) {
+            for (var url in list) {
+                if (list.hasOwnProperty(url)) {
+                    if (list[url].startsWith('regex:')) {
+                        list[url] = new RegExp(list[url].slice(6), 'i');
                     }
                 }
             }
         };
 
-        if (typeof wp_sentry.allowUrls === 'object') {
-            regexUrlList(wp_sentry.allowUrls);
-        }
-
-        if (typeof wp_sentry.denyUrls === 'object') {
-            regexUrlList(wp_sentry.denyUrls);
+        for (var i = 0; i < listsWithRegexes.length; i++) {
+            if (typeof wp_sentry[listsWithRegexes[i]] === 'object') {
+                parseListWithRegexes(wp_sentry[listsWithRegexes[i]]);
+            }
         }
 
         if (typeof wp_sentry_hook === 'function') {
@@ -25,6 +24,27 @@
             if (hookResult === false) {
                 return;
             }
+        }
+
+        wp_sentry.integrations = [];
+
+        // Enable replay if a sample rate is set
+        if (wp_sentry.replaysSessionSampleRate && wp_sentry.replaysSessionSampleRate > 0) {
+            wp_sentry.replaysSessionSampleRate = parseFloat(wp_sentry.replaysSessionSampleRate);
+        }
+        if (wp_sentry.replaysOnErrorSampleRate && wp_sentry.replaysOnErrorSampleRate > 0) {
+            wp_sentry.replaysOnErrorSampleRate = parseFloat(wp_sentry.replaysOnErrorSampleRate);
+        }
+        if (wp_sentry.replaysSessionSampleRate > 0 || wp_sentry.replaysOnErrorSampleRate > 0) {
+            wp_sentry.integrations.push(new Sentry.Integrations.Replay(wp_sentry.wpSessionReplayOptions));
+        }
+
+        // Enable tracing if a sample rate is set
+        if (wp_sentry.tracesSampleRate) {
+            wp_sentry.tracesSampleRate = parseFloat(wp_sentry.tracesSampleRate);
+        }
+        if (wp_sentry.tracesSampleRate && wp_sentry.tracesSampleRate > 0) {
+            wp_sentry.integrations.push(new Sentry.Integrations.BrowserTracing(wp_sentry.wpBrowserTracingOptions));
         }
 
         Sentry.init(wp_sentry);

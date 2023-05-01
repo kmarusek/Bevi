@@ -1,20 +1,22 @@
-=== Post SMTP Mailer/Email Log - Best Mail SMTP For WP ===
+=== POST SMTP Mailer - Email log, Delivery Failure Notifications and Best Mail SMTP for WordPress ===
 Plugin URI: https://wpexperts.io/
 Contributors: wpexpertsio
 Tags: email, mail, smtp, wordpress smtp, email log, postman smtp, postman, gmail, google apps, hotmail, yahoo, mandrill api, sendgrid api, elastic email, office365, mailgun
-Requires at least: 3.9
-Tested up to: 6.1.1
-Stable tag: 2.4.3
+Requires at least: 5.6.0
+Tested up to: 6.2
+Stable tag: 2.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Send, log, and get notified when your emails are failing. Plus a unique option for secondary backup SMTP so your emails will never stop. Supports everything: SMTP, Gmail, Mailgun, office365, SendGrid, Elastic Email and OAuth 2.0!
+Connect with any SMTP, including Gmail, Outlook, SendinBlue, Sendgrid, Mailgun, Zoho, SES, and More.
 
 == Description ==
 
 [Live Demo](https://www.tastewp.com/plugins/post-smtp) | [Extensions](https://postmansmtp.com/extension/)
 
 = WordPress Mail SMTP Plugin =
+
+https://www.youtube.com/watch?v=UDmwPG-RmDc
 
 Post SMTP is a next-generation WP Mail SMTP plugin that assists and improves the email deliverability process of your WordPress website. 
 
@@ -72,19 +74,19 @@ In essence, SMTP is a set of commands that authenticates and directs the transfe
 [Post SMTP Pro Extensions](https://postmansmtp.com/extensions/) are everything you need to enhance your WordPress email deliverability experience. Check our extensions for Amazon SES, Better Email Logger and Office365.
 
 **Office365 API delivery**
-[Office365 Pro extension](https://postmansmtp.com/extensions/office-365-extension-for-post-smtp/) allows you to connect PostSMTP with your Outlook and Microsoft 365 accounts to improve email deliverability.
+[Office365 Pro Extension](https://postmansmtp.com/extensions/office-365-extension-for-post-smtp/) allows you to connect PostSMTP with your Outlook and Microsoft 365 accounts to improve email deliverability.
 
 **Amazon SES API delivery**
 [Amazon SES Pro Extension](https://postmansmtp.com/extensions/post-smtp-extension-for-amazon-ses/) combines Amazon's mail service provider with PostSMTP's powerful and easy-to-use SMTP mailing features. 
+
+**Report & Tracking Pro Extension**
+[Report and Tracking Pro Extension](https://postmansmtp.com/extensions/reporting-and-tracking-extension/) gives you detailed reports and statistics of your website's email performance. You can filter email statistics by day/week/month and track who viewed your emails. You can also view your email's open rate. Also, the addon sends you daily, weekly or monthly email reports directly in your inbox to make sure you are aware of your email performance.
 
 **Zoho Mail API delivery**
 [Zoho Mail Pro Extension](https://postmansmtp.com/extensions/zoho-mail-pro-extension/) gives you the power to connect PostSMTP with your Zoho Mail account to improve email deliverability of your WordPress site.
 
 **Twilio Pro Extension**
 [Twilio Extension](https://postmansmtp.com/extensions/twilio-extension-pro/) allows you to add your phone number so that you can receive SMS notifications and alerts when emails are not delivered to your recipients.
-
-**Better Email Logger Extension**
-[Better Email Logger Pro extension](https://postmansmtp.com/extensions/the-better-email/) allows you to design email marketing campaigns and improve email deliverability for your WordPress site.
 
 **Mail Control Pro Extension**
 [Mail Control Pro Extension](https://postmansmtp.com/extensions/post-smtp-mail-control/) allows you to control Post SMTP's email actions like sending email alerts to authors, webmasters, and new users. 
@@ -298,6 +300,45 @@ To avoid being flagged as spam, you need to prove your email isn't forged. On a 
 1. Email Log Filter
 
 == Changelog ==
+
+= 2.4.9 - 2023-04-27 =
+**FIXES**
+* Uncaught Error: Cannot use object of type WP_Error as array
+* Fixed deprecation notice for PHP Version > 8.0
+
+**IMPROVEMENTS**
+* Added condition for notice on how to fix broken emails
+
+= 2.4.8 - 2023-04-17 =
+**Bug Fix**
+
+* Fixed deprecated functions on Php 8.x
+
+= 2.4.7 - 2023-04-10 =
+**Improvements**
+
+* Updated feedback SDK to latest version
+* Added PHP 8.1 compatibility
+
+= 2.4.6 - 2023-03-27 =
+**Bug Fixes**
+
+* Added new option in the settings to fix broken emails.
+
+= 2.4.5 - 2023-03-14 =
+**Bug Fixes**
+
+* Reverted the fix to support minor PHP versions, impacting some other PHP versions.
+* NEW Filter post_smtp_incompatible_php added to fix the compatibility of minor PHP versions.
+
+= 2.4.4 - 2023-03-08 =
+**Bug Fixes**
+
+* Resolved an issue where warnings were generated due to an array to string conversion.
+* Fixed a problem where CC and BCC recipients were not properly added when using SendInBlue.
+* Addressed an issue where multiple recipients using SendInBlue were receiving emails individually instead of as a group.
+* Fixed an email formatting issue that occurred in certain PHP versions.
+* Corrected an issue where the friendly name feature was not functioning properly with SendInBlue.
 
 = 2.4.3 - 2023-02-27 =
 **Bug Fixes**

@@ -3,8 +3,8 @@ Contributors: PixelYourSite
 Tags: Meta Pixel, Facebook Pixel, Facebook Conversion API, CAPI, Facebook Pixel Events, Facebook Dynamic Product Ads, Facebook Conversion Value, WooCommerce Facebook Pixel, Easy Digital Downloads Facebook Pixel, Google Analytics, Google Analytics Enhanced Ecommerce, GA4, WooCommerce Google Analytics, Easy Digital Downloads Google Analytics, head & footer scripts, Pinterest tag
 Requires at least: 3.0.1
 Requires PHP: 5.4
-Tested up to: 6.1
-Stable tag: 9.3.2
+Tested up to: 6.2
+Stable tag: 9.3.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -466,6 +466,46 @@ NO, absolutely not! We don't track any type of data about your website. We simpl
 
 
 == Changelog ==
+
+= PixelYourSite 9.3.6=
+
+* Notification for users that don't have the Meta CAPI token.
+
+* Small code changes to ensure compatibility with ConsentMagic.
+
+* Fixing a potential problem with traffic data stored for WooCommerce orders.
+
+* Small UI changes.
+
+
+= PixelYourSite 9.3.5=
+
+* Fix for an issue with the additional data we track for WooCommerce or Easy Digital Downloads orders. 
+
+
+= PixelYourSite 9.3.4 =
+
+* WooCommerce 7.5 compatibility check.
+
+* Fixing a possible conflict with Oxygen Builder.
+
+* Fixing a possible bug with sites using themes that are missing some default scripts, resulting in tags not being fired. 
+
+* Fixing various deprecation warnings.
+
+* Fix for Fatal error: Access level to PixelYourSite\FormEventForminator::__construct
+
+
+= PixelYourSite 9.3.3 =
+
+* The Form automatic event will fire when forms are successfully submitted for the following plugins: Contact Form 7, Forminator, WP Forms, Formidable Pro, Ninja Forms, and Fluent Forms. For forms added by different means, we will fire the event when the submit button is clicked.
+
+* New option that allows to remove the plugin's name from the browser's console. 
+
+* Changes to ensure compatibility with the recent changes from the ConsentMagic plugin.
+
+* WooCommerce 7.4 compatibility. 
+
 
 = PixelYourSite 9.3.2 =
 

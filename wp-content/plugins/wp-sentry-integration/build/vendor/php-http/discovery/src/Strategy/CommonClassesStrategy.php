@@ -46,6 +46,8 @@ use WPSentry\ScopedVendor\Zend\Diactoros\Request as ZendDiactorosRequest;
  * @internal
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ *
+ * Don't miss updating src/Composer/Plugin.php when adding a new supported class.
  */
 final class CommonClassesStrategy implements \WPSentry\ScopedVendor\Http\Discovery\Strategy\DiscoveryStrategy
 {

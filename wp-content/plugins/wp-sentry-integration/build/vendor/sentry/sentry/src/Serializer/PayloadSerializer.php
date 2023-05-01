@@ -9,6 +9,7 @@ use Sentry\EventType;
 use Sentry\ExceptionDataBag;
 use Sentry\Frame;
 use Sentry\Options;
+use Sentry\Profiling\Profile;
 use Sentry\Tracing\DynamicSamplingContext;
 use Sentry\Tracing\Span;
 use Sentry\Tracing\TransactionMetadata;
@@ -35,6 +36,17 @@ final class PayloadSerializer implements \Sentry\Serializer\PayloadSerializerInt
     public function serialize(\Sentry\Event $event) : string
     {
         if (\Sentry\EventType::transaction() === $event->getType()) {
+            $transactionEnvelope = $this->serializeAsEnvelope($event);
+            // Attach a new envelope item containing the profile data
+            if (null !== $event->getSdkMetadata('profile')) {
+                $profileEnvelope = $this->seralizeProfileAsEnvelope($event);
+                if (null !== $profileEnvelope) {
+                    return \sprintf("%s\n%s", $transactionEnvelope, $profileEnvelope);
+                }
+            }
+            return $transactionEnvelope;
+        }
+        if (\Sentry\EventType::checkIn() === $event->getType()) {
             return $this->serializeAsEnvelope($event);
         }
         return $this->serializeAsEvent($event);
@@ -42,6 +54,15 @@ final class PayloadSerializer implements \Sentry\Serializer\PayloadSerializerInt
     private function serializeAsEvent(\Sentry\Event $event) : string
     {
         $result = $this->toArray($event);
+        return \Sentry\Util\JSON::encode($result);
+    }
+    private function serializeAsCheckInEvent(\Sentry\Event $event) : string
+    {
+        $result = [];
+        $checkIn = $event->getCheckIn();
+        if (null !== $checkIn) {
+            $result = ['check_in_id' => $checkIn->getId(), 'monitor_slug' => $checkIn->getMonitorSlug(), 'status' => (string) $checkIn->getStatus(), 'duration' => $checkIn->getDuration(), 'release' => $checkIn->getRelease(), 'environment' => $checkIn->getEnvironment()];
+        }
         return \Sentry\Util\JSON::encode($result);
     }
     /**
@@ -140,7 +161,27 @@ final class PayloadSerializer implements \Sentry\Serializer\PayloadSerializerInt
             }
         }
         $itemHeader = ['type' => (string) $event->getType(), 'content_type' => 'application/json'];
-        return \sprintf("%s\n%s\n%s", \Sentry\Util\JSON::encode($envelopeHeader), \Sentry\Util\JSON::encode($itemHeader), $this->serializeAsEvent($event));
+        $seralizedEvent = '';
+        if (\Sentry\EventType::transaction() === $event->getType()) {
+            $seralizedEvent = $this->serializeAsEvent($event);
+        }
+        if (\Sentry\EventType::checkIn() === $event->getType()) {
+            $seralizedEvent = $this->serializeAsCheckInEvent($event);
+        }
+        return \sprintf("%s\n%s\n%s", \Sentry\Util\JSON::encode($envelopeHeader), \Sentry\Util\JSON::encode($itemHeader), $seralizedEvent);
+    }
+    private function seralizeProfileAsEnvelope(\Sentry\Event $event) : ?string
+    {
+        $itemHeader = ['type' => 'profile', 'content_type' => 'application/json'];
+        $profile = $event->getSdkMetadata('profile');
+        if (!$profile instanceof \Sentry\Profiling\Profile) {
+            return null;
+        }
+        $profileData = $profile->getFormattedData($event);
+        if (null === $profileData) {
+            return null;
+        }
+        return \sprintf("%s\n%s", \Sentry\Util\JSON::encode($itemHeader), \Sentry\Util\JSON::encode($profileData));
     }
     /**
      * @return array<string, mixed>

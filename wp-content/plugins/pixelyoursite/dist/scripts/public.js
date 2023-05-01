@@ -190,9 +190,9 @@ if (!Array.prototype.includes) {
 
         let isNewSession = checkSession();
 
-        let utmTerms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        var utmTerms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
 
-        let utmId = ['fbadid', 'gadid', 'padid', 'bingid'];
+        var utmId = ['fbadid', 'gadid', 'padid', 'bingid'];
 
         function validateEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -769,28 +769,72 @@ if (!Array.prototype.includes) {
                 /**
                  * ConsentMagic
                  */
-                if (options.gdpr.consent_magic_integration_enabled && typeof CS_Data !== "undefined") {
+                if (options.gdpr.consent_magic_integration_enabled && typeof CS_Data !== "undefined" ) {
 
-                    var cs_cookie = Cookies.get('cs_viewed_cookie_policy'+test_prefix);
+                    var test_prefix = CS_Data.test_prefix;
+                    if ((typeof CS_Data.cs_google_analytics_consent_mode !== "undefined" && CS_Data.cs_google_analytics_consent_mode == 1) && pixel == 'analytics') {
+                        return true;
+                    }
+                    if ((typeof CS_Data.cs_google_ads_consent_mode !== "undefined" && CS_Data.cs_google_ads_consent_mode == 1) && pixel == 'google_ads') {
+                        return true;
+                    }
 
-                    if (options.gdpr[pixel + '_prior_consent_enabled']) {
-                        if (typeof cs_cookie === 'undefined' || cs_cookie === 'yes') {
-                            return true;
+                    if ( CS_Data.cs_cache_enabled == 1 ) {
+                        var substring = "cs_enabled_cookie_term";
+                        var theCookies = document.cookie.split(';');
+
+                        for (var i = 1 ; i <= theCookies.length; i++) {
+                            if ( theCookies[ i - 1 ].indexOf( substring ) !== -1 ) {
+                                var categoryCookie = theCookies[ i - 1 ].replace( 'cs_enabled_cookie_term' + test_prefix + '_', '' );
+                                categoryCookie = Number( categoryCookie.replace( /\D+/g, "" ) );
+                                var cs_cookie_val = Cookies.get( 'cs_enabled_cookie_term' + test_prefix + '_' + categoryCookie );
+
+                                if ( categoryCookie === CS_Data.cs_script_cat.facebook && pixel == 'facebook' ) {
+                                    if ( cs_cookie_val == 'yes' ) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                } else if ( categoryCookie === CS_Data.cs_script_cat.bing && pixel == 'bing' ) {
+                                    if ( cs_cookie_val == 'yes' ) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                } else if ( categoryCookie === CS_Data.cs_script_cat.analytics && pixel == 'analytics' ) {
+                                    if ( cs_cookie_val == 'yes' ) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                } else if ( categoryCookie === CS_Data.cs_script_cat.gads && pixel == 'google_ads' ) {
+                                    if ( cs_cookie_val == 'yes' ) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                } else if ( categoryCookie === CS_Data.cs_script_cat.pinterest && pixel == 'pinterest' ) {
+                                    if ( cs_cookie_val == 'yes' ) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                } else if ( categoryCookie === CS_Data.cs_script_cat.tiktok && pixel == 'tiktok' ) {
+                                    if ( cs_cookie_val == 'yes' ) {
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                }
+                            }
                         }
                     } else {
+                        var cs_cookie = Cookies.get('cs_viewed_cookie_policy'+test_prefix);
                         if (typeof cs_cookie === 'undefined' || cs_cookie === 'yes') {
                             return true;
                         }
                     }
-                    if (options.gdpr.consent_magic_integration_enabled && typeof CS_Data !== "undefined") {
-                        if ((typeof CS_Data.cs_google_analytics_consent_mode !== "undefined" && CS_Data.cs_google_analytics_consent_mode == 1) && pixel == 'analytics') {
-                            return true;
-                        }
 
-                        if ((typeof CS_Data.cs_google_ads_consent_mode !== "undefined" && CS_Data.cs_google_ads_consent_mode == 1) && pixel == 'google_ads') {
-                            return true;
-                        }
-                    }
                     return false;
 
                 }
@@ -2045,7 +2089,33 @@ if (!Array.prototype.includes) {
         var Pinterest = Utils.setupPinterestObject();
         var Bing = Utils.setupBingObject();
 
-        Utils.manageCookies();
+        if((options.woo.enabled || options.edd.enabled) && (options.woo.enabled_save_data_to_orders || options.edd.enabled_save_data_to_orders))
+        {
+            Utils.manageCookies();
+        }
+        else
+        {
+            Cookies.remove('pys_first_visit')
+            Cookies.remove('pysTrafficSource')
+            Cookies.remove('pys_landing_page')
+            Cookies.remove('last_pys_landing_page')
+            Cookies.remove('last_pysTrafficSource')
+            Cookies.remove('pys_start_session')
+            Cookies.remove('pys_session_limit')
+
+            $.each(Utils.utmTerms, function (index, name) {
+                Cookies.remove('pys_' + name)
+            });
+            $.each(Utils.utmId,function(index,name) {
+                Cookies.remove('pys_' + name)
+            })
+            $.each(Utils.utmTerms, function (index, name) {
+                Cookies.remove('last_pys_' + name)
+            });
+            $.each(Utils.utmId,function(index,name) {
+                Cookies.remove('last_pys_' + name)
+            });
+        }
         Utils.setupGdprCallbacks();
         // page scroll event
         if ( options.dynamicEvents.hasOwnProperty("automatic_event_scroll")
@@ -2433,66 +2503,88 @@ if (!Array.prototype.includes) {
                 if ($form.hasClass('edd_form') || $form.hasClass('edd_download_purchase_form')) {
                     return;
                 }
+// exclude CF7 forms
+                if ($form.hasClass('wpcf7-form')) {
+                    return;
+                }
+                // exclude Forminator forms
+                if ($form.hasClass('forminator-custom-form') || $form.hasClass('forminator_ajax')) {
+                    return;
+                }
+                // exclude WPforms forms
+                if ($form.hasClass('wpforms-form') || $form.hasClass('wpforms-ajax-form')) {
+                    return;
+                }
+                // exclude Formidable forms
+                /*if ($form.hasClass('frm-show-form')) {
+                    return;
+                }*/
+                // exclude Ninja Forms forms
+                if ($form.parent().hasClass('nf-form-layout')) {
+                    return;
+                }
+                // exclude Fluent forms
+                if ($form.hasClass('frm-fluent-form')) {
+                    return;
+                }
+                if(!options.enable_success_send_form) {
+                    var params = {
+                        form_id: $form.attr('id'),
+                        form_class: $form.attr('class'),
+                        text: $form.find('[type="submit"]').is('input') ?
+                            $form.find('[type="submit"]').val() : $form.find('[type="submit"]').text()
+                    };
 
-                var params = {
-                    form_id: $form.attr('id'),
-                    form_class: $form.attr('class'),
-                    text: $form.find('[type="submit"]').is('input') ?
-                        $form.find('[type="submit"]').val() : $form.find('[type="submit"]').text()
-                };
+                    if (options.dynamicEvents.hasOwnProperty("automatic_event_form")) {
+                        var pixels = Object.keys(options.dynamicEvents.automatic_event_form);
+                        for (var i = 0; i < pixels.length; i++) {
+                            var event = Utils.clone(options.dynamicEvents.automatic_event_form[pixels[i]]);
 
-                if(options.dynamicEvents.hasOwnProperty("automatic_event_form") ) {
-                    var pixels = Object.keys(options.dynamicEvents.automatic_event_form);
-                    for (var i = 0; i < pixels.length; i++) {
-                        var event = Utils.clone(options.dynamicEvents.automatic_event_form[pixels[i]]);
-
-                        if(pixels[i] === "tiktok") {
-                            getPixelBySlag(pixels[i]).fireEvent(event.name, event);
-                        } else {
-                            Utils.copyProperties(params, event.params,)
-                            Utils.copyProperties(Utils.getRequestParams(), event.params);
-                            getPixelBySlag(pixels[i]).onFormEvent(event);
+                            if (pixels[i] === "tiktok") {
+                                getPixelBySlag(pixels[i]).fireEvent(event.name, event);
+                            } else {
+                                Utils.copyProperties(params, event.params,)
+                                Utils.copyProperties(Utils.getRequestParams(), event.params);
+                                getPixelBySlag(pixels[i]).onFormEvent(event);
+                            }
                         }
                     }
                 }
             });
 
+            document.addEventListener( 'wpcf7mailsent', function( event ) {
+                var form_id = event.detail.contactFormId;
+                sendFormAction($(event.target), form_id);
+            }, false );
             //Forminator
-            $(document).on( 'forminator:form:submit:success', function( formData ){
-                var params = {
-                    form_id: $(formData.target).find('input[name="form_id"]').val(),
-                    text: $(formData.target).find('.forminator-button-submit').text()
-                };
-
-                if(options.dynamicEvents.hasOwnProperty("automatic_event_form") ) {
-                    var pixels = Object.keys(options.dynamicEvents.automatic_event_form);
-                    for (var i = 0; i < pixels.length; i++) {
-                        var event = Utils.clone(options.dynamicEvents.automatic_event_form[pixels[i]]);
-                        Utils.copyProperties(params, event.params)
-                        Utils.copyProperties(Utils.getRequestParams(), event.params);
-                        getPixelBySlag(pixels[i]).onFormEvent(event);
-                    }
-                }
+            $(document).on( 'forminator:form:submit:success', function( event ){
+                var form_id = $(event.target).find('input[name="form_id"]').val();
+                sendFormAction($(event.target), form_id);
             });
 
+            //WPForm
+            $('form.wpforms-form').on('wpformsAjaxSubmitSuccess', (event) => {
+                var form_id = $(event.target).attr('data-formid');
+                sendFormAction($(event.target), form_id);
+            })
+            $(document).on( 'frmFormComplete', function( event, form, response ) {
+                const form_id = $(form).find('input[name="form_id"]').val();
+                sendFormAction($(event.target), form_id);
+            });
             // Ninja Forms
-            $(document).onFirst('nfFormSubmitResponse', function (e, data) {
+            $(document).onFirst('nfFormSubmitResponse', function (event, data) {
+                const form_id = data.response.data.form_id;
+                sendFormAction($(event.target), form_id);
+            });
 
-                var params = {
-                    form_id: data.response.data.form_id,
-                    text: data.response.data.settings.title
-                };
-
-                if(options.dynamicEvents.hasOwnProperty("automatic_event_form") ) {
-                    var pixels = Object.keys(options.dynamicEvents.automatic_event_form);
-                    for(var i = 0;i<pixels.length;i++) {
-                        var event = options.dynamicEvents.automatic_event_form[pixels[i]];
-                        Utils.copyProperties(params,event.params)
-                        Utils.copyProperties(Utils.getRequestParams(), event.params);
-                        getPixelBySlag(pixels[i]).onFormEvent(event);
-                    }
-                }
-
+            var fluentForms = $('form.frm-fluent-form');
+            fluentForms.each(function() {
+                var $form = $(this);
+                $form.on('fluentform_submission_success', function(event) {
+                    var $formItem = $(this);
+                    var form_id = $formItem.attr('data-form_id');
+                    sendFormAction($(event.target), form_id);
+                });
             });
 
         }
@@ -2505,6 +2597,29 @@ if (!Array.prototype.includes) {
             Utils.addCheckoutFields();
         }
     });
+
+    var sendFormAction = function (form_target, formId){
+        var params = {
+            form_id: formId,
+            text: form_target.find('[type="submit"]').is('input') ? form_target.find('[type="submit"]').val() :
+                form_target.find('.forminator-button-submit').text() != '' ? form_target.find('.forminator-button-submit').text() :
+                    form_target.find('[type="submit"]').text()
+        };
+
+        if (options.dynamicEvents.hasOwnProperty("automatic_event_form")) {
+            var pixels = Object.keys(options.dynamicEvents.automatic_event_form);
+            for (var i = 0; i < pixels.length; i++) {
+                var event = options.dynamicEvents.automatic_event_form[pixels[i]];
+                if (pixels[i] === "tiktok") {
+                    getPixelBySlag(pixels[i]).fireEvent(event.name, event);
+                } else {
+                    Utils.copyProperties(params, event.params)
+                    Utils.copyProperties(Utils.getRequestParams(), event.params);
+                    getPixelBySlag(pixels[i]).onFormEvent(event);
+                }
+            }
+        }
+    }
 
 }(jQuery, pysOptions);
 

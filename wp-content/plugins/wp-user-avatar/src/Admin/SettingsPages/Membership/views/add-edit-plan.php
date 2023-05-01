@@ -196,15 +196,13 @@ add_action('add_meta_boxes', function () use ($subscription_settings, $plan_deta
     if ($plan_data->exists()) {
         add_meta_box(
             'ppress-subscription-plan-links',
-            __('Order Links', 'wp-user-avatar'),
+            __('Checkout URL', 'wp-user-avatar'),
             function () use ($plan_data) {
                 $checkout_url = $plan_data->get_checkout_url();
                 ?>
                 <div class="ppress-subscription-plan-payment-links">
                     <p>
-                        <label><?php _e('Checkout link:', 'wp-user-avatar'); ?>
-                            <input type="text" onfocus="this.select();" readonly="readonly" value="<?= esc_url($checkout_url) ?>"/>
-                        </label>
+                        <input type="text" onfocus="this.select();" readonly="readonly" value="<?= esc_url($checkout_url) ?>"/>
                     </p>
                 </div>
                 <?php
