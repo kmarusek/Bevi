@@ -38,6 +38,7 @@
           ref="pardot"
           class="pardot-form"
           v-html="block.pardot_form ? block.pardot_form : block.pardot_form_fallback"
+          :style="[ isMobile ? { 'height' : `${block.form_height.mobile}px` } : { 'height' : `${block.form_height.desktop}px` } ]"
         />
       </div>
     </div>
