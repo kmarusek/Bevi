@@ -65,13 +65,33 @@
     mounted() {
       const iframe = this.$refs.pardot.querySelector('iframe');
       const pardotClass = this.block.pardot_class;
+      const isMobile = this.block.form_height.mobile;
+      const isDesktop = this.block.form_height.desktop;
+
       
+
+      function onLoadFunction(e){
+        onResizeFunction();
+      }
+      function onResizeFunction(e) {
+        if(window.innerWidth <= 768){
+          iframe.height = isMobile;
+        }else{
+          iframe.height = isDesktop;
+        };
+      }
+
+      window.addEventListener("resize", onResizeFunction);
+      window.addEventListener("load", onLoadFunction);
+
+
       if(pardotClass != ''){
       iframe.classList.add(pardotClass);
       }else {
 
-      }
-      iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'taggedElement'}, iframe);
+      };
+      iframeResize({'checkOrigin': false, 'heightCalculationMethod': 'lowestElement'}, iframe);
+
     }
   };
 </script>
