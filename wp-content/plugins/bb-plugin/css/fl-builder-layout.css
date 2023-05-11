@@ -60,6 +60,8 @@
 /* Responsive Utilities
 ------------------------------------------------------ */
 
+.fl-visible-large,
+.fl-visible-large-medium,
 .fl-visible-medium,
 .fl-visible-medium-mobile,
 .fl-visible-mobile,
@@ -76,6 +78,7 @@
 .fl-row-content {
 	margin-left: auto;
 	margin-right: auto;
+	min-width: 0;
 }
 .fl-row-content-wrap {
 	position: relative;
@@ -112,6 +115,12 @@
 	position: absolute;
 	right: 0;
 	top: 0px;
+}
+.fl-row-bg-video .fl-bg-video video {
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
 }
 .fl-row-bg-video .fl-bg-video iframe,
 .fl-row-bg-embed .fl-bg-embed-code iframe {
@@ -337,7 +346,15 @@
 	content: none;
 }
 
+/* Equal height align top */
+.fl-col-group-nested.fl-col-group-equal-height.fl-col-group-align-top .fl-col-content,
+.fl-col-group-equal-height.fl-col-group-align-top .fl-col-content {
+	justify-content: flex-start;
+	-webkit-justify-content: flex-start;	
+}
+
 /* Equal height align center */
+.fl-col-group-nested.fl-col-group-equal-height.fl-col-group-align-center .fl-col-content,
 .fl-col-group-equal-height.fl-col-group-align-center .fl-col-content {
 	align-items: center;
 	justify-content: center;
@@ -350,6 +367,7 @@
 }
 
 /* Equal height align bottom */
+.fl-col-group-nested.fl-col-group-equal-height.fl-col-group-align-bottom .fl-col-content,
 .fl-col-group-equal-height.fl-col-group-align-bottom .fl-col-content {
 	justify-content: flex-end;
 	-webkit-justify-content: flex-end;

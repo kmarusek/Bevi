@@ -31,7 +31,7 @@ final class Client implements \Sentry\ClientInterface
     /**
      * The version of the SDK.
      */
-    public const SDK_VERSION = '3.17.0';
+    public const SDK_VERSION = '3.18.0';
     /**
      * @var Options The client options
      */

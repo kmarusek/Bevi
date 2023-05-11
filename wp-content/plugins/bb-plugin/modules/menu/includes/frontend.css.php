@@ -50,21 +50,9 @@ if ( 'horizontal' === $settings->menu_layout ) {
 		'settings'     => $settings,
 		'setting_name' => 'menu_align',
 		'selector'     => ".fl-node-$id .fl-menu .menu",
-		'prop'         => 'float',
-		'ignore'       => array( 'center' ),
+		'prop'         => 'justify-content',
 	) );
 
-	FLBuilderCSS::responsive_rule( array(
-		'settings'     => $settings,
-		'setting_name' => 'menu_align',
-		'selector'     => ".fl-node-$id .fl-menu .menu",
-		'props'        => array(
-			'float'          => 'none',
-			'display'        => 'inline-block',
-			'vertical-align' => 'top',
-		),
-		'ignore'       => array( 'left', 'right' ),
-	) );
 }
 
 
@@ -190,6 +178,13 @@ if ( ! empty( $settings->submenu_bg_color ) || 'yes' == $settings->drop_shadow )
 	<?php
 endif;
 
+// Dropdown Typography
+FLBuilderCSS::typography_field_rule( array(
+	'settings'     => $settings,
+	'setting_name' => 'submenu_typography',
+	'selector'     => ".fl-node-$id .fl-menu .menu .sub-menu > li",
+) );
+
 /**
  * Submenu links
  */
@@ -290,11 +285,6 @@ if ( isset( $settings->submenu_border ) && ! empty( $settings->submenu_border ) 
 		'selector'     => "$submenu_selector:hover",
 	) );
 
-	FLBuilderCSS::typography_field_rule( array(
-		'settings'     => $settings,
-		'setting_name' => 'submenu_typography',
-		'selector'     => "$submenu_selector",
-	) );
 endif;
 
 /**
@@ -502,8 +492,8 @@ if ( 'always' != $module->get_media_breakpoint() ) :
 		<?php if ( 'yes' == $settings->mobile_full_width ) : ?>
 			.fl-node-<?php echo $id; ?> .fl-menu .menu {
 				position: absolute;
-				left: <?php echo empty( $settings->margin_left ) ? $global_settings->module_margins : $settings->margin_left; ?>px;
-				right: <?php echo empty( $settings->margin_right ) ? $global_settings->module_margins : $settings->margin_right; ?>px;
+				left: <?php echo empty( $settings->margin_left ) ? $global_settings->module_margins_left : $settings->margin_left; ?>px;
+				right: <?php echo empty( $settings->margin_right ) ? $global_settings->module_margins_right : $settings->margin_right; ?>px;
 				z-index: 1500;
 			}
 		<?php endif; ?>
@@ -576,15 +566,26 @@ if ( 'always' != $module->get_media_breakpoint() ) :
 		<?php
 	endif;
 
-	?>
-	<?php
-	if ( 'medium-mobile' == $settings->mobile_breakpoint ) {
+	if ( 'large-mobile' == $settings->mobile_breakpoint ) {
+		$media = 'large';
+	} elseif ( 'medium-mobile' == $settings->mobile_breakpoint ) {
 		$media = 'medium';
 	} elseif ( 'mobile' == $settings->mobile_breakpoint ) {
 		$media = 'responsive';
 	} else {
 		$media = 'default';
 	}
+
+	// Indent sub-menu on responsive view.
+	if ( in_array( $settings->menu_layout, array( 'horizontal', 'vertical' ) ) ) :
+		FLBuilderCSS::rule( array(
+			'media'    => $media,
+			'selector' => ".fl-node-$id .menu li.fl-has-submenu ul.sub-menu",
+			'props'    => array(
+				'padding-left' => '15px',
+			),
+		) );
+	endif;
 
 	$flyout_selector  = "body.fl-builder-edit .fl-node-$id .fl-menu-responsive-flyout-overlay nav,";
 	$flyout_selector .= "body.fl-builder-edit .fl-node-$id .fl-menu-responsive-flyout-push nav,";
@@ -661,12 +662,14 @@ if ( 'always' != $module->get_media_breakpoint() ) :
 		display: none;
 	}
 
+<?php if ( ! empty( $settings->mobile_toggle_submenu_item_icon ) && 'r_arrow' === $settings->mobile_toggle_submenu_item_icon ) : ?>
 	.fl-node-<?php echo $id; ?> .sub-menu .menu-item a::before {
-		content: '>';
-		font-family: courier;
-		margin-right: 5px;
+		font-family: 'Font Awesome 5 <?php echo FLBuilder::fa5_pro_enabled() ? 'Pro' : 'Free'; ?>';
+		content: '\f105';
+		font-weight: 900;
+		margin-right: 10px;
 	}
-
+<?php endif; ?>
 <?php if ( 'always' != $module->get_media_breakpoint() ) : ?>
 	} <?php // close media max-width ?>
 

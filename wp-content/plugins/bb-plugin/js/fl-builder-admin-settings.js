@@ -59,6 +59,10 @@
 			$('#uninstall-form').on('submit', FLBuilderAdminSettings._uninstallFormSubmit);
 			$( '.fl-settings-form .dashicons-editor-help' ).tipTip();
 			$( '.subscription-form .subscribe-button' ).on( 'click', FLBuilderAdminSettings._welcomeSubscribe);
+			$( '.advanced-group input[type=checkbox]').on('change', FLBuilderAdminSettings._advancedToggle );
+			$( '.advanced-group input[type=text]').on('keyup', FLBuilderAdminSettings._advancedText );
+			$( '.advanced-group h3' ).on('click', FLBuilderAdminSettings._advancedShowHide );
+			$( '.advanced-group button' ).on('click', FLBuilderAdminSettings._advancedTextSave );
 		},
 
 		_welcomeSubscribe: function()
@@ -103,6 +107,101 @@
 					$( error ).html(response.data.message).fadeIn()
 				}
 			});
+		},
+
+		_advancedText: function() {
+			button = $(this).parent().find('.save-button');
+			button.css('display', 'contents')
+		},
+
+		_advancedTextSave: function(e) {
+			e.preventDefault();
+			var buttonwrap = $(this).parent()
+
+			id = $(this).data('id');
+			value = $('#' + id).val();
+			data = {
+				'action'  : 'fl_advanced_submit',
+				'setting' : id,
+				'type'    : 'text',
+				'value'   : value,
+				'_wpnonce': $('#fl-advanced-nonce').val()
+			}
+			$.post(ajaxurl, data, function(response) {
+				if ( response.success ) {
+					buttonwrap.fadeOut();
+				new Notify({
+					status: 'success',
+					title: 'Saved',
+					autoclose: true,
+					autotimeout: 1000,
+					distance: 20,
+				});
+			} else {
+				new Notify({
+					status: 'error',
+					title: 'Save Error',
+					autoclose: false,
+					distance: 20,
+				});
+			}
+			})
+			.fail( function(){
+				new Notify({
+					status: 'error',
+					title: 'Save Error',
+					autoclose: false,
+					distance: 20,
+				});
+			});
+		},
+
+		_advancedToggle: function(event) {
+			checkbox = $(this);
+			var depend = $(this).data('depend') || false;
+			data = {
+				'action'  : 'fl_advanced_submit',
+				'setting' : checkbox.attr('name'),
+				'value'   : checkbox.is(':checked'),
+				'_wpnonce': $('#fl-advanced-nonce').val()
+			}
+			$.post(ajaxurl, data, function(response) {
+				if ( response.success ) {
+					$.when(
+				new Notify({
+					status: 'success',
+					title: 'Saved',
+					autoclose: true,
+					autotimeout: 1000,
+					distance: 20,
+				})
+			).done(function(){
+				if ( depend ) {
+					location.reload()
+				}
+			});
+
+			} else {
+				new Notify({
+					status: 'error',
+					title: 'Save Error',
+					autoclose: false,
+					distance: 20,
+				});
+			}
+			})
+			.fail( function(){
+				new Notify({
+					status: 'error',
+					title: 'Save Error',
+					autoclose: false,
+					distance: 20,
+				});
+			});
+		},
+
+		_advancedShowHide: function() {
+			$(this).parent().find('.advanced-option').toggle('fast');
 		},
 
 		/**
@@ -512,8 +611,7 @@
 
 				}
 			})
-		}
-
+		},
 	};
 
 	/* Initializes the builder's admin settings. */

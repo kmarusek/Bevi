@@ -18,95 +18,60 @@ trait MessageDecorator
      *
      * Since the underlying Message is immutable as well
      * exposing it is not an issue, because it's state cannot be altered
-     *
-     * @return MessageInterface
      */
-    public function getMessage()
+    public function getMessage() : \WPSentry\ScopedVendor\Psr\Http\Message\MessageInterface
     {
         return $this->message;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getProtocolVersion()
+    public function getProtocolVersion() : string
     {
         return $this->message->getProtocolVersion();
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion(string $version) : \WPSentry\ScopedVendor\Psr\Http\Message\MessageInterface
     {
         $new = clone $this;
         $new->message = $this->message->withProtocolVersion($version);
         return $new;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getHeaders()
+    public function getHeaders() : array
     {
         return $this->message->getHeaders();
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function hasHeader($header)
+    public function hasHeader(string $header) : bool
     {
         return $this->message->hasHeader($header);
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getHeader($header)
+    public function getHeader(string $header) : array
     {
         return $this->message->getHeader($header);
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getHeaderLine($header)
+    public function getHeaderLine(string $header) : string
     {
         return $this->message->getHeaderLine($header);
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function withHeader($header, $value)
+    public function withHeader(string $header, $value) : \WPSentry\ScopedVendor\Psr\Http\Message\MessageInterface
     {
         $new = clone $this;
         $new->message = $this->message->withHeader($header, $value);
         return $new;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function withAddedHeader($header, $value)
+    public function withAddedHeader(string $header, $value) : \WPSentry\ScopedVendor\Psr\Http\Message\MessageInterface
     {
         $new = clone $this;
         $new->message = $this->message->withAddedHeader($header, $value);
         return $new;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function withoutHeader($header)
+    public function withoutHeader(string $header) : \WPSentry\ScopedVendor\Psr\Http\Message\MessageInterface
     {
         $new = clone $this;
         $new->message = $this->message->withoutHeader($header);
         return $new;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getBody()
+    public function getBody() : \WPSentry\ScopedVendor\Psr\Http\Message\StreamInterface
     {
         return $this->message->getBody();
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function withBody(\WPSentry\ScopedVendor\Psr\Http\Message\StreamInterface $body)
+    public function withBody(\WPSentry\ScopedVendor\Psr\Http\Message\StreamInterface $body) : \WPSentry\ScopedVendor\Psr\Http\Message\MessageInterface
     {
         $new = clone $this;
         $new->message = $this->message->withBody($body);

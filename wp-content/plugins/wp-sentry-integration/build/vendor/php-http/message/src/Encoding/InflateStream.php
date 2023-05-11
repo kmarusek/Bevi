@@ -23,17 +23,11 @@ class InflateStream extends \WPSentry\ScopedVendor\Http\Message\Encoding\Filtere
         // @deprecated will be removed in 2.0
         $this->writeFilterCallback = \WPSentry\ScopedVendor\Clue\StreamFilter\fun($this->writeFilter(), ['window' => -15, 'level' => $level]);
     }
-    /**
-     * {@inheritdoc}
-     */
-    protected function readFilter()
+    protected function readFilter() : string
     {
         return 'zlib.inflate';
     }
-    /**
-     * {@inheritdoc}
-     */
-    protected function writeFilter()
+    protected function writeFilter() : string
     {
         return 'zlib.deflate';
     }

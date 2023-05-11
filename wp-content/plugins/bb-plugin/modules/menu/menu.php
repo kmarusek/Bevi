@@ -11,6 +11,11 @@ class FLMenuModule extends FLBuilderModule {
 	public static $fl_builder_page_id;
 
 	/**
+	 * @property $core_menus
+	 */
+	private $core_menus = null;
+
+	/**
 	 * @method __construct
 	 */
 	public function __construct() {
@@ -22,6 +27,8 @@ class FLMenuModule extends FLBuilderModule {
 			'editor_export'   => false,
 			'icon'            => 'menu.svg',
 		));
+
+		$this->core_menus = $this->get_core_menus();
 
 		// Actions
 		add_action( 'pre_get_posts', __CLASS__ . '::set_pre_get_posts_query', 10, 2 );
@@ -122,6 +129,12 @@ class FLMenuModule extends FLBuilderModule {
 			unset( $settings->submenu_spacing );
 		}
 
+		if ( ! empty( $this->core_menus ) ) {
+			if ( empty( $settings->menu ) || ! in_array( $settings->menu, $this->core_menus ) ) {
+				$settings->menu = apply_filters( 'fl_builder_menu_module_core_menu', $this->core_menus[0], $settings );
+			}
+		}
+
 		// Return the filtered settings.
 		return $settings;
 	}
@@ -134,6 +147,7 @@ class FLMenuModule extends FLBuilderModule {
 	public static function _get_menus() {
 		$get_menus = get_terms( 'nav_menu', array(
 			'hide_empty' => true,
+			'update_term_meta_cache' => false,
 		) );
 		$fields    = array(
 			'label' => __( 'Menu', 'fl-builder' ),
@@ -147,7 +161,7 @@ class FLMenuModule extends FLBuilderModule {
 			foreach ( $get_menus as $key => $menu ) {
 
 				if ( 0 == $key ) {
-					$fields['default'] = $menu->name;
+					$fields['default'] = $menu->slug;
 				}
 
 				$menus[ $menu->slug ] = $menu->name;
@@ -181,9 +195,10 @@ class FLMenuModule extends FLBuilderModule {
 		if ( isset( $toggle ) && 'expanded' != $toggle ) {
 
 			if ( in_array( $toggle, array( 'hamburger', 'hamburger-label' ) ) ) {
-
-				echo '<button class="fl-menu-mobile-toggle ' . $toggle . '" aria-label="' . esc_attr( $menu_title ) . '"><span class="svg-container">';
-				include FL_BUILDER_DIR . 'img/svg/hamburger-menu.svg';
+				$menu_icon = apply_filters( 'fl_builder_mobile_menu_icon', file_get_contents( FL_BUILDER_DIR . 'img/svg/hamburger-menu.svg' ) );
+				echo '<button class="fl-menu-mobile-toggle ' . $toggle . '" aria-label="' . esc_attr( $menu_title ) . '">';
+				echo '<span class="fl-menu-icon svg-container">';
+				echo $menu_icon;
 				echo '</span>';
 
 				if ( 'hamburger-label' == $toggle ) {
@@ -255,7 +270,9 @@ class FLMenuModule extends FLBuilderModule {
 		$mobile_breakpoint = $this->settings->mobile_breakpoint;
 
 		if ( isset( $mobile_breakpoint ) && 'expanded' != $this->settings->mobile_toggle ) {
-			if ( 'medium-mobile' == $mobile_breakpoint ) {
+			if ( 'large-mobile' == $mobile_breakpoint ) {
+				$media_width = $global_settings->large_breakpoint;
+			} elseif ( 'medium-mobile' == $mobile_breakpoint ) {
 				$media_width = $global_settings->medium_breakpoint;
 			} elseif ( 'mobile' == $this->settings->mobile_breakpoint ) {
 				$media_width = $global_settings->responsive_breakpoint;
@@ -285,7 +302,7 @@ class FLMenuModule extends FLBuilderModule {
 	 */
 	public function get_total_top_lvl_items() {
 		$settings = $this->settings;
-		$count    = count( wp_list_filter( wp_get_nav_menu_items( $this->settings->menu ), array( 'menu_item_parent' => 0 ) ) );
+		$count    = count( wp_list_filter( wp_get_nav_menu_items( $this->settings->menu, array( 'update_menu_item_cache' => false ) ), array( 'menu_item_parent' => 0 ) ) );
 
 		if ( isset( $settings->woo_menu_cart ) && 'show' == $settings->woo_menu_cart ) {
 			$count++;
@@ -496,6 +513,28 @@ class FLMenuModule extends FLBuilderModule {
 
 		return $cart_contents_total;
 	}
+
+	/**
+	 * Get Core Menu slugs as an array.
+	 */
+	public function get_core_menus() {
+
+		if ( $this->core_menus ) {
+			return $this->core_menus;
+		}
+
+		$core_menus = array();
+		$nav_terms  = get_terms( 'nav_menu', array(
+			'hide_empty' => true,
+			'update_term_meta_cache' => false,
+		) );
+
+		foreach ( $nav_terms as $key => $menu ) {
+			$core_menus[] = $menu->slug;
+		}
+
+		return $core_menus;
+	}
 }
 
 /**
@@ -622,7 +661,7 @@ FLBuilder::register_module('FLMenuModule', array(
 			'mobile'               => array(
 				'title'  => __( 'Responsive', 'fl-builder' ),
 				'fields' => array(
-					'mobile_toggle'     => array(
+					'mobile_toggle'                   => array(
 						'type'    => 'select',
 						'label'   => __( 'Responsive Toggle', 'fl-builder' ),
 						'default' => 'hamburger',
@@ -650,7 +689,7 @@ FLBuilder::register_module('FLMenuModule', array(
 							),
 						),
 					),
-					'mobile_full_width' => array(
+					'mobile_full_width'               => array(
 						'type'    => 'select',
 						'label'   => __( 'Responsive Style', 'fl-builder' ),
 						'default' => 'no',
@@ -683,7 +722,7 @@ FLBuilder::register_module('FLMenuModule', array(
 							),
 						),
 					),
-					'flyout_position'   => array(
+					'flyout_position'                 => array(
 						'type'    => 'select',
 						'label'   => __( 'Flyout Position', 'fl-builder' ),
 						'default' => 'left',
@@ -695,23 +734,33 @@ FLBuilder::register_module('FLMenuModule', array(
 							'type' => 'none',
 						),
 					),
-					'mobile_breakpoint' => array(
+					'mobile_breakpoint'               => array(
 						'type'    => 'select',
 						'label'   => __( 'Responsive Breakpoint', 'fl-builder' ),
 						'default' => 'mobile',
 						'options' => array(
 							'always'        => __( 'Always', 'fl-builder' ),
+							'large-mobile'  => __( 'Large, Medium &amp; Small Devices Only', 'fl-builder' ),
 							'medium-mobile' => __( 'Medium &amp; Small Devices Only', 'fl-builder' ),
 							'mobile'        => __( 'Small Devices Only', 'fl-builder' ),
 						),
 					),
-					'mobile_stacked'    => array(
+					'mobile_stacked'                  => array(
 						'type'    => 'select',
 						'label'   => __( 'Stacked Layout', 'fl-builder' ),
 						'default' => 'yes',
 						'options' => array(
 							'yes' => __( 'Yes', 'fl-builder' ),
 							'no'  => __( 'No', 'fl-builder' ),
+						),
+					),
+					'mobile_toggle_submenu_item_icon' => array(
+						'type'    => 'button-group',
+						'label'   => 'Sub-menu Item Icon',
+						'default' => '',
+						'options' => array(
+							''        => 'None',
+							'r_arrow' => 'Arrow',
 						),
 					),
 				),
@@ -1057,7 +1106,7 @@ FLBuilder::register_module('FLMenuModule', array(
 						),
 						'preview'    => array(
 							'type'      => 'css',
-							'selector'  => '.fl-menu .sub-menu',
+							'selector'  => '.fl-menu .menu .sub-menu > li',
 							'important' => true,
 						),
 					),

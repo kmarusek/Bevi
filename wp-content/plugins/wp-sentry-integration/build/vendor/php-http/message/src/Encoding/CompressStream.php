@@ -23,17 +23,11 @@ class CompressStream extends \WPSentry\ScopedVendor\Http\Message\Encoding\Filter
         // @deprecated will be removed in 2.0
         $this->writeFilterCallback = \WPSentry\ScopedVendor\Clue\StreamFilter\fun($this->writeFilter(), ['window' => 15]);
     }
-    /**
-     * {@inheritdoc}
-     */
-    protected function readFilter()
+    protected function readFilter() : string
     {
         return 'zlib.deflate';
     }
-    /**
-     * {@inheritdoc}
-     */
-    protected function writeFilter()
+    protected function writeFilter() : string
     {
         return 'zlib.inflate';
     }

@@ -11,17 +11,11 @@ namespace WPSentry\ScopedVendor\Http\Message\Encoding;
  */
 class DechunkStream extends \WPSentry\ScopedVendor\Http\Message\Encoding\FilteredStream
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function readFilter()
+    protected function readFilter() : string
     {
         return 'dechunk';
     }
-    /**
-     * {@inheritdoc}
-     */
-    protected function writeFilter()
+    protected function writeFilter() : string
     {
         return 'chunk';
     }

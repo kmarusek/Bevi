@@ -8,6 +8,8 @@ use WPSentry\ScopedVendor\Http\Discovery\Exception\DiscoveryFailedException;
  * Finds an HTTP Client.
  *
  * @author Márk Sági-Kazár <mark.sagikazar@gmail.com>
+ *
+ * @deprecated This will be removed in 2.0. Consider using Psr18FactoryDiscovery.
  */
 final class HttpClientDiscovery extends \WPSentry\ScopedVendor\Http\Discovery\ClassDiscovery
 {

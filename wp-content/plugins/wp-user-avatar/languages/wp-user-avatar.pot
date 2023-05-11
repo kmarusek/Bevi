@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the ProfilePress package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ProfilePress 4.10.1\n"
+"Project-Id-Version: ProfilePress 4.10.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-user-avatar\n"
-"POT-Creation-Date: 2023-04-16 11:32:56+00:00\n"
+"POT-Creation-Date: 2023-05-08 10:11:35+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -543,8 +543,8 @@ msgstr ""
 #: src/Admin/SettingsPages/AdminFooter.php:27
 msgid ""
 "Thank you for using <a href=\"%1$s\" target=\"_blank\">ProfilePress</a>! "
-"Please <a href=\"%2$s\" target=\"_blank\">rate us ★★★★★</a> on <a href=\"%2$s"
-"\" target=\"_blank\">WordPress.org</a> to help us spread the word."
+"Please <a href=\"%2$s\" target=\"_blank\">rate us ★★★★★</a> on <a "
+"href=\"%2$s\" target=\"_blank\">WordPress.org</a> to help us spread the word."
 msgstr ""
 
 #: src/Admin/SettingsPages/DragDropBuilder/DragDropBuilder.php:192
@@ -1498,7 +1498,7 @@ msgstr ""
 #: src/Admin/SettingsPages/EmailSettings/EmailSettingsPage.php:86
 #: src/Admin/SettingsPages/Membership/OrdersPage/OrderWPListTable.php:53
 #: src/ShortcodeParser/MyAccount/view-order.tmpl.php:40
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:123
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:125
 msgid "Order"
 msgstr ""
 
@@ -1954,7 +1954,7 @@ msgstr ""
 #: src/Admin/SettingsPages/Membership/OrdersPage/OrderWPListTable.php:58
 #: src/Admin/SettingsPages/Membership/OrdersPage/SettingsPage.php:575
 #: src/Admin/SettingsPages/Membership/views/subscriptions/sub-payments-metabox.php:17
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:124
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:126
 msgid "Date"
 msgstr ""
 
@@ -3032,14 +3032,14 @@ msgstr ""
 #: src/Admin/SettingsPages/Membership/views/subscriptions/sub-payments-metabox.php:18
 #: src/ShortcodeParser/MyAccount/subscriptions.tmpl.php:57
 #: src/ShortcodeParser/MyAccount/view-order.tmpl.php:165
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:66
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:125
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:68
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:127
 msgid "Status"
 msgstr ""
 
 #: src/Admin/SettingsPages/Membership/CouponsPage/CouponWPListTable.php:35
 #: src/Admin/SettingsPages/Membership/views/add-edit-coupon.php:77
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:84
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:86
 msgid "Start Date"
 msgstr ""
 
@@ -3606,14 +3606,14 @@ msgstr ""
 #: src/Admin/SettingsPages/Membership/views/orders/add-edit-order.php:140
 #: src/ContentProtection/NavMenuProtection.php:90
 #: src/ShortcodeParser/MyAccount/downloads.tmpl.php:40
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:72
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:74
 msgid "Plan"
 msgstr ""
 
 #: src/Admin/SettingsPages/Membership/OrdersPage/OrderWPListTable.php:55
 #: src/Admin/SettingsPages/Membership/views/subscriptions/sub-payments-metabox.php:19
 #: src/ShortcodeParser/MyAccount/view-order.tmpl.php:138
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:126
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:128
 #: src/templates/checkout/form-checkout-sidebar.php:115
 msgid "Total"
 msgstr ""
@@ -4054,12 +4054,12 @@ msgstr ""
 #: src/Admin/SettingsPages/Membership/views/customers/subcriptions-metabox.php:21
 #: src/ShortcodeParser/MyAccount/subscriptions.tmpl.php:63
 #: src/ShortcodeParser/MyAccount/view-order.tmpl.php:166
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:88
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:90
 msgid "Renewal Date"
 msgstr ""
 
 #: src/Admin/SettingsPages/Membership/SubscriptionsPage/SubscriptionWPListTable.php:58
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:88
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:90
 msgid "Expiration Date"
 msgstr ""
 
@@ -4808,8 +4808,8 @@ msgstr ""
 
 #: src/Admin/SettingsPages/Membership/views/payment-method-list.php:54
 msgid ""
-"Wish to accept payments and sell memberships via PayPal? %supgrade to premium"
-"%s."
+"Wish to accept payments and sell memberships via PayPal? %supgrade to "
+"premium%s."
 msgstr ""
 
 #: src/Admin/SettingsPages/Membership/views/payment-method-list.php:58
@@ -4834,7 +4834,7 @@ msgid "Subscription #%s"
 msgstr ""
 
 #: src/Admin/SettingsPages/Membership/views/subscriptions/add-edit-subscription.php:32
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:116
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:118
 msgid "Subscription Orders"
 msgstr ""
 
@@ -5067,9 +5067,9 @@ msgstr ""
 
 #: src/Classes/AdminNotices.php:281
 msgid ""
-"User registration currently disabled. To enable, Go to <a href=\"%1$s"
-"\">Settings -> General</a>, and under Membership, check \"Anyone can register"
-"\""
+"User registration currently disabled. To enable, Go to <a "
+"href=\"%1$s\">Settings -> General</a>, and under Membership, check \"Anyone "
+"can register\""
 msgstr ""
 
 #: src/Classes/AjaxHandler.php:46
@@ -5512,7 +5512,7 @@ msgstr ""
 
 #: src/Classes/Miscellaneous.php:105
 #: src/Membership/Models/Order/OrderMode.php:13
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:220
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:224
 msgid "Live"
 msgstr ""
 
@@ -15500,7 +15500,7 @@ msgid "Payment %s has been fully refunded in %s."
 msgstr ""
 
 #: src/Membership/Models/Order/OrderEntity.php:256
-#: src/Membership/Models/Subscription/SubscriptionEntity.php:560
+#: src/Membership/Models/Subscription/SubscriptionEntity.php:564
 msgid "payment method"
 msgstr ""
 
@@ -15509,7 +15509,7 @@ msgid "Order changed from %s to %s by %s"
 msgstr ""
 
 #: src/Membership/Models/Order/OrderMode.php:14
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:220
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:224
 msgid "Test"
 msgstr ""
 
@@ -15575,7 +15575,7 @@ msgstr ""
 msgid "One-time purchase"
 msgstr ""
 
-#: src/Membership/Models/Subscription/SubscriptionEntity.php:563
+#: src/Membership/Models/Subscription/SubscriptionEntity.php:567
 msgid "Subscription changed from %s to %s by %s"
 msgstr ""
 
@@ -15711,83 +15711,85 @@ msgstr ""
 msgid "Setup Fee"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:32
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:33
 msgid "Pay with your credit card via Stripe"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:35
-msgid "Credit card payment method that integrates with your Stripe account."
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:36
+msgid ""
+"Accept various payment methods including Credit Card, Apple & Google Pay via "
+"Stripe."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:38
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:39
 msgid ""
 "NOTE: The free version of ProfilePress includes an additional 2%% fee for "
 "processing payments. Remove the fee by %supgrading to premium%s."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:78
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:82
 msgid "Stripe Connect Error:"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:176
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:180
 msgid "test"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:176
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:180
 msgid "live"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:186
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:190
 msgid ""
-"Your Stripe account is connected in %1$s mode. %2$sDisconnect this account"
-"%3$s."
+"Your Stripe account is connected in %1$s mode. %2$sDisconnect this "
+"account%3$s."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:201
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:205
 msgid "Connection Status"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:208
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:212
 msgid ""
 "Connect now to start accepting payments instantly. This includes an "
 "additional 2%% payment processing fee. Remove the fee by %supgrading to "
 "premium%s."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:226
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:230
 msgid "Webhook Setup"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:229
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:233
 msgid ""
 "In order for Stripe to function well, ensure the webhook endpoint %1$s is "
 "present in the %2$sStripe webhooks settings%3$s. Learn more from our "
 "%4$swebhook documentation%3$s"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:238
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:242
 msgid "test mode"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:238
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:242
 msgid "live mode"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:240
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:244
 msgid "Webhook Secret"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:243
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:247
 msgid ""
-"Retrieve your %3$s \"Signing secret\" from your %1$sStripe webhook settings"
-"%2$s. Select the endpoint then click \"Reveal\"."
+"Retrieve your %3$s \"Signing secret\" from your %1$sStripe webhook "
+"settings%2$s. Select the endpoint then click \"Reveal\"."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:254
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:258
 msgid "Statement Descriptor"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:257
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:261
 msgid ""
 "The text that appears on your customer's bank or credit card statements. "
 "Choose something they will recognise to help prevent disputes, typically "
@@ -15795,49 +15797,49 @@ msgid ""
 "%1$s<%2$s, %1$s>%2$s, %1$s'%2$s, or %1$s\"%2$s."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:263
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:267
 msgid "Payment Collection Method"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:266
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:270
 msgid "Stripe Credit Card Field (On-site)"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:267
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:271
 msgid "Stripe Payment Page (Off-site)"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:269
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:273
 msgid ""
 "Select how payment information will be collected. Could be right on your "
 "site with Stripe card fields or off-site through Stripe hosted payment page."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:273
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:277
 msgid "Remove Billing Address"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:275
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:279
 msgid "Check to remove billing address fields from the checkout page."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:276
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:280
 msgid ""
 "If you do not want the billing address fields displayed on the checkout "
 "page, use this setting to remove it."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:280
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:284
 msgid "Restrict Stripe Assets"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:282
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:286
 msgid ""
 "Only load Stripe.com hosted assets on pages that specifically utilize Stripe "
 "functionality."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:284
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:288
 msgid ""
 "Stripe advises that their Javascript library be loaded on every page to take "
 "advantage of their advanced fraud detection rules. If you are not concerned "
@@ -15845,28 +15847,36 @@ msgid ""
 "%sLearn more%s"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:303
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:307
 msgid "Please enter a name for the credit card."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:428
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:432
 msgid "Attempted cancellation but was unable. Message was \"%s\"."
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:541
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:545
 #: src/templates/checkout/credit-card-fields.php:5
 msgid "Name on card"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:880
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:602
+msgid "Manage Subscription"
+msgstr ""
+
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:633
+msgid "Unable to generate Stripe customer portal URL. Please try again"
+msgstr ""
+
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:929
 msgid "Refund request is pending"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:883
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:932
 msgid "Refund request failed"
 msgstr ""
 
-#: src/Membership/PaymentMethods/Stripe/Stripe.php:886
+#: src/Membership/PaymentMethods/Stripe/Stripe.php:935
 msgid "Refund request failed. Status: %s"
 msgstr ""
 
@@ -16304,11 +16314,11 @@ msgid "Change password"
 msgstr ""
 
 #. translators: 1: user display name 2: logout url
-#: src/ShortcodeParser/MyAccount/dashboard.tmpl.php:16
+#: src/ShortcodeParser/MyAccount/dashboard.tmpl.php:19
 msgid "Hello %1$s (not %1$s? <a href=\"%2$s\">Log out</a>)"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/dashboard.tmpl.php:26
+#: src/ShortcodeParser/MyAccount/dashboard.tmpl.php:29
 msgid ""
 "From your account dashboard you can <a href=\"%1$s\">change your password</"
 "a> and <a href=\"%2$s\">edit your account details</a>."
@@ -16361,7 +16371,7 @@ msgid "You have no subscription."
 msgstr ""
 
 #: src/ShortcodeParser/MyAccount/subscriptions.tmpl.php:51
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:80
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:82
 msgid "Initial Amount"
 msgstr ""
 
@@ -16382,7 +16392,7 @@ msgid "Order Type"
 msgstr ""
 
 #: src/ShortcodeParser/MyAccount/view-order.tmpl.php:164
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:76
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:78
 msgid "Terms"
 msgstr ""
 
@@ -16398,15 +16408,15 @@ msgstr ""
 msgid "Change Plan"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:92
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:94
 msgid "Payment"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:93
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:95
 msgid "Via %s"
 msgstr ""
 
-#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:97
+#: src/ShortcodeParser/MyAccount/view-subscription.tmpl.php:99
 msgid "Actions"
 msgstr ""
 
@@ -17297,9 +17307,9 @@ msgstr ""
 msgid "ProfilePress"
 msgstr ""
 
-#. #-#-#-#-#  wp-user-avatar.pot (ProfilePress 4.10.1)  #-#-#-#-#
+#. #-#-#-#-#  wp-user-avatar.pot (ProfilePress 4.10.2)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  wp-user-avatar.pot (ProfilePress 4.10.1)  #-#-#-#-#
+#. #-#-#-#-#  wp-user-avatar.pot (ProfilePress 4.10.2)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "https://profilepress.com"
 msgstr ""

@@ -73,6 +73,8 @@ class SubscriptionService
             PROFILEPRESS_sql::delete_meta_data_by_flag($sub->get_meta_flag_id());
         }
 
+        do_action('ppress_subscription_deleted', $sub_id, $sub);
+
         return $result;
     }
 

@@ -37,18 +37,24 @@
             _this.mountPaymentElement(response);
         };
 
+        this.fieldValueOrEmpty = function (field) {
+            if (!field) return '';
+
+            return field;
+        };
+
         this.getBillingDetails = function () {
             return {
-                name: $('#stripe-card_name').val(),
-                email: $('#ppmb_email').val(),
-                phone: $('#stripe_ppress_billing_phone').val(),
+                name: _this.fieldValueOrEmpty($('#stripe-card_name').val()),
+                email: _this.fieldValueOrEmpty($('#ppmb_email').val()),
+                phone: _this.fieldValueOrEmpty($('#stripe_ppress_billing_phone').val()),
                 address: {
-                    line1: $('#stripe_ppress_billing_address').val(),
+                    line1: _this.fieldValueOrEmpty($('#stripe_ppress_billing_address').val()),
                     line2: '',
-                    city: $('#stripe_ppress_billing_city').val(),
-                    state: $('#stripe_ppress_billing_state').val(),
-                    country: $('#stripe_ppress_billing_country').val(),
-                    postal_code: $('#stripe_ppress_billing_postcode').val(),
+                    city: _this.fieldValueOrEmpty($('#stripe_ppress_billing_city').val()),
+                    state: _this.fieldValueOrEmpty($('#stripe_ppress_billing_state').val()),
+                    country: _this.fieldValueOrEmpty($('#stripe_ppress_billing_country').val()),
+                    postal_code: _this.fieldValueOrEmpty($('#stripe_ppress_billing_postcode').val()),
                 }
             };
         };
@@ -152,13 +158,15 @@
                             client_secret = response.gateway_response.latest_invoice.payment_intent.client_secret;
                         }
 
+                        var cp_getBillingDetails = _this.getBillingDetails();
+
                         stripe.confirmPayment({
                             elements: window.elements,
                             clientSecret: client_secret,
                             confirmParams: {
                                 return_url: response.order_success_url,
                                 payment_method_data: {
-                                    billing_details: _this.getBillingDetails(),
+                                    billing_details: cp_getBillingDetails
                                 }
                             },
                             redirect: 'if_required'

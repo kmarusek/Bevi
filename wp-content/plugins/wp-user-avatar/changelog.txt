@@ -1,4 +1,16 @@
-﻿== Changelog ==
+== Changelog ==
+
+= 4.10.2 =
+* Integrated [Stripe Customer Portal](https://profilepress.com/article/setting-up-stripe/#Stripe_Customer_Portal_Integration) for updating payment methods.
+* Fixed bug where stripe checkout might failed if phone field is not present.
+* Fixed bug where subscription expiration and renewal reminder didnt work for trial subscriptions.
+* Fixed bug where some placeholders weren't working for new user admin email notification.
+* Made remember me checkbox for login form unchecked by default.
+* Correct missing filter hook arguments.
+* Hardened security of myaccount subscription actions.
+* Added ppress_subscription_deleted action hook.
+* Added ppress_added_plan_role_to_customer and ppress_removed_plan_role_from_customer filters.
+* Added filter ppress_subscription_formatted_expiration_date.
 
 = 4.10.1 =
 * Fixed bug where stripe checkout doesn't work again on error.

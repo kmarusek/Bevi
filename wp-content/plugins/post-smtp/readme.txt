@@ -4,7 +4,7 @@ Contributors: wpexpertsio
 Tags: email, mail, smtp, wordpress smtp, email log, postman smtp, postman, gmail, google apps, hotmail, yahoo, mandrill api, sendgrid api, elastic email, office365, mailgun
 Requires at least: 5.6.0
 Tested up to: 6.2
-Stable tag: 2.4.9
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -301,12 +301,30 @@ To avoid being flagged as spam, you need to prove your email isn't forged. On a 
 
 == Changelog ==
 
+= 2.5.1 - 2023-05-10 =
+**NEW**
+
+* Added a link to learn more about migration.
+* Added a condition to initiate the migration and logging only if the new custom table exists.
+
+**IMPROVEMENTS**
+
+* Improved database migration process to handle potential failures.
+
+= 2.5.0 - 2023-05-09 =
+**NEW**
+
+* Introducing a new log section that is both lightweight and optimized, capable of accommodating millions of entries.
+* Added a migration wizard to help move existing logs to new custom tables from the old version.
+
 = 2.4.9 - 2023-04-27 =
 **FIXES**
+
 * Uncaught Error: Cannot use object of type WP_Error as array
 * Fixed deprecation notice for PHP Version > 8.0
 
 **IMPROVEMENTS**
+
 * Added condition for notice on how to fix broken emails
 
 = 2.4.8 - 2023-04-17 =

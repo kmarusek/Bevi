@@ -49,6 +49,9 @@ final class PayloadSerializer implements \Sentry\Serializer\PayloadSerializerInt
         if (\Sentry\EventType::checkIn() === $event->getType()) {
             return $this->serializeAsEnvelope($event);
         }
+        if ($this->options->isTracingEnabled()) {
+            return $this->serializeAsEnvelope($event);
+        }
         return $this->serializeAsEvent($event);
     }
     private function serializeAsEvent(\Sentry\Event $event) : string
@@ -161,12 +164,10 @@ final class PayloadSerializer implements \Sentry\Serializer\PayloadSerializerInt
             }
         }
         $itemHeader = ['type' => (string) $event->getType(), 'content_type' => 'application/json'];
-        $seralizedEvent = '';
-        if (\Sentry\EventType::transaction() === $event->getType()) {
-            $seralizedEvent = $this->serializeAsEvent($event);
-        }
         if (\Sentry\EventType::checkIn() === $event->getType()) {
             $seralizedEvent = $this->serializeAsCheckInEvent($event);
+        } else {
+            $seralizedEvent = $this->serializeAsEvent($event);
         }
         return \sprintf("%s\n%s\n%s", \Sentry\Util\JSON::encode($envelopeHeader), \Sentry\Util\JSON::encode($itemHeader), $seralizedEvent);
     }

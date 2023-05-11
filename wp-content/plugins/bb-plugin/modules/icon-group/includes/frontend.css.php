@@ -11,6 +11,8 @@ FLBuilder::render_module_css('icon', $id, array(
 	'link_target'          => '',
 	'size'                 => $settings->size,
 	'size_unit'            => $settings->size_unit,
+	'size_large'           => $settings->size_large,
+	'size_large_unit'      => $settings->size_large_unit,
 	'size_medium'          => $settings->size_medium,
 	'size_medium_unit'     => $settings->size_medium_unit,
 	'size_responsive'      => $settings->size_responsive,
@@ -38,9 +40,9 @@ FLBuilderCSS::responsive_rule( array(
 foreach ( $settings->icons as $i => $icon ) :
 	$index = $i + 1;
 
-	if ( ! empty( $icon->bg_color ) ) {
+	if ( ! empty( $icon->item_icon_bg_color ) ) {
 
-		foreach ( array( '', 'medium', 'responsive' ) as $device ) {
+		foreach ( array( '', 'large', 'medium', 'responsive' ) as $device ) {
 
 			$key      = empty( $device ) ? 'size' : "size_{$device}";
 			$unit_key = "{$key}_unit";
@@ -51,15 +53,21 @@ foreach ( $settings->icons as $i => $icon ) :
 					'media'    => $device,
 					'selector' => ".fl-node-$id .fl-module-content .fl-icon:nth-child($index) i",
 					'props'    => array(
+						'height' => array(
+							'value' => $settings->{ $key } * 1.75,
+							'unit'  => $settings->{ $unit_key },
+						),
+						'width'  => array(
+							'value' => $settings->{ $key } * 1.75,
+							'unit'  => $settings->{ $unit_key },
+						),
+					),
+				) );
+				FLBuilderCSS::rule( array(
+					'media'    => $device,
+					'selector' => ".fl-node-$id .fl-icon-group .fl-icon:nth-child($index) i, .fl-node-$id .fl-icon-group .fl-icon:nth-child($index) i:before",
+					'props'    => array(
 						'line-height' => array(
-							'value' => $settings->{ $key } * 1.75,
-							'unit'  => $settings->{ $unit_key },
-						),
-						'height'      => array(
-							'value' => $settings->{ $key } * 1.75,
-							'unit'  => $settings->{ $unit_key },
-						),
-						'width'       => array(
 							'value' => $settings->{ $key } * 1.75,
 							'unit'  => $settings->{ $unit_key },
 						),
@@ -69,15 +77,15 @@ foreach ( $settings->icons as $i => $icon ) :
 		}
 	}
 	?>
-	<?php if ( isset( $icon->color ) && ! empty( $icon->color ) ) : ?>
+	<?php if ( isset( $icon->item_icon_color ) && ! empty( $icon->item_icon_color ) ) : ?>
 	.fl-node-<?php echo $id; ?> .fl-module-content .fl-icon:nth-child(<?php echo $index; ?>) i,
 	.fl-node-<?php echo $id; ?> .fl-module-content .fl-icon:nth-child(<?php echo $index; ?>) i:before {
-		color: <?php echo FLBuilderColor::hex_or_rgb( $icon->color ); ?>;
+		color: <?php echo FLBuilderColor::hex_or_rgb( $icon->item_icon_color ); ?>;
 	}
 	<?php endif; ?>
-	<?php if ( isset( $icon->bg_color ) && ! empty( $icon->bg_color ) ) : ?>
+	<?php if ( isset( $icon->item_icon_bg_color ) && ! empty( $icon->item_icon_bg_color ) ) : ?>
 	.fl-node-<?php echo $id; ?> .fl-module-content .fl-icon:nth-child(<?php echo $index; ?>) i {
-		background: <?php echo FLBuilderColor::hex_or_rgb( $icon->bg_color ); ?>;
+		background: <?php echo FLBuilderColor::hex_or_rgb( $icon->item_icon_bg_color ); ?>;
 		border-radius: 100%;
 		-moz-border-radius: 100%;
 		-webkit-border-radius: 100%;

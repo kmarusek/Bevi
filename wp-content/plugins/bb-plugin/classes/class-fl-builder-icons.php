@@ -164,6 +164,13 @@ final class FLBuilderIcons {
 			),
 		) );
 
+		if ( FLBuilder::fa5_pro_enabled() && FLBuilderFontAwesome::is_installed() ) {
+			$core_sets['font-awesome-5-thin'] = array(
+				'name'   => 'Font Awesome Thin (pro only)',
+				'prefix' => 'fat',
+			);
+		}
+
 		if ( ! FLBuilder::fa5_pro_enabled() ) {
 			unset( $core_sets['font-awesome-5-light'] );
 			unset( $core_sets['font-awesome-5-duotone'] );
@@ -187,6 +194,9 @@ final class FLBuilderIcons {
 
 		// Loop through core sets and add icons.
 		foreach ( self::$sets as $set_key => $set_data ) {
+			if ( 'font-awesome-5-thin' == $set_key ) {
+				continue;
+			}
 			if ( 'core' == $set_data['type'] && 'font-awesome-kit' !== $set_key ) {
 
 				$key = $set_key;
@@ -415,7 +425,7 @@ final class FLBuilderIcons {
 				$form = FLBuilderModel::$settings_forms[ $field['form'] ];
 				self::enqueue_styles_for_nested_module_form( $module, $form['tabs'], $name );
 			} elseif ( 'icon' == $field['type'] && isset( $module->settings->$name ) ) {
-				self::enqueue_styles_for_icon( $module->settings->$name );
+				self::enqueue_styles_for_icon( $module->settings->$name, $field, $module->settings );
 			}
 		}
 	}
@@ -439,13 +449,13 @@ final class FLBuilderIcons {
 					if ( isset( $val->$name ) ) {
 						if ( 'array' === gettype( $val->$name ) ) {
 							foreach ( $val->$name as $v ) {
-								self::enqueue_styles_for_icon( $v );
+								self::enqueue_styles_for_icon( $v, $field, $module->settings );
 							}
 						} else {
-							self::enqueue_styles_for_icon( $val->$name );
+							self::enqueue_styles_for_icon( $val->$name, $field, $module->settings );
 						}
 					} elseif ( $name == $key && ! empty( $val ) ) {
-						self::enqueue_styles_for_icon( $val );
+						self::enqueue_styles_for_icon( $val, $field, $module->settings );
 					}
 				}
 			}
@@ -460,7 +470,7 @@ final class FLBuilderIcons {
 	 * @param string $icon The icon CSS classname.
 	 * @return void
 	 */
-	static public function enqueue_styles_for_icon( $icon ) {
+	static public function enqueue_styles_for_icon( $icon, $field = false, $settings = false ) {
 		/**
 		 * Enqueue the stylesheet for an icon.
 		 * @see fl_builder_enqueue_styles_for_icon
@@ -470,6 +480,16 @@ final class FLBuilderIcons {
 		// Make sure there is no whitespace
 		// Fixes broken uabb icons
 		$icon = ltrim( $icon );
+
+		// check for a dependency because defaults are merged and
+		// this can cause icons to enqueue when not needed.
+		if ( is_array( $field ) && isset( $field['depend'] ) && ! empty( $field['depend'] ) && is_object( $settings ) ) {
+			$depend_field   = array_key_first( $field['depend'] );
+			$depend_setting = isset( $settings->$depend_field ) ? $settings->$depend_field : false;
+			if ( $depend_setting !== $field['depend'][ $depend_field ] ) {
+				return;
+			}
+		}
 
 		// Is this a core icon?
 		if ( stristr( $icon, 'fa fa-' ) ) {
@@ -485,7 +505,7 @@ final class FLBuilderIcons {
 
 		$sets = self::get_sets();
 		foreach ( (array) $sets as $key => $data ) {
-			if ( in_array( $icon, $data['icons'] ) ) {
+			if ( isset( $data['icons'] ) && is_array( $data['icons'] ) && in_array( $icon, $data['icons'] ) ) {
 				self::enqueue_custom_styles_by_key( $key );
 				return;
 			}

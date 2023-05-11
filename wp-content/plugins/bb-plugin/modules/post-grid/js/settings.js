@@ -1,6 +1,28 @@
 ( function( $ ) {
+	$.validator.addMethod( "nonull", function( value, element ) {
+		layout = $('#fl-field-layout select[name=layout]').val();
+		if ( 'columns' !== layout ) {
+			return true;
+		}
+		return parseInt( value ) >= 1;
+	}, "Value must be one or greater" );
 
 	FLBuilder.registerModuleHelper( 'post-grid', {
+
+		rules: {
+			post_columns: {
+				nonull: true
+			},
+			post_columns_large: {
+				nonull: true
+			},
+			post_columns_medium: {
+				nonull: true
+			},
+			post_columns_responsive: {
+				nonull: true
+			},
+		},
 
 		resizeTimeout: null,
 
@@ -10,11 +32,14 @@
 				buttonBgColor = form.find( 'input[name=more_btn_bg_color]' ),
 				icon = form.find('input[name=icon]'),
 				layout = form.find( 'select[name=layout]' ),
-				postType = form.find( 'select[name=post_type]' ),
-				showContent = form.find( 'select[name=show_content]' );
+				postType = form.find( '#fl-field-post_type' ).find('select'),
+				showContent = form.find( 'select[name=show_content]' ),
+				dataSource = form.find( '#fl-field-data_source' ).find('select');
 
 			layout.on( 'change', this._layoutChanged.bind( this ) );
 			postType.on( 'change', this._toggleEventsSection.bind( this ) );
+			postType.on( 'change', this._toggleWooCommerceSection.bind( this ) );
+			dataSource.on( 'change', this._toggleWooCommerceSection.bind( this ) );
 			showContent.on( 'change', this._showContentChanged.bind(this) );
 			resizeFields.find( 'input' ).on( 'input', this._resizeLayout.bind( this ) );
 			resizeFields.find( 'select' ).on( 'change', this._resizeLayout.bind( this ) );
@@ -22,6 +47,7 @@
 			icon.on( 'change', this._flipSettings );
 			this._flipSettings();
 			this._toggleEventsSection();
+			this._toggleWooCommerceSection();
 		},
 
 		/**
@@ -41,20 +67,53 @@
 				tecEventsSection = form.find('#fl-builder-settings-section-events'),
 				tecEventsButtonSection = form.find('#fl-builder-settings-section-events_button'),
 				dataSource = form.find('#fl-field-data_source select').val(),
-				selectedPostType = form.find( 'select[name=post_type]' ).val();
-			
+				selectedPostTypes = form.find( '#fl-field-post_type' ).find('select').val();
+
 			if ( tecEventsSection.length <= 0 || tecEventsButtonSection.length <= 0 || 'custom_query' !== dataSource ) {
 				return;
 			}
-			
-			if ( 'tribe_events' === selectedPostType ) {
+			if ( $.inArray( 'tribe_events', selectedPostTypes ) > -1 ) {
 				tecEventsSection.show();
 				tecEventsButtonSection.show();
 			} else {
 				tecEventsSection.hide();
 				tecEventsButtonSection.hide();
 			}
-			
+		},
+
+		/**
+		 * Toggle WooCommerce section.
+		 * @since 2.6
+		 */
+		_toggleWooCommerceSection: function() {
+			var form = $('.fl-builder-settings'),
+				dataSource = form.find('#fl-field-data_source select').val(),
+				selectedPostTypes = form.find('#fl-field-post_type').find('select').val(),
+				wooSection = form.find('#fl-builder-settings-section-woo'),
+				wooStyleSection = form.find('#fl-builder-settings-section-woo_style'),
+				wooButtonSection = form.find('#fl-builder-settings-section-woo_button'),
+				isWooLayout = false;
+
+			if ( wooSection.length <= 0 ) {
+				return;
+			}
+
+			if ( 'main_query' === dataSource ) {
+				isWooLayout = 'fl-theme-layout' === FLBuilderConfig.postType && $('body').hasClass('woocommerce');
+			} else {
+				isWooLayout = $.inArray('product', selectedPostTypes ) > -1;
+			}
+
+			wooStyleSection = wooStyleSection.length ? wooStyleSection : form.find('#fl-builder-settings-tab-style #fl-builder-settings-section-woo');
+			if ( isWooLayout ) {
+				wooSection.show();
+				wooStyleSection.show();
+				wooButtonSection.show();
+			} else {
+				wooSection.hide();
+				wooStyleSection.hide();
+				wooButtonSection.hide();
+			}
 		},
 
 		/**
@@ -76,10 +135,10 @@
 		_switchContentFields: function( hide ) {
 			var form = $('.fl-builder-settings'),
 				layout = form.find('select[name=layout]').val(),
-				contentType = form.find('select[name=content_type]').val(), 
+				contentType = form.find('select[name=content_type]').val(),
 			    contentTypeField = form.find('#fl-field-content_type'),
 				contentLengthField = form.find('#fl-field-content_length');
-			
+
 			// Hide both fields when Content == '0' (Hide).
 			if ( hide ) {
 				contentTypeField.hide();

@@ -14,58 +14,38 @@ trait RequestDecorator
     }
     /**
      * Exchanges the underlying request with another.
-     *
-     * @return self
      */
-    public function withRequest(\WPSentry\ScopedVendor\Psr\Http\Message\RequestInterface $request)
+    public function withRequest(\WPSentry\ScopedVendor\Psr\Http\Message\RequestInterface $request) : \WPSentry\ScopedVendor\Psr\Http\Message\RequestInterface
     {
         $new = clone $this;
         $new->message = $request;
         return $new;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getRequestTarget()
+    public function getRequestTarget() : string
     {
         return $this->message->getRequestTarget();
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function withRequestTarget($requestTarget)
+    public function withRequestTarget(string $requestTarget) : \WPSentry\ScopedVendor\Psr\Http\Message\RequestInterface
     {
         $new = clone $this;
         $new->message = $this->message->withRequestTarget($requestTarget);
         return $new;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getMethod()
+    public function getMethod() : string
     {
         return $this->message->getMethod();
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function withMethod($method)
+    public function withMethod(string $method) : \WPSentry\ScopedVendor\Psr\Http\Message\RequestInterface
     {
         $new = clone $this;
         $new->message = $this->message->withMethod($method);
         return $new;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getUri()
+    public function getUri() : \WPSentry\ScopedVendor\Psr\Http\Message\UriInterface
     {
         return $this->message->getUri();
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function withUri(\WPSentry\ScopedVendor\Psr\Http\Message\UriInterface $uri, $preserveHost = \false)
+    public function withUri(\WPSentry\ScopedVendor\Psr\Http\Message\UriInterface $uri, bool $preserveHost = \false) : \WPSentry\ScopedVendor\Psr\Http\Message\RequestInterface
     {
         $new = clone $this;
         $new->message = $this->message->withUri($uri, $preserveHost);

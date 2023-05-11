@@ -736,29 +736,6 @@ function ppress_wp_new_user_notification($user_id, $deprecated = null, $notify =
 
             $title = ppress_get_setting('new_user_admin_email_email_subject', sprintf(__('[%s] New User Registration'), $blogname), true);
 
-            // handle support for custom fields placeholder.
-            preg_match_all('#({{[a-z_-]+}})#', $message, $matches);
-
-            if (isset($matches[1]) && ! empty($matches[1])) {
-
-                foreach ($matches[1] as $match) {
-                    $key = str_replace(['{', '}'], '', $match);
-
-                    $value = '';
-
-                    if (isset($user->{$key})) {
-
-                        $value = $user->{$key};
-
-                        if (is_array($value)) {
-                            $value = implode(', ', $value);
-                        }
-                    }
-
-                    $message = str_replace($match, $value, $message);
-                }
-            }
-
             $search = array(
                 '{{username}}',
                 '{{user_email}}',
@@ -788,6 +765,29 @@ function ppress_wp_new_user_notification($user_id, $deprecated = null, $notify =
                 str_replace($search, $replace, $title),
                 $user
             );
+
+            // handle support for custom fields placeholder.
+            preg_match_all('#({{[a-z_-]+}})#', $message, $matches);
+
+            if (isset($matches[1]) && ! empty($matches[1])) {
+
+                foreach ($matches[1] as $match) {
+                    $key = str_replace(['{', '}'], '', $match);
+
+                    $value = '';
+
+                    if (isset($user->{$key})) {
+
+                        $value = $user->{$key};
+
+                        if (is_array($value)) {
+                            $value = implode(', ', $value);
+                        }
+                    }
+
+                    $message = str_replace($match, $value, $message);
+                }
+            }
 
             $admin_email = apply_filters('ppress_signup_notification_admin_email', ppress_get_admin_notification_emails());
 

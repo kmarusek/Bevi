@@ -46,6 +46,8 @@
 
 				// Init forms.
 				FLBuilderLayout._initForms();
+
+				FLBuilderLayout._reorderMenu();
 			}
 		},
 
@@ -294,8 +296,12 @@
 				body.addClass( 'fl-builder-breakpoint-medium' );
 			}
 
-			if ( $(window).width() > FLBuilderLayoutConfig.breakpoints.medium ) {
+			if ( $(window).width() > FLBuilderLayoutConfig.breakpoints.medium && $(window).width() < FLBuilderLayoutConfig.breakpoints.large ) {
 				body.addClass( 'fl-builder-breakpoint-large' );
+			}
+
+			if ( $(window).width() > FLBuilderLayoutConfig.breakpoints.large ) {
+				body.addClass( 'fl-builder-breakpoint-default' );
 			}
 
 			// IE11 body class.
@@ -328,7 +334,15 @@
 			if($('.fl-bg-video').length > 0) {
 				FLBuilderLayout._initBgVideos();
 				FLBuilderLayout._resizeBgVideos();
-				win.on('resize.fl-bg-video', FLBuilderLayout._resizeBgVideos);
+
+				// Ensure FLBuilderLayout._resizeBgVideos() is only called once on window resize.
+				var resizeBGTimer = null;
+				win.on('resize.fl-bg-video', function(e){
+					clearTimeout( resizeBGTimer );
+					resizeBGTimer = setTimeout(function() {
+						FLBuilderLayout._resizeBgVideos(e);
+					}, 100 );
+				});
 			}
 		},
 
@@ -377,7 +391,7 @@
 
 			content.css('background-image', 'url(' + imageSrc[screenSize] + ')');
 			row.data('current-image-loaded', screenSize );
-			
+
 		},
 
 		/**
@@ -465,9 +479,13 @@
 			 */
 			if( 'undefined' != typeof fallback && '' != fallback ) {
 				videoTag.attr( 'poster', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' )
-				videoTag.css( 'background', 'transparent url("' + fallback + '") no-repeat center center' )
-				videoTag.css( 'background-size', 'cover' )
-				videoTag.css( 'height', '100%' )
+				videoTag.css({
+					backgroundImage: 'url("' + fallback + '")',
+					backgroundColor: 'transparent',
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: 'cover',
+					backgroundPosition: 'center center',
+				})
 			}
 
 			// MP4 Source Tag
@@ -825,7 +843,13 @@
 				newHeight   = Math.round(vidHeight * wrapWidth/vidWidth),
 				newLeft     = 0,
 				newTop      = 0,
-				iframe 		= wrap.find('iframe');
+				iframe 		= wrap.find('iframe'),
+				isRowFullHeight = $(this).closest('.fl-row-bg-video').hasClass('fl-row-full-height'),
+				vidCSS          = {
+					top:       '50%',
+					left:      '50%',
+					transform: 'translate(-50%,-50%)',
+				};
 
 			if ( vid.length ) {
 				if(vidHeight === '' || typeof vidHeight === 'undefined' || vidWidth === '' || typeof vidWidth === 'undefined') {
@@ -837,31 +861,29 @@
 
 					// Try to set the actual video dimension on 'loadedmetadata' when using URL as video source
 					vid.on('loadedmetadata', FLBuilderLayout._resizeOnLoadedMeta);
-
+					
+					return;
 				}
-				else {
-					if(newHeight < wrapHeight) {
+
+				if ( ! isRowFullHeight ) {
+					if ( newHeight < wrapHeight ) {
 						newHeight = wrapHeight;
 						newLeft   = -((newWidth - wrapWidth) / 2);
-
-						if ( 0 != vidHeight ) {
-							newWidth = Math.round(vidWidth * wrapHeight/vidHeight);
-						}
+						newWidth  = vidHeight ? Math.round(vidWidth * wrapHeight/vidHeight) : newWidth;
 					}
 					else {
 						newTop = -((newHeight - wrapHeight)/2);
 					}
-
-					vid.css({
-						'left'   : newLeft + 'px',
-						'top'    : newTop + 'px',
-						'height' : newHeight + 'px',
-						'width'  : newWidth + 'px'
-					});
-					
-					vid.on('loadedmetadata', FLBuilderLayout._resizeOnLoadedMeta);
-
+					vidCSS = {
+						left   : newLeft + 'px',
+						top    : newTop + 'px',
+						height : newHeight + 'px',
+						width  : newWidth + 'px',
+					}
 				}
+
+				vid.css( vidCSS );
+
 			}
 			else if ( iframe.length ) {
 
@@ -1033,22 +1055,14 @@
 							}, 100 );
 						}
 						if ( element.hasClass( 'fl-tabs-panel' ) ) {
-
 							setTimeout( function() {
-
 								tabs 			= element.closest( '.fl-tabs' );
 								responsiveLabel = element.find( '.fl-tabs-panel-label' );
 								tabIndex 		= responsiveLabel.data( 'index' );
 								label 			= tabs.find( '.fl-tabs-labels .fl-tabs-label[data-index=' + tabIndex + ']' );
-
-								if ( responsiveLabel.is( ':visible' ) ) {
-									responsiveLabel.trigger( 'click' );
-								}
-								else {
-									label[0].click();
-									FLBuilderLayout._scrollToElement( element );
-								}
-
+								
+								label[0].click();
+								FLBuilderLayout._scrollToElement(element);
 							}, 100 );
 						}
 					}
@@ -1230,11 +1244,10 @@
 				label 			= tabs.find( '.fl-tabs-labels .fl-tabs-label[data-index=' + tabIndex + ']' );
 
 				if ( responsiveLabel.is( ':visible' ) ) {
-
+					
 					var callback = function() {
 						if ( element ) {
-							responsiveLabel.trigger( 'click' );
-							element = false;
+							responsiveLabel.trigger( $.Event( 'click', { which: 1 } ) );
 						}
 					};
 
@@ -1354,7 +1367,7 @@
 
 		/**
 		 * Init Row Shape Layer's height.
-		 * 
+		 *
 		 * @since 2.5.3
 		 * @access private
 		 * @method _initRowShapeLayerHeight
@@ -1363,7 +1376,7 @@
 			FLBuilderLayout._adjustRowShapeLayerHeight();
 			$( window ).on( 'resize', FLBuilderLayout._adjustRowShapeLayerHeight );
 		},
-		
+
 		/**
 		 * Adjust Row Shape Layer's height to fix to remove the fine line that appears on certain screen sizes.
 		 *
@@ -1373,7 +1386,7 @@
 		 */
 		_adjustRowShapeLayerHeight: function() {
 			var rowShapeLayers = $('.fl-builder-shape-layer');
-				
+
 			$( rowShapeLayers ).each(function (index) {
 				var rowShapeLayer = $(this),
 					shape = $(rowShapeLayer).find('svg'),
@@ -1384,6 +1397,26 @@
 					$(shape).css('height', Math.ceil( height ) );
 				}
 			});
+		},
+		_string_to_slug: function( str ) {
+			str = str.replace(/^\s+|\s+$/g, ''); // trim
+			if ( 'undefined' == typeof window._fl_string_to_slug_regex ) {
+				regex = new RegExp('[^a-zA-Z0-9\'":() !.,-_|]', 'g');
+			} else {
+				regex = new RegExp('[^' + window._fl_string_to_slug_regex + '\'":\(\) !.,-_|\\\p{Letter}]', 'ug');
+			}
+			str = str.replace(regex, '') // remove invalid chars
+				.replace(/\s+/g, ' '); // collapse whitespace and replace by a space
+			return str;
+		},
+		_reorderMenu: function() {
+			if ( $('#wp-admin-bar-fl-builder-frontend-edit-link-default li').length > 1 ) {
+					$( '#wp-admin-bar-fl-builder-frontend-duplicate-link' )
+					.appendTo('#wp-admin-bar-fl-builder-frontend-edit-link-default')
+					.css( 'padding-top', '5px' )
+					.css( 'border-top', '2px solid #1D2125' )
+					.css( 'margin-top', '5px' )
+				}
 		}
 	};
 

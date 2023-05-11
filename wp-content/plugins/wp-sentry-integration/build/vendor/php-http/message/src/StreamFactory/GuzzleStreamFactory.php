@@ -21,6 +21,7 @@ final class GuzzleStreamFactory implements \WPSentry\ScopedVendor\Http\Message\S
         if (\class_exists(\WPSentry\ScopedVendor\GuzzleHttp\Psr7\Utils::class)) {
             return \WPSentry\ScopedVendor\GuzzleHttp\Psr7\Utils::streamFor($body);
         }
+        // legacy support for guzzle/psr7 1.*
         return \WPSentry\ScopedVendor\GuzzleHttp\Psr7\stream_for($body);
     }
 }

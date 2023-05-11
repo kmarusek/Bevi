@@ -114,6 +114,16 @@ final class TransactionContext extends \Sentry\Tracing\SpanContext
         return $context;
     }
     /**
+     * Returns a context populated with the data of the given environment variables.
+     *
+     * @param string $sentryTrace The sentry-trace value from the environment
+     * @param string $baggage     The baggage header value from the environment
+     */
+    public static function fromEnvironment(string $sentryTrace, string $baggage) : self
+    {
+        return self::parseTraceAndBaggage($sentryTrace, $baggage);
+    }
+    /**
      * Returns a context populated with the data of the given headers.
      *
      * @param string $sentryTraceHeader The sentry-trace header from an incoming request
@@ -121,9 +131,13 @@ final class TransactionContext extends \Sentry\Tracing\SpanContext
      */
     public static function fromHeaders(string $sentryTraceHeader, string $baggageHeader) : self
     {
+        return self::parseTraceAndBaggage($sentryTraceHeader, $baggageHeader);
+    }
+    private static function parseTraceAndBaggage(string $sentryTrace, string $baggage) : self
+    {
         $context = new self();
         $hasSentryTrace = \false;
-        if (\preg_match(self::TRACEPARENT_HEADER_REGEX, $sentryTraceHeader, $matches)) {
+        if (\preg_match(self::TRACEPARENT_HEADER_REGEX, $sentryTrace, $matches)) {
             if (!empty($matches['trace_id'])) {
                 $context->traceId = new \Sentry\Tracing\TraceId($matches['trace_id']);
                 $hasSentryTrace = \true;
@@ -137,7 +151,7 @@ final class TransactionContext extends \Sentry\Tracing\SpanContext
                 $hasSentryTrace = \true;
             }
         }
-        $samplingContext = \Sentry\Tracing\DynamicSamplingContext::fromHeader($baggageHeader);
+        $samplingContext = \Sentry\Tracing\DynamicSamplingContext::fromHeader($baggage);
         if ($hasSentryTrace && !$samplingContext->hasEntries()) {
             // The request comes from an old SDK which does not support Dynamic Sampling.
             // Propagate the Dynamic Sampling Context as is, but frozen, even without sentry-* entries.

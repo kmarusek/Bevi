@@ -1,14 +1,14 @@
-=== NitroPack ===
+=== NitroPack – Cache & Speed Optimization for Core Web Vitals, Defer CSS & JavaScript, Lazy load Images ===
 Contributors: nitropack
-Tags: cache,performance,optimize,pagespeed,lazy load,cdn,critical css,compression,defer css javascript,minify css,minify,webp
+Tags: cache,performance,optimize,pagespeed,lazy load,cdn,critical css,compression,defer css javascript,minify css,minify,web vitals
 Requires at least: 4.7
-Tested up to: 6.1.1
+Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 1.6.1
+Stable tag: 1.7.1
 License: GNU General Public License, version 2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Everything you need for a fast website. Simple set up, easy to use, awesome support. Caching, Lazy Loading, Minification, Defer CSS/JS, CDN and more!
+Automatic optimization for site speed and Core Web Vitals. Use 35+ features, including Caching, image optimization, critical CSS, and Cloudflare CDN.
 
 == Description ==
 NitroPack is the all-in-one performance optimization service. It combines **everything** you need for a lightning-fast website. Image optimization, code minification, caching, CDN, lazy loading - you name it, NitroPack has it.
@@ -168,6 +168,18 @@ No. We’ve designed NitroPack to be a very lightweight solution that adds no CP
 2. Dashboard - see and manage the data in your Nitropack.io
 
 == Changelog ==
+
+= 1.7.1 =
+* Bug fix: Resolve connection issues
+
+= 1.7.0 =
+* Improvement: Move the plugin's data directory into wp-content/cache/
+* Improvement: Automatically run cache warmup when the permalink structure has changed
+* Improvement: Automatically purge cache when the front page configuration is changed
+* Improvement: Overall stability improvements
+* Bug fix: Resolve fatal error when WCML is active
+* Bug fix: Resolve error when purging cache in WP-CLI mode
+* Bug fix: Fix typo in the diagnostics report
 
 = 1.6.1 =
 * Update: Temporarily disable the changes related to Gravity Forms as further improvements are needed for optimal experience

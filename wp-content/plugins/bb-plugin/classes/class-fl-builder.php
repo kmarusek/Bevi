@@ -873,8 +873,10 @@ final class FLBuilder {
 	 * @return void
 	 */
 	static public function enqueue_ui_styles_scripts() {
+		global $post, $wpdb;
+
 		if ( FLBuilderModel::is_builder_active() ) {
-			global $wp_the_query;
+
 			global $wp_version;
 
 			// Remove wp admin bar top margin
@@ -1019,25 +1021,89 @@ final class FLBuilder {
 			 * Enqueue the canvas script for handling dom manipulation.
 			 */
 			self::enqueue_canvas();
+			$kb_link   = sprintf( "<a class='link' target='_blank' href='https://docs.wpbeaverbuilder.com/beaver-builder/troubleshooting/debugging/known-beaver-builder-incompatibilities'>%s</a>", __( 'Knowledge Base', 'fl-builder' ) );
+			$support   = sprintf( "<a class='link' target='_blank' href='https://www.wpbeaverbuilder.com/beaver-builder-support/'>%s</a>", __( 'Support ticket', 'fl-builder' ) );
+			$updates   = self::get_available_updates();
+			$revisions = wp_count_posts( 'revision' );
+			$revisions = $revisions->inherit;
+			$revpage   = $wpdb->get_var( $wpdb->prepare( "SELECT count(ID) from $wpdb->posts WHERE post_type = 'revision' AND post_parent = %d", $post->ID ) );
+			$args      = array(
+				'product'     => FLBuilderModel::get_branding(),
+				'white_label' => FLBuilderModel::is_white_labeled(),
+
+				/**
+				 * Custom info text for crash popup.
+				 * @see fl_builder_crash_white_label_text
+				 */
+				'labeled_txt' => apply_filters( 'fl_builder_crash_white_label_text', '' ),
+				'vars'        => array(
+					'PHP Version'      => phpversion(),
+					'Memory Limit'     => FL_Debug::safe_ini_get( 'memory_limit' ),
+					'Usage'            => FLBuilderUtils::formatbytes( memory_get_usage() ),
+					'Peak'             => FLBuilderUtils::formatbytes( memory_get_peak_usage() ),
+					'URL'              => get_permalink(),
+					'Builder Version'  => FL_BUILDER_VERSION . $updates['builder'],
+					'Theme Version'    => ( defined( 'FL_THEME_VERSION' ) ) ? FL_THEME_VERSION . $updates['theme'] : 'Not active/installed.',
+					'Themer Version'   => ( defined( 'FL_THEME_BUILDER_VERSION' ) ) ? FL_THEME_BUILDER_VERSION . $updates['themer'] : 'Not active/installed.',
+					'Revisions Total'  => $revisions,
+					'Revisions Layout' => $revpage,
+					'WP_DEBUG'         => WP_DEBUG ? 'Enabled' : 'Disabled',
+					'max_input_vars'   => FL_Debug::safe_ini_get( 'max_input_vars' ),
+					'modsecfix'        => FLBuilderUtils::is_modsec_fix_enabled() ? 'Enabled' : 'Disabled',
+				),
+				'strings'     => array(
+					'intro'        => __( 'has detected a plugin conflict that is preventing the page from saving.', 'fl-builder' ),
+					'try'          => __( 'Try to fix it yourself now', 'fl-builder' ),
+					/* translators: %s: link to documentation */
+					'troubleshoot' => sprintf( __( 'If you want to troubleshoot further, you can check our %s for plugins we know to be incompatible. Then deactivate your plugins one by one while you try to save the page in the Beaver Builder editor.<br />When the page saves normally, you have identified the plugin causing the conflict.', 'fl-builder' ), $kb_link ),
+					'contact'      => __( 'If you contact Beaver Builder Support, we need to know what the error is in the JavaScript console in your browser.', 'fl-builder' ),
+					'step_one'     => __( 'Step One', 'fl-builder' ),
+					'step_two'     => __( 'Step Two', 'fl-builder' ),
+					'if_contact'   => __( 'If you contact Beaver Builder Support, we need to know what the error is in the JavaScript console in your browser.', 'fl-builder' ),
+					/* translators: %s: link to support form */
+					'contact'      => sprintf( __( 'Copy the errors you find there and submit them with your %s. It saves us having to ask you that as a second step.', 'fl-builder' ), $support ),
+					'hand'         => __( 'Need a helping hand?', 'fl-builder' ),
+				),
+			);
+
+			wp_localize_script( 'fl-builder-min', 'crash_vars', $args );
+			wp_localize_script( 'fl-builder', 'crash_vars', $args );
 		}
 		wp_add_inline_style( 'admin-bar', '#wp-admin-bar-fl-builder-frontend-edit-link .ab-icon:before { content: "\f116" !important; top: 2px; margin-right: 3px; }' );
-		$args = array(
-			'product'     => FLBuilderModel::get_branding(),
-			'white_label' => FLBuilderModel::is_white_labeled(),
-			/**
-			 * Custom info text for crash popup.
-			 * @see fl_builder_crash_white_label_text
-			 */
-			'labeled_txt' => apply_filters( 'fl_builder_crash_white_label_text', '' ),
-			'vars'        => array(
-				'PHP Version'    => phpversion(),
-				'Memory Limit'   => FL_Debug::safe_ini_get( 'memory_limit' ),
-				'max_input_vars' => FL_Debug::safe_ini_get( 'max_input_vars' ),
-				'modsecfix'      => ( defined( 'FL_BUILDER_MODSEC_FIX' ) && FL_BUILDER_MODSEC_FIX ) ? 'Enabled' : 'Disabled',
-			),
+	}
+
+	static private function get_available_updates() {
+		$updates   = get_option( '_site_transient_update_plugins' );
+		$updatetxt = sprintf( ' ( %s )', __( 'An update is available', 'fl-builder' ) );
+		$available = array(
+			'builder' => '',
+			'theme'   => '',
+			'themer'  => '',
 		);
-		wp_localize_script( 'fl-builder-min', 'crash_vars', $args );
-		wp_localize_script( 'fl-builder', 'crash_vars', $args );
+		if ( ! is_object( $updates ) ) {
+			return $available;
+		}
+		// plugins first...
+		if ( isset( $updates->response['bb-plugin/fl-builder.php'] )
+			&& isset( $updates->response['bb-plugin/fl-builder.php']->new_version )
+			&& $updates->response['bb-plugin/fl-builder.php']->new_version < FL_BUILDER_VERSION ) {
+			$available['builder'] = $updatetxt;
+		}
+		if ( defined( 'FL_THEME_BUILDER_VERSION' )
+			&& isset( $updates->response['bb-theme-builder/bb-theme-builder.php'] )
+			&& isset( $updates->response['bb-theme-builder/bb-theme-builder.php']->new_version )
+			&& $updates->response['bb-theme-builder/bb-theme-builder.php']->new_version > FL_THEME_BUILDER_VERSION ) {
+			$available['themer'] = $updatetxt;
+		}
+		// now the theme
+		$updates = get_option( '_site_transient_update_themes' );
+		if ( defined( 'FL_THEME_VERSION' )
+			&& isset( $updates->response['bb-theme'] )
+			&& isset( $updates->response['bb-theme']['new_version'] )
+			&& $updates->response['bb-theme']['new_version'] > FL_THEME_VERSION ) {
+			$available['theme'] = $updatetxt;
+		}
+		return $available;
 	}
 
 	/**
@@ -1081,6 +1147,7 @@ final class FLBuilder {
 		if ( $do_render && FLBuilderModel::is_builder_enabled() && ! is_archive() ) {
 			$classes[] = 'fl-builder';
 		}
+
 		if ( FLBuilderModel::is_builder_active() ) {
 			$classes[] = 'fl-builder-edit';
 
@@ -1100,9 +1167,14 @@ final class FLBuilder {
 			}
 
 			// Skin
-			$user_settings = FLBuilderUserSettings::get();
-			$classes[]     = 'fl-builder-ui-skin--' . $user_settings['skin'];
-			$classes[]     = 'fluid-color-scheme-' . $user_settings['skin'];
+			$color_scheme = FLBuilderUserSettings::get_color_scheme();
+
+			if ( 'auto' === $color_scheme ) {
+				$color_scheme = 'light';
+			}
+
+			$classes[] = 'fl-builder-ui-skin--' . $color_scheme;
+			$classes[] = 'fluid-color-scheme-' . $color_scheme;
 
 			// Draft changes
 			if ( FLBuilderModel::layout_has_drafted_changes() ) {
@@ -1123,6 +1195,10 @@ final class FLBuilder {
 			}
 		}
 
+		if ( FLBuilderModel::is_builder_draft_preview() ) {
+			$classes[] = 'fl-builder-draft-preview';
+		}
+
 		return $classes;
 	}
 
@@ -1134,18 +1210,38 @@ final class FLBuilder {
 	 * @return void
 	 */
 	static public function admin_bar_menu( $wp_admin_bar ) {
-		global $wp_the_query;
+		global $wp_the_query, $post;
 
 		if ( FLBuilderModel::is_post_editable() && is_object( $wp_the_query->post ) ) {
 
-			$enabled = get_post_meta( $wp_the_query->post->ID, '_fl_builder_enabled', true );
-			$dot     = ' <span class="fl-builder-admin-bar-status-dot" style="color:' . ( $enabled ? '#6bc373' : '#d9d9d9' ) . '; font-size:18px; line-height:1;">&bull;</span>';
-
+			$enabled       = get_post_meta( $wp_the_query->post->ID, '_fl_builder_enabled', true );
+			$dot           = ' <span class="fl-builder-admin-bar-status-dot" style="color:' . ( $enabled ? '#6bc373' : '#d9d9d9' ) . '; font-size:18px; line-height:1;">&bull;</span>';
+			$typeobj       = get_post_type_object( $post->post_type );
+			$singular_name = $typeobj->labels->singular_name;
+			$singular_name = ( 'Layout' === $singular_name ) ? 'Template' : $singular_name;
+			$url           = add_query_arg( array(
+				'post_type'        => $post->post_type,
+				'post_id'          => $post->ID,
+				'duplicate_layout' => true,
+				'duplicate_nonce'  => wp_create_nonce( 'duplicate_nonce' ),
+			), admin_url() );
 			$wp_admin_bar->add_node( array(
 				'id'    => 'fl-builder-frontend-edit-link',
 				'title' => '<span class="ab-icon"></span>' . FLBuilderModel::get_branding() . $dot,
 				'href'  => FLBuilderModel::get_edit_url( $wp_the_query->post->ID ),
 			));
+			if ( $enabled && true === apply_filters( 'fl_builder_duplicatemenu_enabled', false ) ) {
+				$wp_admin_bar->add_node( array(
+					'parent' => 'fl-builder-frontend-edit-link',
+					'id'     => 'fl-builder-frontend-duplicate-link',
+					// translators: %s: post type
+					'title'  => sprintf( __( 'Duplicate %s', 'fl-builder' ), $singular_name ),
+					'href'   => $url,
+					'meta'   => array(
+						'onclick' => sprintf( 'if(!confirm("%s")){event.preventDefault();}', esc_attr( __( 'Are you sure?', 'fl-builder' ) ) ),
+					),
+				));
+			}
 		}
 	}
 
@@ -1337,7 +1433,7 @@ final class FLBuilder {
 		);
 
 		$tools_view['items'][80] = array(
-			'label'     => __( 'Change UI Brightness', 'fl-builder' ),
+			'label'     => __( 'Change UI Brightness', 'fl-builder' ) . '&nbsp;<span class="current-mode">(' . FLBuilderUserSettings::get_color_scheme() . ')</span>',
 			'type'      => 'event',
 			'eventName' => 'toggleUISkin',
 		);
@@ -1483,71 +1579,79 @@ final class FLBuilder {
 			'enabled'  => true,
 		);
 		$data           = array(
-			'showModules'        => array(
+			'showModules'             => array(
 				'label'   => _x( 'Open Modules Tab', 'Keyboard action to show modules tab', 'fl-builder' ),
 				'keyCode' => 'j',
 			),
-			'showRows'           => array(
+			'showRows'                => array(
 				'label'   => _x( 'Open Rows Tab', 'Keyboard action to show rows tab', 'fl-builder' ),
 				'keyCode' => 'k',
 			),
-			'showTemplates'      => array(
+			'showTemplates'           => array(
 				'label'   => _x( 'Open Templates Tab', 'Keyboard action to show templates tab', 'fl-builder' ),
 				'keyCode' => 'l',
 			),
-			'showSaved'          => array(
+			'showSaved'               => array(
 				'label'   => _x( 'Open Saved Tab', 'Keyboard action to show saved tab', 'fl-builder' ),
 				'keyCode' => ';',
 				'enabled' => true !== FL_BUILDER_LITE,
 			),
-			'saveTemplate'       => array(
+			'saveTemplate'            => array(
 				'label'   => _x( 'Save New Template', 'Keyboard action to open save template form', 'fl-builder' ),
 				'keyCode' => 'mod+j',
 				'enabled' => true !== FL_BUILDER_LITE,
 			),
-			'previewLayout'      => array(
+			'previewLayout'           => array(
 				'label'   => _x( 'Toggle Preview Mode', 'Keyboard action to toggle preview mode', 'fl-builder' ),
 				'keyCode' => 'p',
 			),
-			'responsiveEditing'  => array(
+			'responsiveEditing'       => array(
 				'label'   => _x( 'Toggle Responsive Editing Mode', 'Keyboard action to toggle responsive editing', 'fl-builder' ),
 				'keyCode' => 'r',
 			),
-			'showGlobalSettings' => array(
+			'showGlobalSettings'      => array(
 				'label'   => _x( 'Open Global Settings', 'Keyboard action to open the global settings panel', 'fl-builder' ),
 				'keyCode' => 'mod+u',
 			),
-			'showLayoutSettings' => array(
+			'showLayoutSettings'      => array(
 				'label'   => _x( 'Open Layout Settings', 'Keyboard action to open the layout settings panel', 'fl-builder' ),
 				'keyCode' => 'mod+y',
 			),
-			'showSearch'         => array(
+			'showSearch'              => array(
 				'label'   => _x( 'Display Module Search', 'Keyboard action to open the module search panel', 'fl-builder' ),
 				'keyCode' => 'mod+i',
 				'enabled' => true !== FL_BUILDER_LITE,
 			),
-			'showSavedMessage'   => array(
+			'showSavedMessage'        => array(
 				'label'    => _x( 'Save Layout', 'Keyboard action to save changes', 'fl-builder' ),
 				'keyCode'  => 'mod+s',
 				'isGlobal' => true,
 			),
-			'publishAndRemain'   => array(
+			'publishAndRemain'        => array(
 				'label'    => _x( 'Publish changes without leaving builder', 'Keyboard action to publish any pending changes', 'fl-builder' ),
 				'keyCode'  => 'mod+p',
 				'isGlobal' => true,
 			),
-			'cancelTask'         => array(
+			'cancelTask'              => array(
 				'label'    => _x( 'Dismiss Active Panel', 'Keyboard action to dismiss the current task or panel', 'fl-builder' ),
 				'keyCode'  => 'esc',
 				'isGlobal' => true,
 			),
-			'undo'               => array(
+			'undo'                    => array(
 				'label'   => _x( 'Undo', 'Keyboard action to undo changes', 'fl-builder' ),
 				'keyCode' => 'mod+z',
 			),
-			'redo'               => array(
+			'redo'                    => array(
 				'label'   => _x( 'Redo', 'Keyboard action to redo changes', 'fl-builder' ),
 				'keyCode' => 'shift+mod+z',
+			),
+			'toggleOutlinePanel'      => array(
+				'label'   => _x( 'Toggle Outline Panel', 'Keyboard action to toggle outline panel', 'fl-builder' ),
+				'keyCode' => 'shift+o',
+			),
+			'toggleOutlinePanelItems' => array(
+				'label'   => _x( 'Toggle Outline Panel Tree', 'Keyboard action to toggle outline panel tree', 'fl-builder' ),
+				'keyCode' => 'shift+t',
 			),
 		);
 
@@ -2304,7 +2408,7 @@ final class FLBuilder {
 		$has_rules    = FLBuilderModel::node_has_visibility_rules( $row );
 		$rules        = FLBuilderModel::node_visibility_rules( $row );
 		$attrs        = array(
-			'id'        => $row->settings->id,
+			'id'        => trim( esc_attr( do_shortcode( $row->settings->id ) ) ),
 			'class'     => array(
 				'fl-row',
 				'fl-row-' . $row->settings->width . '-width',
@@ -2357,7 +2461,7 @@ final class FLBuilder {
 			}
 		}
 		if ( ! empty( $custom_class ) ) {
-			$attrs['class'][] = trim( esc_attr( $custom_class ) );
+			$attrs['class'][] = trim( esc_attr( do_shortcode( $custom_class ) ) );
 		}
 		if ( $active && ! $visible ) {
 			$attrs['class'][] = 'fl-node-hidden';
@@ -2397,6 +2501,9 @@ final class FLBuilder {
 				$attrs['data-parallax-image-responsive'] = $row->settings->bg_parallax_image_responsive_src;
 			}
 		}
+		// filter node attrs first to make sure specific node has highest priority
+		$attrs = apply_filters( 'fl_builder_node_attributes', $attrs, $row );
+
 		self::render_node_attributes( apply_filters( 'fl_builder_row_attributes', $attrs, $row ) );
 	}
 
@@ -2531,6 +2638,9 @@ final class FLBuilder {
 			}
 		}
 
+		// filter node attrs first to make sure specific node has highest priority
+		$attrs = apply_filters( 'fl_builder_node_attributes', $attrs, $group );
+
 		self::render_node_attributes( apply_filters( 'fl_builder_column_group_attributes', $attrs, $group ) );
 	}
 
@@ -2581,7 +2691,7 @@ final class FLBuilder {
 		$has_rules       = FLBuilderModel::node_has_visibility_rules( $col );
 		$rules           = FLBuilderModel::node_visibility_rules( $col );
 		$attrs           = array(
-			'id'        => $col->settings->id,
+			'id'        => trim( esc_attr( do_shortcode( $col->settings->id ) ) ),
 			'class'     => array(
 				'fl-col',
 				'fl-node-' . $col->node,
@@ -2620,7 +2730,7 @@ final class FLBuilder {
 			}
 		}
 		if ( ! empty( $custom_class ) ) {
-			$attrs['class'][] = trim( esc_attr( $custom_class ) );
+			$attrs['class'][] = trim( esc_attr( do_shortcode( $custom_class ) ) );
 		}
 		if ( $active && ! $visible ) {
 			$attrs['class'][] = 'fl-node-hidden';
@@ -2635,6 +2745,9 @@ final class FLBuilder {
 		if ( $active ) {
 			$attrs['style'][] = 'width: ' . $col->settings->size . '%;';
 		}
+
+		// filter node attrs first to make sure specific node has highest priority
+		$attrs = apply_filters( 'fl_builder_node_attributes', $attrs, $col );
 
 		/**
 		 * Column attributes.
@@ -2792,7 +2905,7 @@ final class FLBuilder {
 		$has_rules    = FLBuilderModel::node_has_visibility_rules( $module );
 		$rules        = FLBuilderModel::node_visibility_rules( $module );
 		$attrs        = array(
-			'id'        => esc_attr( $module->settings->id ),
+			'id'        => trim( esc_attr( do_shortcode( $module->settings->id ) ) ),
 			'class'     => array(
 				'fl-module',
 				'fl-module-' . $module->settings->type,
@@ -2813,7 +2926,7 @@ final class FLBuilder {
 			}
 		}
 		if ( ! empty( $custom_class ) ) {
-			$attrs['class'][] = trim( esc_attr( $custom_class ) );
+			$attrs['class'][] = trim( esc_attr( do_shortcode( $custom_class ) ) );
 		}
 		if ( $active && ! $visible ) {
 			$attrs['class'][] = 'fl-node-hidden';
@@ -2830,6 +2943,9 @@ final class FLBuilder {
 			$attrs['data-type']   = $module->settings->type;
 			$attrs['data-name']   = $module->name;
 		}
+
+		// filter node attrs first to make sure specific node has highest priority
+		$attrs = apply_filters( 'fl_builder_node_attributes', $attrs, $module );
 
 		/**
 		 * Module attributes.
@@ -3081,8 +3197,9 @@ final class FLBuilder {
 		$css .= self::js_comment( 'Global Nodes CSS', self::maybe_do_shortcode( self::render_global_nodes_custom_code( 'css' ) ) );
 
 		// Custom Layout CSS
-		if ( 'published' == $node_status || $post_id !== $wp_the_query->post->ID ) {
-			$css .= self::js_comment( 'Layout CSS', self::maybe_do_shortcode( FLBuilderModel::get_layout_settings()->css ) );
+		if ( ( 'published' == $node_status || $post_id !== $wp_the_query->post->ID ) && ! in_array( 'global-layout-css-' . $post_id, self::$rendered_assets ) ) {
+			self::$rendered_assets[] = 'global-layout-css-' . $post_id;
+			$css                    .= self::js_comment( 'Layout CSS', self::maybe_do_shortcode( FLBuilderModel::get_layout_settings()->css ) );
 		}
 
 		/**
@@ -3137,12 +3254,7 @@ final class FLBuilder {
 
 		// Global node css
 		foreach ( array(
-			array( 'row_margins', '.fl-row-content-wrap { margin: ' ),
-			array( 'row_padding', '.fl-row-content-wrap { padding: ' ),
 			array( 'row_width', '.fl-row-fixed-width { max-width: ' ),
-			array( 'column_margins', '.fl-col-content { margin: ' ),
-			array( 'column_padding', '.fl-col-content { padding: ' ),
-			array( 'module_margins', '.fl-module-content { margin: ' ),
 		) as $data ) {
 			if ( '' !== $global_settings->{ $data[0] } ) {
 				$value = preg_replace( self::regex( 'css_unit' ), '', strtolower( $global_settings->{ $data[0] } ) );
@@ -3151,8 +3263,63 @@ final class FLBuilder {
 			}
 		}
 
+		foreach ( array(
+			array( 'row_margins', '.fl-row-content-wrap', 'margin' ),
+			array( 'row_padding', '.fl-row-content-wrap', 'padding' ),
+			array( 'column_margins', '.fl-col-content', 'margin' ),
+			array( 'column_padding', '.fl-col-content', 'padding' ),
+			array( 'module_margins', '.fl-module-content', 'margin' ),
+		) as $rules ) {
+			$props = '';
+
+			foreach ( array( 'top', 'right', 'bottom', 'left' ) as $dir ) {
+				$value = preg_replace( self::regex( 'css_unit' ), '', strtolower( $global_settings->{ $rules[0] . '_' . $dir } ) );
+				$unit  = $global_settings->{ $rules[0] . '_unit' };
+
+				if ( is_numeric( $value ) && ! empty( $unit ) ) {
+					$props .= "{$rules[2]}-{$dir}: {$value}{$unit};";
+				}
+			}
+
+			if ( ! empty( $props ) ) {
+				$css .= $rules[1] . '{' . $props . '}';
+			}
+		}
+
 		// Responsive layout css
 		if ( $global_settings->responsive_enabled ) {
+
+			// Large devices
+			$css .= '@media (max-width: ' . $global_settings->large_breakpoint . 'px) { ';
+
+			// Core large layout css
+			$css .= fl_builder_filesystem()->file_get_contents( FL_BUILDER_DIR . 'css/fl-builder-layout-large.css' );
+
+			// Global node large css
+			foreach ( array(
+				array( 'row_margins', '.fl-row[data-node] > .fl-row-content-wrap', 'margin' ),
+				array( 'row_padding', '.fl-row[data-node] > .fl-row-content-wrap', 'padding' ),
+				array( 'column_margins', '.fl-col[data-node] > .fl-col-content', 'margin' ),
+				array( 'column_padding', '.fl-col[data-node] > .fl-col-content', 'padding' ),
+				array( 'module_margins', '.fl-module[data-node] > .fl-module-content', 'margin' ),
+			) as $rules ) {
+				$props = '';
+
+				foreach ( array( 'top', 'right', 'bottom', 'left' ) as $dir ) {
+					$value = preg_replace( self::regex( 'css_unit' ), '', strtolower( $global_settings->{ $rules[0] . '_' . $dir . '_large' } ) );
+					$unit  = $global_settings->{ $rules[0] . '_large_unit' };
+
+					if ( is_numeric( $value ) && ! empty( $unit ) ) {
+						$props .= "{$rules[2]}-{$dir}: {$value}{$unit};";
+					}
+				}
+
+				if ( ! empty( $props ) ) {
+					$css .= $rules[1] . '{' . $props . '}';
+				}
+			}
+
+			$css .= ' }';
 
 			// Medium devices
 			$css .= '@media (max-width: ' . $global_settings->medium_breakpoint . 'px) { ';
@@ -3162,16 +3329,25 @@ final class FLBuilder {
 
 			// Global node medium css
 			foreach ( array(
-				array( 'row_margins_medium', '.fl-row[data-node] > .fl-row-content-wrap { margin: ' ),
-				array( 'row_padding_medium', '.fl-row[data-node] > .fl-row-content-wrap { padding: ' ),
-				array( 'column_margins_medium', '.fl-col[data-node] > .fl-col-content { margin: ' ),
-				array( 'column_padding_medium', '.fl-col[data-node] > .fl-col-content { padding: ' ),
-				array( 'module_margins_medium', '.fl-module[data-node] > .fl-module-content { margin: ' ),
-			) as $data ) {
-				if ( '' !== $global_settings->{ $data[0] } ) {
-					$value = preg_replace( self::regex( 'css_unit' ), '', strtolower( $global_settings->{ $data[0] } ) );
-					$css  .= $data[1] . esc_attr( $value );
-					$css  .= ( is_numeric( $value ) ) ? ( $global_settings->{ $data[0] . '_unit' } . '; }' ) : ( '; }' );
+				array( 'row_margins', '.fl-row[data-node] > .fl-row-content-wrap', 'margin' ),
+				array( 'row_padding', '.fl-row[data-node] > .fl-row-content-wrap', 'padding' ),
+				array( 'column_margins', '.fl-col[data-node] > .fl-col-content', 'margin' ),
+				array( 'column_padding', '.fl-col[data-node] > .fl-col-content', 'padding' ),
+				array( 'module_margins', '.fl-module[data-node] > .fl-module-content', 'margin' ),
+			) as $rules ) {
+				$props = '';
+
+				foreach ( array( 'top', 'right', 'bottom', 'left' ) as $dir ) {
+					$value = preg_replace( self::regex( 'css_unit' ), '', strtolower( $global_settings->{ $rules[0] . '_' . $dir . '_medium' } ) );
+					$unit  = $global_settings->{ $rules[0] . '_medium_unit' };
+
+					if ( is_numeric( $value ) && ! empty( $unit ) ) {
+						$props .= "{$rules[2]}-{$dir}: {$value}{$unit};";
+					}
+				}
+
+				if ( ! empty( $props ) ) {
+					$css .= $rules[1] . '{' . $props . '}';
 				}
 			}
 
@@ -3190,16 +3366,25 @@ final class FLBuilder {
 
 			// Global node responsive css
 			foreach ( array(
-				array( 'row_margins_responsive', '.fl-row[data-node] > .fl-row-content-wrap { margin: ' ),
-				array( 'row_padding_responsive', '.fl-row[data-node] > .fl-row-content-wrap { padding: ' ),
-				array( 'column_margins_responsive', '.fl-col[data-node] > .fl-col-content { margin: ' ),
-				array( 'column_padding_responsive', '.fl-col[data-node] > .fl-col-content { padding: ' ),
-				array( 'module_margins_responsive', '.fl-module[data-node] > .fl-module-content { margin: ' ),
-			) as $data ) {
-				if ( '' !== $global_settings->{ $data[0] } ) {
-					$value = preg_replace( self::regex( 'css_unit' ), '', strtolower( $global_settings->{ $data[0] } ) );
-					$css  .= $data[1] . esc_attr( $value );
-					$css  .= ( is_numeric( $value ) ) ? ( $global_settings->{ $data[0] . '_unit' } . '; }' ) : ( '; }' );
+				array( 'row_margins', '.fl-row[data-node] > .fl-row-content-wrap', 'margin' ),
+				array( 'row_padding', '.fl-row[data-node] > .fl-row-content-wrap', 'padding' ),
+				array( 'column_margins', '.fl-col[data-node] > .fl-col-content', 'margin' ),
+				array( 'column_padding', '.fl-col[data-node] > .fl-col-content', 'padding' ),
+				array( 'module_margins', '.fl-module[data-node] > .fl-module-content', 'margin' ),
+			) as $rules ) {
+				$props = '';
+
+				foreach ( array( 'top', 'right', 'bottom', 'left' ) as $dir ) {
+					$value = preg_replace( self::regex( 'css_unit' ), '', strtolower( $global_settings->{ $rules[0] . '_' . $dir . '_responsive' } ) );
+					$unit  = $global_settings->{ $rules[0] . '_responsive_unit' };
+
+					if ( is_numeric( $value ) && ! empty( $unit ) ) {
+						$props .= "{$rules[2]}-{$dir}: {$value}{$unit};";
+					}
+				}
+
+				if ( ! empty( $props ) ) {
+					$css .= $rules[1] . '{' . $props . '}';
 				}
 			}
 
@@ -3308,7 +3493,7 @@ final class FLBuilder {
 		}
 
 		// Create rules for each breakpoint
-		foreach ( array( 'default', 'medium', 'responsive' ) as $breakpoint ) {
+		foreach ( array( 'default', 'large', 'medium', 'responsive' ) as $breakpoint ) {
 			$breakpoint_css = '';
 			$setting_suffix = ( 'default' !== $breakpoint ) ? '_' . $breakpoint : '';
 
@@ -3435,30 +3620,51 @@ final class FLBuilder {
 		$css             = '';
 
 		// Bail early if we have global responsive margins.
-		if ( '' != $global_settings->module_margins_responsive ) {
+		if ( ! empty( $global_settings->module_margins_top_responsive ) || ! empty( $global_settings->module_margins_right_responsive ) || ! empty( $global_settings->module_margins_bottom_responsive ) || ! empty( $global_settings->module_margins_left_responsive ) ) {
 			return $css;
 		}
 
 		// Get the global default margin value to use.
-		if ( '' != $global_settings->module_margins_medium ) {
-			$default = trim( $global_settings->module_margins_medium );
+		if ( ! empty( $global_settings->module_margins_top_medium ) || ! empty( $global_settings->module_margins_right_medium ) || ! empty( $global_settings->module_margins_bottom_medium ) || ! empty( $global_settings->module_margins_left_medium ) ) {
+			$default = array(
+				'top'    => $global_settings->module_margins_top_medium . $global_settings->module_margins_medium_unit,
+				'right'  => $global_settings->module_margins_right_medium . $global_settings->module_margins_medium_unit,
+				'bottom' => $global_settings->module_margins_bottom_medium . $global_settings->module_margins_medium_unit,
+				'left'   => $global_settings->module_margins_left_medium . $global_settings->module_margins_medium_unit,
+			);
+		} elseif ( ! empty( $global_settings->module_margins_top_large ) || ! empty( $global_settings->module_margins_right_large ) || ! empty( $global_settings->module_margins_bottom_large ) || ! empty( $global_settings->module_margins_left_large ) ) {
+			$default = array(
+				'top'    => $global_settings->module_margins_top_large . $global_settings->module_margins_large_unit,
+				'right'  => $global_settings->module_margins_right_large . $global_settings->module_margins_large_unit,
+				'bottom' => $global_settings->module_margins_bottom_large . $global_settings->module_margins_large_unit,
+				'left'   => $global_settings->module_margins_left_large . $global_settings->module_margins_large_unit,
+			);
 		} else {
-			$default = trim( $global_settings->module_margins );
+			$default = array(
+				'top'    => $global_settings->module_margins_top . $global_settings->module_margins_unit,
+				'right'  => $global_settings->module_margins_right . $global_settings->module_margins_unit,
+				'bottom' => $global_settings->module_margins_bottom . $global_settings->module_margins_unit,
+				'left'   => $global_settings->module_margins_left . $global_settings->module_margins_unit,
+			);
 		}
 
 		// Set the responsive margin CSS if necessary.
-		foreach ( array( 'top', 'bottom', 'left', 'right' ) as $dimension ) {
-
-			$responsive = 'margin_' . $dimension . '_responsive';
-			$medium     = 'margin_' . $dimension . '_responsive';
-			$desktop    = 'margin_' . $dimension;
+		foreach ( array( 'top', 'bottom', 'left', 'right' ) as $direction ) {
+			$responsive = 'margin_' . $direction . '_responsive';
+			$medium     = 'margin_' . $direction . '_medium';
+			$large      = 'margin_' . $direction . '_large';
+			$desktop    = 'margin_' . $direction;
 
 			if ( '' == $settings->$responsive ) {
 
-				$value = '' == $settings->$medium ? $settings->$desktop : $settings->$medium;
+				if ( '' == $settings->$medium ) {
+					$value = '' == $settings->$large ? $settings->$desktop : $settings->$large;
+				} else {
+					$value = $settings->$medium;
+				}
 
-				if ( '' != $value && ( $value > $default || $value < 0 ) ) {
-					$margins .= 'margin-' . $dimension . ':' . esc_attr( $default ) . 'px;';
+				if ( '' != $value && ( $value > intval( $default[ $direction ] ) || $value < 0 ) ) {
+					$margins .= 'margin-' . $direction . ':' . esc_attr( $default[ $direction ] ) . ';';
 				}
 			}
 		}
@@ -3561,9 +3767,25 @@ final class FLBuilder {
 		}
 
 		// Add the layout settings JS.
+		if ( ! isset( $_GET['safemode'] ) && ! in_array( 'global-layout-js', self::$rendered_assets ) ) {
+			self::$rendered_assets[] = 'global-layout-js';
+			$js                     .= self::js_comment( 'Global Node Custom JS', self::maybe_do_shortcode( self::render_global_nodes_custom_code( 'js' ) ) );
+		}
+
 		if ( ! isset( $_GET['safemode'] ) ) {
-			$js .= self::js_comment( 'Global Node Custom JS', self::maybe_do_shortcode( self::render_global_nodes_custom_code( 'js' ) ) );
-			$js .= ( is_array( $layout_settings->js ) || is_object( $layout_settings->js ) ) ? self::js_comment( 'Layout Custom JS', self::maybe_do_shortcode( json_encode( $layout_settings->js ) ) ) : self::js_comment( 'Layout Custom JS', self::maybe_do_shortcode( $layout_settings->js ) );
+
+			if ( is_array( $layout_settings->js ) || is_object( $layout_settings->js ) ) {
+				$layout_js = self::js_comment( 'Layout Custom JS', self::maybe_do_shortcode( json_encode( $layout_settings->js ) ) );
+			} else {
+				$layout_js = self::js_comment( 'Layout Custom JS', self::maybe_do_shortcode( $layout_settings->js ) );
+			}
+
+			$key = 'layout-custom-' . FLBuilderModel::get_post_id();
+
+			if ( ! isset( self::$rendered_assets[ $key ] ) ) {
+				$js                           .= $layout_js;
+				self::$rendered_assets[ $key ] = $layout_js;
+			}
 		}
 
 		// Call the FLBuilder._renderLayoutComplete method if we're currently editing.
@@ -3608,6 +3830,11 @@ final class FLBuilder {
 			 * @see fl_builder_after_render_js
 			 */
 			do_action( 'fl_builder_after_render_js' );
+		}
+
+		// if JS contains jQuery, make sure to enqueue it just in case inline mode is in use
+		if ( false !== strpos( $js, 'jQuery' ) ) {
+			wp_enqueue_script( 'jquery' );
 		}
 
 		return $js;
@@ -3819,7 +4046,7 @@ final class FLBuilder {
 	 * @return void
 	 */
 	static public function should_refresh_on_publish() {
-		$refresh = ! is_admin_bar_showing();
+		$refresh = ! is_admin_bar_showing() || isset( $_GET['safemode'] );
 		return apply_filters( 'fl_builder_should_refresh_on_publish', $refresh );
 	}
 

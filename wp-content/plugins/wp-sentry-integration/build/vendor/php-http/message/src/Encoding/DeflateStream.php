@@ -23,14 +23,14 @@ class DeflateStream extends \WPSentry\ScopedVendor\Http\Message\Encoding\Filtere
     /**
      * {@inheritdoc}
      */
-    protected function readFilter()
+    protected function readFilter() : string
     {
         return 'zlib.deflate';
     }
     /**
      * {@inheritdoc}
      */
-    protected function writeFilter()
+    protected function writeFilter() : string
     {
         return 'zlib.inflate';
     }

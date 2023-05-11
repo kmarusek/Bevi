@@ -394,7 +394,7 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
             $date = ppress_format_date($this->expiration_date);
         }
 
-        return $date;
+        return apply_filters('ppress_subscription_formatted_expiration_date', $date, $this);
     }
 
     public function get_notes()
@@ -471,6 +471,8 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         if ($user instanceof \WP_User) {
             $user->add_role($plan->user_role);
         }
+
+        do_action('ppress_added_plan_role_to_customer', $this);
     }
 
     public function remove_plan_role_from_customer()
@@ -483,6 +485,8 @@ class SubscriptionEntity extends AbstractModel implements ModelInterface
         if ($user instanceof \WP_User) {
             $user->remove_role($plan->user_role);
         }
+
+        do_action('ppress_removed_plan_role_from_customer', $this);
     }
 
     /**

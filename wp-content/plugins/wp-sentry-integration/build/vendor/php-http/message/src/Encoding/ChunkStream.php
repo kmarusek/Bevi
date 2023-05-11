@@ -9,24 +9,15 @@ namespace WPSentry\ScopedVendor\Http\Message\Encoding;
  */
 class ChunkStream extends \WPSentry\ScopedVendor\Http\Message\Encoding\FilteredStream
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function readFilter()
+    protected function readFilter() : string
     {
         return 'chunk';
     }
-    /**
-     * {@inheritdoc}
-     */
-    protected function writeFilter()
+    protected function writeFilter() : string
     {
         return 'dechunk';
     }
-    /**
-     * {@inheritdoc}
-     */
-    protected function fill()
+    protected function fill() : void
     {
         parent::fill();
         if ($this->stream->eof()) {

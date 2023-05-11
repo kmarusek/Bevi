@@ -1,11 +1,11 @@
-=== Paid Membership Plugin, Ecommerce, Registration Form, Login Form, User Profile & Restrict Content – ProfilePress ===
+﻿ Paid Membership Plugin, Ecommerce, Registration Form, Login Form, User Profile & Restrict Content – ProfilePress ===
 Contributors: properfraction, collizo4sky
 Donate link: https://profilepress.com/pricing/
 Tags: membership, ecommerce, user registration, user profile, membership plugin, members, stripe, paypal, razorpay, mollie, paystack, login form, login, registration, password reset, member, users, profile, front-end profile, avatar
 Requires at least: 5.3
 Requires PHP: 7.2.0
 Tested up to: 6.2
-Stable tag: 4.10.1
+Stable tag: 4.10.2
 License: GPLv2 or later
 
 Paid membership plugin: accept payments, sell subscriptions & digital downloads, paywall & restrict content, create user registration form & login form, user profile & member directory.
@@ -180,6 +180,18 @@ Any file type can be sold using ProfilePress ecommerce and membership plugin, in
 
 == Changelog ==
 
+= Paid Membership, Ecommerce & User Registration 4.10.2 =
+* Integrated [Stripe Customer Portal](https://profilepress.com/article/setting-up-stripe/#Stripe_Customer_Portal_Integration) for updating payment methods.
+* Fixed bug where stripe checkout might failed if phone field is not present.
+* Fixed bug where subscription expiration and renewal reminder didnt work for trial subscriptions.
+* Fixed bug where some placeholders weren’t working for new user admin email notification.
+* Made remember me checkbox for login form unchecked by default.
+* Correct missing filter hook arguments.
+* Hardened security of myaccount subscription actions.
+* Added ppress_subscription_deleted action hook.
+* Added ppress_added_plan_role_to_customer and ppress_removed_plan_role_from_customer filters.
+* Added filter: ppress_subscription_formatted_expiration_date.
+
 = Paid Membership, Ecommerce & User Registration 4.10.1 =
 * Fixed bug where stripe checkout doesn't work again on error.
 * Added Plan selection on group checkout as select dropdown.
@@ -188,16 +200,5 @@ Any file type can be sold using ProfilePress ecommerce and membership plugin, in
 * Migrated Stripe integration from card to payment element.
 * Fixed bug where logout redirect on group checkout goes to individual plan checkout url.
 * Fixed bug with stripe checkout not working when search is disabled in certain countries.
-
-= Paid Membership, Ecommerce & User Registration 4.9.0 =
-* New: [Membership plan group](https://profilepress.com/article/membership-plan-groups/?ref=changelog).
-* Added [Restricted Page Template](https://profilepress.com/article/adding-content-protection-rules/?ref=changelog#rpt) option for content protection.
-* Added ppress_public_js_dependencies filter.
-* Added filters to checkout fields.
-* Added ppress_customer_active_subscriptions filter.
-* Added ppress_checkout_sidebar_order_expiration_date_time filter.
-* Added ppress_stripe_price_search_args filter.
-* Added ppress_checkout_disable_validate_field filter.
-* Added has_any_status_subscription method to customer entity.
 
 See the [changelog file](https://plugins.svn.wordpress.org/wp-user-avatar/trunk/changelog.txt) for full change log information.

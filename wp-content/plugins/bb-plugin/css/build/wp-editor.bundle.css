@@ -1,5 +1,7 @@
 .wp-block[data-type="fl-builder/layout"] .components-placeholder__fieldset,
+.wp-block[data-type="fl-builder/layout"] .components-placeholder__instructions,
 .wp-block[data-type="fl-builder/layout"] .components-placeholder.components-placeholder {
+  text-align: center;
   justify-content: center;
   align-items: center; }
 
@@ -58,4 +60,3 @@ body.fl-builder-layout-enabled .block-editor-block-contextual-toolbar {
   z-index: 1; }
 
 
-/*# sourceMappingURL=wp-editor.bundle.css.map*/

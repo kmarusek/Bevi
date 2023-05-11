@@ -97,6 +97,7 @@ class FLPhotoModule extends FLBuilderModule {
 
 		if ( fl_builder_filesystem()->file_exists( $cropped_path['path'] ) ) {
 			fl_builder_filesystem()->unlink( $cropped_path['path'] );
+			do_action( 'fl_builder_cropped_image_deleted', $cropped_path );
 		}
 	}
 
@@ -349,8 +350,10 @@ class FLPhotoModule extends FLBuilderModule {
 
 		$is_svg = ! empty( $photo->mime ) && 'image/svg+xml' === $photo->mime;
 
-		if ( $is_svg ) {
-			$attrs .= 'height="' . $photo->sizes->full->height . '" width="' . $photo->sizes->full->width . '" ';
+		if ( $is_svg && isset( $photo->sizes ) ) {
+			if ( isset( $photo->sizes->full->height ) && isset( $photo->sizes->full->width ) ) {
+				$attrs .= 'height="' . $photo->sizes->full->height . '" width="' . $photo->sizes->full->width . '" ';
+			}
 		}
 
 		if ( is_object( $photo ) && isset( $photo->sizes ) && ! $is_svg ) {

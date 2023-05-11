@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b
+class ComposerStaticInit23077d5292556bcd9bf371e9aad83022
 {
     public static $files = array (
         'wp-sentry-7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
@@ -440,7 +440,6 @@ class ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b
         'WPSentry\\ScopedVendor\\Http\\Client\\Promise\\HttpFulfilledPromise' => __DIR__ . '/..' . '/php-http/httplug/src/Promise/HttpFulfilledPromise.php',
         'WPSentry\\ScopedVendor\\Http\\Client\\Promise\\HttpRejectedPromise' => __DIR__ . '/..' . '/php-http/httplug/src/Promise/HttpRejectedPromise.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\ClassDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/ClassDiscovery.php',
-        'WPSentry\\ScopedVendor\\Http\\Discovery\\Composer\\Plugin' => __DIR__ . '/..' . '/php-http/discovery/src/Composer/Plugin.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Exception' => __DIR__ . '/..' . '/php-http/discovery/src/Exception.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Exception\\ClassInstantiationFailedException' => __DIR__ . '/..' . '/php-http/discovery/src/Exception/ClassInstantiationFailedException.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Exception\\DiscoveryFailedException' => __DIR__ . '/..' . '/php-http/discovery/src/Exception/DiscoveryFailedException.php',
@@ -454,6 +453,7 @@ class ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b
         'WPSentry\\ScopedVendor\\Http\\Discovery\\NotFoundException' => __DIR__ . '/..' . '/php-http/discovery/src/NotFoundException.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Psr17Factory' => __DIR__ . '/..' . '/php-http/discovery/src/Psr17Factory.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Psr17FactoryDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/Psr17FactoryDiscovery.php',
+        'WPSentry\\ScopedVendor\\Http\\Discovery\\Psr18Client' => __DIR__ . '/..' . '/php-http/discovery/src/Psr18Client.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Psr18ClientDiscovery' => __DIR__ . '/..' . '/php-http/discovery/src/Psr18ClientDiscovery.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Strategy\\CommonClassesStrategy' => __DIR__ . '/..' . '/php-http/discovery/src/Strategy/CommonClassesStrategy.php',
         'WPSentry\\ScopedVendor\\Http\\Discovery\\Strategy\\CommonPsr17ClassesStrategy' => __DIR__ . '/..' . '/php-http/discovery/src/Strategy/CommonPsr17ClassesStrategy.php',
@@ -580,9 +580,9 @@ class ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd485a41788ed0ef4a681e96c2d14ab8b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit23077d5292556bcd9bf371e9aad83022::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit23077d5292556bcd9bf371e9aad83022::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit23077d5292556bcd9bf371e9aad83022::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -16,7 +16,7 @@ class MyAccountTag extends FormProcessor
 
         add_action('init', [$this, 'add_endpoints']);
 
-        add_action('wp', [$this, 'redirect_non_logged_in_users']);
+        add_action('wp', [$this, 'redirect_non_logged_in_users'], 1);
 
         if ( ! is_admin()) {
             add_filter('query_vars', [$this, 'add_query_vars'], 99);
@@ -230,7 +230,7 @@ class MyAccountTag extends FormProcessor
             $sub_id = (int)$_GET['sub_id'];
             $sub    = SubscriptionFactory::fromId((int)$_GET['sub_id']);
 
-            check_admin_referer($sub_id . $action);
+            check_admin_referer($sub_id . $action . $sub->get_customer()->get_user_id());
 
             if ($action == 'cancel') {
                 $sub->cancel(true);

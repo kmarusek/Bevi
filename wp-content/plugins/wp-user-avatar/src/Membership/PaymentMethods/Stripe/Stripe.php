@@ -18,6 +18,7 @@ use ProfilePress\Core\Membership\PaymentMethods\PaymentMethods;
 use ProfilePress\Core\Membership\PaymentMethods\WebhookHandlerInterface;
 use ProfilePress\Core\Membership\Services\Calculator;
 use ProfilePress\Core\RegisterScripts;
+use ProfilePress\Core\ShortcodeParser\MyAccount\MyAccountTag;
 use ProfilePressVendor\Stripe\Webhook as StripeWebhook;
 use WP_Error;
 
@@ -32,7 +33,7 @@ class Stripe extends AbstractPaymentMethod
         $this->description = esc_html__('Pay with your credit card via Stripe', 'wp-user-avatar');
 
         $this->method_title       = 'Stripe';
-        $this->method_description = esc_html__('Credit card payment method that integrates with your Stripe account.', 'wp-user-avatar');
+        $this->method_description = esc_html__('Accept various payment methods including Credit Card, Apple & Google Pay via Stripe.', 'wp-user-avatar');
         $this->method_description .= ( ! isset($_GET['method']) && true === PaymentHelpers::has_application_fee()) ?
             ' ' . sprintf(
                 esc_html__('NOTE: The free version of ProfilePress includes an additional 2%% fee for processing payments. Remove the fee by %supgrading to premium%s.', 'wp-user-avatar'),
@@ -53,6 +54,9 @@ class Stripe extends AbstractPaymentMethod
         add_action('ppress_admin_notices', [$this, 'output_connection_error']);
 
         add_filter('ppress_update_order_review_response', [$this, 'filter_update_order_review_response'], 10, 2);
+
+        add_filter('ppress_myaccount_subscription_actions', [$this, 'manage_subscription_button'], 10, 3);
+        add_action('ppress_handle_subscription_actions', [$this, 'handle_manage_subscription_action'], 10, 2);
     }
 
     public function has_fields()
@@ -75,7 +79,7 @@ class Stripe extends AbstractPaymentMethod
         if (ppressGET_var('section') == 'payment-methods' && ppressGET_var('method') == 'stripe' && ! empty($_GET['oauth-error'])) {
 
             echo '<div class="notice notice-error is-dismissible"><p>';
-            echo '<strong>' . esc_html__('Stripe Connect Error:', 'wp-user-avatar') . '</strong> ' . sanitize_text_field(ppressGET_var('oauth-error'));
+            echo '<strong>' . esc_html__('Stripe Connect Error:', 'wp-user-avatar') . '</strong> ' . esc_html(ppressGET_var('oauth-error'));
             echo '</p></div>';
         }
     }
@@ -583,6 +587,51 @@ class Stripe extends AbstractPaymentMethod
         ];
 
         return $response;
+    }
+
+    /**
+     * @param array $actions
+     * @param SubscriptionEntity $sub
+     * @param AbstractPaymentMethod|false $payment_method
+     *
+     * @return mixed
+     */
+    public function manage_subscription_button($actions, $sub, $payment_method)
+    {
+        if ( ! empty($sub->profile_id) && is_object($payment_method) && $payment_method->id == $this->id) {
+            $actions['stripe_manage_subscription'] = esc_html__('Manage Subscription', 'wp-user-avatar');
+        }
+
+        return $actions;
+    }
+
+    /**
+     * @param string $action
+     * @param SubscriptionEntity $sub
+     *
+     * @return void
+     */
+    public function handle_manage_subscription_action($action, $sub)
+    {
+        if ($action == 'stripe_manage_subscription') {
+
+            try {
+                $response = APIClass::stripeClient()->billingPortal->sessions->create([
+                    'customer'   => $sub->get_customer()->get_meta('stripe_customer_id'),
+                    'return_url' => add_query_arg(['sub_id' => $sub->id], MyAccountTag::get_endpoint_url('list-subscriptions'))
+                ]);
+
+                if (isset($response->url)) {
+                    wp_redirect($response->url);
+                    exit;
+                }
+
+            } catch (\Exception $e) {
+                ppress_log_error($e->getMessage());
+            }
+
+            wp_die(esc_html__('Unable to generate Stripe customer portal URL. Please try again', 'wp-user-avatar'));
+        }
     }
 
     /**

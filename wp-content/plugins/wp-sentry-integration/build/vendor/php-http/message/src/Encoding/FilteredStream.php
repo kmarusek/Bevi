@@ -64,10 +64,7 @@ abstract class FilteredStream implements \WPSentry\ScopedVendor\Psr\Http\Message
         }
         $this->stream = $stream;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function read($length)
+    public function read(int $length) : string
     {
         if (\strlen($this->buffer) >= $length) {
             $read = \substr($this->buffer, 0, $length);
@@ -84,10 +81,7 @@ abstract class FilteredStream implements \WPSentry\ScopedVendor\Psr\Http\Message
         $this->fill();
         return $read . $this->read($length - \strlen($read));
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function eof()
+    public function eof() : bool
     {
         return $this->stream->eof() && '' === $this->buffer;
     }
@@ -98,7 +92,7 @@ abstract class FilteredStream implements \WPSentry\ScopedVendor\Psr\Http\Message
      * This allow to get last data in the PHP buffer otherwise this
      * bug is present : https://bugs.php.net/bug.php?id=48725
      */
-    protected function fill()
+    protected function fill() : void
     {
         $readFilterCallback = $this->readFilterCallback;
         $this->buffer .= $readFilterCallback($this->stream->read(self::BUFFER_SIZE));
@@ -109,7 +103,7 @@ abstract class FilteredStream implements \WPSentry\ScopedVendor\Psr\Http\Message
     /**
      * {@inheritdoc}
      */
-    public function getContents()
+    public function getContents() : string
     {
         $buffer = '';
         while (!$this->eof()) {
@@ -125,14 +119,11 @@ abstract class FilteredStream implements \WPSentry\ScopedVendor\Psr\Http\Message
     /**
      * Always returns null because we can't tell the size of a stream when we filter.
      */
-    public function getSize()
+    public function getSize() : ?int
     {
         return null;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getContents();
     }
@@ -141,22 +132,22 @@ abstract class FilteredStream implements \WPSentry\ScopedVendor\Psr\Http\Message
      *
      * We would need to buffer and process everything to allow seeking.
      */
-    public function isSeekable()
+    public function isSeekable() : bool
     {
         return \false;
     }
     /**
-     * {@inheritdoc}
+     * Filtered streams are not seekable and can thus not be rewound.
      */
-    public function rewind()
+    public function rewind() : void
     {
         @\trigger_error('Filtered streams are not seekable. This method will start raising an exception in the next major version', \E_USER_DEPRECATED);
         $this->doRewind();
     }
     /**
-     * {@inheritdoc}
+     * Filtered streams are not seekable.
      */
-    public function seek($offset, $whence = \SEEK_SET)
+    public function seek(int $offset, int $whence = \SEEK_SET) : void
     {
         @\trigger_error('Filtered streams are not seekable. This method will start raising an exception in the next major version', \E_USER_DEPRECATED);
         $this->doSeek($offset, $whence);
@@ -164,37 +155,29 @@ abstract class FilteredStream implements \WPSentry\ScopedVendor\Psr\Http\Message
     /**
      * Returns the read filter name.
      *
-     * @return string
-     *
      * @deprecated since version 1.5, will be removed in 2.0
      */
-    public function getReadFilter()
+    public function getReadFilter() : string
     {
         @\trigger_error('The ' . __CLASS__ . '::' . __METHOD__ . ' method is deprecated since version 1.5 and will be removed in 2.0.', \E_USER_DEPRECATED);
         return $this->readFilter();
     }
     /**
      * Returns the write filter name.
-     *
-     * @return string
      */
-    protected abstract function readFilter();
+    protected abstract function readFilter() : string;
     /**
      * Returns the write filter name.
      *
-     * @return string
-     *
      * @deprecated since version 1.5, will be removed in 2.0
      */
-    public function getWriteFilter()
+    public function getWriteFilter() : string
     {
         @\trigger_error('The ' . __CLASS__ . '::' . __METHOD__ . ' method is deprecated since version 1.5 and will be removed in 2.0.', \E_USER_DEPRECATED);
         return $this->writeFilter();
     }
     /**
      * Returns the write filter name.
-     *
-     * @return string
      */
-    protected abstract function writeFilter();
+    protected abstract function writeFilter() : string;
 }

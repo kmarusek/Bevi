@@ -222,6 +222,7 @@
 				config.lightbox.setContent( template( config ) );
 			}
 
+			FL.Builder.data.getOutlinePanelActions().setActiveNode( config.nodeId );
 			return true;
 		},
 
@@ -278,16 +279,20 @@
 				value 			 = null,
 				isMultiple       = false,
 				responsive		 = null,
-				responsiveFields = [ 'align', 'border', 'dimension', 'unit', 'photo', 'select', 'typography' ],
+				responsiveFields = FLBuilderConfig.responsiveFields,
 				settings		 = ! settings ? this.config.settings : settings,
 				globalSettings   = FLBuilderConfig.global;
 
-			for ( name in fields ) {
 
-				field 				= fields[ name ];
-				isMultiple 		 	= field.multiple ? true : false;
-				supportsResponsive 	= $.inArray( field['type'], responsiveFields ) > -1,
-				value 			 	= ! _.isUndefined( settings[ name ] ) ? settings[ name ] : '';
+			for ( name in fields ) {
+				field = fields[ name ];
+				// Make sure this field is even a thing!
+				if ( ! field ) {
+					continue;
+				}
+				isMultiple         = field.multiple ? true : false;
+				supportsResponsive = $.inArray( field['type'], responsiveFields ) > -1,
+				value              = ! _.isUndefined( settings[ name ] ) ? settings[ name ] : '';
 
 				// Make sure this field has a type, if not the sky falls.
 				if ( ! field.type ) {

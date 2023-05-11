@@ -15,7 +15,7 @@ class BufferedStream implements \WPSentry\ScopedVendor\Psr\Http\Message\StreamIn
 {
     /** @var resource The buffered resource used to seek previous data */
     private $resource;
-    /** @var int size of the stream if available */
+    /** @var int|null size of the stream if available */
     private $size;
     /** @var StreamInterface The underlying stream decorated by this class */
     private $stream;
@@ -41,25 +41,16 @@ class BufferedStream implements \WPSentry\ScopedVendor\Psr\Http\Message\StreamIn
             throw new \RuntimeException('Cannot create a resource over temp or memory implementation');
         }
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
+    public function __toString() : string
     {
         try {
             $this->rewind();
             return $this->getContents();
         } catch (\Throwable $throwable) {
             return '';
-        } catch (\Exception $exception) {
-            // Layer to be BC with PHP 5, remove this when we only support PHP 7+
-            return '';
         }
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function close()
+    public function close() : void
     {
         if (null === $this->resource) {
             throw new \RuntimeException('Cannot close on a detached stream');
@@ -67,13 +58,10 @@ class BufferedStream implements \WPSentry\ScopedVendor\Psr\Http\Message\StreamIn
         $this->stream->close();
         \fclose($this->resource);
     }
-    /**
-     * {@inheritdoc}
-     */
     public function detach()
     {
         if (null === $this->resource) {
-            return;
+            return null;
         }
         // Force reading the remaining data of the stream
         $this->getContents();
@@ -83,33 +71,28 @@ class BufferedStream implements \WPSentry\ScopedVendor\Psr\Http\Message\StreamIn
         $this->resource = null;
         return $resource;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getSize()
+    public function getSize() : ?int
     {
         if (null === $this->resource) {
-            return;
+            return null;
         }
         if (null === $this->size && $this->stream->eof()) {
             return $this->written;
         }
         return $this->size;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function tell()
+    public function tell() : int
     {
         if (null === $this->resource) {
             throw new \RuntimeException('Cannot tell on a detached stream');
         }
-        return \ftell($this->resource);
+        $tell = \ftell($this->resource);
+        if (\false === $tell) {
+            throw new \RuntimeException('ftell failed');
+        }
+        return $tell;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function eof()
+    public function eof() : bool
     {
         if (null === $this->resource) {
             throw new \RuntimeException('Cannot call eof on a detached stream');
@@ -117,58 +100,37 @@ class BufferedStream implements \WPSentry\ScopedVendor\Psr\Http\Message\StreamIn
         // We are at the end only when both our resource and underlying stream are at eof
         return $this->stream->eof() && \ftell($this->resource) === $this->written;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function isSeekable()
+    public function isSeekable() : bool
     {
         return null !== $this->resource;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function seek($offset, $whence = \SEEK_SET)
+    public function seek(int $offset, int $whence = \SEEK_SET) : void
     {
         if (null === $this->resource) {
             throw new \RuntimeException('Cannot seek on a detached stream');
         }
         \fseek($this->resource, $offset, $whence);
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function rewind()
+    public function rewind() : void
     {
         if (null === $this->resource) {
             throw new \RuntimeException('Cannot rewind on a detached stream');
         }
         \rewind($this->resource);
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function isWritable()
+    public function isWritable() : bool
     {
         return \false;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function write($string)
+    public function write(string $string) : int
     {
         throw new \RuntimeException('Cannot write on this stream');
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function isReadable()
+    public function isReadable() : bool
     {
         return null !== $this->resource;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function read($length)
+    public function read(int $length) : string
     {
         if (null === $this->resource) {
             throw new \RuntimeException('Cannot read on a detached stream');
@@ -181,6 +143,9 @@ class BufferedStream implements \WPSentry\ScopedVendor\Psr\Http\Message\StreamIn
         if (\ftell($this->resource) !== $this->written) {
             $read = \fread($this->resource, $length);
         }
+        if (\false === $read) {
+            throw new \RuntimeException('Failed to read from resource');
+        }
         $bytesRead = \strlen($read);
         if ($bytesRead < $length) {
             $streamRead = $this->stream->read($length - $bytesRead);
@@ -190,10 +155,7 @@ class BufferedStream implements \WPSentry\ScopedVendor\Psr\Http\Message\StreamIn
         }
         return $read;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getContents()
+    public function getContents() : string
     {
         if (null === $this->resource) {
             throw new \RuntimeException('Cannot read on a detached stream');
@@ -204,23 +166,20 @@ class BufferedStream implements \WPSentry\ScopedVendor\Psr\Http\Message\StreamIn
         }
         return $read;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadata($key = null)
+    public function getMetadata(?string $key = null)
     {
         if (null === $this->resource) {
             if (null === $key) {
                 return [];
             }
-            return;
+            return null;
         }
         $metadata = \stream_get_meta_data($this->resource);
         if (null === $key) {
             return $metadata;
         }
         if (!\array_key_exists($key, $metadata)) {
-            return;
+            return null;
         }
         return $metadata[$key];
     }

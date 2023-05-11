@@ -26,14 +26,14 @@ class GzipDecodeStream extends \WPSentry\ScopedVendor\Http\Message\Encoding\Filt
     /**
      * {@inheritdoc}
      */
-    protected function readFilter()
+    protected function readFilter() : string
     {
         return 'zlib.inflate';
     }
     /**
      * {@inheritdoc}
      */
-    protected function writeFilter()
+    protected function writeFilter() : string
     {
         return 'zlib.deflate';
     }

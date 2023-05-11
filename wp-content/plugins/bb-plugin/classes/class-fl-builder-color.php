@@ -123,7 +123,7 @@ final class FLBuilderColor {
 	 * @param array $setting
 	 * @return string
 	 */
-	static public function gradient( $setting ) {
+	static public function gradient( $setting, $test = false ) {
 		$gradient = '';
 		$values   = array();
 
@@ -131,10 +131,31 @@ final class FLBuilderColor {
 			return $gradient;
 		}
 
+		$is_gradient_field_ok = isset( $setting['type'] )
+			&& isset( $setting['angle'] )
+			&& isset( $setting['position'] )
+			&& isset( $setting['colors'] )
+			&& isset( $setting['stops'] );
+
+		if ( ! $is_gradient_field_ok ) {
+			return $gradient;
+		}
+
+		/**
+		 * There should be 2 colours here even if one is blank
+		 * SD mode strips the blank one, we need to add it back
+		 */
+		if ( count( $setting['colors'] ) < 2 ) {
+			$setting['colors'][] = '';
+		}
+
 		foreach ( $setting['colors'] as $i => $color ) {
 			$stop = $setting['stops'][ $i ];
 
 			if ( empty( $color ) ) {
+				if ( $test ) {
+					return false;
+				}
 				$color = 'rgba(255,255,255,0)';
 			}
 			if ( ! strstr( $color, 'rgb' ) ) {
